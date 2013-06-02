@@ -1,0 +1,27 @@
+# feed
+j0k3r_feed_homepage:
+    pattern:  /
+    defaults: { _controller: j0k3rFeedBundle:Feed:index }
+
+j0k3r_feed_new:
+    pattern:  /new
+    defaults: { _controller: j0k3rFeedBundle:Feed:new }
+
+j0k3r_feed_create:
+    pattern:  /create
+    defaults: { _controller: j0k3rFeedBundle:Feed:create }
+    methods:  [POST]
+
+j0k3r_feed_edit:
+    pattern:  /{slug}/edit
+    defaults: { _controller: j0k3rFeedBundle:Feed:edit }
+
+j0k3r_feed_update:
+    pattern:  /{slug}/update
+    defaults: { _controller: j0k3rFeedBundle:Feed:update }
+    methods:  [POST]
+
+j0k3r_feed_delete:
+    pattern:  /{slug}/delete
+    defaults: { _controller: j0k3rFeedBundle:Feed:delete }
+    methods:  [POST]

@@ -1,0 +1,7 @@
+parameters:
+#    j0k3r_feed.example.class: j0k3r\FeedBundle\Example
+
+services:
+#    j0k3r_feed.example:
+#        class: %j0k3r_feed.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]

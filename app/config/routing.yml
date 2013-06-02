@@ -1,0 +1,4 @@
+j0k3r_f43me:
+    resource: "@j0k3rFeedBundle/Resources/config/routing.yml"
+    prefix:   /
+

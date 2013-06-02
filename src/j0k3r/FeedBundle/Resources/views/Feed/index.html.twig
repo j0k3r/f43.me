@@ -1,0 +1,53 @@
+{% extends "j0k3rFeedBundle::layout.html.twig" %}
+
+{% block h2_title %}f43.me <small>readable &amp; cleaner feeds</small>{% endblock %}
+{% block h3_title %}Feed list <small>readable &amp; cleaner feeds</small>{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="large-8 columns">
+        <h3 class="subheader">Last updated feeds</h3>
+    </div>
+    <div class="large-2 large-offset-2 columns">
+        <p><a class="success button radius small" href="{{ path('j0k3r_feed_new') }}">Add a new feed</a></p>
+    </div>
+</div>
+<div class="row">
+    <div class="large-12 columns">
+        {% if feeds|length > 0 %}
+            <table>
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Link</th>
+                        <th>Items cached</th>
+                        <th>Created_at</th>
+                        <th>Updated_at</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for feed in feeds %}
+                    <tr>
+                        <td><img class="favicon" src="{{ feed.image }}" /> <a href="{{ path('j0k3r_feed_edit', { 'slug': feed.slug }) }}">{{ feed.name }}</a></td>
+                        <td>{{ feed.link }}</td>
+                        <td>xxx</td>
+                        <td>{% if feed.createdat %}{{ feed.createdat|date('Y-m-d H:i:s') }}{% endif %}</td>
+                        <td>{% if feed.updatedat %}{{ feed.updatedat|date('Y-m-d H:i:s') }}{% endif %}</td>
+                        <td>
+                            <ul class="inline-list">
+                                <li><a href="#">items</a></li>
+                                <li><a href="{{ path('j0k3r_feed_edit', { 'slug': feed.slug }) }}">edit</a></li>
+                            </ul>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <p>No feeds</p>
+        {% endif %}
+    </div>
+</div>
+
+{% endblock %}
