@@ -39,7 +39,7 @@
         <hr/>
         <ul class="inline-list">
             <li><a class="secondary button radius small" href="{{ path('j0k3r_feed_homepage') }}">Back to the list</a></li>
-            <li><a class="success button radius small" href="{{ path('j0k3r_feed_new') }}">Add a new feed</a></li>
+            <li><a class="button radius small" href="{{ path('j0k3r_feeditem_homepage', { 'slug': feed.slug }) }}">View cached items</a></li>
             <li><form action="{{ path('j0k3r_feed_delete', { 'slug': feed.slug }) }}" method="post">{{ form_widget(delete_form) }}<button class="alert button radius small" type="submit">Delete</button></form></li>
         </ul>
     </div>

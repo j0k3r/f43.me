@@ -25,3 +25,8 @@ j0k3r_feed_delete:
     pattern:  /{slug}/delete
     defaults: { _controller: j0k3rFeedBundle:Feed:delete }
     methods:  [POST]
+
+# feed item
+j0k3r_feeditem_homepage:
+    pattern:  /{slug}/items
+    defaults: { _controller: j0k3rFeedBundle:FeedItem:index }

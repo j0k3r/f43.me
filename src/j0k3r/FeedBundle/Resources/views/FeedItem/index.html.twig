@@ -1,0 +1,17 @@
+{% extends "j0k3rFeedBundle::layout.html.twig" %}
+
+{% block h2_title %}{{ feed.name }}'s cached items{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="large-12 columns">
+        <h3 class="subheader">{{ feeditems.count }} items cached</h3>
+    </div>
+    <div class="large-12 columns">
+        <hr/>
+        <ul class="inline-list">
+            <li><a class="secondary button radius small" href="{{ path('j0k3r_feed_edit', { 'slug': feed.slug }) }}">Back to the feed</a></li>
+        </ul>
+    </div>
+</dib>
+{% endblock %}

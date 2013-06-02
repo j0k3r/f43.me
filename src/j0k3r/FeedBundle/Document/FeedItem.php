@@ -8,12 +8,11 @@ use Doctrine\ODM\MongoDB\Mapping\Annotations as MongoDB;
 use Doctrine\Bundle\MongoDBBundle\Validator\Constraints\Unique as MongoDBUnique;
 
 /**
- * @MongoDB\Document(collection="feeds")
- * @MongoDB\Document(repositoryClass="j0k3r\FeedBundle\Repository\FeedRepository")
- * @MongoDBUnique(fields="slug")
+ * @MongoDB\Document(collection="feeditems")
+ * @MongoDB\Document(repositoryClass="j0k3r\FeedBundle\Repository\FeedItemRepository")
  * @MongoDBUnique(fields="link")
  */
-class Feed
+class FeedItem
 {
     /**
      * @MongoDB\Id
@@ -22,14 +21,8 @@ class Feed
 
     /**
      * @MongoDB\String
-     * @Assert\NotBlank()
      */
-    protected $name;
-
-    /**
-     * @MongoDB\String
-     */
-    protected $description;
+    protected $title;
 
     /**
      * @MongoDB\String
@@ -40,15 +33,8 @@ class Feed
 
     /**
      * @MongoDB\String
-     * @Assert\Url()
      */
-    protected $image;
-
-    /**
-     * @Gedmo\Slug(fields={"name"}, updatable=false, unique=true)
-     * @MongoDB\String
-     */
-    protected $slug;
+    protected $content;
 
     /**
      * @MongoDB\Date
@@ -63,9 +49,9 @@ class Feed
     protected $updated_at;
 
     /**
-     * @MongoDB\ReferenceMany(targetDocument="FeedItem", mappedBy="feed")
+     * @MongoDB\ReferenceOne(targetDocument="Feed", inversedBy="feeditems")
      */
-    protected $feeditems;
+    protected $feed;
 
     /**
      * Get id
@@ -78,47 +64,25 @@ class Feed
     }
 
     /**
-     * Set name
+     * Set title
      *
-     * @param string $name
+     * @param string $title
      * @return self
      */
-    public function setName($name)
+    public function setTitle($title)
     {
-        $this->name = $name;
+        $this->title = $title;
         return $this;
     }
 
     /**
-     * Get name
+     * Get title
      *
-     * @return string $name
+     * @return string $title
      */
-    public function getName()
+    public function getTitle()
     {
-        return $this->name;
-    }
-
-    /**
-     * Set description
-     *
-     * @param string $description
-     * @return self
-     */
-    public function setDescription($description)
-    {
-        $this->description = $description;
-        return $this;
-    }
-
-    /**
-     * Get description
-     *
-     * @return string $description
-     */
-    public function getDescription()
-    {
-        return $this->description;
+        return $this->title;
     }
 
     /**
@@ -144,25 +108,25 @@ class Feed
     }
 
     /**
-     * Set image
+     * Set content
      *
-     * @param string $image
+     * @param string $content
      * @return self
      */
-    public function setImage($image)
+    public function setContent($content)
     {
-        $this->image = $image;
+        $this->content = $content;
         return $this;
     }
 
     /**
-     * Get image
+     * Get content
      *
-     * @return string $image
+     * @return string $content
      */
-    public function getImage()
+    public function getContent()
     {
-        return $this->image;
+        return $this->content;
     }
 
     /**
@@ -207,27 +171,5 @@ class Feed
     public function getUpdatedAt()
     {
         return $this->updated_at;
-    }
-
-    /**
-     * Set slug
-     *
-     * @param string $slug
-     * @return self
-     */
-    public function setSlug($slug)
-    {
-        $this->slug = $slug;
-        return $this;
-    }
-
-    /**
-     * Get slug
-     *
-     * @return string $slug
-     */
-    public function getSlug()
-    {
-        return $this->slug;
     }
 }
