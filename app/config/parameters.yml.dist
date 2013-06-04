@@ -1,0 +1,6 @@
+parameters:
+    database_server:   mongodb://localhost:27017
+    database_name:     f43me
+
+    locale:            en
+    secret:            uLq3XcJHHbLhq6GX
