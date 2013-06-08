@@ -29,9 +29,9 @@
                 <tbody>
                 {% for feed in feeds %}
                     <tr>
-                        <td><img class="favicon" src="{{ feed.image }}" /> <a href="{{ path('j0k3r_feed_edit', { 'slug': feed.slug }) }}">{{ feed.name }}</a></td>
+                        <td><img class="favicon" src="https://plus.google.com/_/favicon?domain={{ feed.link }}" /> <a href="{{ path('j0k3r_feed_edit', { 'slug': feed.slug }) }}">{{ feed.name }}</a></td>
                         <td>{{ feed.link }}</td>
-                        <td>xxx</td>
+                        <td>{{ feed.feeditems.count }}</td>
                         <td>{% if feed.createdat %}{{ feed.createdat|date('Y-m-d H:i:s') }}{% endif %}</td>
                         <td>{% if feed.updatedat %}{{ feed.updatedat|date('Y-m-d H:i:s') }}{% endif %}</td>
                         <td>

@@ -2,6 +2,14 @@ parameters:
 #    j0k3r_feed.example.class: j0k3r\FeedBundle\Example
 
 services:
-#    j0k3r_feed.example:
-#        class: %j0k3r_feed.example.class%
-#        arguments: [@service_id, "plain_value", %parameter%]
+    readability_proxy:
+        class: j0k3r\FeedBundle\Services\ReadabilityProxy
+        arguments:
+            token:       c3f3b605b5457f7e88892a7e7113aab38600774d
+            debug:       false #%kernel.debug%
+            convertLink: false
+
+    simple_pie_proxy:
+        class: j0k3r\FeedBundle\Services\SimplePieProxy
+        arguments:
+            cache: "%kernel.root_dir%/cache/simplepie/"

@@ -30,3 +30,7 @@ j0k3r_feed_delete:
 j0k3r_feeditem_homepage:
     pattern:  /{slug}/items
     defaults: { _controller: j0k3rFeedBundle:FeedItem:index }
+
+j0k3r_feeditem_test:
+    pattern:  /{slug}/testItem
+    defaults: { _controller: j0k3rFeedBundle:FeedItem:testItem }

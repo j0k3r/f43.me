@@ -24,14 +24,14 @@ class FeedItemController extends Controller
      */
     public function indexAction($slug)
     {
-        $dm        = $this->getDocumentManager();
-        $feed      = $dm->getRepository('j0k3rFeedBundle:Feed')->findOneBySlug($slug);
+        $dm   = $this->getDocumentManager();
+        $feed = $dm->getRepository('j0k3rFeedBundle:Feed')->findOneBySlug($slug);
 
         if (!$feed) {
             throw $this->createNotFoundException('Unable to find Feed document.');
         }
 
-        $feeditems = $dm->getRepository('j0k3rFeedBundle:FeedItem')->findByFeed($slug);
+        $feeditems = $dm->getRepository('j0k3rFeedBundle:FeedItem')->findByFeedId($feed->getId());
 
         return array(
             'feeditems' => $feeditems,
@@ -69,6 +69,27 @@ class FeedItemController extends Controller
         }
 
         return $this->redirect($this->generateUrl('j0k3r_feed_homepage'));
+    }
+
+    public function testItemAction($slug)
+    {
+        $dm   = $this->getDocumentManager();
+        $feed = $dm->getRepository('j0k3rFeedBundle:Feed')->findOneBySlug($slug);
+
+        $rssFeed = $this
+            ->get('simple_pie_proxy')
+            ->setUrl($feed->getLink())
+            ->init();
+
+        $parser = $this
+            ->get('readability_proxy')
+            ->setChoosenParser($feed->getTypeParser());
+
+        $content = $parser->parseContent($rssFeed->get_item(0)->get_link());
+
+        return $this->container->get('templating')->renderResponse('j0k3rFeedBundle:FeedItem:testItem.html.twig', array(
+            'content' => $content,
+        ));
     }
 
     private function createDeleteForm($slug)

@@ -6,11 +6,11 @@
 {% block content %}
 <div class="row">
     <div class="large-8 columns">
-        <form action="{{ path('j0k3r_feed_create') }}" method="post" {{ form_enctype(form) }}>
+        <form action="{{ path('j0k3r_feed_create') }}" method="post" {{ form_enctype(form) }} class="custom">
             {{ form_widget(form) }}
             <div class="row">
                 <div class="small-9 small-offset-3 columns">
-                    <button type="submit" class="small button radius">Create</button>
+                    <button type="submit" class="small button radius success">Create</button>
                 </div>
             </div>
         </form>

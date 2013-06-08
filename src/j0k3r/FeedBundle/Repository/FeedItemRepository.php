@@ -12,10 +12,10 @@ use Doctrine\ODM\MongoDB\DocumentRepository;
  */
 class FeedItemRepository extends DocumentRepository
 {
-    public function findByFeed($slug)
+    public function findByFeedId($id)
     {
         return $this->createQueryBuilder()
-            ->field('feed.slug')->equals($slug)
+            ->field('feed.id')->equals($id)
             ->sort('updated_at', 'DESC')
             ->getQuery()
             ->execute();

@@ -17,7 +17,9 @@
         "incenteev/composer-parameter-handler": "~2.0",
         "doctrine/mongodb-odm": "1.0.*@dev",
         "doctrine/mongodb-odm-bundle": "3.0.*@dev",
-        "stof/doctrine-extensions-bundle": "~1.1@dev"
+        "stof/doctrine-extensions-bundle": "~1.1@dev",
+        "fivefilters/php-readability": "dev-master",
+        "simplepie/simplepie": "dev-master"
     },
     "scripts": {
         "post-install-cmd": [

@@ -40,9 +40,8 @@ class Feed
 
     /**
      * @MongoDB\String
-     * @Assert\Url()
      */
-    protected $image;
+    protected $type_parser;
 
     /**
      * @Gedmo\Slug(fields={"name"}, updatable=false, unique=true)
@@ -144,28 +143,6 @@ class Feed
     }
 
     /**
-     * Set image
-     *
-     * @param string $image
-     * @return self
-     */
-    public function setImage($image)
-    {
-        $this->image = $image;
-        return $this;
-    }
-
-    /**
-     * Get image
-     *
-     * @return string $image
-     */
-    public function getImage()
-    {
-        return $this->image;
-    }
-
-    /**
      * Set created_at
      *
      * @param date $createdAt
@@ -229,5 +206,62 @@ class Feed
     public function getSlug()
     {
         return $this->slug;
+    }
+
+    public function __construct()
+    {
+        $this->feeditems = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add feeditems
+     *
+     * @param j0k3r\FeedBundle\Document\FeedItem $feeditems
+     */
+    public function addFeeditem(\j0k3r\FeedBundle\Document\FeedItem $feeditems)
+    {
+        $this->feeditems[] = $feeditems;
+    }
+
+    /**
+    * Remove feeditems
+    *
+    * @param <variableType$feeditems
+    */
+    public function removeFeeditem(\j0k3r\FeedBundle\Document\FeedItem $feeditems)
+    {
+        $this->feeditems->removeElement($feeditems);
+    }
+
+    /**
+     * Get feeditems
+     *
+     * @return Doctrine\Common\Collections\Collection $feeditems
+     */
+    public function getFeeditems()
+    {
+        return $this->feeditems;
+    }
+
+    /**
+     * Set type_parser
+     *
+     * @param string $typeParser
+     * @return self
+     */
+    public function setTypeParser($typeParser)
+    {
+        $this->type_parser = $typeParser;
+        return $this;
+    }
+
+    /**
+     * Get type_parser
+     *
+     * @return string $typeParser
+     */
+    public function getTypeParser()
+    {
+        return $this->type_parser;
     }
 }

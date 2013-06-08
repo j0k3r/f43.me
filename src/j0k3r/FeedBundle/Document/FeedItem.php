@@ -33,6 +33,13 @@ class FeedItem
 
     /**
      * @MongoDB\String
+     * @Assert\NotBlank()
+     * @Assert\Url()
+     */
+    protected $permalink;
+
+    /**
+     * @MongoDB\String
      */
     protected $content;
 
@@ -171,5 +178,49 @@ class FeedItem
     public function getUpdatedAt()
     {
         return $this->updated_at;
+    }
+
+    /**
+     * Set permalink
+     *
+     * @param string $permalink
+     * @return self
+     */
+    public function setPermalink($permalink)
+    {
+        $this->permalink = $permalink;
+        return $this;
+    }
+
+    /**
+     * Get permalink
+     *
+     * @return string $permalink
+     */
+    public function getPermalink()
+    {
+        return $this->permalink;
+    }
+
+    /**
+     * Set feed
+     *
+     * @param j0k3r\FeedBundle\Document\Feed $feed
+     * @return self
+     */
+    public function setFeed(\j0k3r\FeedBundle\Document\Feed $feed)
+    {
+        $this->feed = $feed;
+        return $this;
+    }
+
+    /**
+     * Get feed
+     *
+     * @return j0k3r\FeedBundle\Document\Feed $feed
+     */
+    public function getFeed()
+    {
+        return $this->feed;
     }
 }
