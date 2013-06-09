@@ -20,23 +20,25 @@
         </form>
     </div>
     <div class="large-4 columns">
-        <p><span class="label">created at</span> {{ feed.createdat|date('H:i:s - d/m/Y') }}</p>
-        <p><span class="label">updated at</span> {{ feed.updatedat|date('H:i:s - d/m/Y') }}</p>
+        <p><span class="label">created at</span> {{ feed.createdat|date('d/m/y - H:i:s') }}</p>
+        <p><span class="label">updated at</span> {{ feed.updatedat|date('d/m/y - H:i:s') }}</p>
+        {% if lastItem %}<p><span class="label">last item</span> {{ lastItem.publishedat|date('d/m/y - H:i:s') }}</p>{% endif %}
         <p><span class="label">cached items</span> {{ feed.feeditems.count }}</p>
     </div>
 </div>
+
 <div class="row">
     <div class="large-12 columns">
         <hr/>
         <ul class="inline-list">
-            <li><a class="secondary button radius small" href="{{ path('j0k3r_feed_homepage') }}">Back to the list</a></li>
+            <li><a class="secondary button radius small" href="{{ path('j0k3r_feed_homepage') }}">&lArr; Back to the list</a></li>
             <li><a class="button radius small" data-reveal-id="modal-test-item" data-reveal-ajax="{{ path('j0k3r_feeditem_test', { 'slug': feed.slug }) }}">Test parsing</a></li>
             <li><a class="button radius small" href="{{ path('j0k3r_feeditem_homepage', { 'slug': feed.slug }) }}">View cached items</a></li>
             <li><form action="{{ path('j0k3r_feed_delete', { 'slug': feed.slug }) }}" method="post">{{ form_widget(delete_form) }}<button class="alert button radius small" type="submit">Delete</button></form></li>
         </ul>
     </div>
-
-    <div id="modal-test-item" class="reveal-modal"></div>
 </div>
+
+<div id="modal-test-item" class="reveal-modal"></div>
 
 {% endblock %}

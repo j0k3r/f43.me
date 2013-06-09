@@ -6,3 +6,21 @@ img.favicon {
   width: 16px;
   height: 16px;
 }
+
+table.table-items td div {
+  width: 560px;
+}
+
+table.table-feeds td div {
+  width: 300px;
+}
+
+table.table-feeds td div, table.table-items td div {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.reveal-modal {
+  top: 6.25em;
+}

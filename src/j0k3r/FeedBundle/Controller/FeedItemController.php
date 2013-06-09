@@ -34,47 +34,34 @@ class FeedItemController extends Controller
         $feeditems = $dm->getRepository('j0k3rFeedBundle:FeedItem')->findByFeedId($feed->getId());
 
         return array(
-            'feeditems' => $feeditems,
             'feed'      => $feed,
+            'feeditems' => $feeditems,
         );
     }
 
-    /**
-     * Deletes a Feed document.
-     *
-     * @param Request $request The request object
-     * @param string $slug     The document Slug
-     *
-     * @return array
-     *
-     * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException If document doesn't exists
-     */
-    public function deleteAction(Request $request, $slug)
+    public function previewAction($id)
     {
-        $form = $this->createDeleteForm($slug);
-        $form->bind($request);
+        $dm       = $this->getDocumentManager();
+        $feeditem = $dm->getRepository('j0k3rFeedBundle:FeedItem')->find($id);
 
-        if ($form->isValid()) {
-            $dm = $this->getDocumentManager();
-            $document = $dm->getRepository('j0k3rFeedBundle:FeedItem')->findOneBySlug($slug);
-
-            if (!$document) {
-                throw $this->createNotFoundException('Unable to find FeedItem document.');
-            }
-
-            $dm->remove($document);
-            $dm->flush();
-
-            $this->get('session')->getFlashBag()->add('notice', 'Document deleted!');
+        if (!$feeditem) {
+            throw $this->createNotFoundException('Unable to find FeedItem document.');
         }
 
-        return $this->redirect($this->generateUrl('j0k3r_feed_homepage'));
+        return $this->container->get('templating')->renderResponse('j0k3rFeedBundle:FeedItem:content.html.twig', array(
+            'content' => $feeditem->getContent(),
+            'url'     => $feeditem->getLink(),
+        ));
     }
 
     public function testItemAction($slug)
     {
         $dm   = $this->getDocumentManager();
         $feed = $dm->getRepository('j0k3rFeedBundle:Feed')->findOneBySlug($slug);
+
+        if (!$feed) {
+            throw $this->createNotFoundException('Unable to find Feed document.');
+        }
 
         $rssFeed = $this
             ->get('simple_pie_proxy')
@@ -87,17 +74,10 @@ class FeedItemController extends Controller
 
         $content = $parser->parseContent($rssFeed->get_item(0)->get_link());
 
-        return $this->container->get('templating')->renderResponse('j0k3rFeedBundle:FeedItem:testItem.html.twig', array(
-            'content' => $content,
+        return $this->container->get('templating')->renderResponse('j0k3rFeedBundle:FeedItem:content.html.twig', array(
+            'content' => $content->content,
+            'url'     => $content->url,
         ));
-    }
-
-    private function createDeleteForm($slug)
-    {
-        return $this->createFormBuilder(array('slug' => $slug))
-            ->add('slug', 'hidden')
-            ->getForm()
-        ;
     }
 
     /**

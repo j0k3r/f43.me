@@ -8,13 +8,40 @@
 {% block content %}
 <div class="row">
     <div class="large-12 columns">
+        <a class="secondary button radius small right" href="{{ path('j0k3r_feed_edit', { 'slug': feed.slug }) }}">&lArr; Back to the feed</a>
         <h3 class="subheader">{{ feeditems.count }} items cached</h3>
+
+        {% if feeditems|length > 0 %}
+            <table class="table-items">
+                <thead>
+                    <tr>
+                        <th>Title</th>
+                        <th>Published at</th>
+                        <th>Created at</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for feeditem in feeditems %}
+                    <tr>
+                        <td><div><a href="{{ feeditem.link }}" target="_blank">{{ feeditem.title|raw }}</a></div></td>
+                        <td>{{ feeditem.publishedat|date('d/m/y - H:i:s') }}</td>
+                        <td>{{ feeditem.createdat|date('d/m/y - H:i:s') }}</td>
+                        <td><a class="secondary button small radius" data-reveal-id="modal-preview-item" data-reveal-ajax="{{ path('j0k3r_feeditem_preview', { 'id': feeditem.id }) }}">preview</a></td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        {% endif %}
     </div>
     <div class="large-12 columns">
         <hr/>
         <ul class="inline-list">
-            <li><a class="secondary button radius small" href="{{ path('j0k3r_feed_edit', { 'slug': feed.slug }) }}">Back to the feed</a></li>
+            <li><a class="secondary button radius small" href="{{ path('j0k3r_feed_edit', { 'slug': feed.slug }) }}">&lArr; Back to the feed</a></li>
         </ul>
     </div>
-</dib>
+</div>
+
+<div id="modal-preview-item" class="reveal-modal"></div>
+
 {% endblock %}

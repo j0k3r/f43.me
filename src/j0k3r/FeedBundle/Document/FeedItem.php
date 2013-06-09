@@ -45,6 +45,11 @@ class FeedItem
 
     /**
      * @MongoDB\Date
+     */
+    protected $published_at;
+
+    /**
+     * @MongoDB\Date
      * @Gedmo\Timestampable(on="create")
      */
     protected $created_at;
@@ -222,5 +227,32 @@ class FeedItem
     public function getFeed()
     {
         return $this->feed;
+    }
+
+    /**
+     * Set published_at
+     *
+     * @param date $publishedAt
+     * @return self
+     */
+    public function setPublishedAt($publishedAt)
+    {
+        $this->published_at = $publishedAt;
+        return $this;
+    }
+
+    /**
+     * Get published_at
+     *
+     * @return date $publishedAt
+     */
+    public function getPublishedAt()
+    {
+        return $this->published_at;
+    }
+
+    public function __construct()
+    {
+        $this->feedlogs = new \Doctrine\Common\Collections\ArrayCollection();
     }
 }

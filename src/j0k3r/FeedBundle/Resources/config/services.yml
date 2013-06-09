@@ -13,3 +13,4 @@ services:
         class: j0k3r\FeedBundle\Services\SimplePieProxy
         arguments:
             cache: "%kernel.root_dir%/cache/simplepie/"
+            item_limit: 20

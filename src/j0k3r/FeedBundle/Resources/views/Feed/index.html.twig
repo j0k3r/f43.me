@@ -15,14 +15,14 @@
 <div class="row">
     <div class="large-12 columns">
         {% if feeds|length > 0 %}
-            <table>
+            <table class="table-feeds">
                 <thead>
                     <tr>
                         <th>Name</th>
                         <th>Link</th>
-                        <th>Items cached</th>
-                        <th>Created_at</th>
-                        <th>Updated_at</th>
+                        <th>Items</th>
+                        <th>Created at</th>
+                        <th>Updated at</th>
                         <th>Actions</th>
                     </tr>
                 </thead>
@@ -30,15 +30,13 @@
                 {% for feed in feeds %}
                     <tr>
                         <td><img class="favicon" src="https://plus.google.com/_/favicon?domain={{ feed.link }}" /> <a href="{{ path('j0k3r_feed_edit', { 'slug': feed.slug }) }}">{{ feed.name }}</a></td>
-                        <td>{{ feed.link }}</td>
+                        <td><div>{{ feed.link }}</div></td>
                         <td>{{ feed.feeditems.count }}</td>
-                        <td>{% if feed.createdat %}{{ feed.createdat|date('Y-m-d H:i:s') }}{% endif %}</td>
-                        <td>{% if feed.updatedat %}{{ feed.updatedat|date('Y-m-d H:i:s') }}{% endif %}</td>
+                        <td>{% if feed.createdat %}{{ feed.createdat|date('d/m/y - H:i:s') }}{% endif %}</td>
+                        <td>{% if feed.updatedat %}{{ feed.updatedat|date('d/m/y - H:i:s') }}{% endif %}</td>
                         <td>
-                            <ul class="inline-list">
-                                <li><a href="{{ path('j0k3r_feed_edit', { 'slug': feed.slug }) }}">edit</a></li>
-                                <li><a href="{{ path('j0k3r_feeditem_homepage', { 'slug': feed.slug }) }}">items</a></li>
-                            </ul>
+                            <a href="{{ path('j0k3r_feed_edit', { 'slug': feed.slug }) }}">edit</a> -
+                            <a href="{{ path('j0k3r_feeditem_homepage', { 'slug': feed.slug }) }}">items</a> -
                         </td>
                     </tr>
                 {% endfor %}

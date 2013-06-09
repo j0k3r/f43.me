@@ -106,8 +106,11 @@ class FeedController extends Controller
         $editForm   = $this->createForm(new FeedType(), $feed);
         $deleteForm = $this->createDeleteForm($feed->getId());
 
+        $lastItem   = $dm->getRepository('j0k3rFeedBundle:FeedItem')->findLastItemByFeedId($feed->getId());
+
         return array(
             'feed'        => $feed,
+            'lastItem'    => $lastItem,
             'edit_form'   => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
         );
