@@ -13,6 +13,24 @@
             {{ form_widget(edit_form) }}
 
             <div class="row">
+                <div class="small-3 columns">
+                    <label class="right inline">Created</label>
+                </div>
+                <div class="small-9 columns">
+                    <input disabled="disabled" type="text" value="{{ feed.createdat|date('Y-m-d H:i:s') }}" />
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="small-3 columns">
+                    <label class="right inline">Updated</label>
+                </div>
+                <div class="small-9 columns">
+                    <input disabled="disabled" type="text" value="{{ feed.updatedat|date('Y-m-d H:i:s') }}" />
+                </div>
+            </div>
+
+            <div class="row">
                 <div class="small-9 small-offset-3 columns">
                     <button type="submit" class="small button radius success">Save</button>
                 </div>
@@ -20,10 +38,11 @@
         </form>
     </div>
     <div class="large-4 columns">
-        <p><span class="label">created at</span> {{ feed.createdat|date('d/m/y - H:i:s') }}</p>
-        <p><span class="label">updated at</span> {{ feed.updatedat|date('d/m/y - H:i:s') }}</p>
-        {% if lastItem %}<p><span class="label">last item</span> {{ lastItem.publishedat|date('d/m/y - H:i:s') }}</p>{% endif %}
-        <p><span class="label">cached items</span> {{ feed.feeditems.count }}</p>
+        <ul class="side-nav">
+            <li class="active"><a href="#"><span class="label">{{ lastItem.publishedat|date('d/m/y - H:i:s') }}</span> last item</a></li>
+            <li><a href="{{ path('j0k3r_feeditem_homepage', { 'slug': feed.slug }) }}"><span class="label">{{ feed.feeditems.count }}</span> cached items</a></li>
+            <li><a href="{{ path('j0k3r_feedlog_feed', { 'slug': feed.slug }) }}"><span class="label">{{ feed.feedlogs.count }}</span> logs</a></li>
+        </ul>
     </div>
 </div>
 
@@ -32,8 +51,7 @@
         <hr/>
         <ul class="inline-list">
             <li><a class="secondary button radius small" href="{{ path('j0k3r_feed_homepage') }}">&lArr; Back to the list</a></li>
-            <li><a class="button radius small" data-reveal-id="modal-test-item" data-reveal-ajax="{{ path('j0k3r_feeditem_test', { 'slug': feed.slug }) }}">Test parsing</a></li>
-            <li><a class="button radius small" href="{{ path('j0k3r_feeditem_homepage', { 'slug': feed.slug }) }}">View cached items</a></li>
+            <li><a class="button radius small" data-tooltip class="has-tip" title="It can take few seconds to load" data-reveal-id="modal-test-item" data-reveal-ajax="{{ path('j0k3r_feeditem_test', { 'slug': feed.slug }) }}">Test parsing</a></li>
             <li><form action="{{ path('j0k3r_feed_delete', { 'slug': feed.slug }) }}" method="post">{{ form_widget(delete_form) }}<button class="alert button radius small" type="submit">Delete</button></form></li>
         </ul>
     </div>

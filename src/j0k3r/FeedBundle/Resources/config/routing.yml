@@ -1,6 +1,6 @@
 # feed
 j0k3r_feed_homepage:
-    pattern:  /
+    pattern:  /feeds
     defaults: { _controller: j0k3rFeedBundle:Feed:index }
 
 j0k3r_feed_new:
@@ -36,6 +36,14 @@ j0k3r_feeditem_test:
     defaults: { _controller: j0k3rFeedBundle:FeedItem:testItem }
 
 j0k3r_feeditem_preview:
-    pattern:  /feed-item/{id}/preview
+    pattern:  /item/{id}/preview
     defaults: { _controller: j0k3rFeedBundle:FeedItem:preview }
 
+# feed log
+j0k3r_feedlog_homepage:
+    pattern:  /logs
+    defaults: { _controller: j0k3rFeedBundle:FeedLog:index }
+
+j0k3r_feedlog_feed:
+    pattern:  /feed/{slug}/logs
+    defaults: { _controller: j0k3rFeedBundle:FeedLog:feed }

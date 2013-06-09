@@ -67,6 +67,11 @@ class Feed
     protected $feeditems;
 
     /**
+     * @MongoDB\ReferenceMany(targetDocument="FeedLog", mappedBy="feed")
+     */
+    protected $feedlogs;
+
+    /**
      * Get id
      *
      * @return id $id
@@ -263,5 +268,35 @@ class Feed
     public function getTypeParser()
     {
         return $this->type_parser;
+    }
+
+    /**
+     * Add feedlogs
+     *
+     * @param j0k3r\FeedBundle\Document\FeedLog $feedlogs
+     */
+    public function addFeedlog(\j0k3r\FeedBundle\Document\FeedLog $feedlogs)
+    {
+        $this->feedlogs[] = $feedlogs;
+    }
+
+    /**
+    * Remove feedlogs
+    *
+    * @param <variableType$feedlogs
+    */
+    public function removeFeedlog(\j0k3r\FeedBundle\Document\FeedLog $feedlogs)
+    {
+        $this->feedlogs->removeElement($feedlogs);
+    }
+
+    /**
+     * Get feedlogs
+     *
+     * @return Doctrine\Common\Collections\Collection $feedlogs
+     */
+    public function getFeedlogs()
+    {
+        return $this->feedlogs;
     }
 }

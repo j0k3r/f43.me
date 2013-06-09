@@ -32,11 +32,13 @@
                         <td><img class="favicon" src="https://plus.google.com/_/favicon?domain={{ feed.link }}" /> <a href="{{ path('j0k3r_feed_edit', { 'slug': feed.slug }) }}">{{ feed.name }}</a></td>
                         <td><div>{{ feed.link }}</div></td>
                         <td>{{ feed.feeditems.count }}</td>
-                        <td>{% if feed.createdat %}{{ feed.createdat|date('d/m/y - H:i:s') }}{% endif %}</td>
-                        <td>{% if feed.updatedat %}{{ feed.updatedat|date('d/m/y - H:i:s') }}{% endif %}</td>
+                        <td>{{ feed.feedlogs.count }}</td>
+                        <td>{{ feed.createdat|date('d/m/y - H:i') }}</td>
+                        <td>{{ feed.updatedat|date('d/m/y - H:i') }}</td>
                         <td>
                             <a href="{{ path('j0k3r_feed_edit', { 'slug': feed.slug }) }}">edit</a> -
                             <a href="{{ path('j0k3r_feeditem_homepage', { 'slug': feed.slug }) }}">items</a> -
+                            <a href="{{ path('j0k3r_feedlog_feed', { 'slug': feed.slug }) }}">logs</a>
                         </td>
                     </tr>
                 {% endfor %}
