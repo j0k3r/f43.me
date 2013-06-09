@@ -72,12 +72,14 @@ class FetchItemsCommand extends ContainerAwareCommand
                 ->setChoosenParser($feed->getTypeParser());
 
             $itemCached = $feedItemRepo->findLastItemByFeedId($feed->getId());
+            $cached     = 0;
 
-            $total = $rssFeed->get_item_quantity();
-            $cached = 0;
-            $progress->start($output, $total);
-            foreach ($rssFeed->get_items() as $item)
-            {
+            if ($input->getOption('t')) {
+                $total = $rssFeed->get_item_quantity();
+                $progress->start($output, $total);
+            }
+
+            foreach ($rssFeed->get_items() as $item) {
                 // if we find the last cached item, we don't need to cache more item
                 if (null !== $itemCached && $itemCached->getPermalink() == $item->get_permalink()) {
                     break;
@@ -95,11 +97,16 @@ class FetchItemsCommand extends ContainerAwareCommand
                 $dm->persist($feedItem);
 
                 $cached++;
-                $progress->advance();
+
+                if ($input->getOption('t')) {
+                    $progress->advance();
+                }
             }
 
             if (0 !== $cached) {
-                $progress->finish();
+                if ($input->getOption('t')) {
+                    $progress->finish();
+                }
 
                 $feedLog = new feedLog();
                 $feedLog->setItemsNumber($cached);
