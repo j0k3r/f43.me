@@ -6,7 +6,7 @@ class SimplePieProxy
 {
     protected $feed;
 
-    public function __construct($cache, $item_limit)
+    public function __construct($cache, $item_limit = 25, $enable_cache = true)
     {
         $this->feed = new \SimplePie();
         $this->feed->set_cache_location($cache);
@@ -14,9 +14,10 @@ class SimplePieProxy
 
         // Force the given URL to be treated as a feed
         $this->feed->force_feed(true);
+        $this->feed->enable_cache($enable_cache);
 
         // be sure that the cache is writable by SimplePie
-        if (!is_writable($cache)) {
+        if ($enable_cache && !is_writable($cache)) {
             @mkdir($cache, 0777, true);
             chmod($cache, 0777);
         }
