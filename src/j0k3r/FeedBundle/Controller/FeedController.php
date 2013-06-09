@@ -18,6 +18,25 @@ use j0k3r\FeedBundle\Form\FeedType;
 class FeedController extends Controller
 {
     /**
+     * Display some information about feeds, items, logs, etc ...
+     *
+     * @Template()
+     *
+     * @return array
+     */
+    public function dashboardAction()
+    {
+        $dm       = $this->getDocumentManager();
+        $feeds    = $dm->getRepository('j0k3rFeedBundle:Feed')->findAllOrderedByDate(10);
+        $feedlogs = $dm->getRepository('j0k3rFeedBundle:FeedLog')->findAllOrderedById(10);
+
+        return array(
+            'feedlogs' => $feedlogs,
+            'feeds'    => $feeds,
+        );
+    }
+
+    /**
      * Lists all Feed documents.
      *
      * @Template()

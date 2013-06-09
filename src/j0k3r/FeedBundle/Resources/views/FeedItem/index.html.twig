@@ -2,14 +2,14 @@
 
 {% block h2_title %}
     <img class="favicon" src="https://plus.google.com/_/favicon?domain={{ feed.link }}" />
-    {{ feed.name }}'s cached items
+    {{ feed.name }}'s items
+    <small>- {{ feeditems|length }} cached items</small>
 {% endblock %}
 
 {% block content %}
 <div class="row">
     <div class="large-12 columns">
-        <a class="secondary button radius small right" href="{{ path('j0k3r_feed_edit', { 'slug': feed.slug }) }}">&lArr; Back to the feed</a>
-        <h3 class="subheader">{{ feeditems.count }} items cached</h3>
+        <a class="secondary button radius small" href="{{ path('j0k3r_feed_edit', { 'slug': feed.slug }) }}">&lArr; Back to the feed</a>
 
         {% if feeditems|length > 0 %}
             <table class="table-items">
@@ -33,12 +33,8 @@
                 </tbody>
             </table>
         {% endif %}
-    </div>
-    <div class="large-12 columns">
-        <hr/>
-        <ul class="inline-list">
-            <li><a class="secondary button radius small" href="{{ path('j0k3r_feed_edit', { 'slug': feed.slug }) }}">&lArr; Back to the feed</a></li>
-        </ul>
+
+        <a class="secondary button radius small" href="{{ path('j0k3r_feed_edit', { 'slug': feed.slug }) }}">&lArr; Back to the feed</a>
     </div>
 </div>
 

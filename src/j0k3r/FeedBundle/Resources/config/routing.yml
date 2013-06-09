@@ -1,3 +1,7 @@
+j0k3r_feed_dashboard:
+    pattern:  /
+    defaults: { _controller: j0k3rFeedBundle:Feed:dashboard }
+
 # feed
 j0k3r_feed_homepage:
     pattern:  /feeds

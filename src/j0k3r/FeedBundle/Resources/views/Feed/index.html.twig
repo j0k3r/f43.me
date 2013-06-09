@@ -1,17 +1,8 @@
 {% extends "j0k3rFeedBundle::layout.html.twig" %}
 
-{% block h2_title %}f43.me <small>readable &amp; cleaner feeds</small>{% endblock %}
-{% block h3_title %}Feed list <small>readable &amp; cleaner feeds</small>{% endblock %}
+{% block h2_title %}Feeds list <small>- {{ feeds|length }} feeds</small>{% endblock %}
 
 {% block content %}
-<div class="row">
-    <div class="large-8 columns">
-        <h3 class="subheader">Last updated feeds</h3>
-    </div>
-    <div class="large-2 large-offset-2 columns">
-        <p><a class="success button radius small" href="{{ path('j0k3r_feed_new') }}">Add a new feed</a></p>
-    </div>
-</div>
 <div class="row">
     <div class="large-12 columns">
         {% if feeds|length > 0 %}
@@ -21,8 +12,9 @@
                         <th>Name</th>
                         <th>Link</th>
                         <th>Items</th>
-                        <th>Created at</th>
-                        <th>Updated at</th>
+                        <th>Logs</th>
+                        <th>Created</th>
+                        <th>Updated</th>
                         <th>Actions</th>
                     </tr>
                 </thead>

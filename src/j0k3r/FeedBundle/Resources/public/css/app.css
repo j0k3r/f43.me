@@ -15,7 +15,15 @@ table.table-feeds td div {
   width: 300px;
 }
 
-table.table-feeds td div, table.table-items td div {
+table.table-dashboard-feedlogs td div {
+  width: 150px;
+}
+
+table.table-dashboard-feeds td div {
+  width: 160px;
+}
+
+table.table-feeds td div, table.table-items td div, table.table-dashboard-feedlogs td div, table.table-dashboard-feeds td div {
   text-overflow: ellipsis;
   overflow: hidden;
   white-space: nowrap;

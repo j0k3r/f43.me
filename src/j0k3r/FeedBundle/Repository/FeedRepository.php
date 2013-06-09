@@ -15,15 +15,21 @@ class FeedRepository extends DocumentRepository
     /**
      * Find feeds ordered by updated date
      *
+     * @param  integer   $limit Items to retrieve
+     *
      * @return Doctrine\ODM\MongoDB\EagerCursor
      */
-    public function findAllOrderedByDate()
+    public function findAllOrderedByDate($limit = null)
     {
-        return $this->createQueryBuilder()
+        $q = $this->createQueryBuilder()
             ->eagerCursor(true)
-            ->sort('updated_at', 'DESC')
-            ->getQuery()
-            ->execute();
+            ->sort('updated_at', 'DESC');
+
+        if (null !== $limit) {
+            $q->limit($limit);
+        }
+
+        return $q->getQuery()->execute();
     }
 
     /**

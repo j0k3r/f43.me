@@ -1,0 +1,70 @@
+{% extends "j0k3rFeedBundle::layout.html.twig" %}
+
+{% block h2_title %}f43.me <small>readable &amp; cleaner feeds</small>{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="large-5 columns">
+        <h3 class="subheader">Last updated feeds</h3>
+        {% if feedlogs|length > 0 %}
+            <table class="table-dashboard-feedlogs">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Items</th>
+                        <th>Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for feedlog in feedlogs %}
+                    <tr>
+                        <td>
+                            <div>
+                                <img class="favicon" src="https://plus.google.com/_/favicon?domain={{ feedlog.feed.link }}" />
+                                <a href="{{ path('j0k3r_feed_edit', { 'slug': feedlog.feed.slug }) }}">{{ feedlog.feed.name }}</a>
+                            </div>
+                        </td>
+                        <td>{{ feedlog.itemsnumber }}</td>
+                        <td>{{ feedlog.createdat|date('d/m/y - H:i:s') }}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <p>No update.</p>
+        {% endif %}
+    </div>
+
+    <div class="large-7 columns">
+        <h3 class="subheader">Last created feeds</h3>
+        {% if feeds|length > 0 %}
+            <table class="table-dashboard-feeds">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Link</th>
+                        <th>Items</th>
+                        <th>Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for feed in feeds %}
+                    <tr>
+                        <td>
+                            <img class="favicon" src="https://plus.google.com/_/favicon?domain={{ feed.link }}" />
+                            <a href="{{ path('j0k3r_feed_edit', { 'slug': feed.slug }) }}">{{ feed.name }}</a>
+                        </td>
+                        <td><div>{{ feed.link }}</div></td>
+                        <td>{{ feed.feeditems.count }}</td>
+                        <td>{{ feed.createdat|date('d/m/y - H:i') }}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <p>No update.</p>
+        {% endif %}
+    </div>
+</div>
+
+{% endblock %}
