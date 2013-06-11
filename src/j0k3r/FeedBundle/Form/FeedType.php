@@ -14,11 +14,17 @@ class FeedType extends AbstractType
             ->add('name')
             ->add('description', 'textarea', array('required' => false))
             ->add('link', 'url')
-            ->add('type_parser', 'choice', array(
+            ->add('parser', 'choice', array(
                 'choices' => array(
                     'default'  => 'Default',
                     'internal' => 'Internal',
                     'external' => 'External'
+                ),
+            ))
+            ->add('formatter', 'choice', array(
+                'choices' => array(
+                    'rss'  => 'RSS',
+                    'atom' => 'Atom'
                 ),
             ))
         ;

@@ -61,7 +61,7 @@ class FetchItemsCommand extends ContainerAwareCommand
         $output->writeln('<info>Feeds to check</info>: '.count($feeds));
 
         foreach ($feeds as $feed) {
-            $output->writeln('<info>Working on</info>: '.$feed->getName().' (parser: <comment>'.$feed->getTypeParser().'</comment>)');
+            $output->writeln('<info>Working on</info>: '.$feed->getName().' (parser: <comment>'.$feed->getParser().'</comment>)');
             $rssFeed = $container
                 ->get('simple_pie_proxy')
                 ->setUrl($feed->getLink())
@@ -69,7 +69,7 @@ class FetchItemsCommand extends ContainerAwareCommand
 
             $parser = $container
                 ->get('readability_proxy')
-                ->setChoosenParser($feed->getTypeParser());
+                ->setChoosenParser($feed->getParser());
 
             $itemCached = $feedItemRepo->findLastItemByFeedId($feed->getId());
             $cached     = 0;

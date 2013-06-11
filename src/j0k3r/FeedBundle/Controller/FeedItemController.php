@@ -5,10 +5,8 @@ namespace j0k3r\FeedBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Component\HttpFoundation\Request;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use j0k3r\FeedBundle\Document\Feed;
-// use j0k3r\FeedBundle\Document\FeedItem;
 
 /**
  * FeedItem controller.
@@ -70,7 +68,7 @@ class FeedItemController extends Controller
 
         $parser = $this
             ->get('readability_proxy')
-            ->setChoosenParser($feed->getTypeParser());
+            ->setChoosenParser($feed->getParser());
 
         $content = $parser->parseContent($rssFeed->get_item(0)->get_link());
 

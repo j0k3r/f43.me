@@ -4,3 +4,5 @@ parameters:
 
     locale:            en
     secret:            uLq3XcJHHbLhq6GX
+
+    domain:            f43.me

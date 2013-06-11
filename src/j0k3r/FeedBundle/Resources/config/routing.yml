@@ -51,3 +51,11 @@ j0k3r_feedlog_homepage:
 j0k3r_feedlog_feed:
     pattern:  /feed/{slug}/logs
     defaults: { _controller: j0k3rFeedBundle:FeedLog:feed }
+
+# api
+j0k3r_feedapi_feed:
+    path:     /feedapi/{slug}
+    # host:     api.{domain}
+    defaults: { _controller: j0k3rFeedBundle:FeedApi:index }
+    # requirements:
+        # domain: %domain%

@@ -5,15 +5,12 @@ namespace j0k3r\FeedBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Component\HttpFoundation\Request;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use j0k3r\FeedBundle\Document\Feed;
 use j0k3r\FeedBundle\Form\FeedType;
 
 /**
  * Feed controller.
- *
- * @Route("/feed")
  */
 class FeedController extends Controller
 {

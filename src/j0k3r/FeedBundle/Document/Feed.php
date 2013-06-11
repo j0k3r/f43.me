@@ -7,6 +7,8 @@ use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\ODM\MongoDB\Mapping\Annotations as MongoDB;
 use Doctrine\Bundle\MongoDBBundle\Validator\Constraints\Unique as MongoDBUnique;
 
+use j0k3r\FeedBundle\Formatter;
+
 /**
  * @MongoDB\Document(collection="feeds")
  * @MongoDB\Document(repositoryClass="j0k3r\FeedBundle\Repository\FeedRepository")
@@ -41,7 +43,12 @@ class Feed
     /**
      * @MongoDB\String
      */
-    protected $type_parser;
+    protected $parser;
+
+    /**
+     * @MongoDB\String
+     */
+    protected $formatter;
 
     /**
      * @Gedmo\Slug(fields={"name"}, updatable=false, unique=true)
@@ -249,25 +256,25 @@ class Feed
     }
 
     /**
-     * Set type_parser
+     * Set parser
      *
-     * @param string $typeParser
+     * @param string $parser
      * @return self
      */
-    public function setTypeParser($typeParser)
+    public function setParser($parser)
     {
-        $this->type_parser = $typeParser;
+        $this->parser = $parser;
         return $this;
     }
 
     /**
-     * Get type_parser
+     * Get parser
      *
-     * @return string $typeParser
+     * @return string $parser
      */
-    public function getTypeParser()
+    public function getParser()
     {
-        return $this->type_parser;
+        return $this->parser;
     }
 
     /**
@@ -298,5 +305,70 @@ class Feed
     public function getFeedlogs()
     {
         return $this->feedlogs;
+    }
+
+    /**
+     * Set formatter
+     *
+     * @param string $formatter
+     * @return self
+     */
+    public function setFormatter($formatter)
+    {
+        $this->formatter = $formatter;
+        return $this;
+    }
+
+    /**
+     * Get formatter
+     *
+     * @return string $formatter
+     */
+    public function getFormatter()
+    {
+        return $this->formatter;
+    }
+
+    /**
+     * Return main domain from link:
+     *     http://site.com/feed/index.xml -> http://site.com
+     *
+     * @return string
+     */
+    public function getHost()
+    {
+        $url = parse_url($this->getLink());
+
+        return $url['scheme'].'://'.$url['host'];
+    }
+
+    /**
+     * Render the feed in specified format
+     *
+     * @param collection  $items  All items to render
+     *
+     * @return string
+     *
+     * @throws \InvalidArgumentException if given format formatter does not exists
+     */
+    public function render($items)
+    {
+        switch ($this->getFormatter()) {
+            case 'rss':
+                $formatter = new Formatter\RssFormatter($this, $items);
+                break;
+
+            case 'atom':
+                $formatter = new Formatter\AtomFormatter($this, $items);
+                break;
+
+            default:
+                throw new \InvalidArgumentException(
+                    sprintf("Format '%s' is not available. Please see documentation.", $format)
+                );
+                break;
+        }
+
+        return $formatter->render();
     }
 }
