@@ -6,6 +6,27 @@
 <div class="row">
     <div class="large-5 columns">
         <h3 class="subheader">Last updated feeds</h3>
+
+        {% if historylogs|length > 0 %}
+            <div id="history-logs" style="height: 200px;"></div>
+
+            <script type="text/javascript">
+            Zepto(function($){
+                new Morris.Bar({
+                    element: 'history-logs',
+                    data: [
+                    {% for date, number in historylogs %}
+                        { x: '{{ date }}', y: {{ number }} },
+                        {% endfor %}
+                    ],
+                    xkey: 'x',
+                    ykeys: ['y'],
+                    labels: ['Items']
+                });
+            });
+            </script>
+        {% endif %}
+
         {% if feedlogs|length > 0 %}
             <table class="table-dashboard-feedlogs">
                 <thead>
@@ -31,7 +52,7 @@
                 </tbody>
             </table>
         {% else %}
-            <p>No update.</p>
+            <p>No updated item.</p>
         {% endif %}
     </div>
 
