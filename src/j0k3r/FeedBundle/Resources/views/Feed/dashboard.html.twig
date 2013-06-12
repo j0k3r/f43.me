@@ -46,7 +46,7 @@
                             </div>
                         </td>
                         <td>{{ feedlog.itemsnumber }}</td>
-                        <td>{{ feedlog.createdat|date('d/m/y - H:i:s') }}</td>
+                        <td title="{{ feedlog.createdat|date('d/m/y - H:i:s') }}">{{ time_diff(feedlog.createdat) }}</td>
                     </tr>
                 {% endfor %}
                 </tbody>

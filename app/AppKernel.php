@@ -18,6 +18,7 @@ class AppKernel extends Kernel
             new Doctrine\Bundle\MongoDBBundle\DoctrineMongoDBBundle(),
             new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
             new j0k3r\FeedBundle\j0k3rFeedBundle(),
+            new Knp\Bundle\TimeBundle\KnpTimeBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {
