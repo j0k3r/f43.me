@@ -12,7 +12,7 @@ use j0k3r\FeedBundle\Document\Feed;
 use j0k3r\FeedBundle\Document\FeedItem;
 use j0k3r\FeedBundle\Document\FeedLog;
 
-class FetchItemsCommand extends ContainerAwareCommand
+class FetchItemsCommand extends BaseFeedCommand
 {
     protected function configure()
     {
@@ -27,6 +27,10 @@ class FetchItemsCommand extends ContainerAwareCommand
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
+        if (!$this->lockCommand($input->getOptions())) {
+            return $output->writeLn("<error>Command locked !</error>");
+        }
+
         $container    = $this->getContainer();
         $dm           = $container->get('doctrine.odm.mongodb.document_manager');
         $feedRepo     = $dm->getRepository('j0k3rFeedBundle:Feed');
@@ -37,6 +41,7 @@ class FetchItemsCommand extends ContainerAwareCommand
         if ($slug = $input->getOption('slug')) {
             $feed = $feedRepo->findOneBySlug($slug);
             if (!$feed) {
+                $this->unlockCommand();
                 return $output->writeLn("<error>Unable to find Feed document:</error> <comment>".$slug."</comment>");
             }
             $feeds = array($feed);
@@ -53,6 +58,7 @@ class FetchItemsCommand extends ContainerAwareCommand
                 $feeds = $feedRepo->findByIds($feedsWithItems, 'notIn');
             }
         } else {
+            $this->unlockCommand();
             return $output->writeLn("<error>You must add some options to the task :</error> an <comment>age</comment> or a <comment>slug</comment>");
         }
 
@@ -124,5 +130,7 @@ class FetchItemsCommand extends ContainerAwareCommand
 
             $output->writeln('<info>New cached items</info>: '.$cached);
         }
+
+        $this->unlockCommand();
     }
 }
