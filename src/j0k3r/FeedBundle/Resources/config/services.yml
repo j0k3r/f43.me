@@ -5,7 +5,7 @@ services:
     readability_proxy:
         class: j0k3r\FeedBundle\Services\ReadabilityProxy
         arguments:
-            token:       c3f3b605b5457f7e88892a7e7113aab38600774d
+            token:       %readability_token%
             debug:       false #%kernel.debug%
             convertLink: false
 

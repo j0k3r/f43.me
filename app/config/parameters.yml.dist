@@ -6,3 +6,5 @@ parameters:
     secret:            uLq3XcJHHbLhq6GX
 
     domain:            f43.me
+
+    readability_token: xxxxxxx
