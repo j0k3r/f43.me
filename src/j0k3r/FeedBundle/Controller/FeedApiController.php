@@ -31,7 +31,11 @@ class FeedApiController extends Controller
 
         $feeditems = $dm->getRepository('j0k3rFeedBundle:FeedItem')->findByFeedId($feed->getId());
 
-        return new Response($feed->render($feeditems));
+        return new Response(
+            $feed->render($feeditems),
+            200,
+            array('Content-Type' => 'text/xml')
+        );
     }
 
     /**
