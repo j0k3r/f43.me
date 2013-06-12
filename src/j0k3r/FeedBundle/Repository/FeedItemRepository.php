@@ -15,16 +15,16 @@ class FeedItemRepository extends DocumentRepository
     /**
      * Get the base query to fetch items
      *
-     * @param  string   $id    Feed id
-     * @param  int      $limit Number of items to return
-     * @param  int      $skip  Item to skip before applying the limit
+     * @param  string   $feedId     Feed id
+     * @param  int      $limit      Number of items to return
+     * @param  int      $skip       Item to skip before applying the limit
      *
      * @return Doctrine\ODM\MongoDB\Query\Query
      */
-    private function getItemsByFeedIdQuery($id, $limit = null, $skip = null)
+    private function getItemsByFeedIdQuery($feedId, $limit = null, $skip = null)
     {
         $q = $this->createQueryBuilder()
-            ->field('feed.id')->equals($id)
+            ->field('feed.id')->equals($feedId)
             ->sort('published_at', 'DESC');
 
         if (null !== $limit) {
@@ -41,26 +41,26 @@ class FeedItemRepository extends DocumentRepository
     /**
      * Find all items for a given Feed id
      *
-     * @param  int   $id Feed id
+     * @param  int   $feedId Feed id
      *
      * @return Doctrine\ODM\MongoDB\LoggableCursor
      */
-    public function findByFeedId($id)
+    public function findByFeedId($feedId)
     {
-        return $this->getItemsByFeedIdQuery($id)
+        return $this->getItemsByFeedIdQuery($feedId)
             ->execute();
     }
 
     /**
      * Retrieve the last item for a given Feed id
      *
-     * @param  int   $id Feed id
+     * @param  int   $feedId Feed id
      *
      * @return j0k3r\FeedBundle\Document\FeedItem
      */
-    public function findLastItemByFeedId($id)
+    public function findLastItemByFeedId($feedId)
     {
-        return $this->getItemsByFeedIdQuery($id, 1)
+        return $this->getItemsByFeedIdQuery($feedId, 1)
             ->getSingleResult();
     }
 
@@ -89,5 +89,33 @@ class FeedItemRepository extends DocumentRepository
         }
 
         return $res;
+    }
+
+    /**
+     * Retrieve all links from cached item for a given id.
+     * Link are used as a "unique" key for item.
+     *
+     * @param  int   $feedId Feed id
+     *
+     * @return array
+     */
+    public function getAllLinks($feedId)
+    {
+        $res = $this->createQueryBuilder()
+            ->select('permalink')
+            ->hydrate(false)
+            ->field('feed.id')->equals($feedId)
+            ->sort('published_at', 'DESC')
+            ->getQuery()
+            ->execute();
+
+        // store as key to avoid duplicate (even if it doesn't have to happen)
+        // and also because it's faster to isset than in_array to match a value
+        $results = array();
+        foreach ($res as $item) {
+            $results[$item['permalink']] = true;
+        }
+
+        return $results;
     }
 }

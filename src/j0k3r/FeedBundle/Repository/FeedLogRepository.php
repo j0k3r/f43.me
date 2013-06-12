@@ -23,7 +23,6 @@ class FeedLogRepository extends DocumentRepository
     {
         $q = $this->createQueryBuilder()
             ->eagerCursor(true)
-            ->field('feed.id')->notIn(array(null))
             ->sort('id', 'DESC');
 
         if (null !== $limit) {
@@ -36,16 +35,16 @@ class FeedLogRepository extends DocumentRepository
     /**
      * Get the base query to fetch items
      *
-     * @param  string   $id    Feed id
-     * @param  int      $limit Number of items to return
-     * @param  int      $skip  Item to skip before applying the limit
+     * @param  string   $feedId     Feed id
+     * @param  int      $limit      Number of items to return
+     * @param  int      $skip       Item to skip before applying the limit
      *
      * @return Doctrine\ODM\MongoDB\Query\Query
      */
-    private function getItemsByFeedIdQuery($id, $limit = null, $skip = null)
+    private function getItemsByFeedIdQuery($feedId, $limit = null, $skip = null)
     {
         $q = $this->createQueryBuilder()
-            ->field('feed.id')->equals($id)
+            ->field('feed.id')->equals($feedId)
             ->sort('id', 'DESC');
 
         if (null !== $limit) {
@@ -62,26 +61,26 @@ class FeedLogRepository extends DocumentRepository
     /**
      * Find all logs for a given Feed id
      *
-     * @param  int   $id Feed id
+     * @param  int   $feedId Feed id
      *
      * @return Doctrine\ODM\MongoDB\LoggableCursor
      */
-    public function findByFeedId($id)
+    public function findByFeedId($feedId)
     {
-        return $this->getItemsByFeedIdQuery($id)
+        return $this->getItemsByFeedIdQuery($feedId)
             ->execute();
     }
 
     /**
      * Retrieve the last log for a given Feed id
      *
-     * @param  int   $id Feed id
+     * @param  int   $feedId Feed id
      *
      * @return j0k3r\FeedBundle\Document\FeedLog
      */
-    public function findLastItemByFeedId($id)
+    public function findLastItemByFeedId($feedId)
     {
-        return $this->getItemsByFeedIdQuery($id, 1)
+        return $this->getItemsByFeedIdQuery($feedId, 1)
             ->getSingleResult();
     }
 

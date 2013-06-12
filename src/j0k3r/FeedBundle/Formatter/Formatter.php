@@ -18,7 +18,7 @@ class Formatter
     protected $feed;
 
     /**
-     * @var Feed $feed A feed instance
+     * @var Collection $items A collection of item
      */
     protected $items;
 
@@ -28,7 +28,7 @@ class Formatter
     protected $dom;
 
     /**
-     * @var array $fields Contain Field instances for this formatter
+     * @var array $fields Contain arrays for this formatter
      */
     protected $fields = array();
 
@@ -65,7 +65,6 @@ class Formatter
         } else if (isset($field['attribute'])) {
             $element = $this->dom->createElement($name);
             $element->setAttribute($field['attribute'], $item->getLink());
-
         } else {
             if (isset($field['date_format'])) {
                 $format = $field['date_format'];

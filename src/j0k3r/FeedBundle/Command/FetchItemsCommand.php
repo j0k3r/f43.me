@@ -19,8 +19,8 @@ class FetchItemsCommand extends ContainerAwareCommand
         $this
             ->setName('feed:fetch-items')
             ->setDescription('Fetch items from feed to cache them')
-            ->addArgument('age', InputArgument::REQUIRED, '`old` to fetch old feed or `new` to fetch recent feed with no item')
-            ->addArgument('slug', InputArgument::OPTIONAL, 'To fetch item for one particulat feed (using its slug)')
+            ->addOption('age', null, InputOption::VALUE_NONE, '`old` to fetch old feed or `new` to fetch recent feed with no item')
+            ->addOption('slug', null, InputOption::VALUE_OPTIONAL, 'To fetch item for one particulat feed (using its slug)')
             ->addOption('t', null, InputOption::VALUE_NONE, 'Display debug')
         ;
     }
@@ -34,28 +34,26 @@ class FetchItemsCommand extends ContainerAwareCommand
         $progress     = $this->getHelperSet()->get('progress');
 
         // retrieve feed to work on
-        if ($slug = $input->getArgument('slug')) {
+        if ($slug = $input->getOption('slug')) {
             $feed = $feedRepo->findOneBySlug($slug);
             if (!$feed) {
                 return $output->writeLn("<error>Unable to find Feed document:</error> <comment>".$slug."</comment>");
             }
             $feeds = array($feed);
-        } else {
-            if (!in_array($input->getArgument('age'), array('new', 'old'))) {
-                return $output->writeLn("<error>Age argument must be `old` or `new`:</error> <comment>".$input->getArgument('age')."</comment> given");
-            }
-
+        } elseif (in_array($input->getOption('age'), array('new', 'old'))) {
             $feedsWithItems = $feedItemRepo->findAllFeedWithItems();
 
             // retrieve feed that HAVE items
-            if ('old' == $input->getArgument('age')) {
+            if ('old' == $input->getOption('age')) {
                 $feeds = $feedRepo->findByIds($feedsWithItems, 'in');
             }
 
             // retrieve feeds that DOESN'T have items
-            if ('new' == $input->getArgument('age')) {
+            if ('new' == $input->getOption('age')) {
                 $feeds = $feedRepo->findByIds($feedsWithItems, 'notIn');
             }
+        } else {
+            return $output->writeLn("<error>You must add some options to the task :</error> an <comment>age</comment> or a <comment>slug</comment>");
         }
 
         $output->writeln('<info>Feeds to check</info>: '.count($feeds));
@@ -71,26 +69,33 @@ class FetchItemsCommand extends ContainerAwareCommand
                 ->get('readability_proxy')
                 ->setChoosenParser($feed->getParser());
 
-            $itemCached = $feedItemRepo->findLastItemByFeedId($feed->getId());
-            $cached     = 0;
+            $cachedLinks = $feedItemRepo->getAllLinks($feed->getId());
+            $cached      = 0;
 
+            // show progress bar in trace mode only
             if ($input->getOption('t')) {
                 $total = $rssFeed->get_item_quantity();
                 $progress->start($output, $total);
             }
 
             foreach ($rssFeed->get_items() as $item) {
-                // if we find the last cached item, we don't need to cache more item
-                if (null !== $itemCached && $itemCached->getPermalink() == $item->get_permalink()) {
-                    break;
+                // if an item already exists, we skip it
+                if (isset($cachedLinks[$item->get_permalink()])) {
+                    continue;
                 }
 
                 $parsedContent = $parser->parseContent($item->get_permalink());
 
+                // if readable content failed, use default one from feed item
+                $content = $parsedContent->content;
+                if (false === $content) {
+                    $content = $item->get_content();
+                }
+
                 $feedItem = new FeedItem();
                 $feedItem->setTitle($item->get_title());
                 $feedItem->setLink($parsedContent->url);
-                $feedItem->setContent($parsedContent->content);
+                $feedItem->setContent($content);
                 $feedItem->setPermalink($item->get_permalink());
                 $feedItem->setPublishedAt($item->get_date());
                 $feedItem->setFeed($feed);
