@@ -37,3 +37,27 @@ table.table-feeds td div, table.table-items td div, table.table-dashboard-feedlo
 .morris-hover.morris-default-style{border-radius:10px;padding:6px;color:#666;background:rgba(255, 255, 255, 0.8);border:solid 2px rgba(230, 230, 230, 0.8);font-family:sans-serif;font-size:12px;text-align:center;}
 .morris-hover.morris-default-style .morris-hover-row-label{font-weight:bold;margin:0.25em 0;}
 .morris-hover.morris-default-style .morris-hover-point{white-space:nowrap;margin:0.1em 0;}
+
+div.feed-info {
+  border: 1px solid #eeeeee;
+  padding: 10px 20px 20px;
+  font-size: 14px;
+  line-height: 1.1;
+}
+
+div.feed-info ul {
+  list-style: none;
+  margin-left: 0;
+}
+
+div.feed-info ul li {
+  margin-bottom: 10px;
+}
+
+div.feed-info .info {
+  display: block;
+}
+
+div.feed-info span {
+  color: #555;
+}

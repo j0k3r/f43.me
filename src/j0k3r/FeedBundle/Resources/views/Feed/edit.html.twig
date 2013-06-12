@@ -37,11 +37,38 @@
             </div>
         </form>
     </div>
-    <div class="large-4 columns">
-        <ul class="side-nav">
-            <li class="active"><a href="#"><span class="label">{{ lastItem.publishedat|date('d/m/y - H:i:s') }}</span> last item</a></li>
-            <li><a href="{{ path('j0k3r_feeditem_homepage', { 'slug': feed.slug }) }}"><span class="label">{{ feed.feeditems.count }}</span> cached items</a></li>
-            <li><a href="{{ path('j0k3r_feedlog_feed', { 'slug': feed.slug }) }}"><span class="label">{{ feed.feedlogs.count }}</span> logs</a></li>
+    <div class="large-4 columns feed-info">
+        <ul>
+            <li>
+                <span class="info">Api feed link</span>
+                <a href="{{ url('j0k3r_feedapi_feed', { 'slug': feed.slug }) }}" target="_blank">
+                    {{ url('j0k3r_feedapi_feed', { 'slug': feed.slug }) }}
+                </a>
+            </li>
+            <li>
+                <span class="info">Last cached item</span>
+                <a href="{{ path('j0k3r_feeditem_homepage', { 'slug': feed.slug }) }}" title="{{ lastItem.publishedat|date('d/m/y - H:i:s') }}">
+                    {{ time_diff(lastItem.publishedat) }}
+                </a>
+            </li>
+            <li>
+                <span class="info">Cached items</span>
+                <a href="{{ path('j0k3r_feeditem_homepage', { 'slug': feed.slug }) }}">
+                    {{ feed.feeditems.count }} items
+                </a>
+            </li>
+            <li>
+                <span class="info">Last log</span>
+                <a href="{{ path('j0k3r_feedlog_feed', { 'slug': feed.slug }) }}" title="{{ lastLog.createdat|date('d/m/y - H:i:s') }}">
+                    {{ time_diff(lastLog.createdat) }}
+                </a>
+            </li>
+            <li>
+                <span class="info">Logs</span>
+                <a href="{{ path('j0k3r_feedlog_feed', { 'slug': feed.slug }) }}">
+                    {{ feed.feedlogs.count }} items
+                </a>
+            </li>
         </ul>
     </div>
 </div>

@@ -54,8 +54,9 @@ j0k3r_feedlog_feed:
 
 # api
 j0k3r_feedapi_feed:
-    path:     /feedapi/{slug}
-    # host:     api.{domain}
-    defaults: { _controller: j0k3rFeedBundle:FeedApi:index }
-    # requirements:
-        # domain: %domain%
+    path:     /{slug}
+    host:     api.{domain}
+    defaults: { _controller: j0k3rFeedBundle:FeedApi:index, domain: %domain% }
+    requirements:
+        domain: %domain%
+

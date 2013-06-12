@@ -10,7 +10,7 @@
                 <thead>
                     <tr>
                         <th>Name</th>
-                        <th>Link</th>
+                        <th>Links</th>
                         <th>Items</th>
                         <th>Logs</th>
                         <th>Created</th>
@@ -22,7 +22,10 @@
                 {% for feed in feeds %}
                     <tr>
                         <td><img class="favicon" src="https://plus.google.com/_/favicon?domain={{ feed.link }}" /> <a href="{{ path('j0k3r_feed_edit', { 'slug': feed.slug }) }}">{{ feed.name }}</a></td>
-                        <td><div>{{ feed.link }}</div></td>
+                        <td>
+                            <a href="{{ feed.link }}" target="_blank">Official one</a> -
+                            <a href="{{ url('j0k3r_feedapi_feed', { 'slug': feed.slug }) }}" target="_blank">Readable one</a>
+                        </td>
                         <td>{{ feed.feeditems.count }}</td>
                         <td>{{ feed.feedlogs.count }}</td>
                         <td>{{ feed.createdat|date('d/m/y - H:i') }}</td>
