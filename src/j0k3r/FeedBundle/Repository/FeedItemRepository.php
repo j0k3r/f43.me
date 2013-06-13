@@ -118,4 +118,26 @@ class FeedItemRepository extends DocumentRepository
 
         return $results;
     }
+
+    /**
+     * Find all items starting at $skip.
+     * Used to remove all old items.
+     * I can't find a way to perform the remove in one query (remove & skip doesn't want to work *well* together)
+     *
+     * @param  int   $feedId Feed id
+     * @param  int   $skip   Items to keep
+     *
+     * @return Doctrine\ODM\MongoDB\EagerCursor
+     */
+    public function findOldItemsByFeedId($feedId, $skip = 100)
+    {
+        return $this->createQueryBuilder()
+            ->find()
+            ->eagerCursor(true)
+            ->field('feed.id')->equals($feedId)
+            ->sort('published_at', 'desc')
+            ->skip((int) $skip)
+            ->getQuery()
+            ->execute();
+    }
 }

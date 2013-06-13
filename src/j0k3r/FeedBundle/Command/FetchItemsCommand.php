@@ -21,7 +21,7 @@ class FetchItemsCommand extends BaseFeedCommand
             ->setDescription('Fetch items from feed to cache them')
             ->addOption('age', null, InputOption::VALUE_NONE, '`old` to fetch old feed or `new` to fetch recent feed with no item')
             ->addOption('slug', null, InputOption::VALUE_OPTIONAL, 'To fetch item for one particulat feed (using its slug)')
-            ->addOption('t', null, InputOption::VALUE_NONE, 'Display debug')
+            ->addOption('with-trace', 't', InputOption::VALUE_NONE, 'Display debug')
         ;
     }
 
@@ -79,7 +79,7 @@ class FetchItemsCommand extends BaseFeedCommand
             $cached      = 0;
 
             // show progress bar in trace mode only
-            if ($input->getOption('t')) {
+            if ($input->getOption('with-trace')) {
                 $total = $rssFeed->get_item_quantity();
                 $progress->start($output, $total);
             }
@@ -109,13 +109,13 @@ class FetchItemsCommand extends BaseFeedCommand
 
                 $cached++;
 
-                if ($input->getOption('t')) {
+                if ($input->getOption('with-trace')) {
                     $progress->advance();
                 }
             }
 
             if (0 !== $cached) {
-                if ($input->getOption('t')) {
+                if ($input->getOption('with-trace')) {
                     $progress->finish();
                 }
 
