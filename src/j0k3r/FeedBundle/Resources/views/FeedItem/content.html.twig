@@ -1,4 +1,9 @@
-<p>Link: <a href="{{ url }}" target="_blank">{{ url }}</a></p>
+<a class="close-reveal-modal">&#215;</a>
+
+<ul class="no-bullet">
+    <li><strong>Link</strong>: <a href="{{ url }}" target="_blank">{{ url }}</a></li>
+    <li><strong>Title</strong>: {{ title }}</li>
+</ul>
+
 <hr/>
 {{ content|raw }}
-<a class="close-reveal-modal">&#215;</a>

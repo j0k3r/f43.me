@@ -70,9 +70,11 @@ class FeedItemController extends Controller
             ->get('readability_proxy')
             ->setChoosenParser($feed->getParser());
 
-        $content = $parser->parseContent($rssFeed->get_item(0)->get_link());
+        $firstItem = $rssFeed->get_item(0);
+        $content   = $parser->parseContent($firstItem->get_link());
 
         return $this->container->get('templating')->renderResponse('j0k3rFeedBundle:FeedItem:content.html.twig', array(
+            'title'   => $firstItem->get_title(),
             'content' => $content->content,
             'url'     => $content->url,
         ));
