@@ -3,7 +3,7 @@
 {% block h2_title %}
     <img class="favicon" src="https://plus.google.com/_/favicon?domain={{ feed.link }}" />
     {{ feed.name }}'s items
-    <small>- {{ feeditems|length }} cached items</small>
+    <small>{{ feeditems|length }} cached items</small>
 {% endblock %}
 
 {% block content %}

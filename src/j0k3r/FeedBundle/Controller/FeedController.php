@@ -29,9 +29,27 @@ class FeedController extends Controller
         $historylogs = $dm->getRepository('j0k3rFeedBundle:FeedLog')->findStatsForLastDays();
 
         return array(
+            'menu'        => 'dashboard',
             'feedlogs'    => $feedlogs,
             'feeds'       => $feeds,
             'historylogs' => $historylogs,
+        );
+    }
+
+    /**
+     * Display a public view
+     *
+     * @Template()
+     *
+     * @return array
+     */
+    public function publicAction()
+    {
+        $dm    = $this->getDocumentManager();
+        $feeds = $dm->getRepository('j0k3rFeedBundle:Feed')->findAllOrderedByDate();
+
+        return array(
+            'feeds'   => $feeds,
         );
     }
 
@@ -47,7 +65,10 @@ class FeedController extends Controller
         $dm    = $this->getDocumentManager();
         $feeds = $dm->getRepository('j0k3rFeedBundle:Feed')->findAllOrderedByDate();
 
-        return array('feeds' => $feeds);
+        return array(
+            'menu'  => 'feed',
+            'feeds' => $feeds
+        );
     }
 
     /**
@@ -63,6 +84,7 @@ class FeedController extends Controller
         $form = $this->createForm(new FeedType(), $feed);
 
         return array(
+            'menu' => 'feed',
             'feed' => $feed,
             'form' => $form->createView()
         );
@@ -96,6 +118,7 @@ class FeedController extends Controller
         }
 
         return array(
+            'menu' => 'feed',
             'feed' => $feed,
             'form' => $form->createView()
         );
@@ -128,6 +151,7 @@ class FeedController extends Controller
         $lastLog    = $dm->getRepository('j0k3rFeedBundle:FeedLog')->findLastItemByFeedId($feed->getId());
 
         return array(
+            'menu'        => 'feed',
             'feed'        => $feed,
             'lastItem'    => $lastItem,
             'lastLog'     => $lastLog,
@@ -176,6 +200,7 @@ class FeedController extends Controller
         }
 
         return array(
+            'menu'        => 'feed',
             'feed'        => $feed,
             'edit_form'   => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),

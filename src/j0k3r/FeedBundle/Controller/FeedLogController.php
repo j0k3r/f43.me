@@ -25,6 +25,7 @@ class FeedLogController extends Controller
         $feedlogs = $dm->getRepository('j0k3rFeedBundle:FeedLog')->findAllOrderedById();
 
         return array(
+            'menu'     => 'log',
             'feedlogs' => $feedlogs,
         );
     }
@@ -48,6 +49,7 @@ class FeedLogController extends Controller
         $feedlogs = $dm->getRepository('j0k3rFeedBundle:FeedLog')->findByFeedId($feed->getId());
 
         return array(
+            'menu'     => 'log',
             'feed'     => $feed,
             'feedlogs' => $feedlogs,
         );

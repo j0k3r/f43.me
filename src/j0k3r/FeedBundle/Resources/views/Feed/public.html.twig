@@ -1,0 +1,58 @@
+{% extends "j0k3rFeedBundle::layout.html.twig" %}
+
+{% block h2_title %}f43.me <small>readable &amp; cleaner feeds</small>{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="large-12 columns">
+        <h2 class="subheader">What's that?</h2>
+        <p>I'm reading a lot of feeds in the subway. Mostly when I go to work and when I come back home. We are lucky in Paris because we have data network in the subway, but sometimes, network is saturated and you can't load the webpage of an item of your feed. You're stuck with only 3 lines from the feed...</p>
+        <p>That's why I've built a <em>kind of</em> proxy for RSS feeds that I read the most, called <strong>f43.me</strong>.</p>
+        <p>It's simple:</p>
+        <ul class="square">
+            <li>fetch items from a feed</li>
+            <li>grab the content</li>
+            <li>make it <em>readable</em> using an <a href="http://www.keyvan.net/2010/08/php-readability/">internal</a> or <a href="https://www.readability.com/">external</a> method</li>
+            <li>store it</li>
+            <li>create a new feed with readable items</li>
+        </ul>
+        <p>And it's available on <a href="https://github.com/j0k3r/f43.me">Github</a>.</p>
+    </div>
+</div>
+
+<div class="row">
+    <div class="large-12 columns">
+        <h2 class="subheader">Available <em>readable</em> feeds</h2>
+        {% if feeds|length > 0 %}
+            <table>
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Link</th>
+                        <th>Items</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for feed in feeds %}
+                    <tr>
+                        <td>
+                            <img class="favicon" src="https://plus.google.com/_/favicon?domain={{ feed.link }}" />
+                            {{ feed.name }}
+                        </td>
+                        <td>
+                            <a href="{{ url('j0k3r_feedapi_feed', { 'slug': feed.slug }) }}" target="_blank">
+                                {{ url('j0k3r_feedapi_feed', { 'slug': feed.slug }) }}
+                            </a>
+                        </td>
+                        <td>{{ feed.feeditems.count }}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <p>No update.</p>
+        {% endif %}
+    </div>
+</div>
+
+{% endblock %}

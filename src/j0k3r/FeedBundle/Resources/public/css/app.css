@@ -1,3 +1,7 @@
+.top-bar-section ul li.active > a {
+  background: #555;
+}
+
 table {
   width: 100%;
 }

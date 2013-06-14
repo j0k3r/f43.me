@@ -32,6 +32,7 @@ class FeedItemController extends Controller
         $feeditems = $dm->getRepository('j0k3rFeedBundle:FeedItem')->findByFeedId($feed->getId());
 
         return array(
+            'menu'      => 'feed',
             'feed'      => $feed,
             'feeditems' => $feeditems,
         );
@@ -47,6 +48,7 @@ class FeedItemController extends Controller
         }
 
         return $this->container->get('templating')->renderResponse('j0k3rFeedBundle:FeedItem:content.html.twig', array(
+            'title'   => $feeditem->getTitle(),
             'content' => $feeditem->getContent(),
             'url'     => $feeditem->getLink(),
         ));

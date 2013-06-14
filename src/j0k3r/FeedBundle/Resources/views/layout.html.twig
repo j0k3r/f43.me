@@ -18,7 +18,7 @@
     <nav class="top-bar">
         <ul class="title-area">
             <li class="name">
-                <h1><a href="{{ path('j0k3r_feed_dashboard') }}">f43.me</a></h1>
+                <h1><a href="{{ path('j0k3r_feed_publicview') }}">f43.me</a></h1>
             </li>
             <li class="toggle-topbar menu-icon"><a href="#"><span></span></a></li>
         </ul>
@@ -26,10 +26,17 @@
         <section class="top-bar-section">
             <ul class="left">
                 <li class="divider"></li>
-                <!-- <li class="active"><a href="#">Main Item 1</a></li> -->
-                <li><a href="{{ path('j0k3r_feed_homepage') }}">Feeds</a></li>
+                <li {% if menu is defined and 'dashboard' == menu %}class="active"{% endif %}>
+                    <a href="{{ path('j0k3r_feed_dashboard') }}">Dashboard</a>
+                </li>
                 <li class="divider"></li>
-                <li><a href="{{ path('j0k3r_feedlog_homepage') }}">Feed logs</a></li>
+                <li {% if menu is defined and 'feed' == menu %}class="active"{% endif %}>
+                    <a href="{{ path('j0k3r_feed_homepage') }}">Feeds</a>
+                </li>
+                <li class="divider"></li>
+                <li {% if menu is defined and 'log' == menu %}class="active"{% endif %}>
+                    <a href="{{ path('j0k3r_feedlog_homepage') }}">Feed logs</a>
+                </li>
                 <li class="divider"></li>
             </ul>
 
