@@ -40,8 +40,8 @@
                             {{ feed.name }}
                         </td>
                         <td>
-                            <a href="{{ url('j0k3r_feedapi_feed', { 'slug': feed.slug }) }}" target="_blank">
-                                {{ url('j0k3r_feedapi_feed', { 'slug': feed.slug }) }}
+                            <a href="{{ url('feedapi_feed', { 'slug': feed.slug }) }}" target="_blank">
+                                {{ url('feedapi_feed', { 'slug': feed.slug }) }}
                             </a>
                         </td>
                         <td>{{ feed.feeditems.count }}</td>

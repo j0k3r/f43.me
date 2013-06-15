@@ -9,7 +9,7 @@
 {% block content %}
 <div class="row">
     <div class="large-8 columns">
-        <form action="{{ path('j0k3r_feed_update', { 'slug': feed.slug }) }}" method="post" {{ form_enctype(edit_form) }} class="custom">
+        <form action="{{ path('feed_update', { 'slug': feed.slug }) }}" method="post" {{ form_enctype(edit_form) }} class="custom">
             {{ form_widget(edit_form) }}
 
             <div class="row">
@@ -41,14 +41,14 @@
         <ul>
             <li>
                 <span class="info">Api feed link</span>
-                <a href="{{ url('j0k3r_feedapi_feed', { 'slug': feed.slug }) }}" target="_blank">
-                    {{ url('j0k3r_feedapi_feed', { 'slug': feed.slug }) }}
+                <a href="{{ url('feedapi_feed', { 'slug': feed.slug }) }}" target="_blank">
+                    {{ url('feedapi_feed', { 'slug': feed.slug }) }}
                 </a>
             </li>
             <li>
                 <span class="info">Last cached item</span>
                 {% if lastItem.publishedat is defined %}
-                    <a href="{{ path('j0k3r_feeditem_homepage', { 'slug': feed.slug }) }}" title="{{ lastItem.publishedat|date('d/m/y - H:i:s') }}">
+                    <a href="{{ path('feeditem_homepage', { 'slug': feed.slug }) }}" title="{{ lastItem.publishedat|date('d/m/y - H:i:s') }}">
                         {{ time_diff(lastItem.publishedat) }}
                     </a>
                 {% else %}
@@ -57,14 +57,14 @@
             </li>
             <li>
                 <span class="info">Cached items</span>
-                <a href="{{ path('j0k3r_feeditem_homepage', { 'slug': feed.slug }) }}">
+                <a href="{{ path('feeditem_homepage', { 'slug': feed.slug }) }}">
                     {{ feed.feeditems.count }} items
                 </a>
             </li>
             <li>
                 <span class="info">Last log</span>
                 {% if lastLog.createdat is defined %}
-                    <a href="{{ path('j0k3r_feedlog_feed', { 'slug': feed.slug }) }}" title="{{ lastLog.createdat|date('d/m/y - H:i:s') }}">
+                    <a href="{{ path('feedlog_feed', { 'slug': feed.slug }) }}" title="{{ lastLog.createdat|date('d/m/y - H:i:s') }}">
                         {{ time_diff(lastLog.createdat) }}
                     </a>
                 {% else %}
@@ -73,7 +73,7 @@
             </li>
             <li>
                 <span class="info">Logs</span>
-                <a href="{{ path('j0k3r_feedlog_feed', { 'slug': feed.slug }) }}">
+                <a href="{{ path('feedlog_feed', { 'slug': feed.slug }) }}">
                     {{ feed.feedlogs.count }} items
                 </a>
             </li>
@@ -85,9 +85,9 @@
     <div class="large-12 columns">
         <hr/>
         <ul class="inline-list">
-            <li><a class="secondary button radius small" href="{{ path('j0k3r_feed_homepage') }}">&lArr; Back to the list</a></li>
-            <li><a class="button radius small" data-tooltip class="has-tip" title="It can take few seconds to load" data-reveal-id="modal-test-item" data-reveal-ajax="{{ path('j0k3r_feeditem_test', { 'slug': feed.slug }) }}">Test parsing</a></li>
-            <li><form action="{{ path('j0k3r_feed_delete', { 'slug': feed.slug }) }}" method="post">{{ form_widget(delete_form) }}<button class="alert button radius small" type="submit">Delete</button></form></li>
+            <li><a class="secondary button radius small" href="{{ path('feed_homepage') }}">&lArr; Back to the list</a></li>
+            <li><a class="button radius small" data-tooltip class="has-tip" title="It can take few seconds to load" data-reveal-id="modal-test-item" data-reveal-ajax="{{ path('feeditem_test', { 'slug': feed.slug }) }}">Test parsing</a></li>
+            <li><form action="{{ path('feed_delete', { 'slug': feed.slug }) }}" method="post">{{ form_widget(delete_form) }}<button class="alert button radius small" type="submit">Delete</button></form></li>
         </ul>
     </div>
 </div>

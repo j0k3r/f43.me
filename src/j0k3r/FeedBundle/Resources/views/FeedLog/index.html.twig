@@ -20,7 +20,7 @@
                 <tbody>
                 {% for feedlog in feedlogs %}
                     <tr>
-                        <td><img class="favicon" src="https://plus.google.com/_/favicon?domain={{ feedlog.feed.link }}" /> <a href="{{ path('j0k3r_feed_edit', { 'slug': feedlog.feed.slug }) }}">{{ feedlog.feed.name }}</a></td>
+                        <td><img class="favicon" src="https://plus.google.com/_/favicon?domain={{ feedlog.feed.link }}" /> <a href="{{ path('feed_edit', { 'slug': feedlog.feed.slug }) }}">{{ feedlog.feed.name }}</a></td>
                         <td>{{ feedlog.itemsnumber }}</td>
                         <td title="{{ feedlog.createdat|date('d/m/y - H:i:s') }}">{{ time_diff(feedlog.createdat) }}</td>
                     </tr>

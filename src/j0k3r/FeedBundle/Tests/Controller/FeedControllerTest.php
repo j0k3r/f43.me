@@ -19,7 +19,7 @@ class FeedControllerTest extends WebTestCase
 
         // Fill in the form and submit it
         $form = $crawler->selectButton('Create')->form(array(
-            'j0k3r_feedbundle_feedtype[field_name]'  => 'Test',
+            'feedbundle_feedtype[field_name]'  => 'Test',
             // ... other fields to fill
         ));
 
@@ -33,7 +33,7 @@ class FeedControllerTest extends WebTestCase
         $crawler = $client->click($crawler->selectLink('Edit')->link());
 
         $form = $crawler->selectButton('Edit')->form(array(
-            'j0k3r_feedbundle_feedtype[field_name]'  => 'Foo',
+            'feedbundle_feedtype[field_name]'  => 'Foo',
             // ... other fields to fill
         ));
 

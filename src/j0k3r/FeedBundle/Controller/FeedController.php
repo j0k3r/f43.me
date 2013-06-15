@@ -112,7 +112,7 @@ class FeedController extends Controller
 
             $this->get('session')->getFlashBag()->add('notice', 'Document created!');
 
-            return $this->redirect($this->generateUrl('j0k3r_feed_edit', array('slug' => $feed->getSlug())));
+            return $this->redirect($this->generateUrl('feed_edit', array('slug' => $feed->getSlug())));
         } else {
             $this->get('session')->getFlashBag()->add('error', 'Form is invalid.');
         }
@@ -194,7 +194,7 @@ class FeedController extends Controller
 
             $this->get('session')->getFlashBag()->add('notice', 'Document updated!');
 
-            return $this->redirect($this->generateUrl('j0k3r_feed_edit', array('slug' => $slug)));
+            return $this->redirect($this->generateUrl('feed_edit', array('slug' => $slug)));
         } else {
             $this->get('session')->getFlashBag()->add('error', 'Form is invalid.');
         }
@@ -236,7 +236,7 @@ class FeedController extends Controller
             $this->get('session')->getFlashBag()->add('notice', 'Document deleted!');
         }
 
-        return $this->redirect($this->generateUrl('j0k3r_feed_homepage'));
+        return $this->redirect($this->generateUrl('feed_homepage'));
     }
 
     private function createDeleteForm($slug)

@@ -6,7 +6,7 @@
 {% block content %}
 <div class="row">
     <div class="large-8 columns">
-        <form action="{{ path('j0k3r_feed_create') }}" method="post" {{ form_enctype(form) }} class="custom">
+        <form action="{{ path('feed_create') }}" method="post" {{ form_enctype(form) }} class="custom">
             {{ form_widget(form) }}
             <div class="row">
                 <div class="small-9 small-offset-3 columns">
@@ -18,7 +18,7 @@
     <div class="large-12 columns">
         <hr/>
         <ul class="inline-list">
-            <li><a class="secondary button radius small" href="{{ path('j0k3r_feed_homepage') }}">&lArr; Back to the list</a></li>
+            <li><a class="secondary button radius small" href="{{ path('feed_homepage') }}">&lArr; Back to the list</a></li>
         </ul>
     </div>
 </div>

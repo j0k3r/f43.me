@@ -21,7 +21,7 @@ class SecurityController extends Controller
     public function loginAction()
     {
         if (true === $this->get('security.context')->isGranted('ROLE_ADMIN')) {
-            return $this->redirect($this->generateUrl('j0k3r_feed_dashboard'));
+            return $this->redirect($this->generateUrl('feed_dashboard'));
         }
 
         $request = $this->getRequest();

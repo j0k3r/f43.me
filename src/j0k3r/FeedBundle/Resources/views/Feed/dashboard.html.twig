@@ -42,7 +42,7 @@
                         <td>
                             <div>
                                 <img class="favicon" src="https://plus.google.com/_/favicon?domain={{ feedlog.feed.link }}" />
-                                <a href="{{ path('j0k3r_feed_edit', { 'slug': feedlog.feed.slug }) }}">{{ feedlog.feed.name }}</a>
+                                <a href="{{ path('feed_edit', { 'slug': feedlog.feed.slug }) }}">{{ feedlog.feed.name }}</a>
                             </div>
                         </td>
                         <td>{{ feedlog.itemsnumber }}</td>
@@ -73,7 +73,7 @@
                     <tr>
                         <td>
                             <img class="favicon" src="https://plus.google.com/_/favicon?domain={{ feed.link }}" />
-                            <a href="{{ path('j0k3r_feed_edit', { 'slug': feed.slug }) }}">{{ feed.name }}</a>
+                            <a href="{{ path('feed_edit', { 'slug': feed.slug }) }}">{{ feed.name }}</a>
                         </td>
                         <td><div>{{ feed.link }}</div></td>
                         <td>{{ feed.feeditems.count }}</td>

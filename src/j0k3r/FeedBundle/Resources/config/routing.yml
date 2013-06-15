@@ -10,65 +10,65 @@ logout:
     path:     /logout
 
 # feed
-j0k3r_feed_dashboard:
+feed_dashboard:
     pattern:  /dashboard
     defaults: { _controller: j0k3rFeedBundle:Feed:dashboard }
 
-j0k3r_feed_publicview:
+feed_publicview:
     pattern:  /
     defaults: { _controller: j0k3rFeedBundle:Feed:public }
 
-j0k3r_feed_homepage:
+feed_homepage:
     pattern:  /feeds
     defaults: { _controller: j0k3rFeedBundle:Feed:index }
 
-j0k3r_feed_new:
+feed_new:
     pattern:  /feed/new
     defaults: { _controller: j0k3rFeedBundle:Feed:new }
 
-j0k3r_feed_create:
+feed_create:
     pattern:  /feed/create
     defaults: { _controller: j0k3rFeedBundle:Feed:create }
     methods:  [POST]
 
-j0k3r_feed_edit:
+feed_edit:
     pattern:  /feed/{slug}/edit
     defaults: { _controller: j0k3rFeedBundle:Feed:edit }
 
-j0k3r_feed_update:
+feed_update:
     pattern:  /feed/{slug}/update
     defaults: { _controller: j0k3rFeedBundle:Feed:update }
     methods:  [POST]
 
-j0k3r_feed_delete:
+feed_delete:
     pattern:  /feed/{slug}/delete
     defaults: { _controller: j0k3rFeedBundle:Feed:delete }
     methods:  [POST]
 
 # feed item
-j0k3r_feeditem_homepage:
+feeditem_homepage:
     pattern:  /feed/{slug}/items
     defaults: { _controller: j0k3rFeedBundle:FeedItem:index }
 
-j0k3r_feeditem_test:
+feeditem_test:
     pattern:  /feed/{slug}/testItem
     defaults: { _controller: j0k3rFeedBundle:FeedItem:testItem }
 
-j0k3r_feeditem_preview:
+feeditem_preview:
     pattern:  /item/{id}/preview
     defaults: { _controller: j0k3rFeedBundle:FeedItem:preview }
 
 # feed log
-j0k3r_feedlog_homepage:
+feedlog_homepage:
     pattern:  /logs
     defaults: { _controller: j0k3rFeedBundle:FeedLog:index }
 
-j0k3r_feedlog_feed:
+feedlog_feed:
     pattern:  /feed/{slug}/logs
     defaults: { _controller: j0k3rFeedBundle:FeedLog:feed }
 
 # api
-j0k3r_feedapi_feed:
+feedapi_feed:
     path:     /{slug}
     host:     api.{domain}
     defaults: { _controller: j0k3rFeedBundle:FeedApi:index, domain: %domain% }

@@ -39,6 +39,6 @@ class FeedType extends AbstractType
 
     public function getName()
     {
-        return 'j0k3r_feedbundle_feedtype';
+        return 'feedbundle_feedtype';
     }
 }
