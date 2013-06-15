@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<!--[if IE 8]>         <html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>f43.me</title>
+
+    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+    <link rel="stylesheet" href="{{ asset('bundles/j0k3rfeed/css/foundation.css') }}" />
+    <link rel="stylesheet" href="{{ asset('bundles/j0k3rfeed/css/app.css') }}" />
+
+    <script src="{{ asset('bundles/j0k3rfeed/js/vendor/zepto.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('bundles/j0k3rfeed/js/vendor/custom.modernizr.js') }}" type="text/javascript"></script>
+    <script type="text/javascript"> function delayer() {window.location = "/"} </script>
+</head>
+<body onLoad="setTimeout('delayer()', 7000)">
+    <nav class="top-bar">
+        <ul class="title-area">
+            <li class="name">
+                <h1><a href="{{ path('feed_publicview') }}">f43.me</a></h1>
+            </li>
+            <li class="toggle-topbar menu-icon"><a href="#"><span></span></a></li>
+        </ul>
+    </nav>
+
+    <div class="row">
+        <div class="large-5 large-centered columns">
+            <h3> Aw, shit! </h3>
+            <p>Looks like the page you're after doesn't exist.  Guess you're going to have to go <a href="/">home</a> and try again!</p>
+            <p>You will be redirected momentarily...</p>
+        </div>
+    </div>
+</body>
+</html>
