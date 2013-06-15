@@ -24,31 +24,43 @@
         </ul>
 
         <section class="top-bar-section">
-            <ul class="left">
-                <li class="divider"></li>
-                <li {% if menu is defined and 'dashboard' == menu %}class="active"{% endif %}>
-                    <a href="{{ path('j0k3r_feed_dashboard') }}">Dashboard</a>
-                </li>
-                <li class="divider"></li>
-                <li {% if menu is defined and 'feed' == menu %}class="active"{% endif %}>
-                    <a href="{{ path('j0k3r_feed_homepage') }}">Feeds</a>
-                </li>
-                <li class="divider"></li>
-                <li {% if menu is defined and 'log' == menu %}class="active"{% endif %}>
-                    <a href="{{ path('j0k3r_feedlog_homepage') }}">Feed logs</a>
-                </li>
-                <li class="divider"></li>
-            </ul>
+            {% if app.user %}
 
-            <ul class="right">
-                <li class="has-form">
-                    <a class="success button radius small" href="{{ path('j0k3r_feed_new') }}">Add a new feed</a>
-                </li>
-                <li class="divider"></li>
-                <li class="has-form">
-                    <a class="alert button" href="#">Logout</a>
-                </li>
-            </ul>
+                <ul class="left">
+                    <li class="divider"></li>
+                    <li {% if menu is defined and 'dashboard' == menu %}class="active"{% endif %}>
+                        <a href="{{ path('j0k3r_feed_dashboard') }}">Dashboard</a>
+                    </li>
+                    <li class="divider"></li>
+                    <li {% if menu is defined and 'feed' == menu %}class="active"{% endif %}>
+                        <a href="{{ path('j0k3r_feed_homepage') }}">Feeds</a>
+                    </li>
+                    <li class="divider"></li>
+                    <li {% if menu is defined and 'log' == menu %}class="active"{% endif %}>
+                        <a href="{{ path('j0k3r_feedlog_homepage') }}">Feed logs</a>
+                    </li>
+                    <li class="divider"></li>
+                </ul>
+
+                <ul class="right">
+                    <li class="has-form">
+                        <a class="success button radius small" href="{{ path('j0k3r_feed_new') }}">Add a new feed</a>
+                    </li>
+                    <li class="divider"></li>
+                    <li class="has-form">
+                        <a class="alert button" href="{{ path('logout') }}">Logout</a>
+                    </li>
+                </ul>
+
+            {% else %}
+
+                <ul class="right">
+                    <li class="has-form">
+                        <a class="success button" href="{{ path('login') }}">Login</a>
+                    </li>
+                </ul>
+
+            {% endif %}
         </section>
     </nav>
 
@@ -73,8 +85,6 @@
     {% block content %}{% endblock %}
 
     <script src="{{ asset('bundles/j0k3rfeed/js/foundation.min.js') }}" type="text/javascript"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js" type="text/javascript"></script>
-    <script src="{{ asset('bundles/j0k3rfeed/js/morris.js') }}" type="text/javascript"></script>
 
     <script>
         $(document).foundation();
