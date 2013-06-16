@@ -1,4 +1,15 @@
 f43me:
     resource: "@j0k3rFeedBundle/Resources/config/routing.yml"
     prefix:   /
+    host:     "{domain}"
+    defaults: { domain: %domain% }
+    requirements:
+        domain: %domain%
 
+f43me_api:
+    resource: "@j0k3rFeedBundle/Resources/config/routing_api.yml"
+    prefix:   /
+    host:     "api.{domain}"
+    defaults: { domain: %domain% }
+    requirements:
+        domain: %domain%
