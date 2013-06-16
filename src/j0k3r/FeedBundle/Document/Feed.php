@@ -53,6 +53,7 @@ class Feed
     /**
      * @Gedmo\Slug(fields={"name"}, updatable=false, unique=true)
      * @MongoDB\String
+     * @MongoDB\Index
      */
     protected $slug;
 
