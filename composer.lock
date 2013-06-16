@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "dd444ed9c86954d06150781587a61b75",
+    "hash": "826bf1e51f8d7c05920c8eb91f7f6616",
     "packages": [
         {
             "name": "doctrine/common",
@@ -1068,12 +1068,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/stof/StofDoctrineExtensionsBundle.git",
-                "reference": "62b1dd67fadb6fdd72d6606cafa6260c18896b61"
+                "reference": "9701288b8584b732618e0a70cfeab6ced1bf332b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/stof/StofDoctrineExtensionsBundle/zipball/62b1dd67fadb6fdd72d6606cafa6260c18896b61",
-                "reference": "62b1dd67fadb6fdd72d6606cafa6260c18896b61",
+                "url": "https://api.github.com/repos/stof/StofDoctrineExtensionsBundle/zipball/9701288b8584b732618e0a70cfeab6ced1bf332b",
+                "reference": "9701288b8584b732618e0a70cfeab6ced1bf332b",
                 "shasum": ""
             },
             "require": {
@@ -1121,7 +1121,7 @@
                 "translatable",
                 "tree"
             ],
-            "time": "2013-04-07 18:16:23"
+            "time": "2013-06-16 18:38:55"
         },
         {
             "name": "symfony/assetic-bundle",
@@ -1513,7 +1513,8 @@
         "knplabs/knp-time-bundle": 20
     },
     "platform": {
-        "php": ">=5.3.3"
+        "php": ">=5.3.3",
+        "ext-mongo": ">=1.3.0"
     },
     "platform-dev": [
 
