@@ -58,7 +58,6 @@ class RemoveItemsCommand extends BaseFeedCommand
             $feeds = $feedRepo->findAll();
         }
 
-        // show progress bar in trace mode only
         if ($input->getOption('with-trace')) {
             $output->writeLn('<info>Feeds</info>: <comment>'.count($feeds).'</comment>');
         }

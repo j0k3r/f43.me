@@ -62,10 +62,17 @@ class FetchItemsCommand extends BaseFeedCommand
             return $output->writeLn("<error>You must add some options to the task :</error> an <comment>age</comment> or a <comment>slug</comment>");
         }
 
-        $output->writeln('<info>Feeds to check</info>: '.count($feeds));
+        if ($input->getOption('with-trace')) {
+            $output->writeln('<info>Feeds to check</info>: '.count($feeds));
+        }
+
+        $totalCached = 0;
 
         foreach ($feeds as $feed) {
-            $output->writeln('<info>Working on</info>: '.$feed->getName().' (parser: <comment>'.$feed->getParser().'</comment>)');
+            if ($input->getOption('with-trace')) {
+                $output->writeln('<info>Working on</info>: '.$feed->getName().' (parser: <comment>'.$feed->getParser().'</comment>)');
+            }
+
             $rssFeed = $container
                 ->get('simple_pie_proxy')
                 ->setUrl($feed->getLink())
@@ -119,6 +126,8 @@ class FetchItemsCommand extends BaseFeedCommand
                     $progress->finish();
                 }
 
+                $totalCached += $cached;
+
                 $feedLog = new feedLog();
                 $feedLog->setItemsNumber($cached);
                 $feedLog->setFeed($feed);
@@ -128,9 +137,12 @@ class FetchItemsCommand extends BaseFeedCommand
                 $dm->clear();
             }
 
-            $output->writeln('<info>New cached items</info>: '.$cached);
+            if ($input->getOption('with-trace')) {
+                $output->writeln('<info>New cached items</info>: '.$cached);
+            }
         }
 
+        $output->writeLn('<comment>'.$totalCached.'</comment> items cached.');
         $this->unlockCommand();
     }
 }
