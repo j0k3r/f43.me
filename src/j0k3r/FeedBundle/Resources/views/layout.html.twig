@@ -40,6 +40,10 @@
                         <a href="{{ path('feedlog_homepage') }}">Feed logs</a>
                     </li>
                     <li class="divider"></li>
+                    <li {% if menu is defined and 'test' == menu %}class="active"{% endif %}>
+                        <a href="{{ path('feed_test') }}">Test link</a>
+                    </li>
+                    <li class="divider"></li>
                 </ul>
 
                 <ul class="right">

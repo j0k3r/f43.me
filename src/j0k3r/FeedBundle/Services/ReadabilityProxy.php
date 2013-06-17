@@ -7,7 +7,8 @@ class ReadabilityProxy
     protected
         $token,
         $debug,
-        $convertLink,
+        $convertLinksToFootnotes,
+        $regexps,
         $choosenParser = null
     ;
 
@@ -16,11 +17,12 @@ class ReadabilityProxy
         $content
     ;
 
-    public function __construct($token, $debug = false, $convertLink = false)
+    public function __construct($token, $debug = false, $convertLinksToFootnotes = false, $regexps = array())
     {
-        $this->token       = $token;
-        $this->debug       = $debug;
-        $this->convertLink = $convertLink;
+        $this->token = $token;
+        $this->debug = $debug;
+        $this->convertLinksToFootnotes = $convertLinksToFootnotes;
+        $this->regexps = $regexps;
     }
 
     public function setChoosenParser($parser)
@@ -120,21 +122,28 @@ class ReadabilityProxy
         // Remove all headers from the response body
         $content = str_replace($headers_string, '', $content);
 
+        // Convert encoding since Readability accept only UTF-8
+        if ('UTF-8' != mb_detect_encoding($content, mb_detect_order(), true)) {
+            $content = mb_convert_encoding($content, 'UTF-8');
+        }
+
         // let's clean up input.
         $tidy = tidy_parse_string($content, array(), 'UTF8');
         $tidy->cleanRepair();
 
         $readability = new \Readability($tidy->value);
         $readability->debug = $this->debug;
-        $readability->convertLinksToFootnotes = $this->convertLink;
+        $readability->regexps = $this->regexps;
+        $readability->convertLinksToFootnotes = $this->convertLinksToFootnotes;
 
         if (!$readability->init()) {
-            return false;
+            return 'Can\'t retrieve content...';
         }
 
         $tidy = tidy_parse_string(
             $readability->getContent()->innerHTML,
             array(
+                'wrap'           => 0,
                 'indent'         => true,
                 'show-body-only' => true
             ),
@@ -142,7 +151,11 @@ class ReadabilityProxy
         );
         $tidy->cleanRepair();
 
-        return $tidy->value;
+        // hard way to convert relative image path to absolute path
+        $host = parse_url($this->url, PHP_URL_HOST);
+        $html = str_replace('src="/', 'src="http://'.$host.'/', $tidy->value);
+
+        return $html;
     }
 
     /**
@@ -156,7 +169,6 @@ class ReadabilityProxy
     private function useExternalParser($url)
     {
         $url = 'https://readability.com/api/content/v1/parser?token='.$this->token.'&url='.urlencode($url);
-        // $html = json_decode(file_get_contents($url));
 
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $url);
@@ -167,6 +179,10 @@ class ReadabilityProxy
         if (isset($html->content)) {
             $this->url = $html->url;
             return $html->content;
+        }
+
+        if (isset($html->error)) {
+            return $html->messages;
         }
 
         return false;

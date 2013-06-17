@@ -75,6 +75,7 @@ class FeedItemController extends Controller
             'title'   => $feeditem->getTitle(),
             'content' => $feeditem->getContent(),
             'url'     => $feeditem->getLink(),
+            'modal'   => true,
         ));
     }
 
@@ -102,6 +103,7 @@ class FeedItemController extends Controller
         return $this->container->get('templating')->renderResponse('j0k3rFeedBundle:FeedItem:content.html.twig', array(
             'title'   => $firstItem->get_title(),
             'content' => $content->content,
+            'modal'   => true,
             'url'     => $content->url,
         ));
     }

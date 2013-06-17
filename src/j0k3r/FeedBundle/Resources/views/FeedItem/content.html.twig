@@ -1,9 +1,19 @@
-<a class="close-reveal-modal">&#215;</a>
+{% if true == modal %}
+    <a class="close-reveal-modal">&#215;</a>
+{% endif %}
 
-<ul class="no-bullet">
-    <li><strong>Link</strong>: <a href="{{ url }}" target="_blank">{{ url }}</a></li>
-    <li><strong>Title</strong>: {{ title }}</li>
-</ul>
+<p><span class="label">Tips:</span> if it looks bad, you should change the parser type and test again.</p>
+
+{% if url or title %}
+    <ul class="no-bullet">
+        {% if url %}
+            <li><strong>Link</strong>: <a href="{{ url }}" target="_blank">{{ url }}</a></li>
+        {% endif %}
+        {% if title %}
+            <li><strong>Title</strong>: {{ title }}</li>
+        {% endif %}
+    </ul>
+{% endif %}
 
 <hr/>
 {{ content|raw }}

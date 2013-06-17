@@ -9,6 +9,11 @@ login_check:
 logout:
     path:     /logout
 
+# test
+feed_test:
+    pattern:  /feed/test
+    defaults: { _controller: j0k3rFeedBundle:FeedTest:index }
+
 # feed
 feed_dashboard:
     pattern:  /dashboard
@@ -75,10 +80,3 @@ feedlog_delete_all:
     pattern:  /feed/{slug}/logs/deleteAll
     defaults: { _controller: j0k3rFeedBundle:FeedLog:deleteAll }
 
-# api
-feedapi_feed:
-    path:     /{slug}
-    host:     api.{domain}
-    defaults: { _controller: j0k3rFeedBundle:FeedApi:index, domain: %domain% }
-    requirements:
-        domain: %domain%
