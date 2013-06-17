@@ -58,6 +58,10 @@ feeditem_preview:
     pattern:  /item/{id}/preview
     defaults: { _controller: j0k3rFeedBundle:FeedItem:preview }
 
+feeditem_delete_all:
+    pattern:  /feed/{slug}/items/deleteAll
+    defaults: { _controller: j0k3rFeedBundle:FeedItem:deleteAll }
+
 # feed log
 feedlog_homepage:
     pattern:  /logs
@@ -67,6 +71,10 @@ feedlog_feed:
     pattern:  /feed/{slug}/logs
     defaults: { _controller: j0k3rFeedBundle:FeedLog:feed }
 
+feedlog_delete_all:
+    pattern:  /feed/{slug}/logs/deleteAll
+    defaults: { _controller: j0k3rFeedBundle:FeedLog:deleteAll }
+
 # api
 feedapi_feed:
     path:     /{slug}
@@ -74,4 +82,3 @@ feedapi_feed:
     defaults: { _controller: j0k3rFeedBundle:FeedApi:index, domain: %domain% }
     requirements:
         domain: %domain%
-

@@ -140,4 +140,20 @@ class FeedItemRepository extends DocumentRepository
             ->getQuery()
             ->execute();
     }
+
+    /**
+     * Remove all items associated to the given Feed id
+     *
+     * @param  int   $feedId Feed id
+     *
+     * @return array (with key 'n' as number of row affected)
+     */
+    public function deleteAllByFeedId($feedId)
+    {
+        return $this->createQueryBuilder()
+            ->remove()
+            ->field('feed.id')->equals($feedId)
+            ->getQuery()
+            ->execute();
+    }
 }

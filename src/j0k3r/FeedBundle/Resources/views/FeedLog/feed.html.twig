@@ -9,7 +9,18 @@
 {% block content %}
 <div class="row">
     <div class="large-12 columns">
-        <a class="secondary button radius small" href="{{ path('feed_edit', { 'slug': feed.slug }) }}">&lArr; Back to the feed</a>
+        <ul class="inline-list list-buttons">
+            <li><a class="secondary button radius small" href="{{ path('feed_edit', { 'slug': feed.slug }) }}">&lArr; Back to the feed</a></li>
+
+            {% if feedlogs|length > 0 %}
+            <li>
+                <form action="{{ path('feedlog_delete_all', { 'slug': feed.slug }) }}" method="post" class="delete_form">
+                    {{ form_widget(delete_all_form) }}
+                    <button class="alert button radius small" type="submit">Cleanup logs</button>
+                </form>
+            </li>
+            {% endif %}
+        </ul>
 
         {% if feedlogs|length > 0 %}
             <table class="table-feedlogs">

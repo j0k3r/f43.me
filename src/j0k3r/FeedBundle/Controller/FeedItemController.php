@@ -31,11 +31,35 @@ class FeedItemController extends Controller
 
         $feeditems = $dm->getRepository('j0k3rFeedBundle:FeedItem')->findByFeedId($feed->getId());
 
+        $deleteAllForm = $this->createDeleteAllForm($feed->getSlug());
+
         return array(
-            'menu'      => 'feed',
-            'feed'      => $feed,
-            'feeditems' => $feeditems,
+            'menu'            => 'feed',
+            'feed'            => $feed,
+            'feeditems'       => $feeditems,
+            'delete_all_form' => $deleteAllForm->createView(),
         );
+    }
+
+    public function deleteAllAction(Request $request, $slug)
+    {
+        $dm   = $this->getDocumentManager();
+        $feed = $dm->getRepository('j0k3rFeedBundle:Feed')->findOneBySlug($slug);
+
+        if (!$feed) {
+            throw $this->createNotFoundException('Unable to find Feed document.');
+        }
+
+        $form = $this->createDeleteAllForm($slug);
+        $form->bind($request);
+
+        if ($form->isValid()) {
+            $res = $dm->getRepository('j0k3rFeedBundle:FeedItem')->deleteAllByFeedId($feed->getId());
+
+            $this->get('session')->getFlashBag()->add('notice', $res['n'].' documents deleted!');
+        }
+
+        return $this->redirect($this->generateUrl('feed_edit', array('slug' => $slug)));
     }
 
     public function previewAction($id)
@@ -80,6 +104,14 @@ class FeedItemController extends Controller
             'content' => $content->content,
             'url'     => $content->url,
         ));
+    }
+
+    private function createDeleteAllForm($slug)
+    {
+        return $this->createFormBuilder(array('slug' => $slug))
+            ->add('slug', 'hidden')
+            ->getForm()
+        ;
     }
 
     /**

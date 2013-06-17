@@ -70,3 +70,11 @@ div.feed-info .info {
 div.feed-info span {
   color: #555;
 }
+
+ul.list-buttons {
+  margin-bottom: 0
+}
+
+ul.list-buttons form {
+  margin: 0
+}
