@@ -93,7 +93,17 @@ class ReadabilityProxy
         $content = curl_exec($ch);
         curl_close($ch);
 
-        // Remove headers
+        $location = $url;
+        // find last occurence of "Location: h" to be sure it isn't a local redirect (like /new_location)
+        if ($content != NULL && ($location_raw = strripos($content, "Location: h")) !== FALSE ) {
+            $location_raw += strlen("Location: h");
+            $length       = (strpos($content, "\n", $location_raw) !== FALSE) ? strpos($content, "\n", $location_raw) - $location_raw : '';
+            $location     = 'h'.trim(substr($content, $location_raw, $length));
+        }
+
+        $this->url = $location;
+
+        // Remove headers (once the url has been extract)
         // grabbed from: https://github.com/hugochinchilla/curl/blob/e6b1a1277f41b95f8247ff690873f3194194194f/lib/curl_response.php#L38-52
         $pattern = '#HTTP/\d\.\d.*?$.*?\r\n\r\n#ims';
 
@@ -109,16 +119,6 @@ class ReadabilityProxy
 
         // Remove all headers from the response body
         $content = str_replace($headers_string, '', $content);
-
-        $location = $url;
-        // find last occurence of "Location: h" to be sure it isn't a local redirect (like /new_location)
-        if ($content != NULL && ($location_raw = strripos($content, "Location: h")) !== FALSE ) {
-            $location_raw += strlen("Location: h");
-            $length       = (strpos($content, "\n", $location_raw) !== FALSE) ? strpos($content, "\n", $location_raw) - $location_raw : '';
-            $location     = 'h'.trim(substr($content, $location_raw, $length));
-        }
-
-        $this->url = $location;
 
         // let's clean up input.
         $tidy = tidy_parse_string($content, array(), 'UTF8');
