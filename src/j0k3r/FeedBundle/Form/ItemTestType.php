@@ -14,7 +14,6 @@ class ItemTestType extends AbstractType
             ->add('link', 'url')
             ->add('parser', 'choice', array(
                 'choices' => array(
-                    'default'  => 'Default',
                     'internal' => 'Internal',
                     'external' => 'External'
                 ),

@@ -2,9 +2,12 @@
 
 namespace j0k3r\FeedBundle\Services;
 
+use Doctrine\Common\Util\Inflector;
+
 class ReadabilityProxy
 {
     protected
+        $url_api,
         $token,
         $debug,
         $convertLinksToFootnotes,
@@ -17,9 +20,10 @@ class ReadabilityProxy
         $content
     ;
 
-    public function __construct($token, $debug = false, $convertLinksToFootnotes = false, $regexps = array())
+    public function __construct($token, $url_api, $debug = false, $convertLinksToFootnotes = false, $regexps = array())
     {
         $this->token = $token;
+        $this->url_api = $url_api;
         $this->debug = $debug;
         $this->convertLinksToFootnotes = $convertLinksToFootnotes;
         $this->regexps = $regexps;
@@ -41,26 +45,13 @@ class ReadabilityProxy
      */
     public function parseContent($url)
     {
-        switch ($this->choosenParser)
-        {
-            case 'internal':
-                $this->content = $this->useInternalParser($url);
-                break;
+        $parserMethod = 'use'.Inflector::camelize($this->choosenParser).'Parser';
 
-            case 'external':
-                $this->content = $this->useExternalParser($url);
-                break;
-
-            default:
-                $this->content = $this->useInternalParser($url);
-                if ($this->content) {
-                    break;
-                }
-
-                $this->content = $this->useExternalParser($this->url);
-                if ($this->content) {
-                    break;
-                }
+        if (is_callable(array($this, $parserMethod))) {
+            $this->content = $this->$parserMethod($url);
+        } else {
+            // use internal by default
+            $this->content = $this->useInternalParser($url);
         }
 
         // do something when readabled content failed
@@ -171,7 +162,7 @@ class ReadabilityProxy
      */
     private function useExternalParser($url)
     {
-        $url = 'https://readability.com/api/content/v1/parser?token='.$this->token.'&url='.urlencode($url);
+        $url = $this->url_api.'?token='.$this->token.'&url='.urlencode($url);
 
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $url);

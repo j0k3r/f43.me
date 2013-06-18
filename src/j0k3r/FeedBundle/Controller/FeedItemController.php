@@ -62,7 +62,7 @@ class FeedItemController extends Controller
         return $this->redirect($this->generateUrl('feed_edit', array('slug' => $slug)));
     }
 
-    public function previewAction($id)
+    public function previewCachedAction($id)
     {
         $dm       = $this->getDocumentManager();
         $feeditem = $dm->getRepository('j0k3rFeedBundle:FeedItem')->find($id);
@@ -88,6 +88,20 @@ class FeedItemController extends Controller
             throw $this->createNotFoundException('Unable to find Feed document.');
         }
 
+        return $this->container->get('templating')->renderResponse('j0k3rFeedBundle:FeedItem:preview.html.twig', array(
+            'feed' => $feed
+        ));
+    }
+
+    public function previewNewAction(Request $request, $slug)
+    {
+        $dm   = $this->getDocumentManager();
+        $feed = $dm->getRepository('j0k3rFeedBundle:Feed')->findOneBySlug($slug);
+
+        if (!$feed) {
+            throw $this->createNotFoundException('Unable to find Feed document.');
+        }
+
         $rssFeed = $this
             ->get('simple_pie_proxy')
             ->setUrl($feed->getLink())
@@ -95,7 +109,7 @@ class FeedItemController extends Controller
 
         $parser = $this
             ->get('readability_proxy')
-            ->setChoosenParser($feed->getParser());
+            ->setChoosenParser($request->get('parser'));
 
         $firstItem = $rssFeed->get_item(0);
         $content   = $parser->parseContent($firstItem->get_link());
@@ -103,7 +117,7 @@ class FeedItemController extends Controller
         return $this->container->get('templating')->renderResponse('j0k3rFeedBundle:FeedItem:content.html.twig', array(
             'title'   => $firstItem->get_title(),
             'content' => $content->content,
-            'modal'   => true,
+            'modal'   => false,
             'url'     => $content->url,
         ));
     }

@@ -55,13 +55,17 @@ feeditem_homepage:
     pattern:  /feed/{slug}/items
     defaults: { _controller: j0k3rFeedBundle:FeedItem:index }
 
+feeditem_preview_new:
+    pattern:  /feed/{slug}/previewItem
+    defaults: { _controller: j0k3rFeedBundle:FeedItem:previewNew }
+
 feeditem_test:
     pattern:  /feed/{slug}/testItem
     defaults: { _controller: j0k3rFeedBundle:FeedItem:testItem }
 
-feeditem_preview:
+feeditem_preview_cached:
     pattern:  /item/{id}/preview
-    defaults: { _controller: j0k3rFeedBundle:FeedItem:preview }
+    defaults: { _controller: j0k3rFeedBundle:FeedItem:previewCached }
 
 feeditem_delete_all:
     pattern:  /feed/{slug}/items/deleteAll

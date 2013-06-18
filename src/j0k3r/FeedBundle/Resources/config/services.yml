@@ -6,6 +6,7 @@ services:
         class: j0k3r\FeedBundle\Services\ReadabilityProxy
         arguments:
             token: %readability_token%
+            url_api: https://readability.com/api/content/v1/parser
             debug: false #%kernel.debug%
             converconvertLinksToFootnotestLink: false
             regex:
