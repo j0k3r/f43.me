@@ -9,10 +9,10 @@ services:
             debug: false #%kernel.debug%
             converconvertLinksToFootnotestLink: false
             regex:
-                unlikelyCandidates: '/combx|comment|community|disqus|extra|foot|header|menu|remark|rss|shoutbox|sidebar|sponsor|ad-break|agegate|pagination|pager|popup|sharedaddy|addthis|response|slate_associated_bn|reseaux/i'
+                unlikelyCandidates: '/combx|comment|community|disqus|extra|foot|header|menu|remark|rss|shoutbox|sidebar|sponsor|ad-break|agegate|pagination|pager|popup|sharedaddy|addthis|response|slate_associated_bn|reseaux|sharing/i'
                 okMaybeItsACandidate: '/and|article|body|column|main|shadow/i'
                 positive: '/article|body|content|entry|hentry|main|page|attachment|pagination|post|text|blog|story/i'
-                negative: '/combx|comment|com-|contact|foot|footer|_nav|footnote|masthead|media|meta|outbrain|promo|related|scroll|shoutbox|sidebar|sponsor|shopping|tags|tool|widget|sharedaddy|addthis/i'
+                negative: '/combx|comment|com-|contact|foot|footer|_nav|footnote|masthead|media|meta|outbrain|promo|related|scroll|shoutbox|sidebar|sponsor|shopping|tags|tool|widget/i'
                 divToPElements: '/<(a|blockquote|dl|div|img|ol|p|pre|table|ul)/i'
                 replaceBrs: '/(<br[^>]*>[ \n\r\t]*){2,}/i'
                 replaceFonts: '/<(\/?)font[^>]*>/i'
