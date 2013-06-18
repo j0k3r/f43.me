@@ -103,7 +103,8 @@ class ReadabilityProxy
             $location     = 'h'.trim(substr($content, $location_raw, $length));
         }
 
-        $this->url = $location;
+        // remove utm parameters & fragment
+        $this->url = preg_replace('/(&?utm_(.*?)\=[^&]+)|(#(.*?)\=[^&]+)/', '', html_entity_decode($location));
 
         // Remove headers (once the url has been extract)
         // grabbed from: https://github.com/hugochinchilla/curl/blob/e6b1a1277f41b95f8247ff690873f3194194194f/lib/curl_response.php#L38-52

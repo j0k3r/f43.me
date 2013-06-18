@@ -9,7 +9,7 @@ services:
             debug: false #%kernel.debug%
             converconvertLinksToFootnotestLink: false
             regex:
-                unlikelyCandidates: '/combx|comment|community|disqus|extra|foot|header|menu|remark|rss|shoutbox|sidebar|sponsor|ad-break|agegate|pagination|pager|popup|sharedaddy|addthis|response|slate_associated_bn|reseaux|sharing/i'
+                unlikelyCandidates: '/combx|comment|community|disqus|extra|foot|header|menu|remark|rss|shoutbox|sidebar|sponsor|ad-break|agegate|pagination|pager|popup|sharedaddy|addthis|response|slate_associated_bn|reseaux|sharing|auteur/i'
                 okMaybeItsACandidate: '/and|article|body|column|main|shadow/i'
                 positive: '/article|body|content|entry|hentry|main|page|attachment|pagination|post|text|blog|story/i'
                 negative: '/combx|comment|com-|contact|foot|footer|_nav|footnote|masthead|media|meta|outbrain|promo|related|scroll|shoutbox|sidebar|sponsor|shopping|tags|tool|widget/i'
