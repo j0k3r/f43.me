@@ -97,7 +97,10 @@ class FetchItemsCommand extends BaseFeedCommand
                     continue;
                 }
 
-                $parsedContent = $parser->parseContent($item->get_permalink());
+                $parsedContent = $parser->parseContent(
+                    $item->get_permalink(),
+                    $item->get_description()
+                );
 
                 // if readable content failed, use default one from feed item
                 $content = $parsedContent->content;

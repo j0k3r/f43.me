@@ -39,11 +39,12 @@ class ReadabilityProxy
     /**
      * Try to retrieve content from a given url
      *
-     * @param  string   $url
+     * @param  string   $url                RSS item url
+     * @param  string   $defaultContent     RSS item content, which will be taken if we can't extract content from url
      *
      * @return string
      */
-    public function parseContent($url)
+    public function parseContent($url, $defaultContent = null)
     {
         $parserMethod = 'use'.Inflector::camelize($this->choosenParser).'Parser';
 
@@ -56,7 +57,7 @@ class ReadabilityProxy
 
         // do something when readabled content failed
         if (!$this->content) {
-            # code...
+            $this->content = $defaultContent;
         }
 
         return $this;
@@ -129,7 +130,7 @@ class ReadabilityProxy
         $readability->convertLinksToFootnotes = $this->convertLinksToFootnotes;
 
         if (!$readability->init()) {
-            return 'Can\'t retrieve content...';
+            return false;
         }
 
         $tidy = tidy_parse_string(
