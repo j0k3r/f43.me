@@ -11,12 +11,6 @@ framework:
     #validation:
     #    cache: apc
 
-#doctrine:
-#    orm:
-#        metadata_cache_driver: apc
-#        result_cache_driver: apc
-#        query_cache_driver: apc
-
 monolog:
     handlers:
         main:
@@ -24,6 +18,7 @@ monolog:
             action_level: error
             handler:      nested
         nested:
-            type:  stream
-            path:  %kernel.logs_dir%/%kernel.environment%.log
+            type: rotating_file
+            max_files: 10
+            path: %kernel.logs_dir%/%kernel.environment%.log
             level: debug
