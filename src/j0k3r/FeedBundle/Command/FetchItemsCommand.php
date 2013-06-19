@@ -78,6 +78,13 @@ class FetchItemsCommand extends BaseFeedCommand
                 ->setUrl($feed->getLink())
                 ->init();
 
+            // update feed description, in case it was empty
+            if (0 === strlen($feed->getDescription()) && 0 !== strlen($rssFeed->get_description())) {
+                $feed->setDescription(html_entity_decode($rssFeed->get_description(), ENT_COMPAT, 'UTF-8'));
+                $dm->persist($feed);
+                $dm->flush();
+            }
+
             $parser = $container
                 ->get('readability_proxy')
                 ->setChoosenParser($feed->getParser());
@@ -134,16 +141,16 @@ class FetchItemsCommand extends BaseFeedCommand
                 $feedLog = new feedLog();
                 $feedLog->setItemsNumber($cached);
                 $feedLog->setFeed($feed);
-                $dm->persist($feedLog);
 
+                $dm->persist($feedLog);
                 $dm->flush();
-                $dm->clear();
             }
 
             if ($input->getOption('with-trace')) {
                 $output->writeln('<info>New cached items</info>: '.$cached);
             }
         }
+        $dm->clear();
 
         $output->writeLn('<comment>'.$totalCached.'</comment> items cached.');
         $this->unlockCommand();
