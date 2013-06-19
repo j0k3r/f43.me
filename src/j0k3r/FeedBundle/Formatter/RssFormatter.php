@@ -54,19 +54,13 @@ class RssFormatter extends Formatter
         $channel = $this->dom->createElement('channel');
         $channel = $root->appendChild($channel);
 
-        $fields = array(
-            'title'       => 'getName',
-            'description' => 'getName',
-            'link'        => 'getHost'
-        );
+        $title       = $this->dom->createElement('title', htmlspecialchars($this->feed->getName()));
+        $description = $this->dom->createElement('description', htmlspecialchars($this->feed->getDescription()));
+        $link        = $this->dom->createElement('link', $this->feed->getHost());
 
-        foreach ($fields as $field => $method) {
-            $element = $this->dom->createElement(
-                $field,
-                $this->feed->$method()
-            );
-            $channel->appendChild($element);
-        }
+        $channel->appendChild($title);
+        $channel->appendChild($description);
+        $channel->appendChild($link);
 
         $date = new \DateTime();
         $lastBuildDate = $this->dom->createElement('lastBuildDate', $date->format(\DateTime::RSS));
