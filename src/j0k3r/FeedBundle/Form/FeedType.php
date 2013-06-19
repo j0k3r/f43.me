@@ -13,7 +13,8 @@ class FeedType extends AbstractType
         $builder
             ->add('name')
             ->add('description', 'textarea', array('required' => false))
-            ->add('link', 'url')
+            ->add('host', 'text', array('attr' => array('placeholder' => 'www.website.com')))
+            ->add('link', 'url', array('attr' => array('placeholder' => 'http://www.website.com/rss')))
             ->add('parser', 'choice', array(
                 'choices' => array(
                     'internal' => 'Internal',

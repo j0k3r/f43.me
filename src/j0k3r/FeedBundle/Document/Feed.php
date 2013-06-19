@@ -42,6 +42,12 @@ class Feed
 
     /**
      * @MongoDB\String
+     * @Assert\NotBlank()
+     */
+    protected $host;
+
+    /**
+     * @MongoDB\String
      */
     protected $parser;
 
@@ -331,16 +337,32 @@ class Feed
     }
 
     /**
-     * Return main domain from link:
-     *     http://site.com/feed/index.xml -> http://site.com
+     * Set host
      *
-     * @return string
+     * @param string $host
+     * @return self
+     */
+    public function setHost($host)
+    {
+        $url = parse_url($host);
+
+        // be sure that host doesn't have http
+        if (1 < count($url) && isset($url['host'])) {
+            $host = $url['host'];
+        }
+
+        $this->host = $host;
+        return $this;
+    }
+
+    /**
+     * Get host
+     *
+     * @return string $host
      */
     public function getHost()
     {
-        $url = parse_url($this->getLink());
-
-        return $url['scheme'].'://'.$url['host'];
+        return $this->host;
     }
 
     /**

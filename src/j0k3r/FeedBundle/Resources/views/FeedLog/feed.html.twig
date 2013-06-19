@@ -1,7 +1,7 @@
 {% extends "j0k3rFeedBundle::layout.html.twig" %}
 
 {% block h2_title %}
-    <img class="favicon" src="https://plus.google.com/_/favicon?domain={{ feed.link }}" />
+    {{ include('j0k3rFeedBundle:Feed:_favicon.html.twig', {'host': feed.host}) }}
     {{ feed.name }}'s logs
     <small>- {{ feedlogs|length }} logs</small>
 {% endblock %}
@@ -35,7 +35,7 @@
                 {% for feedlog in feedlogs %}
                     <tr>
                         <td>
-                            <img class="favicon" src="https://plus.google.com/_/favicon?domain={{ feedlog.feed.link }}" />
+                            {{ include('j0k3rFeedBundle:Feed:_favicon.html.twig', {'host': feedlog.feed.host}) }}
                             <a href="{{ path('feed_edit', { 'slug': feedlog.feed.slug }) }}">{{ feedlog.feed.name }}</a>
                         </td>
                         <td>{{ feedlog.itemsnumber }}</td>

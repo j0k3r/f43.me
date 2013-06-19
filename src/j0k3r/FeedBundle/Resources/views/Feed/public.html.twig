@@ -38,7 +38,7 @@
                 {% for feed in feeds %}
                     <tr>
                         <td>
-                            <img class="favicon" src="https://plus.google.com/_/favicon?domain={{ feed.link }}" />
+                            {{ include('j0k3rFeedBundle:Feed:_favicon.html.twig', {'host': feed.host}) }}
                             {{ feed.name }}
                         </td>
                         <td>

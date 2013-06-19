@@ -1,7 +1,7 @@
 {% extends "j0k3rFeedBundle::layout.html.twig" %}
 
 {% block h2_title %}
-    <img class="favicon" src="https://plus.google.com/_/favicon?domain={{ feed.link }}" />
+    {{ include('j0k3rFeedBundle:Feed:_favicon.html.twig', {'host': feed.host}) }}
     {{ feed.name }}'s items
     <small>{{ feeditems|length }} cached items</small>
 {% endblock %}
