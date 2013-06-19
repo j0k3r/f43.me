@@ -118,7 +118,7 @@ class FeedItemController extends Controller
         );
 
         return $this->container->get('templating')->renderResponse('j0k3rFeedBundle:FeedItem:content.html.twig', array(
-            'title'   => $firstItem->get_title(),
+            'title'   => html_entity_decode($firstItem->get_title(), ENT_COMPAT, 'UTF-8'),
             'content' => $content->content,
             'modal'   => false,
             'url'     => $content->url,

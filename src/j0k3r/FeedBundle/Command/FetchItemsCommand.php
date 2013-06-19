@@ -109,7 +109,7 @@ class FetchItemsCommand extends BaseFeedCommand
                 }
 
                 $feedItem = new FeedItem();
-                $feedItem->setTitle($item->get_title());
+                $feedItem->setTitle(html_entity_decode($item->get_title(), ENT_COMPAT, 'UTF-8'));
                 $feedItem->setLink($parsedContent->url);
                 $feedItem->setContent($content);
                 $feedItem->setPermalink($item->get_permalink());
