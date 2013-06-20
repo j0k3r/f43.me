@@ -146,9 +146,10 @@ class ReadabilityProxy
 
         // hard way to convert relative image path to absolute path
         $host = parse_url($this->url, PHP_URL_HOST);
-        $html = str_replace('src="/', 'src="//'.$host.'/', $tidy->value);
-        // in case we replace src that starts with //
-        $html = str_replace('//'.$host.'//', '//', $html);
+        // replace src="/path to src="//host.com/path
+        $html = preg_replace('/(?<=src=")(?!http:\/\/|\/\/)(\/.*?)(?=")/i', '//'.$host.'$1', $tidy->value);
+        // replace src="path to src="//host.com/path
+        $html = preg_replace('/(?<=src=")(?!http:\/\/|\/\/)(.*?)(?=")/i', '//'.$host.'/$1', $html);
 
         return $html;
     }
