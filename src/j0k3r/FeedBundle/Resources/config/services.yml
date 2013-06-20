@@ -3,13 +3,13 @@ parameters:
 
 services:
     readability_proxy:
-        class: j0k3r\FeedBundle\Services\ReadabilityProxy
+        class: j0k3r\FeedBundle\Readability\Proxy
         arguments:
             token: %readability_token%
             url_api: https://readability.com/api/content/v1/parser
             debug: false #%kernel.debug%
             converconvertLinksToFootnotestLink: false
-            regex:
+            regexps:
                 unlikelyCandidates: '/combx|comment|community|disqus|extra|foot|header|menu|remark|rss|shoutbox|sidebar|sponsor|ad-break|agegate|pagination|pager|popup|sharedaddy|addthis|response|slate_associated_bn|reseaux|sharing|auteur|tag/i'
                 okMaybeItsACandidate: '/and|article|body|column|main|shadow/i'
                 positive: '/article|body|content|entry|hentry|main|page|attachment|pagination|post|text|blog|story/i'
@@ -21,6 +21,7 @@ services:
                 killBreaks: '/(<br\s*\/?>(\s|&nbsp;?)*){1,}/'
                 video: '!//(player\.|www\.)?(youtube|vimeo|viddler)\.com!i'
                 skipFootnoteLink: '/^\s*(\[?[a-z0-9]{1,2}\]?|^|edit|citation needed)\s*$/i'
+                attrToRemove: 'onclick|rel|class|target|fs:definition|alt|id|onload|name'
 
     simple_pie_proxy:
         class: j0k3r\FeedBundle\Services\SimplePieProxy

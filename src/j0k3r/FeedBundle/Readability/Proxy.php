@@ -1,10 +1,10 @@
 <?php
 
-namespace j0k3r\FeedBundle\Services;
+namespace j0k3r\FeedBundle\Readability;
 
 use Doctrine\Common\Util\Inflector;
 
-class ReadabilityProxy
+class Proxy
 {
     protected
         $url_api,
@@ -124,9 +124,10 @@ class ReadabilityProxy
         $tidy = tidy_parse_string($content, array(), 'UTF8');
         $tidy->cleanRepair();
 
-        $readability = new \Readability($tidy->value);
-        $readability->debug = $this->debug;
+        $readability          = new ReadabilityExtended($tidy->value);
+        $readability->debug   = $this->debug;
         $readability->regexps = $this->regexps;
+        $readability->host    = parse_url($this->url, PHP_URL_HOST);
         $readability->convertLinksToFootnotes = $this->convertLinksToFootnotes;
 
         if (!$readability->init()) {
@@ -144,14 +145,7 @@ class ReadabilityProxy
         );
         $tidy->cleanRepair();
 
-        // hard way to convert relative image path to absolute path
-        $host = parse_url($this->url, PHP_URL_HOST);
-        // replace src="/path to src="//host.com/path
-        $html = preg_replace('/(?<=src=")(?!http:\/\/|\/\/)(\/.*?)(?=")/i', '//'.$host.'$1', $tidy->value);
-        // replace src="path to src="//host.com/path
-        $html = preg_replace('/(?<=src=")(?!http:\/\/|\/\/)(.*?)(?=")/i', '//'.$host.'/$1', $html);
-
-        return $html;
+        return $tidy->value;
     }
 
     /**
