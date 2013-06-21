@@ -10,11 +10,9 @@ namespace j0k3r\FeedBundle\Formatter;
 class AtomFormatter extends Formatter
 {
     /**
-     * Construct a formatter with given feed
-     *
-     * @param Feed $feed A feed instance
+     * @see parent
      */
-    public function __construct($feed, $items)
+    public function setItemFields()
     {
         $this->fields = array(
             array(
@@ -38,14 +36,10 @@ class AtomFormatter extends Formatter
                 'date_format' => \DateTime::RSS,
             ),
         );
-
-        parent::__construct($feed, $items);
-
-        $this->initialize();
     }
 
     /**
-     * Initialize XML DOMDocument nodes and call addItem on all items
+     * @see parent
      */
     public function initialize()
     {
@@ -59,9 +53,10 @@ class AtomFormatter extends Formatter
         $title      = $this->dom->createElement('title', htmlspecialchars($this->feed->getName()));
         $subtitle   = $this->dom->createElement('subtitle', htmlspecialchars($this->feed->getDescription()));
         $name       = $this->dom->createElement('name', htmlspecialchars($this->feed->getName()));
+        $generator  = $this->dom->createElement('generator', htmlspecialchars($this->generator));
 
         $link = $this->dom->createElement('link');
-        $link->setAttribute('href', $this->feed->getHost());
+        $link->setAttribute('href', 'http://'.$this->feed->getHost());
 
         $date = new \DateTime();
         $updated = $this->dom->createElement('updated', $date->format(\DateTime::ATOM));
@@ -75,6 +70,7 @@ class AtomFormatter extends Formatter
         $root->appendChild($updated);
         $root->appendChild($identifier);
         $root->appendChild($author);
+        $root->appendChild($generator);
 
         foreach ($this->items as $item) {
             $this->addItem($root, $item, 'entry');

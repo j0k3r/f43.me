@@ -10,11 +10,9 @@ namespace j0k3r\FeedBundle\Formatter;
 class RssFormatter extends Formatter
 {
     /**
-     * Construct a formatter with given feed
-     *
-     * @param Feed $feed A feed instance
+     * @see parent
      */
-    public function __construct($feed, $items)
+    public function setItemFields()
     {
         $this->fields = array(
             array(
@@ -34,14 +32,10 @@ class RssFormatter extends Formatter
                 'date_format' => \DateTime::RSS,
             ),
         );
-
-        parent::__construct($feed, $items);
-
-        $this->initialize();
     }
 
     /**
-     * Initialize XML DOMDocument nodes and call addItem on all items
+     * @see parent
      */
     public function initialize()
     {
@@ -54,13 +48,15 @@ class RssFormatter extends Formatter
         $channel = $this->dom->createElement('channel');
         $channel = $root->appendChild($channel);
 
+        $generator   = $this->dom->createElement('generator', htmlspecialchars($this->generator));
         $title       = $this->dom->createElement('title', htmlspecialchars($this->feed->getName()));
         $description = $this->dom->createElement('description', htmlspecialchars($this->feed->getDescription()));
-        $link        = $this->dom->createElement('link', $this->feed->getHost());
+        $link        = $this->dom->createElement('link', 'http://'.$this->feed->getHost());
 
         $channel->appendChild($title);
         $channel->appendChild($description);
         $channel->appendChild($link);
+        $channel->appendChild($generator);
 
         $date = new \DateTime();
         $lastBuildDate = $this->dom->createElement('lastBuildDate', $date->format(\DateTime::RSS));

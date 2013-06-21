@@ -23,6 +23,11 @@ class Formatter
     protected $items;
 
     /**
+     * @var string $generator Genrator name
+     */
+    protected $generator;
+
+    /**
      * @var DOMDocument $dom XML DOMDocument
      */
     protected $dom;
@@ -30,17 +35,40 @@ class Formatter
     /**
      * @var array $fields Contain arrays for this formatter
      */
-    protected $fields = array();
+    protected $fields;
 
     /**
      * Construct a formatter with given feed
      *
      * @param Feed $feed A feed instance
      */
-    public function __construct(Feed $feed, $items)
+    public function __construct(Feed $feed, $items, $generator = null)
     {
         $this->feed  = $feed;
         $this->items = $items;
+        $this->generator = $generator;
+
+        $this->setItemFields();
+        $this->initialize();
+    }
+
+    /**
+     * Define fields that will inside an item
+     *     - name: will be the node name
+     *     - method: will be the method to retrieve content to put in this node
+     *
+     */
+    public function setItemFields()
+    {
+        $this->fields = array();
+    }
+
+    /**
+     * Initialize XML DOMDocument nodes and call addItem on all items
+     */
+    public function initialize()
+    {
+        $this->dom = new \DOMDocument('1.0', 'utf-8');
     }
 
     /**

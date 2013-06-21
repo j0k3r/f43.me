@@ -29,3 +29,9 @@ services:
             cache: "%kernel.root_dir%/cache/simplepie/"
             item_limit: 20
             enable_cache: false
+
+    rss_render:
+        class: j0k3r\FeedBundle\Services\RssRender
+        arguments:
+            generator: %domain%
+            doctrine: "@doctrine.odm.mongodb.document_manager"

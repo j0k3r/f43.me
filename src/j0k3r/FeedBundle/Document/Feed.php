@@ -7,8 +7,6 @@ use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\ODM\MongoDB\Mapping\Annotations as MongoDB;
 use Doctrine\Bundle\MongoDBBundle\Validator\Constraints\Unique as MongoDBUnique;
 
-use j0k3r\FeedBundle\Formatter;
-
 /**
  * @MongoDB\Document(collection="feeds")
  * @MongoDB\Document(repositoryClass="j0k3r\FeedBundle\Repository\FeedRepository")
@@ -363,35 +361,5 @@ class Feed
     public function getHost()
     {
         return $this->host;
-    }
-
-    /**
-     * Render the feed in specified format
-     *
-     * @param collection  $items  All items to render
-     *
-     * @return string
-     *
-     * @throws \InvalidArgumentException if given format formatter does not exists
-     */
-    public function render($items)
-    {
-        switch ($this->getFormatter()) {
-            case 'rss':
-                $formatter = new Formatter\RssFormatter($this, $items);
-                break;
-
-            case 'atom':
-                $formatter = new Formatter\AtomFormatter($this, $items);
-                break;
-
-            default:
-                throw new \InvalidArgumentException(
-                    sprintf("Format '%s' is not available. Please see documentation.", $format)
-                );
-                break;
-        }
-
-        return $formatter->render();
     }
 }

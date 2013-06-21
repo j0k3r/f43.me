@@ -29,10 +29,8 @@ class FeedApiController extends Controller
             throw $this->createNotFoundException('Feed does not exists.');
         }
 
-        $feeditems = $dm->getRepository('j0k3rFeedBundle:FeedItem')->findByFeedId($feed->getId());
-
         return new Response(
-            $feed->render($feeditems),
+            $this->get('rss_render')->render($feed),
             200,
             array('Content-Type' => 'text/xml')
         );
