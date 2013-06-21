@@ -24,7 +24,7 @@ class FeedController extends Controller
     public function dashboardAction()
     {
         $dm          = $this->getDocumentManager();
-        $feeds       = $dm->getRepository('j0k3rFeedBundle:Feed')->findAllOrderedByDate(5);
+        $feeds       = $dm->getRepository('j0k3rFeedBundle:Feed')->findAllOrderedByDate(20);
         $feedlogs    = $dm->getRepository('j0k3rFeedBundle:FeedLog')->findAllOrderedById(10);
         $historylogs = $dm->getRepository('j0k3rFeedBundle:FeedLog')->findStatsForLastDays();
 

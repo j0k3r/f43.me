@@ -22,7 +22,7 @@ class FeedLogController extends Controller
     public function indexAction()
     {
         $dm       = $this->getDocumentManager();
-        $feedlogs = $dm->getRepository('j0k3rFeedBundle:FeedLog')->findAllOrderedById();
+        $feedlogs = $dm->getRepository('j0k3rFeedBundle:FeedLog')->findAllOrderedById(100);
 
         return array(
             'menu'     => 'log',

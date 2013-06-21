@@ -86,7 +86,7 @@
         <hr/>
         <ul class="inline-list">
             <li><a class="secondary button radius small" href="{{ path('feed_homepage') }}">&lArr; Back to the list</a></li>
-            <li><a class="button radius small" data-tooltip class="has-tip" title="It can take few seconds to load" data-reveal-id="modal-test-item" data-reveal-ajax="{{ path('feeditem_test', { 'slug': feed.slug }) }}">Test parsing</a></li>
+            <li class="hide-for-small"><a class="button radius small" data-tooltip class="has-tip" title="It can take few seconds to load" data-reveal-id="modal-test-item" data-reveal-ajax="{{ path('feeditem_test', { 'slug': feed.slug }) }}">Test parsing</a></li>
             <li><form class="delete_form" action="{{ path('feed_delete', { 'slug': feed.slug }) }}" method="post">{{ form_widget(delete_form) }}<button class="alert button radius small" type="submit">Delete</button></form></li>
         </ul>
     </div>
