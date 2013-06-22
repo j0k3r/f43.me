@@ -35,3 +35,10 @@ services:
         arguments:
             generator: %domain%
             doctrine: "@doctrine.odm.mongodb.document_manager"
+
+    feeditem.ping_hub:
+        class: j0k3r\FeedBundle\EventListener\FeedItemSubscriber
+        arguments:
+            hub: "http://pubsubhubbub.appspot.com"
+        tags:
+            - { name: kernel.event_listener, event: j0k3r_feed.after_item_cached, method: pingHub }

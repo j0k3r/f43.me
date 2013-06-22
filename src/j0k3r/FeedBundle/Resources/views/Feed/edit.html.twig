@@ -8,6 +8,10 @@
 
 {% block content %}
 <div class="row">
+    <div class="large-12 columns">
+        <h3 class="subheader">Feed information</h3>
+    </div>
+
     <div class="large-8 columns">
         <form action="{{ path('feed_update', { 'slug': feed.slug }) }}" method="post" {{ form_enctype(edit_form) }} class="custom">
             {{ form_widget(edit_form) }}
@@ -78,6 +82,13 @@
                 </a>
             </li>
         </ul>
+    </div>
+</div>
+
+<div class="row">
+    <div class="large-12 columns">
+        <h3 class="subheader">PubSubHubbub information</h3>
+        <iframe class="pubsubhubbub" src="https://pubsubhubbub.appspot.com/topic-details?hub.url={{ url('feedapi_feed', { 'slug': feed.slug }) }}"></iframe>
     </div>
 </div>
 

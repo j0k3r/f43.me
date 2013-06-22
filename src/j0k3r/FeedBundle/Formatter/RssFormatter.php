@@ -43,16 +43,22 @@ class RssFormatter extends Formatter
 
         $root = $this->dom->createElement('rss');
         $root->setAttribute('version', '2.0');
+        $root->setAttribute('xmlns:atom', 'http://www.w3.org/2005/Atom');
         $root = $this->dom->appendChild($root);
 
         $channel = $this->dom->createElement('channel');
         $channel = $root->appendChild($channel);
+
+        $hub = $this->dom->createElement('atom:link');
+        $hub->setAttribute('href', 'http://pubsubhubbub.appspot.com/');
+        $hub->setAttribute('rel', 'hub');
 
         $generator   = $this->dom->createElement('generator', htmlspecialchars($this->generator));
         $title       = $this->dom->createElement('title', htmlspecialchars($this->feed->getName()));
         $description = $this->dom->createElement('description', htmlspecialchars($this->feed->getDescription()));
         $link        = $this->dom->createElement('link', 'http://'.$this->feed->getHost());
 
+        $channel->appendChild($hub);
         $channel->appendChild($title);
         $channel->appendChild($description);
         $channel->appendChild($link);

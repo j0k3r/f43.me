@@ -11,6 +11,8 @@ use Symfony\Component\Console\Output\OutputInterface;
 use j0k3r\FeedBundle\Document\Feed;
 use j0k3r\FeedBundle\Document\FeedItem;
 use j0k3r\FeedBundle\Document\FeedLog;
+use j0k3r\FeedBundle\Event\FeedItemEvent;
+use j0k3r\FeedBundle\j0k3rFeedEvents;
 
 class FetchItemsCommand extends BaseFeedCommand
 {
@@ -33,6 +35,11 @@ class FetchItemsCommand extends BaseFeedCommand
 
         $container    = $this->getContainer();
         $dm           = $container->get('doctrine.odm.mongodb.document_manager');
+
+        // define host for generating route
+        $context = $container->get('router')->getContext();
+        $context->setHost($container->getParameter('domain'));
+
         $feedRepo     = $dm->getRepository('j0k3rFeedBundle:Feed');
         $feedItemRepo = $dm->getRepository('j0k3rFeedBundle:FeedItem');
         $progress     = $this->getHelperSet()->get('progress');
@@ -67,6 +74,7 @@ class FetchItemsCommand extends BaseFeedCommand
         }
 
         $totalCached = 0;
+        $feedUpdated = array();
 
         foreach ($feeds as $feed) {
             if ($input->getOption('with-trace')) {
@@ -144,6 +152,13 @@ class FetchItemsCommand extends BaseFeedCommand
 
                 $dm->persist($feedLog);
                 $dm->flush();
+
+                // store feed url updated, to ping hub later
+                $feedUpdated[] = $container->get('router')->generate(
+                    'feedapi_feed',
+                    array('slug' => $feed->getSlug()),
+                    true
+                );
             }
 
             if ($input->getOption('with-trace')) {
@@ -151,6 +166,21 @@ class FetchItemsCommand extends BaseFeedCommand
             }
         }
         $dm->clear();
+
+        if (!empty($feedUpdated)) {
+            if ($input->getOption('with-trace')) {
+                $output->writeln('<info>Ping hubs...</info>');
+            }
+
+            // send an event about new feed updated
+            $event = new FeedItemEvent();
+            $event->setFeedUrls($feedUpdated);
+
+            $container->get('event_dispatcher')->dispatch(
+                j0k3rFeedEvents::AFTER_ITEM_CACHED,
+                $event
+            );
+        }
 
         $output->writeLn('<comment>'.$totalCached.'</comment> items cached.');
         $this->unlockCommand();

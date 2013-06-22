@@ -58,12 +58,17 @@ class AtomFormatter extends Formatter
         $link = $this->dom->createElement('link');
         $link->setAttribute('href', 'http://'.$this->feed->getHost());
 
+        $hub = $this->dom->createElement('link');
+        $hub->setAttribute('href', 'http://pubsubhubbub.appspot.com/');
+        $hub->setAttribute('rel', 'hub');
+
         $date = new \DateTime();
         $updated = $this->dom->createElement('updated', $date->format(\DateTime::ATOM));
 
         $author = $this->dom->createElement('author');
         $author->appendChild($name);
 
+        $root->appendChild($hub);
         $root->appendChild($title);
         $root->appendChild($subtitle);
         $root->appendChild($link);
