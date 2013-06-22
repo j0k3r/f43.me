@@ -35,6 +35,7 @@ services:
         arguments:
             generator: %domain%
             doctrine: "@doctrine.odm.mongodb.document_manager"
+            router: "@router"
 
     feeditem.ping_hub:
         class: j0k3r\FeedBundle\EventListener\FeedItemSubscriber

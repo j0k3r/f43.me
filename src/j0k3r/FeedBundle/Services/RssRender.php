@@ -9,13 +9,15 @@ class RssRender
 {
     protected
         $generator,
-        $dm
+        $dm,
+        $router
     ;
 
-    public function __construct($generator, \Doctrine\ODM\MongoDB\DocumentManager $dm)
+    public function __construct($generator, \Doctrine\ODM\MongoDB\DocumentManager $dm, $router)
     {
         $this->generator = $generator;
         $this->dm = $dm;
+        $this->router = $router;
     }
 
     /**
@@ -29,15 +31,20 @@ class RssRender
      */
     public function render(Feed $feed)
     {
-        $items = $this->dm->getRepository('j0k3rFeedBundle:FeedItem')->findByFeedId($feed->getId());;
+        $items = $this->dm->getRepository('j0k3rFeedBundle:FeedItem')->findByFeedId($feed->getId());
+        $feedUrl = $this->router->generate(
+            'feedapi_feed',
+            array('slug' => $feed->getSlug()),
+            true
+        );
 
         switch ($feed->getFormatter()) {
             case 'rss':
-                $formatter = new Formatter\RssFormatter($feed, $items, $this->generator);
+                $formatter = new Formatter\RssFormatter($feed, $items, $feedUrl, $this->generator);
                 break;
 
             case 'atom':
-                $formatter = new Formatter\AtomFormatter($feed, $items, $this->generator);
+                $formatter = new Formatter\AtomFormatter($feed, $items, $feedUrl, $this->generator);
                 break;
 
             default:

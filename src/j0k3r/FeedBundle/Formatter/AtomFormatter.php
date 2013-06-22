@@ -33,7 +33,7 @@ class AtomFormatter extends Formatter
             ), array(
                 'name'        => 'updated',
                 'method'      => 'getPublishedAt',
-                'date_format' => \DateTime::RSS,
+                'date_format' => \DateTime::ATOM,
             ),
         );
     }
@@ -49,11 +49,15 @@ class AtomFormatter extends Formatter
         $root->setAttribute('xmlns', 'http://www.w3.org/2005/Atom');
         $root = $this->dom->appendChild($root);
 
-        $identifier = $this->dom->createElement('id', $this->feed->getHost());
+        $identifier = $this->dom->createElement('id', 'http://'.$this->feed->getHost().'/');
         $title      = $this->dom->createElement('title', htmlspecialchars($this->feed->getName()));
         $subtitle   = $this->dom->createElement('subtitle', htmlspecialchars($this->feed->getDescription()));
         $name       = $this->dom->createElement('name', htmlspecialchars($this->feed->getName()));
         $generator  = $this->dom->createElement('generator', htmlspecialchars($this->generator));
+
+        $self = $this->dom->createElement('link');
+        $self->setAttribute('href', $this->url);
+        $self->setAttribute('rel', 'self');
 
         $link = $this->dom->createElement('link');
         $link->setAttribute('href', 'http://'.$this->feed->getHost());
@@ -69,6 +73,7 @@ class AtomFormatter extends Formatter
         $author->appendChild($name);
 
         $root->appendChild($hub);
+        $root->appendChild($self);
         $root->appendChild($title);
         $root->appendChild($subtitle);
         $root->appendChild($link);

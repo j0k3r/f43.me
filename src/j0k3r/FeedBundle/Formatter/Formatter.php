@@ -28,6 +28,11 @@ class Formatter
     protected $generator;
 
     /**
+     * @var string $url Feed url
+     */
+    protected $url;
+
+    /**
      * @var DOMDocument $dom XML DOMDocument
      */
     protected $dom;
@@ -42,10 +47,11 @@ class Formatter
      *
      * @param Feed $feed A feed instance
      */
-    public function __construct(Feed $feed, $items, $generator = null)
+    public function __construct(Feed $feed, $items, $url, $generator = null)
     {
         $this->feed  = $feed;
         $this->items = $items;
+        $this->url = $url;
         $this->generator = $generator;
 
         $this->setItemFields();

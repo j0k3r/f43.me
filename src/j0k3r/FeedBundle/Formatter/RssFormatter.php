@@ -27,6 +27,9 @@ class RssFormatter extends Formatter
                 'name'        => 'link',
                 'method'      => 'getLink'
             ), array(
+                'name'        => 'guid',
+                'method'      => 'getLink'
+            ), array(
                 'name'        => 'pubDate',
                 'method'      => 'getPublishedAt',
                 'date_format' => \DateTime::RSS,
@@ -49,6 +52,11 @@ class RssFormatter extends Formatter
         $channel = $this->dom->createElement('channel');
         $channel = $root->appendChild($channel);
 
+        $self = $this->dom->createElement('atom:link');
+        $self->setAttribute('href', $this->url);
+        $self->setAttribute('rel', 'self');
+        $self->setAttribute('type', 'application/rss+xml');
+
         $hub = $this->dom->createElement('atom:link');
         $hub->setAttribute('href', 'http://pubsubhubbub.appspot.com/');
         $hub->setAttribute('rel', 'hub');
@@ -59,6 +67,7 @@ class RssFormatter extends Formatter
         $link        = $this->dom->createElement('link', 'http://'.$this->feed->getHost());
 
         $channel->appendChild($hub);
+        $channel->appendChild($self);
         $channel->appendChild($title);
         $channel->appendChild($description);
         $channel->appendChild($link);
