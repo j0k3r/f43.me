@@ -21,7 +21,8 @@ services:
                 killBreaks: '/(<br\s*\/?>(\s|&nbsp;?)*){1,}/'
                 video: '!//(player\.|www\.)?(youtube|vimeo|viddler)\.com!i'
                 skipFootnoteLink: '/^\s*(\[?[a-z0-9]{1,2}\]?|^|edit|citation needed)\s*$/i'
-                attrToRemove: 'onclick|rel|class|target|fs:definition|alt|id|onload|name'
+                attrToRemove: 'onclick|rel|class|target|fs:definition|alt|id|onload|name|onchange'
+                tagToRemove: 'select|form'
 
     simple_pie_proxy:
         class: j0k3r\FeedBundle\Services\SimplePieProxy

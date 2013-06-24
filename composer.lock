@@ -1068,12 +1068,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/stof/StofDoctrineExtensionsBundle.git",
-                "reference": "7618302c798edbe5f13cd7d7f6aab4b21110a135"
+                "reference": "v1.1.0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/stof/StofDoctrineExtensionsBundle/zipball/7618302c798edbe5f13cd7d7f6aab4b21110a135",
-                "reference": "7618302c798edbe5f13cd7d7f6aab4b21110a135",
+                "url": "https://api.github.com/repos/stof/StofDoctrineExtensionsBundle/zipball/v1.1.0",
+                "reference": "v1.1.0",
                 "shasum": ""
             },
             "require": {
@@ -1121,7 +1121,7 @@
                 "translatable",
                 "tree"
             ],
-            "time": "2013-06-20 00:09:53"
+            "time": "2013-06-23 16:53:41"
         },
         {
             "name": "symfony/assetic-bundle",

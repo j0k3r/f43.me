@@ -29,6 +29,7 @@ class ReadabilityExtended extends \Readability
      */
     public function prepArticle($articleContent)
     {
+        $this->cleanTags($articleContent);
         $this->cleanAttrs($articleContent);
         $this->makeImgSrcAbsolute($articleContent);
 
@@ -51,6 +52,26 @@ class ReadabilityExtended extends \Readability
         foreach ($elems as $elem) {
             foreach ($attrs as $attr) {
                 $elem->removeAttribute($attr);
+            }
+        }
+    }
+
+    /**
+     * Remove some "bad" tags on every $e and under.
+     *
+     * @param DOMElement $e
+     * @return void
+     */
+    public function cleanTags($e)
+    {
+        if (!is_object($e)) return;
+
+        $tags = explode('|', $this->regexps['tagToRemove']);
+
+        foreach ($tags as $tag) {
+            $elems = $e->getElementsByTagName($tag);
+            foreach ($elems as $elem) {
+                $elem->parentNode->removeChild($elem);
             }
         }
     }
