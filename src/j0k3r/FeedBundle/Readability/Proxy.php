@@ -127,7 +127,7 @@ class Proxy
         $readability          = new ReadabilityExtended($tidy->value);
         $readability->debug   = $this->debug;
         $readability->regexps = $this->regexps;
-        $readability->host    = parse_url($this->url, PHP_URL_HOST);
+        $readability->url     = $this->url;
         $readability->convertLinksToFootnotes = $this->convertLinksToFootnotes;
 
         if (!$readability->init()) {

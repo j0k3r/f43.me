@@ -2,6 +2,8 @@
 
 namespace j0k3r\FeedBundle\Readability;
 
+use j0k3r\FeedBundle\Readability\AbsoluteUrl;
+
 /**
  * This class extends the Readability one to add more fine tuning on content:
  *     - remove some unwanted attributes
@@ -11,11 +13,11 @@ namespace j0k3r\FeedBundle\Readability;
 class ReadabilityExtended extends \Readability
 {
     /**
-     * host used to convert relative image path to absolute
+     * url of the article
      *
      * @var string
      */
-    public $host;
+    public $url;
 
     /**
      * Prepare the article node for display. Clean out any inline styles,
@@ -85,18 +87,16 @@ class ReadabilityExtended extends \Readability
                 $elem->setAttribute('src', $src);
             }
 
-            if (preg_match('/^(http)/i', $src)) {
+            if (preg_match('/^http(s?):\/\//i', $src)) {
                 continue;
             }
 
-            // replace src="/path to src="//host.com/path
-            if (preg_match('/^\/(.*)/i', $src)) {
-                $src = '//'.$this->host.$src;
-            }
-            // replace src="path to src="//host.com/path
-            elseif (preg_match('/^(.*)/i', $src)) {
-                $src = '//'.$this->host.'/'.$src;
-            }
+            // convert relative src to absolute
+            $absUrl = new AbsoluteUrl();
+            $src = $absUrl->url_to_absolute(
+                $this->url,
+                $src
+            );
 
             $elem->setAttribute('src', $src);
         }
