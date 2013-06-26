@@ -15,4 +15,8 @@
 {% endif %}
 
 <hr/>
-{{ content|raw }}
+{% if content|length == 0 %}
+    <p><span class="label alert radius">Warning</span> We failed to make this item readable, the default text from the feed item will be displayed intead.</p>
+{% else %}
+    {{ content|raw }}
+{% endif %}
