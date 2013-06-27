@@ -69,10 +69,7 @@ class ReadabilityExtended extends \Readability
         $tags = explode('|', $this->regexps['tagToRemove']);
 
         foreach ($tags as $tag) {
-            $elems = $e->getElementsByTagName($tag);
-            foreach ($elems as $elem) {
-                $elem->parentNode->removeChild($elem);
-            }
+            $this->clean($e, $tag);
         }
     }
 
