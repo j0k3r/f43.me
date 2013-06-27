@@ -145,4 +145,41 @@ class FeedLogRepository extends DocumentRepository
             ->getQuery()
             ->execute();
     }
+
+    /**
+     * Retrieve a list of all feed with the last feedlog date
+     *
+     * @return array
+     */
+    public function findLastUpdated()
+    {
+        $res = $this->getDocumentManager()
+            ->getDocumentCollection('j0k3r\FeedBundle\Document\FeedLog')
+            ->getMongoCollection()
+            ->group(
+                array('feed' => true),
+                array('count' => 0),
+                'function (obj, prev) {
+                    prev.max_created_at = isNaN(prev.max_created_at) ? Math.max(obj.created_at) : Math.max(prev.max_created_at, obj.created_at);
+                }'
+            );
+
+        if (!isset($res['retval'])) {
+            return array();
+        }
+
+        $results = array();
+        foreach ($res['retval'] as $oneRes) {
+            $results[$oneRes['max_created_at']] = array(
+                // we get milliseconds, so we convert it to seconds
+                'created_at' => new \DateTime('@'.$oneRes['max_created_at']/1000),
+                'feed_id'    => (string) $oneRes['feed']['$id']
+            );
+        }
+
+        // sort by most recent first (and we don't care to keep key)
+        rsort($results);
+
+        return $results;
+    }
 }

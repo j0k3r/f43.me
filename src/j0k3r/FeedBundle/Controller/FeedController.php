@@ -45,11 +45,17 @@ class FeedController extends Controller
      */
     public function publicAction()
     {
-        $dm    = $this->getDocumentManager();
-        $feeds = $dm->getRepository('j0k3rFeedBundle:Feed')->findAllOrderedByDate();
+        $dm   = $this->getDocumentManager();
+        $logs = $dm->getRepository('j0k3rFeedBundle:FeedLog')->findLastUpdated();
+
+        // loop through all logs and retrieve the feed document
+        // since we use the php function to query, object aren't hydrated
+        foreach ($logs as &$log) {
+            $log['feed'] = $dm->getRepository('j0k3rFeedBundle:Feed')->find($log['feed_id']);
+        }
 
         return array(
-            'feeds'   => $feeds,
+            'logs' => $logs,
         );
     }
 
