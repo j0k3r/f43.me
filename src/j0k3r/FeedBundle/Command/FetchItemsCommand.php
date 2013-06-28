@@ -95,7 +95,8 @@ class FetchItemsCommand extends BaseFeedCommand
 
             $parser = $container
                 ->get('readability_proxy')
-                ->setChoosenParser($feed->getParser());
+                ->setChoosenParser($feed->getParser())
+                ->setFeedSlug($feed->getSlug());
 
             $cachedLinks = $feedItemRepo->getAllLinks($feed->getId());
             $cached      = 0;

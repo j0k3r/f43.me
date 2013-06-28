@@ -3,11 +3,13 @@
 namespace j0k3r\FeedBundle\Readability;
 
 use Doctrine\Common\Util\Inflector;
+use j0k3r\FeedBundle\Parser;
 
 class Proxy
 {
     protected
-        $url_api,
+        $feedSlug = null,
+        $urlApi,
         $token,
         $debug,
         $convertLinksToFootnotes,
@@ -21,10 +23,10 @@ class Proxy
         $useDefault = false
     ;
 
-    public function __construct($token, $url_api, $debug = false, $convertLinksToFootnotes = false, $regexps = array())
+    public function __construct($token, $urlApi, $debug = false, $convertLinksToFootnotes = false, $regexps = array())
     {
         $this->token = $token;
-        $this->url_api = $url_api;
+        $this->urlApi = $urlApi;
         $this->debug = $debug;
         $this->convertLinksToFootnotes = $convertLinksToFootnotes;
         $this->regexps = $regexps;
@@ -37,17 +39,39 @@ class Proxy
         return $this;
     }
 
+    public function setFeedSlug($slug)
+    {
+        $this->feedSlug = $slug;
+
+        return $this;
+    }
+
     /**
      * Try to retrieve content from a given url
      *
-     * @param  string   $url                RSS item url
-     * @param  string   $defaultContent     RSS item content, which will be taken if we can't extract content from url
+     * @param  string   $url             RSS item url
+     * @param  string   $itemContent     RSS item content, which will be taken if we can't extract content from url
      *
      * @return string
      */
-    public function parseContent($url, $defaultContent = null)
+    public function parseContent($url, $itemContent = null)
     {
-        $parserMethod = 'use'.Inflector::camelize($this->choosenParser).'Parser';
+        // we use default parser
+        $customParser = new Parser\DefaultParser($url, $itemContent);
+
+        // or try to find a custom one
+        if (null !== $this->feedSlug) {
+            // I don't know why I have to use the *full* path to test if the class exists
+            // even if the current classe "use" j0k3r\FeedBundle\Parser ...
+            $customMethod = 'j0k3r\FeedBundle\Parser\\'.Inflector::classify($this->feedSlug).'Parser';
+
+            if (class_exists($customMethod)){
+                $customParser = new $customMethod($url, $itemContent);
+            }
+        }
+
+        // retrieve custom url ?
+        $url = $customParser->retrieveUrl();
 
         if (is_callable(array($this, $parserMethod))) {
             $this->content = $this->$parserMethod($url);
@@ -58,8 +82,11 @@ class Proxy
 
         // do something when readabled content failed
         if (!$this->content) {
-            $this->content = $defaultContent;
+            $this->content = $itemContent;
             $this->useDefault = true;
+        } else {
+            // update readable content with something ?
+            $this->content = $customParser->updateContent($this->content);
         }
 
         return $this;
@@ -126,10 +153,9 @@ class Proxy
         $tidy = tidy_parse_string($content, array(), 'UTF8');
         $tidy->cleanRepair();
 
-        $readability          = new ReadabilityExtended($tidy->value);
+        $readability          = new ReadabilityExtended($tidy->value, $this->url);
         $readability->debug   = $this->debug;
         $readability->regexps = $this->regexps;
-        $readability->url     = $this->url;
         $readability->convertLinksToFootnotes = $this->convertLinksToFootnotes;
 
         if (!$readability->init()) {
@@ -160,7 +186,7 @@ class Proxy
      */
     private function useExternalParser($url)
     {
-        $url = $this->url_api.'?token='.$this->token.'&url='.urlencode($url);
+        $url = $this->urlApi.'?token='.$this->token.'&url='.urlencode($url);
 
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $url);
