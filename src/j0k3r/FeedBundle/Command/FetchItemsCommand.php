@@ -123,12 +123,18 @@ class FetchItemsCommand extends BaseFeedCommand
                     $content = $item->get_content();
                 }
 
+                // if there is no date in the feed, we use the current one
+                $date = $item->get_date();
+                if (null === $date) {
+                    $date = date('j F Y, g:i:s a');
+                }
+
                 $feedItem = new FeedItem();
                 $feedItem->setTitle(html_entity_decode($item->get_title(), ENT_COMPAT, 'UTF-8'));
                 $feedItem->setLink($parsedContent->url);
                 $feedItem->setContent($content);
                 $feedItem->setPermalink($item->get_permalink());
-                $feedItem->setPublishedAt($item->get_date());
+                $feedItem->setPublishedAt($date);
                 $feedItem->setFeed($feed);
                 $dm->persist($feedItem);
 
