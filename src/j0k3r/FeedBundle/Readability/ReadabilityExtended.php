@@ -13,11 +13,18 @@ use j0k3r\FeedBundle\Readability\AbsoluteUrl;
 class ReadabilityExtended extends \Readability
 {
     /**
-     * url of the article
+     * AbsoluteUrl object
      *
      * @var string
      */
-    public $url;
+    public $absUrl;
+
+    function __construct($html, $url = null, $parser = 'libxml')
+    {
+        $this->absUrl = new AbsoluteUrl();
+
+        parent::__construct($html, $url, $parser);
+    }
 
     /**
      * Prepare the article node for display. Clean out any inline styles,
@@ -32,6 +39,7 @@ class ReadabilityExtended extends \Readability
         $this->cleanTags($articleContent);
         $this->cleanAttrs($articleContent);
         $this->makeImgSrcAbsolute($articleContent);
+        $this->makeHrefAbsolute($articleContent);
 
         parent::prepArticle($articleContent);
     }
@@ -110,13 +118,34 @@ class ReadabilityExtended extends \Readability
             }
 
             // convert relative src to absolute
-            $absUrl = new AbsoluteUrl();
-            $src = $absUrl->url_to_absolute(
+            $src = $this->absUrl->url_to_absolute(
                 $this->url,
                 $src
             );
 
             $elem->setAttribute('src', $src);
+        }
+    }
+
+    public function makeHrefAbsolute($e)
+    {
+        if (!is_object($e)) return;
+
+        $elems = $e->getElementsByTagName('a');
+        foreach ($elems as $elem) {
+            $href = $elem->getAttribute('href');
+
+            if (preg_match('/^http(s?):\/\//i', $href)) {
+                continue;
+            }
+
+            // convert relative href to absolute
+            $href = $this->absUrl->url_to_absolute(
+                $this->url,
+                $href
+            );
+
+            $elem->setAttribute('href', $href);
         }
     }
 }
