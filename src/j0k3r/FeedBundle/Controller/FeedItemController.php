@@ -112,13 +112,17 @@ class FeedItemController extends Controller
             ->setChoosenParser($request->get('parser'));
 
         $firstItem = $rssFeed->get_item(0);
-        $content   = $parser->parseContent($firstItem->get_permalink());
+        $content   = $parser->parseContent(
+            $firstItem->get_permalink(),
+            $firstItem->get_description()
+        );
 
         return $this->container->get('templating')->renderResponse('j0k3rFeedBundle:FeedItem:content.html.twig', array(
             'title'   => html_entity_decode($firstItem->get_title(), ENT_COMPAT, 'UTF-8'),
             'content' => $content->content,
             'modal'   => false,
             'url'     => $content->url,
+            'defaultContent' => $content->useDefault,
         ));
     }
 

@@ -17,7 +17,8 @@ class Proxy
 
     public
         $url,
-        $content
+        $content,
+        $useDefault = false
     ;
 
     public function __construct($token, $url_api, $debug = false, $convertLinksToFootnotes = false, $regexps = array())
@@ -58,6 +59,7 @@ class Proxy
         // do something when readabled content failed
         if (!$this->content) {
             $this->content = $defaultContent;
+            $this->useDefault = true;
         }
 
         return $this;
