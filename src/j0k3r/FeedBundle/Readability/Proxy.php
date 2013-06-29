@@ -4,6 +4,7 @@ namespace j0k3r\FeedBundle\Readability;
 
 use Doctrine\Common\Util\Inflector;
 use j0k3r\FeedBundle\Parser;
+use TubeLink\TubeLink;
 
 class Proxy
 {
@@ -71,13 +72,29 @@ class Proxy
         }
 
         // retrieve custom url ?
-        $url = $customParser->retrieveUrl();
+        $this->url = $customParser->retrieveUrl();
 
-        if (is_callable(array($this, $parserMethod))) {
-            $this->content = $this->$parserMethod($url);
+        // is it a video?
+        try {
+            $video = TubeLink::create()->parse($url);
+        } catch (ServiceNotFoundException $e) {
+            $video = false;
+        }
+
+        // if content is an image or a vide, just return it instead of trying to make it readable
+        if (preg_match('/\.(jpe?g|gif|png)$/i', $this->url)) {
+            $this->content = '<img src="'.$this->url.'" />';
+        } elseif (false !== $video) {
+            $this->content = $video->render();
         } else {
-            // use internal by default
-            $this->content = $this->useInternalParser($url);
+            $parserMethod = 'use'.Inflector::camelize($this->choosenParser).'Parser';
+
+            if (is_callable(array($this, $parserMethod))) {
+                $this->content = $this->$parserMethod($this->url);
+            } else {
+                // use internal by default
+                $this->content = $this->useInternalParser($this->url);
+            }
         }
 
         // do something when readabled content failed

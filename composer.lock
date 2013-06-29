@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "826bf1e51f8d7c05920c8eb91f7f6616",
+    "hash": "e7c21a5170426661987bacca6d4b9074",
     "packages": [
         {
             "name": "doctrine/common",
@@ -273,12 +273,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/mongodb-odm.git",
-                "reference": "9bbe6a2ec98db4b66230f46f003129e7334943c5"
+                "reference": "0a1324a596a73e5d8ec2a26b957486dd56eba2c7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/mongodb-odm/zipball/9bbe6a2ec98db4b66230f46f003129e7334943c5",
-                "reference": "9bbe6a2ec98db4b66230f46f003129e7334943c5",
+                "url": "https://api.github.com/repos/doctrine/mongodb-odm/zipball/0a1324a596a73e5d8ec2a26b957486dd56eba2c7",
+                "reference": "0a1324a596a73e5d8ec2a26b957486dd56eba2c7",
                 "shasum": ""
             },
             "require": {
@@ -338,7 +338,7 @@
                 "odm",
                 "persistence"
             ],
-            "time": "2013-06-17 01:52:45"
+            "time": "2013-06-27 14:07:45"
         },
         {
             "name": "doctrine/mongodb-odm-bundle",
@@ -535,6 +535,56 @@
                 "uploadable"
             ],
             "time": "2013-05-21 12:09:55"
+        },
+        {
+            "name": "grom/tube-link",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/GromNaN/TubeLink.git",
+                "reference": "3ea9c086ca80d57274e9f345e18849e0f00fcaae"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/GromNaN/TubeLink/zipball/3ea9c086ca80d57274e9f345e18849e0f00fcaae",
+                "reference": "3ea9c086ca80d57274e9f345e18849e0f00fcaae",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "TubeLink": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Jérôme Tamarelle",
+                    "email": "jerome@tamarelle.net"
+                }
+            ],
+            "description": "Extract video/music information from any URL and render HTML",
+            "keywords": [
+                "dailymotion",
+                "parser",
+                "spotify",
+                "url",
+                "video",
+                "vimeo",
+                "youtube"
+            ],
+            "time": "2012-11-22 16:22:30"
         },
         {
             "name": "incenteev/composer-parameter-handler",
@@ -1510,7 +1560,8 @@
         "stof/doctrine-extensions-bundle": 20,
         "fivefilters/php-readability": 20,
         "simplepie/simplepie": 20,
-        "knplabs/knp-time-bundle": 20
+        "knplabs/knp-time-bundle": 20,
+        "grom/tube-link": 20
     },
     "platform": {
         "php": ">=5.3.3",
