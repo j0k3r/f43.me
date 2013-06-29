@@ -76,8 +76,8 @@ class Proxy
 
         // is it a video?
         try {
-            $video = TubeLink::create()->parse($url);
-        } catch (ServiceNotFoundException $e) {
+            $video = TubeLink::create()->parse(htmlspecialchars_decode($this->url));
+        } catch (\TubeLink\Exception\ServiceNotFoundException $e) {
             $video = false;
         }
 
