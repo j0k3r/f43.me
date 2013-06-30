@@ -40,6 +40,7 @@ class ReadabilityExtended extends \Readability
         $this->cleanAttrs($articleContent);
         $this->makeImgSrcAbsolute($articleContent);
         $this->makeHrefAbsolute($articleContent);
+        $this->convertH1ToH2($articleContent);
 
         parent::prepArticle($articleContent);
     }
@@ -127,6 +128,12 @@ class ReadabilityExtended extends \Readability
         }
     }
 
+    /**
+     * Convert relative url absolute
+     *
+     * @param  DOMElement   $e
+     * @return void
+     */
     public function makeHrefAbsolute($e)
     {
         if (!is_object($e)) return;
@@ -146,6 +153,34 @@ class ReadabilityExtended extends \Readability
             );
 
             $elem->setAttribute('href', $href);
+        }
+    }
+
+    /**
+     * Convert h1 tag to h2.
+     * Since Readability removes h1
+     *
+     * @param  DOMElement   $e
+     * @return void
+     */
+    public function convertH1ToH2($e)
+    {
+        if (!is_object($e)) return;
+
+        while (null !== ($elem = $e->getElementsByTagName('h1')->item(0))) {
+            $newNode = $elem->ownerDocument->createElement('h2');
+
+            if ($elem->attributes->length) {
+                foreach ($elem->attributes as $attribute) {
+                    $newNode->setAttribute($attribute->nodeName, $attribute->nodeValue);
+                }
+            }
+
+            while ($elem->firstChild) {
+                $newNode->appendChild($elem->firstChild);
+            }
+
+            $elem->parentNode->replaceChild($newNode, $elem);
         }
     }
 }
