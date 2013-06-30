@@ -6,3 +6,7 @@
 /vendor/
 /bin/
 /app/config/parameters.yml
+
+/web/css/
+/web/js/
+/src/j0k3r/FeedBundle/Resources/foundation/*

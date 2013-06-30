@@ -8,11 +8,20 @@
     <title>f43.me</title>
 
     <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
-    <link rel="stylesheet" href="{{ asset('bundles/j0k3rfeed/css/foundation.css') }}" />
-    <link rel="stylesheet" href="{{ asset('bundles/j0k3rfeed/css/app.css') }}" />
 
-    <script src="{{ asset('bundles/j0k3rfeed/js/vendor/zepto.js') }}" type="text/javascript"></script>
-    <script src="{{ asset('bundles/j0k3rfeed/js/vendor/custom.modernizr.js') }}" type="text/javascript"></script>
+    {% stylesheets filter='compass' output='css/compiled/main.css'
+        '@j0k3rFeedBundle/Resources/foundation/scss/normalize.scss'
+        '@j0k3rFeedBundle/Resources/foundation/scss/foundation.scss'
+        '@j0k3rFeedBundle/Resources/sass/app.sass'
+    %}
+        <link rel="stylesheet" href="{{ asset_url }}" />
+    {% endstylesheets %}
+
+    {% javascripts output='js/compiled/zepto.modernizr.js'
+        '@j0k3rFeedBundle/Resources/foundation/js/vendor/zepto.js'
+        '@j0k3rFeedBundle/Resources/foundation/js/vendor/custom.modernizr.js' %}
+        <script type="text/javascript" src="{{ asset_url }}"></script>
+    {% endjavascripts %}
 </head>
 <body>
     <nav class="top-bar">
@@ -88,8 +97,19 @@
 
     {% block content %}{% endblock %}
 
-    <script src="{{ asset('bundles/j0k3rfeed/js/foundation.min.js') }}" type="text/javascript"></script>
-    <script src="{{ asset('bundles/j0k3rfeed/js/app.js') }}" type="text/javascript"></script>
+    {% javascripts output='js/compiled/foundation.app.js'
+        '@j0k3rFeedBundle/Resources/foundation/js/foundation/foundation.js'
+        '@j0k3rFeedBundle/Resources/foundation/js/foundation/foundation.alerts.js'
+        '@j0k3rFeedBundle/Resources/foundation/js/foundation/foundation.dropdown.js'
+        '@j0k3rFeedBundle/Resources/foundation/js/foundation/foundation.forms.js'
+        '@j0k3rFeedBundle/Resources/foundation/js/foundation/foundation.placeholder.js'
+        '@j0k3rFeedBundle/Resources/foundation/js/foundation/foundation.reveal.js'
+        '@j0k3rFeedBundle/Resources/foundation/js/foundation/foundation.section.js'
+        '@j0k3rFeedBundle/Resources/foundation/js/foundation/foundation.tooltips.js'
+        '@j0k3rFeedBundle/Resources/foundation/js/foundation/foundation.topbar.js'
+        '@j0k3rFeedBundle/Resources/public/js/app.js' %}
+        <script type="text/javascript" src="{{ asset_url }}"></script>
+    {% endjavascripts %}
 
     <script>
         $(document).foundation();

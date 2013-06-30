@@ -22,7 +22,8 @@
         "fivefilters/php-readability": "dev-master",
         "simplepie/simplepie": "dev-master",
         "knplabs/knp-time-bundle": "1.1.*@dev",
-        "grom/tube-link": "dev-master"
+        "grom/tube-link": "dev-master",
+        "zurb/foundation": "dev-master"
     },
     "scripts": {
         "post-install-cmd": [
@@ -30,7 +31,8 @@
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::buildBootstrap",
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::clearCache",
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installAssets",
-            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installRequirementsFile"
+            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installRequirementsFile",
+            "j0k3r\\FeedBundle\\Composer\\Script::postInstallFoundation"
         ],
         "post-update-cmd": [
             "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters",

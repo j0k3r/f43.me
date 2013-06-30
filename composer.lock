@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "e7c21a5170426661987bacca6d4b9074",
+    "hash": "d8babd7b5a40409e26ba17698ca69484",
     "packages": [
         {
             "name": "doctrine/common",
@@ -1545,6 +1545,33 @@
                 "templating"
             ],
             "time": "2013-06-06 06:06:01"
+        },
+        {
+            "name": "zurb/foundation",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/zurb/foundation.git",
+                "reference": "d9ecaa1a2675a6ce40b8f363061788a92676188b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/zurb/foundation/zipball/d9ecaa1a2675a6ce40b8f363061788a92676188b",
+                "reference": "d9ecaa1a2675a6ce40b8f363061788a92676188b",
+                "shasum": ""
+            },
+            "type": "library",
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "The most advanced responsive front-end framework in the world.",
+            "homepage": "http://foundation.zurb.com",
+            "keywords": [
+                "foundation",
+                "scss"
+            ],
+            "time": "2013-06-28 06:28:58"
         }
     ],
     "packages-dev": [
@@ -1561,7 +1588,8 @@
         "fivefilters/php-readability": 20,
         "simplepie/simplepie": 20,
         "knplabs/knp-time-bundle": 20,
-        "grom/tube-link": 20
+        "grom/tube-link": 20,
+        "zurb/foundation": 20
     },
     "platform": {
         "php": ">=5.3.3",
