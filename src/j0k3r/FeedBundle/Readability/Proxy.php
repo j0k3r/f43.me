@@ -81,8 +81,12 @@ class Proxy
             $video = false;
         }
 
-        // if content is an image or a vide, just return it instead of trying to make it readable
-        if (preg_match('/\.(jpe?g|gif|png)$/i', $this->url)) {
+        // don't try to make binary file readable
+        if (preg_match('/\.(pdf|doc|ppt)$/i', $this->url)) {
+            $this->content = false;
+        }
+        // if content is an image or a video, just return it instead of trying to make it readable
+        else if (preg_match('/\.(jpe?g|gif|png)$/i', $this->url)) {
             $this->content = '<img src="'.$this->url.'" />';
         } elseif (false !== $video) {
             $this->content = $video->render();
@@ -124,20 +128,17 @@ class Proxy
     {
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $url);
-        curl_setopt($ch, CURLOPT_HEADER, TRUE);
-        // curl_setopt($ch, CURLOPT_NOBODY, TRUE);
-        curl_setopt($ch, CURLOPT_FOLLOWLOCATION, TRUE);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
-        // curl_setopt($ch, CURLOPT_HEADERFUNCTION, array($this, 'readHeaders'));
-        // curl_setopt($ch, CURLOPT_WRITEFUNCTION, array($this, 'readBody'));
+        curl_setopt($ch, CURLOPT_HEADER, true);
+        curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         $content = curl_exec($ch);
         curl_close($ch);
 
         $location = $url;
         // find last occurence of "Location: h" to be sure it isn't a local redirect (like /new_location)
-        if ($content != NULL && ($location_raw = strripos($content, "Location: h")) !== FALSE ) {
+        if ($content != null && ($location_raw = strripos($content, "Location: h")) !== false ) {
             $location_raw += strlen("Location: h");
-            $length       = (strpos($content, "\n", $location_raw) !== FALSE) ? strpos($content, "\n", $location_raw) - $location_raw : '';
+            $length       = (strpos($content, "\n", $location_raw) !== false) ? strpos($content, "\n", $location_raw) - $location_raw : '';
             $location     = 'h'.trim(substr($content, $location_raw, $length));
         }
 
@@ -207,7 +208,7 @@ class Proxy
 
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $url);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 
         $html = json_decode(curl_exec($ch));
 
