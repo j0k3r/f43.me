@@ -4,6 +4,7 @@ namespace j0k3r\FeedBundle\Document;
 
 use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Validator\Constraints as Assert;
+use j0k3r\FeedBundle\Validator\Constraints as FeedAssert;
 use Doctrine\ODM\MongoDB\Mapping\Annotations as MongoDB;
 use Doctrine\Bundle\MongoDBBundle\Validator\Constraints\Unique as MongoDBUnique;
 
@@ -35,6 +36,7 @@ class Feed
      * @MongoDB\String
      * @Assert\NotBlank()
      * @Assert\Url()
+     * @FeedAssert\ContainsRss
      */
     protected $link;
 
