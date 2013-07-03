@@ -13,22 +13,18 @@ class ContainsRssValidator extends ConstraintValidator
 {
     public function validate($value, Constraint $constraint)
     {
-        libxml_use_internal_errors(true);
-
         $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, $value);
+        curl_setopt($ch, CURLOPT_URL, 'http://validator.w3.org/feed/check.cgi?url='.$value);
         curl_setopt($ch, CURLOPT_HEADER, false);
         curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_USERAGENT, 'f43.me');
         // wait 3s before time out
         curl_setopt($ch, CURLOPT_TIMEOUT, 3);
         $content = curl_exec($ch);
         curl_close($ch);
 
-        $dom = new \DOMDocument;
-        $dom->load($content);
-
-        if (false === $dom->validate()) {
+        if (0 === preg_match('/This is a valid/', $content)) {
             $this->context->addViolation($constraint->message, array('%string%' => $value));
         }
     }
