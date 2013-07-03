@@ -24,7 +24,7 @@
     <div class="large-4 columns">
         <h2 class="subheader"><em>Readable</em> feeds</h2>
         {% if logs|length > 0 %}
-            <table>
+            <table class="table-public">
                 <thead>
                     <tr>
                         <th>RSS link</th>
@@ -35,10 +35,12 @@
                 {% for log in logs %}
                     <tr>
                         <td>
-                            {{ include('j0k3rFeedBundle:Feed:_favicon.html.twig', {'host': log.feed.host}) }}
-                            <a href="{{ url('feedapi_feed', { 'slug': log.feed.slug }) }}" target="_blank">
-                                {{ log.feed.name }}
-                            </a>
+                            <div>
+                                {{ include('j0k3rFeedBundle:Feed:_favicon.html.twig', {'host': log.feed.host}) }}
+                                <a href="{{ url('feedapi_feed', { 'slug': log.feed.slug }) }}" target="_blank" title="{{ log.feed.name }}">
+                                    {{ log.feed.name }}
+                                </a>
+                            </div>
                         </td>
                         <td>{{ log.created_at|date('H:i:s - d/m/y') }}</td>
                     </tr>
