@@ -167,6 +167,10 @@ class ReadabilityExtended extends \Readability
     {
         if (!is_object($e)) return;
 
+        if ($e->getElementsByTagName('h1')->length == 1) {
+            return;
+        }
+
         while (null !== ($elem = $e->getElementsByTagName('h1')->item(0))) {
             $newNode = $elem->ownerDocument->createElement('h2');
 

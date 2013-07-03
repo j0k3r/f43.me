@@ -15,7 +15,9 @@ class Proxy
         $debug,
         $convertLinksToFootnotes,
         $regexps,
-        $choosenParser = null
+        $choosenParser = null,
+        $allowAllParser = false,
+        $availableParsers = array('Internal', 'External')
     ;
 
     public
@@ -43,6 +45,21 @@ class Proxy
     public function setFeedSlug($slug)
     {
         $this->feedSlug = $slug;
+
+        return $this;
+    }
+
+    /**
+     * Define if we have to use all *known* parser to get the content if the defined one failed.
+     * For example, Internal parser can't make content readable, it will use the External one, etc ..
+     *
+     * @param  bool   $value
+     *
+     * @return \Proxy          Current object
+     */
+    public function allowAllParser($value)
+    {
+        $this->allowAllParser = (bool) $value;
 
         return $this;
     }
@@ -95,9 +112,24 @@ class Proxy
 
             if (is_callable(array($this, $parserMethod))) {
                 $this->content = $this->$parserMethod($this->url);
-            } else {
-                // use internal by default
-                $this->content = $this->useInternalParser($this->url);
+            }
+
+            // if we allow all parser to be tested to get content, loop through all of them
+            if (false === $this->content && true === $this->allowAllParser) {
+                foreach ($this->availableParsers as $method) {
+                    // don't try the previous parser, which fails
+                    if (Inflector::camelize($this->choosenParser) == $method) {
+                        continue;
+                    }
+
+                    $parserMethod = 'use'.Inflector::camelize($method).'Parser';
+                    $this->content = $this->$parserMethod($this->url);
+
+                    // once one parser succeed, we stop
+                    if (false !== $this->content) {
+                        break;
+                    }
+                }
             }
         }
 
