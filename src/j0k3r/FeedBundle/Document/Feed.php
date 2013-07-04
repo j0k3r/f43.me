@@ -64,6 +64,11 @@ class Feed
     protected $slug;
 
     /**
+     * @MongoDB\Boolean
+     */
+    protected $is_private = false;
+
+    /**
      * @MongoDB\Date
      * @Gedmo\Timestampable(on="create")
      */
@@ -363,5 +368,27 @@ class Feed
     public function getHost()
     {
         return $this->host;
+    }
+
+    /**
+     * Set is_private
+     *
+     * @param boolean $isPrivate
+     * @return self
+     */
+    public function setIsPrivate($isPrivate)
+    {
+        $this->is_private = $isPrivate;
+        return $this;
+    }
+
+    /**
+     * Get is_private
+     *
+     * @return boolean $isPrivate
+     */
+    public function getIsPrivate()
+    {
+        return $this->is_private;
     }
 }

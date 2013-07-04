@@ -27,6 +27,7 @@ class FeedType extends AbstractType
                     'atom' => 'Atom'
                 ),
             ))
+            ->add('is_private', 'checkbox', array('required' => false))
         ;
     }
 

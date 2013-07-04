@@ -703,7 +703,7 @@
             },
             "require": {
                 "php": ">=5.3.3",
-                "symfony/framework-bundle": ">=2.0,<3.0"
+                "symfony/framework-bundle": "~2.0"
             },
             "suggest": {
                 "symfony/twig-bundle": "to use the Twig time_diff function"
@@ -1552,12 +1552,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/zurb/foundation.git",
-                "reference": "d9ecaa1a2675a6ce40b8f363061788a92676188b"
+                "reference": "67903e8269c10dfc62e69a85ff315a9a5dc7f500"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/zurb/foundation/zipball/d9ecaa1a2675a6ce40b8f363061788a92676188b",
-                "reference": "d9ecaa1a2675a6ce40b8f363061788a92676188b",
+                "url": "https://api.github.com/repos/zurb/foundation/zipball/67903e8269c10dfc62e69a85ff315a9a5dc7f500",
+                "reference": "67903e8269c10dfc62e69a85ff315a9a5dc7f500",
                 "shasum": ""
             },
             "type": "library",
@@ -1571,7 +1571,7 @@
                 "foundation",
                 "scss"
             ],
-            "time": "2013-06-28 06:28:58"
+            "time": "2013-07-04 00:26:32"
         }
     ],
     "packages-dev": [
