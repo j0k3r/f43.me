@@ -10,13 +10,15 @@ namespace j0k3r\FeedBundle\Parser;
 class HackernewsParser extends DefaultParser
 {
     /**
-     * We just append the readable content to the default content.
-     * In fact, we transform the "Comments" link, to something a bit more friendly
+     * We append the readable content to something a bit more friendly:
+     * - a link to the original article with the host as value
+     * - a link to comments on Hacker News
      */
     public function updateContent($content)
     {
         $url_parts = parse_url($this->url);
 
-        return '<p><em>Original article on <a href="'.$this->url.'">'.$url_parts['host'].'</a></em></p> '.$content;
+        // $itemContent for HackerNews feed contains only a link to the HN page with "Comments" as name
+        return '<p><em>Original article on <a href="'.$this->url.'">'.$url_parts['host'].'</a> - '.$this->itemContent.' on Hacker News</em></p> '.$content;
     }
 }
