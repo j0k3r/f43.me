@@ -3,11 +3,11 @@
 namespace j0k3r\FeedBundle\Parser;
 
 /**
- * HackernewsParser
+ * NewsYcombinatorComParser
  *
  * This class provides a custom parser for news.ycombinator.com feed
  */
-class HackernewsParser extends DefaultParser
+class NewsYcombinatorComParser extends DefaultParser
 {
     /**
      * We append the readable content to something a bit more friendly:

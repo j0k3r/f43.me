@@ -3,11 +3,11 @@
 namespace j0k3r\FeedBundle\Parser;
 
 /**
- * RedditParser
+ * RedditComParser
  *
  * This class provides a custom parser for reddit feeds
  */
-class RedditParser extends DefaultParser
+class RedditComParser extends DefaultParser
 {
     public function retrieveUrl()
     {

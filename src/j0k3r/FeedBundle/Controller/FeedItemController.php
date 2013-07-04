@@ -110,7 +110,7 @@ class FeedItemController extends Controller
         $parser = $this
             ->get('readability_proxy')
             ->setChoosenParser($request->get('parser'))
-            ->setFeedSlug($feed->getSlug());
+            ->setFeed($feed);
 
         $firstItem = $rssFeed->get_item(0);
         $content   = $parser->parseContent(

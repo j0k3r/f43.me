@@ -9,7 +9,7 @@ use TubeLink\TubeLink;
 class Proxy
 {
     protected
-        $feedSlug = null,
+        $feed = null,
         $urlApi,
         $token,
         $debug,
@@ -42,9 +42,9 @@ class Proxy
         return $this;
     }
 
-    public function setFeedSlug($slug)
+    public function setFeed($feed)
     {
-        $this->feedSlug = $slug;
+        $this->feed = $feed;
 
         return $this;
     }
@@ -78,10 +78,11 @@ class Proxy
         $customParser = new Parser\DefaultParser($url, $itemContent);
 
         // or try to find a custom one
-        if (null !== $this->feedSlug) {
+        if (null !== $this->feed) {
             // I don't know why I have to use the *full* path to test if the class exists
             // even if the current classe "use" j0k3r\FeedBundle\Parser ...
-            $customMethod = 'j0k3r\FeedBundle\Parser\\'.Inflector::classify($this->feedSlug).'Parser';
+            $name = Inflector::classify(str_replace('.', '-', $this->feed->getHost()));
+            $customMethod = 'j0k3r\FeedBundle\Parser\\'.$name.'Parser';
 
             if (class_exists($customMethod)){
                 $customParser = new $customMethod($url, $itemContent);
