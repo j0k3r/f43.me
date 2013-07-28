@@ -273,12 +273,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/mongodb-odm.git",
-                "reference": "d607bec0560f977274a818bf99d2d7f4d7f3e91b"
+                "reference": "f24c23d2e181dc2dd789ed2077ebe0c959e6a507"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/mongodb-odm/zipball/d607bec0560f977274a818bf99d2d7f4d7f3e91b",
-                "reference": "d607bec0560f977274a818bf99d2d7f4d7f3e91b",
+                "url": "https://api.github.com/repos/doctrine/mongodb-odm/zipball/f24c23d2e181dc2dd789ed2077ebe0c959e6a507",
+                "reference": "f24c23d2e181dc2dd789ed2077ebe0c959e6a507",
                 "shasum": ""
             },
             "require": {
@@ -338,7 +338,7 @@
                 "odm",
                 "persistence"
             ],
-            "time": "2013-07-02 19:15:51"
+            "time": "2013-07-17 13:49:45"
         },
         {
             "name": "doctrine/mongodb-odm-bundle",
@@ -356,11 +356,11 @@
                 "shasum": ""
             },
             "require": {
-                "doctrine/mongodb-odm": ">=1.0-beta5,<1.1",
+                "doctrine/mongodb-odm": "~1.0.0-beta5@dev",
                 "php": ">=5.3.2",
-                "symfony/doctrine-bridge": ">=2.1,<3.0",
-                "symfony/framework-bundle": ">=2.1,<3.0",
-                "symfony/options-resolver": ">=2.1,<3.0"
+                "symfony/doctrine-bridge": "~2.1",
+                "symfony/framework-bundle": "~2.1",
+                "symfony/options-resolver": "~2.1"
             },
             "require-dev": {
                 "doctrine/data-fixtures": "@dev",
@@ -416,7 +416,7 @@
             "source": {
                 "type": "git",
                 "url": "http://code.fivefilters.org/php-readability.git",
-                "reference": "e25182cdd1ccdebdce1149ab79c886eae1363674"
+                "reference": "5112edb387b53931ab9324b890fa581c0e951d2d"
             },
             "require": {
                 "php": ">=5.2"
@@ -454,7 +454,7 @@
                 "extraction",
                 "html"
             ],
-            "time": "2013-04-17 13:51:09"
+            "time": "2013-07-17 15:41:33"
         },
         {
             "name": "gedmo/doctrine-extensions",
@@ -747,21 +747,21 @@
         },
         {
             "name": "kriswallsmith/assetic",
-            "version": "v1.1.1",
+            "version": "v1.1.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/kriswallsmith/assetic.git",
-                "reference": "v1.1.1"
+                "reference": "v1.1.2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/kriswallsmith/assetic/zipball/v1.1.1",
-                "reference": "v1.1.1",
+                "url": "https://api.github.com/repos/kriswallsmith/assetic/zipball/v1.1.2",
+                "reference": "v1.1.2",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.3.1",
-                "symfony/process": ">=2.1,<3.0"
+                "symfony/process": "~2.1"
             },
             "require-dev": {
                 "cssmin/cssmin": "*",
@@ -771,9 +771,9 @@
                 "leafo/scssphp": "*",
                 "leafo/scssphp-compass": "*",
                 "mrclay/minify": "*",
-                "phpunit/phpunit": ">=3.7,<4.0",
+                "phpunit/phpunit": "~3.7",
                 "ptachoire/cssembed": "*",
-                "twig/twig": ">=1.6,<2.0"
+                "twig/twig": "~1.6"
             },
             "suggest": {
                 "leafo/lessphp": "Assetic provides the integration with the lessphp LESS compiler",
@@ -814,7 +814,7 @@
                 "compression",
                 "minification"
             ],
-            "time": "2013-06-01 22:13:43"
+            "time": "2013-07-19 00:03:27"
         },
         {
             "name": "monolog/monolog",
@@ -918,21 +918,21 @@
         },
         {
             "name": "sensio/distribution-bundle",
-            "version": "v2.3.1",
+            "version": "v2.3.2",
             "target-dir": "Sensio/Bundle/DistributionBundle",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sensiolabs/SensioDistributionBundle.git",
-                "reference": "v2.3.1"
+                "reference": "v2.3.2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sensiolabs/SensioDistributionBundle/zipball/v2.3.1",
-                "reference": "v2.3.1",
+                "url": "https://api.github.com/repos/sensiolabs/SensioDistributionBundle/zipball/v2.3.2",
+                "reference": "v2.3.2",
                 "shasum": ""
             },
             "require": {
-                "symfony/framework-bundle": ">=2.2,<3.0"
+                "symfony/framework-bundle": "~2.2"
             },
             "type": "symfony-bundle",
             "extra": {
@@ -960,26 +960,26 @@
                 "configuration",
                 "distribution"
             ],
-            "time": "2013-05-30 16:15:25"
+            "time": "2013-07-17 06:24:17"
         },
         {
             "name": "sensio/framework-extra-bundle",
-            "version": "v2.3.1",
+            "version": "v2.3.2",
             "target-dir": "Sensio/Bundle/FrameworkExtraBundle",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sensiolabs/SensioFrameworkExtraBundle.git",
-                "reference": "v2.3.1"
+                "reference": "v2.3.2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sensiolabs/SensioFrameworkExtraBundle/zipball/v2.3.1",
-                "reference": "v2.3.1",
+                "url": "https://api.github.com/repos/sensiolabs/SensioFrameworkExtraBundle/zipball/v2.3.2",
+                "reference": "v2.3.2",
                 "shasum": ""
             },
             "require": {
-                "doctrine/common": ">=2.2,<3.0",
-                "symfony/framework-bundle": ">=2.2,<3.0"
+                "doctrine/common": "~2.2",
+                "symfony/framework-bundle": "~2.2"
             },
             "type": "symfony-bundle",
             "extra": {
@@ -1007,31 +1007,31 @@
                 "annotations",
                 "controllers"
             ],
-            "time": "2013-06-02 16:13:20"
+            "time": "2013-07-09 09:29:53"
         },
         {
             "name": "sensio/generator-bundle",
-            "version": "v2.3.1",
+            "version": "v2.3.2",
             "target-dir": "Sensio/Bundle/GeneratorBundle",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sensiolabs/SensioGeneratorBundle.git",
-                "reference": "v2.3.1"
+                "reference": "v2.3.2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sensiolabs/SensioGeneratorBundle/zipball/v2.3.1",
-                "reference": "v2.3.1",
+                "url": "https://api.github.com/repos/sensiolabs/SensioGeneratorBundle/zipball/v2.3.2",
+                "reference": "v2.3.2",
                 "shasum": ""
             },
             "require": {
-                "symfony/console": ">=2.0,<3.0",
-                "symfony/framework-bundle": ">=2.2,<3.0"
+                "symfony/console": "~2.0",
+                "symfony/framework-bundle": "~2.2"
             },
             "require-dev": {
-                "doctrine/orm": ">=2.2,<3.0,>=2.2.3",
-                "symfony/doctrine-bridge": ">=2.2,<3.0",
-                "twig/twig": ">=1.11.0,<2.0"
+                "doctrine/orm": "~2.2,>=2.2.3",
+                "symfony/doctrine-bridge": "~2.2",
+                "twig/twig": "~1.11"
             },
             "type": "symfony-bundle",
             "extra": {
@@ -1055,7 +1055,7 @@
                 }
             ],
             "description": "This bundle generates code for you",
-            "time": "2013-06-05 17:32:22"
+            "time": "2013-07-04 12:20:59"
         },
         {
             "name": "simplepie/simplepie",
@@ -1344,24 +1344,24 @@
         },
         {
             "name": "symfony/symfony",
-            "version": "v2.3.1",
+            "version": "v2.3.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/symfony.git",
-                "reference": "v2.3.1"
+                "reference": "v2.3.2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/symfony/zipball/v2.3.1",
-                "reference": "v2.3.1",
+                "url": "https://api.github.com/repos/symfony/symfony/zipball/v2.3.2",
+                "reference": "v2.3.2",
                 "shasum": ""
             },
             "require": {
-                "doctrine/common": ">=2.2,<3.0",
+                "doctrine/common": "~2.2",
                 "php": ">=5.3.3",
-                "psr/log": ">=1.0,<2.0",
-                "symfony/icu": ">=1.0,<2.0",
-                "twig/twig": ">=1.11.0,<2.0"
+                "psr/log": "~1.0",
+                "symfony/icu": "~1.0",
+                "twig/twig": "~1.11"
             },
             "replace": {
                 "symfony/browser-kit": "self.version",
@@ -1404,10 +1404,10 @@
             },
             "require-dev": {
                 "doctrine/data-fixtures": "1.0.*",
-                "doctrine/dbal": ">=2.2,<3.0",
-                "doctrine/orm": ">=2.2,<3.0,>=2.2.3",
+                "doctrine/dbal": "~2.2",
+                "doctrine/orm": "~2.2,>=2.2.3",
                 "ircmaxell/password-compat": "1.0.*",
-                "monolog/monolog": ">=1.3,<2.0",
+                "monolog/monolog": "~1.3",
                 "ocramius/proxy-manager": ">=0.3.1,<0.4-dev",
                 "propel/propel1": "1.6.*"
             },
@@ -1448,7 +1448,7 @@
             "keywords": [
                 "framework"
             ],
-            "time": "2013-06-11 11:46:38"
+            "time": "2013-07-17 06:22:21"
         },
         {
             "name": "twig/extensions",
@@ -1552,12 +1552,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/zurb/foundation.git",
-                "reference": "67903e8269c10dfc62e69a85ff315a9a5dc7f500"
+                "reference": "805e0a77b3055514b8314dd2ccc907e850e202c1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/zurb/foundation/zipball/67903e8269c10dfc62e69a85ff315a9a5dc7f500",
-                "reference": "67903e8269c10dfc62e69a85ff315a9a5dc7f500",
+                "url": "https://api.github.com/repos/zurb/foundation/zipball/805e0a77b3055514b8314dd2ccc907e850e202c1",
+                "reference": "805e0a77b3055514b8314dd2ccc907e850e202c1",
                 "shasum": ""
             },
             "type": "library",
@@ -1571,7 +1571,7 @@
                 "foundation",
                 "scss"
             ],
-            "time": "2013-07-04 00:26:32"
+            "time": "2013-07-25 20:25:37"
         }
     ],
     "packages-dev": [
