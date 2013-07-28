@@ -47,7 +47,7 @@ class FeedItemSubscriber
 
         $ch = curl_init();
         curl_setopt_array($ch, $options);
-        $response = curl_exec($ch);
+        curl_exec($ch);
 
         // receive the response
         $info = curl_getinfo($ch);

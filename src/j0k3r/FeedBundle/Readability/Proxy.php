@@ -185,7 +185,6 @@ class Proxy
         // Extract headers from content
         preg_match_all($pattern, $content, $matches);
         $headers_string = array_pop($matches[0]);
-        $headers = explode("\r\n", str_replace("\r\n\r\n", '', $headers_string));
 
         // Inlude all received headers in the $headers_string
         while (count($matches[0])) {

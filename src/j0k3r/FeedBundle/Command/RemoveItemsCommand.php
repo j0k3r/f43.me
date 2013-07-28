@@ -44,7 +44,6 @@ class RemoveItemsCommand extends BaseFeedCommand
         $dm           = $container->get('doctrine.odm.mongodb.document_manager');
         $feedRepo     = $dm->getRepository('j0k3rFeedBundle:Feed');
         $feedItemRepo = $dm->getRepository('j0k3rFeedBundle:FeedItem');
-        $progress     = $this->getHelperSet()->get('progress');
 
         // retrieve feed to work on
         if ($slug = $input->getOption('slug')) {
