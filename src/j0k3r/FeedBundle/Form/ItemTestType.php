@@ -4,7 +4,6 @@ namespace j0k3r\FeedBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 class ItemTestType extends AbstractType
 {

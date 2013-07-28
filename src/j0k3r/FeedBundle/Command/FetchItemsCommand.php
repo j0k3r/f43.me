@@ -2,15 +2,12 @@
 
 namespace j0k3r\FeedBundle\Command;
 
-use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
-use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 
 use j0k3r\FeedBundle\Document\Feed;
 use j0k3r\FeedBundle\Document\FeedItem;
-use j0k3r\FeedBundle\Document\FeedLog;
 use j0k3r\FeedBundle\Event\FeedItemEvent;
 use j0k3r\FeedBundle\j0k3rFeedEvents;
 
