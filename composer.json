@@ -1,6 +1,7 @@
 {
     "name": "j0k3r/f43",
     "description": "More readable & cleaner feed",
+    "license": "MIT",
     "autoload": {
         "psr-0": { "": "src/" }
     },
