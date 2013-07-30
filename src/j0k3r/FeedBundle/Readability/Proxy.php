@@ -92,44 +92,26 @@ class Proxy
         // retrieve custom url ?
         $this->url = $customParser->retrieveUrl();
 
-        // is it a video?
-        try {
-            $video = TubeLink::create()->parse(htmlspecialchars_decode($this->url));
-        } catch (\TubeLink\Exception\ServiceNotFoundException $e) {
-            $video = false;
+        $parserMethod = 'use'.Inflector::camelize($this->choosenParser).'Parser';
+
+        if (is_callable(array($this, $parserMethod))) {
+            $this->content = $this->$parserMethod($this->url);
         }
 
-        // don't try to make binary file readable
-        if (preg_match('/\.(pdf|doc|ppt)$/i', $this->url)) {
-            $this->content = false;
-        }
-        // if content is an image or a video, just return it instead of trying to make it readable
-        else if (preg_match('/\.(jpe?g|gif|png)$/i', $this->url)) {
-            $this->content = '<img src="'.$this->url.'" />';
-        } elseif (false !== $video) {
-            $this->content = $video->render();
-        } else {
-            $parserMethod = 'use'.Inflector::camelize($this->choosenParser).'Parser';
+        // if we allow all parser to be tested to get content, loop through all of them
+        if (false === $this->content && true === $this->allowAllParser) {
+            foreach ($this->availableParsers as $method) {
+                // don't try the previous parser, which fails
+                if (Inflector::camelize($this->choosenParser) == $method) {
+                    continue;
+                }
 
-            if (is_callable(array($this, $parserMethod))) {
+                $parserMethod = 'use'.Inflector::camelize($method).'Parser';
                 $this->content = $this->$parserMethod($this->url);
-            }
 
-            // if we allow all parser to be tested to get content, loop through all of them
-            if (false === $this->content && true === $this->allowAllParser) {
-                foreach ($this->availableParsers as $method) {
-                    // don't try the previous parser, which fails
-                    if (Inflector::camelize($this->choosenParser) == $method) {
-                        continue;
-                    }
-
-                    $parserMethod = 'use'.Inflector::camelize($method).'Parser';
-                    $this->content = $this->$parserMethod($this->url);
-
-                    // once one parser succeed, we stop
-                    if (false !== $this->content) {
-                        break;
-                    }
+                // once one parser succeed, we stop
+                if (false !== $this->content) {
+                    break;
                 }
             }
         }
@@ -159,6 +141,15 @@ class Proxy
      */
     private function useInternalParser($url)
     {
+        // If it's a video, just return an embed html content
+        try {
+            return TubeLink::create()
+                ->parse(htmlspecialchars_decode($url))
+                ->render();
+        } catch (\TubeLink\Exception\ServiceNotFoundException $e) {
+            // it means it's not a video, let's try other content !
+        }
+
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $url);
         curl_setopt($ch, CURLOPT_HEADER, true);
@@ -168,7 +159,23 @@ class Proxy
         curl_close($ch);
 
         // save information about gzip content for later decoding
-        $is_gziped = (bool) strripos($content, "Content-Encoding: gzip");
+        $is_gziped = (bool) strripos($content, 'Content-Encoding: gzip');
+
+        // determine if it's a binary file. In that case, handle it differently
+        if (!strripos($content, 'Content-type: text')) {
+            $cTypePos = strripos($content, 'Content-type: ') + strlen('Content-type: ');
+            $length   = (strpos($content, "\n", $cTypePos) !== false) ? strpos($content, "\n", $cTypePos) - $cTypePos : '';
+            $mimeType = trim(substr($content, $cTypePos, $length));
+
+            // if content is an image, just return it
+            if (preg_match('/(jpe?g|gif|png)$/i', $mimeType)) {
+                return '<img src="'.$url.'" />';
+            }
+
+            // if it's not an image, we don't know how to render it
+            // so we act that we can't make it readable
+            return false;
+        }
 
         $location = $url;
         // find last occurence of "Location: h" to be sure it isn't a local redirect (like /new_location)
@@ -181,21 +188,7 @@ class Proxy
         // remove utm parameters & fragment
         $this->url = preg_replace('/(&?utm_(.*?)\=[^&]+)|(#(.*?)\=[^&]+)/', '', html_entity_decode($location));
 
-        // Remove headers (once the url has been extract)
-        // grabbed from: https://github.com/hugochinchilla/curl/blob/e6b1a1277f41b95f8247ff690873f3194194194f/lib/curl_response.php#L38-52
-        $pattern = '#HTTP/\d\.\d.*?$.*?\r\n\r\n#ims';
-
-        // Extract headers from content
-        preg_match_all($pattern, $content, $matches);
-        $headers_string = array_pop($matches[0]);
-
-        // Inlude all received headers in the $headers_string
-        while (count($matches[0])) {
-          $headers_string = array_pop($matches[0]).$headers_string;
-        }
-
-        // Remove all headers from the response body
-        $content = str_replace($headers_string, '', $content);
+        $content = $this->removeHeader($content);
 
         // decode gzip content (most of the time it's a Tumblr website)
         if (true === $is_gziped) {
@@ -262,5 +255,29 @@ class Proxy
         }
 
         return false;
+    }
+
+    /**
+     * Remove headers (once the url has been extract)
+     * Grabbed from: https://github.com/hugochinchilla/curl/blob/e6b1a1277f41b95f8247ff690873f3194194194f/lib/curl_response.php#L38-52
+     *
+     * @param  string   $content Content with header
+     *
+     * @return string
+     */
+    private function removeHeader($content) {
+        $pattern = '#HTTP/\d\.\d.*?$.*?\r\n\r\n#ims';
+
+        // Extract headers from content
+        preg_match_all($pattern, $content, $matches);
+        $headers_string = array_pop($matches[0]);
+
+        // Inlude all received headers in the $headers_string
+        while (count($matches[0])) {
+          $headers_string = array_pop($matches[0]).$headers_string;
+        }
+
+        // Remove all headers from the response body
+        return str_replace($headers_string, '', $content);
     }
 }
