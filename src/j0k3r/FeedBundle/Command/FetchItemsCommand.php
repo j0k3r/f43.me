@@ -18,7 +18,7 @@ class FetchItemsCommand extends BaseFeedCommand
         $this
             ->setName('feed:fetch-items')
             ->setDescription('Fetch items from feed to cache them')
-            ->addOption('age', null, InputOption::VALUE_NONE, '`old` to fetch old feed or `new` to fetch recent feed with no item')
+            ->addOption('age', null, InputOption::VALUE_OPTIONAL, '`old` to fetch old feed or `new` to fetch recent feed with no item')
             ->addOption('slug', null, InputOption::VALUE_OPTIONAL, 'To fetch item for one particulat feed (using its slug)')
             ->addOption('with-trace', 't', InputOption::VALUE_NONE, 'Display debug')
         ;
