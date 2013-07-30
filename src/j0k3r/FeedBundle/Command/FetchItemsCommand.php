@@ -8,6 +8,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 use j0k3r\FeedBundle\Document\Feed;
 use j0k3r\FeedBundle\Document\FeedItem;
+use j0k3r\FeedBundle\Document\FeedLog;
 use j0k3r\FeedBundle\Event\FeedItemEvent;
 use j0k3r\FeedBundle\j0k3rFeedEvents;
 
@@ -151,7 +152,7 @@ class FetchItemsCommand extends BaseFeedCommand
 
                 $totalCached += $cached;
 
-                $feedLog = new feedLog();
+                $feedLog = new FeedLog();
                 $feedLog->setItemsNumber($cached);
                 $feedLog->setFeed($feed);
 
