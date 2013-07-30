@@ -167,9 +167,12 @@ class Proxy
         $content = curl_exec($ch);
         curl_close($ch);
 
+        // save information about gzip content for later decoding
+        $is_gziped = (bool) strripos($content, "Content-Encoding: gzip");
+
         $location = $url;
         // find last occurence of "Location: h" to be sure it isn't a local redirect (like /new_location)
-        if ($content != null && ($location_raw = strripos($content, "Location: h")) !== false ) {
+        if ($content != null && ($location_raw = strripos($content, "Location: h")) !== false) {
             $location_raw += strlen("Location: h");
             $length       = (strpos($content, "\n", $location_raw) !== false) ? strpos($content, "\n", $location_raw) - $location_raw : '';
             $location     = 'h'.trim(substr($content, $location_raw, $length));
@@ -193,6 +196,11 @@ class Proxy
 
         // Remove all headers from the response body
         $content = str_replace($headers_string, '', $content);
+
+        // decode gzip content (most of the time it's a Tumblr website)
+        if (true === $is_gziped) {
+            $content = gzdecode($content);
+        }
 
         // Convert encoding since Readability accept only UTF-8
         if ('UTF-8' != mb_detect_encoding($content, mb_detect_order(), true)) {
