@@ -158,6 +158,11 @@ class Proxy
         $content = curl_exec($ch);
         curl_close($ch);
 
+        // curl failed to retrieve content (dead link, etc ..)
+        if (false === $content) {
+            return false;
+        }
+
         // save information about gzip content for later decoding
         $is_gziped = (bool) strripos($content, 'Content-Encoding: gzip');
 
