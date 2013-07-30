@@ -192,7 +192,7 @@ class Proxy
 
         // decode gzip content (most of the time it's a Tumblr website)
         if (true === $is_gziped) {
-            $content = gzdecode($content);
+            $content = $this->gzdecode($content);
         }
 
         // Convert encoding since Readability accept only UTF-8
@@ -265,7 +265,8 @@ class Proxy
      *
      * @return string
      */
-    private function removeHeader($content) {
+    private function removeHeader($content)
+    {
         $pattern = '#HTTP/\d\.\d.*?$.*?\r\n\r\n#ims';
 
         // Extract headers from content
@@ -279,5 +280,22 @@ class Proxy
 
         // Remove all headers from the response body
         return str_replace($headers_string, '', $content);
+    }
+
+    /**
+     * Emulate gzdecode function that is available only for PHP >= 5.4
+     */
+    private function gzdecode($data)
+    {
+        if (function_exists('gzencode')) {
+            return \gzencode($data);
+        }
+
+        $g = tempnam('/tmp', 'ff');
+        @file_put_contents($g, $data);
+        ob_start();
+        readgzfile($g);
+
+        return ob_get_clean();
     }
 }
