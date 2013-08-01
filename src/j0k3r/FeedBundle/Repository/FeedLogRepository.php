@@ -15,7 +15,7 @@ class FeedLogRepository extends DocumentRepository
     /**
      * Find all logs ordered by id desc
      *
-     * @param  integer   $limit Items to retrieve
+     * @param integer $limit Items to retrieve
      *
      * @return Doctrine\ODM\MongoDB\EagerCursor
      */
@@ -35,9 +35,9 @@ class FeedLogRepository extends DocumentRepository
     /**
      * Get the base query to fetch items
      *
-     * @param  string   $feedId     Feed id
-     * @param  int      $limit      Number of items to return
-     * @param  int      $skip       Item to skip before applying the limit
+     * @param string $feedId Feed id
+     * @param int    $limit  Number of items to return
+     * @param int    $skip   Item to skip before applying the limit
      *
      * @return Doctrine\ODM\MongoDB\Query\Query
      */
@@ -61,7 +61,7 @@ class FeedLogRepository extends DocumentRepository
     /**
      * Find all logs for a given Feed id
      *
-     * @param  int   $feedId Feed id
+     * @param int $feedId Feed id
      *
      * @return Doctrine\ODM\MongoDB\LoggableCursor
      */
@@ -74,7 +74,7 @@ class FeedLogRepository extends DocumentRepository
     /**
      * Retrieve the last log for a given Feed id
      *
-     * @param  int   $feedId Feed id
+     * @param int $feedId Feed id
      *
      * @return j0k3r\FeedBundle\Document\FeedLog
      */
@@ -93,7 +93,7 @@ class FeedLogRepository extends DocumentRepository
      *     '11/6/2013' => 55,
      *   )
      *
-     * @param  integer  $limit Limit of results to show in the dashboard chart
+     * @param integer $limit Limit of results to show in the dashboard chart
      *
      * @return Array
      */
@@ -133,7 +133,7 @@ class FeedLogRepository extends DocumentRepository
     /**
      * Remove all logs associated to the given Feed id
      *
-     * @param  int   $feedId Feed id
+     * @param int $feedId Feed id
      *
      * @return array (with key 'n' as number of row affected)
      */

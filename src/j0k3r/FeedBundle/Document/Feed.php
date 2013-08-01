@@ -103,12 +103,13 @@ class Feed
     /**
      * Set name
      *
-     * @param string $name
+     * @param  string $name
      * @return self
      */
     public function setName($name)
     {
         $this->name = $name;
+
         return $this;
     }
 
@@ -125,12 +126,13 @@ class Feed
     /**
      * Set description
      *
-     * @param string $description
+     * @param  string $description
      * @return self
      */
     public function setDescription($description)
     {
         $this->description = $description;
+
         return $this;
     }
 
@@ -147,12 +149,13 @@ class Feed
     /**
      * Set link
      *
-     * @param string $link
+     * @param  string $link
      * @return self
      */
     public function setLink($link)
     {
         $this->link = $link;
+
         return $this;
     }
 
@@ -169,12 +172,13 @@ class Feed
     /**
      * Set created_at
      *
-     * @param date $createdAt
+     * @param  date $createdAt
      * @return self
      */
     public function setCreatedAt($createdAt)
     {
         $this->created_at = $createdAt;
+
         return $this;
     }
 
@@ -191,12 +195,13 @@ class Feed
     /**
      * Set updated_at
      *
-     * @param date $updatedAt
+     * @param  date $updatedAt
      * @return self
      */
     public function setUpdatedAt($updatedAt)
     {
         $this->updated_at = $updatedAt;
+
         return $this;
     }
 
@@ -213,12 +218,13 @@ class Feed
     /**
      * Set slug
      *
-     * @param string $slug
+     * @param  string $slug
      * @return self
      */
     public function setSlug($slug)
     {
         $this->slug = $slug;
+
         return $this;
     }
 
@@ -270,12 +276,13 @@ class Feed
     /**
      * Set parser
      *
-     * @param string $parser
+     * @param  string $parser
      * @return self
      */
     public function setParser($parser)
     {
         $this->parser = $parser;
+
         return $this;
     }
 
@@ -322,12 +329,13 @@ class Feed
     /**
      * Set formatter
      *
-     * @param string $formatter
+     * @param  string $formatter
      * @return self
      */
     public function setFormatter($formatter)
     {
         $this->formatter = $formatter;
+
         return $this;
     }
 
@@ -344,7 +352,7 @@ class Feed
     /**
      * Set host
      *
-     * @param string $host
+     * @param  string $host
      * @return self
      */
     public function setHost($host)
@@ -357,6 +365,7 @@ class Feed
         }
 
         $this->host = $host;
+
         return $this;
     }
 
@@ -373,12 +382,13 @@ class Feed
     /**
      * Set is_private
      *
-     * @param boolean $isPrivate
+     * @param  boolean $isPrivate
      * @return self
      */
     public function setIsPrivate($isPrivate)
     {
         $this->is_private = $isPrivate;
+
         return $this;
     }
 

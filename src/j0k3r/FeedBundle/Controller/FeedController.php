@@ -223,7 +223,7 @@ class FeedController extends Controller
      * Deletes a Feed document.
      *
      * @param Request $request The request object
-     * @param string $slug     The document Slug
+     * @param string  $slug    The document Slug
      *
      * @return array
      *

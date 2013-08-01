@@ -53,9 +53,9 @@ class Proxy
      * Define if we have to use all *known* parser to get the content if the defined one failed.
      * For example, Internal parser can't make content readable, it will use the External one, etc ..
      *
-     * @param  bool   $value
+     * @param bool $value
      *
-     * @return \Proxy          Current object
+     * @return \Proxy Current object
      */
     public function allowAllParser($value)
     {
@@ -67,8 +67,8 @@ class Proxy
     /**
      * Try to retrieve content from a given url
      *
-     * @param  string   $url             RSS item url
-     * @param  string   $itemContent     RSS item content, which will be taken if we can't extract content from url
+     * @param string $url         RSS item url
+     * @param string $itemContent RSS item content, which will be taken if we can't extract content from url
      *
      * @return string
      */
@@ -84,7 +84,7 @@ class Proxy
             $name = Inflector::classify(str_replace('.', '-', $this->feed->getHost()));
             $customMethod = 'j0k3r\FeedBundle\Parser\\'.$name.'Parser';
 
-            if (class_exists($customMethod)){
+            if (class_exists($customMethod)) {
                 $customParser = new $customMethod($url, $itemContent);
             }
         }
@@ -135,7 +135,7 @@ class Proxy
      * First step is to retrieve the real url, thanks to `CURLOPT_FOLLOWLOCATION`
      * @source http://link.chrislaskey.com/?source=true
      *
-     * @param  string   $content
+     * @param string $content
      *
      * @return string
      */
@@ -236,7 +236,7 @@ class Proxy
      * Retrieve content from an external webservice.
      * In this case, we use the excellent Readability web service: https://www.readability.com/developers/api/parser
      *
-     * @param  string   $url
+     * @param string $url
      *
      * @return string
      */
@@ -252,6 +252,7 @@ class Proxy
 
         if (isset($html->content)) {
             $this->url = $html->url;
+
             return $html->content;
         }
 
@@ -266,7 +267,7 @@ class Proxy
      * Remove headers (once the url has been extract)
      * Grabbed from: https://github.com/hugochinchilla/curl/blob/e6b1a1277f41b95f8247ff690873f3194194194f/lib/curl_response.php#L38-52
      *
-     * @param  string   $content Content with header
+     * @param string $content Content with header
      *
      * @return string
      */

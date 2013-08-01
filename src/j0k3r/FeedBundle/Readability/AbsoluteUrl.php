@@ -69,14 +69,14 @@ class AbsoluteUrl
      *  URLs, or false if the base URL is not absolute or if either
      *  URL cannot be parsed.
      */
-    function url_to_absolute($baseUrl, $relativeUrl) {
+    public function url_to_absolute($baseUrl, $relativeUrl)
+    {
         // If relative URL has a scheme, clean path and return.
         $r = $this->split_url($relativeUrl);
         if ($r === false)
             return false;
 
-        if (!empty($r['scheme']))
-        {
+        if (!empty($r['scheme'])) {
             if (!empty($r['path'] ) && $r['path'][0] == '/')
                 $r['path'] = $this->url_remove_dot_segments($r['path']);
 
@@ -94,6 +94,7 @@ class AbsoluteUrl
         if (isset($r['host'])) {
             if (!empty($r['path']))
                 $r['path'] = $this->url_remove_dot_segments($r['path']);
+
             return $this->join_url($r);
         }
         unset($r['port']);
@@ -112,6 +113,7 @@ class AbsoluteUrl
                 $r['path'] = $b['path'];
             if (!isset($r['query'] ) && isset($b['query']))
                 $r['query'] = $b['query'];
+
             return $this->join_url($r);
         }
 
@@ -143,7 +145,8 @@ class AbsoluteUrl
      * Return values:
      *  The filtered path with "." and ".." removed.
      */
-    function url_remove_dot_segments($path) {
+    public function url_remove_dot_segments($path)
+    {
         // multi-byte character explode
         $inSegs  = preg_split( '!/!u', $path);
         $outSegs = array();
@@ -257,7 +260,8 @@ class AbsoluteUrl
      *  the associative array of URL parts, or false if the URL is
      *  too malformed to recognize any parts.
      */
-    function split_url($url, $decode=false) {
+    public function split_url($url, $decode=false)
+    {
         $parts = null;
         // Character sets from RFC3986.
         $xunressub     = 'a-zA-Z\d\-._~\!$&\'()*+,;=';
@@ -390,7 +394,8 @@ class AbsoluteUrl
      *  empty string is returned if the $parts array does not contain
      *  any of the needed values.
      */
-    function join_url($parts, $encode=false) {
+    public function join_url($parts, $encode=false)
+    {
         if ($encode) {
             if (isset($parts['user']))
                 $parts['user']     = rawurlencode($parts['user']);
@@ -455,7 +460,8 @@ class AbsoluteUrl
      * Return values:
      *  Returns the encoded URL string.
      */
-    function encode_url($url) {
+    public function encode_url($url)
+    {
       $reserved = array(
         ":" => '!%3A!ui',
         "/" => '!%2F!ui',

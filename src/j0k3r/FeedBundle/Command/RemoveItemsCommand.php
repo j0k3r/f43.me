@@ -30,6 +30,7 @@ class RemoveItemsCommand extends BaseFeedCommand
             $dialog = $this->getHelperSet()->get('dialog');
             if (!$dialog->askConfirmation($output, '<question>You will remove ALL items, are your sure?</question>', false)) {
                 $this->unlockCommand();
+
                 return $output->writeLn("<comment>You *almost* remove every thing from your database, pfiou !</comment> Be sure to define a <comment>max</comment> option greater than 0.");
             }
         }
@@ -44,6 +45,7 @@ class RemoveItemsCommand extends BaseFeedCommand
             $feed = $feedRepo->findOneBySlug($slug);
             if (!$feed) {
                 $this->unlockCommand();
+
                 return $output->writeLn("<error>Unable to find Feed document:</error> <comment>".$slug."</comment>");
             }
             $feeds = array($feed);

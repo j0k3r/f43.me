@@ -18,8 +18,8 @@ class FeedItemSubscriber
      *
      * http://nathangrigg.net/2012/09/real-time-publishing/
      *
-     * @param   FeedItemEvent $event
-     * @return  true/false
+     * @param  FeedItemEvent $event
+     * @return true/false
      */
     public function pingHub(FeedItemEvent $event)
     {
@@ -57,6 +57,7 @@ class FeedItemSubscriber
             // hub doesn't respond correctly, do something ?
             return false;
         }
+
         return true;
     }
 }

@@ -47,6 +47,7 @@ class FetchItemsCommand extends BaseFeedCommand
             $feed = $feedRepo->findOneBySlug($slug);
             if (!$feed) {
                 $this->unlockCommand();
+
                 return $output->writeLn("<error>Unable to find Feed document:</error> <comment>".$slug."</comment>");
             }
             $feeds = array($feed);
@@ -64,6 +65,7 @@ class FetchItemsCommand extends BaseFeedCommand
             }
         } else {
             $this->unlockCommand();
+
             return $output->writeLn("<error>You must add some options to the task :</error> an <comment>age</comment> or a <comment>slug</comment>");
         }
 

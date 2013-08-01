@@ -14,8 +14,8 @@ class DefaultParser
 
     /**
      *
-     * @param  string   $itemContent RSS item content
-     * @param  string   $url         RSS item url
+     * @param string $itemContent RSS item content
+     * @param string $url         RSS item url
      */
     public function __construct($url, $itemContent)
     {
@@ -29,7 +29,7 @@ class DefaultParser
      * Could be the case for Reddit (retrieving the [link] url instead of the Reddit one)
      *
      *
-     * @return string  Url to be used to retrieve content
+     * @return string Url to be used to retrieve content
      */
     public function retrieveUrl()
     {
@@ -40,7 +40,7 @@ class DefaultParser
      * Further action to be done on the readable content.
      * For example, it may be added to the item content.
      *
-     * @param  string   $content Readable item content
+     * @param string $content Readable item content
      *
      * @return string
      */

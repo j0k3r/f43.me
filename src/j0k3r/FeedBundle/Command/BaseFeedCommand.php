@@ -13,7 +13,7 @@ abstract class BaseFeedCommand extends ContainerAwareCommand
      * Lock command using given option as "lock file".
      * We also write the date inside the lock file
      *
-     * @param  array   $options
+     * @param array $options
      *
      * @return true/false
      */

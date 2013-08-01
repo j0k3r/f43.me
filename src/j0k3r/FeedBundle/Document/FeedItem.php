@@ -78,12 +78,13 @@ class FeedItem
     /**
      * Set title
      *
-     * @param string $title
+     * @param  string $title
      * @return self
      */
     public function setTitle($title)
     {
         $this->title = $title;
+
         return $this;
     }
 
@@ -100,12 +101,13 @@ class FeedItem
     /**
      * Set link
      *
-     * @param string $link
+     * @param  string $link
      * @return self
      */
     public function setLink($link)
     {
         $this->link = $link;
+
         return $this;
     }
 
@@ -122,12 +124,13 @@ class FeedItem
     /**
      * Set content
      *
-     * @param string $content
+     * @param  string $content
      * @return self
      */
     public function setContent($content)
     {
         $this->content = $content;
+
         return $this;
     }
 
@@ -144,12 +147,13 @@ class FeedItem
     /**
      * Set created_at
      *
-     * @param date $createdAt
+     * @param  date $createdAt
      * @return self
      */
     public function setCreatedAt($createdAt)
     {
         $this->created_at = $createdAt;
+
         return $this;
     }
 
@@ -166,12 +170,13 @@ class FeedItem
     /**
      * Set updated_at
      *
-     * @param date $updatedAt
+     * @param  date $updatedAt
      * @return self
      */
     public function setUpdatedAt($updatedAt)
     {
         $this->updated_at = $updatedAt;
+
         return $this;
     }
 
@@ -188,12 +193,13 @@ class FeedItem
     /**
      * Set permalink
      *
-     * @param string $permalink
+     * @param  string $permalink
      * @return self
      */
     public function setPermalink($permalink)
     {
         $this->permalink = $permalink;
+
         return $this;
     }
 
@@ -210,12 +216,13 @@ class FeedItem
     /**
      * Set feed
      *
-     * @param j0k3r\FeedBundle\Document\Feed $feed
+     * @param  j0k3r\FeedBundle\Document\Feed $feed
      * @return self
      */
     public function setFeed(\j0k3r\FeedBundle\Document\Feed $feed)
     {
         $this->feed = $feed;
+
         return $this;
     }
 
@@ -232,12 +239,13 @@ class FeedItem
     /**
      * Set published_at
      *
-     * @param date $publishedAt
+     * @param  date $publishedAt
      * @return self
      */
     public function setPublishedAt($publishedAt)
     {
         $this->published_at = $publishedAt;
+
         return $this;
     }
 

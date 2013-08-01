@@ -23,7 +23,7 @@ class RssRender
     /**
      * Render the feed in specified format
      *
-     * @param Feed  $feed  Feed to render
+     * @param Feed $feed Feed to render
      *
      * @return string
      *

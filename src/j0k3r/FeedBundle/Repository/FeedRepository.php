@@ -15,7 +15,7 @@ class FeedRepository extends DocumentRepository
     /**
      * Find feeds ordered by updated date
      *
-     * @param  integer   $limit Items to retrieve
+     * @param integer $limit Items to retrieve
      *
      * @return Doctrine\ODM\MongoDB\EagerCursor
      */
@@ -51,8 +51,8 @@ class FeedRepository extends DocumentRepository
      * Find feed by ids.
      * Used in FetchItemCommand to retrieve feed that have / or not items
      *
-     * @param  Array    $ids   An array of MongoID
-     * @param  string   $type  in or notIn
+     * @param Array  $ids  An array of MongoID
+     * @param string $type in or notIn
      *
      * @return Doctrine\ODM\MongoDB\EagerCursor
      */
@@ -61,8 +61,7 @@ class FeedRepository extends DocumentRepository
         $q = $this->createQueryBuilder()
             ->field('id');
 
-        switch ($type)
-        {
+        switch ($type) {
             case 'in':
                 $q->in($ids);
                 break;

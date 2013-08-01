@@ -80,8 +80,8 @@ class Formatter
     /**
      * Format field
      *
-     * @param array      $field A field instance
-     * @param FeedItem   $item  An entity instance
+     * @param array    $field A field instance
+     * @param FeedItem $item  An entity instance
      *
      * @return string
      */
@@ -96,7 +96,7 @@ class Formatter
 
             $element = $this->dom->createElement($name);
             $element->appendChild($value);
-        } else if (isset($field['attribute'])) {
+        } elseif (isset($field['attribute'])) {
             $element = $this->dom->createElement($name);
             $element->setAttribute($field['attribute'], $item->getLink());
         } else {
@@ -130,9 +130,9 @@ class Formatter
     /**
      * Add an entity item to the feed
      *
-     * @param \DOMElement   $root The root (feed) DOM element
-     * @param FeedItem      $item An entity object
-     * @param string        $name Could be "entry", for atom or "item" for rss
+     * @param \DOMElement $root The root (feed) DOM element
+     * @param FeedItem    $item An entity object
+     * @param string      $name Could be "entry", for atom or "item" for rss
      */
     public function addItem(\DOMElement $root, FeedItem $item, $name)
     {

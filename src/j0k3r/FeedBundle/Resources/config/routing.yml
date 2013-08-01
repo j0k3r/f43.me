@@ -83,4 +83,3 @@ feedlog_feed:
 feedlog_delete_all:
     pattern:  /feed/{slug}/logs/deleteAll
     defaults: { _controller: j0k3rFeedBundle:FeedLog:deleteAll }
-

@@ -15,9 +15,9 @@ class FeedItemRepository extends DocumentRepository
     /**
      * Get the base query to fetch items
      *
-     * @param  string   $feedId     Feed id
-     * @param  int      $limit      Number of items to return
-     * @param  int      $skip       Item to skip before applying the limit
+     * @param string $feedId Feed id
+     * @param int    $limit  Number of items to return
+     * @param int    $skip   Item to skip before applying the limit
      *
      * @return Doctrine\ODM\MongoDB\Query\Query
      */
@@ -41,7 +41,7 @@ class FeedItemRepository extends DocumentRepository
     /**
      * Find all items for a given Feed id
      *
-     * @param  int   $feedId Feed id
+     * @param int $feedId Feed id
      *
      * @return Doctrine\ODM\MongoDB\LoggableCursor
      */
@@ -54,7 +54,7 @@ class FeedItemRepository extends DocumentRepository
     /**
      * Retrieve the last item for a given Feed id
      *
-     * @param  int   $feedId Feed id
+     * @param int $feedId Feed id
      *
      * @return j0k3r\FeedBundle\Document\FeedItem
      */
@@ -78,6 +78,7 @@ class FeedItemRepository extends DocumentRepository
                 for (var i in vals) {
                     sum += vals[i];
                 }
+
                 return sum;
             }')
             ->getQuery();
@@ -95,7 +96,7 @@ class FeedItemRepository extends DocumentRepository
      * Retrieve all links from cached item for a given id.
      * Link are used as a "unique" key for item.
      *
-     * @param  int   $feedId Feed id
+     * @param int $feedId Feed id
      *
      * @return array
      */
@@ -124,8 +125,8 @@ class FeedItemRepository extends DocumentRepository
      * Used to remove all old items.
      * I can't find a way to perform the remove in one query (remove & skip doesn't want to work *well* together)
      *
-     * @param  int   $feedId Feed id
-     * @param  int   $skip   Items to keep
+     * @param int $feedId Feed id
+     * @param int $skip   Items to keep
      *
      * @return Doctrine\ODM\MongoDB\EagerCursor
      */
@@ -144,7 +145,7 @@ class FeedItemRepository extends DocumentRepository
     /**
      * Remove all items associated to the given Feed id
      *
-     * @param  int   $feedId Feed id
+     * @param int $feedId Feed id
      *
      * @return array (with key 'n' as number of row affected)
      */

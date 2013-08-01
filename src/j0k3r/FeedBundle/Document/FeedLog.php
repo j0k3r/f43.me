@@ -47,12 +47,13 @@ class FeedLog
     /**
      * Set items_number
      *
-     * @param int $itemsNumber
+     * @param  int  $itemsNumber
      * @return self
      */
     public function setItemsNumber($itemsNumber)
     {
         $this->items_number = $itemsNumber;
+
         return $this;
     }
 
@@ -69,12 +70,13 @@ class FeedLog
     /**
      * Set created_at
      *
-     * @param date $createdAt
+     * @param  date $createdAt
      * @return self
      */
     public function setCreatedAt($createdAt)
     {
         $this->created_at = $createdAt;
+
         return $this;
     }
 
@@ -91,12 +93,13 @@ class FeedLog
     /**
      * Set feed
      *
-     * @param j0k3r\FeedBundle\Document\Feed $feed
+     * @param  j0k3r\FeedBundle\Document\Feed $feed
      * @return self
      */
     public function setFeed(\j0k3r\FeedBundle\Document\Feed $feed)
     {
         $this->feed = $feed;
+
         return $this;
     }
 
