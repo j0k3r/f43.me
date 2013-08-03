@@ -10,10 +10,10 @@ class Proxy
 {
     protected
         $feed = null,
+        $buzz,
         $urlApi,
         $token,
         $debug,
-        $convertLinksToFootnotes,
         $regexps,
         $choosenParser = null,
         $allowAllParser = false,
@@ -26,12 +26,12 @@ class Proxy
         $useDefault = false
     ;
 
-    public function __construct($token, $urlApi, $debug = false, $convertLinksToFootnotes = false, $regexps = array())
+    public function __construct($buzz, $token, $urlApi, $debug = false, $regexps = array())
     {
+        $this->buzz = $buzz;
         $this->token = $token;
         $this->urlApi = $urlApi;
         $this->debug = $debug;
-        $this->convertLinksToFootnotes = $convertLinksToFootnotes;
         $this->regexps = $regexps;
     }
 
@@ -132,9 +132,6 @@ class Proxy
      * Retrieve content from an internal library instead of a webservice.
      * It's a fallback by default, but can be the only solution if specified
      *
-     * First step is to retrieve the real url, thanks to `CURLOPT_FOLLOWLOCATION`
-     * @source http://link.chrislaskey.com/?source=true
-     *
      * @param string $content
      *
      * @return string
@@ -150,30 +147,25 @@ class Proxy
             // it means it's not a video, let's try other content !
         }
 
-        $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, $url);
-        curl_setopt($ch, CURLOPT_HEADER, true);
-        curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        $content = curl_exec($ch);
-        curl_close($ch);
+        $response = $this->buzz->get($url);
+        $content  = $response->getContent();
 
-        // curl failed to retrieve content (dead link, etc ..)
+        // failed to retrieve content (dead link, etc ..)
         if (false === $content) {
             return false;
         }
 
+        // remove utm parameters & fragment
+        $this->url = preg_replace('/(&?utm_(.*?)\=[^&]+)|(#(.*?)\=[^&]+)/', '', $this->buzz->getClient()->getInfo(CURLINFO_EFFECTIVE_URL));
+
         // save information about gzip content for later decoding
-        $is_gziped = (bool) strripos($content, 'Content-Encoding: gzip');
+        $is_gziped = (bool) 'gzip' == $response->getHeader('Content-Encoding');
 
-        // determine if it's a binary file. In that case, handle it differently
-        if (!strripos($content, 'Content-type: text')) {
-            $cTypePos = strripos($content, 'Content-type: ') + strlen('Content-type: ');
-            $length   = (strpos($content, "\n", $cTypePos) !== false) ? strpos($content, "\n", $cTypePos) - $cTypePos : '';
-            $mimeType = trim(substr($content, $cTypePos, $length));
-
+        $contentType = $response->getHeader('Content-Type');
+        // if it's a binary file (in fact, not a 'text'), we handle it differently
+        if (false === strpos($contentType, 'text')) {
             // if content is an image, just return it
-            if (preg_match('/(jpe?g|gif|png)$/i', $mimeType)) {
+            if (0 == strpos($contentType, 'image')) {
                 return '<img src="'.$url.'" />';
             }
 
@@ -181,19 +173,6 @@ class Proxy
             // so we act that we can't make it readable
             return false;
         }
-
-        $location = $url;
-        // find last occurence of "Location: h" to be sure it isn't a local redirect (like /new_location)
-        if ($content != null && ($location_raw = strripos($content, "Location: h")) !== false) {
-            $location_raw += strlen("Location: h");
-            $length       = (strpos($content, "\n", $location_raw) !== false) ? strpos($content, "\n", $location_raw) - $location_raw : '';
-            $location     = 'h'.trim(substr($content, $location_raw, $length));
-        }
-
-        // remove utm parameters & fragment
-        $this->url = preg_replace('/(&?utm_(.*?)\=[^&]+)|(#(.*?)\=[^&]+)/', '', html_entity_decode($location));
-
-        $content = $this->removeHeader($content);
 
         // decode gzip content (most of the time it's a Tumblr website)
         if (true === $is_gziped) {
@@ -212,7 +191,7 @@ class Proxy
         $readability          = new ReadabilityExtended($tidy->value, $this->url);
         $readability->debug   = $this->debug;
         $readability->regexps = $this->regexps;
-        $readability->convertLinksToFootnotes = $this->convertLinksToFootnotes;
+        $readability->convertLinksToFootnotes = false;
 
         if (!$readability->init()) {
             return false;
@@ -242,13 +221,8 @@ class Proxy
      */
     private function useExternalParser($url)
     {
-        $url = $this->urlApi.'?token='.$this->token.'&url='.urlencode($url);
-
-        $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, $url);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-
-        $html = json_decode(curl_exec($ch));
+        $response = $this->buzz->get($this->urlApi.'?token='.$this->token.'&url='.urlencode($url));
+        $html = json_decode($response->getContent());
 
         if (isset($html->content)) {
             $this->url = $html->url;
@@ -261,31 +235,6 @@ class Proxy
         }
 
         return false;
-    }
-
-    /**
-     * Remove headers (once the url has been extract)
-     * Grabbed from: https://github.com/hugochinchilla/curl/blob/e6b1a1277f41b95f8247ff690873f3194194194f/lib/curl_response.php#L38-52
-     *
-     * @param string $content Content with header
-     *
-     * @return string
-     */
-    private function removeHeader($content)
-    {
-        $pattern = '#HTTP/\d\.\d.*?$.*?\r\n\r\n#ims';
-
-        // Extract headers from content
-        preg_match_all($pattern, $content, $matches);
-        $headers_string = array_pop($matches[0]);
-
-        // Inlude all received headers in the $headers_string
-        while (count($matches[0])) {
-          $headers_string = array_pop($matches[0]).$headers_string;
-        }
-
-        // Remove all headers from the response body
-        return str_replace($headers_string, '', $content);
     }
 
     /**

@@ -24,7 +24,8 @@
         "simplepie/simplepie": "dev-master",
         "knplabs/knp-time-bundle": "1.1.*@dev",
         "grom/tube-link": "dev-master",
-        "zurb/foundation": "dev-master"
+        "zurb/foundation": "dev-master",
+        "sensio/buzz-bundle": "1.0.*@dev"
     },
     "scripts": {
         "post-install-cmd": [
