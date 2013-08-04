@@ -147,10 +147,14 @@ class Proxy
             // it means it's not a video, let's try other content !
         }
 
-        $response = $this->buzz->get($url);
-        $content  = $response->getContent();
+        try {
+            $response = $this->buzz->get($url);
+            $content  = $response->getContent();
+        } catch (\Exception $e) {
+            // catch timeout, ssl verification that failed, etc ...
+            return false;
+        }
 
-        // failed to retrieve content (dead link, etc ..)
         if (false === $content) {
             return false;
         }
@@ -221,8 +225,12 @@ class Proxy
      */
     private function useExternalParser($url)
     {
-        $response = $this->buzz->get($this->urlApi.'?token='.$this->token.'&url='.urlencode($url));
-        $html = json_decode($response->getContent());
+        try {
+            $response = $this->buzz->get($this->urlApi.'?token='.$this->token.'&url='.urlencode($url));
+            $html = json_decode($response->getContent());
+        } catch (\Exception $e) {
+            return false;
+        }
 
         if (isset($html->content)) {
             $this->url = $html->url;
