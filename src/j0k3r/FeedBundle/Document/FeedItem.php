@@ -263,4 +263,15 @@ class FeedItem
     {
         $this->feedlogs = new \Doctrine\Common\Collections\ArrayCollection();
     }
+
+    /**
+     * Retrieve the "publication" date *only* used in the RSS/Atom feed.
+     * Depending on the feed, we want the published_at date or the created_at date
+     *
+     * @return date
+     */
+    public function getPubDate()
+    {
+        return ('published_at' == $this->feed->getSortBy()) ? $this->getPublishedAt() : $this->getCreatedAt();
+    }
 }

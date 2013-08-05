@@ -27,6 +27,12 @@ class FeedType extends AbstractType
                     'atom' => 'Atom'
                 ),
             ))
+            ->add('sort_by', 'choice', array(
+                'choices' => array(
+                    'published_at' => 'Published (when item arrive in the original feed)',
+                    'created_at' => 'Created (when feed item are fetched)'
+                ),
+            ))
             ->add('is_private', 'checkbox', array('required' => false))
         ;
     }

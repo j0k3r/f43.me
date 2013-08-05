@@ -31,7 +31,11 @@ class RssRender
      */
     public function render(Feed $feed)
     {
-        $items = $this->dm->getRepository('j0k3rFeedBundle:FeedItem')->findByFeedId($feed->getId());
+        $items = $this->dm->getRepository('j0k3rFeedBundle:FeedItem')->findByFeed(
+            $feed->getId(),
+            $feed->getSortBy()
+        );
+
         $feedUrl = $this->router->generate(
             'feedapi_feed',
             array('slug' => $feed->getSlug()),

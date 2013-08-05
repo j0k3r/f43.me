@@ -32,7 +32,7 @@ class AtomFormatter extends Formatter
                 'attribute'   => 'href'
             ), array(
                 'name'        => 'updated',
-                'method'      => 'getPublishedAt',
+                'method'      => 'getPubDate',
                 'date_format' => \DateTime::ATOM,
             ),
         );

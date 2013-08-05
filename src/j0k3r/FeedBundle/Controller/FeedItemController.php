@@ -27,7 +27,10 @@ class FeedItemController extends Controller
             throw $this->createNotFoundException('Unable to find Feed document.');
         }
 
-        $feeditems = $dm->getRepository('j0k3rFeedBundle:FeedItem')->findByFeedId($feed->getId());
+        $feeditems = $dm->getRepository('j0k3rFeedBundle:FeedItem')->findByFeed(
+            $feed->getId(),
+            $feed->getSortBy()
+        );
 
         $deleteAllForm = $this->createDeleteAllForm($feed->getSlug());
 

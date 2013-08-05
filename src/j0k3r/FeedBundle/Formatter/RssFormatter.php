@@ -31,7 +31,7 @@ class RssFormatter extends Formatter
                 'method'      => 'getLink'
             ), array(
                 'name'        => 'pubDate',
-                'method'      => 'getPublishedAt',
+                'method'      => 'getPubDate',
                 'date_format' => \DateTime::RSS,
             ),
         );

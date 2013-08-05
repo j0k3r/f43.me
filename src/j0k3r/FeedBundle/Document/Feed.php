@@ -69,6 +69,11 @@ class Feed
     protected $is_private = false;
 
     /**
+     * @MongoDB\String
+     */
+    protected $sort_by;
+
+    /**
      * @MongoDB\Date
      * @Gedmo\Timestampable(on="create")
      */
@@ -400,5 +405,27 @@ class Feed
     public function getIsPrivate()
     {
         return $this->is_private;
+    }
+
+    /**
+     * Set sort_by
+     *
+     * @param string $sortBy
+     * @return self
+     */
+    public function setSortBy($sortBy)
+    {
+        $this->sort_by = $sortBy;
+        return $this;
+    }
+
+    /**
+     * Get sort_by
+     *
+     * @return string $sortBy
+     */
+    public function getSortBy()
+    {
+        return $this->sort_by;
     }
 }

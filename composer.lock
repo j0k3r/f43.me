@@ -208,6 +208,69 @@
             "time": "2013-03-25 20:13:59"
         },
         {
+            "name": "doctrine/inflector",
+            "version": "v1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/doctrine/inflector.git",
+                "reference": "v1.0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://github.com/doctrine/inflector/archive/v1.0.zip",
+                "reference": "v1.0",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.2"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Doctrine\\Common\\Inflector\\": "lib/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Jonathan Wage",
+                    "email": "jonwage@gmail.com",
+                    "homepage": "http://www.jwage.com/"
+                },
+                {
+                    "name": "Guilherme Blanco",
+                    "email": "guilhermeblanco@gmail.com",
+                    "homepage": "http://www.instaclick.com"
+                },
+                {
+                    "name": "Roman Borschel",
+                    "email": "roman@code-factory.org"
+                },
+                {
+                    "name": "Benjamin Eberlei",
+                    "email": "kontakt@beberlei.de"
+                },
+                {
+                    "name": "Johannes M. Schmitt",
+                    "email": "schmittjoh@gmail.com",
+                    "homepage": "http://jmsyst.com",
+                    "role": "Developer of wrapped JMSSerializerBundle"
+                }
+            ],
+            "description": "Common String Manipulations with regard to casing and singular/plural rules.",
+            "homepage": "http://www.doctrine-project.org",
+            "keywords": [
+                "inflection",
+                "pluarlize",
+                "singuarlize",
+                "string"
+            ],
+            "time": "2013-01-10 21:49:15"
+        },
+        {
             "name": "doctrine/mongodb",
             "version": "1.0.3",
             "source": {
@@ -273,16 +336,17 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/mongodb-odm.git",
-                "reference": "102c71af1ea3fd6b6eab1354e163a890cac7f989"
+                "reference": "2c32111f87c8789948d67b39b258404f5393e64e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/mongodb-odm/zipball/102c71af1ea3fd6b6eab1354e163a890cac7f989",
-                "reference": "102c71af1ea3fd6b6eab1354e163a890cac7f989",
+                "url": "https://api.github.com/repos/doctrine/mongodb-odm/zipball/2c32111f87c8789948d67b39b258404f5393e64e",
+                "reference": "2c32111f87c8789948d67b39b258404f5393e64e",
                 "shasum": ""
             },
             "require": {
                 "doctrine/common": ">=2.2.0,<2.5-dev",
+                "doctrine/inflector": "~1.0",
                 "doctrine/mongodb": "1.0.*",
                 "php": ">=5.3.2",
                 "symfony/console": "~2.0"
@@ -338,7 +402,7 @@
                 "odm",
                 "persistence"
             ],
-            "time": "2013-08-02 17:36:59"
+            "time": "2013-08-05 18:38:02"
         },
         {
             "name": "doctrine/mongodb-odm-bundle",
@@ -1595,16 +1659,16 @@
         },
         {
             "name": "twig/twig",
-            "version": "v1.13.1",
+            "version": "v1.13.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/fabpot/Twig.git",
-                "reference": "v1.13.1"
+                "reference": "v1.13.2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/fabpot/Twig/zipball/v1.13.1",
-                "reference": "v1.13.1",
+                "url": "https://api.github.com/repos/fabpot/Twig/zipball/v1.13.2",
+                "reference": "v1.13.2",
                 "shasum": ""
             },
             "require": {
@@ -1623,7 +1687,7 @@
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
-                "BSD-3"
+                "BSD-3-Clause"
             ],
             "authors": [
                 {
@@ -1640,7 +1704,7 @@
             "keywords": [
                 "templating"
             ],
-            "time": "2013-06-06 06:06:01"
+            "time": "2013-08-03 15:35:31"
         },
         {
             "name": "zurb/foundation",
@@ -1648,12 +1712,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/zurb/foundation.git",
-                "reference": "6e403a57c6a609a88e80c5fa0bdcc0714ed69833"
+                "reference": "90dbcfb1bf8a8a9cb93aed160b2cceb67f07a29a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/zurb/foundation/zipball/6e403a57c6a609a88e80c5fa0bdcc0714ed69833",
-                "reference": "6e403a57c6a609a88e80c5fa0bdcc0714ed69833",
+                "url": "https://api.github.com/repos/zurb/foundation/zipball/90dbcfb1bf8a8a9cb93aed160b2cceb67f07a29a",
+                "reference": "90dbcfb1bf8a8a9cb93aed160b2cceb67f07a29a",
                 "shasum": ""
             },
             "type": "library",
@@ -1667,7 +1731,7 @@
                 "foundation",
                 "scss"
             ],
-            "time": "2013-08-01 15:08:07"
+            "time": "2013-08-05 17:26:45"
         }
     ],
     "packages-dev": [
