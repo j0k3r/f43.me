@@ -17,7 +17,8 @@ framework:
         assets_version: v20130730
     default_locale:  "%locale%"
     trusted_proxies: ~
-    session:         ~
+    session:
+        name: f43me
     fragments:       ~
 
 # Twig Configuration
