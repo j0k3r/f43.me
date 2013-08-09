@@ -10,3 +10,4 @@
 /web/css/compiled/*
 /web/js/compiled/*
 /src/j0k3r/FeedBundle/Resources/foundation/*
+/web/index_dev.php
