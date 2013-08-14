@@ -160,7 +160,7 @@ class Proxy
         }
 
         // remove utm parameters & fragment
-        $this->url = preg_replace('/(&?utm_(.*?)\=[^&]+)|(#(.*?)\=[^&]+)/', '', $this->buzz->getClient()->getInfo(CURLINFO_EFFECTIVE_URL));
+        $this->url = preg_replace('/((\?)?(&(amp;)?)?utm_(.*?)\=[^&]+)|(#(.*?)\=[^&]+)/', '', $this->buzz->getClient()->getInfo(CURLINFO_EFFECTIVE_URL));
 
         // save information about gzip content for later decoding
         $is_gziped = (bool) 'gzip' == $response->getHeader('Content-Encoding');
