@@ -53,7 +53,7 @@ class RssRender
 
             default:
                 throw new \InvalidArgumentException(
-                    sprintf("Format '%s' is not available. Please see documentation.", $format)
+                    sprintf("Format '%s' is not available. Please see documentation.", $feed->getFormatter())
                 );
                 break;
         }

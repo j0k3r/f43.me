@@ -14,7 +14,7 @@ class RedditComParser extends DefaultParser
         // we extract the source of the reddit post
         preg_match('/(.*)\<a href\=\"(.*)\"\>\[link\]\<\/a\>/i', $this->itemContent, $matches);
         if (count($matches) != 3) {
-            return $url;
+            return $this->url;
         }
 
         return $matches[2];
