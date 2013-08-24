@@ -13,6 +13,12 @@ class NewsYcombinatorComParser extends DefaultParser
      * We append the readable content to something a bit more friendly:
      * - a link to the original article with the host as value
      * - a link to comments on Hacker News
+     *
+     * @see DefaultParser/updateContent
+     *
+     * @param string $content Readable item content
+     *
+     * @return string
      */
     public function updateContent($content)
     {

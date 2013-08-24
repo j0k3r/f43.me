@@ -28,7 +28,6 @@ class DefaultParser
      * For example, if we want to extract the url from the item instead of using the default link.
      * Could be the case for Reddit (retrieving the [link] url instead of the Reddit one)
      *
-     *
      * @return string Url to be used to retrieve content
      */
     public function retrieveUrl()

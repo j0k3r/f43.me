@@ -9,6 +9,11 @@ namespace j0k3r\FeedBundle\Parser;
  */
 class RedditComParser extends DefaultParser
 {
+    /**
+     * @see DefaultParser/retrieveUrl
+     *
+     * @return string Url to be used to retrieve content
+     */
     public function retrieveUrl()
     {
         // we extract the source of the reddit post
@@ -20,6 +25,13 @@ class RedditComParser extends DefaultParser
         return $matches[2];
     }
 
+    /**
+     * @see DefaultParser/updateContent
+     *
+     * @param string $content Readable item content
+     *
+     * @return string
+     */
     public function updateContent($content)
     {
         return $this->itemContent.'<br/><hr/><br/>'.$content;
