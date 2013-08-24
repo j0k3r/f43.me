@@ -23,7 +23,7 @@ class Formatter
     protected $items;
 
     /**
-     * @var string $generator Genrator name
+     * @var string $generator Generator name
      */
     protected $generator;
 

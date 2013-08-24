@@ -20,7 +20,7 @@ class FetchItemsCommand extends BaseFeedCommand
             ->setName('feed:fetch-items')
             ->setDescription('Fetch items from feed to cache them')
             ->addOption('age', null, InputOption::VALUE_OPTIONAL, '`old` to fetch old feed or `new` to fetch recent feed with no item')
-            ->addOption('slug', null, InputOption::VALUE_OPTIONAL, 'To fetch item for one particulat feed (using its slug)')
+            ->addOption('slug', null, InputOption::VALUE_OPTIONAL, 'To fetch item for one particular feed (using its slug)')
             ->addOption('with-trace', 't', InputOption::VALUE_NONE, 'Display debug')
         ;
     }
@@ -95,7 +95,7 @@ class FetchItemsCommand extends BaseFeedCommand
 
             $parser = $container
                 ->get('readability_proxy')
-                ->setChoosenParser($feed->getParser())
+                ->setChosenParser($feed->getParser())
                 ->setFeed($feed)
                 ->allowAllParser(true);
 

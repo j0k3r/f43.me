@@ -15,7 +15,7 @@ class Proxy
         $token,
         $debug,
         $regexps,
-        $choosenParser = null,
+        $chosenParser = null,
         $allowAllParser = false,
         $availableParsers = array('Internal', 'External')
     ;
@@ -35,9 +35,9 @@ class Proxy
         $this->regexps = $regexps;
     }
 
-    public function setChoosenParser($parser)
+    public function setChosenParser($parser)
     {
-        $this->choosenParser = $parser;
+        $this->chosenParser = $parser;
 
         return $this;
     }
@@ -80,7 +80,7 @@ class Proxy
         // or try to find a custom one
         if (null !== $this->feed) {
             // I don't know why I have to use the *full* path to test if the class exists
-            // even if the current classe "use" j0k3r\FeedBundle\Parser ...
+            // even if the current class "use" j0k3r\FeedBundle\Parser ...
             $name = Inflector::classify(str_replace('.', '-', $this->feed->getHost()));
             $customMethod = 'j0k3r\FeedBundle\Parser\\'.$name.'Parser';
 
@@ -116,7 +116,7 @@ class Proxy
             }
         }
 
-        // do something when readabled content failed
+        // do something when readable content failed
         if (!$this->content) {
             $this->content = $itemContent;
             $this->useDefault = true;
@@ -132,7 +132,7 @@ class Proxy
      * Retrieve content from an internal library instead of a webservice.
      * It's a fallback by default, but can be the only solution if specified
      *
-     * @param string $content
+     * @param string $url
      *
      * @return string
      */

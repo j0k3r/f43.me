@@ -93,7 +93,7 @@ class FeedLog
     /**
      * Set feed
      *
-     * @param  j0k3r\FeedBundle\Document\Feed $feed
+     * @param  \j0k3r\FeedBundle\Document\Feed $feed
      * @return self
      */
     public function setFeed(\j0k3r\FeedBundle\Document\Feed $feed)

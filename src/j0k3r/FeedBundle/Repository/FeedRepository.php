@@ -65,11 +65,9 @@ class FeedRepository extends DocumentRepository
             case 'in':
                 $q->in($ids);
                 break;
-
             case 'notIn':
                 $q->notIn($ids);
                 break;
-
             default:
                 return false;
         }

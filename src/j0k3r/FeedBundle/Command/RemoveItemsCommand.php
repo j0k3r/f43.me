@@ -14,7 +14,7 @@ class RemoveItemsCommand extends BaseFeedCommand
             ->setName('feed:remove-items')
             ->setDescription('Fetch items from feed to cache them')
             ->addOption('max', 'm', InputOption::VALUE_OPTIONAL, 'Number of items to keep in the feed', 100)
-            ->addOption('slug', null, InputOption::VALUE_OPTIONAL, 'To work on one particulat feed (using its slug)')
+            ->addOption('slug', null, InputOption::VALUE_OPTIONAL, 'To work on one particular feed (using its slug)')
             ->addOption('with-trace', 't', InputOption::VALUE_NONE, 'Display debug')
         ;
     }
@@ -31,7 +31,7 @@ class RemoveItemsCommand extends BaseFeedCommand
             if (!$dialog->askConfirmation($output, '<question>You will remove ALL items, are your sure?</question>', false)) {
                 $this->unlockCommand();
 
-                return $output->writeLn("<comment>You *almost* remove every thing from your database, pfiou !</comment> Be sure to define a <comment>max</comment> option greater than 0.");
+                return $output->writeLn("<comment>You *almost* remove everything from your database, pfiou !</comment> Be sure to define a <comment>max</comment> option greater than 0.");
             }
         }
 
