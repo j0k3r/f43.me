@@ -46,7 +46,7 @@ class FeedItemRepository extends DocumentRepository
      * Find all items for a given Feed id
      *
      * @param int    $feedId Feed id
-     * @param string $feedId Feed sort by
+     * @param string $sortBy Feed sort by
      *
      * @return Doctrine\ODM\MongoDB\LoggableCursor
      */

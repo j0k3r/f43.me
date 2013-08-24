@@ -251,7 +251,7 @@ class Feed
     /**
      * Add feeditems
      *
-     * @param j0k3r\FeedBundle\Document\FeedItem $feeditems
+     * @param \j0k3r\FeedBundle\Document\FeedItem $feeditems
      */
     public function addFeeditem(\j0k3r\FeedBundle\Document\FeedItem $feeditems)
     {
@@ -261,7 +261,7 @@ class Feed
     /**
     * Remove feeditems
     *
-    * @param <variableType$feeditems
+    * @param \j0k3r\FeedBundle\Document\FeedItem $feeditems
     */
     public function removeFeeditem(\j0k3r\FeedBundle\Document\FeedItem $feeditems)
     {
@@ -304,7 +304,7 @@ class Feed
     /**
      * Add feedlogs
      *
-     * @param j0k3r\FeedBundle\Document\FeedLog $feedlogs
+     * @param \j0k3r\FeedBundle\Document\FeedLog $feedlogs
      */
     public function addFeedlog(\j0k3r\FeedBundle\Document\FeedLog $feedlogs)
     {
@@ -314,7 +314,7 @@ class Feed
     /**
     * Remove feedlogs
     *
-    * @param <variableType$feedlogs
+    * @param \j0k3r\FeedBundle\Document\FeedLog $feedlogs
     */
     public function removeFeedlog(\j0k3r\FeedBundle\Document\FeedLog $feedlogs)
     {

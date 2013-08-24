@@ -196,8 +196,6 @@ class FeedController extends Controller
         $editForm   = $this->createForm(new FeedType(), $feed);
         $deleteForm = $this->createDeleteForm($feed->getId());
 
-        $request = $this->getRequest();
-
         $editForm->bind($request);
 
         if ($editForm->isValid()) {

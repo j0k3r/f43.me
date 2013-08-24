@@ -33,7 +33,7 @@ class FeedTestController extends Controller
             if ($form->isValid()) {
                 $parser = $this
                     ->get('readability_proxy')
-                    ->setChoosenParser($form->get('parser')->getData());
+                    ->setChosenParser($form->get('parser')->getData());
 
                 $content = $parser->parseContent($form->get('link')->getData());
             }
