@@ -10,6 +10,9 @@ namespace j0k3r\FeedBundle\Parser;
 class RedditComParser extends DefaultParser
 {
     /**
+     * For reddit we extract link for the default content retrieved.
+     * Because the rss item link goes to reddit. The important one is inside the content.
+     *
      * @see DefaultParser/retrieveUrl
      *
      * @return string Url to be used to retrieve content
@@ -26,6 +29,8 @@ class RedditComParser extends DefaultParser
     }
 
     /**
+     * We just happen the readable item to the default one
+     *
      * @see DefaultParser/updateContent
      *
      * @param string $content Readable item content
