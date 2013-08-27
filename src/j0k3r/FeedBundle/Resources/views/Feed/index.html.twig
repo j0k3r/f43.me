@@ -12,7 +12,6 @@
                         <th>Name</th>
                         <th>Links</th>
                         <th>Items</th>
-                        <th>Logs</th>
                         <th>Created</th>
                         <th>Updated</th>
                         <th>Actions</th>
@@ -30,7 +29,6 @@
                             <a href="{{ url('feedapi_feed', { 'slug': feed.slug }) }}" target="_blank">Readable one</a>
                         </td>
                         <td>{{ feed.feeditems.count }}</td>
-                        <td>{{ feed.feedlogs.count }}</td>
                         <td>{{ feed.createdat|date('d/m/y - H:i') }}</td>
                         <td>{{ feed.updatedat|date('d/m/y - H:i') }}</td>
                         <td>
