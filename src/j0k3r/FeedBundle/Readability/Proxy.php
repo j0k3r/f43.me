@@ -92,7 +92,7 @@ class Proxy
         // retrieve custom url ?
         $this->url = $customParser->retrieveUrl();
 
-        $parserMethod = 'use'.Inflector::camelize($this->choosenParser).'Parser';
+        $parserMethod = 'use'.Inflector::camelize($this->chosenParser).'Parser';
 
         if (is_callable(array($this, $parserMethod))) {
             $this->content = $this->$parserMethod($this->url);
@@ -102,7 +102,7 @@ class Proxy
         if (false === $this->content && true === $this->allowAllParser) {
             foreach ($this->availableParsers as $method) {
                 // don't try the previous parser, which fails
-                if (Inflector::camelize($this->choosenParser) == $method) {
+                if (Inflector::camelize($this->chosenParser) == $method) {
                     continue;
                 }
 
