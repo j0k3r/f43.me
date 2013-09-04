@@ -4,6 +4,8 @@ namespace j0k3r\FeedBundle\Formatter;
 
 use j0k3r\FeedBundle\Document\Feed;
 use j0k3r\FeedBundle\Document\FeedItem;
+use j0k3r\FeedBundle\DomDocument\XDOMDocument;
+use j0k3r\FeedBundle\DomDocument\XDOMElement;
 
 /**
  * Formatter
@@ -74,7 +76,7 @@ class Formatter
      */
     public function initialize()
     {
-        $this->dom = new \DOMDocument('1.0', 'utf-8');
+        $this->dom = new XDOMDocument('1.0', 'utf-8');
     }
 
     /**
@@ -130,11 +132,11 @@ class Formatter
     /**
      * Add an entity item to the feed
      *
-     * @param \DOMElement $root The root (feed) DOM element
+     * @param XDOMElement $root The root (feed) DOM element
      * @param FeedItem    $item An entity object
      * @param string      $name Could be "entry", for atom or "item" for rss
      */
-    public function addItem(\DOMElement $root, FeedItem $item, $name)
+    public function addItem(XDOMElement $root, FeedItem $item, $name)
     {
         $node = $this->dom->createElement($name);
         $node = $root->appendChild($node);

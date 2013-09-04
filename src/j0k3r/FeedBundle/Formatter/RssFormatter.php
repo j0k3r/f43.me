@@ -42,7 +42,7 @@ class RssFormatter extends Formatter
      */
     public function initialize()
     {
-        $this->dom = new \DOMDocument('1.0', 'utf-8');
+        parent::initialize();
 
         $root = $this->dom->createElement('rss');
         $root->setAttribute('version', '2.0');
@@ -52,12 +52,12 @@ class RssFormatter extends Formatter
         $channel = $this->dom->createElement('channel');
         $channel = $root->appendChild($channel);
 
-        $self = $this->dom->createElement('atom:link');
+        $self = $this->dom->createElementNS('http://www.w3.org/2005/Atom', 'link');
         $self->setAttribute('href', $this->url);
         $self->setAttribute('rel', 'self');
         $self->setAttribute('type', 'application/rss+xml');
 
-        $hub = $this->dom->createElement('atom:link');
+        $hub = $this->dom->createElementNS('http://www.w3.org/2005/Atom', 'link');
         $hub->setAttribute('href', 'http://pubsubhubbub.appspot.com/');
         $hub->setAttribute('rel', 'hub');
 

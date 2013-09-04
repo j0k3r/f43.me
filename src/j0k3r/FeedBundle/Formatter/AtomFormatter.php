@@ -43,7 +43,7 @@ class AtomFormatter extends Formatter
      */
     public function initialize()
     {
-        $this->dom = new \DOMDocument('1.0', 'utf-8');
+        parent::initialize();
 
         $root = $this->dom->createElement('feed');
         $root->setAttribute('xmlns', 'http://www.w3.org/2005/Atom');
