@@ -1,11 +1,5 @@
 <?php
 
-if (extension_loaded('newrelic'))
-{
-  newrelic_set_appname('f43.me');
-  newrelic_background_job(false);
-}
-
 use Symfony\Component\ClassLoader\ApcClassLoader;
 use Symfony\Component\HttpFoundation\Request;
 

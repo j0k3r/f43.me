@@ -25,7 +25,8 @@
         "knplabs/knp-time-bundle": "1.1.*@dev",
         "grom/tube-link": "1.0.*@dev",
         "zurb/foundation": "4.3.*",
-        "sensio/buzz-bundle": "1.0.*@dev"
+        "sensio/buzz-bundle": "1.0.*@dev",
+        "ekino/newrelic-bundle": "1.2.*@dev"
     },
     "scripts": {
         "post-install-cmd": [

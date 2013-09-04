@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "2f9b0c41a9eb1315b04e12277ae7aece",
+    "hash": "548bde88a1ef3e2d2202d34d0b62e33f",
     "packages": [
         {
             "name": "doctrine/common",
@@ -336,12 +336,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/mongodb-odm.git",
-                "reference": "744b63b7b9aee9208d3e97e0d16e5b5f46a58e8b"
+                "reference": "3515b2cfb4779a804fbabef2dd3f0a1c12baa994"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/mongodb-odm/zipball/744b63b7b9aee9208d3e97e0d16e5b5f46a58e8b",
-                "reference": "744b63b7b9aee9208d3e97e0d16e5b5f46a58e8b",
+                "url": "https://api.github.com/repos/doctrine/mongodb-odm/zipball/3515b2cfb4779a804fbabef2dd3f0a1c12baa994",
+                "reference": "3515b2cfb4779a804fbabef2dd3f0a1c12baa994",
                 "shasum": ""
             },
             "require": {
@@ -402,7 +402,7 @@
                 "odm",
                 "persistence"
             ],
-            "time": "2013-08-20 21:50:51"
+            "time": "2013-08-30 17:25:05"
         },
         {
             "name": "doctrine/mongodb-odm-bundle",
@@ -473,6 +473,55 @@
                 "symfony"
             ],
             "time": "2013-08-09 18:32:51"
+        },
+        {
+            "name": "ekino/newrelic-bundle",
+            "version": "dev-master",
+            "target-dir": "Ekino/Bundle/NewRelicBundle",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/ekino/EkinoNewRelicBundle.git",
+                "reference": "749df89fad626c7e47ce1d81c1ad9a67e75f2a5f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/ekino/EkinoNewRelicBundle/zipball/749df89fad626c7e47ce1d81c1ad9a67e75f2a5f",
+                "reference": "749df89fad626c7e47ce1d81c1ad9a67e75f2a5f",
+                "shasum": ""
+            },
+            "require": {
+                "symfony/symfony": "*"
+            },
+            "type": "symfony-bundle",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.2-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Ekino\\Bundle\\NewRelicBundle": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Thomas Rabaix",
+                    "email": "thomas.rabaix@ekino.com",
+                    "homepage": "http://ekino.com"
+                }
+            ],
+            "description": "Integrate New Relic into Symfony2",
+            "homepage": "https://github.com/ekino/EkinoNewRelicBundle",
+            "keywords": [
+                "metric",
+                "monitoring",
+                "performance"
+            ],
+            "time": "2013-08-19 20:19:36"
         },
         {
             "name": "fivefilters/php-readability",
@@ -1747,7 +1796,8 @@
         "stof/doctrine-extensions-bundle": 20,
         "knplabs/knp-time-bundle": 20,
         "grom/tube-link": 20,
-        "sensio/buzz-bundle": 20
+        "sensio/buzz-bundle": 20,
+        "ekino/newrelic-bundle": 20
     },
     "platform": {
         "php": ">=5.3.3",

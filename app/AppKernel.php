@@ -20,6 +20,7 @@ class AppKernel extends Kernel
             new j0k3r\FeedBundle\j0k3rFeedBundle(),
             new Knp\Bundle\TimeBundle\KnpTimeBundle(),
             new Sensio\Bundle\BuzzBundle\SensioBuzzBundle(),
+            new Ekino\Bundle\NewRelicBundle\EkinoNewRelicBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

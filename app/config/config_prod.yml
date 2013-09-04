@@ -33,3 +33,14 @@ assetic:
             apply_to: "\.js$"
         compass:
             bin: /usr/local/bin/compass
+
+ekino_new_relic:
+    enabled: true
+    application_name: f43.me
+    api_key: %newrelic_api_key%
+    logging: false                        # If true, logs all New Relic interactions to the Symfony log
+    instrument: false                     # If true, uses enhanced New Relic RUM instrumentation (see below)
+    log_exceptions: true                  # If true, sends exceptions to New Relic
+    log_commands: true                    # If true, logs CLI commands to New Relic as Background jobs (>2.3 only)
+    transaction_naming: route             # route, controller or service (see below)
+    transaction_naming_service: ~         # Transaction naming service (see below)
