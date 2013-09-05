@@ -19,11 +19,11 @@ class FeedRepository extends DocumentRepository
      *
      * @return Doctrine\ODM\MongoDB\EagerCursor
      */
-    public function findAllOrderedByDate($limit = null)
+    public function findAllOrderedByDate($limit = null, $dateField = 'updated_at')
     {
         $q = $this->createQueryBuilder()
             ->eagerCursor(true)
-            ->sort('updated_at', 'DESC');
+            ->sort($dateField, 'DESC');
 
         if (null !== $limit) {
             $q->limit($limit);

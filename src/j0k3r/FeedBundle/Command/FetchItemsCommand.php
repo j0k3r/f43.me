@@ -147,10 +147,14 @@ class FetchItemsCommand extends BaseFeedCommand
                 }
             }
 
-            if (0 !== $cached) {
+            if ($cached) {
                 if ($input->getOption('with-trace')) {
                     $progress->finish();
                 }
+
+                // save the last time items where updated
+                $feed->setLastItemCachedAt(date('j F Y, g:i:s a'));
+                $dm->persist($feed);
 
                 $totalCached += $cached;
 

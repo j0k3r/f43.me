@@ -44,24 +44,12 @@ class FeedController extends Controller
      */
     public function publicAction()
     {
-        $dm   = $this->getDocumentManager();
-        $logs = $dm->getRepository('j0k3rFeedBundle:FeedLog')->findLastUpdated();
-
-        // loop through all logs and retrieve the feed document
-        // since we use the php function to query, object aren't hydrated
-        foreach ($logs as $key => &$log) {
-            $feed = $dm->getRepository('j0k3rFeedBundle:Feed')->find($log['feed_id']);
-
-            // do not include private feed in public view
-            if ($feed->getIsPrivate()) {
-                unset($logs[$key]);
-            }
-
-            $log['feed'] = $feed;
-        }
+        $feeds = $this->getDocumentManager()
+            ->getRepository('j0k3rFeedBundle:Feed')
+            ->findAllOrderedByDate(null, 'last_item_cached_at');
 
         return array(
-            'logs' => $logs,
+            'feeds' => $feeds,
         );
     }
 
@@ -74,8 +62,9 @@ class FeedController extends Controller
      */
     public function indexAction()
     {
-        $dm    = $this->getDocumentManager();
-        $feeds = $dm->getRepository('j0k3rFeedBundle:Feed')->findAllOrderedByDate();
+        $feeds = $this->getDocumentManager()
+            ->getRepository('j0k3rFeedBundle:Feed')
+            ->findAllOrderedByDate();
 
         return array(
             'menu'  => 'feed',

@@ -75,6 +75,11 @@ class Feed
 
     /**
      * @MongoDB\Date
+     */
+    protected $last_item_cached_at;
+
+    /**
+     * @MongoDB\Date
      * @Gedmo\Timestampable(on="create")
      */
     protected $created_at;
@@ -427,5 +432,27 @@ class Feed
     public function getSortBy()
     {
         return $this->sort_by;
+    }
+
+    /**
+     * Set lastItemCachedAt
+     *
+     * @param date $lastItemCachedAt
+     * @return self
+     */
+    public function setLastItemCachedAt($lastItemCachedAt)
+    {
+        $this->last_item_cached_at = $lastItemCachedAt;
+        return $this;
+    }
+
+    /**
+     * Get lastItemCachedAt
+     *
+     * @return date $lastItemCachedAt
+     */
+    public function getLastItemCachedAt()
+    {
+        return $this->last_item_cached_at;
     }
 }
