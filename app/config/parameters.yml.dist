@@ -14,3 +14,4 @@ parameters:
     adminpass:         74913f5cd5f61ec0bcfdb775414c2fb3d161b620
 
     newrelic_api_key: xxxxxxxxxxx
+    google_analytics_code: UA-xxxxx-x
