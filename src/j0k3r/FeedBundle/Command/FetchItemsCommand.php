@@ -110,7 +110,8 @@ class FetchItemsCommand extends BaseFeedCommand
 
             foreach ($rssFeed->get_items() as $item) {
                 // if an item already exists, we skip it
-                if (isset($cachedLinks[$item->get_permalink()])) {
+                // or if the item doesn't have a link, we won't cache it - will be useless
+                if (isset($cachedLinks[$item->get_permalink()]) || null === $item->get_permalink()) {
                     continue;
                 }
 
