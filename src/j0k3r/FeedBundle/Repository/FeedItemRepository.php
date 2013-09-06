@@ -108,7 +108,7 @@ class FeedItemRepository extends DocumentRepository
     public function getAllLinks($feedId)
     {
         $res = $this->createQueryBuilder()
-            ->select('permalink', 'link')
+            ->select('permalink')
             ->hydrate(false)
             ->field('feed.id')->equals($feedId)
             ->sort('published_at', 'DESC')
@@ -119,9 +119,7 @@ class FeedItemRepository extends DocumentRepository
         // and also because it's faster to isset than in_array to match a value
         $results = array();
         foreach ($res as $item) {
-            // sometimes permalink can't be define in the source feed, use link instead
-            $link = (isset($item['permalink']) && $item['permalink']) ? $item['permalink'] : $item['link'];
-            $results[$link] = true;
+            $results[$item['permalink']] = true;
         }
 
         return $results;
