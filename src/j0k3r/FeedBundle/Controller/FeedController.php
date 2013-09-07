@@ -46,7 +46,7 @@ class FeedController extends Controller
     {
         $feeds = $this->getDocumentManager()
             ->getRepository('j0k3rFeedBundle:Feed')
-            ->findAllOrderedByDate(null, 'last_item_cached_at');
+            ->findForPublic();
 
         return array(
             'feeds' => $feeds,

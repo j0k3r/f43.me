@@ -19,15 +19,30 @@ class FeedRepository extends DocumentRepository
      *
      * @return Doctrine\ODM\MongoDB\EagerCursor
      */
-    public function findAllOrderedByDate($limit = null, $dateField = 'updated_at')
+    public function findAllOrderedByDate($limit = null)
     {
         $q = $this->createQueryBuilder()
             ->eagerCursor(true)
-            ->sort($dateField, 'DESC');
+            ->sort('updated_at', 'DESC');
 
         if (null !== $limit) {
             $q->limit($limit);
         }
+
+        return $q->getQuery()->execute();
+    }
+
+    /**
+     * Find feeds for public display
+     *
+     * @return Doctrine\ODM\MongoDB\EagerCursor
+     */
+    public function findForPublic()
+    {
+        $q = $this->createQueryBuilder()
+            ->eagerCursor(true)
+            ->field('is_private')->equals(false)
+            ->sort('last_item_cached_at', 'DESC');
 
         return $q->getQuery()->execute();
     }
