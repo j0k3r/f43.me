@@ -9,7 +9,7 @@ namespace j0k3r\FeedBundle\DomDocument;
  */
 class XDOMElement extends \DOMElement
 {
-    function __construct($name, $value = null, $namespaceURI = null)
+    public function __construct($name, $value = null, $namespaceURI = null)
     {
         parent::__construct($name, null, $namespaceURI);
     }

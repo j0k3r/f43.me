@@ -11,14 +11,14 @@ use j0k3r\FeedBundle\DomDocument\XDOMElement;
  */
 class XDOMDocument extends \DOMDocument
 {
-    function __construct($version = null, $encoding = null)
+    public function __construct($version = null, $encoding = null)
     {
         parent::__construct($version, $encoding);
 
         $this->registerNodeClass('DOMElement', 'j0k3r\FeedBundle\DomDocument\XDOMElement');
     }
 
-    function createElement($name, $value = null, $namespaceURI = null)
+    public function createElement($name, $value = null, $namespaceURI = null)
     {
         $element = new XDOMElement($name, $value, $namespaceURI);
 

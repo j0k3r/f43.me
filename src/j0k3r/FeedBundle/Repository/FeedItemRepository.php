@@ -15,8 +15,8 @@ class FeedItemRepository extends DocumentRepository
     /**
      * Get the base query to fetch items
      *
-     * @param string $feedId    Feed id
-     * @param array  $options   limit, sort_by, skip
+     * @param string $feedId  Feed id
+     * @param array  $options limit, sort_by, skip
      *
      * @return Doctrine\ODM\MongoDB\Query\Query
      */

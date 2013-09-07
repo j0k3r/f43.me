@@ -415,12 +415,13 @@ class Feed
     /**
      * Set sort_by
      *
-     * @param string $sortBy
+     * @param  string $sortBy
      * @return self
      */
     public function setSortBy($sortBy)
     {
         $this->sort_by = $sortBy;
+
         return $this;
     }
 
@@ -437,12 +438,13 @@ class Feed
     /**
      * Set lastItemCachedAt
      *
-     * @param date $lastItemCachedAt
+     * @param  date $lastItemCachedAt
      * @return self
      */
     public function setLastItemCachedAt($lastItemCachedAt)
     {
         $this->last_item_cached_at = $lastItemCachedAt;
+
         return $this;
     }
 
