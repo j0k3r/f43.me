@@ -1,0 +1,17 @@
+parameters:
+    database_server:   mongodb://localhost:27017
+    database_name:     f43me
+
+    locale:            en
+    secret:            414c2fb3d161b620
+
+    domain:            f43.me
+
+    # Get one here: https://www.readability.com/account/api
+    readability_token: ~
+
+    # sha1 encoded, in this case "adminpass"
+    adminpass:         74913f5cd5f61ec0bcfdb775414c2fb3d161b620
+
+    # newrelic_api_key: xxxxxxxxxxx
+    google_analytics_code: ~
