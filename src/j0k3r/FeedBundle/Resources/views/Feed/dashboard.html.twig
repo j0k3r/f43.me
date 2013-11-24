@@ -47,7 +47,7 @@
                                 <a href="{{ path('feed_edit', { 'slug': feedlog.feed.slug }) }}">{{ feedlog.feed.name }}</a>
                             </div>
                         </td>
-                        <td>{{ feedlog.itemsnumber }}</td>
+                        <td class="items-count">{{ feedlog.itemsnumber }}</td>
                         <td title="{{ feedlog.createdat|date('d/m/y - H:i:s') }}">{{ time_diff(feedlog.createdat) }}</td>
                     </tr>
                 {% endfor %}
@@ -78,7 +78,7 @@
                             <a href="{{ path('feed_edit', { 'slug': feed.slug }) }}">{{ feed.name }}</a>
                         </td>
                         <td><div>{{ feed.host }}</div></td>
-                        <td>{{ feed.feeditems.count }}</td>
+                        <td class="items-count">{{ feed.feeditems.count }}</td>
                         <td>{{ feed.createdat|date('d/m/y - H:i') }}</td>
                     </tr>
                 {% endfor %}

@@ -12,7 +12,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 class FeedItemController extends Controller
 {
     /**
-     * Lists all Feed documents.
+     * Lists all Items documents related to a Feed
      *
      * @Template()
      *

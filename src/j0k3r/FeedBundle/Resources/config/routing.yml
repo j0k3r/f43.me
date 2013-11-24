@@ -70,6 +70,7 @@ feeditem_preview_cached:
 feeditem_delete_all:
     pattern:  /feed/{slug}/items/deleteAll
     defaults: { _controller: j0k3rFeedBundle:FeedItem:deleteAll }
+    methods:  [POST]
 
 # feed log
 feedlog_homepage:

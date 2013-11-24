@@ -226,7 +226,7 @@ class FeedController extends Controller
             $feed = $dm->getRepository('j0k3rFeedBundle:Feed')->findOneBySlug($slug);
 
             if (!$feed) {
-                throw $this->createNotFoundException('Unable to find Feed.');
+                throw $this->createNotFoundException('Unable to find Feed document.');
             }
 
             $dm->remove($feed);
