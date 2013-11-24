@@ -6,7 +6,7 @@ security:
             encode_as_base64: false
 
     role_hierarchy:
-        ROLE_ADMIN: [ROLE_USER, ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH]
+        ROLE_ADMIN: [ROLE_ADMIN]
 
     providers:
         in_memory:
@@ -16,6 +16,10 @@ security:
 
     firewalls:
         dev:
+            pattern:  ^/(_(profiler|wdt)|css|images|js)/
+            security: false
+
+        test:
             pattern:  ^/(_(profiler|wdt)|css|images|js)/
             security: false
 

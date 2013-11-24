@@ -2,7 +2,7 @@
 /app/bootstrap.php.cache
 /app/cache/*
 /app/logs/*
-/build/
+/app/build/
 /vendor/
 /bin/
 /app/config/parameters.yml
@@ -10,3 +10,5 @@
 /web/css/compiled/*
 /web/js/compiled/*
 /src/j0k3r/FeedBundle/Resources/foundation/*
+
+/app/cache.properties

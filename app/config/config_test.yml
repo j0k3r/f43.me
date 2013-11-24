@@ -11,3 +11,22 @@ framework:
 web_profiler:
     toolbar: false
     intercept_redirects: false
+
+security:
+    firewalls:
+        secured:
+            http_basic:
+
+    providers:
+        in_memory:
+            memory:
+                users:
+                    admin: { password: 74913f5cd5f61ec0bcfdb775414c2fb3d161b620, roles: [ 'ROLE_ADMIN' ] }
+
+doctrine_mongodb:
+    default_database: f43me_test
+    document_managers:
+        default:
+            auto_mapping: true
+            metadata_cache_driver:
+                type: array
