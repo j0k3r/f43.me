@@ -5,7 +5,7 @@ parameters:
     locale:            en
     secret:            414c2fb3d161b620
 
-    domain:            f43.me
+    domain:            f43me.dev
 
     # Get one here: https://www.readability.com/account/api
     readability_token: ~
