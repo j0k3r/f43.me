@@ -19,6 +19,7 @@ framework:
     trusted_proxies: ~
     session:
         name: f43me
+        save_path: %kernel.root_dir%/sessions
     fragments:       ~
 
 # Twig Configuration
