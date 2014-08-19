@@ -69,12 +69,7 @@ class FeedItemRepository extends DocumentRepository
             ->getSingleResult();
     }
 
-    /**
-     * Return feeds which HAVE items
-     *
-     * @return array of MongoId
-     */
-    public function findAllFeedWithItems()
+    private function resultsForAllFeedsWithNbItems()
     {
         $q = $this->createQueryBuilder()
             ->map('function() { emit(this.feed.$id, 1); }')
@@ -87,11 +82,39 @@ class FeedItemRepository extends DocumentRepository
                 return sum;
             }')
             ->getQuery();
-        $items = $q->execute();
+
+        return $q->execute();
+    }
+
+    /**
+     * Return feeds which HAVE items
+     *
+     * @return array of MongoId
+     */
+    public function findAllFeedWithItems()
+    {
+        $items = $this->resultsForAllFeedsWithNbItems();
 
         $res = array();
         foreach ($items as $item) {
             $res[] = (string) $item['_id'];
+        }
+
+        return $res;
+    }
+
+    /**
+     * Return feeds which have items with the number of items
+     *
+     * @return array
+     */
+    public function findAllFeedWithNbItems()
+    {
+        $items = $this->resultsForAllFeedsWithNbItems();
+
+        $res = array();
+        foreach ($items as $item) {
+            $res[(string) $item['_id']] = $item['value'];
         }
 
         return $res;

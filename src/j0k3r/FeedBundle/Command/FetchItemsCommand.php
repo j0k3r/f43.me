@@ -178,7 +178,6 @@ class FetchItemsCommand extends BaseFeedCommand
                 $output->writeln('<info>New cached items</info>: '.$cached);
             }
         }
-        $dm->clear();
 
         if (!empty($feedUpdated)) {
             if ($input->getOption('with-trace')) {
@@ -196,6 +195,21 @@ class FetchItemsCommand extends BaseFeedCommand
         }
 
         $output->writeLn('<comment>'.$totalCached.'</comment> items cached.');
+
+        // update nb items for each feed
+        $feedsWithNbItems = $feedItemRepo->findAllFeedWithNbItems();
+        foreach ($feedsWithNbItems as $id => $value) {
+            $feed = $feedRepo->findOneById($id);
+            $feed->setNbItems($value);
+            $dm->persist($feed);
+
+            if ($input->getOption('with-trace')) {
+                $output->writeln('<info>'.$feed->getName().'</info> items updated: <comment>'.$value.'</comment>');
+            }
+        }
+        $dm->flush();
+        $dm->clear();
+
         $this->unlockCommand();
     }
 }

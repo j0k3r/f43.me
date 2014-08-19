@@ -78,7 +78,7 @@
                             <a href="{{ path('feed_edit', { 'slug': feed.slug }) }}">{{ feed.name }}</a>
                         </td>
                         <td><div>{{ feed.host }}</div></td>
-                        <td class="items-count">{{ feed.feeditems.count }}</td>
+                        <td class="items-count">{{ feed.nbitems }}</td>
                         <td>{{ feed.createdat|date('d/m/y - H:i') }}</td>
                     </tr>
                 {% endfor %}

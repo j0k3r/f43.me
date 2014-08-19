@@ -57,6 +57,11 @@ class Feed
     protected $formatter;
 
     /**
+     * @MongoDB\Int
+     */
+    protected $nb_items;
+
+    /**
      * @Gedmo\Slug(fields={"name"}, updatable=false, unique=true)
      * @MongoDB\String
      * @MongoDB\Index
@@ -456,5 +461,27 @@ class Feed
     public function getLastItemCachedAt()
     {
         return $this->last_item_cached_at;
+    }
+
+    /**
+     * Set nbItems
+     *
+     * @param int $nbItems
+     * @return self
+     */
+    public function setNbItems($nbItems)
+    {
+        $this->nb_items = $nbItems;
+        return $this;
+    }
+
+    /**
+     * Get nbItems
+     *
+     * @return int $nbItems
+     */
+    public function getNbItems()
+    {
+        return $this->nb_items;
     }
 }
