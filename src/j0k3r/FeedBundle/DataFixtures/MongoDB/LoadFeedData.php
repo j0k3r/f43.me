@@ -23,6 +23,7 @@ class LoadFeedData extends AbstractFixture implements OrderedFixtureInterface
         $feedReddit->setHost('http://reddit.com');
         $feedReddit->setIsPrivate(false);
         $feedReddit->setSortBy('created_at');
+        $feedReddit->setNbItems(3);
         $feedReddit->setLastItemCachedAt(date('j F Y, g:i:s a'));
         $manager->persist($feedReddit);
         $this->addReference('feed-reddit', $feedReddit);
@@ -36,6 +37,7 @@ class LoadFeedData extends AbstractFixture implements OrderedFixtureInterface
         $feedHN->setHost('news.ycombinator.com');
         $feedHN->setIsPrivate(false);
         $feedHN->setSortBy('published_at');
+        $feedHN->setNbItems(3);
         $feedHN->setLastItemCachedAt(date('j F Y, g:i:s a'));
         $manager->persist($feedHN);
         $this->addReference('feed-hackernews', $feedHN);
@@ -49,6 +51,7 @@ class LoadFeedData extends AbstractFixture implements OrderedFixtureInterface
         $feedMadame->setHost('bonjourmadame.fr');
         $feedMadame->setIsPrivate(true);
         $feedMadame->setSortBy('published_at');
+        $feedMadame->setNbItems(2);
         $feedMadame->setLastItemCachedAt(date('j F Y, g:i:s a'));
         $manager->persist($feedMadame);
         $this->addReference('feed-bonjourmadame', $feedMadame);
