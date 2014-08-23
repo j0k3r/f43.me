@@ -1,4 +1,0 @@
-# api
-feedapi_feed:
-    path:     /{slug}
-    defaults: { _controller: j0k3rFeedBundle:FeedApi:index, _format: xml }

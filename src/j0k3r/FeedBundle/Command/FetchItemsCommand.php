@@ -168,7 +168,7 @@ class FetchItemsCommand extends BaseFeedCommand
 
                 // store feed url updated, to ping hub later
                 $feedUpdated[] = $container->get('router')->generate(
-                    'feedapi_feed',
+                    'feed_xml',
                     array('slug' => $feed->getSlug()),
                     true
                 );

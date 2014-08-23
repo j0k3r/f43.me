@@ -4,6 +4,7 @@ namespace j0k3r\FeedBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use j0k3r\FeedBundle\Document\Feed;
 use j0k3r\FeedBundle\Form\FeedType;
@@ -244,6 +245,29 @@ class FeedController extends Controller
             ->add('slug', 'hidden')
             ->getForm()
         ;
+    }
+
+    /**
+     * Display some information about feeds, items, logs, etc ...
+     *
+     * @Template
+     *
+     * @return array
+     */
+    public function xmlAction($slug)
+    {
+        $dm   = $this->getDocumentManager();
+        $feed = $dm->getRepository('j0k3rFeedBundle:Feed')->findOneBySlug($slug);
+
+        if (!$feed) {
+            throw $this->createNotFoundException('Feed "'.$slug.'" does not exists.');
+        }
+
+        return new Response(
+            $this->get('rss_render')->render($feed),
+            200,
+            array('Content-Type' => 'text/xml')
+        );
     }
 
     /**

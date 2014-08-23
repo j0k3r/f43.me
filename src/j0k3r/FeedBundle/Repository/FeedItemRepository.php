@@ -72,8 +72,8 @@ class FeedItemRepository extends DocumentRepository
     private function resultsForAllFeedsWithNbItems()
     {
         $q = $this->createQueryBuilder()
-            ->map('function() { emit(this.feed.$id, 1); }')
-            ->reduce('function(k, vals) {
+            ->map('function () { emit(this.feed.$id, 1); }')
+            ->reduce('function (k, vals) {
                 var sum = 0;
                 for (var i in vals) {
                     sum += vals[i];

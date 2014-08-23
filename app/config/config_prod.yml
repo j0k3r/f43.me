@@ -44,3 +44,9 @@ ekino_new_relic:
     log_commands: true                    # If true, logs CLI commands to New Relic as Background jobs (>2.3 only)
     transaction_naming: route             # route, controller or service (see below)
     transaction_naming_service: ~         # Transaction naming service (see below)
+
+doctrine_mongodb:
+    document_managers:
+        default:
+            metadata_cache_driver:
+                type: apc

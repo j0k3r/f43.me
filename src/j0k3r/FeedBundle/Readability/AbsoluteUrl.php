@@ -1,5 +1,9 @@
 <?php
 
+/**
+ * @codeCoverageIgnore
+ */
+
 namespace j0k3r\FeedBundle\Readability;
 
 /**

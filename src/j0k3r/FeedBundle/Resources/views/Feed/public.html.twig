@@ -37,7 +37,7 @@
                         <td>
                             <div>
                                 {{ include('j0k3rFeedBundle:Feed:_favicon.html.twig', {'host': feed.host}) }}
-                                <a href="{{ url('feedapi_feed', { 'slug': feed.slug }) }}" target="_blank" title="{{ feed.name }}">
+                                <a href="{{ url('feed_xml', { 'slug': feed.slug }) }}" target="_blank" title="{{ feed.name }}">
                                     {{ feed.name }}
                                 </a>
                             </div>

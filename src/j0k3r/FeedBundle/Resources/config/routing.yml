@@ -50,6 +50,10 @@ feed_delete:
     defaults: { _controller: j0k3rFeedBundle:Feed:delete }
     methods:  [POST]
 
+feed_xml:
+    path:     /{slug}.xml
+    defaults: { _controller: j0k3rFeedBundle:Feed:xml, _format: xml }
+
 # feed item
 feeditem_homepage:
     pattern:  /feed/{slug}/items

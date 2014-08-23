@@ -26,7 +26,7 @@
                         </td>
                         <td>
                             <a href="{{ feed.link }}" target="_blank">Official one</a> -
-                            <a href="{{ url('feedapi_feed', { 'slug': feed.slug }) }}" target="_blank">Readable one</a>
+                            <a href="{{ url('feed_xml', { 'slug': feed.slug }) }}" target="_blank">Readable one</a>
                         </td>
                         <td class="items-count">{{ feed.nbitems }}</td>
                         <td>{{ feed.createdat|date('d/m/y - H:i') }}</td>

@@ -52,7 +52,7 @@ doctrine_mongodb:
         default:
             auto_mapping: true
             metadata_cache_driver:
-                type: apc
+                type: array
 
 stof_doctrine_extensions:
     default_locale: en_US

@@ -1,9 +1,5 @@
 language: php
 
-addons:
-  hosts:
-    - f43me.dev
-
 services:
   - mongodb
 
@@ -13,24 +9,9 @@ php:
   - 5.5
 
 before_script:
-  - sudo apt-get install apache2 libapache2-mod-fastcgi
-  # enable php-fpm
-  - sudo cp ~/.phpenv/versions/$(phpenv version-name)/etc/php-fpm.conf.default ~/.phpenv/versions/$(phpenv version-name)/etc/php-fpm.conf
-  - sudo a2enmod rewrite actions fastcgi alias
-  - echo "cgi.fix_pathinfo = 1" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
-  - ~/.phpenv/versions/$(phpenv version-name)/sbin/php-fpm
-  # configure apache virtual hosts
-  - sudo cp -f .travis-ci-apache /etc/apache2/sites-available/default
-  - sudo sed -e "s?%TRAVIS_BUILD_DIR%?$(pwd)?g" --in-place /etc/apache2/sites-available/default
-  - sudo service apache2 restart
   - echo 'date.timezone = "Europe/Paris"' >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
   # this trick simulate a "no interaction"
   - printf "\n" | pecl install channel://pecl.php.net/apcu-4.0.2
   - pecl install -f mongo-1.4.5
-  - composer install -n
-  - cp app/config/parameters.yml.travis app/config/parameters.yml
-  - php app/console doctrine:mongodb:schema:create --env=test
-  - php app/console doctrine:mongodb:fixtures:load --env=test
-  - php app/console cache:clear --env=test
 
-script: phpunit -c app
+script: ant -f app/build.xml

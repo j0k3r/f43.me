@@ -59,7 +59,7 @@ class Feed
     /**
      * @MongoDB\Int
      */
-    protected $nb_items;
+    protected $nb_items = 0;
 
     /**
      * @Gedmo\Slug(fields={"name"}, updatable=false, unique=true)
@@ -466,12 +466,13 @@ class Feed
     /**
      * Set nbItems
      *
-     * @param int $nbItems
+     * @param  int  $nbItems
      * @return self
      */
     public function setNbItems($nbItems)
     {
         $this->nb_items = $nbItems;
+
         return $this;
     }
 

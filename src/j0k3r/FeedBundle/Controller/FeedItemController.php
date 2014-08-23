@@ -114,7 +114,11 @@ class FeedItemController extends Controller
             ->setFeed($feed);
 
         $firstItem = $rssFeed->get_item(0);
-        $content   = $parser->parseContent(
+        if (!$firstItem) {
+            throw $this->createNotFoundException('No item found in this feed.');
+        }
+
+        $content = $parser->parseContent(
             $firstItem->get_permalink(),
             $firstItem->get_description()
         );

@@ -5,6 +5,7 @@ namespace j0k3r\FeedBundle\Readability;
 use Doctrine\Common\Util\Inflector;
 use j0k3r\FeedBundle\Parser;
 use TubeLink\TubeLink;
+use Buzz\Browser;
 
 class Proxy
 {
@@ -26,7 +27,7 @@ class Proxy
         $useDefault = false
     ;
 
-    public function __construct($buzz, $token, $urlApi, $debug = false, $regexps = array())
+    public function __construct(Browser $buzz, $token, $urlApi, $debug = false, $regexps = array())
     {
         $this->buzz = $buzz;
         $this->token = $token;
@@ -169,7 +170,7 @@ class Proxy
         // if it's a binary file (in fact, not a 'text'), we handle it differently
         if (false === strpos($contentType, 'text')) {
             // if content is an image, just return it
-            if (0 == strpos($contentType, 'image')) {
+            if (0 === strpos($contentType, 'image')) {
                 return '<img src="'.$url.'" />';
             }
 
@@ -250,8 +251,8 @@ class Proxy
      */
     private function gzdecode($data)
     {
-        if (function_exists('gzencode')) {
-            return \gzencode($data);
+        if (function_exists('gzdecode')) {
+            return \gzdecode($data);
         }
 
         $g = tempnam('/tmp', 'ff');

@@ -2,8 +2,6 @@
 
 namespace j0k3r\FeedBundle\DomDocument;
 
-use j0k3r\FeedBundle\DomDocument\XDOMElement;
-
 /**
  * Custom class to handle bad "unterminated entity references"
  *

@@ -6,19 +6,19 @@ class FeedLogControllerTest extends FeedWebTestCase
 {
     public function testUnAuthorized()
     {
-        $client = static::getClient();
+        $client = static::createClient();
 
         $crawler = $client->request('GET', '/feed/reddit/logs');
         $this->assertEquals(302, $client->getResponse()->getStatusCode());
-        $this->assertTrue($client->getResponse()->isRedirect('http://f43me.dev/login'));
+        $this->assertTrue($client->getResponse()->isRedirect('http://localhost/login'));
 
         $crawler = $client->request('GET', '/feed/reddit/logs/deleteAll');
         $this->assertEquals(302, $client->getResponse()->getStatusCode());
-        $this->assertTrue($client->getResponse()->isRedirect('http://f43me.dev/login'));
+        $this->assertTrue($client->getResponse()->isRedirect('http://localhost/login'));
 
         $crawler = $client->request('GET', '/logs');
         $this->assertEquals(302, $client->getResponse()->getStatusCode());
-        $this->assertTrue($client->getResponse()->isRedirect('http://f43me.dev/login'));
+        $this->assertTrue($client->getResponse()->isRedirect('http://localhost/login'));
     }
 
     public function testLogs()

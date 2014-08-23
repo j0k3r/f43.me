@@ -6,19 +6,19 @@ class FeedItemControllerTest extends FeedWebTestCase
 {
     public function testUnAuthorized()
     {
-        $client = static::getClient();
+        $client = static::createClient();
 
         $crawler = $client->request('GET', '/feed/reddit/items');
         $this->assertEquals(302, $client->getResponse()->getStatusCode());
-        $this->assertTrue($client->getResponse()->isRedirect('http://f43me.dev/login'));
+        $this->assertTrue($client->getResponse()->isRedirect('http://localhost/login'));
 
         $crawler = $client->request('GET', '/feed/reddit/previewItem');
         $this->assertEquals(302, $client->getResponse()->getStatusCode());
-        $this->assertTrue($client->getResponse()->isRedirect('http://f43me.dev/login'));
+        $this->assertTrue($client->getResponse()->isRedirect('http://localhost/login'));
 
         $crawler = $client->request('GET', '/feed/reddit/testItem');
         $this->assertEquals(302, $client->getResponse()->getStatusCode());
-        $this->assertTrue($client->getResponse()->isRedirect('http://f43me.dev/login'));
+        $this->assertTrue($client->getResponse()->isRedirect('http://localhost/login'));
     }
 
     public function testIndexBadSlug()

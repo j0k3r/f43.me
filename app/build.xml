@@ -12,11 +12,41 @@
     </parallel>
   </target>
 
+  <target name="clean-local" description="Cleanup build artifacts">
+    <delete dir="${basedir}/build"/>
+    <delete dir="${basedir}/app/cache"/>
+  </target>
+
+  <target name="local" depends="clean-local" description="Prepare for build local test">
+    <mkdir dir="${basedir}/build/code-browser"/>
+    <mkdir dir="${basedir}/build/coverage"/>
+    <mkdir dir="${basedir}/build/logs"/>
+    <mkdir dir="${basedir}/build/pdepend"/>
+    <mkdir dir="${basedir}/app/cache"/>
+
+    <exec executable="php">
+      <arg value="${basedir}/../app/console"/>
+      <arg value="doctrine:mongodb:schema:create"/>
+      <arg value="--env=test"/>
+    </exec>
+    <exec executable="php">
+      <arg value="${basedir}/../app/console"/>
+      <arg value="doctrine:mongodb:fixtures:load"/>
+      <arg value="--env=test"/>
+    </exec>
+    <exec executable="php">
+      <arg value="${basedir}/../app/console"/>
+      <arg value="cache:clear"/>
+      <arg value="--env=test"/>
+    </exec>
+  </target>
+
   <target name="clean" description="Cleanup build artifacts">
     <delete dir="${basedir}/build/code-browser"/>
     <delete dir="${basedir}/build/coverage"/>
     <delete dir="${basedir}/build/logs"/>
     <delete dir="${basedir}/build/pdepend"/>
+    <delete dir="${basedir}/app/cache"/>
   </target>
 
   <target name="prepare" depends="clean" description="Prepare for build">
@@ -24,6 +54,7 @@
     <mkdir dir="${basedir}/build/coverage"/>
     <mkdir dir="${basedir}/build/logs"/>
     <mkdir dir="${basedir}/build/pdepend"/>
+    <mkdir dir="${basedir}/app/cache"/>
     <exec executable="php">
       <arg value="${basedir}/../app/console"/>
       <arg value="doctrine:mongodb:schema:create"/>
@@ -132,7 +163,9 @@
   </target>
 
   <target name="phpunit" description="Run unit tests with PHPUnit">
-    <exec executable="phpunit" failonerror="true"/>
+    <exec executable="phpunit" failonerror="true">
+      <arg value="-c app"/>
+    </exec>
   </target>
 
   <target name="phpcb" description="Aggregate tool output with PHP_CodeBrowser">

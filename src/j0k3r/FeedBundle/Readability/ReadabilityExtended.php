@@ -2,8 +2,6 @@
 
 namespace j0k3r\FeedBundle\Readability;
 
-use j0k3r\FeedBundle\Readability\AbsoluteUrl;
-
 /**
  * This class extends the Readability one to add more fine tuning on content:
  *     - remove some unwanted attributes

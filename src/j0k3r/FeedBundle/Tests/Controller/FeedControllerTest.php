@@ -6,7 +6,7 @@ class FeedControllerTest extends FeedWebTestCase
 {
     public function testIndex()
     {
-        $client = static::getClient();
+        $client = static::createClient();
 
         $crawler = $client->request('GET', '/');
 
@@ -24,23 +24,23 @@ class FeedControllerTest extends FeedWebTestCase
 
     public function testUnAuthorized()
     {
-        $client = static::getClient();
+        $client = static::createClient();
 
         $client->request('GET', '/dashboard');
         $this->assertEquals(302, $client->getResponse()->getStatusCode());
-        $this->assertTrue($client->getResponse()->isRedirect('http://f43me.dev/login'));
+        $this->assertTrue($client->getResponse()->isRedirect('http://localhost/login'));
 
         $client->request('GET', '/feeds');
         $this->assertEquals(302, $client->getResponse()->getStatusCode());
-        $this->assertTrue($client->getResponse()->isRedirect('http://f43me.dev/login'));
+        $this->assertTrue($client->getResponse()->isRedirect('http://localhost/login'));
 
         $client->request('GET', '/feed/new');
         $this->assertEquals(302, $client->getResponse()->getStatusCode());
-        $this->assertTrue($client->getResponse()->isRedirect('http://f43me.dev/login'));
+        $this->assertTrue($client->getResponse()->isRedirect('http://localhost/login'));
 
         $client->request('GET', '/feed/reddit/edit');
         $this->assertEquals(302, $client->getResponse()->getStatusCode());
-        $this->assertTrue($client->getResponse()->isRedirect('http://f43me.dev/login'));
+        $this->assertTrue($client->getResponse()->isRedirect('http://localhost/login'));
     }
 
     public function testDashboard()
@@ -121,7 +121,7 @@ class FeedControllerTest extends FeedWebTestCase
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
         $this->assertCount(1, $alert = $crawler->filter('div.alert-box')->extract(array('_text')));
         $this->assertEquals('Form is invalid.', $alert[0]);
-        $this->assertCount(4, $crawler->filter('small.error'));
+        $this->assertGreaterThanOrEqual(1, count($crawler->filter('small.error')));
     }
 
     public function dataNewFeedOk()
@@ -239,7 +239,7 @@ class FeedControllerTest extends FeedWebTestCase
             'feedbundle_feedtype[host]' => 'news.ycombinator.com',
             'feedbundle_feedtype[link]' => 'https://news.ycombinator.com/rss',
             'feedbundle_feedtype[parser]' => 'internal',
-            'feedbundle_feedtype[formatter]' => 'rss',
+            'feedbundle_feedtype[formatter]' => 'atom',
             'feedbundle_feedtype[sort_by]' => 'published_at',
             // 'feedbundle_feedtype[is_private]' => 0,
             'feedbundle_feedtype[_token]' => '',
@@ -365,5 +365,91 @@ class FeedControllerTest extends FeedWebTestCase
         $crawler = $client->followRedirect();
         $this->assertCount(1, $alert = $crawler->filter('div.alert-box')->extract(array('_text')));
         $this->assertEquals('Document deleted!', $alert[0]);
+    }
+
+    public function testInvalidFeed()
+    {
+        $client = static::createClient();
+
+        $client->request('GET', '/nawak.xml');
+
+        $this->assertEquals(404, $client->getResponse()->getStatusCode());
+        $this->assertContains('does not exists.', $client->getResponse()->getContent());
+    }
+
+    public function testRedditFeed()
+    {
+        $client = static::createClient();
+
+        $crawler = $client->request('GET', '/reddit.xml');
+
+        $this->assertEquals(200, $client->getResponse()->getStatusCode());
+
+        libxml_use_internal_errors(true);
+
+        $xml = new \DOMDocument();
+        $xml->loadXML($client->getResponse()->getContent());
+
+        $errors = libxml_get_errors();
+        $this->assertEmpty($errors, var_export($errors, true));
+
+        libxml_use_internal_errors(false);
+
+        return $crawler;
+    }
+
+    /**
+     * @depends testRedditFeed
+     */
+    public function testRedditFeedContent($crawler)
+    {
+        $this->assertGreaterThan(0, $crawler->filterXPath('//channel/link')->count());
+        $this->assertGreaterThan(0, $crawler->filterXPath('//channel/description')->count());
+        $this->assertGreaterThan(0, $crawler->filterXPath('//channel/generator')->count());
+        $this->assertGreaterThan(0, $crawler->filterXPath('//channel/lastBuildDate')->count());
+        $this->assertGreaterThan(0, $crawler->filterXPath('//channel/item')->count());
+        $this->assertGreaterThan(0, $crawler->filterXPath('//channel/item/title')->count());
+        $this->assertGreaterThan(0, $crawler->filterXPath('//channel/item/description')->count());
+        $this->assertGreaterThan(0, $crawler->filterXPath('//channel/item/link')->count());
+        $this->assertGreaterThan(0, $crawler->filterXPath('//channel/item/guid')->count());
+        $this->assertGreaterThan(0, $crawler->filterXPath('//channel/item/pubDate')->count());
+    }
+
+    public function testHnFeed()
+    {
+        $client = static::createClient();
+
+        $crawler = $client->request('GET', '/hackernews.xml');
+
+        $this->assertEquals(200, $client->getResponse()->getStatusCode());
+
+        libxml_use_internal_errors(true);
+
+        $xml = new \DOMDocument();
+        $xml->loadXML($client->getResponse()->getContent());
+
+        $errors = libxml_get_errors();
+        $this->assertEmpty($errors, var_export($errors, true));
+
+        libxml_use_internal_errors(false);
+
+        return $crawler;
+    }
+
+    /**
+     * @depends testHnFeed
+     */
+    public function testHnFeedContent($crawler)
+    {
+        $this->assertGreaterThan(0, $crawler->filterXPath('//feed/title')->count());
+        $this->assertGreaterThan(0, $crawler->filterXPath('//feed/author')->count());
+        $this->assertGreaterThan(0, $crawler->filterXPath('//feed/generator')->count());
+        $this->assertGreaterThan(0, $crawler->filterXPath('//feed/updated')->count());
+        $this->assertGreaterThan(0, $crawler->filterXPath('//feed/id')->count());
+        $this->assertGreaterThan(0, $crawler->filterXPath('//feed/entry/title')->count());
+        $this->assertGreaterThan(0, $crawler->filterXPath('//feed/entry/summary')->count());
+        $this->assertGreaterThan(0, $crawler->filterXPath('//feed/entry/link')->count());
+        $this->assertGreaterThan(0, $crawler->filterXPath('//feed/entry/updated')->count());
+        $this->assertGreaterThan(0, $crawler->filterXPath('//feed/entry/id')->count());
     }
 }

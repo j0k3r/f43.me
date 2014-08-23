@@ -6,7 +6,7 @@ class SecurityControllerTest extends FeedWebTestCase
 {
     public function testLogin()
     {
-        $client = static::getClient();
+        $client = static::createClient();
 
         $crawler = $client->request('GET', '/login');
 
@@ -22,7 +22,7 @@ class SecurityControllerTest extends FeedWebTestCase
 
     public function testBadLogin()
     {
-        $client = static::getClient();
+        $client = static::createClient();
 
         $crawler = $client->request('GET', '/login');
 
@@ -34,6 +34,6 @@ class SecurityControllerTest extends FeedWebTestCase
 
         $crawler = $client->submit($form);
         $this->assertEquals(302, $client->getResponse()->getStatusCode());
-        $this->assertTrue($client->getResponse()->isRedirect('http://f43me.dev/login'));
+        $this->assertTrue($client->getResponse()->isRedirect('http://localhost/login'));
     }
 }

@@ -6,8 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 
 abstract class BaseFeedCommand extends ContainerAwareCommand
 {
-    protected
-        $lockResource = null;
+    protected $lockResource = null;
 
     /**
      * Lock command using given option as "lock file".
