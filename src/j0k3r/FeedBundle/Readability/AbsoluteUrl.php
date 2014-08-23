@@ -1,9 +1,5 @@
 <?php
 
-/**
- * @codeCoverageIgnore
- */
-
 namespace j0k3r\FeedBundle\Readability;
 
 /**
@@ -50,6 +46,9 @@ namespace j0k3r\FeedBundle\Readability;
  * See:  http://www.opensource.org/licenses/bsd-license.php
  */
 
+/**
+ * @codeCoverageIgnore
+ */
 class AbsoluteUrl
 {
     /**

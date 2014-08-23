@@ -14,4 +14,6 @@ before_script:
   - printf "\n" | pecl install channel://pecl.php.net/apcu-4.0.2
   - pecl install -f mongo-1.4.5
 
-script: ant -f app/build.xml
+script:
+  - ant -f app/build.xml prepare
+  - phpunit -c app
