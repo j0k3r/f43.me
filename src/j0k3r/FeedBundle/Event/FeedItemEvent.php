@@ -13,7 +13,7 @@ class FeedItemEvent extends Event
      */
     protected $feedUrls = array();
 
-    public function setFeedUrls(array $feedUrls)
+    public function __construct(array $feedUrls)
     {
         $this->feedUrls = $feedUrls;
     }

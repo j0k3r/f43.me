@@ -185,8 +185,7 @@ class FetchItemsCommand extends BaseFeedCommand
             }
 
             // send an event about new feed updated
-            $event = new FeedItemEvent();
-            $event->setFeedUrls($feedUpdated);
+            $event = new FeedItemEvent($feedUpdated);
 
             $container->get('event_dispatcher')->dispatch(
                 j0k3rFeedEvents::AFTER_ITEM_CACHED,
