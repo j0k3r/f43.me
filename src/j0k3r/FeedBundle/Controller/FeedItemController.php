@@ -32,7 +32,7 @@ class FeedItemController extends Controller
             $feed->getSortBy()
         );
 
-        $deleteAllForm = $this->createDeleteAllForm($feed->getSlug());
+        $deleteAllForm = $this->createDeleteAllForm();
 
         return array(
             'menu'            => 'feed',
@@ -51,7 +51,7 @@ class FeedItemController extends Controller
             throw $this->createNotFoundException('Unable to find Feed document.');
         }
 
-        $form = $this->createDeleteAllForm($slug);
+        $form = $this->createDeleteAllForm();
         $form->bind($request);
 
         if ($form->isValid()) {
@@ -132,10 +132,9 @@ class FeedItemController extends Controller
         ));
     }
 
-    private function createDeleteAllForm($slug)
+    private function createDeleteAllForm()
     {
-        return $this->createFormBuilder(array('slug' => $slug))
-            ->add('slug', 'hidden')
+        return $this->createFormBuilder()
             ->getForm()
         ;
     }

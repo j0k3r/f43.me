@@ -152,14 +152,9 @@ class FeedItemControllerTest extends FeedWebTestCase
 
         $crawler = $client->request('GET', '/feed/hackernews/items');
 
-        $token = $crawler->filter('form.delete_form input[id=form__token]')->extract(array('_text', 'value'));
-
         $form = $crawler->filter('form.delete_form button[type=submit]')->form();
 
-        $crawler = $client->submit($form, array(
-            'form[slug]' => 'hackernews',
-            'form[_token]' => $token[0][1],
-        ));
+        $crawler = $client->submit($form);
 
         $this->assertEquals(302, $client->getResponse()->getStatusCode());
         $this->assertContains('hackernews', $client->getResponse()->headers->get('location'));

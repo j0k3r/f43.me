@@ -147,7 +147,7 @@ class FeedController extends Controller
         }
 
         $editForm   = $this->createForm(new FeedType(), $feed);
-        $deleteForm = $this->createDeleteForm($feed->getId());
+        $deleteForm = $this->createDeleteForm();
 
         $lastItem   = $dm->getRepository('j0k3rFeedBundle:FeedItem')->findLastItemByFeedId($feed->getId());
         $lastLog    = $dm->getRepository('j0k3rFeedBundle:FeedLog')->findLastItemByFeedId($feed->getId());
@@ -184,7 +184,7 @@ class FeedController extends Controller
         }
 
         $editForm   = $this->createForm(new FeedType(), $feed);
-        $deleteForm = $this->createDeleteForm($feed->getId());
+        $deleteForm = $this->createDeleteForm();
 
         $editForm->bind($request);
 
@@ -219,7 +219,7 @@ class FeedController extends Controller
      */
     public function deleteAction(Request $request, $slug)
     {
-        $form = $this->createDeleteForm($slug);
+        $form = $this->createDeleteForm();
         $form->bind($request);
 
         if ($form->isValid()) {
@@ -239,10 +239,9 @@ class FeedController extends Controller
         return $this->redirect($this->generateUrl('feed_homepage'));
     }
 
-    private function createDeleteForm($slug)
+    private function createDeleteForm()
     {
-        return $this->createFormBuilder(array('slug' => $slug))
-            ->add('slug', 'hidden')
+        return $this->createFormBuilder()
             ->getForm()
         ;
     }

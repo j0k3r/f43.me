@@ -6,9 +6,21 @@ use j0k3r\FeedBundle\Services\SimplePieProxy;
 
 class SimplePieProxyTest extends \PHPUnit_Framework_TestCase
 {
+    protected $cacheDir;
+
+    protected function setUp()
+    {
+        $this->cacheDir = sys_get_temp_dir().md5(time());
+    }
+
+    protected function tearDown()
+    {
+        @rmdir($this->cacheDir);
+    }
+
     public function testRenderBadFormat()
     {
-        $proxy = new SimplePieProxy(md5(time()));
+        $proxy = new SimplePieProxy($this->cacheDir);
 
         $res = $proxy->setUrl('http://test.com');
         $feed = $proxy->init();
