@@ -127,7 +127,7 @@ class ProxyTest extends \PHPUnit_Framework_TestCase
 
         $this->response->expects($this->any())
             ->method('getContent')
-            ->will($this->throwException(new \Exception));
+            ->will($this->throwException(new \Exception()));
 
         $proxy->parseContent('http://foo.bar.nowhere/test.html', 'default content');
 
