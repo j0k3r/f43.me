@@ -55,6 +55,11 @@
     <mkdir dir="${basedir}/build/logs"/>
     <mkdir dir="${basedir}/build/pdepend"/>
     <mkdir dir="${basedir}/app/cache"/>
+    <exec executable="composer">
+      <arg value="install"/>
+      <arg value="--dev"/>
+      <arg value="--working-dir=.."/>
+    </exec>
     <exec executable="php">
       <arg value="${basedir}/../app/console"/>
       <arg value="doctrine:mongodb:schema:create"/>
@@ -64,11 +69,6 @@
       <arg value="${basedir}/../app/console"/>
       <arg value="doctrine:mongodb:fixtures:load"/>
       <arg value="--env=test"/>
-    </exec>
-    <exec executable="composer">
-      <arg value="install"/>
-      <arg value="--dev"/>
-      <arg value="--working-dir=.."/>
     </exec>
     <exec executable="php">
       <arg value="${basedir}/../app/console"/>
