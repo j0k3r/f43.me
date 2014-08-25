@@ -10,7 +10,7 @@ class SimplePieProxyTest extends \PHPUnit_Framework_TestCase
 
     protected function setUp()
     {
-        $this->cacheDir = sys_get_temp_dir().md5(time());
+        $this->cacheDir = __DIR__.'/../../../../../app/cache/tmp-'.md5(time());
     }
 
     protected function tearDown()
