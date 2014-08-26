@@ -67,7 +67,7 @@ class FeedLogController extends Controller
         }
 
         $form = $this->createDeleteAllForm($slug);
-        $form->bind($request);
+        $form->submit($request);
 
         if ($form->isValid()) {
             $res = $dm->getRepository('j0k3rFeedBundle:FeedLog')->deleteAllByFeedId($feed->getId());

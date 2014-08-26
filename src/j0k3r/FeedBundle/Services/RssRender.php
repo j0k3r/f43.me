@@ -10,11 +10,9 @@ use Symfony\Bundle\FrameworkBundle\Routing\Router;
 
 class RssRender
 {
-    protected
-        $generator,
-        $dm,
-        $router
-    ;
+    protected $generator;
+    protected $dm;
+    protected $router;
 
     /**
      *
@@ -64,7 +62,6 @@ class RssRender
                 throw new \InvalidArgumentException(
                     sprintf("Format '%s' is not available. Please see documentation.", $feed->getFormatter())
                 );
-                break;
         }
 
         return $formatter->render();

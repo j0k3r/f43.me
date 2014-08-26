@@ -3,6 +3,7 @@
 namespace j0k3r\FeedBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\SecurityContext;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 
@@ -18,13 +19,12 @@ class SecurityController extends Controller
      *
      * @return array
      */
-    public function loginAction()
+    public function loginAction(Request $request)
     {
         if (true === $this->get('security.context')->isGranted('ROLE_ADMIN')) {
             return $this->redirect($this->generateUrl('feed_dashboard'));
         }
 
-        $request = $this->getRequest();
         $session = $request->getSession();
 
         // get the login error if there is one

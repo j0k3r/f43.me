@@ -13,7 +13,7 @@ class ReadabilityExtended extends \Readability
     /**
      * AbsoluteUrl object
      *
-     * @var string
+     * @var AbsoluteUrl
      */
     public $absUrl;
 

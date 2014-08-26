@@ -9,23 +9,19 @@ use Buzz\Browser;
 
 class Proxy
 {
-    protected
-        $feed = null,
-        $buzz,
-        $urlApi,
-        $token,
-        $debug,
-        $regexps,
-        $chosenParser = null,
-        $allowAllParser = false,
-        $availableParsers = array('Internal', 'External')
-    ;
+    protected $feed = null;
+    protected $buzz;
+    protected $urlApi;
+    protected $token;
+    protected $debug;
+    protected $regexps;
+    protected $chosenParser = null;
+    protected $allowAllParser = false;
+    protected $availableParsers = array('Internal', 'External');
 
-    public
-        $url,
-        $content,
-        $useDefault = false
-    ;
+    public $url;
+    public $content;
+    public $useDefault = false;
 
     public function __construct(Browser $buzz, $token, $urlApi, $debug = false, $regexps = array())
     {
@@ -166,7 +162,7 @@ class Proxy
         // save information about gzip content for later decoding
         $is_gziped = (bool) 'gzip' == $response->getHeader('Content-Encoding');
 
-        $contentType = $response->getHeader('Content-Type');
+        $contentType = (string) $response->getHeader('Content-Type');
         // if it's a binary file (in fact, not a 'text'), we handle it differently
         if (false === strpos($contentType, 'text')) {
             // if content is an image, just return it

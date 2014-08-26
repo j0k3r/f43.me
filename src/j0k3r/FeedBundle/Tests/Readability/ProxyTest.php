@@ -152,11 +152,9 @@ class ProxyTest extends \PHPUnit_Framework_TestCase
                 switch ($param) {
                     case 'Content-Encoding':
                         return 'gzip';
-                        break;
 
                     case 'Content-Type':
                         return 'text';
-                        break;
                 }
             }));
 
@@ -183,11 +181,9 @@ class ProxyTest extends \PHPUnit_Framework_TestCase
                 switch ($param) {
                     case 'Content-Encoding':
                         return 'gzip';
-                        break;
 
                     case 'Content-Type':
                         return 'image';
-                        break;
                 }
             }));
 

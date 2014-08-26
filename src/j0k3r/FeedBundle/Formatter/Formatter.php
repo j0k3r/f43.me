@@ -35,7 +35,7 @@ class Formatter
     protected $url;
 
     /**
-     * @var DOMDocument $dom XML DOMDocument
+     * @var XDOMDocument $dom XML (X)DOMDocument
      */
     protected $dom;
 

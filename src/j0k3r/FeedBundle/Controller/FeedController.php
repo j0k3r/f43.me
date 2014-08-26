@@ -105,7 +105,7 @@ class FeedController extends Controller
     {
         $feed = new Feed();
         $form = $this->createForm(new FeedType(), $feed);
-        $form->bind($request);
+        $form->submit($request);
 
         if ($form->isValid()) {
             $dm = $this->getDocumentManager();
@@ -186,7 +186,7 @@ class FeedController extends Controller
         $editForm   = $this->createForm(new FeedType(), $feed);
         $deleteForm = $this->createDeleteForm();
 
-        $editForm->bind($request);
+        $editForm->submit($request);
 
         if ($editForm->isValid()) {
             $dm->persist($feed);
@@ -220,7 +220,7 @@ class FeedController extends Controller
     public function deleteAction(Request $request, $slug)
     {
         $form = $this->createDeleteForm();
-        $form->bind($request);
+        $form->submit($request);
 
         if ($form->isValid()) {
             $dm   = $this->getDocumentManager();

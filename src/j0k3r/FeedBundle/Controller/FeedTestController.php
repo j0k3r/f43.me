@@ -28,7 +28,7 @@ class FeedTestController extends Controller
         $content = null;
 
         if ($request->isMethod('POST')) {
-            $form->bind($request);
+            $form->submit($request);
 
             if ($form->isValid()) {
                 $parser = $this
