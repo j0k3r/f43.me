@@ -66,6 +66,11 @@ class FeedItem
     protected $feed;
 
     /**
+     * @MongoDB\ReferenceMany(targetDocument="FeedLog", mappedBy="feeditem")
+     */
+    protected $feedlogs;
+
+    /**
      * Get id
      *
      * @return id $id

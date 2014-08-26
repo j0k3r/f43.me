@@ -8,15 +8,15 @@ class FeedItemControllerTest extends FeedWebTestCase
     {
         $client = static::createClient();
 
-        $crawler = $client->request('GET', '/feed/reddit/items');
+        $client->request('GET', '/feed/reddit/items');
         $this->assertEquals(302, $client->getResponse()->getStatusCode());
         $this->assertTrue($client->getResponse()->isRedirect('http://localhost/login'));
 
-        $crawler = $client->request('GET', '/feed/reddit/previewItem');
+        $client->request('GET', '/feed/reddit/previewItem');
         $this->assertEquals(302, $client->getResponse()->getStatusCode());
         $this->assertTrue($client->getResponse()->isRedirect('http://localhost/login'));
 
-        $crawler = $client->request('GET', '/feed/reddit/testItem');
+        $client->request('GET', '/feed/reddit/testItem');
         $this->assertEquals(302, $client->getResponse()->getStatusCode());
         $this->assertTrue($client->getResponse()->isRedirect('http://localhost/login'));
     }
@@ -154,7 +154,7 @@ class FeedItemControllerTest extends FeedWebTestCase
 
         $form = $crawler->filter('form.delete_form button[type=submit]')->form();
 
-        $crawler = $client->submit($form);
+        $client->submit($form);
 
         $this->assertEquals(302, $client->getResponse()->getStatusCode());
         $this->assertContains('hackernews', $client->getResponse()->headers->get('location'));

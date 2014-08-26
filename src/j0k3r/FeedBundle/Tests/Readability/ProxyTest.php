@@ -8,6 +8,10 @@ class ProxyTest extends \PHPUnit_Framework_TestCase
 {
     private $readability;
     private $dom;
+    private $buzz;
+    private $response;
+    private $feed;
+    private $regexs;
 
     protected function setUp()
     {

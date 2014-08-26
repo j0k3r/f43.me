@@ -53,11 +53,7 @@ class FeedItemSubscriber
         $info = curl_getinfo($ch);
         curl_close($ch);
 
-        if ($info['http_code'] != 204) {
-            // hub doesn't respond correctly, do something ?
-            return false;
-        }
-
-        return true;
+        // hub doesn't respond correctly, do something ?
+        return !($info['http_code'] != 204);
     }
 }

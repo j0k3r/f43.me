@@ -11,7 +11,7 @@ class FeedControllerTest extends FeedWebTestCase
         $crawler = $client->request('GET', '/');
 
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
-        $this->assertTrue($crawler->filter('html:contains("f43.me")')->count() > 0);
+        $this->assertGreaterThan(0, $crawler->filter('html:contains("f43.me")')->count());
 
         $this->assertCount(1, $crawler->filter('h1'));
         $this->assertCount(1, $crawler->filter('h2.title'));
@@ -180,9 +180,6 @@ class FeedControllerTest extends FeedWebTestCase
         $this->assertEquals(302, $client->getResponse()->getStatusCode());
         $this->assertContains('google-news', $location);
 
-        $location = str_replace('/edit', '', $location);
-        $slug = substr($location, strrpos($location, '/')+1, strlen($location));
-
         $crawler = $client->followRedirect();
         $this->assertCount(1, $alert = $crawler->filter('div.alert-box')->extract(array('_text')));
         $this->assertEquals('Document created!', $alert[0]);
@@ -192,7 +189,7 @@ class FeedControllerTest extends FeedWebTestCase
     {
         $client = static::getAuthorizedClient();
 
-        $crawler = $client->request('GET', '/feed/nawak/edit');
+        $client->request('GET', '/feed/nawak/edit');
 
         $this->assertEquals(404, $client->getResponse()->getStatusCode());
         $this->assertContains('Unable to find Feed document.', $client->getResponse()->getContent());
@@ -273,7 +270,7 @@ class FeedControllerTest extends FeedWebTestCase
 
         $form = $crawler->filter('button[type=submit]')->form();
 
-        $crawler = $client->submit($form, $data);
+        $client->submit($form, $data);
 
         $this->assertEquals(302, $client->getResponse()->getStatusCode());
         $this->assertContains('hackernews', $client->getResponse()->headers->get('location'));
@@ -311,7 +308,7 @@ class FeedControllerTest extends FeedWebTestCase
 
         $form = $crawler->filter('form.delete_form button[type=submit]')->form();
 
-        $crawler = $client->request('POST', '/feed/nawak/delete', $form->getPhpValues());
+        $client->request('POST', '/feed/nawak/delete', $form->getPhpValues());
 
         $this->assertEquals(404, $client->getResponse()->getStatusCode());
         $this->assertContains('Unable to find Feed document.', $client->getResponse()->getContent());

@@ -31,6 +31,7 @@ class FetchItemsCommand extends BaseFeedCommand
             return $output->writeLn("<error>Command locked !</error>");
         }
 
+        $feeds        = array();
         $container    = $this->getContainer();
         $dm           = $container->get('doctrine.odm.mongodb.document_manager');
 

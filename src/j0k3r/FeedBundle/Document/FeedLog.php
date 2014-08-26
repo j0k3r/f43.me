@@ -35,6 +35,11 @@ class FeedLog
     protected $feed;
 
     /**
+     * @MongoDB\ReferenceOne(targetDocument="FeedItem", inversedBy="feeditems")
+     */
+    protected $feeditem;
+
+    /**
      * Get id
      *
      * @return id $id

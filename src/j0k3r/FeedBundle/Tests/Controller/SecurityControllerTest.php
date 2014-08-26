@@ -32,7 +32,7 @@ class SecurityControllerTest extends FeedWebTestCase
         $form['_username'] = 'admin';
         $form['_password'] = 'admin';
 
-        $crawler = $client->submit($form);
+        $client->submit($form);
         $this->assertEquals(302, $client->getResponse()->getStatusCode());
         $this->assertTrue($client->getResponse()->isRedirect('http://localhost/login'));
     }
