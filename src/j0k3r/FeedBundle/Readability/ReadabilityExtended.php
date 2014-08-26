@@ -2,6 +2,8 @@
 
 namespace j0k3r\FeedBundle\Readability;
 
+use webignition\AbsoluteUrlDeriver\AbsoluteUrlDeriver;
+
 /**
  * This class extends the Readability one to add more fine tuning on content:
  *     - remove some unwanted attributes
@@ -11,15 +13,15 @@ namespace j0k3r\FeedBundle\Readability;
 class ReadabilityExtended extends \Readability
 {
     /**
-     * AbsoluteUrl object
+     * AbsoluteUrlDeriver object
      *
-     * @var AbsoluteUrl
+     * @var AbsoluteUrlDeriver
      */
     public $absUrl;
 
     public function __construct($html, $url = null, $parser = 'libxml')
     {
-        $this->absUrl = new AbsoluteUrl();
+        $this->absUrl = new AbsoluteUrlDeriver();
 
         parent::__construct($html, $url, $parser);
     }
@@ -51,7 +53,9 @@ class ReadabilityExtended extends \Readability
      */
     public function cleanAttrs($e)
     {
-        if (!is_object($e)) return;
+        if (!is_object($e)) {
+            return;
+        }
 
         $attrs = explode('|', $this->regexps['attrToRemove']);
 
@@ -71,7 +75,9 @@ class ReadabilityExtended extends \Readability
      */
     public function cleanTags($e)
     {
-        if (!is_object($e)) return;
+        if (!is_object($e)) {
+            return;
+        }
 
         $tags = explode('|', $this->regexps['tagToRemove']);
 
@@ -88,7 +94,9 @@ class ReadabilityExtended extends \Readability
      */
     public function makeImgSrcAbsolute($e)
     {
-        if (!is_object($e)) return;
+        if (!is_object($e)) {
+            return;
+        }
 
         $elems = $e->getElementsByTagName('img');
         foreach ($elems as $elem) {
@@ -117,10 +125,11 @@ class ReadabilityExtended extends \Readability
             }
 
             // convert relative src to absolute
-            $src = $this->absUrl->url_to_absolute(
-                $this->url,
-                $src
+            $this->absUrl->init(
+                $src,
+                $this->url
             );
+            $src = (string) $this->absUrl->getAbsoluteUrl();
 
             $elem->setAttribute('src', $src);
         }
@@ -134,7 +143,9 @@ class ReadabilityExtended extends \Readability
      */
     public function makeHrefAbsolute($e)
     {
-        if (!is_object($e)) return;
+        if (!is_object($e)) {
+            return;
+        }
 
         $elems = $e->getElementsByTagName('a');
         foreach ($elems as $elem) {
@@ -145,10 +156,11 @@ class ReadabilityExtended extends \Readability
             }
 
             // convert relative href to absolute
-            $href = $this->absUrl->url_to_absolute(
-                $this->url,
-                $href
+            $this->absUrl->init(
+                $href,
+                $this->url
             );
+            $href = (string) $this->absUrl->getAbsoluteUrl();
 
             $elem->setAttribute('href', $href);
         }
@@ -163,7 +175,9 @@ class ReadabilityExtended extends \Readability
      */
     public function convertH1ToH2($e)
     {
-        if (!is_object($e)) return;
+        if (!is_object($e)) {
+            return;
+        }
 
         if ($e->getElementsByTagName('h1')->length == 1) {
             return;

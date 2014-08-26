@@ -24,7 +24,8 @@
         "grom/tube-link": "1.*",
         "zurb/foundation": "4.3.*",
         "sensio/buzz-bundle": "1.0.*@dev",
-        "ekino/newrelic-bundle": "1.2.*@dev"
+        "ekino/newrelic-bundle": "1.2.*@dev",
+        "webignition/absolute-url-deriver": "1.5"
     },
     "require-dev": {
         "sensio/generator-bundle": "2.3.*@dev",
