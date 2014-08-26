@@ -199,7 +199,7 @@ class Proxy
         }
 
         $tidy = tidy_parse_string(
-            $readability->getContent()->innerHTML,
+            $readability->getHtmlContent(),
             array(
                 'wrap'           => 0,
                 'indent'         => true,

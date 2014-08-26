@@ -29,10 +29,13 @@ class SecurityControllerTest extends FeedWebTestCase
         $form = $crawler->filter('button[type=submit]')->form();
 
         // bad password
-        $form['_username'] = 'admin';
-        $form['_password'] = 'admin';
+        $data = array(
+            '_username' => 'admin',
+            '_password' => 'admin',
+        );
 
-        $client->submit($form);
+        $client->submit($form, $data);
+
         $this->assertEquals(302, $client->getResponse()->getStatusCode());
         $this->assertTrue($client->getResponse()->isRedirect('http://localhost/login'));
     }

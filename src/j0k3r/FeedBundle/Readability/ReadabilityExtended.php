@@ -27,6 +27,22 @@ class ReadabilityExtended extends \Readability
     }
 
     /**
+     * Get article content as html
+     *
+     * @return string
+     */
+    public function getHtmlContent()
+    {
+        $innerHTML = '';
+        $children = $this->articleContent->childNodes;
+        foreach ($children as $child) {
+            $innerHTML .= $child->ownerDocument->saveXML($child);
+        }
+
+        return $innerHTML;
+    }
+
+    /**
      * Prepare the article node for display. Clean out any inline styles,
      * iframes, forms, strip extraneous <p> tags, etc.
      *
