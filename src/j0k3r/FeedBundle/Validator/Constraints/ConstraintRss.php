@@ -7,7 +7,7 @@ use Symfony\Component\Validator\Constraint;
 /**
  * @Annotation
  */
-class ContainsRss extends Constraint
+class ConstraintRss extends Constraint
 {
     public $message = 'Feed "%string%" is not valid.';
 

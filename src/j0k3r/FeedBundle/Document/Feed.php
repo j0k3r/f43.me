@@ -36,7 +36,7 @@ class Feed
      * @MongoDB\String
      * @Assert\NotBlank()
      * @Assert\Url()
-     * @FeedAssert\ContainsRss
+     * @FeedAssert\ConstraintRss
      */
     protected $link;
 

@@ -9,7 +9,7 @@ use Symfony\Component\Validator\ConstraintValidator;
  * Validate a XML feed.
  * Wait 3s before timeout
  */
-class ContainsRssValidator extends ConstraintValidator
+class ConstraintRssValidator extends ConstraintValidator
 {
     public function validate($value, Constraint $constraint)
     {
