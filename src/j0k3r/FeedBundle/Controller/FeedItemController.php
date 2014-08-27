@@ -47,8 +47,8 @@ class FeedItemController extends Controller
     /**
      * Delete all items for a given Feed
      *
-     * @param  Request $request
-     * @param  string  $slug    The Feed slug
+     * @param Request $request
+     * @param string  $slug    The Feed slug
      *
      * @return RedirectResponse
      */
@@ -76,7 +76,7 @@ class FeedItemController extends Controller
     /**
      * Preview an item that is already cached
      *
-     * @param  string $id Item id
+     * @param string $id Item id
      *
      * @return string
      */
@@ -101,7 +101,7 @@ class FeedItemController extends Controller
      * Display a modal to preview the first item from a Feed.
      * It will allow to preview the parsed item (which isn't cached) using the internal or the external parser
      *
-     * @param  string $slug The Feed slug
+     * @param string $slug The Feed slug
      *
      * @return string
      */
@@ -122,8 +122,8 @@ class FeedItemController extends Controller
     /**
      * Following the previous action, this one will actually parse the content (for both parser)
      *
-     * @param  Request $request
-     * @param  string  $slug    The Feed slug
+     * @param Request $request
+     * @param string  $slug    The Feed slug
      *
      * @return string
      */

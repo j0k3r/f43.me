@@ -47,10 +47,10 @@ class Formatter
     /**
      * Construct a formatter with given feed
      *
-     * @param Feed   $feed      A feed instance
-     * @param array  $items     An array of FeedItem object
-     * @param string $url
-     * @param string $generator
+     * @param Feed        $feed      A feed instance
+     * @param array       $items     An array of FeedItem object
+     * @param string      $url
+     * @param string|null $generator
      */
     public function __construct(Feed $feed, $items, $url, $generator = null)
     {
@@ -88,7 +88,7 @@ class Formatter
      * @param array    $field A field instance
      * @param FeedItem $item  An entity instance
      *
-     * @return \DOMNode
+     * @return XDOMElement
      */
     protected function format($field, FeedItem $item)
     {

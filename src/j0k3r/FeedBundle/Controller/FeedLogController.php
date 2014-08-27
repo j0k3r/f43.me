@@ -62,8 +62,8 @@ class FeedLogController extends Controller
     /**
      * Delete all logs for a given Feed
      *
-     * @param  Request $request
-     * @param  string  $slug    The Feed slug
+     * @param Request $request
+     * @param string  $slug    The Feed slug
      *
      * @return RedirectResponse
      */

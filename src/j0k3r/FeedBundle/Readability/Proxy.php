@@ -85,7 +85,7 @@ class Proxy
     /**
      * Try to retrieve content from a given url
      *
-     * @param string $url         RSS item url
+     * @param string      $url         RSS item url
      * @param string|null $itemContent RSS item content, which will be taken if we can't extract content from url
      *
      * @return Proxy

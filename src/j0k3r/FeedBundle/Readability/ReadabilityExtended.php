@@ -67,7 +67,7 @@ class ReadabilityExtended extends \Readability
     /**
      * Remove some attributes on every $e and under.
      *
-     * @param  DOMElement $e
+     * @param DOMElement $e
      */
     public function cleanAttrs($e)
     {
@@ -88,7 +88,7 @@ class ReadabilityExtended extends \Readability
     /**
      * Remove some "bad" tags on every $e and under.
      *
-     * @param  DOMElement $e
+     * @param DOMElement $e
      */
     public function cleanTags($e)
     {
@@ -106,7 +106,7 @@ class ReadabilityExtended extends \Readability
     /**
      * Convert relative image path to absolute
      *
-     * @param  DOMElement $e
+     * @param DOMElement $e
      */
     public function makeImgSrcAbsolute($e)
     {
@@ -154,7 +154,7 @@ class ReadabilityExtended extends \Readability
     /**
      * Convert relative url absolute
      *
-     * @param  DOMElement $e
+     * @param DOMElement $e
      */
     public function makeHrefAbsolute($e)
     {
@@ -185,7 +185,7 @@ class ReadabilityExtended extends \Readability
      * Convert h1 tag to h2.
      * Since Readability removes h1
      *
-     * @param  DOMElement $e
+     * @param DOMElement $e
      */
     public function convertH1ToH2($e)
     {

@@ -7,7 +7,6 @@ use j0k3r\FeedBundle\Command\FetchItemsCommand;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Component\Console\Tester\CommandTester;
-use Symfony\Component\Console\Output\OutputInterface;
 
 class FetchItemsCommandTest extends WebTestCase
 {
@@ -16,7 +15,7 @@ class FetchItemsCommandTest extends WebTestCase
 
     public function setUp()
     {
-        $this->client = static::createClient();
+        static::createClient();
 
         $application = new Application(static::$kernel);
         $application->add(new FetchItemsCommand());
@@ -27,6 +26,7 @@ class FetchItemsCommandTest extends WebTestCase
 
     /**
      * @see http://symfony.com/doc/current/components/console/helpers/dialoghelper.html#testing-a-command-which-expects-input
+     * @param string $input
      */
     protected function getInputStream($input)
     {

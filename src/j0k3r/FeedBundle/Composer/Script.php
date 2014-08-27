@@ -36,7 +36,7 @@ class Script
     /**
      * Display full path
      *
-     * @param  string $directory
+     * @param string $directory
      *
      * @return string
      */
@@ -48,9 +48,9 @@ class Script
     /**
      * Call `system()` function to create symlink inside the project
      *
-     * @param  string  $target The target dir
-     * @param  string  $source The source dir
-     * @param  boolean $force
+     * @param string  $target The target dir
+     * @param string  $source The source dir
+     * @param boolean $force
      */
     private static function createSymlink($target, $source, $force = false)
     {

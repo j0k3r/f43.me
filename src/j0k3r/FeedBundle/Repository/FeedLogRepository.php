@@ -35,9 +35,9 @@ class FeedLogRepository extends DocumentRepository
     /**
      * Get the base query to fetch items
      *
-     * @param string $feedId Feed id
-     * @param integer|null    $limit  Number of items to return
-     * @param integer|null    $skip   Item to skip before applying the limit
+     * @param string       $feedId Feed id
+     * @param integer|null $limit  Number of items to return
+     * @param integer|null $skip   Item to skip before applying the limit
      *
      * @return Doctrine\ODM\MongoDB\Query\Query
      */
