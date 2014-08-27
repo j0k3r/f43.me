@@ -4,6 +4,7 @@ namespace j0k3r\FeedBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\Security\Core\SecurityContext;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 
@@ -17,7 +18,7 @@ class SecurityController extends Controller
      *
      * @Template()
      *
-     * @return array
+     * @return array|RedirectResponse
      */
     public function loginAction(Request $request)
     {

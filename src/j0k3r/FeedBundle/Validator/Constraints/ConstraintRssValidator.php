@@ -11,6 +11,9 @@ use Symfony\Component\Validator\ConstraintValidator;
  */
 class ConstraintRssValidator extends ConstraintValidator
 {
+    /**
+     * {@inheritdoc}
+     */
     public function validate($value, Constraint $constraint)
     {
         $ch = curl_init();

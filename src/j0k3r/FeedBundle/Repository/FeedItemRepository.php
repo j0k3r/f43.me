@@ -69,6 +69,11 @@ class FeedItemRepository extends DocumentRepository
             ->getSingleResult();
     }
 
+    /**
+     * Return the raw results of feeds which HAVE items.
+     *
+     * @return \MongoCursor
+     */
     private function resultsForAllFeedsWithNbItems()
     {
         $q = $this->createQueryBuilder()

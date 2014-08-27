@@ -5,6 +5,7 @@ namespace j0k3r\FeedBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use j0k3r\FeedBundle\Document\Feed;
 use j0k3r\FeedBundle\Form\FeedType;
@@ -99,7 +100,7 @@ class FeedController extends Controller
      *
      * @param Request $request
      *
-     * @return array
+     * @return array|RedirectResponse
      */
     public function createAction(Request $request)
     {
@@ -170,7 +171,7 @@ class FeedController extends Controller
      * @param Request $request The request object
      * @param string  $slug    The document Slug
      *
-     * @return array
+     * @return array|RedirectResponse
      *
      * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException If document doesn't exists
      */
@@ -213,7 +214,7 @@ class FeedController extends Controller
      * @param Request $request The request object
      * @param string  $slug    The document Slug
      *
-     * @return array
+     * @return RedirectResponse
      *
      * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException If document doesn't exists
      */
@@ -241,17 +242,16 @@ class FeedController extends Controller
 
     private function createDeleteForm()
     {
-        return $this->createFormBuilder()
-            ->getForm()
-        ;
+        return $this->createFormBuilder()->getForm();
     }
 
     /**
      * Display some information about feeds, items, logs, etc ...
      *
      * @Template
+     * @param string $slug Feed slug
      *
-     * @return array
+     * @return Response
      */
     public function xmlAction($slug)
     {

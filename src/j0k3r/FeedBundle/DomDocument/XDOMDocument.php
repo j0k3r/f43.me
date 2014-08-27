@@ -9,6 +9,12 @@ namespace j0k3r\FeedBundle\DomDocument;
  */
 class XDOMDocument extends \DOMDocument
 {
+    /**
+     * Create a new XDOMDocument
+     *
+     * @param string $version  The version number of the document as part of the XML declaration.
+     * @param string $encoding The encoding of the document as part of the XML declaration.
+     */
     public function __construct($version = null, $encoding = null)
     {
         parent::__construct($version, $encoding);
@@ -16,6 +22,15 @@ class XDOMDocument extends \DOMDocument
         $this->registerNodeClass('DOMElement', 'j0k3r\FeedBundle\DomDocument\XDOMElement');
     }
 
+    /**
+     * Create a new instance of XDOMElement
+     *
+     * @param  string $name         The tag name of the element.
+     * @param  string $value        The value of the element.
+     * @param  string $namespaceURI The namespace of the element.
+     *
+     * @return XDOMElement
+     */
     public function createElement($name, $value = null, $namespaceURI = null)
     {
         $element = new XDOMElement($name, $value, $namespaceURI);

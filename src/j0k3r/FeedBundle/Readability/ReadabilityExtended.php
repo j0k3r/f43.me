@@ -19,6 +19,9 @@ class ReadabilityExtended extends \Readability
      */
     public $absUrl;
 
+    /**
+     * {@inheritDoc}
+     */
     public function __construct($html, $url = null, $parser = 'libxml')
     {
         $this->absUrl = new AbsoluteUrlDeriver();
@@ -47,8 +50,8 @@ class ReadabilityExtended extends \Readability
      * iframes, forms, strip extraneous <p> tags, etc.
      *
      * @see parent
-     * @param DOMElement
-     * @return void
+     *
+     * @param DOMElement $articleContent
      */
     public function prepArticle($articleContent)
     {
@@ -65,7 +68,6 @@ class ReadabilityExtended extends \Readability
      * Remove some attributes on every $e and under.
      *
      * @param  DOMElement $e
-     * @return void
      */
     public function cleanAttrs($e)
     {
@@ -87,7 +89,6 @@ class ReadabilityExtended extends \Readability
      * Remove some "bad" tags on every $e and under.
      *
      * @param  DOMElement $e
-     * @return void
      */
     public function cleanTags($e)
     {
@@ -106,7 +107,6 @@ class ReadabilityExtended extends \Readability
      * Convert relative image path to absolute
      *
      * @param  DOMElement $e
-     * @return void
      */
     public function makeImgSrcAbsolute($e)
     {
@@ -155,7 +155,6 @@ class ReadabilityExtended extends \Readability
      * Convert relative url absolute
      *
      * @param  DOMElement $e
-     * @return void
      */
     public function makeHrefAbsolute($e)
     {
@@ -187,7 +186,6 @@ class ReadabilityExtended extends \Readability
      * Since Readability removes h1
      *
      * @param  DOMElement $e
-     * @return void
      */
     public function convertH1ToH2($e)
     {

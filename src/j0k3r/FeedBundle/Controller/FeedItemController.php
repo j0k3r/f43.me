@@ -4,6 +4,7 @@ namespace j0k3r\FeedBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 
 /**
@@ -15,6 +16,7 @@ class FeedItemController extends Controller
      * Lists all Items documents related to a Feed
      *
      * @Template()
+     * @param string $slug Feed slug
      *
      * @return array
      */
@@ -42,6 +44,14 @@ class FeedItemController extends Controller
         );
     }
 
+    /**
+     * Delete all items for a given Feed
+     *
+     * @param  Request $request
+     * @param  string  $slug    The Feed slug
+     *
+     * @return RedirectResponse
+     */
     public function deleteAllAction(Request $request, $slug)
     {
         $dm   = $this->getDocumentManager();
@@ -63,6 +73,13 @@ class FeedItemController extends Controller
         return $this->redirect($this->generateUrl('feed_edit', array('slug' => $slug)));
     }
 
+    /**
+     * Preview an item that is already cached
+     *
+     * @param  string $id Item id
+     *
+     * @return string
+     */
     public function previewCachedAction($id)
     {
         $dm       = $this->getDocumentManager();
@@ -80,6 +97,14 @@ class FeedItemController extends Controller
         ));
     }
 
+    /**
+     * Display a modal to preview the first item from a Feed.
+     * It will allow to preview the parsed item (which isn't cached) using the internal or the external parser
+     *
+     * @param  string $slug The Feed slug
+     *
+     * @return string
+     */
     public function testItemAction($slug)
     {
         $dm   = $this->getDocumentManager();
@@ -94,6 +119,14 @@ class FeedItemController extends Controller
         ));
     }
 
+    /**
+     * Following the previous action, this one will actually parse the content (for both parser)
+     *
+     * @param  Request $request
+     * @param  string  $slug    The Feed slug
+     *
+     * @return string
+     */
     public function previewNewAction(Request $request, $slug)
     {
         $dm   = $this->getDocumentManager();
@@ -134,9 +167,7 @@ class FeedItemController extends Controller
 
     private function createDeleteAllForm()
     {
-        return $this->createFormBuilder()
-            ->getForm()
-        ;
+        return $this->createFormBuilder()->getForm();
     }
 
     /**

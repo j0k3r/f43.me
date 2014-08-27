@@ -6,8 +6,13 @@ use j0k3r\FeedBundle\Event\FeedItemEvent;
 
 class FeedItemSubscriber
 {
-    protected $hub = array();
+    protected $hub = '';
 
+    /**
+     * Create a new subscriber.
+     *
+     * @param string $hub A hub (url) to ping
+     */
     public function __construct($hub)
     {
         $this->hub = $hub;

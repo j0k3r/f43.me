@@ -15,7 +15,7 @@ class FeedRepository extends DocumentRepository
     /**
      * Find feeds ordered by updated date
      *
-     * @param integer $limit Items to retrieve
+     * @param integer|null $limit Items to retrieve
      *
      * @return Doctrine\ODM\MongoDB\EagerCursor
      */

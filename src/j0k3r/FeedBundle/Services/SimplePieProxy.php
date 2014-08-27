@@ -6,6 +6,13 @@ class SimplePieProxy
 {
     protected $feed;
 
+    /**
+     * Create a new Proxy for SimplePie
+     *
+     * @param string  $cache        Path to cache folder
+     * @param integer $item_limit   The maximum number of items to return.
+     * @param boolean $enable_cache Enable caching
+     */
     public function __construct($cache, $item_limit = 25, $enable_cache = true)
     {
         $this->feed = new \SimplePie();
@@ -23,6 +30,13 @@ class SimplePieProxy
         }
     }
 
+    /**
+     * Set the URL of the feed you want to parse
+     *
+     * @param string $url
+     *
+     * @see  SimplePie->set_feed_url
+     */
     public function setUrl($url)
     {
         $this->feed->set_feed_url($url);
@@ -30,6 +44,13 @@ class SimplePieProxy
         return $this;
     }
 
+    /**
+     * Initialize the feed object
+     *
+     * @return \SimplePie
+     *
+     * @see  SimplePie->init
+     */
     public function init()
     {
         $this->feed->init();

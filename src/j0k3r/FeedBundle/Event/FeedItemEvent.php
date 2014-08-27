@@ -13,6 +13,11 @@ class FeedItemEvent extends Event
      */
     protected $feedUrls = array();
 
+    /**
+     * Store feed urls that need to be dispatched
+     *
+     * @param array $feedUrls
+     */
     public function __construct(array $feedUrls)
     {
         $this->feedUrls = $feedUrls;

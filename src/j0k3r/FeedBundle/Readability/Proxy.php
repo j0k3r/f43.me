@@ -3,9 +3,11 @@
 namespace j0k3r\FeedBundle\Readability;
 
 use Doctrine\Common\Util\Inflector;
-use j0k3r\FeedBundle\Parser;
 use TubeLink\TubeLink;
 use Buzz\Browser;
+
+use j0k3r\FeedBundle\Parser;
+use j0k3r\FeedBundle\Document\Feed;
 
 class Proxy
 {
@@ -23,6 +25,15 @@ class Proxy
     public $content;
     public $useDefault = false;
 
+    /**
+     * Create a new Proxy for Readability
+     *
+     * @param Browser $buzz
+     * @param string  $token   Readability API token
+     * @param string  $urlApi  Readability API url
+     * @param boolean $debug
+     * @param array   $regexps Regex to remove/escape content
+     */
     public function __construct(Browser $buzz, $token, $urlApi, $debug = false, $regexps = array())
     {
         $this->buzz = $buzz;
@@ -32,6 +43,11 @@ class Proxy
         $this->regexps = $regexps;
     }
 
+    /**
+     * Define the parser to use
+     *
+     * @param string $parser Could be "internal" or "external"
+     */
     public function setChosenParser($parser)
     {
         $this->chosenParser = $parser;
@@ -39,7 +55,12 @@ class Proxy
         return $this;
     }
 
-    public function setFeed($feed)
+    /**
+     * Define the Feed object to work on
+     *
+     * @param Feed $feed
+     */
+    public function setFeed(Feed $feed)
     {
         $this->feed = $feed;
 
@@ -52,7 +73,7 @@ class Proxy
      *
      * @param bool $value
      *
-     * @return \Proxy Current object
+     * @return Proxy Current object
      */
     public function allowAllParser($value)
     {
@@ -65,9 +86,9 @@ class Proxy
      * Try to retrieve content from a given url
      *
      * @param string $url         RSS item url
-     * @param string $itemContent RSS item content, which will be taken if we can't extract content from url
+     * @param string|null $itemContent RSS item content, which will be taken if we can't extract content from url
      *
-     * @return string
+     * @return Proxy
      */
     public function parseContent($url, $itemContent = null)
     {
@@ -177,7 +198,7 @@ class Proxy
 
         // decode gzip content (most of the time it's a Tumblr website)
         if (true === $is_gziped) {
-            $content = $this->gzdecode($content);
+            $content = gzdecode($content);
         }
 
         // Convert encoding since Readability accept only UTF-8
@@ -240,22 +261,5 @@ class Proxy
         }
 
         return false;
-    }
-
-    /**
-     * Emulate gzdecode function that is available only for PHP >= 5.4
-     */
-    private function gzdecode($data)
-    {
-        if (function_exists('gzdecode')) {
-            return \gzdecode($data);
-        }
-
-        $g = tempnam('/tmp', 'ff');
-        @file_put_contents($g, $data);
-        ob_start();
-        readgzfile($g);
-
-        return ob_get_clean();
     }
 }

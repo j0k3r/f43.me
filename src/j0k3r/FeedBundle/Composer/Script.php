@@ -4,6 +4,9 @@ namespace j0k3r\FeedBundle\Composer;
 
 use Composer\Script\Event;
 
+/**
+ * @codeCoverageIgnore
+ */
 class Script
 {
     private static $rootDir;
@@ -30,11 +33,25 @@ class Script
         self::createSymlink($targetDir, $sourceDir);
     }
 
+    /**
+     * Display full path
+     *
+     * @param  string $directory
+     *
+     * @return string
+     */
     private static function displayPath($directory)
     {
         return str_replace(self::$rootDir.'/', '', $directory);
     }
 
+    /**
+     * Call `system()` function to create symlink inside the project
+     *
+     * @param  string  $target The target dir
+     * @param  string  $source The source dir
+     * @param  boolean $force
+     */
     private static function createSymlink($target, $source, $force = false)
     {
         if (false === file_exists($target) || true === $force) {
