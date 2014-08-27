@@ -141,4 +141,16 @@ class ReadabilityExtendedTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals('test<h1>first h1</h1>', $domElement->innerHTML);
     }
+
+    /**
+     * @group only
+     */
+    public function testNotAnObjectArgument()
+    {
+        $this->assertEmpty($this->readability->cleanAttrs(''));
+        $this->assertEmpty($this->readability->cleanTags(''));
+        $this->assertEmpty($this->readability->makeImgSrcAbsolute(''));
+        $this->assertEmpty($this->readability->makeHrefAbsolute(''));
+        $this->assertEmpty($this->readability->convertH1ToH2(''));
+    }
 }

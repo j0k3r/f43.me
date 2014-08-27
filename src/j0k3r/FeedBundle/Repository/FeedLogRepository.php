@@ -149,7 +149,11 @@ class FeedLogRepository extends DocumentRepository
     /**
      * Retrieve a list of all feed with the last feedlog date
      *
+     * This one isn't used anymore. It was too long to retrieve data. I switched to something else.
+     * But I spent too much hour on it, so I can't remove it like that..
+     *
      * @return array
+     * @codeCoverageIgnore
      */
     public function findLastUpdated()
     {

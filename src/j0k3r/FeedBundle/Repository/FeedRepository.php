@@ -48,21 +48,6 @@ class FeedRepository extends DocumentRepository
     }
 
     /**
-     * Find feeds that doesn't have items
-     * BUT, this doesn't seems to work ...
-     *
-     * @return Doctrine\ODM\MongoDB\EagerCursor
-     */
-    public function findAllNew()
-    {
-        return $this->createQueryBuilder()
-            ->field('feeditems')->size(0)
-            ->eagerCursor(true)
-            ->getQuery()
-            ->execute();
-    }
-
-    /**
      * Find feed by ids.
      * Used in FetchItemCommand to retrieve feed that have / or not items
      *

@@ -30,7 +30,7 @@ class LoadFeedData extends AbstractFixture implements OrderedFixtureInterface
 
         $feedHN = new Feed();
         $feedHN->setName('HackerNews');
-        $feedHN->setDescription('Links for the intellectually curious, ranked by readers.');
+        $feedHN->setDescription('');
         $feedHN->setLink('https://news.ycombinator.com/rss');
         $feedHN->setParser('internal');
         $feedHN->setFormatter('atom');
