@@ -111,6 +111,7 @@
         <script type="text/javascript" src="{{ asset_url }}"></script>
     {% endjavascripts %}
 
+    {% if ga_tracking %}
     <script>
         $(document).foundation();
         (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -121,5 +122,6 @@
         ga('create', '{{ ga_tracking }}', 'f43.me');
         ga('send', 'pageview');
     </script>
+    {% endif %}
 </body>
 </html>

@@ -29,6 +29,3 @@ assetic:
         compass:
             bin: /opt/local/bin/compass
 
-twig:
-    globals:
-        ga_tracking: ''
