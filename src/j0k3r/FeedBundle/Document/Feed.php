@@ -91,7 +91,7 @@ class Feed
 
     /**
      * @MongoDB\Date
-     * @Gedmo\Timestampable(on="update")
+     * @Gedmo\Timestampable(on="change", field={"name", "description", "link", "host", "parser", "formatter", "is_private", "sort_by"})
      */
     protected $updated_at;
 
