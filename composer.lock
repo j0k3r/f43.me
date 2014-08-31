@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "0a16b2dc2effcd9ee8b45fe0761b6679",
+    "hash": "0a6554b0ce4a1c54bf3a6f17abb98520",
     "packages": [
         {
             "name": "doctrine/annotations",
@@ -760,26 +760,23 @@
         },
         {
             "name": "ekino/newrelic-bundle",
-            "version": "dev-master",
+            "version": "1.2.2",
             "target-dir": "Ekino/Bundle/NewRelicBundle",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ekino/EkinoNewRelicBundle.git",
-                "reference": "2f62ed3ba3d906a7ee6e03fc610b2d38afe35794"
+                "reference": "802a854bc948dca90523c5f87b8f137f4fb56796"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ekino/EkinoNewRelicBundle/zipball/2f62ed3ba3d906a7ee6e03fc610b2d38afe35794",
-                "reference": "2f62ed3ba3d906a7ee6e03fc610b2d38afe35794",
+                "url": "https://api.github.com/repos/ekino/EkinoNewRelicBundle/zipball/802a854bc948dca90523c5f87b8f137f4fb56796",
+                "reference": "802a854bc948dca90523c5f87b8f137f4fb56796",
                 "shasum": ""
             },
             "require-dev": {
                 "silex/silex": "~1.0",
                 "symfony/console": "~2.2",
                 "symfony/framework-bundle": "~2.2"
-            },
-            "suggest": {
-                "sonata-project/block-bundle": "2.2.*@dev"
             },
             "type": "symfony-bundle",
             "extra": {
@@ -810,7 +807,7 @@
                 "monitoring",
                 "performance"
             ],
-            "time": "2014-07-11 22:42:24"
+            "time": "2014-02-04 17:20:36"
         },
         {
             "name": "etechnika/idna-convert",
@@ -1146,17 +1143,17 @@
         },
         {
             "name": "knplabs/knp-time-bundle",
-            "version": "dev-master",
+            "version": "v1.3",
             "target-dir": "Knp/Bundle/TimeBundle",
             "source": {
                 "type": "git",
                 "url": "https://github.com/KnpLabs/KnpTimeBundle.git",
-                "reference": "9c54fa31ecb5cae95a4a29c7243aa0be5d02bbba"
+                "reference": "abf7c17ab817d9b991445f56297c44b2217f6a5d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/KnpLabs/KnpTimeBundle/zipball/9c54fa31ecb5cae95a4a29c7243aa0be5d02bbba",
-                "reference": "9c54fa31ecb5cae95a4a29c7243aa0be5d02bbba",
+                "url": "https://api.github.com/repos/KnpLabs/KnpTimeBundle/zipball/abf7c17ab817d9b991445f56297c44b2217f6a5d",
+                "reference": "abf7c17ab817d9b991445f56297c44b2217f6a5d",
                 "shasum": ""
             },
             "require": {
@@ -1201,7 +1198,7 @@
                 "knplabs",
                 "time"
             ],
-            "time": "2014-08-03 18:39:37"
+            "time": "2013-12-12 12:04:14"
         },
         {
             "name": "kriswallsmith/assetic",
@@ -1430,17 +1427,17 @@
         },
         {
             "name": "sensio/buzz-bundle",
-            "version": "dev-master",
+            "version": "v1.0.0",
             "target-dir": "Sensio/Bundle/BuzzBundle",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sensiolabs/SensioBuzzBundle.git",
-                "reference": "929c883f8d8ad7adafa36b652007af81c3c8b976"
+                "reference": "d622a26bd2c2e0d1b636f0c8a8cebda8ebf22bd9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sensiolabs/SensioBuzzBundle/zipball/929c883f8d8ad7adafa36b652007af81c3c8b976",
-                "reference": "929c883f8d8ad7adafa36b652007af81c3c8b976",
+                "url": "https://api.github.com/repos/sensiolabs/SensioBuzzBundle/zipball/d622a26bd2c2e0d1b636f0c8a8cebda8ebf22bd9",
+                "reference": "d622a26bd2c2e0d1b636f0c8a8cebda8ebf22bd9",
                 "shasum": ""
             },
             "require": {
@@ -1474,7 +1471,7 @@
                 "buzz",
                 "http client"
             ],
-            "time": "2013-07-11 13:03:01"
+            "time": "2013-07-10 11:22:01"
         },
         {
             "name": "simplepie/simplepie",
@@ -1532,20 +1529,21 @@
         },
         {
             "name": "stof/doctrine-extensions-bundle",
-            "version": "dev-master",
+            "version": "v1.1.0",
+            "target-dir": "Stof/DoctrineExtensionsBundle",
             "source": {
                 "type": "git",
                 "url": "https://github.com/stof/StofDoctrineExtensionsBundle.git",
-                "reference": "cfe13e8c64a5067f6d0ce63630a0c97911789198"
+                "reference": "0aa21137bcae43241ffa047946bbdd46b91a2b0a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/stof/StofDoctrineExtensionsBundle/zipball/cfe13e8c64a5067f6d0ce63630a0c97911789198",
-                "reference": "cfe13e8c64a5067f6d0ce63630a0c97911789198",
+                "url": "https://api.github.com/repos/stof/StofDoctrineExtensionsBundle/zipball/0aa21137bcae43241ffa047946bbdd46b91a2b0a",
+                "reference": "0aa21137bcae43241ffa047946bbdd46b91a2b0a",
                 "shasum": ""
             },
             "require": {
-                "gedmo/doctrine-extensions": "~2.3.1",
+                "gedmo/doctrine-extensions": "2.3.*",
                 "php": ">=5.3.2",
                 "symfony/framework-bundle": "~2.1"
             },
@@ -1560,8 +1558,8 @@
                 }
             },
             "autoload": {
-                "psr-4": {
-                    "Stof\\DoctrineExtensionsBundle\\": ""
+                "psr-0": {
+                    "Stof\\DoctrineExtensionsBundle": ""
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -1589,7 +1587,7 @@
                 "translatable",
                 "tree"
             ],
-            "time": "2014-08-28 20:29:53"
+            "time": "2013-06-23 16:53:41"
         },
         {
             "name": "symfony/assetic-bundle",
@@ -2149,24 +2147,24 @@
     "packages-dev": [
         {
             "name": "doctrine/data-fixtures",
-            "version": "dev-master",
+            "version": "v1.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/data-fixtures.git",
-                "reference": "ac36ccc812454e057aec564e0725509e74ce6b35"
+                "reference": "b4a135c7db56ecc4602b54a2184368f440cac33e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/data-fixtures/zipball/ac36ccc812454e057aec564e0725509e74ce6b35",
-                "reference": "ac36ccc812454e057aec564e0725509e74ce6b35",
+                "url": "https://api.github.com/repos/doctrine/data-fixtures/zipball/b4a135c7db56ecc4602b54a2184368f440cac33e",
+                "reference": "b4a135c7db56ecc4602b54a2184368f440cac33e",
                 "shasum": ""
             },
             "require": {
-                "doctrine/common": "~2.2",
+                "doctrine/common": ">=2.2,<2.5-dev",
                 "php": ">=5.3.2"
             },
             "require-dev": {
-                "doctrine/orm": "~2.2"
+                "doctrine/orm": ">=2.2,<2.5-dev"
             },
             "suggest": {
                 "doctrine/mongodb-odm": "For loading MongoDB ODM fixtures",
@@ -2191,7 +2189,9 @@
             "authors": [
                 {
                     "name": "Jonathan Wage",
-                    "email": "jonwage@gmail.com"
+                    "email": "jonwage@gmail.com",
+                    "homepage": "http://www.jwage.com/",
+                    "role": "Creator"
                 }
             ],
             "description": "Data Fixtures for all Doctrine Object Managers",
@@ -2199,21 +2199,21 @@
             "keywords": [
                 "database"
             ],
-            "time": "2014-08-18 12:52:16"
+            "time": "2013-07-10 17:04:07"
         },
         {
             "name": "doctrine/doctrine-fixtures-bundle",
-            "version": "dev-master",
+            "version": "v2.2.0",
             "target-dir": "Doctrine/Bundle/FixturesBundle",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/DoctrineFixturesBundle.git",
-                "reference": "3ffa2184c94d94477d5bb625b94597ed0d44ebe0"
+                "reference": "c811f96f0cf83b997e3a3ed037cac729bbe3e803"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/DoctrineFixturesBundle/zipball/3ffa2184c94d94477d5bb625b94597ed0d44ebe0",
-                "reference": "3ffa2184c94d94477d5bb625b94597ed0d44ebe0",
+                "url": "https://api.github.com/repos/doctrine/DoctrineFixturesBundle/zipball/c811f96f0cf83b997e3a3ed037cac729bbe3e803",
+                "reference": "c811f96f0cf83b997e3a3ed037cac729bbe3e803",
                 "shasum": ""
             },
             "require": {
@@ -2225,7 +2225,7 @@
             "type": "symfony-bundle",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.2.x-dev"
+                    "dev-master": "2.1.x-dev"
                 }
             },
             "autoload": {
@@ -2239,16 +2239,18 @@
             ],
             "authors": [
                 {
+                    "name": "Fabien Potencier",
+                    "email": "fabien@symfony.com",
+                    "homepage": "http://fabien.potencier.org",
+                    "role": "Lead Developer"
+                },
+                {
                     "name": "Symfony Community",
                     "homepage": "http://symfony.com/contributors"
                 },
                 {
                     "name": "Doctrine Project",
                     "homepage": "http://www.doctrine-project.org"
-                },
-                {
-                    "name": "Fabien Potencier",
-                    "email": "fabien@symfony.com"
                 }
             ],
             "description": "Symfony DoctrineFixturesBundle",
@@ -2257,30 +2259,37 @@
                 "Fixture",
                 "persistence"
             ],
-            "time": "2014-08-20 20:34:54"
+            "time": "2013-09-05 11:23:37"
         },
         {
             "name": "sensio/distribution-bundle",
-            "version": "v2.3.4",
+            "version": "v3.0.5",
             "target-dir": "Sensio/Bundle/DistributionBundle",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sensiolabs/SensioDistributionBundle.git",
-                "reference": "66df91b4bd637a83299d8072aed3658bfd3b3021"
+                "reference": "ad10123f2532f6e311e583cce203ef368eedc469"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sensiolabs/SensioDistributionBundle/zipball/66df91b4bd637a83299d8072aed3658bfd3b3021",
-                "reference": "66df91b4bd637a83299d8072aed3658bfd3b3021",
+                "url": "https://api.github.com/repos/sensiolabs/SensioDistributionBundle/zipball/ad10123f2532f6e311e583cce203ef368eedc469",
+                "reference": "ad10123f2532f6e311e583cce203ef368eedc469",
                 "shasum": ""
             },
             "require": {
-                "symfony/framework-bundle": "~2.2"
+                "php": ">=5.3.3",
+                "sensiolabs/security-checker": "~2.0",
+                "symfony/class-loader": "~2.2",
+                "symfony/form": "~2.2",
+                "symfony/framework-bundle": "~2.4",
+                "symfony/process": "~2.2",
+                "symfony/validator": "~2.2",
+                "symfony/yaml": "~2.2"
             },
             "type": "symfony-bundle",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.3.x-dev"
+                    "dev-master": "3.0.x-dev"
                 }
             },
             "autoload": {
@@ -2298,12 +2307,12 @@
                     "email": "fabien@symfony.com"
                 }
             ],
-            "description": "The base bundle for the Symfony Distributions",
+            "description": "Base bundle for Symfony Distributions",
             "keywords": [
                 "configuration",
                 "distribution"
             ],
-            "time": "2013-08-22 05:04:53"
+            "time": "2014-08-26 13:14:47"
         },
         {
             "name": "sensio/framework-extra-bundle",
@@ -2364,17 +2373,17 @@
         },
         {
             "name": "sensio/generator-bundle",
-            "version": "dev-master",
+            "version": "v2.3.5",
             "target-dir": "Sensio/Bundle/GeneratorBundle",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sensiolabs/SensioGeneratorBundle.git",
-                "reference": "3acd15b9287d1d887e443b57f6c68b5d7ffc20db"
+                "reference": "8b7a33aa3d22388443b6de0b0cf184122e9f60d2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sensiolabs/SensioGeneratorBundle/zipball/3acd15b9287d1d887e443b57f6c68b5d7ffc20db",
-                "reference": "3acd15b9287d1d887e443b57f6c68b5d7ffc20db",
+                "url": "https://api.github.com/repos/sensiolabs/SensioGeneratorBundle/zipball/8b7a33aa3d22388443b6de0b0cf184122e9f60d2",
+                "reference": "8b7a33aa3d22388443b6de0b0cf184122e9f60d2",
                 "shasum": ""
             },
             "require": {
@@ -2404,25 +2413,65 @@
             "authors": [
                 {
                     "name": "Fabien Potencier",
-                    "email": "fabien@symfony.com"
+                    "email": "fabien@symfony.com",
+                    "homepage": "http://fabien.potencier.org",
+                    "role": "Lead Developer"
                 }
             ],
             "description": "This bundle generates code for you",
-            "time": "2014-08-08 10:34:11"
+            "time": "2014-04-28 14:01:06"
+        },
+        {
+            "name": "sensiolabs/security-checker",
+            "version": "v2.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/sensiolabs/security-checker.git",
+                "reference": "5b4eb4743ebe68276c911c84101ecdf4a9ae76ee"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/sensiolabs/security-checker/zipball/5b4eb4743ebe68276c911c84101ecdf4a9ae76ee",
+                "reference": "5b4eb4743ebe68276c911c84101ecdf4a9ae76ee",
+                "shasum": ""
+            },
+            "require": {
+                "ext-curl": "*",
+                "symfony/console": "~2.0"
+            },
+            "bin": [
+                "security-checker"
+            ],
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.0-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "SensioLabs\\Security": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Fabien Potencier",
+                    "email": "fabien.potencier@gmail.com"
+                }
+            ],
+            "description": "A security checker for your composer.lock",
+            "time": "2014-07-19 10:52:35"
         }
     ],
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
         "doctrine/mongodb-odm": 20,
-        "doctrine/mongodb-odm-bundle": 20,
-        "stof/doctrine-extensions-bundle": 20,
-        "knplabs/knp-time-bundle": 20,
-        "sensio/buzz-bundle": 20,
-        "ekino/newrelic-bundle": 20,
-        "sensio/generator-bundle": 20,
-        "doctrine/data-fixtures": 20,
-        "doctrine/doctrine-fixtures-bundle": 20
+        "doctrine/mongodb-odm-bundle": 20
     },
     "prefer-stable": false,
     "platform": {
