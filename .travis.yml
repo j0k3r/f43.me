@@ -12,7 +12,7 @@ before_script:
   - echo 'date.timezone = "Europe/Paris"' >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
   # this trick simulate a "no interaction"
   - printf "\n" | pecl install channel://pecl.php.net/apcu-4.0.2
-  - pecl install -f mongo-1.5.5
+  - printf "\n" | pecl install -f mongo-1.5.5
 
 script:
   - ant -f app/build.xml prepare
