@@ -152,6 +152,7 @@ class FeedController extends Controller
 
         $lastItem   = $dm->getRepository('j0k3rFeedBundle:FeedItem')->findLastItemByFeedId($feed->getId());
         $lastLog    = $dm->getRepository('j0k3rFeedBundle:FeedLog')->findLastItemByFeedId($feed->getId());
+        $nbLogs     = $dm->getRepository('j0k3rFeedBundle:FeedLog')->countByFeedId($feed->getId());
 
         return array(
             'menu'        => 'feed',
@@ -160,6 +161,7 @@ class FeedController extends Controller
             'lastLog'     => $lastLog,
             'edit_form'   => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
+            'nb_logs'     => $nbLogs,
         );
     }
 
