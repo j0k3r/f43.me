@@ -138,7 +138,7 @@ class FeedController extends Controller
      *
      * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException If document doesn't exists
      */
-    public function editAction($slug)
+    public function editAction(Request $request, $slug)
     {
         $dm   = $this->getDocumentManager();
         $feed = $dm->getRepository('j0k3rFeedBundle:Feed')->findOneBySlug($slug);
@@ -154,6 +154,21 @@ class FeedController extends Controller
         $lastLog    = $dm->getRepository('j0k3rFeedBundle:FeedLog')->findLastItemByFeedId($feed->getId());
         $nbLogs     = $dm->getRepository('j0k3rFeedBundle:FeedLog')->countByFeedId($feed->getId());
 
+        if ($request->isMethod('POST')) {
+            $editForm->submit($request);
+
+            if ($editForm->isValid()) {
+                $dm->persist($feed);
+                $dm->flush();
+
+                $this->get('session')->getFlashBag()->add('notice', 'Document updated!');
+
+                return $this->redirect($this->generateUrl('feed_edit', array('slug' => $slug)));
+            } else {
+                $this->get('session')->getFlashBag()->add('error', 'Form is invalid.');
+            }
+        }
+
         return array(
             'menu'        => 'feed',
             'feed'        => $feed,
@@ -162,51 +177,6 @@ class FeedController extends Controller
             'edit_form'   => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
             'nb_logs'     => $nbLogs,
-        );
-    }
-
-    /**
-     * Edits an existing Feed document.
-     *
-     * @Template("j0k3rFeedBundle:Feed:edit.html.twig")
-     *
-     * @param Request $request The request object
-     * @param string  $slug    The document Slug
-     *
-     * @return array|RedirectResponse
-     *
-     * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException If document doesn't exists
-     */
-    public function updateAction(Request $request, $slug)
-    {
-        $dm   = $this->getDocumentManager();
-        $feed = $dm->getRepository('j0k3rFeedBundle:Feed')->findOneBySlug($slug);
-
-        if (!$feed) {
-            throw $this->createNotFoundException('Unable to find Feed document.');
-        }
-
-        $editForm   = $this->createForm(new FeedType(), $feed);
-        $deleteForm = $this->createDeleteForm();
-
-        $editForm->submit($request);
-
-        if ($editForm->isValid()) {
-            $dm->persist($feed);
-            $dm->flush();
-
-            $this->get('session')->getFlashBag()->add('notice', 'Document updated!');
-
-            return $this->redirect($this->generateUrl('feed_edit', array('slug' => $slug)));
-        } else {
-            $this->get('session')->getFlashBag()->add('error', 'Form is invalid.');
-        }
-
-        return array(
-            'menu'        => 'feed',
-            'feed'        => $feed,
-            'edit_form'   => $editForm->createView(),
-            'delete_form' => $deleteForm->createView(),
         );
     }
 

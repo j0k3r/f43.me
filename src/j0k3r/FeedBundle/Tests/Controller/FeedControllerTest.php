@@ -284,7 +284,7 @@ class FeedControllerTest extends FeedWebTestCase
     {
         $client = static::getAuthorizedClient();
 
-        $client->request('POST', '/feed/nawak/update');
+        $client->request('POST', '/feed/nawak/edit');
 
         $this->assertEquals(404, $client->getResponse()->getStatusCode());
         $this->assertContains('Unable to find Feed document.', $client->getResponse()->getContent());
