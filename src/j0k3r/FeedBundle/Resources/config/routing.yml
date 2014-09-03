@@ -40,11 +40,6 @@ feed_edit:
     pattern:  /feed/{slug}/edit
     defaults: { _controller: j0k3rFeedBundle:Feed:edit }
 
-feed_update:
-    pattern:  /feed/{slug}/update
-    defaults: { _controller: j0k3rFeedBundle:Feed:update }
-    methods:  [POST]
-
 feed_delete:
     pattern:  /feed/{slug}/delete
     defaults: { _controller: j0k3rFeedBundle:Feed:delete }
