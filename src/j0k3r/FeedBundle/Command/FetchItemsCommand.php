@@ -89,7 +89,7 @@ class FetchItemsCommand extends BaseFeedCommand
             if (0 === strlen($feed->getDescription()) && 0 !== strlen($rssFeed->get_description())) {
                 $feed->setDescription(html_entity_decode($rssFeed->get_description(), ENT_COMPAT, 'UTF-8'));
                 $dm->persist($feed);
-                $dm->flush();
+                $dm->flush($feed);
             }
 
             $parser = $container
@@ -161,7 +161,6 @@ class FetchItemsCommand extends BaseFeedCommand
                 $feedLog->setFeed($feed);
 
                 $dm->persist($feedLog);
-                $dm->flush();
 
                 // store feed url updated, to ping hub later
                 $feedUpdated[] = $container->get('router')->generate(

@@ -34,7 +34,7 @@ abstract class BaseFeedCommand extends ContainerAwareCommand
 
         if (!is_readable($pidFile)) {
             if (!is_dir(dirname($pidFile)) && false === @mkdir(dirname($pidFile), 0777)) {
-                throw new RuntimeException();
+                throw new \RuntimeException();
             }
 
             file_put_contents($pidFile, date('Y-m-d H:i:s'));
@@ -58,7 +58,7 @@ abstract class BaseFeedCommand extends ContainerAwareCommand
     protected function unlockCommand()
     {
         if (false === @flock($this->lockResource, LOCK_UN) || false === @fclose($this->lockResource)) {
-            throw new RuntimeException(sprintf('Unable to unlock file "%s"', $this->lockResource));
+            throw new \RuntimeException(sprintf('Unable to unlock file "%s"', $this->lockResource));
         }
     }
 }

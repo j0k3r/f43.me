@@ -71,12 +71,12 @@ class RemoveItemsCommand extends BaseFeedCommand
 
             $totalRemoved += $removed;
 
-            $dm->flush();
-
             if ($input->getOption('with-trace')) {
                 $output->writeLn('<info>'.$feed->getName().'</info>: <comment>'.$removed.'</comment> removed.');
             }
         }
+
+        $dm->flush();
 
         $output->writeLn('<comment>'.$totalRemoved.'</comment> items removed.');
         $this->unlockCommand();

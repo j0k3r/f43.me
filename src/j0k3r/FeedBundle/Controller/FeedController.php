@@ -172,11 +172,13 @@ class FeedController extends Controller
         return array(
             'menu'        => 'feed',
             'feed'        => $feed,
-            'lastItem'    => $lastItem,
-            'lastLog'     => $lastLog,
+            'infos'       => array(
+                'last_item' => $lastItem,
+                'last_log'  => $lastLog,
+                'nb_logs'   => $nbLogs,
+            ),
             'edit_form'   => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
-            'nb_logs'     => $nbLogs,
         );
     }
 
