@@ -24,7 +24,7 @@ class Proxy
     protected $availableParsers = array('Internal', 'External');
 
     public $url;
-    public $content;
+    public $content = false;
     public $useDefault = false;
 
     /**
@@ -113,20 +113,20 @@ class Proxy
         // retrieve custom url ?
         $this->url = $customParser->retrieveUrl();
 
+        // try to find a custom extractor for api content (imgur, twitter, etc...)
         $extractorAlias = $this->extractorChain->match($this->url);
-
         if (false !== $extractorAlias) {
             $extractor = $this->extractorChain->getExtractor($extractorAlias);
 
             $this->url = $extractor->getUrl();
             $this->content = $extractor->getContent();
-
-            return $this;
         }
 
         $parserMethod = 'use'.Inflector::camelize($this->chosenParser).'Parser';
 
-        if (is_callable(array($this, $parserMethod))) {
+        // this means the selected extractor was able to extract content OR
+        // no extractor were able to match the url
+        if (false === $this->content && is_callable(array($this, $parserMethod))) {
             $this->content = $this->$parserMethod($this->url);
         }
 
