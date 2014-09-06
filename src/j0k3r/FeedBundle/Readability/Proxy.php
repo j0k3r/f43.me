@@ -8,11 +8,13 @@ use Buzz\Browser;
 
 use j0k3r\FeedBundle\Parser;
 use j0k3r\FeedBundle\Document\Feed;
+use j0k3r\FeedBundle\Extractor\ExtractorChain;
 
 class Proxy
 {
     protected $feed = null;
     protected $buzz;
+    protected $extractorChain;
     protected $urlApi;
     protected $token;
     protected $debug;
@@ -34,9 +36,10 @@ class Proxy
      * @param boolean $debug
      * @param array   $regexps Regex to remove/escape content
      */
-    public function __construct(Browser $buzz, $token, $urlApi, $debug = false, $regexps = array())
+    public function __construct(Browser $buzz, ExtractorChain $extractorChain, $token, $urlApi, $debug = false, $regexps = array())
     {
         $this->buzz = $buzz;
+        $this->extractorChain = $extractorChain;
         $this->token = $token;
         $this->urlApi = $urlApi;
         $this->debug = $debug;
@@ -109,6 +112,17 @@ class Proxy
 
         // retrieve custom url ?
         $this->url = $customParser->retrieveUrl();
+
+        $extractorAlias = $this->extractorChain->match($this->url);
+
+        if (false !== $extractorAlias) {
+            $extractor = $this->extractorChain->getExtractor($extractorAlias);
+
+            $this->url = $extractor->getUrl();
+            $this->content = $extractor->getContent();
+
+            return $this;
+        }
 
         $parserMethod = 'use'.Inflector::camelize($this->chosenParser).'Parser';
 

@@ -25,7 +25,8 @@
         "zurb/foundation": "~4.3",
         "sensio/buzz-bundle": "~1.0",
         "ekino/newrelic-bundle": "~1.2",
-        "webignition/absolute-url-deriver": "1.5"
+        "webignition/absolute-url-deriver": "1.5",
+        "adyg/php-imgur-api-client": "~1.0"
     },
     "require-dev": {
         "sensio/generator-bundle": "~2.3",

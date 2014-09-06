@@ -15,3 +15,6 @@ parameters:
 
     # newrelic_api_key: xxxxxxxxxxx
     google_analytics_code: ~
+
+    imgur.client_id: xxxxx
+    imgur.client_secret: xxxxx
