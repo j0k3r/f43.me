@@ -15,13 +15,51 @@ class FetchItemsCommandTest extends WebTestCase
 
     public function setUp()
     {
-        static::createClient();
+        $client = static::createClient();
 
         $application = new Application(static::$kernel);
         $application->add(new FetchItemsCommand());
 
         $this->command = $application->find('feed:fetch-items');
         $this->commandTester = new CommandTester($this->command);
+
+        $simplePieItem = $this->getMockBuilder('SimplePie_Item')
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $simplePieItem->expects($this->any())
+            ->method('get_description')
+            ->will($this->returnValue('desc'));
+
+        $simplePieItem->expects($this->any())
+            ->method('get_permalink')
+            ->will($this->returnValue('http://localhost'));
+
+        $simplePie = $this->getMockBuilder('SimplePie')
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $simplePie->expects($this->any())
+            ->method('get_items')
+            ->will($this->returnValue(array($simplePieItem)));
+
+        $simplePie->expects($this->any())
+            ->method('get_description')
+            ->will($this->returnValue('desc'));
+
+        $simplePieProxy = $this->getMockBuilder('j0k3r\FeedBundle\Services\SimplePieProxy')
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $simplePieProxy->expects($this->any())
+            ->method('setUrl')
+            ->will($this->returnSelf());
+
+        $simplePieProxy->expects($this->any())
+            ->method('init')
+            ->will($this->returnValue($simplePie));
+
+        $client->getContainer()->set('simple_pie_proxy', $simplePieProxy);
     }
 
     /**
