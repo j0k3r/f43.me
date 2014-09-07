@@ -73,3 +73,10 @@ services:
             - @guzzle.client
         tags:
             -  { name: feed.extractor, alias: twitter }
+
+    validator.rss.valid_rss:
+        class: j0k3r\FeedBundle\Validator\Constraints\ConstraintRssValidator
+        arguments:
+            - @guzzle.client
+        tags:
+            - { name: validator.constraint_validator, alias: valid_rss }

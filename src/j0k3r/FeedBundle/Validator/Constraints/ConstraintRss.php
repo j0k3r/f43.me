@@ -13,6 +13,6 @@ class ConstraintRss extends Constraint
 
     public function validatedBy()
     {
-        return get_class($this).'Validator';
+        return 'valid_rss';
     }
 }
