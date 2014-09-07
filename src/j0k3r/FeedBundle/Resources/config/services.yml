@@ -1,7 +1,14 @@
-parameters:
-#    j0k3r_feed.example.class: j0k3r\FeedBundle\Example
-
 services:
+    # external service
+    imgur.client:
+        class: Imgur\Client
+        calls:
+            - [ setOption, [ 'client_id', %imgur.client_id% ] ]
+            - [ setOption, [ 'client_secret', %imgur.client_secret% ] ]
+
+    guzzle.client:
+        class: Guzzle\Http\Client
+
     readability_proxy:
         class: j0k3r\FeedBundle\Readability\Proxy
         arguments:
@@ -47,16 +54,7 @@ services:
         tags:
             - { name: kernel.event_listener, event: j0k3r_feed.after_item_cached, method: pingHub }
 
-    imgur.client:
-        class: Imgur\Client
-        calls:
-            - [ setOption, [ 'client_id', %imgur.client_id% ] ]
-            - [ setOption, [ 'client_secret', %imgur.client_secret% ] ]
-            # - [ sign ]
-
-    guzzle.client:
-        class: Guzzle\Http\Client
-
+    # feed extractor
     feed.extractor.chain:
         class: j0k3r\FeedBundle\Extractor\ExtractorChain
 
@@ -74,6 +72,15 @@ services:
         tags:
             -  { name: feed.extractor, alias: twitter }
 
+    feed.extractor.tumblr:
+        class: j0k3r\FeedBundle\Extractor\Tumblr
+        arguments:
+            - @guzzle.client
+            - %tumblr.api_key%
+        tags:
+            -  { name: feed.extractor, alias: tumblr }
+
+    # validator
     validator.rss.valid_rss:
         class: j0k3r\FeedBundle\Validator\Constraints\ConstraintRssValidator
         arguments:
