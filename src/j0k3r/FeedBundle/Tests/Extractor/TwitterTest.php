@@ -26,7 +26,6 @@ class TwitterTest extends \PHPUnit_Framework_TestCase
 
         $twitter = new Twitter($guzzle);
         $this->assertEquals($expected, $twitter->match($url));
-        $this->assertEquals($url, $twitter->getUrl());
     }
 
     public function testContent()

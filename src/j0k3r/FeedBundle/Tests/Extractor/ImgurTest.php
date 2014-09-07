@@ -33,7 +33,6 @@ class ImgurTest extends \PHPUnit_Framework_TestCase
 
         $imgur = new Imgur($imgurClient);
         $this->assertEquals($expected, $imgur->match($url));
-        $this->assertEquals($url, $imgur->getUrl());
     }
 
     public function testContentImage()

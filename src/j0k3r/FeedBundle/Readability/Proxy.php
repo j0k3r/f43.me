@@ -116,10 +116,9 @@ class Proxy
         // try to find a custom extractor for api content (imgur, twitter, etc...)
         $extractorAlias = $this->extractorChain->match($this->url);
         if (false !== $extractorAlias) {
-            $extractor = $this->extractorChain->getExtractor($extractorAlias);
-
-            $this->url = $extractor->getUrl();
-            $this->content = $extractor->getContent();
+            $this->content = $this->extractorChain
+                ->getExtractor($extractorAlias)
+                ->getContent();
         }
 
         $parserMethod = 'use'.Inflector::camelize($this->chosenParser).'Parser';

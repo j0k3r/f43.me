@@ -21,8 +21,6 @@ class Imgur extends AbstractExtractor
      */
     public function match($url)
     {
-        $this->url = $url;
-
         $host = parse_url($url, PHP_URL_HOST);
         $path = parse_url($url, PHP_URL_PATH);
 
@@ -37,14 +35,6 @@ class Imgur extends AbstractExtractor
         $this->type = $matches[1];
 
         return true;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getUrl()
-    {
-        return $this->url;
     }
 
     /**

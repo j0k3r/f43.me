@@ -46,7 +46,6 @@ class TumblrTest extends \PHPUnit_Framework_TestCase
 
         $tumblr = new Tumblr($guzzle, 'apikey');
         $this->assertEquals($expected, $tumblr->match($url));
-        $this->assertEquals($url, $tumblr->getUrl());
     }
 
     public function testMatchNotTumblrUser()

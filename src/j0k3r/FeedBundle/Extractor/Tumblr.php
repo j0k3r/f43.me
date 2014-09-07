@@ -23,8 +23,6 @@ class Tumblr extends AbstractExtractor
      */
     public function match($url)
     {
-        $this->url = $url;
-
         $host = parse_url($url, PHP_URL_HOST);
         $path = parse_url($url, PHP_URL_PATH);
 
@@ -49,14 +47,6 @@ class Tumblr extends AbstractExtractor
         $this->tumblrHost = $host;
 
         return true;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getUrl()
-    {
-        return $this->url;
     }
 
     /**
