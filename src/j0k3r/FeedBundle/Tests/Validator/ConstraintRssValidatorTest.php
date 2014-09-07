@@ -77,7 +77,7 @@ class ConstraintRssValidatorTest extends \PHPUnit_Framework_TestCase
 
         $response->expects($this->any())
             ->method('getBody')
-            ->will($this->onConsecutiveCalls('This is a not valid'));
+            ->will($this->returnValue('This is a not valid'));
 
         $validator = new ConstraintRssValidator($guzzle);
         $validator->initialize($context);

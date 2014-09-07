@@ -55,8 +55,6 @@ class TwitterTest extends \PHPUnit_Framework_TestCase
             ->method('json')
             ->will($this->returnValue(array('html' => '<div></div>')));
 
-        // $guzzle = new \Guzzle\Http\Client();
-
         $twitter = new Twitter($guzzle);
         $twitter->match('https://twitter.com/DoerteDev/statuses/506522223860277248');
 
@@ -88,8 +86,6 @@ class TwitterTest extends \PHPUnit_Framework_TestCase
         $response->expects($this->any())
             ->method('json')
             ->will($this->returnValue(array()));
-
-        // $guzzle = new \Guzzle\Http\Client();
 
         $twitter = new Twitter($guzzle);
         $twitter->match('https://twitter.com/DoerteDev/statuses/506522223860277248');
