@@ -1,11 +1,19 @@
-parameters:
-#    j0k3r_feed.example.class: j0k3r\FeedBundle\Example
-
 services:
+    # external service
+    imgur.client:
+        class: Imgur\Client
+        calls:
+            - [ setOption, [ 'client_id', %imgur.client_id% ] ]
+            - [ setOption, [ 'client_secret', %imgur.client_secret% ] ]
+
+    guzzle.client:
+        class: Guzzle\Http\Client
+
     readability_proxy:
         class: j0k3r\FeedBundle\Readability\Proxy
         arguments:
-            buzz: "@buzz"
+            buzz: @buzz
+            extractor: @feed.extractor.chain
             token: %readability_token%
             url_api: https://readability.com/api/content/v1/parser
             debug: false #%kernel.debug%
@@ -45,3 +53,37 @@ services:
             hub: "http://pubsubhubbub.appspot.com"
         tags:
             - { name: kernel.event_listener, event: j0k3r_feed.after_item_cached, method: pingHub }
+
+    # feed extractor
+    feed.extractor.chain:
+        class: j0k3r\FeedBundle\Extractor\ExtractorChain
+
+    feed.extractor.imgur:
+        class: j0k3r\FeedBundle\Extractor\Imgur
+        arguments:
+            - @imgur.client
+        tags:
+            -  { name: feed.extractor, alias: imgur }
+
+    feed.extractor.twitter:
+        class: j0k3r\FeedBundle\Extractor\Twitter
+        arguments:
+            - @guzzle.client
+        tags:
+            -  { name: feed.extractor, alias: twitter }
+
+    feed.extractor.tumblr:
+        class: j0k3r\FeedBundle\Extractor\Tumblr
+        arguments:
+            - @guzzle.client
+            - %tumblr.api_key%
+        tags:
+            -  { name: feed.extractor, alias: tumblr }
+
+    # validator
+    validator.rss.valid_rss:
+        class: j0k3r\FeedBundle\Validator\Constraints\ConstraintRssValidator
+        arguments:
+            - @guzzle.client
+        tags:
+            - { name: validator.constraint_validator, alias: valid_rss }

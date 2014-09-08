@@ -27,9 +27,7 @@ class FetchItemsCommand extends BaseFeedCommand
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        if (!$this->lockCommand($input->getOptions())) {
-            return $output->writeLn("<error>Command locked !</error>");
-        }
+        parent::execute($input, $output);
 
         $feeds        = array();
         $container    = $this->getContainer();

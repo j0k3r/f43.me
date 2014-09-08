@@ -21,9 +21,7 @@ class RemoveItemsCommand extends BaseFeedCommand
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        if (!$this->lockCommand($input->getOptions())) {
-            return $output->writeLn("<error>Command locked !</error>");
-        }
+        parent::execute($input, $output);
 
         // ask user as it will remove all items from its database
         if (0 >= $input->getOption('max')) {

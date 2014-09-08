@@ -3,10 +3,19 @@
 namespace j0k3r\FeedBundle\Command;
 
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
+use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Output\OutputInterface;
 
 abstract class BaseFeedCommand extends ContainerAwareCommand
 {
     protected $lockResource = null;
+
+    protected function execute(InputInterface $input, OutputInterface $output)
+    {
+        if (!$this->lockCommand($input->getOptions())) {
+            return $output->writeLn("<error>Command locked !</error>");
+        }
+    }
 
     /**
      * Lock command using given option as "lock file".
@@ -22,6 +31,7 @@ abstract class BaseFeedCommand extends ContainerAwareCommand
 
         $fileName = 'task.'.$this->getName().'-'.$keySuffix.'.pid';
         $pidFile  = $this->getContainer()->get('kernel')->getLogDir().'/task/'.$fileName;
+
         if (!is_readable($pidFile)) {
             if (!is_dir(dirname($pidFile)) && false === @mkdir(dirname($pidFile), 0777)) {
                 throw new RuntimeException();

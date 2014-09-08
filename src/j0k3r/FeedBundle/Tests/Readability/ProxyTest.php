@@ -50,6 +50,14 @@ class ProxyTest extends \PHPUnit_Framework_TestCase
             ->method('getFormatter')
             ->willReturn('atom');
 
+        $this->extractorChain = $this->getMockBuilder('j0k3r\FeedBundle\Extractor\ExtractorChain')
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $this->extractorChain->expects($this->any())
+            ->method('match')
+            ->willReturn(false);
+
         $this->regexs = array(
             'unlikelyCandidates' => '/combx|comment|community|disqus|extra|foot|header|menu|remark|rss|shoutbox|sidebar|sponsor|ad-break|agegate|pagination|pager|popup|addthis|response|slate_associated_bn|reseaux|sharing|auteur|tag|feedback|meta|kudo|sidebar|copyright|bio|moreInfo|legal|share/i',
             'okMaybeItsACandidate' => '/and|article|body|column|main|shadow/i',
@@ -74,7 +82,7 @@ class ProxyTest extends \PHPUnit_Framework_TestCase
 
     public function testWithEmptyContent()
     {
-        $proxy = new Proxy($this->buzz, 'xxx', 'http://0.0.0.0/api', false, $this->regexs);
+        $proxy = new Proxy($this->buzz, $this->extractorChain, 'xxx', 'http://0.0.0.0/api', false, $this->regexs);
         $proxy->setChosenParser('internal');
         $proxy->setFeed($this->feed);
         $proxy->allowAllParser(true);
@@ -90,7 +98,7 @@ class ProxyTest extends \PHPUnit_Framework_TestCase
 
     public function testWithFalseContent()
     {
-        $proxy = new Proxy($this->buzz, 'xxx', 'http://0.0.0.0/api', false, $this->regexs);
+        $proxy = new Proxy($this->buzz, $this->extractorChain, 'xxx', 'http://0.0.0.0/api', false, $this->regexs);
         $proxy->setChosenParser('internal');
         $proxy->setFeed($this->feed);
         $proxy->allowAllParser(true);
@@ -107,7 +115,7 @@ class ProxyTest extends \PHPUnit_Framework_TestCase
 
     public function testWithVideoContent()
     {
-        $proxy = new Proxy($this->buzz, 'xxx', 'http://0.0.0.0/api', false, $this->regexs);
+        $proxy = new Proxy($this->buzz, $this->extractorChain, 'xxx', 'http://0.0.0.0/api', false, $this->regexs);
         $proxy->setChosenParser('internal');
         $proxy->setFeed($this->feed);
         $proxy->allowAllParser(true);
@@ -124,7 +132,7 @@ class ProxyTest extends \PHPUnit_Framework_TestCase
 
     public function testWithExceptionFromBuzz()
     {
-        $proxy = new Proxy($this->buzz, 'xxx', 'http://0.0.0.0/api', false, $this->regexs);
+        $proxy = new Proxy($this->buzz, $this->extractorChain, 'xxx', 'http://0.0.0.0/api', false, $this->regexs);
         $proxy->setChosenParser('internal');
         $proxy->setFeed($this->feed);
         $proxy->allowAllParser(true);
@@ -141,7 +149,7 @@ class ProxyTest extends \PHPUnit_Framework_TestCase
 
     public function testWithGzipContent()
     {
-        $proxy = new Proxy($this->buzz, 'xxx', 'http://0.0.0.0/api', false, $this->regexs);
+        $proxy = new Proxy($this->buzz, $this->extractorChain, 'xxx', 'http://0.0.0.0/api', false, $this->regexs);
         $proxy->setChosenParser('internal');
         $proxy->setFeed($this->feed);
         $proxy->allowAllParser(true);
@@ -170,7 +178,7 @@ class ProxyTest extends \PHPUnit_Framework_TestCase
 
     public function testWithImageContent()
     {
-        $proxy = new Proxy($this->buzz, 'xxx', 'http://0.0.0.0/api', false, $this->regexs);
+        $proxy = new Proxy($this->buzz, $this->extractorChain, 'xxx', 'http://0.0.0.0/api', false, $this->regexs);
         $proxy->setChosenParser('internal');
         $proxy->setFeed($this->feed);
         $proxy->allowAllParser(true);
@@ -199,7 +207,7 @@ class ProxyTest extends \PHPUnit_Framework_TestCase
 
     public function testWithCustomParser()
     {
-        $proxy = new Proxy($this->buzz, 'xxx', 'http://0.0.0.0/api', false, $this->regexs);
+        $proxy = new Proxy($this->buzz, $this->extractorChain, 'xxx', 'http://0.0.0.0/api', false, $this->regexs);
         $proxy->setChosenParser('internal');
         $proxy->setFeed($this->feed);
         $proxy->allowAllParser(true);
