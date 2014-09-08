@@ -163,9 +163,6 @@ class ProxyTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('default content', $proxy->content);
     }
 
-    /**
-     * @group only
-     */
     public function testWithGzipContent()
     {
         $proxy = new Proxy($this->buzz, $this->extractorChain, $this->improverChain, 'xxx', 'http://0.0.0.0/api', false, $this->regexs);

@@ -31,15 +31,6 @@ class Proxy
     /**
      * Create a new Proxy for Readability
      *
-     * @param Browser $buzz
-     * @param string  $token   Readability API token
-     * @param string  $urlApi  Readability API url
-     * @param boolean $debug
-     * @param array   $regexps Regex to remove/escape content
-     */
-    /**
-     * Create a new Proxy for Readability
-     *
      * @param Browser        $buzz
      * @param ExtractorChain $extractorChain
      * @param ImproverChain  $improverChain
