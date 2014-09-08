@@ -58,6 +58,30 @@ class ProxyTest extends \PHPUnit_Framework_TestCase
             ->method('match')
             ->willReturn(false);
 
+        $this->improverChain = $this->getMockBuilder('j0k3r\FeedBundle\Improver\ImproverChain')
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $nothingImprover = $this->getMockBuilder('j0k3r\FeedBundle\Improver\Nothing')
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $nothingImprover->expects($this->any())
+            ->method('updateContent')
+            ->will($this->returnArgument(0));
+
+        $nothingImprover->expects($this->any())
+            ->method('updateUrl')
+            ->will($this->returnArgument(0));
+
+        $this->improverChain->expects($this->any())
+            ->method('match')
+            ->willReturn('nothing');
+
+        $this->improverChain->expects($this->any())
+            ->method('getImprover')
+            ->willReturn($nothingImprover);
+
         $this->regexs = array(
             'unlikelyCandidates' => '/combx|comment|community|disqus|extra|foot|header|menu|remark|rss|shoutbox|sidebar|sponsor|ad-break|agegate|pagination|pager|popup|addthis|response|slate_associated_bn|reseaux|sharing|auteur|tag|feedback|meta|kudo|sidebar|copyright|bio|moreInfo|legal|share/i',
             'okMaybeItsACandidate' => '/and|article|body|column|main|shadow/i',
@@ -82,7 +106,7 @@ class ProxyTest extends \PHPUnit_Framework_TestCase
 
     public function testWithEmptyContent()
     {
-        $proxy = new Proxy($this->buzz, $this->extractorChain, 'xxx', 'http://0.0.0.0/api', false, $this->regexs);
+        $proxy = new Proxy($this->buzz, $this->extractorChain, $this->improverChain, 'xxx', 'http://0.0.0.0/api', false, $this->regexs);
         $proxy->init('internal', $this->feed, true);
 
         $this->response->expects($this->any())
@@ -96,7 +120,7 @@ class ProxyTest extends \PHPUnit_Framework_TestCase
 
     public function testWithFalseContent()
     {
-        $proxy = new Proxy($this->buzz, $this->extractorChain, 'xxx', 'http://0.0.0.0/api', false, $this->regexs);
+        $proxy = new Proxy($this->buzz, $this->extractorChain, $this->improverChain, 'xxx', 'http://0.0.0.0/api', false, $this->regexs);
         $proxy->init('internal', $this->feed, true);
 
         $this->response->expects($this->any())
@@ -111,7 +135,7 @@ class ProxyTest extends \PHPUnit_Framework_TestCase
 
     public function testWithVideoContent()
     {
-        $proxy = new Proxy($this->buzz, $this->extractorChain, 'xxx', 'http://0.0.0.0/api', false, $this->regexs);
+        $proxy = new Proxy($this->buzz, $this->extractorChain, $this->improverChain, 'xxx', 'http://0.0.0.0/api', false, $this->regexs);
         $proxy->init('internal', $this->feed, true);
 
         $this->response->expects($this->any())
@@ -126,7 +150,7 @@ class ProxyTest extends \PHPUnit_Framework_TestCase
 
     public function testWithExceptionFromBuzz()
     {
-        $proxy = new Proxy($this->buzz, $this->extractorChain, 'xxx', 'http://0.0.0.0/api', false, $this->regexs);
+        $proxy = new Proxy($this->buzz, $this->extractorChain, $this->improverChain, 'xxx', 'http://0.0.0.0/api', false, $this->regexs);
         $proxy->init('internal', $this->feed, true);
 
         $this->response->expects($this->any())
@@ -139,9 +163,12 @@ class ProxyTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('default content', $proxy->content);
     }
 
+    /**
+     * @group only
+     */
     public function testWithGzipContent()
     {
-        $proxy = new Proxy($this->buzz, $this->extractorChain, 'xxx', 'http://0.0.0.0/api', false, $this->regexs);
+        $proxy = new Proxy($this->buzz, $this->extractorChain, $this->improverChain, 'xxx', 'http://0.0.0.0/api', false, $this->regexs);
         $proxy->init('internal', $this->feed, true);
 
         $this->response->expects($this->any())
@@ -168,7 +195,7 @@ class ProxyTest extends \PHPUnit_Framework_TestCase
 
     public function testWithImageContent()
     {
-        $proxy = new Proxy($this->buzz, $this->extractorChain, 'xxx', 'http://0.0.0.0/api', false, $this->regexs);
+        $proxy = new Proxy($this->buzz, $this->extractorChain, $this->improverChain, 'xxx', 'http://0.0.0.0/api', false, $this->regexs);
         $proxy->init('internal', $this->feed, true);
 
         $this->response->expects($this->any())
@@ -195,7 +222,7 @@ class ProxyTest extends \PHPUnit_Framework_TestCase
 
     public function testWithCustomParser()
     {
-        $proxy = new Proxy($this->buzz, $this->extractorChain, 'xxx', 'http://0.0.0.0/api', false, $this->regexs);
+        $proxy = new Proxy($this->buzz, $this->extractorChain, $this->improverChain, 'xxx', 'http://0.0.0.0/api', false, $this->regexs);
         $proxy->init('internal', $this->feed, true);
 
         $this->feed->expects($this->any())

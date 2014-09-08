@@ -9,6 +9,7 @@ use Buzz\Browser;
 use j0k3r\FeedBundle\Parser;
 use j0k3r\FeedBundle\Document\Feed;
 use j0k3r\FeedBundle\Extractor\ExtractorChain;
+use j0k3r\FeedBundle\Improver\ImproverChain;
 
 class Proxy
 {
@@ -36,10 +37,22 @@ class Proxy
      * @param boolean $debug
      * @param array   $regexps Regex to remove/escape content
      */
-    public function __construct(Browser $buzz, ExtractorChain $extractorChain, $token, $urlApi, $debug = false, $regexps = array())
+    /**
+     * Create a new Proxy for Readability
+     *
+     * @param Browser        $buzz
+     * @param ExtractorChain $extractorChain
+     * @param ImproverChain  $improverChain
+     * @param string         $token          Readability API token
+     * @param string         $urlApi         Readability API url
+     * @param boolean        $debug
+     * @param array          $regexps        Regex to remove/escape content
+     */
+    public function __construct(Browser $buzz, ExtractorChain $extractorChain, ImproverChain $improverChain, $token, $urlApi, $debug = false, $regexps = array())
     {
         $this->buzz = $buzz;
         $this->extractorChain = $extractorChain;
+        $this->improverChain = $improverChain;
         $this->token = $token;
         $this->urlApi = $urlApi;
         $this->debug = $debug;
@@ -79,23 +92,21 @@ class Proxy
         $this->content = false;
         $this->url = false;
 
-        // we use default parser
-        $customParser = new Parser\DefaultParser($url, $itemContent);
-
-        // or try to find a custom one
+        // the feed isn't always defined, for example when we test an url
+        $host = parse_url($url, PHP_URL_HOST);
         if (null !== $this->feed) {
-            // I don't know why I have to use the *full* path to test if the class exists
-            // even if the current class "use" j0k3r\FeedBundle\Parser ...
-            $name = Inflector::classify(str_replace('.', '-', $this->feed->getHost()));
-            $customMethod = 'j0k3r\FeedBundle\Parser\\'.$name.'Parser';
-
-            if (class_exists($customMethod)) {
-                $customParser = new $customMethod($url, $itemContent);
-            }
+            $host = $this->feed->getHost();
         }
 
+        // we loop thru all improver and we are SURE that the default one will match anyway
+        $improverAlias = $this->improverChain->match($host);
+        $improver = $this->improverChain->getImprover($improverAlias);
+
+        $improver->setUrl($url);
+        $improver->setItemContent($itemContent);
+
         // retrieve custom url ?
-        $this->url = $customParser->retrieveUrl();
+        $this->url = $improver->updateUrl($url);
 
         // try to find a custom extractor for api content (imgur, twitter, etc...)
         $extractorAlias = $this->extractorChain->match($this->url);
@@ -137,7 +148,7 @@ class Proxy
             $this->useDefault = true;
         } else {
             // update readable content with something ?
-            $this->content = $customParser->updateContent($this->content);
+            $this->content = $improver->updateContent($this->content);
         }
 
         return $this;
