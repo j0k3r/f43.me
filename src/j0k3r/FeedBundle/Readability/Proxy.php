@@ -47,7 +47,7 @@ class Proxy
     }
 
     /**
-     * Initialize some common variable that'll be modified each time this class is called
+     * Initialize some common variable
      *
      * @param string    $chosenParser   Could be "internal" or "external"
      * @param null|Feed $feed           Define the Feed object to work on
@@ -58,9 +58,6 @@ class Proxy
      */
     public function init($chosenParser, Feed $feed = null, $allowAllParser = false)
     {
-        $this->content = false;
-        $this->url = false;
-
         $this->chosenParser = $chosenParser;
         $this->feed = $feed;
         $this->allowAllParser = (bool) $allowAllParser;
@@ -78,6 +75,10 @@ class Proxy
      */
     public function parseContent($url, $itemContent = null)
     {
+        // be sure to have a clean workspace :)
+        $this->content = false;
+        $this->url = false;
+
         // we use default parser
         $customParser = new Parser\DefaultParser($url, $itemContent);
 
