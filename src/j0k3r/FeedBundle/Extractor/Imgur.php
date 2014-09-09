@@ -11,6 +11,10 @@ class Imgur extends AbstractExtractor
     protected $hash = null;
     protected $type = null;
 
+    /**
+     *
+     * @param Client $imgurClient
+     */
     public function __construct(Client $imgurClient)
     {
         $this->imgurClient = $imgurClient;
@@ -27,7 +31,7 @@ class Imgur extends AbstractExtractor
         // find the hash and the type (gallery or single image)
         preg_match('/(?:\/(a|gallery|signin))?\/([^\W_]{5,7})(?:\/|\.[a-zA-Z]+|#([^\W_]{5,7}|\d+))?$/', $url, $matches);
 
-        if (0 !== strpos($host, 'imgur') || false !== strpos($path, '.') || !isset($matches[2])) {
+        if (false === $host || false === $path || 0 !== strpos($host, 'imgur') || false !== strpos($path, '.') || !isset($matches[2])) {
             return false;
         }
 

@@ -26,7 +26,7 @@ class Twitter extends AbstractExtractor
         // find tweet id
         preg_match('/([0-9]{18})/', $path, $matches);
 
-        if (0 !== strpos($host, 'twitter') || !isset($matches[1])) {
+        if (false === $host || false === $path || 0 !== strpos($host, 'twitter') || !isset($matches[1])) {
             return false;
         }
 

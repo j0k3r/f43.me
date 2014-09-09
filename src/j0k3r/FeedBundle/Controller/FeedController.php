@@ -100,7 +100,7 @@ class FeedController extends Controller
      *
      * @param Request $request
      *
-     * @return array|RedirectResponse
+     * @return RedirectResponse|array
      */
     public function createAction(Request $request)
     {
@@ -134,7 +134,7 @@ class FeedController extends Controller
      *
      * @param string $slug The document Slug
      *
-     * @return array
+     * @return RedirectResponse|array
      *
      * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException If document doesn't exists
      */

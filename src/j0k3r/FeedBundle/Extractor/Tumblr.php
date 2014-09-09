@@ -12,6 +12,11 @@ class Tumblr extends AbstractExtractor
     protected $tumblrId = null;
     protected $tumblrHost = null;
 
+    /**
+     *
+     * @param Client $guzzle
+     * @param string $tumblrApiKey
+     */
     public function __construct(Client $guzzle, $tumblrApiKey)
     {
         $this->guzzle = $guzzle;
@@ -29,7 +34,7 @@ class Tumblr extends AbstractExtractor
         // find tumblr post id
         preg_match('/post\/([0-9]{11})/', $path, $matches);
 
-        if (!isset($matches[1])) {
+        if (false === $path || !isset($matches[1])) {
             return false;
         }
 

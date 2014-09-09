@@ -11,7 +11,13 @@ class ExtractorChain
         $this->extractors = array();
     }
 
-    public function addExtractor($extractor, $alias)
+    /**
+     * Add an extrator to the chain
+     *
+     * @param AbstractExtractor $extractor
+     * @param string            $alias
+     */
+    public function addExtractor(AbstractExtractor $extractor, $alias)
     {
         $this->extractors[$alias] = $extractor;
     }
@@ -37,7 +43,7 @@ class ExtractorChain
      *
      * @param string $url An url
      *
-     * @return bool
+     * @return string|false
      */
     public function match($url)
     {
