@@ -51,9 +51,9 @@
             </li>
             <li>
                 <span class="info">Last cached item</span>
-                {% if info.last_item.publishedat is defined %}
-                    <a href="{{ path('feeditem_homepage', { 'slug': feed.slug }) }}" title="{{ info.last_item.publishedat|date('d/m/y - H:i:s') }}">
-                        {{ time_diff(info.last_item.publishedat) }}
+                {% if infos.last_item.publishedat is defined %}
+                    <a href="{{ path('feeditem_homepage', { 'slug': feed.slug }) }}" title="{{ infos.last_item.publishedat|date('d/m/y - H:i:s') }}">
+                        {{ time_diff(infos.last_item.publishedat) }}
                     </a>
                 {% else %}
                     <span><i>Never</i></span>
