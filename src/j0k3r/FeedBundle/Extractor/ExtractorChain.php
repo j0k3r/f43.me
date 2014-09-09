@@ -19,7 +19,7 @@ class ExtractorChain
     /**
      * Get one extractor by alias
      *
-     * @param  string $alias
+     * @param string $alias
      *
      * @return bool|object
      */
@@ -35,7 +35,7 @@ class ExtractorChain
     /**
      * Loop thru all extractor to find one that match
      *
-     * @param  string $url An url
+     * @param string $url An url
      *
      * @return bool
      */

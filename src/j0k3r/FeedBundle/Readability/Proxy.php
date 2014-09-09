@@ -47,40 +47,23 @@ class Proxy
     }
 
     /**
-     * Define the parser to use
+     * Initialize some common variable that'll be modified each time this class is called
      *
-     * @param string $parser Could be "internal" or "external"
-     */
-    public function setChosenParser($parser)
-    {
-        $this->chosenParser = $parser;
-
-        return $this;
-    }
-
-    /**
-     * Define the Feed object to work on
-     *
-     * @param Feed $feed
-     */
-    public function setFeed(Feed $feed)
-    {
-        $this->feed = $feed;
-
-        return $this;
-    }
-
-    /**
-     * Define if we have to use all *known* parser to get the content if the defined one failed.
-     * For example, Internal parser can't make content readable, it will use the External one, etc ..
-     *
-     * @param bool $value
+     * @param string    $chosenParser   Could be "internal" or "external"
+     * @param null|Feed $feed           Define the Feed object to work on
+     * @param bool      $allowAllParser Define if we have to use all *known* parser to get the content if the defined one failed.
+     *                                  For example, Internal parser can't make content readable, it will use the External one, etc ..
      *
      * @return Proxy Current object
      */
-    public function allowAllParser($value)
+    public function init($chosenParser, Feed $feed = null, $allowAllParser = false)
     {
-        $this->allowAllParser = (bool) $value;
+        $this->content = false;
+        $this->url = false;
+
+        $this->chosenParser = $chosenParser;
+        $this->feed = $feed;
+        $this->allowAllParser = (bool) $allowAllParser;
 
         return $this;
     }

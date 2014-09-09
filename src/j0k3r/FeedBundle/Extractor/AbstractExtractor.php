@@ -7,7 +7,7 @@ abstract class AbstractExtractor
     /**
      * Will tell if this url should be handled by this extrator.
      *
-     * @param  string $url
+     * @param string $url
      *
      * @return bool
      */
