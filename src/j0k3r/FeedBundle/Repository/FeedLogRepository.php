@@ -149,9 +149,9 @@ class FeedLogRepository extends DocumentRepository
     /**
      * Count all feed logs by feed id
      *
-     * @param  integer $feedId Feed id
+     * @param integer $feedId Feed id
      *
-     * @return integer         Number of items
+     * @return integer Number of items
      */
     public function countByFeedId($feedId)
     {

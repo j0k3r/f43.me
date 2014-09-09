@@ -83,9 +83,7 @@ class ProxyTest extends \PHPUnit_Framework_TestCase
     public function testWithEmptyContent()
     {
         $proxy = new Proxy($this->buzz, $this->extractorChain, 'xxx', 'http://0.0.0.0/api', false, $this->regexs);
-        $proxy->setChosenParser('internal');
-        $proxy->setFeed($this->feed);
-        $proxy->allowAllParser(true);
+        $proxy->init('internal', $this->feed, true);
 
         $this->response->expects($this->any())
             ->method('getContent')
@@ -99,9 +97,7 @@ class ProxyTest extends \PHPUnit_Framework_TestCase
     public function testWithFalseContent()
     {
         $proxy = new Proxy($this->buzz, $this->extractorChain, 'xxx', 'http://0.0.0.0/api', false, $this->regexs);
-        $proxy->setChosenParser('internal');
-        $proxy->setFeed($this->feed);
-        $proxy->allowAllParser(true);
+        $proxy->init('internal', $this->feed, true);
 
         $this->response->expects($this->any())
             ->method('getContent')
@@ -116,9 +112,7 @@ class ProxyTest extends \PHPUnit_Framework_TestCase
     public function testWithVideoContent()
     {
         $proxy = new Proxy($this->buzz, $this->extractorChain, 'xxx', 'http://0.0.0.0/api', false, $this->regexs);
-        $proxy->setChosenParser('internal');
-        $proxy->setFeed($this->feed);
-        $proxy->allowAllParser(true);
+        $proxy->init('internal', $this->feed, true);
 
         $this->response->expects($this->any())
             ->method('getContent')
@@ -133,9 +127,7 @@ class ProxyTest extends \PHPUnit_Framework_TestCase
     public function testWithExceptionFromBuzz()
     {
         $proxy = new Proxy($this->buzz, $this->extractorChain, 'xxx', 'http://0.0.0.0/api', false, $this->regexs);
-        $proxy->setChosenParser('internal');
-        $proxy->setFeed($this->feed);
-        $proxy->allowAllParser(true);
+        $proxy->init('internal', $this->feed, true);
 
         $this->response->expects($this->any())
             ->method('getContent')
@@ -150,9 +142,7 @@ class ProxyTest extends \PHPUnit_Framework_TestCase
     public function testWithGzipContent()
     {
         $proxy = new Proxy($this->buzz, $this->extractorChain, 'xxx', 'http://0.0.0.0/api', false, $this->regexs);
-        $proxy->setChosenParser('internal');
-        $proxy->setFeed($this->feed);
-        $proxy->allowAllParser(true);
+        $proxy->init('internal', $this->feed, true);
 
         $this->response->expects($this->any())
             ->method('getContent')
@@ -179,9 +169,7 @@ class ProxyTest extends \PHPUnit_Framework_TestCase
     public function testWithImageContent()
     {
         $proxy = new Proxy($this->buzz, $this->extractorChain, 'xxx', 'http://0.0.0.0/api', false, $this->regexs);
-        $proxy->setChosenParser('internal');
-        $proxy->setFeed($this->feed);
-        $proxy->allowAllParser(true);
+        $proxy->init('internal', $this->feed, true);
 
         $this->response->expects($this->any())
             ->method('getContent')
@@ -208,9 +196,7 @@ class ProxyTest extends \PHPUnit_Framework_TestCase
     public function testWithCustomParser()
     {
         $proxy = new Proxy($this->buzz, $this->extractorChain, 'xxx', 'http://0.0.0.0/api', false, $this->regexs);
-        $proxy->setChosenParser('internal');
-        $proxy->setFeed($this->feed);
-        $proxy->allowAllParser(true);
+        $proxy->init('internal', $this->feed, true);
 
         $this->feed->expects($this->any())
             ->method('getHost')
