@@ -67,6 +67,10 @@ class FeedItemController extends Controller
         if ($form->isValid()) {
             $res = $dm->getRepository('j0k3rFeedBundle:FeedItem')->deleteAllByFeedId($feed->getId());
 
+            $feed->setNbItems(0);
+            $dm->persist($feed);
+            $dm->flush();
+
             $this->get('session')->getFlashBag()->add('notice', $res['n'].' documents deleted!');
         }
 

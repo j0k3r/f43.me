@@ -35,7 +35,7 @@
                 <tbody>
                 {% for feeditem in feeditems %}
                     <tr>
-                        <td><div><a href="{{ feeditem.link }}" target="_blank">{{ feeditem.title|raw }}</a></div></td>
+                        <td><div><a href="{{ feeditem.link }}" target="_blank">{{ feeditem.title }}</a></div></td>
                         <td>{{ feeditem.publishedat|date('d/m/y - H:i:s') }}</td>
                         <td>{{ feeditem.createdat|date('d/m/y - H:i:s') }}</td>
                         <td><a class="secondary button small radius" data-reveal-id="modal-preview-item" data-reveal-ajax="{{ path('feeditem_preview_cached', { 'id': feeditem.id }) }}">preview</a></td>

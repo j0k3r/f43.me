@@ -82,15 +82,15 @@
             <h2 class="title">{% block h2_title %}{% endblock %}</h2>
             <hr />
             {% for flashMessage in app.session.flashbag.get('info') %}
-                <div data-alert class="alert-box radius">{{ flashMessage|raw }}</div>
+                <div data-alert class="alert-box radius">{{ flashMessage }}</div>
             {% endfor %}
 
             {% for flashMessage in app.session.flashbag.get('notice') %}
-                <div data-alert class="alert-box success radius">{{ flashMessage|raw }}</div>
+                <div data-alert class="alert-box success radius">{{ flashMessage }}</div>
             {% endfor %}
 
             {% for flashMessage in app.session.flashbag.get('error') %}
-                <div data-alert class="alert-box alert radius">{{ flashMessage|raw }}</div>
+                <div data-alert class="alert-box alert radius">{{ flashMessage }}</div>
             {% endfor %}
         </div>
     </div>

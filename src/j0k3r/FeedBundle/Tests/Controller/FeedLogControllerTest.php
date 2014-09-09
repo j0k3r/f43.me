@@ -12,7 +12,7 @@ class FeedLogControllerTest extends FeedWebTestCase
         $this->assertEquals(302, $client->getResponse()->getStatusCode());
         $this->assertTrue($client->getResponse()->isRedirect('http://localhost/login'));
 
-        $client->request('GET', '/feed/reddit/logs/deleteAll');
+        $client->request('POST', '/feed/reddit/logs/deleteAll');
         $this->assertEquals(302, $client->getResponse()->getStatusCode());
         $this->assertTrue($client->getResponse()->isRedirect('http://localhost/login'));
 
