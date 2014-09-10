@@ -122,7 +122,7 @@ class ConstraintRssValidatorTest extends \PHPUnit_Framework_TestCase
         $response->expects($this->any())
             ->method('getBody')
             ->will($this->onConsecutiveCalls(
-                $this->throwException(new RequestException),
+                $this->throwException(new RequestException()),
                 'This is a not valid'
             ));
 
@@ -162,8 +162,8 @@ class ConstraintRssValidatorTest extends \PHPUnit_Framework_TestCase
         $response->expects($this->any())
             ->method('getBody')
             ->will($this->onConsecutiveCalls(
-                $this->throwException(new RequestException),
-                $this->throwException(new RequestException)
+                $this->throwException(new RequestException()),
+                $this->throwException(new RequestException())
             ));
 
         $validator = new ConstraintRssValidator($guzzle);

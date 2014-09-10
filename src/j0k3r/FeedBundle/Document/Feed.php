@@ -372,11 +372,11 @@ class Feed
      */
     public function setHost($host)
     {
-        $url = parse_url($host);
+        $parsedHost = parse_url($host, PHP_URL_HOST);
 
         // be sure that host doesn't have http
-        if (1 < count($url) && isset($url['host'])) {
-            $host = $url['host'];
+        if ($parsedHost) {
+            $host = $parsedHost;
         }
 
         $this->host = $host;

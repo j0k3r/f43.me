@@ -116,7 +116,7 @@ class TwitterTest extends \PHPUnit_Framework_TestCase
 
         $response->expects($this->any())
             ->method('json')
-            ->will($this->throwException(new \Guzzle\Http\Exception\RequestException));
+            ->will($this->throwException(new \Guzzle\Http\Exception\RequestException()));
 
         $twitter = new Twitter($guzzle);
         $twitter->match('https://twitter.com/DoerteDev/statuses/506522223860277248');

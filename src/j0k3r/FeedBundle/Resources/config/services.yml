@@ -14,6 +14,7 @@ services:
         arguments:
             buzz: @buzz
             extractor: @feed.extractor.chain
+            improver: @feed.improver.chain
             token: %readability_token%
             url_api: https://readability.com/api/content/v1/parser
             debug: false #%kernel.debug%
@@ -54,6 +55,14 @@ services:
         tags:
             - { name: kernel.event_listener, event: j0k3r_feed.after_item_cached, method: pingHub }
 
+    # validator
+    validator.rss.valid_rss:
+        class: j0k3r\FeedBundle\Validator\Constraints\ConstraintRssValidator
+        arguments:
+            - @guzzle.client
+        tags:
+            - { name: validator.constraint_validator, alias: valid_rss }
+
     # feed extractor
     feed.extractor.chain:
         class: j0k3r\FeedBundle\Extractor\ExtractorChain
@@ -80,10 +89,22 @@ services:
         tags:
             -  { name: feed.extractor, alias: tumblr }
 
-    # validator
-    validator.rss.valid_rss:
-        class: j0k3r\FeedBundle\Validator\Constraints\ConstraintRssValidator
-        arguments:
-            - @guzzle.client
+    # improver
+    feed.improver.chain:
+        class: j0k3r\FeedBundle\Improver\ImproverChain
+
+    feed.improver.hackernews:
+        class: j0k3r\FeedBundle\Improver\HackerNews
         tags:
-            - { name: validator.constraint_validator, alias: valid_rss }
+            -  { name: feed.improver, alias: hackernews }
+
+    feed.improver.reddit:
+        class: j0k3r\FeedBundle\Improver\Reddit
+        tags:
+            -  { name: feed.improver, alias: reddit }
+
+    # this one should be the last one (because this is the default one :)
+    feed.improver.nothing:
+        class: j0k3r\FeedBundle\Improver\Nothing
+        tags:
+            -  { name: feed.improver, alias: nothing }

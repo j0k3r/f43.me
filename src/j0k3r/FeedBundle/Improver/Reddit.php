@@ -1,28 +1,34 @@
 <?php
 
-namespace j0k3r\FeedBundle\Parser;
+namespace j0k3r\FeedBundle\Improver;
 
 /**
- * RedditComParser
+ * Reddit Improver
  *
  * This class provides a custom parser for reddit feeds
  */
-class RedditComParser extends DefaultParser
+class Reddit extends Nothing
 {
+    /**
+     * {@inheritdoc}
+     */
+    public function match($host)
+    {
+        return 0 === strpos('reddit.com', $host) ? true : false;
+    }
+
     /**
      * For reddit we extract link for the default content retrieved.
      * Because the rss item link goes to reddit. The important one is inside the content.
      *
-     * @see DefaultParser/retrieveUrl
-     *
-     * @return string Url to be used to retrieve content
+     * @inheritdoc
      */
-    public function retrieveUrl()
+    public function updateUrl($url)
     {
         // we extract the source of the reddit post
         preg_match('/(.*)\<a href\=\"(.*)\"\>\[link\]\<\/a\>/i', $this->itemContent, $matches);
         if (count($matches) != 3) {
-            return $this->url;
+            return $url;
         }
 
         return $matches[2];
@@ -31,14 +37,10 @@ class RedditComParser extends DefaultParser
     /**
      * We just happen the readable item to the default one
      *
-     * @see DefaultParser/updateContent
-     *
-     * @param string $content Readable item content
-     *
-     * @return string
+     * @inheritdoc
      */
-    public function updateContent($content)
+    public function updateContent($readableContent)
     {
-        return $this->itemContent.'<br/><hr/><br/>'.$content;
+        return $this->itemContent.'<br/><hr/><br/>'.$readableContent;
     }
 }

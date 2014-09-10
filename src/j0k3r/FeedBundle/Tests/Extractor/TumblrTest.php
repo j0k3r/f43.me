@@ -109,7 +109,7 @@ class TumblrTest extends \PHPUnit_Framework_TestCase
             ->will($this->onConsecutiveCalls(
                 $this->returnValue(array('response' => array('posts' => array(array('body' => '<div>content</div>'))))),
                 $this->returnValue(array()),
-                $this->throwException(new RequestException)
+                $this->throwException(new RequestException())
             ));
 
         $tumblr = new Tumblr($guzzle, 'apikey');
