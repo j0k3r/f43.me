@@ -16,6 +16,7 @@ class Proxy
     protected $feed = null;
     protected $buzz;
     protected $extractorChain;
+    protected $improverChain;
     protected $urlApi;
     protected $token;
     protected $debug;

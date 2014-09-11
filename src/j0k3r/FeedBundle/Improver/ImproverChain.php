@@ -11,6 +11,12 @@ class ImproverChain
         $this->improvers = array();
     }
 
+    /**
+     * Add an improver to the chain
+     *
+     * @param  Nothing    $improver
+     * @param  string     $alias
+     */
     public function addImprover(Nothing $improver, $alias)
     {
         $this->improvers[$alias] = $improver;
@@ -37,7 +43,7 @@ class ImproverChain
      *
      * @param string $host A host
      *
-     * @return bool
+     * @return string|false
      */
     public function match($host)
     {

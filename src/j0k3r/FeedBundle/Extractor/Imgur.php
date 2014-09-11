@@ -28,10 +28,14 @@ class Imgur extends AbstractExtractor
         $host = parse_url($url, PHP_URL_HOST);
         $path = parse_url($url, PHP_URL_PATH);
 
+        if (false === $host || false === $path) {
+            return false;
+        }
+
         // find the hash and the type (gallery or single image)
         preg_match('/(?:\/(a|gallery|signin))?\/([^\W_]{5,7})(?:\/|\.[a-zA-Z]+|#([^\W_]{5,7}|\d+))?$/', $url, $matches);
 
-        if (false === $host || false === $path || 0 !== strpos($host, 'imgur') || false !== strpos($path, '.') || !isset($matches[2])) {
+        if (0 !== strpos($host, 'imgur') || false !== strpos($path, '.') || !isset($matches[2])) {
             return false;
         }
 

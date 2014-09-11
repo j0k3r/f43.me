@@ -31,10 +31,14 @@ class Tumblr extends AbstractExtractor
         $host = parse_url($url, PHP_URL_HOST);
         $path = parse_url($url, PHP_URL_PATH);
 
+        if (false === $path) {
+            return false;
+        }
+
         // find tumblr post id
         preg_match('/post\/([0-9]{11})/', $path, $matches);
 
-        if (false === $path || !isset($matches[1])) {
+        if (!isset($matches[1])) {
             return false;
         }
 

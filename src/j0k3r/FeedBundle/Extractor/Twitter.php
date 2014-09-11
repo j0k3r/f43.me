@@ -23,10 +23,14 @@ class Twitter extends AbstractExtractor
         $host = parse_url($url, PHP_URL_HOST);
         $path = parse_url($url, PHP_URL_PATH);
 
+        if (false === $host || false === $path) {
+            return false;
+        }
+
         // find tweet id
         preg_match('/([0-9]{18})/', $path, $matches);
 
-        if (false === $host || false === $path || 0 !== strpos($host, 'twitter') || !isset($matches[1])) {
+        if (0 !== strpos($host, 'twitter') || !isset($matches[1])) {
             return false;
         }
 
