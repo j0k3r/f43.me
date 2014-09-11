@@ -25,8 +25,8 @@ class Proxy
     protected $allowAllParser = false;
     protected $availableParsers = array('Internal', 'External');
 
-    public $url;
-    public $content = false;
+    public $url = '';
+    public $content = '';
     public $useDefault = false;
 
     /**
@@ -81,11 +81,11 @@ class Proxy
     public function parseContent($url, $itemContent = null)
     {
         // be sure to have a clean workspace :)
-        $this->content = false;
-        $this->url = false;
+        $this->content = '';
+        $this->url = '';
 
         // the feed isn't always defined, for example when we test an url
-        $host = parse_url($url, PHP_URL_HOST);
+        $host = parse_url($url, PHP_URL_HOST) ?: '';
         if (null !== $this->feed) {
             $host = $this->feed->getHost();
         }
@@ -112,7 +112,7 @@ class Proxy
 
         // this means the selected extractor was able to extract content OR
         // no extractor were able to match the url
-        if (false === $this->content && is_callable(array($this, $parserMethod))) {
+        if (!$this->content && is_callable(array($this, $parserMethod))) {
             $this->content = $this->$parserMethod($this->url);
         }
 
@@ -163,6 +163,7 @@ class Proxy
                 ->render();
         } catch (\TubeLink\Exception\ServiceNotFoundException $e) {
             // it means it's not a video, let's try other content !
+            $content = '';
         }
 
         try {
@@ -170,11 +171,11 @@ class Proxy
             $content  = $response->getContent();
         } catch (\Exception $e) {
             // catch timeout, ssl verification that failed, etc ...
-            return false;
+            return '';
         }
 
         if (false === $content) {
-            return false;
+            return '';
         }
 
         // remove utm parameters & fragment
@@ -193,7 +194,7 @@ class Proxy
 
             // if it's not an image, we don't know how to render it
             // so we act that we can't make it readable
-            return false;
+            return '';
         }
 
         // decode gzip content (most of the time it's a Tumblr website)
@@ -216,7 +217,7 @@ class Proxy
         $readability->convertLinksToFootnotes = false;
 
         if (!$readability->init()) {
-            return false;
+            return '';
         }
 
         $tidy = tidy_parse_string(
@@ -247,7 +248,7 @@ class Proxy
             $response = $this->buzz->get($this->urlApi.'?token='.$this->token.'&url='.urlencode($url));
             $html = json_decode($response->getContent());
         } catch (\Exception $e) {
-            return false;
+            return '';
         }
 
         if (isset($html->content)) {
@@ -260,6 +261,6 @@ class Proxy
             return $html->messages;
         }
 
-        return false;
+        return '';
     }
 }

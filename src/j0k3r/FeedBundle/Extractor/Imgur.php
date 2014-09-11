@@ -51,7 +51,7 @@ class Imgur extends AbstractExtractor
     public function getContent()
     {
         if (!$this->hash && !$this->type) {
-            return false;
+            return '';
         }
 
         $images = array();
@@ -72,7 +72,7 @@ class Imgur extends AbstractExtractor
                     break;
             }
         } catch (RuntimeException $e) {
-            return false;
+            return '';
         }
 
         foreach ($images as $image) {

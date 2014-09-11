@@ -131,6 +131,6 @@ class ImgurTest extends \PHPUnit_Framework_TestCase
         $imgur = new Imgur($imgurClient);
         $imgur->match('http://localhost');
 
-        $this->assertFalse($imgur->getContent());
+        $this->assertEmpty($imgur->getContent());
     }
 }

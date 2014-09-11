@@ -45,7 +45,7 @@ class Twitter extends AbstractExtractor
     public function getContent()
     {
         if (!$this->tweetId) {
-            return false;
+            return '';
         }
 
         try {
@@ -54,11 +54,11 @@ class Twitter extends AbstractExtractor
                 ->send()
                 ->json();
         } catch (RequestException $e) {
-            return false;
+            return '';
         }
 
         if (!isset($data['html'])) {
-            return false;
+            return '';
         }
 
         return $data['html'];

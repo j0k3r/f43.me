@@ -115,13 +115,12 @@ class TumblrTest extends \PHPUnit_Framework_TestCase
         $tumblr = new Tumblr($guzzle, 'apikey');
 
         // first test fail because we didn't match an url, so TumblrId isn't defined
-        $this->assertFalse($tumblr->getContent());
+        $this->assertEmpty($tumblr->getContent());
 
         $tumblr->match('http://thecodinglove.com/post/96365413702/client-giving-us-his-feedback-on-his-new-project');
 
         // consecutive calls
         $this->assertEquals('<div>content</div>', $tumblr->getContent());
-        $this->assertFalse($tumblr->getContent());
-        $this->assertFalse($tumblr->getContent());
+        $this->assertEmpty($tumblr->getContent());
     }
 }

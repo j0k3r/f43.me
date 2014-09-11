@@ -89,7 +89,7 @@ class TwitterTest extends \PHPUnit_Framework_TestCase
         $twitter = new Twitter($guzzle);
         $twitter->match('https://twitter.com/DoerteDev/statuses/506522223860277248');
 
-        $this->assertFalse($twitter->getContent());
+        $this->assertEmpty($twitter->getContent());
     }
 
     public function testContentBadResponse2()
@@ -121,7 +121,7 @@ class TwitterTest extends \PHPUnit_Framework_TestCase
         $twitter = new Twitter($guzzle);
         $twitter->match('https://twitter.com/DoerteDev/statuses/506522223860277248');
 
-        $this->assertFalse($twitter->getContent());
+        $this->assertEmpty($twitter->getContent());
     }
 
     public function testNoTweet()
@@ -133,6 +133,6 @@ class TwitterTest extends \PHPUnit_Framework_TestCase
         $twitter = new Twitter($guzzle);
         $twitter->match('http://localhost');
 
-        $this->assertFalse($twitter->getContent());
+        $this->assertEmpty($twitter->getContent());
     }
 }

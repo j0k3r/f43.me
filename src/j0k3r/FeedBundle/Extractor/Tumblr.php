@@ -64,7 +64,7 @@ class Tumblr extends AbstractExtractor
     public function getContent()
     {
         if (!$this->tumblrId && !$this->tumblrHost) {
-            return false;
+            return '';
         }
 
         try {
@@ -73,11 +73,11 @@ class Tumblr extends AbstractExtractor
                 ->send()
                 ->json();
         } catch (RequestException $e) {
-            return false;
+            return '';
         }
 
         if (!isset($data['response']['posts'][0]['body'])) {
-            return false;
+            return '';
         }
 
         return $data['response']['posts'][0]['body'];
