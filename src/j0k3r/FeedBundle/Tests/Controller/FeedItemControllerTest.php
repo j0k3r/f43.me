@@ -65,7 +65,6 @@ class FeedItemControllerTest extends FeedWebTestCase
         $this->assertCount(1, $crawler->filter('a.close-reveal-modal'));
         $this->assertCount(1, $crawler->filter('p span.label'));
         $this->assertCount(1, $crawler->filter('ul.no-bullet'));
-        $this->assertGreaterThan(0, $crawler->filter('p em')->count());
     }
 
     public function testPreviewBadId()
