@@ -3,44 +3,18 @@
 namespace j0k3r\FeedBundle\Tests\Readability;
 
 use j0k3r\FeedBundle\Readability\Proxy;
+use j0k3r\FeedBundle\Parser\Internal;
 
 class ProxyTest extends \PHPUnit_Framework_TestCase
 {
     private $readability;
     private $dom;
-    private $buzz;
     private $response;
     private $feed;
     private $regexs;
 
     protected function setUp()
     {
-        $this->buzz = $this->getMockBuilder('Buzz\Browser')
-            ->disableOriginalConstructor()
-            ->getMock();
-
-        $client = $this->getMockBuilder('Buzz\Client\Curl')
-            ->setMethods(array('getInfo'))
-            ->disableOriginalConstructor()
-            ->getMock();
-
-        $client->expects($this->any())
-            ->method('getInfo')
-            ->willReturn('http://url');
-
-        $this->response = $this->getMockBuilder('Buzz\Message\Response')
-            ->setMethods(array('getContent', 'getHeader'))
-            ->disableOriginalConstructor()
-            ->getMock();
-
-        $this->buzz->expects($this->any())
-            ->method('get')
-            ->willReturn($this->response);
-
-        $this->buzz->expects($this->any())
-            ->method('getClient')
-            ->willReturn($client);
-
         $this->feed = $this->getMockBuilder('j0k3r\FeedBundle\Document\Feed')
             ->setMethods(array('getFormatter', 'getHost'))
             ->disableOriginalConstructor()
@@ -82,7 +56,27 @@ class ProxyTest extends \PHPUnit_Framework_TestCase
             ->method('getImprover')
             ->willReturn($nothingImprover);
 
-        $this->regexs = array(
+        $guzzle = $this->getMockBuilder('Guzzle\Http\Client')
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $request = $this->getMockBuilder('Guzzle\Http\Message\Request')
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $this->response = $this->getMockBuilder('Guzzle\Http\Message\Response')
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $guzzle->expects($this->any())
+            ->method('get')
+            ->will($this->returnValue($request));
+
+        $request->expects($this->any())
+            ->method('send')
+            ->will($this->returnValue($this->response));
+
+        $this->internalParser = new Internal($guzzle, array(
             'unlikelyCandidates' => '/combx|comment|community|disqus|extra|foot|header|menu|remark|rss|shoutbox|sidebar|sponsor|ad-break|agegate|pagination|pager|popup|addthis|response|slate_associated_bn|reseaux|sharing|auteur|tag|feedback|meta|kudo|sidebar|copyright|bio|moreInfo|legal|share/i',
             'okMaybeItsACandidate' => '/and|article|body|column|main|shadow/i',
             'positive' => '/article|body|content|entry|hentry|main|page|attachment|pagination|post|text|blog|story/i',
@@ -96,22 +90,21 @@ class ProxyTest extends \PHPUnit_Framework_TestCase
             'skipFootnoteLink' => '/^\s*(\[?[a-z0-9]{1,2}\]?|^|edit|citation needed)\s*$/i',
             'attrToRemove' => 'onclick|rel|class|target|fs:definition|alt|id|onload|name|onchange',
             'tagToRemove' => 'select|form|header|footer|aside',
-        );
-    }
+        ));
 
-    protected function tearDown()
-    {
-        unset($this->buzz);
+        $this->parserChain = $this->getMockBuilder('j0k3r\FeedBundle\Parser\ParserChain')
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $this->parserChain->expects($this->any())
+            ->method('getParser')
+            ->willReturn($this->internalParser);
     }
 
     public function testWithEmptyContent()
     {
-        $proxy = new Proxy($this->buzz, $this->extractorChain, $this->improverChain, 'xxx', 'http://0.0.0.0/api', false, $this->regexs);
+        $proxy = new Proxy($this->extractorChain, $this->improverChain, $this->parserChain);
         $proxy->init('internal', $this->feed, true);
-
-        $this->response->expects($this->any())
-            ->method('getContent')
-            ->willReturn('<html/>');
 
         $proxy->parseContent('http://0.0.0.0', 'default content');
 
@@ -120,12 +113,8 @@ class ProxyTest extends \PHPUnit_Framework_TestCase
 
     public function testWithFalseContent()
     {
-        $proxy = new Proxy($this->buzz, $this->extractorChain, $this->improverChain, 'xxx', 'http://0.0.0.0/api', false, $this->regexs);
+        $proxy = new Proxy($this->extractorChain, $this->improverChain, $this->parserChain);
         $proxy->init('internal', $this->feed, true);
-
-        $this->response->expects($this->any())
-            ->method('getContent')
-            ->willReturn(false);
 
         $proxy->parseContent('http://0.0.0.0/content.html', 'default content');
 
@@ -135,12 +124,8 @@ class ProxyTest extends \PHPUnit_Framework_TestCase
 
     public function testWithVideoContent()
     {
-        $proxy = new Proxy($this->buzz, $this->extractorChain, $this->improverChain, 'xxx', 'http://0.0.0.0/api', false, $this->regexs);
+        $proxy = new Proxy($this->extractorChain, $this->improverChain, $this->parserChain);
         $proxy->init('internal', $this->feed, true);
-
-        $this->response->expects($this->any())
-            ->method('getContent')
-            ->willReturn(false);
 
         $proxy->parseContent('https://www.youtube.com/watch?v=8b7t5iUV0pQ', 'default content');
 
@@ -150,12 +135,8 @@ class ProxyTest extends \PHPUnit_Framework_TestCase
 
     public function testWithExceptionFromBuzz()
     {
-        $proxy = new Proxy($this->buzz, $this->extractorChain, $this->improverChain, 'xxx', 'http://0.0.0.0/api', false, $this->regexs);
+        $proxy = new Proxy($this->extractorChain, $this->improverChain, $this->parserChain);
         $proxy->init('internal', $this->feed, true);
-
-        $this->response->expects($this->any())
-            ->method('getContent')
-            ->will($this->throwException(new \Exception()));
 
         $proxy->parseContent('http://foo.bar.nowhere/test.html', 'default content');
 
@@ -165,11 +146,11 @@ class ProxyTest extends \PHPUnit_Framework_TestCase
 
     public function testWithGzipContent()
     {
-        $proxy = new Proxy($this->buzz, $this->extractorChain, $this->improverChain, 'xxx', 'http://0.0.0.0/api', false, $this->regexs);
+        $proxy = new Proxy($this->extractorChain, $this->improverChain, $this->parserChain);
         $proxy->init('internal', $this->feed, true);
 
         $this->response->expects($this->any())
-            ->method('getContent')
+            ->method('getBody')
             ->willReturn(gzencode("<p>Le Lorem Ipsum est simplement du faux texte employé dans la composition et la mise en page avant impression. Le Lorem Ipsum est le faux texte standard de l'imprimerie depuis les années 1500, quand un peintre anonyme assembla ensemble des morceaux de texte pour réaliser un livre spécimen de polices de texte.</p>"));
 
         $this->response->expects($this->any())
@@ -186,18 +167,14 @@ class ProxyTest extends \PHPUnit_Framework_TestCase
 
         $proxy->parseContent('http://foo.bar.nowhere/test.html', 'default content');
 
-        $this->assertEquals('http://url', $proxy->url);
+        $this->assertEquals('http://foo.bar.nowhere/test.html', $proxy->url);
         $this->assertContains('readability', $proxy->content);
     }
 
     public function testWithImageContent()
     {
-        $proxy = new Proxy($this->buzz, $this->extractorChain, $this->improverChain, 'xxx', 'http://0.0.0.0/api', false, $this->regexs);
+        $proxy = new Proxy($this->extractorChain, $this->improverChain, $this->parserChain);
         $proxy->init('internal', $this->feed, true);
-
-        $this->response->expects($this->any())
-            ->method('getContent')
-            ->willReturn('<html/>');
 
         $this->response->expects($this->any())
             ->method('getHeader')
@@ -213,22 +190,18 @@ class ProxyTest extends \PHPUnit_Framework_TestCase
 
         $proxy->parseContent('http://foo.bar.nowhere/test.html', 'default content');
 
-        $this->assertEquals('http://url', $proxy->url);
+        $this->assertEquals('http://foo.bar.nowhere/test.html', $proxy->url);
         $this->assertContains('<img src="http://foo.bar.nowhere/test.html"', $proxy->content);
     }
 
     public function testWithCustomParser()
     {
-        $proxy = new Proxy($this->buzz, $this->extractorChain, $this->improverChain, 'xxx', 'http://0.0.0.0/api', false, $this->regexs);
+        $proxy = new Proxy($this->extractorChain, $this->improverChain, $this->parserChain);
         $proxy->init('internal', $this->feed, true);
 
         $this->feed->expects($this->any())
             ->method('getHost')
             ->will($this->returnValue('Default'));
-
-        $this->response->expects($this->any())
-            ->method('getContent')
-            ->willReturn('<html/>');
 
         $proxy->parseContent('http://0.0.0.0', 'default content');
 
