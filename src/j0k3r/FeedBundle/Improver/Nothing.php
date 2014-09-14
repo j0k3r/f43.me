@@ -2,6 +2,9 @@
 
 namespace j0k3r\FeedBundle\Improver;
 
+use Guzzle\Http\Client;
+use Guzzle\Http\Exception\RequestException;
+
 /**
  * Default Improver (aka Nothing)
  *
@@ -11,6 +14,16 @@ class Nothing
 {
     protected $url;
     protected $itemContent;
+    protected $guzzle;
+
+    /**
+     *
+     * @param Client $guzzle
+     */
+    public function __construct(Client $guzzle)
+    {
+        $this->guzzle = $guzzle;
+    }
 
     /**
      * Set RSS item url
@@ -55,6 +68,16 @@ class Nothing
      */
     public function updateUrl($url)
     {
+        try {
+            $response = $this->guzzle->get($url)->send();
+        } catch (RequestException $e) {
+            // catch timeout, ssl verification that failed, etc ...
+            return $url;
+        }
+
+        // remove utm parameters & fragment
+        $url = preg_replace('/((\?)?(&(amp;)?)?utm_(.*?)\=[^&]+)|(#(.*?)\=[^&]+)/', '', $response->getEffectiveUrl());
+
         return $url;
     }
 

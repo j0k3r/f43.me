@@ -77,17 +77,23 @@ services:
 
     feed.improver.hackernews:
         class: j0k3r\FeedBundle\Improver\HackerNews
+        arguments:
+            - @guzzle.client
         tags:
             -  { name: feed.improver, alias: hackernews }
 
     feed.improver.reddit:
         class: j0k3r\FeedBundle\Improver\Reddit
+        arguments:
+            - @guzzle.client
         tags:
             -  { name: feed.improver, alias: reddit }
 
     # this one should be the last one (because this is the default one :)
     feed.improver.nothing:
         class: j0k3r\FeedBundle\Improver\Nothing
+        arguments:
+            - @guzzle.client
         tags:
             -  { name: feed.improver, alias: nothing }
 
