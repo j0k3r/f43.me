@@ -14,8 +14,8 @@ class ParserChain
     /**
      * Add an parser to the chain
      *
-     * @param  AbstractParser    $parser
-     * @param  string     $alias
+     * @param AbstractParser $parser
+     * @param string         $alias
      */
     public function addParser(AbstractParser $parser, $alias)
     {

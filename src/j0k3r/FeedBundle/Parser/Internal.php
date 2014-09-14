@@ -19,6 +19,11 @@ class Internal extends AbstractParser
     protected $guzzle;
     protected $regexps = array();
 
+    /**
+     *
+     * @param Client $guzzle
+     * @param array  $regexps Regex to remove/escape content
+     */
     public function __construct(Client $guzzle, $regexps = array())
     {
         $this->guzzle = $guzzle;
@@ -52,11 +57,8 @@ class Internal extends AbstractParser
             return '';
         }
 
-        // remove utm parameters & fragment
-        // $url = preg_replace('/((\?)?(&(amp;)?)?utm_(.*?)\=[^&]+)|(#(.*?)\=[^&]+)/', '', $response->getEffectiveUrl());
-
         // save information about gzip content for later decoding
-        $is_gziped = (bool) 'gzip' == $response->getHeader('Content-Encoding');
+        $is_gziped = 'gzip' == $response->getHeader('Content-Encoding');
 
         $contentType = (string) $response->getHeader('Content-Type');
 

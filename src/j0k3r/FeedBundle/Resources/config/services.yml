@@ -99,8 +99,8 @@ services:
         class: j0k3r\FeedBundle\Parser\External
         arguments:
             - @guzzle.client
-            - %readability_token%
             - 'https://readability.com/api/content/v1/parser'
+            - %readability_token%
         tags:
             -  { name: feed.parser, alias: external }
 

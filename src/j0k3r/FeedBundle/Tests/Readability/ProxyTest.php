@@ -4,14 +4,16 @@ namespace j0k3r\FeedBundle\Tests\Readability;
 
 use j0k3r\FeedBundle\Readability\Proxy;
 use j0k3r\FeedBundle\Parser\Internal;
+use Guzzle\Http\Exception\RequestException;
 
 class ProxyTest extends \PHPUnit_Framework_TestCase
 {
-    private $readability;
-    private $dom;
     private $response;
     private $feed;
-    private $regexs;
+    private $internalParser;
+    private $parserChain;
+    private $extractorChain;
+    private $improverChain;
 
     protected function setUp()
     {
@@ -116,6 +118,10 @@ class ProxyTest extends \PHPUnit_Framework_TestCase
         $proxy = new Proxy($this->extractorChain, $this->improverChain, $this->parserChain);
         $proxy->init('internal', $this->feed, true);
 
+        $this->response->expects($this->any())
+            ->method('getBody')
+            ->willReturn(false);
+
         $proxy->parseContent('http://0.0.0.0/content.html', 'default content');
 
         $this->assertEquals('http://0.0.0.0/content.html', $proxy->url);
@@ -133,10 +139,14 @@ class ProxyTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('<iframe src="http://www.youtube.com/embed/8b7t5iUV0pQ" width="560" height="315"></iframe>', $proxy->content);
     }
 
-    public function testWithExceptionFromBuzz()
+    public function testWithExceptionFromGuzzle()
     {
         $proxy = new Proxy($this->extractorChain, $this->improverChain, $this->parserChain);
         $proxy->init('internal', $this->feed, true);
+
+        $this->response->expects($this->any())
+            ->method('getBody')
+            ->will($this->throwException(new RequestException()));
 
         $proxy->parseContent('http://foo.bar.nowhere/test.html', 'default content');
 
@@ -206,5 +216,36 @@ class ProxyTest extends \PHPUnit_Framework_TestCase
         $proxy->parseContent('http://0.0.0.0', 'default content');
 
         $this->assertEquals('default content', $proxy->content);
+    }
+
+    public function testWithCustomExtractor()
+    {
+        $extractorChain = $this->getMockBuilder('j0k3r\FeedBundle\Extractor\ExtractorChain')
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $extractor = $this->getMockBuilder('j0k3r\FeedBundle\Extractor\Twitter')
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $extractor->expects($this->any())
+            ->method('getContent')
+            ->willReturn('<html/>');
+
+        $extractorChain->expects($this->any())
+            ->method('match')
+            ->willReturn('twitter');
+
+        $extractorChain->expects($this->any())
+            ->method('getExtractor')
+            ->willReturn($extractor);
+
+
+        $proxy = new Proxy($extractorChain, $this->improverChain, $this->parserChain);
+        $proxy->init('internal', $this->feed, true);
+
+        $proxy->parseContent('http://0.0.0.0', 'default content');
+
+        $this->assertEquals('<html/>', $proxy->content);
     }
 }

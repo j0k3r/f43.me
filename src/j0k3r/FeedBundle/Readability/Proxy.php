@@ -26,7 +26,7 @@ class Proxy
      * @param Browser        $buzz
      * @param ExtractorChain $extractorChain
      * @param ImproverChain  $improverChain
-     * @param ParserChain  $parserChain
+     * @param ParserChain    $parserChain
      */
     public function __construct(ExtractorChain $extractorChain, ImproverChain $improverChain, ParserChain $parserChain)
     {

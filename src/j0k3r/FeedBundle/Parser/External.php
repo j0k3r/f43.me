@@ -15,6 +15,12 @@ class External extends AbstractParser
     protected $urlApi;
     protected $token;
 
+    /**
+     *
+     * @param Client $guzzle
+     * @param string $urlApi Readability API url
+     * @param string $token  Readability API token
+     */
     public function __construct(Client $guzzle, $urlApi, $token)
     {
         $this->guzzle = $guzzle;
@@ -28,7 +34,7 @@ class External extends AbstractParser
     public function parse($url)
     {
         try {
-            $html = $this->guzzle
+            $data = $this->guzzle
                 ->get($this->urlApi.'?token='.$this->token.'&url='.urlencode($url))
                 ->send()
                 ->json();
@@ -36,14 +42,8 @@ class External extends AbstractParser
             return '';
         }
 
-        if (isset($html['content'])) {
-            $this->url = $html['url'];
-
-            return $html['content'];
-        }
-
-        if (isset($html['error'])) {
-            return $html['messages'];
+        if (isset($data['content'])) {
+            return $data['content'];
         }
 
         return '';
