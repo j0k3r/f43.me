@@ -121,6 +121,9 @@ class TumblrTest extends \PHPUnit_Framework_TestCase
 
         // consecutive calls
         $this->assertEquals('<div>content</div>', $tumblr->getContent());
+        // this one will got an empty array
+        $this->assertEmpty($tumblr->getContent());
+        // this one will catch an exception
         $this->assertEmpty($tumblr->getContent());
     }
 }
