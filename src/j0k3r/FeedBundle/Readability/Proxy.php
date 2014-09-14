@@ -2,28 +2,19 @@
 
 namespace j0k3r\FeedBundle\Readability;
 
-use Doctrine\Common\Util\Inflector;
-use TubeLink\TubeLink;
-use Buzz\Browser;
-
-use j0k3r\FeedBundle\Parser;
 use j0k3r\FeedBundle\Document\Feed;
 use j0k3r\FeedBundle\Extractor\ExtractorChain;
 use j0k3r\FeedBundle\Improver\ImproverChain;
+use j0k3r\FeedBundle\Parser\ParserChain;
 
 class Proxy
 {
     protected $feed = null;
-    protected $buzz;
     protected $extractorChain;
     protected $improverChain;
-    protected $urlApi;
-    protected $token;
-    protected $debug;
-    protected $regexps;
+    protected $parserChain;
     protected $chosenParser = null;
     protected $allowAllParser = false;
-    protected $availableParsers = array('Internal', 'External');
 
     public $url = '';
     public $content = '';
@@ -35,20 +26,13 @@ class Proxy
      * @param Browser        $buzz
      * @param ExtractorChain $extractorChain
      * @param ImproverChain  $improverChain
-     * @param string         $token          Readability API token
-     * @param string         $urlApi         Readability API url
-     * @param boolean        $debug
-     * @param array          $regexps        Regex to remove/escape content
+     * @param ParserChain    $parserChain
      */
-    public function __construct(Browser $buzz, ExtractorChain $extractorChain, ImproverChain $improverChain, $token, $urlApi, $debug = false, $regexps = array())
+    public function __construct(ExtractorChain $extractorChain, ImproverChain $improverChain, ParserChain $parserChain)
     {
-        $this->buzz = $buzz;
         $this->extractorChain = $extractorChain;
         $this->improverChain = $improverChain;
-        $this->token = $token;
-        $this->urlApi = $urlApi;
-        $this->debug = $debug;
-        $this->regexps = $regexps;
+        $this->parserChain = $parserChain;
     }
 
     /**
@@ -108,30 +92,17 @@ class Proxy
                 ->getContent();
         }
 
-        $parserMethod = 'use'.Inflector::camelize($this->chosenParser).'Parser';
+        $parser = $this->parserChain->getParser(strtolower($this->chosenParser));
 
         // this means the selected extractor was able to extract content OR
         // no extractor were able to match the url
-        if (!$this->content && is_callable(array($this, $parserMethod))) {
-            $this->content = $this->$parserMethod($this->url);
+        if (!$this->content && false !== $parser) {
+            $this->content = $parser->parse($this->url);
         }
 
         // if we allow all parser to be tested to get content, loop through all of them
-        if (false === $this->content && true === $this->allowAllParser) {
-            foreach ($this->availableParsers as $method) {
-                // don't try the previous parser, which fails
-                if (Inflector::camelize($this->chosenParser) == $method) {
-                    continue;
-                }
-
-                $parserMethod = 'use'.Inflector::camelize($method).'Parser';
-                $this->content = $this->$parserMethod($this->url);
-
-                // once one parser succeed, we stop
-                if (false !== $this->content) {
-                    break;
-                }
-            }
+        if (!$this->content && true === $this->allowAllParser) {
+            $this->content = $this->parserChain->parseAll($this->url);
         }
 
         // do something when readable content failed
@@ -144,123 +115,5 @@ class Proxy
         }
 
         return $this;
-    }
-
-    /**
-     * Retrieve content from an internal library instead of a webservice.
-     * It's a fallback by default, but can be the only solution if specified
-     *
-     * @param string $url
-     *
-     * @return string
-     */
-    private function useInternalParser($url)
-    {
-        // If it's a video, just return an embed html content
-        try {
-            return TubeLink::create()
-                ->parse(htmlspecialchars_decode($url))
-                ->render();
-        } catch (\TubeLink\Exception\ServiceNotFoundException $e) {
-            // it means it's not a video, let's try other content !
-            $content = '';
-        }
-
-        try {
-            $response = $this->buzz->get($url);
-            $content  = $response->getContent();
-        } catch (\Exception $e) {
-            // catch timeout, ssl verification that failed, etc ...
-            return '';
-        }
-
-        if (false === $content) {
-            return '';
-        }
-
-        // remove utm parameters & fragment
-        $this->url = preg_replace('/((\?)?(&(amp;)?)?utm_(.*?)\=[^&]+)|(#(.*?)\=[^&]+)/', '', $this->buzz->getClient()->getInfo(CURLINFO_EFFECTIVE_URL));
-
-        // save information about gzip content for later decoding
-        $is_gziped = (bool) 'gzip' == $response->getHeader('Content-Encoding');
-
-        $contentType = (string) $response->getHeader('Content-Type');
-        // if it's a binary file (in fact, not a 'text'), we handle it differently
-        if (false === strpos($contentType, 'text')) {
-            // if content is an image, just return it
-            if (0 === strpos($contentType, 'image')) {
-                return '<img src="'.$url.'" />';
-            }
-
-            // if it's not an image, we don't know how to render it
-            // so we act that we can't make it readable
-            return '';
-        }
-
-        // decode gzip content (most of the time it's a Tumblr website)
-        if (true === $is_gziped) {
-            $content = gzdecode($content);
-        }
-
-        // Convert encoding since Readability accept only UTF-8
-        if ('UTF-8' != mb_detect_encoding($content, mb_detect_order(), true)) {
-            $content = mb_convert_encoding($content, 'UTF-8');
-        }
-
-        // let's clean up input.
-        $tidy = tidy_parse_string($content, array(), 'UTF8');
-        $tidy->cleanRepair();
-
-        $readability          = new ReadabilityExtended($tidy->value, $this->url);
-        $readability->debug   = $this->debug;
-        $readability->regexps = $this->regexps;
-        $readability->convertLinksToFootnotes = false;
-
-        if (!$readability->init()) {
-            return '';
-        }
-
-        $tidy = tidy_parse_string(
-            $readability->getHtmlContent(),
-            array(
-                'wrap'           => 0,
-                'indent'         => true,
-                'show-body-only' => true
-            ),
-            'UTF8'
-        );
-        $tidy->cleanRepair();
-
-        return $tidy->value;
-    }
-
-    /**
-     * Retrieve content from an external webservice.
-     * In this case, we use the excellent Readability web service: https://www.readability.com/developers/api/parser
-     *
-     * @param string $url
-     *
-     * @return string
-     */
-    private function useExternalParser($url)
-    {
-        try {
-            $response = $this->buzz->get($this->urlApi.'?token='.$this->token.'&url='.urlencode($url));
-            $html = json_decode($response->getContent());
-        } catch (\Exception $e) {
-            return '';
-        }
-
-        if (isset($html->content)) {
-            $this->url = $html->url;
-
-            return $html->content;
-        }
-
-        if (isset($html->error)) {
-            return $html->messages;
-        }
-
-        return '';
     }
 }

@@ -3,6 +3,7 @@
 namespace j0k3r\FeedBundle\Tests\Extractor;
 
 use j0k3r\FeedBundle\Extractor\Imgur;
+use Guzzle\Http\Exception\RequestException;
 
 class ImgurTest extends \PHPUnit_Framework_TestCase
 {
@@ -130,6 +131,22 @@ class ImgurTest extends \PHPUnit_Framework_TestCase
 
         $imgur = new Imgur($imgurClient);
         $imgur->match('http://localhost');
+
+        $this->assertEmpty($imgur->getContent());
+    }
+
+    public function testImgurFail()
+    {
+        $imgurClient = $this->getMockBuilder('Imgur\Client')
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $imgurClient->expects($this->any())
+            ->method('api')
+            ->will($this->throwException(new RequestException()));
+
+        $imgur = new Imgur($imgurClient);
+        $imgur->match('http://imgur.com/gallery/IoKwI7E');
 
         $this->assertEmpty($imgur->getContent());
     }

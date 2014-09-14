@@ -12,27 +12,9 @@ services:
     readability_proxy:
         class: j0k3r\FeedBundle\Readability\Proxy
         arguments:
-            buzz: @buzz
             extractor: @feed.extractor.chain
             improver: @feed.improver.chain
-            token: %readability_token%
-            url_api: https://readability.com/api/content/v1/parser
-            debug: false #%kernel.debug%
-            regexps:
-                # class or id
-                unlikelyCandidates: '/combx|comment|community|disqus|extra|foot|header|menu|remark|rss|shoutbox|sidebar|sponsor|ad-break|agegate|pagination|pager|popup|addthis|response|slate_associated_bn|reseaux|sharing|auteur|tag|feedback|meta|kudo|sidebar|copyright|bio|moreInfo|legal|share|contributor/i'
-                okMaybeItsACandidate: '/and|article|body|column|main|shadow/i'
-                positive: '/article|body|content|entry|hentry|main|page|attachment|pagination|post|text|blog|story/i'
-                negative: '/combx|comment|com-|contact|foot|footer|_nav|footnote|masthead|media|meta|outbrain|promo|related|scroll|shoutbox|sidebar|sponsor|shopping|tags|tool|widget|header|aside/i'
-                divToPElements: '/<(a|blockquote|dl|div|img|ol|p|pre|table|ul)/i'
-                replaceBrs: '/(<br[^>]*>[ \n\r\t]*){2,}/i'
-                replaceFonts: '/<(\/?)font[^>]*>/i'
-                normalize: '/\s{2,}/'
-                killBreaks: '/(<br\s*\/?>(\s|&nbsp;?)*){1,}/'
-                video: '!//(player\.|www\.)?(youtube|vimeo|viddler|dailymotion)\.com!i'
-                skipFootnoteLink: '/^\s*(\[?[a-z0-9]{1,2}\]?|^|edit|citation needed)\s*$/i'
-                attrToRemove: 'onclick|rel|class|target|fs:definition|alt|id|onload|name|onchange'
-                tagToRemove: 'select|form|header|footer|aside'
+            parser: @feed.parser.chain
 
     simple_pie_proxy:
         class: j0k3r\FeedBundle\Services\SimplePieProxy
@@ -95,16 +77,43 @@ services:
 
     feed.improver.hackernews:
         class: j0k3r\FeedBundle\Improver\HackerNews
+        arguments:
+            - @guzzle.client
         tags:
             -  { name: feed.improver, alias: hackernews }
 
     feed.improver.reddit:
         class: j0k3r\FeedBundle\Improver\Reddit
+        arguments:
+            - @guzzle.client
         tags:
             -  { name: feed.improver, alias: reddit }
 
     # this one should be the last one (because this is the default one :)
     feed.improver.nothing:
         class: j0k3r\FeedBundle\Improver\Nothing
+        arguments:
+            - @guzzle.client
         tags:
             -  { name: feed.improver, alias: nothing }
+
+    # parser
+    feed.parser.chain:
+        class: j0k3r\FeedBundle\Parser\ParserChain
+
+    feed.parser.external:
+        class: j0k3r\FeedBundle\Parser\External
+        arguments:
+            - @guzzle.client
+            - 'https://readability.com/api/content/v1/parser'
+            - %readability_token%
+        tags:
+            -  { name: feed.parser, alias: external }
+
+    feed.parser.internal:
+        class: j0k3r\FeedBundle\Parser\Internal
+        arguments:
+            - @guzzle.client
+            - %parser.regexps%
+        tags:
+            -  { name: feed.parser, alias: internal }
