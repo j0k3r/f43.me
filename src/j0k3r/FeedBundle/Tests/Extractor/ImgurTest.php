@@ -17,6 +17,7 @@ class ImgurTest extends \PHPUnit_Framework_TestCase
             array('http://imgur.com/IoKwI7E', true),
             array('https://imgur.com/IoKwI7E', true),
             array('https://imgur.com/a/dLaMy', true),
+            array('https://imgur.com/a/dLaMy?gallery', true),
             array('https://imgur.com/gallery/dLaMy', true),
             array('https://imgur.com/duziauziaozaoLaMy', false),
             array('https://imgur.com/Ay', false),

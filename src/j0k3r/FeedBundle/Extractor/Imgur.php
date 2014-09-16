@@ -32,6 +32,12 @@ class Imgur extends AbstractExtractor
             return false;
         }
 
+        // some gallery got an extra query like ?gallery to change the display, we don't want it
+        $query = parse_url($url, PHP_URL_QUERY);
+        if ($query) {
+            $url = str_replace('?'.$query, '', $url);
+        }
+
         // find the hash and the type (gallery or single image)
         preg_match('/(?:\/(a|gallery|signin))?\/([^\W_]{5,7})(?:\/|\.[a-zA-Z]+|#([^\W_]{5,7}|\d+))?$/', $url, $matches);
 

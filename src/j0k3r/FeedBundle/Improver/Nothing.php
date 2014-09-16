@@ -76,7 +76,7 @@ class Nothing
         }
 
         // remove utm parameters & fragment
-        $effectiveUrl = preg_replace('/((\?)?(&(amp;)?)?utm_(.*?)\=[^&]+)|(#(.*?)\=[^&]+)/', '', $response->getEffectiveUrl());
+        $effectiveUrl = preg_replace('/((\?)?(&(amp;)?)?utm_(.*?)\=[^&]+)|(#(.*?)\=[^&]+)/', '', urldecode($response->getEffectiveUrl()));
 
         return $effectiveUrl;
     }
