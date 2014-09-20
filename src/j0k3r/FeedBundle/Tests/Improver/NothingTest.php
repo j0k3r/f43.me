@@ -14,6 +14,7 @@ class NothingTest extends \PHPUnit_Framework_TestCase
             array('http://modmyi.com/?utm_medium=feed&utm_campaign=Feed%3A+home_all+%28MMi+%7C+Homepage+All%29', 'http://modmyi.com/'),
             array('http://modmyi.com/?utm_campaign=Feed%3A+home_all+%28MMi+%7C+Homepage+All%29', 'http://modmyi.com/'),
             array('http://modmyi.com/?utm_source=feedburner', 'http://modmyi.com/'),
+            array('http://www.allocine.fr/article/fichearticle_gen_carticle=18636758.html?utm_source=feedburner&utm_medium=feed&utm_campaign=Feed%3A+ac%2Factualites+%28AlloCine+-+RSS+News%3A+Cinema+%26+Series%29', 'http://www.allocine.fr/article/fichearticle_gen_carticle=18636758.html'),
         );
     }
 
@@ -61,6 +62,6 @@ class NothingTest extends \PHPUnit_Framework_TestCase
             ->will($this->throwException(new RequestException()));
 
         $nothing = new Nothing($guzzle);
-        $this->assertEquals('http://0.0.0.0/content', $nothing->updateUrl('http://0.0.0.0/content'));
+        $this->assertEquals('http://0.0.0.0/content?not-changed', $nothing->updateUrl('http://0.0.0.0/content'));
     }
 }

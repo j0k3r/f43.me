@@ -72,7 +72,7 @@ class Nothing
             $response = $this->guzzle->get($url)->send();
         } catch (RequestException $e) {
             // catch timeout, ssl verification that failed, etc ...
-            return $url;
+            return $url . (strpos($url, '?') ? '&' : '?') . 'not-changed';
         }
 
         // remove utm parameters & fragment
