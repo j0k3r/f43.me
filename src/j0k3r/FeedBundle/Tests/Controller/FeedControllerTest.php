@@ -224,10 +224,10 @@ class FeedControllerTest extends FeedWebTestCase
     public function dataEditFeedOk()
     {
         return array(array(array(
-            'feedbundle_feedtype[name]' => 'HN edited !',
-            'feedbundle_feedtype[description]' => 'Hackernews edited !',
-            'feedbundle_feedtype[host]' => 'news.ycombinator.com',
-            'feedbundle_feedtype[link]' => 'https://news.ycombinator.com/rss',
+            'feedbundle_feedtype[name]' => 'Bonjour Madame edited !',
+            'feedbundle_feedtype[description]' => 'Bonjour Madame edited !',
+            'feedbundle_feedtype[host]' => 'bonjourmadame.fr',
+            'feedbundle_feedtype[link]' => 'http://feeds2.feedburner.com/BonjourMadame',
             'feedbundle_feedtype[parser]' => 'internal',
             'feedbundle_feedtype[formatter]' => 'atom',
             'feedbundle_feedtype[sort_by]' => 'published_at',
@@ -242,7 +242,7 @@ class FeedControllerTest extends FeedWebTestCase
     {
         $client = static::getAuthorizedClient();
 
-        $crawler = $client->request('GET', '/feed/hackernews/edit');
+        $crawler = $client->request('GET', '/feed/bonjour-madame/edit');
 
         // bad link
         $data['feedbundle_feedtype[link]'] = 'uzioau .oa';
@@ -266,14 +266,14 @@ class FeedControllerTest extends FeedWebTestCase
     {
         $client = static::getAuthorizedClient();
 
-        $crawler = $client->request('GET', '/feed/hackernews/edit');
+        $crawler = $client->request('GET', '/feed/bonjour-madame/edit');
 
         $form = $crawler->filter('button[type=submit]')->form();
 
         $client->submit($form, $data);
 
         $this->assertEquals(302, $client->getResponse()->getStatusCode());
-        $this->assertContains('hackernews', $client->getResponse()->headers->get('location'));
+        $this->assertContains('bonjour-madame', $client->getResponse()->headers->get('location'));
 
         $crawler = $client->followRedirect();
         $this->assertCount(1, $alert = $crawler->filter('div.alert-box')->extract(array('_text')));
@@ -304,7 +304,7 @@ class FeedControllerTest extends FeedWebTestCase
     {
         $client = static::getAuthorizedClient();
 
-        $crawler = $client->request('GET', '/feed/hackernews/edit');
+        $crawler = $client->request('GET', '/feed/bonjour-madame/edit');
 
         $form = $crawler->filter('form.delete_form button[type=submit]')->form();
 
