@@ -166,17 +166,15 @@ class FetchItemsCommand extends ContainerAwareCommand
                 $dm->persist($feedLog);
 
                 // store feed url updated, to ping hub later
-                $feedUpdated[] = $container->get('router')->generate(
-                    'feed_xml',
-                    array('slug' => $feed->getSlug()),
-                    true
-                );
+                $feedUpdated[] = $feed->getSlug();
             }
 
             if ($input->getOption('with-trace')) {
                 $output->writeln('<info>New cached items</info>: '.$cached);
             }
         }
+
+        $dm->flush();
 
         if (!empty($feedUpdated)) {
             if ($input->getOption('with-trace')) {
@@ -194,17 +192,20 @@ class FetchItemsCommand extends ContainerAwareCommand
 
         $output->writeLn('<comment>'.$totalCached.'</comment> items cached.');
 
-        // update nb items for each feed
-        $feedsWithNbItems = $feedItemRepo->findAllFeedWithNbItems();
-        foreach ($feedsWithNbItems as $id => $value) {
-            $feed = $feedRepo->findOneById($id);
-            $feed->setNbItems($value);
+        // update nb items for each udpated feed
+        foreach ($feedUpdated as $slug) {
+            $feed = $feedRepo->findOneByslug($slug);
+
+            $nbItems = $feedItemRepo->countByFeedId($feed->getId());
+
+            $feed->setNbItems($nbItems);
             $dm->persist($feed);
 
             if ($input->getOption('with-trace')) {
-                $output->writeln('<info>'.$feed->getName().'</info> items updated: <comment>'.$value.'</comment>');
+                $output->writeln('<info>'.$feed->getName().'</info> items updated: <comment>'.$nbItems.'</comment>');
             }
         }
+
         $dm->flush();
         $dm->clear();
     }

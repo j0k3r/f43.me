@@ -11,12 +11,16 @@ class FeedItemSubscriberTest extends \PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $this->feedItemSubscriber = new FeedItemSubscriber('http://0.0.0.0');
+        $router = $this->getMockBuilder('Symfony\Bundle\FrameworkBundle\Routing\Router')
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $this->feedItemSubscriber = new FeedItemSubscriber('http://0.0.0.0', $router);
     }
 
     public function testOnItemCached()
     {
-        $event = new FeedItemEvent(array('http://rss.foo.bar.unknown'));
+        $event = new FeedItemEvent(array('bar.unknown'));
         $res = $this->feedItemSubscriber->pingHub($event);
 
         // the hub url is invalid, so it will be generate an error and return false

@@ -37,6 +37,7 @@ services:
         class: j0k3r\FeedBundle\EventListener\FeedItemSubscriber
         arguments:
             hub: "http://pubsubhubbub.appspot.com"
+            router: "@router"
         tags:
             - { name: kernel.event_listener, event: j0k3r_feed.after_item_cached, method: pingHub }
 

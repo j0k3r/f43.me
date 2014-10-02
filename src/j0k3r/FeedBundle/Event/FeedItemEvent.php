@@ -7,24 +7,24 @@ use Symfony\Component\EventDispatcher\Event;
 class FeedItemEvent extends Event
 {
     /**
-     * Feeds api url
+     * Feeds slug
      *
      * @var array
      */
-    protected $feedUrls = array();
+    protected $feedSlugs = array();
 
     /**
-     * Store feed urls that need to be dispatched
+     * Store slug feeds that need to be dispatched
      *
-     * @param array $feedUrls
+     * @param array $feedSlugs
      */
-    public function __construct(array $feedUrls)
+    public function __construct(array $feedSlugs)
     {
-        $this->feedUrls = $feedUrls;
+        $this->feedSlugs = $feedSlugs;
     }
 
-    public function getFeedUrls()
+    public function getFeedSlugs()
     {
-        return $this->feedUrls;
+        return $this->feedSlugs;
     }
 }

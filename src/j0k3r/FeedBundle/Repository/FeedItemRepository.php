@@ -190,4 +190,20 @@ class FeedItemRepository extends DocumentRepository
             ->getQuery()
             ->execute();
     }
+
+    /**
+     * Count items for a given feed id
+     *
+     * @param int $feedId Feed id
+     *
+     * @return integer
+     */
+    public function countByFeedId($feedId)
+    {
+        return $this->createQueryBuilder()
+            ->count()
+            ->field('feed.id')->equals($feedId)
+            ->getQuery()
+            ->execute();
+    }
 }

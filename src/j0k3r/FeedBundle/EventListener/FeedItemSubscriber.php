@@ -3,19 +3,22 @@
 namespace j0k3r\FeedBundle\EventListener;
 
 use j0k3r\FeedBundle\Event\FeedItemEvent;
+use Symfony\Bundle\FrameworkBundle\Routing\Router;
 
 class FeedItemSubscriber
 {
     protected $hub = '';
+    protected $router;
 
     /**
      * Create a new subscriber.
      *
      * @param string $hub A hub (url) to ping
      */
-    public function __construct($hub)
+    public function __construct($hub, Router $router)
     {
         $this->hub = $hub;
+        $this->router = $router;
     }
 
     /**
@@ -24,7 +27,7 @@ class FeedItemSubscriber
      * http://nathangrigg.net/2012/09/real-time-publishing/
      *
      * @param  FeedItemEvent $event
-     * @return true/false
+     * @return bool
      */
     public function pingHub(FeedItemEvent $event)
     {
@@ -33,7 +36,16 @@ class FeedItemSubscriber
         }
 
         // retrieve feed urls
-        $urls = $event->getFeedUrls();
+        $slugs = $event->getFeedSlugs();
+
+        $urls = array();
+        foreach ($slugs as $slug) {
+            $urls[] = $this->router->generate(
+                'feed_xml',
+                array('slug' => $slug),
+                true
+            );
+        }
 
         // ping publisher
         // https://code.google.com/p/pubsubhubbub/source/browse/trunk/publisher_clients/php/library/publisher.php
