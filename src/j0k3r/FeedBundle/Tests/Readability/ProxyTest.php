@@ -240,7 +240,6 @@ class ProxyTest extends \PHPUnit_Framework_TestCase
             ->method('getExtractor')
             ->willReturn($extractor);
 
-
         $proxy = new Proxy($extractorChain, $this->improverChain, $this->parserChain);
         $proxy->init('internal', $this->feed, true);
 

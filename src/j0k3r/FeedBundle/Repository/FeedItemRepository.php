@@ -18,7 +18,7 @@ class FeedItemRepository extends DocumentRepository
      * @param string $feedId  Feed id
      * @param array  $options limit, sort_by, skip
      *
-     * @return Doctrine\ODM\MongoDB\Query\Query
+     * @return \Doctrine\ODM\MongoDB\Query\Query
      */
     private function getItemsByFeedIdQuery($feedId, $options = array())
     {
@@ -48,7 +48,7 @@ class FeedItemRepository extends DocumentRepository
      * @param int    $feedId Feed id
      * @param string $sortBy Feed sort by
      *
-     * @return Doctrine\ODM\MongoDB\LoggableCursor
+     * @return \Doctrine\ODM\MongoDB\LoggableCursor
      */
     public function findByFeed($feedId, $sortBy)
     {
@@ -61,7 +61,7 @@ class FeedItemRepository extends DocumentRepository
      *
      * @param int $feedId Feed id
      *
-     * @return j0k3r\FeedBundle\Document\FeedItem
+     * @return \j0k3r\FeedBundle\Document\FeedItem
      */
     public function findLastItemByFeedId($feedId)
     {
@@ -161,7 +161,7 @@ class FeedItemRepository extends DocumentRepository
      * @param int $feedId Feed id
      * @param int $skip   Items to keep
      *
-     * @return Doctrine\ODM\MongoDB\EagerCursor
+     * @return \Doctrine\ODM\MongoDB\EagerCursor
      */
     public function findOldItemsByFeedId($feedId, $skip = 100)
     {

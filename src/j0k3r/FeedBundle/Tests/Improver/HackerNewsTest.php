@@ -3,7 +3,6 @@
 namespace j0k3r\FeedBundle\Tests\Improver;
 
 use j0k3r\FeedBundle\Improver\HackerNews;
-use Guzzle\Http\Exception\RequestException;
 
 class HackerNewsTest extends \PHPUnit_Framework_TestCase
 {

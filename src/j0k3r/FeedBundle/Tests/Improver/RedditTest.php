@@ -3,7 +3,6 @@
 namespace j0k3r\FeedBundle\Tests\Improver;
 
 use j0k3r\FeedBundle\Improver\Reddit;
-use Guzzle\Http\Exception\RequestException;
 
 class RedditTest extends \PHPUnit_Framework_TestCase
 {

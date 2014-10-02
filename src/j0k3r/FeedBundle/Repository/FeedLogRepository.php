@@ -17,7 +17,7 @@ class FeedLogRepository extends DocumentRepository
      *
      * @param integer|null $limit Items to retrieve
      *
-     * @return Doctrine\ODM\MongoDB\EagerCursor
+     * @return \Doctrine\ODM\MongoDB\EagerCursor
      */
     public function findAllOrderedById($limit = null)
     {
@@ -39,7 +39,7 @@ class FeedLogRepository extends DocumentRepository
      * @param integer|null $limit  Number of items to return
      * @param integer|null $skip   Item to skip before applying the limit
      *
-     * @return Doctrine\ODM\MongoDB\Query\Query
+     * @return \Doctrine\ODM\MongoDB\Query\Query
      */
     private function getItemsByFeedIdQuery($feedId, $limit = null, $skip = null)
     {
@@ -63,7 +63,7 @@ class FeedLogRepository extends DocumentRepository
      *
      * @param integer $feedId Feed id
      *
-     * @return Doctrine\ODM\MongoDB\LoggableCursor
+     * @return \Doctrine\ODM\MongoDB\LoggableCursor
      */
     public function findByFeedId($feedId)
     {
@@ -76,7 +76,7 @@ class FeedLogRepository extends DocumentRepository
      *
      * @param integer $feedId Feed id
      *
-     * @return j0k3r\FeedBundle\Document\FeedLog
+     * @return j0k3r\FeedBundle\Document\FeedLog|null
      */
     public function findLastItemByFeedId($feedId)
     {

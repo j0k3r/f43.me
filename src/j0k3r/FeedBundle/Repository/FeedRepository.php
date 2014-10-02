@@ -17,7 +17,7 @@ class FeedRepository extends DocumentRepository
      *
      * @param integer|null $limit Items to retrieve
      *
-     * @return Doctrine\ODM\MongoDB\EagerCursor
+     * @return \Doctrine\ODM\MongoDB\EagerCursor
      */
     public function findAllOrderedByDate($limit = null)
     {
@@ -35,7 +35,7 @@ class FeedRepository extends DocumentRepository
     /**
      * Find feeds for public display
      *
-     * @return Doctrine\ODM\MongoDB\EagerCursor
+     * @return \Doctrine\ODM\MongoDB\EagerCursor
      */
     public function findForPublic()
     {
@@ -54,7 +54,7 @@ class FeedRepository extends DocumentRepository
      * @param Array  $ids  An array of MongoID
      * @param string $type in or notIn
      *
-     * @return Doctrine\ODM\MongoDB\EagerCursor
+     * @return \Doctrine\ODM\MongoDB\EagerCursor|bool
      */
     public function findByIds($ids, $type = 'in')
     {
