@@ -2,6 +2,7 @@
 
 namespace j0k3r\FeedBundle\Command;
 
+use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -12,7 +13,7 @@ use j0k3r\FeedBundle\Document\FeedLog;
 use j0k3r\FeedBundle\Event\FeedItemEvent;
 use j0k3r\FeedBundle\j0k3rFeedEvents;
 
-class FetchItemsCommand extends BaseFeedCommand
+class FetchItemsCommand extends ContainerAwareCommand
 {
     protected function configure()
     {
@@ -27,7 +28,13 @@ class FetchItemsCommand extends BaseFeedCommand
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        parent::execute($input, $output);
+        $lock = new LockHandler($this->getName());
+
+        if (!$lock->lock()) {
+            $output->writeLn("<error>The command is already running in another process.</error>");
+
+            return 0;
+        }
 
         $feeds        = array();
         $container    = $this->getContainer();
@@ -45,8 +52,6 @@ class FetchItemsCommand extends BaseFeedCommand
         if ($slug = $input->getOption('slug')) {
             $feed = $feedRepo->findOneBySlug($slug);
             if (!$feed) {
-                $this->unlockCommand();
-
                 return $output->writeLn("<error>Unable to find Feed document:</error> <comment>".$slug."</comment>");
             }
             $feeds = array($feed);
@@ -63,8 +68,6 @@ class FetchItemsCommand extends BaseFeedCommand
                 $feeds = $feedRepo->findByIds($feedsWithItems, 'notIn');
             }
         } else {
-            $this->unlockCommand();
-
             return $output->writeLn("<error>You must add some options to the task :</error> an <comment>age</comment> or a <comment>slug</comment>");
         }
 
@@ -204,7 +207,5 @@ class FetchItemsCommand extends BaseFeedCommand
         }
         $dm->flush();
         $dm->clear();
-
-        $this->unlockCommand();
     }
 }

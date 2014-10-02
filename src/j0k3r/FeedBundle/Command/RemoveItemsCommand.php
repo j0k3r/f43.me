@@ -2,11 +2,12 @@
 
 namespace j0k3r\FeedBundle\Command;
 
+use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 
-class RemoveItemsCommand extends BaseFeedCommand
+class RemoveItemsCommand extends ContainerAwareCommand
 {
     protected function configure()
     {
@@ -21,14 +22,18 @@ class RemoveItemsCommand extends BaseFeedCommand
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        parent::execute($input, $output);
+        $lock = new LockHandler($this->getName());
+
+        if (!$lock->lock()) {
+            $output->writeLn("<error>The command is already running in another process.</error>");
+
+            return 0;
+        }
 
         // ask user as it will remove all items from its database
         if (0 >= $input->getOption('max')) {
             $dialog = $this->getHelperSet()->get('dialog');
             if (!$dialog->askConfirmation($output, '<question>You will remove ALL items, are your sure?</question>', false)) {
-                $this->unlockCommand();
-
                 return $output->writeLn("<comment>You *almost* remove everything from your database, pfiou !</comment> Be sure to define a <comment>max</comment> option greater than 0.");
             }
         }
@@ -42,8 +47,6 @@ class RemoveItemsCommand extends BaseFeedCommand
         if ($slug = $input->getOption('slug')) {
             $feed = $feedRepo->findOneBySlug($slug);
             if (!$feed) {
-                $this->unlockCommand();
-
                 return $output->writeLn("<error>Unable to find Feed document:</error> <comment>".$slug."</comment>");
             }
             $feeds = array($feed);
@@ -79,6 +82,5 @@ class RemoveItemsCommand extends BaseFeedCommand
         $dm->flush();
 
         $output->writeLn('<comment>'.$totalRemoved.'</comment> items removed.');
-        $this->unlockCommand();
     }
 }

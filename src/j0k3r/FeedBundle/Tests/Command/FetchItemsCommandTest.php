@@ -82,19 +82,6 @@ class FetchItemsCommandTest extends WebTestCase
         $this->assertRegExp('`You must add some options to the task : an age or a slug`', $this->commandTester->getDisplay());
     }
 
-    public function testLockCommand()
-    {
-        // generate a fake lock pid
-        $pidFile = __DIR__.'/../../../../../app/logs/task/task.feed:fetch-items-d8bed316b496af428021c39fc36c73a8.pid';
-        file_put_contents($pidFile, date('Y-m-d H:i:s', strtotime('-1 day')));
-        $lockResource = fopen($pidFile, 'r+');
-        flock($lockResource, LOCK_EX | LOCK_NB);
-
-        $this->commandTester->execute(array('command' => $this->command->getName()));
-
-        $this->assertRegExp('`Command locked`', $this->commandTester->getDisplay());
-    }
-
     public function testWrongSlug()
     {
         $this->commandTester->execute(array(
