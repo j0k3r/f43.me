@@ -36,3 +36,7 @@ parameters:
         skipFootnoteLink: '/^\s*(\[?[a-z0-9]{1,2}\]?|^|edit|citation needed)\s*$/i'
         attrToRemove: 'onclick|rel|class|target|fs:definition|alt|id|onload|name|onchange'
         tagToRemove: 'select|form|header|footer|aside'
+
+    guzzle.options:
+        request.options:
+            timeout: 10

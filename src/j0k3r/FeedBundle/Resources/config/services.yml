@@ -8,6 +8,9 @@ services:
 
     guzzle.client:
         class: Guzzle\Http\Client
+        arguments:
+            - ''
+            - %guzzle.options%
 
     readability_proxy:
         class: j0k3r\FeedBundle\Readability\Proxy
