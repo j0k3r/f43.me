@@ -33,7 +33,7 @@ twig:
 assetic:
     debug:          %kernel.debug%
     use_controller: false
-    bundles:        [ 'j0k3rFeedBundle' ]
+    bundles:        [ 'j0k3rFeedBundle', 'TwigBundle' ]
     #java: /usr/bin/java
     filters:
         sass:    ~
