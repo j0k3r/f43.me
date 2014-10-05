@@ -75,6 +75,14 @@ services:
         tags:
             -  { name: feed.extractor, alias: tumblr }
 
+    feed.extractor.flickr:
+        class: j0k3r\FeedBundle\Extractor\Flickr
+        arguments:
+            - @guzzle.client
+            - %flickr.api_key%
+        tags:
+            -  { name: feed.extractor, alias: flickr }
+
     # improver
     feed.improver.chain:
         class: j0k3r\FeedBundle\Improver\ImproverChain
