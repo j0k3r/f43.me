@@ -30,7 +30,7 @@ class Flickr extends AbstractExtractor
         $host = parse_url($url, PHP_URL_HOST);
         $path = parse_url($url, PHP_URL_PATH);
 
-        if (false === $path) {
+        if (false === $host || false === $path) {
             return false;
         }
 

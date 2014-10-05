@@ -80,6 +80,7 @@ class RemoveItemsCommand extends ContainerAwareCommand
         }
 
         $dm->flush();
+        $dm->clear();
 
         $output->writeLn('<comment>'.$totalRemoved.'</comment> items removed.');
     }
