@@ -112,7 +112,9 @@ class FeedLogRepository extends DocumentRepository
                             'days'   => array('$dayOfMonth' => '$created_at')
                         ),
                         'number' => array('$sum' => '$items_number'),
-                    )
+                    ),
+                ), array(
+                    '$sort' => array('_id.years' => -1, '_id.months' => -1, '_id.days' => -1),
                 ), array(
                     '$limit' => $limit,
                 )
