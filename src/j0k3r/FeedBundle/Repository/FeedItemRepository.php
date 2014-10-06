@@ -109,23 +109,6 @@ class FeedItemRepository extends DocumentRepository
     }
 
     /**
-     * Return feeds which have items with the number of items
-     *
-     * @return array
-     */
-    public function findAllFeedWithNbItems()
-    {
-        $items = $this->resultsForAllFeedsWithNbItems();
-
-        $res = array();
-        foreach ($items as $item) {
-            $res[(string) $item['_id']] = $item['value'];
-        }
-
-        return $res;
-    }
-
-    /**
      * Retrieve all links from cached item for a given id.
      * Link are used as a "unique" key for item.
      *

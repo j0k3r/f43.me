@@ -129,13 +129,13 @@ class FeedControllerTest extends FeedWebTestCase
         return array(array(array(
             'feedbundle_feedtype[name]' => 'Google News',
             'feedbundle_feedtype[description]' => 'À la une - Google Actualités',
-            'feedbundle_feedtype[host]' => 'news.google.com',
+            'feedbundle_feedtype[host]' => 'http://news.google.com',
             // be sure that link is almost always different
             'feedbundle_feedtype[link]' => 'http://news.google.fr/?output=rss&rand='.time(),
             'feedbundle_feedtype[parser]' => 'external',
             'feedbundle_feedtype[formatter]' => 'rss',
             'feedbundle_feedtype[sort_by]' => 'published_at',
-            // 'feedbundle_feedtype[is_private]' => 0,
+            'feedbundle_feedtype[is_private]' => 1,
         )));
     }
 
