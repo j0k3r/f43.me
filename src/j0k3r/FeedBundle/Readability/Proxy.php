@@ -23,7 +23,6 @@ class Proxy
     /**
      * Create a new Proxy for Readability
      *
-     * @param Browser        $buzz
      * @param ExtractorChain $extractorChain
      * @param ImproverChain  $improverChain
      * @param ParserChain    $parserChain

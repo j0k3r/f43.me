@@ -21,7 +21,7 @@ class Reddit extends Nothing
      * For reddit we extract link for the default content retrieved.
      * Because the rss item link goes to reddit. The important one is inside the content.
      *
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function updateUrl($url)
     {
@@ -37,7 +37,7 @@ class Reddit extends Nothing
     /**
      * We just happen the readable item to the default one
      *
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function updateContent($readableContent)
     {

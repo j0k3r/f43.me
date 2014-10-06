@@ -22,7 +22,7 @@ class HackerNews extends Nothing
      * - a link to the original article with the host as value
      * - a link to comments on Hacker News
      *
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function updateContent($readableContent)
     {
