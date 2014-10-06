@@ -119,7 +119,7 @@ class InternalTest extends \PHPUnit_Framework_TestCase
             ->will($this->throwException(new RequestException()));
 
         $external = new Internal($guzzle, $this->regexs);
-        $this->assertNotEmpty($external->parse('http://localhost'));
+        $this->assertEmpty($external->parse('http://foo.bar.youpla'));
     }
 
     public function testParseFalse()
