@@ -83,6 +83,13 @@ services:
         tags:
             -  { name: feed.extractor, alias: flickr }
 
+    feed.extractor.github:
+        class: j0k3r\FeedBundle\Extractor\Github
+        arguments:
+            - @guzzle.client
+        tags:
+            -  { name: feed.extractor, alias: github }
+
     # improver
     feed.improver.chain:
         class: j0k3r\FeedBundle\Improver\ImproverChain
