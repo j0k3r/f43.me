@@ -47,7 +47,7 @@ class Internal extends AbstractParser
 
         try {
             $response = $this->guzzle->get($url)->send();
-            $content  = $response->getBody();
+            $content  = $response->getBody(true);
         } catch (RequestException $e) {
             // catch timeout, ssl verification that failed, etc ...
             // so try an alternative using basic file_get_contents
@@ -86,17 +86,12 @@ class Internal extends AbstractParser
             }
         }
 
-        // Convert encoding since Readability accept only UTF-8
-        if ('UTF-8' != mb_detect_encoding($content, mb_detect_order(), true)) {
-            $content = mb_convert_encoding($content, 'UTF-8');
-        }
-
         // let's clean up input.
         $tidy = tidy_parse_string($content, array(), 'UTF8');
         $tidy->cleanRepair();
 
         $readability          = new ReadabilityExtended($tidy->value, $url);
-        // $readability->debug   = $this->debug;
+        // $readability->debug   = true;
         $readability->regexps = $this->regexps;
         $readability->convertLinksToFootnotes = false;
 
@@ -108,8 +103,8 @@ class Internal extends AbstractParser
             $readability->getHtmlContent(),
             array(
                 'wrap'           => 0,
-                'indent'         => true,
-                'show-body-only' => true
+                'indent'         => false,
+                'show-body-only' => true,
             ),
             'UTF8'
         );

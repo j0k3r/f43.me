@@ -93,7 +93,7 @@ class Proxy
 
         $parser = $this->parserChain->getParser(strtolower($this->chosenParser));
 
-        // this means the selected extractor was able to extract content OR
+        // this means the selected extractor wasn't able to extract content OR
         // no extractor were able to match the url
         if (!$this->content && false !== $parser) {
             $this->content = $parser->parse($this->url);
