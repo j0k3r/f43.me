@@ -7,21 +7,11 @@
     <meta name="viewport" content="width=device-width" />
     <title>f43.me</title>
 
-    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
 
-    {% stylesheets filter='compass' output='css/compiled/main.css'
-        '@j0k3rFeedBundle/Resources/foundation/scss/normalize.scss'
-        '@j0k3rFeedBundle/Resources/foundation/scss/foundation.scss'
-        '@j0k3rFeedBundle/Resources/sass/app.sass'
-    %}
-        <link rel="stylesheet" href="{{ asset_url }}" />
-    {% endstylesheets %}
+    <link rel="stylesheet" href="/build/main.css" />
 
-    {% javascripts output='js/compiled/zepto.modernizr.js'
-        '@j0k3rFeedBundle/Resources/foundation/js/vendor/zepto.js'
-        '@j0k3rFeedBundle/Resources/foundation/js/vendor/custom.modernizr.js' %}
-        <script type="text/javascript" src="{{ asset_url }}"></script>
-    {% endjavascripts %}
+    <script type="text/javascript" src="/build/zepto.modernizr.js"></script>
 </head>
 <body>
     <nav class="top-bar">
@@ -97,19 +87,7 @@
 
     {% block content %}{% endblock %}
 
-    {% javascripts output='js/compiled/foundation.app.js'
-        '@j0k3rFeedBundle/Resources/foundation/js/foundation/foundation.js'
-        '@j0k3rFeedBundle/Resources/foundation/js/foundation/foundation.alerts.js'
-        '@j0k3rFeedBundle/Resources/foundation/js/foundation/foundation.dropdown.js'
-        '@j0k3rFeedBundle/Resources/foundation/js/foundation/foundation.forms.js'
-        '@j0k3rFeedBundle/Resources/foundation/js/foundation/foundation.placeholder.js'
-        '@j0k3rFeedBundle/Resources/foundation/js/foundation/foundation.reveal.js'
-        '@j0k3rFeedBundle/Resources/foundation/js/foundation/foundation.section.js'
-        '@j0k3rFeedBundle/Resources/foundation/js/foundation/foundation.tooltips.js'
-        '@j0k3rFeedBundle/Resources/foundation/js/foundation/foundation.topbar.js'
-        '@j0k3rFeedBundle/Resources/public/js/app.js' %}
-        <script type="text/javascript" src="{{ asset_url }}"></script>
-    {% endjavascripts %}
+    <script type="text/javascript" src="/build/foundation.app.js"></script>
 
     <script type="text/javascript">
         $(document).foundation();

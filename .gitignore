@@ -8,8 +8,10 @@
 /bin/
 /app/config/parameters.yml
 
-/web/css/compiled/*
-/web/js/compiled/*
 /src/j0k3r/FeedBundle/Resources/foundation/*
 
+/.sass-cache
 /app/cache.properties
+/node_modules/
+/app/Resources/lib
+/web/build

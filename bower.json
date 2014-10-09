@@ -1,0 +1,21 @@
+{
+  "name": "f43.me",
+  "version": "1.0.0",
+  "homepage": "https://github.com/j0k3r/f43.me",
+  "authors": [
+    "Jeremy <jeremy.benoist@gmail.com>"
+  ],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "app/Resources/lib",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "foundation": "~4.3"
+  }
+}
