@@ -12,7 +12,7 @@
         "symfony/symfony": "~2.5",
         "doctrine/doctrine-bundle": "~1.2",
         "twig/extensions": "~1.1",
-        "symfony/assetic-bundle": "~2.3",
+        "symfony/assetic-bundle": "~2.4",
         "symfony/monolog-bundle": "~2.6",
         "incenteev/composer-parameter-handler": "~2.1",
         "doctrine/mongodb-odm": "1.0.*@dev",
