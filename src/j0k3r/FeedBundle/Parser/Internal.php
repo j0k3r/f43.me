@@ -50,33 +50,40 @@ class Internal extends AbstractParser
             $content  = $response->getBody();
         } catch (RequestException $e) {
             // catch timeout, ssl verification that failed, etc ...
-            return '';
+            // so try an alternative using basic file_get_contents
+            $content = @file_get_contents($url, false, stream_context_create(array(
+                'http' => array('timeout' => 10)
+            )));
         }
 
         if (false === $content) {
             return '';
         }
 
-        // save information about gzip content for later decoding
-        $is_gziped = 'gzip' == $response->getHeader('Content-Encoding');
+        // do thing when the resposne is provided from Guzzle
+        // otherwise it means it come from the file_get_contents
+        if (isset($response)) {
+            // save information about gzip content for later decoding
+            $is_gziped = 'gzip' == $response->getHeader('Content-Encoding');
 
-        $contentType = (string) $response->getHeader('Content-Type');
+            $contentType = (string) $response->getHeader('Content-Type');
 
-        // if it's a binary file (in fact, not a 'text'), we handle it differently
-        if (false === strpos($contentType, 'text')) {
-            // if content is an image, just return it
-            if (0 === strpos($contentType, 'image')) {
-                return '<img src="'.$url.'" />';
+            // if it's a binary file (in fact, not a 'text'), we handle it differently
+            if (false === strpos($contentType, 'text')) {
+                // if content is an image, just return it
+                if (0 === strpos($contentType, 'image')) {
+                    return '<img src="'.$url.'" />';
+                }
+
+                // if it's not an image, we don't know how to render it
+                // so we act that we can't make it readable
+                return '';
             }
 
-            // if it's not an image, we don't know how to render it
-            // so we act that we can't make it readable
-            return '';
-        }
-
-        // decode gzip content (most of the time it's a Tumblr website)
-        if (true === $is_gziped) {
-            $content = gzdecode($content);
+            // decode gzip content (most of the time it's a Tumblr website)
+            if (true === $is_gziped) {
+                $content = gzdecode($content);
+            }
         }
 
         // Convert encoding since Readability accept only UTF-8

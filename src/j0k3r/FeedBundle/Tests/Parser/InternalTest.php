@@ -105,6 +105,9 @@ class InternalTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('<iframe src="http://www.youtube.com/embed/8b7t5iUV0pQ" width="560" height="315"></iframe>', $external->parse('https://www.youtube.com/watch?v=8b7t5iUV0pQ'));
     }
 
+    /**
+     * This will throw an exception but the fallback will try to retrieve content using file_get_contents
+     */
     public function testParseGuzzleException()
     {
         $guzzle = $this->getMockBuilder('Guzzle\Http\Client')
@@ -116,7 +119,7 @@ class InternalTest extends \PHPUnit_Framework_TestCase
             ->will($this->throwException(new RequestException()));
 
         $external = new Internal($guzzle, $this->regexs);
-        $this->assertEmpty($external->parse('http://localhost'));
+        $this->assertEmpty($external->parse('http://foo.bar.youpla'));
     }
 
     public function testParseFalse()
