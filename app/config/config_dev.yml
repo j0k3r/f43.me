@@ -21,11 +21,3 @@ monolog:
         chromephp:
             type:  chromephp
             level: info
-
-assetic:
-    # use_controller: true
-    ruby: /opt/local/bin/ruby
-    filters:
-        compass:
-            bin: /opt/local/bin/compass
-
