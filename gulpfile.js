@@ -28,6 +28,11 @@ var paths = {
     ],
     sassApp: [
         './src/**/*.sass'
+    ],
+    css: [
+        'web/build/css/normalize.css',
+        'web/build/css/foundation.css',
+        'web/build/css/app.css',
     ]
 };
 
@@ -66,7 +71,7 @@ gulp.task('css-app', function () {
 });
 
 gulp.task('css', ['css-app', 'css-foundation'], function () {
-    return gulp.src('web/build/css/*.css')
+    return gulp.src(paths.css)
         .pipe(minifycss())
         .pipe(concat({ path: 'main.css', stat: { mode: 0666 }}))
         .pipe(gulp.dest('./web/build'));
