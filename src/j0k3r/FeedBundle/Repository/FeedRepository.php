@@ -61,15 +61,10 @@ class FeedRepository extends DocumentRepository
         $q = $this->createQueryBuilder()
             ->field('id');
 
-        switch ($type) {
-            case 'in':
-                $q->in($ids);
-                break;
-            case 'notIn':
-                $q->notIn($ids);
-                break;
-            default:
-                return false;
+        if ('in' == $type) {
+            $q->in($ids);
+        } else {
+            $q->notIn($ids);
         }
 
         return $q->eagerCursor(true)
