@@ -77,7 +77,10 @@ class FlickrTest extends \PHPUnit_Framework_TestCase
         $response->expects($this->any())
             ->method('json')
             ->will($this->onConsecutiveCalls(
-                $this->returnValue(array('stat' => 'ok', 'sizes' => array('size' => array(array('label' => 'Large', 'source' => 'https://0.0.0.0/image.jpg'))))),
+                $this->returnValue(array('stat' => 'ok', 'sizes' => array('size' => array(
+                    array('label' => 'Medium', 'source' => 'https://0.0.0.0/medium.jpg'),
+                    array('label' => 'Large', 'source' => 'https://0.0.0.0/large.jpg')
+                )))),
                 $this->returnValue(array()),
                 $this->throwException(new RequestException())
             ));
@@ -90,7 +93,7 @@ class FlickrTest extends \PHPUnit_Framework_TestCase
         $flickr->match('http://www.flickr.com/photos/palnick/15000967102/');
 
         // consecutive calls
-        $this->assertEquals('<img src="https://0.0.0.0/image.jpg" />', $flickr->getContent());
+        $this->assertEquals('<img src="https://0.0.0.0/large.jpg" />', $flickr->getContent());
         // this one will got an empty array
         $this->assertEmpty($flickr->getContent());
         // this one will catch an exception

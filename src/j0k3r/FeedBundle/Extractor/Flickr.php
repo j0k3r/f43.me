@@ -52,6 +52,8 @@ class Flickr extends AbstractExtractor
 
     /**
      * {@inheritdoc}
+     *
+     * @see https://www.flickr.com/services/api/explore/flickr.photos.getSizes
      */
     public function getContent()
     {
@@ -72,13 +74,9 @@ class Flickr extends AbstractExtractor
             return '';
         }
 
-        $src = '';
-        foreach ($data['sizes']['size'] as $size) {
-            if ('Large' == $size['label'] || 'Original' == $size['label'] || 0 === strpos($size['label'], 'Medium')) {
-                $src = $size['source'];
-            }
-        }
+        // the biggest photo is always the last one
+        $size = end($data['sizes']['size']);
 
-        return $src ? '<img src="'.$src.'" />' : '';
+        return '<img src="'.$size['source'].'" />';
     }
 }
