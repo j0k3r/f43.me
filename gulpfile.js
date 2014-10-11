@@ -1,33 +1,35 @@
 var gulp = require('gulp');
+var gutil = require('gulp-util');
 var concat = require('gulp-concat');
 var compass = require('gulp-compass');
 var minifycss = require('gulp-minify-css');
 var uglify = require('gulp-uglify');
-var csslint = require('gulp-csslint');
+var del = require('del');
 
 var paths = {
     vendors: [
-        './app/Resources/lib/foundation/js/vendor/zepto.js',
-        './app/Resources/lib/foundation/js/vendor/custom.modernizr.js'
+        'app/Resources/lib/foundation/js/vendor/zepto.js',
+        'app/Resources/lib/foundation/js/vendor/custom.modernizr.js'
     ],
     app: [
-        './app/Resources/lib/foundation/js/foundation/foundation.js',
-        './app/Resources/lib/foundation/js/foundation/foundation.alerts.js',
-        './app/Resources/lib/foundation/js/foundation/foundation.dropdown.js',
-        './app/Resources/lib/foundation/js/foundation/foundation.forms.js',
-        './app/Resources/lib/foundation/js/foundation/foundation.placeholder.js',
-        './app/Resources/lib/foundation/js/foundation/foundation.reveal.js',
-        './app/Resources/lib/foundation/js/foundation/foundation.section.js',
-        './app/Resources/lib/foundation/js/foundation/foundation.tooltips.js',
-        './app/Resources/lib/foundation/js/foundation/foundation.topbar.js',
-        './src/**/*.js'
+        'app/Resources/lib/foundation/js/foundation/foundation.js',
+        'app/Resources/lib/foundation/js/foundation/foundation.alerts.js',
+        'app/Resources/lib/foundation/js/foundation/foundation.dropdown.js',
+        'app/Resources/lib/foundation/js/foundation/foundation.forms.js',
+        'app/Resources/lib/foundation/js/foundation/foundation.placeholder.js',
+        'app/Resources/lib/foundation/js/foundation/foundation.reveal.js',
+        'app/Resources/lib/foundation/js/foundation/foundation.section.js',
+        'src/**/app.js'
+    ],
+    morris: [
+        'src/**/morris.js'
     ],
     sassFoundation: [
-        './app/Resources/lib/foundation/scss/normalize.scss',
-        './app/Resources/lib/foundation/scss/foundation.scss'
+        'app/Resources/lib/foundation/scss/normalize.scss',
+        'app/Resources/lib/foundation/scss/foundation.scss'
     ],
     sassApp: [
-        './src/**/*.sass'
+        'src/**/*.sass'
     ],
     css: [
         'web/build/css/normalize.css',
@@ -36,28 +38,43 @@ var paths = {
     ]
 };
 
+// cleanup the build folder
+gulp.task('clean', function(cb) {
+    del(['web/build'], cb);
+});
+
 gulp.task('js-vendor', function() {
     return gulp.src(paths.vendors)
         .pipe(uglify())
         .pipe(concat({ path: 'zepto.modernizr.js', stat: { mode: 0666 }}))
-        .pipe(gulp.dest('./web/build'));
+        .pipe(gulp.dest('web/build'));
 });
 
 gulp.task('js-app', function() {
     return gulp.src(paths.app)
+        .pipe(concat({ path: 'app.js', stat: { mode: 0666 }}))
         .pipe(uglify())
-        .pipe(concat({ path: 'foundation.app.js', stat: { mode: 0666 }}))
-        .pipe(gulp.dest('./web/build'));
+        .pipe(gulp.dest('web/build'))
+        .on('error', gutil.log);
 });
 
+// morris is alone because we don't need it on every page, only on the dashboard
+gulp.task('js-morris', function() {
+    return gulp.src(paths.morris)
+        .pipe(concat({ path: 'morris.js', stat: { mode: 0666 }}))
+        .pipe(uglify())
+        .pipe(gulp.dest('web/build'))
+        .on('error', gutil.log);
+});
+
+// there are 2 sass definition, because compass() doesn't handle 2 differents folders ...
 gulp.task('css-foundation', function () {
     return gulp.src(paths.sassFoundation)
         .pipe(compass({
             css: 'web/build/css',
             sass: 'app/Resources/lib/foundation/scss'
         }))
-        .pipe(minifycss())
-        .pipe(gulp.dest('./web/build/css'));
+        .pipe(gulp.dest('web/build/css'));
 });
 
 gulp.task('css-app', function () {
@@ -66,15 +83,20 @@ gulp.task('css-app', function () {
             css: 'web/build/css',
             sass: 'src/j0k3r/FeedBundle/Resources/sass'
         }))
-        .pipe(minifycss())
-        .pipe(gulp.dest('./web/build/css'));
+        .pipe(gulp.dest('web/build/css'));
 });
 
 gulp.task('css', ['css-app', 'css-foundation'], function () {
     return gulp.src(paths.css)
-        .pipe(minifycss())
+        .pipe(minifycss({keepSpecialComments: 0}))
         .pipe(concat({ path: 'main.css', stat: { mode: 0666 }}))
-        .pipe(gulp.dest('./web/build'));
+        .pipe(gulp.dest('web/build'));
 });
 
-gulp.task('default', ['js-vendor', 'js-app', 'css']);
+// Rerun tasks when a file changes
+gulp.task('watch', function() {
+    gulp.watch(paths.app, ['js-app']);
+    gulp.watch(paths.sassApp, ['css']);
+});
+
+gulp.task('default', ['clean', 'js-vendor', 'js-app', 'js-morris', 'css']);
