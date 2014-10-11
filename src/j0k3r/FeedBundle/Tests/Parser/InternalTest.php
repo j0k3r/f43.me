@@ -63,9 +63,14 @@ class InternalTest extends \PHPUnit_Framework_TestCase
             ->disableOriginalConstructor()
             ->getMock();
 
-        $response = $this->getMockBuilder('Guzzle\Http\Message\Response')
-            ->disableOriginalConstructor()
-            ->getMock();
+        $response = new \Guzzle\Http\Message\Response(
+            200,
+            array(
+                'Content-Encoding' => 'deflate',
+                'Content-Type' => 'text',
+            ),
+            '<div></div>'
+        );
 
         $guzzle->expects($this->any())
             ->method('get')
@@ -74,22 +79,6 @@ class InternalTest extends \PHPUnit_Framework_TestCase
         $request->expects($this->any())
             ->method('send')
             ->will($this->returnValue($response));
-
-        $response->expects($this->any())
-            ->method('getBody')
-            ->will($this->returnValue('<div></div>'));
-
-        $response->expects($this->any())
-            ->method('getHeader')
-            ->will($this->returnCallback(function ($param) {
-                switch ($param) {
-                    case 'Content-Encoding':
-                        return 'deflate';
-
-                    case 'Content-Type':
-                        return 'text';
-                }
-            }));
 
         $external = new Internal($guzzle, $this->regexs);
         $this->assertEmpty($external->parse('http://localhost'));
@@ -162,9 +151,14 @@ class InternalTest extends \PHPUnit_Framework_TestCase
             ->disableOriginalConstructor()
             ->getMock();
 
-        $response = $this->getMockBuilder('Guzzle\Http\Message\Response')
-            ->disableOriginalConstructor()
-            ->getMock();
+        $response = new \Guzzle\Http\Message\Response(
+            200,
+            array(
+                'Content-Encoding' => 'deflate',
+                'Content-Type' => 'image',
+            ),
+            '<div></div>'
+        );
 
         $guzzle->expects($this->any())
             ->method('get')
@@ -173,22 +167,6 @@ class InternalTest extends \PHPUnit_Framework_TestCase
         $request->expects($this->any())
             ->method('send')
             ->will($this->returnValue($response));
-
-        $response->expects($this->any())
-            ->method('getBody')
-            ->will($this->returnValue('<div></div>'));
-
-        $response->expects($this->any())
-            ->method('getHeader')
-            ->will($this->returnCallback(function ($param) {
-                switch ($param) {
-                    case 'Content-Encoding':
-                        return 'deflate';
-
-                    case 'Content-Type':
-                        return 'image';
-                }
-            }));
 
         $external = new Internal($guzzle, $this->regexs);
         $this->assertEquals('<img src="http://localhost" />', $external->parse('http://localhost'));
@@ -204,9 +182,14 @@ class InternalTest extends \PHPUnit_Framework_TestCase
             ->disableOriginalConstructor()
             ->getMock();
 
-        $response = $this->getMockBuilder('Guzzle\Http\Message\Response')
-            ->disableOriginalConstructor()
-            ->getMock();
+        $response = new \Guzzle\Http\Message\Response(
+            200,
+            array(
+                'Content-Encoding' => 'gzip',
+                'Content-Type' => 'text',
+            ),
+            gzencode("<p>Le Lorem Ipsum est simplement du faux texte employé dans la composition et la mise en page avant impression. Le Lorem Ipsum est le faux texte standard de l'imprimerie depuis les années 1500, quand un peintre anonyme assembla ensemble des morceaux de texte pour réaliser un livre spécimen de polices de texte.</p>")
+        );
 
         $guzzle->expects($this->any())
             ->method('get')
@@ -215,22 +198,6 @@ class InternalTest extends \PHPUnit_Framework_TestCase
         $request->expects($this->any())
             ->method('send')
             ->will($this->returnValue($response));
-
-        $response->expects($this->any())
-            ->method('getBody')
-            ->willReturn(gzencode("<p>Le Lorem Ipsum est simplement du faux texte employé dans la composition et la mise en page avant impression. Le Lorem Ipsum est le faux texte standard de l'imprimerie depuis les années 1500, quand un peintre anonyme assembla ensemble des morceaux de texte pour réaliser un livre spécimen de polices de texte.</p>"));
-
-        $response->expects($this->any())
-            ->method('getHeader')
-            ->will($this->returnCallback(function ($param) {
-                switch ($param) {
-                    case 'Content-Encoding':
-                        return 'gzip';
-
-                    case 'Content-Type':
-                        return 'text';
-                }
-            }));
 
         $external = new Internal($guzzle, $this->regexs);
         $this->assertContains('readability', $external->parse('http://localhost'));

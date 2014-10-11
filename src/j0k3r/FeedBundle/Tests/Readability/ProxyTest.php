@@ -160,14 +160,15 @@ class ProxyTest extends \PHPUnit_Framework_TestCase
             ->willReturn(gzencode("<p>Le Lorem Ipsum est simplement du faux texte employé dans la composition et la mise en page avant impression. Le Lorem Ipsum est le faux texte standard de l'imprimerie depuis les années 1500, quand un peintre anonyme assembla ensemble des morceaux de texte pour réaliser un livre spécimen de polices de texte.</p>"));
 
         $this->response->expects($this->any())
-            ->method('getHeader')
+            ->method('getContentEncoding')
+            ->willReturn('gzip');
+
+        $this->response->expects($this->any())
+            ->method('isContentType')
             ->will($this->returnCallback(function ($param) {
                 switch ($param) {
-                    case 'Content-Encoding':
-                        return 'gzip';
-
-                    case 'Content-Type':
-                        return 'text';
+                    case 'text':
+                        return true;
                 }
             }));
 
@@ -183,14 +184,14 @@ class ProxyTest extends \PHPUnit_Framework_TestCase
         $proxy->init('internal', $this->feed, true);
 
         $this->response->expects($this->any())
-            ->method('getHeader')
+            ->method('isContentType')
             ->will($this->returnCallback(function ($param) {
                 switch ($param) {
-                    case 'Content-Encoding':
-                        return 'gzip';
+                    case 'text':
+                        return false;
 
-                    case 'Content-Type':
-                        return 'image';
+                    case 'image':
+                        return true;
                 }
             }));
 
