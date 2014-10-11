@@ -2,8 +2,6 @@
 
 namespace j0k3r\FeedBundle\Readability;
 
-use webignition\AbsoluteUrlDeriver\AbsoluteUrlDeriver;
-
 /**
  * This class extends the Readability one to add more fine tuning on content:
  *     - remove some unwanted attributes
@@ -12,23 +10,6 @@ use webignition\AbsoluteUrlDeriver\AbsoluteUrlDeriver;
  */
 class ReadabilityExtended extends \Readability
 {
-    /**
-     * AbsoluteUrlDeriver object
-     *
-     * @var AbsoluteUrlDeriver
-     */
-    public $absUrl;
-
-    /**
-     * {@inheritDoc}
-     */
-    public function __construct($html, $url = null, $parser = 'libxml')
-    {
-        $this->absUrl = new AbsoluteUrlDeriver();
-
-        parent::__construct($html, $url, $parser);
-    }
-
     /**
      * Get article content as html
      *
@@ -140,12 +121,7 @@ class ReadabilityExtended extends \Readability
                 continue;
             }
 
-            // convert relative src to absolute
-            $this->absUrl->init(
-                $src,
-                $this->url
-            );
-            $src = (string) $this->absUrl->getAbsoluteUrl();
+            $src = \SimplePie_IRI::absolutize($this->url, $src);
 
             $elem->setAttribute('src', $src);
         }
@@ -170,12 +146,7 @@ class ReadabilityExtended extends \Readability
                 continue;
             }
 
-            // convert relative href to absolute
-            $this->absUrl->init(
-                $href,
-                $this->url
-            );
-            $href = (string) $this->absUrl->getAbsoluteUrl();
+            $href = \SimplePie_IRI::absolutize($this->url, $href);
 
             $elem->setAttribute('href', $href);
         }

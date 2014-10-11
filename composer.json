@@ -24,7 +24,6 @@
         "grom/tube-link": "~1.1",
         "zurb/foundation": "~4.3",
         "ekino/newrelic-bundle": "~1.2",
-        "webignition/absolute-url-deriver": "1.5",
         "adyg/php-imgur-api-client": "~1.0",
         "guzzle/guzzle": "~3.9"
     },
