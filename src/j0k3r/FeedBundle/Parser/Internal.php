@@ -84,6 +84,10 @@ class Internal extends AbstractParser
             if (true === $is_gziped) {
                 $content = gzdecode($content);
             }
+
+            if (!$response->isContentType('utf-8')) {
+                $content = mb_convert_encoding($content, 'UTF-8');
+            }
         }
 
         // let's clean up input.
