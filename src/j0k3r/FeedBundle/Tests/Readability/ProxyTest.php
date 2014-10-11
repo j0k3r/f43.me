@@ -52,10 +52,6 @@ class ProxyTest extends \PHPUnit_Framework_TestCase
 
         $this->improverChain->expects($this->any())
             ->method('match')
-            ->willReturn('nothing');
-
-        $this->improverChain->expects($this->any())
-            ->method('getImprover')
             ->willReturn($nothingImprover);
 
         $guzzle = $this->getMockBuilder('Guzzle\Http\Client')
@@ -234,10 +230,6 @@ class ProxyTest extends \PHPUnit_Framework_TestCase
 
         $extractorChain->expects($this->any())
             ->method('match')
-            ->willReturn('twitter');
-
-        $extractorChain->expects($this->any())
-            ->method('getExtractor')
             ->willReturn($extractor);
 
         $proxy = new Proxy($extractorChain, $this->improverChain, $this->parserChain);

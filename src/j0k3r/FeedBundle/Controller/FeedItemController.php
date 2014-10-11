@@ -145,9 +145,13 @@ class FeedItemController extends Controller
             ->setUrl($feed->getLink())
             ->init();
 
-        $parser = $this
-            ->get('readability_proxy')
-            ->init($request->get('parser'), $feed);
+        try {
+            $parser = $this
+                ->get('readability_proxy')
+                ->init($request->get('parser'), $feed);
+        } catch (\InvalidArgumentException $e) {
+            throw $this->createNotFoundException($e->getMessage());
+        }
 
         $firstItem = $rssFeed->get_item(0);
         if (!$firstItem) {

@@ -128,11 +128,7 @@ class FeedItemControllerTest extends FeedWebTestCase
 
         $crawler = $client->request('GET', '/feed/hackernews/previewItem?parser=nawak');
 
-        $this->assertEquals(200, $client->getResponse()->getStatusCode());
-        $this->assertCount(1, $crawler->filter('ul.no-bullet'));
-        $this->assertGreaterThanOrEqual(2, $crawler->filter('li strong')->count());
-        $this->assertCount(1, $crawler->filter('p span.label.alert.radius'));
-        $this->assertContains('We failed to make this item readable, the default text from the feed item will be displayed instead.', $client->getResponse()->getContent());
+        $this->assertEquals(404, $client->getResponse()->getStatusCode());
     }
 
     public function testPreviewItemBadSlug()

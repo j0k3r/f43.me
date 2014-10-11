@@ -13,7 +13,7 @@ class Proxy
     protected $extractorChain;
     protected $improverChain;
     protected $parserChain;
-    protected $chosenParser = null;
+    protected $parser;
     protected $allowAllParser = false;
 
     public $url = '';
@@ -46,7 +46,11 @@ class Proxy
      */
     public function init($chosenParser, Feed $feed = null, $allowAllParser = false)
     {
-        $this->chosenParser = $chosenParser;
+        $this->parser = $this->parserChain->getParser(strtolower($chosenParser));
+        if (false === $this->parser) {
+            throw new \InvalidArgumentException(sprintf('The given parser "%s" does not exists.', $chosenParser));
+        }
+
         $this->feed = $feed;
         $this->allowAllParser = (bool) $allowAllParser;
 
@@ -74,9 +78,7 @@ class Proxy
         }
 
         // we loop thru all improver and we are SURE that the default one will match anyway
-        $improverAlias = $this->improverChain->match($host);
-        $improver = $this->improverChain->getImprover($improverAlias);
-
+        $improver = $this->improverChain->match($host);
         $improver->setUrl($url);
         $improver->setItemContent($itemContent);
 
@@ -84,19 +86,15 @@ class Proxy
         $this->url = $improver->updateUrl($url);
 
         // try to find a custom extractor for api content (imgur, twitter, etc...)
-        $extractorAlias = $this->extractorChain->match($this->url);
-        if (false !== $extractorAlias) {
-            $this->content = $this->extractorChain
-                ->getExtractor($extractorAlias)
-                ->getContent();
+        $extractor = $this->extractorChain->match($this->url);
+        if (false !== $extractor) {
+            $this->content = $extractor->getContent();
         }
-
-        $parser = $this->parserChain->getParser(strtolower($this->chosenParser));
 
         // this means the selected extractor wasn't able to extract content OR
         // no extractor were able to match the url
-        if (!$this->content && false !== $parser) {
-            $this->content = $parser->parse($this->url);
+        if (!$this->content) {
+            $this->content = $this->parser->parse($this->url);
         }
 
         // if we allow all parser to be tested to get content, loop through all of them

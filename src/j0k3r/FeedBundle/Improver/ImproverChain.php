@@ -23,33 +23,17 @@ class ImproverChain
     }
 
     /**
-     * Get one improver by alias
-     *
-     * @param string $alias
-     *
-     * @return bool|object
-     */
-    public function getImprover($alias)
-    {
-        if (array_key_exists($alias, $this->improvers)) {
-           return $this->improvers[$alias];
-        }
-
-        return false;
-    }
-
-    /**
-     * Loop thru all improver to find one that match
+     * Loop thru all improver and return one that match
      *
      * @param string $host A host
      *
-     * @return string|false
+     * @return Nothing|false
      */
     public function match($host)
     {
         foreach ($this->improvers as $alias => $improver) {
             if (true === $improver->match($host)) {
-                return $alias;
+                return $improver;
             }
         }
 
