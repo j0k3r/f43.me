@@ -63,7 +63,7 @@ class Internal extends AbstractParser
 
             // decode gzip content (most of the time it's a Tumblr website)
             if ('gzip' == $response->getContentEncoding()) {
-                $content = mb_convert_encoding($content, 'UTF-8');
+                $content = gzdecode($content);
             }
 
             if (!$response->isContentType('utf-8')) {

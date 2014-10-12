@@ -49,8 +49,8 @@ class InternalTest extends \PHPUnit_Framework_TestCase
             ->method('getBody')
             ->will($this->returnValue(''));
 
-        $external = new Internal($guzzle, $this->regexs);
-        $this->assertEmpty($external->parse('http://localhost'));
+        $internal = new Internal($guzzle, $this->regexs);
+        $this->assertEmpty($internal->parse('http://localhost'));
     }
 
     public function testParse()
@@ -80,8 +80,8 @@ class InternalTest extends \PHPUnit_Framework_TestCase
             ->method('send')
             ->will($this->returnValue($response));
 
-        $external = new Internal($guzzle, $this->regexs);
-        $this->assertEmpty($external->parse('http://localhost'));
+        $internal = new Internal($guzzle, $this->regexs);
+        $this->assertEmpty($internal->parse('http://localhost'));
     }
 
     public function testParseVideo()
@@ -90,8 +90,8 @@ class InternalTest extends \PHPUnit_Framework_TestCase
             ->disableOriginalConstructor()
             ->getMock();
 
-        $external = new Internal($guzzle, $this->regexs);
-        $this->assertEquals('<iframe src="http://www.youtube.com/embed/8b7t5iUV0pQ" width="560" height="315"></iframe>', $external->parse('https://www.youtube.com/watch?v=8b7t5iUV0pQ'));
+        $internal = new Internal($guzzle, $this->regexs);
+        $this->assertEquals('<iframe src="http://www.youtube.com/embed/8b7t5iUV0pQ" width="560" height="315"></iframe>', $internal->parse('https://www.youtube.com/watch?v=8b7t5iUV0pQ'));
     }
 
     /**
@@ -107,8 +107,8 @@ class InternalTest extends \PHPUnit_Framework_TestCase
             ->method('get')
             ->will($this->throwException(new RequestException()));
 
-        $external = new Internal($guzzle, $this->regexs);
-        $this->assertEmpty($external->parse('http://foo.bar.youpla'));
+        $internal = new Internal($guzzle, $this->regexs);
+        $this->assertEmpty($internal->parse('http://foo.bar.youpla'));
     }
 
     public function testParseFalse()
@@ -137,8 +137,8 @@ class InternalTest extends \PHPUnit_Framework_TestCase
             ->method('getBody')
             ->willReturn(false);
 
-        $external = new Internal($guzzle, $this->regexs);
-        $this->assertEmpty($external->parse('http://localhost'));
+        $internal = new Internal($guzzle, $this->regexs);
+        $this->assertEmpty($internal->parse('http://localhost'));
     }
 
     public function testParseImage()
@@ -168,8 +168,8 @@ class InternalTest extends \PHPUnit_Framework_TestCase
             ->method('send')
             ->will($this->returnValue($response));
 
-        $external = new Internal($guzzle, $this->regexs);
-        $this->assertEquals('<img src="http://localhost" />', $external->parse('http://localhost'));
+        $internal = new Internal($guzzle, $this->regexs);
+        $this->assertEquals('<img src="http://localhost" />', $internal->parse('http://localhost'));
     }
 
     public function testParseGzip()
@@ -199,7 +199,7 @@ class InternalTest extends \PHPUnit_Framework_TestCase
             ->method('send')
             ->will($this->returnValue($response));
 
-        $external = new Internal($guzzle, $this->regexs);
-        $this->assertContains('readability', $external->parse('http://localhost'));
+        $internal = new Internal($guzzle, $this->regexs);
+        $this->assertContains('readability', $internal->parse('http://localhost'));
     }
 }
