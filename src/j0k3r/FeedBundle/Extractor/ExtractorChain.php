@@ -33,7 +33,7 @@ class ExtractorChain
     {
         foreach ($this->extractors as $alias => $extractor) {
             if (true === $extractor->match($url)) {
-                return $extrator;
+                return $extractor;
             }
         }
 
