@@ -1,6 +1,6 @@
 {
     "name": "j0k3r/f43",
-    "description": "More readable & cleaner feed",
+    "description": "A more readable & cleaner feed",
     "license": "MIT",
     "autoload": {
         "psr-0": { "": "src/" }
@@ -12,7 +12,6 @@
         "symfony/symfony": "~2.5",
         "doctrine/doctrine-bundle": "~1.2",
         "twig/extensions": "~1.1",
-        "symfony/assetic-bundle": "~2.3",
         "symfony/monolog-bundle": "~2.6",
         "incenteev/composer-parameter-handler": "~2.1",
         "doctrine/mongodb-odm": "1.0.*@dev",
@@ -22,7 +21,6 @@
         "simplepie/simplepie": "~1.3",
         "knplabs/knp-time-bundle": "1.3",
         "grom/tube-link": "~1.1",
-        "zurb/foundation": "~4.3",
         "ekino/newrelic-bundle": "~1.2",
         "adyg/php-imgur-api-client": "~1.0",
         "guzzle/guzzle": "~3.9"
@@ -39,8 +37,7 @@
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::buildBootstrap",
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::clearCache",
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installAssets",
-            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installRequirementsFile",
-            "j0k3r\\FeedBundle\\Composer\\Script::postInstallFoundation"
+            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installRequirementsFile"
         ],
         "post-update-cmd": [
             "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters",
