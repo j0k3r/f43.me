@@ -4,7 +4,7 @@ build:
   - apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 7F0CEB10
   - echo 'deb http://downloads-distro.mongodb.org/repo/ubuntu-upstart dist 10gen' | tee -a /etc/apt/sources.list.d/mongodb.list
   - apt-get update -y
-  - apt-get install -f -y php-pear php5-dev mongodb-org libtidy-dev php5-tidy re2c libpcre3-dev php5-apcu
+  - apt-get install -f -y php-pear php5-dev mongodb-org libtidy-dev php5-tidy re2c libpcre3-dev php5-apcu npm
   - mongod -f /etc/mongod.conf --fork
   - pecl install -f mongo-1.5.6
   - echo 'extension=mongo.so' | tee /etc/php5/mods-available/mongo.ini
@@ -12,6 +12,10 @@ build:
   - ln -s /etc/php5/mods-available/mongo.ini /etc/php5/fpm/conf.d/20-mongo.ini
   - service php5-fpm restart
   - composer install --ansi --no-progress --dev --prefer-dist --no-interaction
+  - npm install
+  - npm install -g bower
+  - bower install
+  - node_modules/gulp/bin/gulp.js
   - app/console doctrine:mongodb:schema:create
   - app/console doctrine:mongodb:fixtures:load --env=dev --no-interaction
 
