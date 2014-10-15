@@ -7,9 +7,6 @@
 /vendor/
 /bin/
 /app/config/parameters.yml
-
-/src/j0k3r/FeedBundle/Resources/foundation/*
-
 /.sass-cache
 /app/cache.properties
 /node_modules/
