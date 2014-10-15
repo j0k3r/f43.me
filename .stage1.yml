@@ -13,9 +13,7 @@ build:
   - service php5-fpm restart
   - composer install --ansi --no-progress --dev --prefer-dist --no-interaction
   - npm install
-  - npm install -g bower
-  - bower install
-  - node_modules/gulp/bin/gulp.js
+  - ./node_modules/gulp/bin/gulp.js
   - app/console doctrine:mongodb:schema:create
   - app/console doctrine:mongodb:fixtures:load --env=dev --no-interaction
 
