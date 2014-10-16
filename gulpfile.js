@@ -4,7 +4,7 @@ var concat = require('gulp-concat');
 var compass = require('gulp-compass');
 var minifycss = require('gulp-minify-css');
 var uglify = require('gulp-uglify');
-var del = require('del');
+var rimraf = require('rimraf');
 
 var paths = {
     vendors: [
@@ -40,7 +40,7 @@ var paths = {
 
 // cleanup the build folder
 gulp.task('clean', function(cb) {
-    del(['web/build'], cb);
+    rimraf('web/build/**/*.*', cb);
 });
 
 gulp.task('js-vendor', function() {
