@@ -36,7 +36,7 @@ class Tumblr extends AbstractExtractor
         }
 
         // find tumblr post id
-        preg_match('/post\/([0-9]{11})/', $path, $matches);
+        preg_match('/post\/([0-9]+)/', $path, $matches);
 
         if (!isset($matches[1])) {
             return false;
