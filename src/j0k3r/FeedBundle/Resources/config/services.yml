@@ -12,6 +12,16 @@ services:
             - ''
             - %guzzle.options%
 
+    twitter.client:
+        class: TwitterOAuth\TwitterOAuth
+        arguments:
+            -
+                consumer_key: %twitter.consumer_key%
+                consumer_secret: %twitter.consumer_secret%
+                oauth_token: %twitter.access_token%
+                oauth_token_secret: %twitter.access_token_secret%
+                output_format: 'array'
+
     readability_proxy:
         class: j0k3r\FeedBundle\Readability\Proxy
         arguments:
@@ -63,7 +73,7 @@ services:
     feed.extractor.twitter:
         class: j0k3r\FeedBundle\Extractor\Twitter
         arguments:
-            - @guzzle.client
+            - @twitter.client
         tags:
             -  { name: feed.extractor, alias: twitter }
 

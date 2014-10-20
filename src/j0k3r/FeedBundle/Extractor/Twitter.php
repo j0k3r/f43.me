@@ -2,17 +2,17 @@
 
 namespace j0k3r\FeedBundle\Extractor;
 
-use Guzzle\Http\Client;
-use Guzzle\Http\Exception\RequestException;
+use TwitterOAuth\TwitterOAuth;
+use TwitterOAuth\Exception\TwitterException;
 
 class Twitter extends AbstractExtractor
 {
-    protected $guzzle;
+    protected $twitter;
     protected $tweetId = null;
 
-    public function __construct(Client $guzzle)
+    public function __construct(TwitterOAuth $twitter)
     {
-        $this->guzzle = $guzzle;
+        $this->twitter = $twitter;
     }
 
     /**
@@ -49,18 +49,20 @@ class Twitter extends AbstractExtractor
         }
 
         try {
-            $data = $this->guzzle
-                ->get('https://api.twitter.com/1/statuses/oembed.json?id='.$this->tweetId)
-                ->send()
-                ->json();
-        } catch (RequestException $e) {
+            $twitterData = $this->twitter->get('statuses/show', array('id' => $this->tweetId));
+        } catch (TwitterException $e) {
             return '';
         }
 
-        if (!isset($data['html'])) {
-            return '';
+        $tweet = '<p><strong>'.$twitterData['user']['name'].'</strong>';
+        $tweet .= ' &ndash; @'.$twitterData['user']['screen_name'];
+        $tweet .= '<br/>'.$twitterData['text'];
+        $tweet .= '<br/><em>'.$twitterData['created_at'].'</em></p>';
+
+        foreach ($twitterData['extended_entities']['media'] as $media) {
+            $tweet .= '<p><img src="'.$media['media_url_https'].'" /></p>';
         }
 
-        return $data['html'];
+        return $tweet;
     }
 }

@@ -16,10 +16,14 @@ parameters:
     newrelic_api_key: xxxxxxxxxxx
     google_analytics_code: UA-xxxxx-x
 
+    # https://api.imgur.com/oauth2/addclient
     imgur.client_id: xxxxx
     imgur.client_secret: xxxxx
 
+    # https://www.tumblr.com/oauth/apps
     tumblr.api_key: xxxx
+
+    # https://www.flickr.com/services/apps/create/
     flickr.api_key: xxxx
 
     parser.regexps:
@@ -41,3 +45,9 @@ parameters:
     guzzle.options:
         request.options:
             timeout: 10
+
+    # https://apps.twitter.com/
+    twitter.consumer_key: xxx
+    twitter.consumer_secret: xxx
+    twitter.access_token: xxx
+    twitter.access_token_secret: xxx
