@@ -3,6 +3,7 @@
 namespace j0k3r\FeedBundle\Tests\Extractor;
 
 use j0k3r\FeedBundle\Extractor\Twitter;
+use TwitterOAuth\Exception\TwitterException;
 
 class TwitterTest extends \PHPUnit_Framework_TestCase
 {
@@ -12,6 +13,7 @@ class TwitterTest extends \PHPUnit_Framework_TestCase
             array('https://twitter.com/DoerteDev/statuses/50652222386027724', false),
             array('https://twitter.com/DoerteDev/statuses/506522223860277248', true),
             array('http://twitter.com/statuses/506522223860277248', true),
+            array('http://twitter.com/_youhadonejob/status/522835690665807872/photo/1', true),
         );
     }
 
@@ -20,105 +22,55 @@ class TwitterTest extends \PHPUnit_Framework_TestCase
      */
     public function testMatch($url, $expected)
     {
-        $guzzle = $this->getMockBuilder('Guzzle\Http\Client')
+        $twitterOAuth = $this->getMockBuilder('TwitterOAuth\TwitterOAuth')
             ->disableOriginalConstructor()
             ->getMock();
 
-        $twitter = new Twitter($guzzle);
+        $twitter = new Twitter($twitterOAuth);
         $this->assertEquals($expected, $twitter->match($url));
     }
 
     public function testContent()
     {
-        $guzzle = $this->getMockBuilder('Guzzle\Http\Client')
+        $twitterOAuth = $this->getMockBuilder('TwitterOAuth\TwitterOAuth')
             ->disableOriginalConstructor()
             ->getMock();
 
-        $request = $this->getMockBuilder('Guzzle\Http\Message\Request')
-            ->disableOriginalConstructor()
-            ->getMock();
-
-        $response = $this->getMockBuilder('Guzzle\Http\Message\Response')
-            ->disableOriginalConstructor()
-            ->getMock();
-
-        $guzzle->expects($this->any())
+        $twitterOAuth->expects($this->once())
             ->method('get')
-            ->will($this->returnValue($request));
+            ->will($this->returnValue(array(
+                'user' => array(
+                    'name' => 'the name',
+                    'screen_name' => 'the_name',
+                ),
+                'text' => 'my awesome tweet',
+                'created_at' => 'Sun Oct 19 11:31:10 +0000 2014',
+                'extended_entities' => array('media' => array(array('media_url_https' => 'http://0.0.0.0/image.jpg'))),
+            )));
 
-        $request->expects($this->any())
-            ->method('send')
-            ->will($this->returnValue($response));
-
-        $response->expects($this->any())
-            ->method('json')
-            ->will($this->returnValue(array('html' => '<div></div>')));
-
-        $twitter = new Twitter($guzzle);
+        $twitter = new Twitter($twitterOAuth);
         $twitter->match('https://twitter.com/DoerteDev/statuses/506522223860277248');
 
-        $this->assertEquals('<div></div>', $twitter->getContent());
+        $content = $twitter->getContent();
+
+        $this->assertContains('the name', $content);
+        $this->assertContains('the_name', $content);
+        $this->assertContains('my awesome tweet', $content);
+        $this->assertContains('Sun Oct 19', $content);
+        $this->assertContains('img', $content);
     }
 
     public function testContentBadResponse()
     {
-        $guzzle = $this->getMockBuilder('Guzzle\Http\Client')
+        $twitterOAuth = $this->getMockBuilder('TwitterOAuth\TwitterOAuth')
             ->disableOriginalConstructor()
             ->getMock();
 
-        $request = $this->getMockBuilder('Guzzle\Http\Message\Request')
-            ->disableOriginalConstructor()
-            ->getMock();
-
-        $response = $this->getMockBuilder('Guzzle\Http\Message\Response')
-            ->disableOriginalConstructor()
-            ->getMock();
-
-        $guzzle->expects($this->any())
+        $twitterOAuth->expects($this->once())
             ->method('get')
-            ->will($this->returnValue($request));
+            ->will($this->throwException(new TwitterException()));
 
-        $request->expects($this->any())
-            ->method('send')
-            ->will($this->returnValue($response));
-
-        $response->expects($this->any())
-            ->method('json')
-            ->will($this->returnValue(array()));
-
-        $twitter = new Twitter($guzzle);
-        $twitter->match('https://twitter.com/DoerteDev/statuses/506522223860277248');
-
-        $this->assertEmpty($twitter->getContent());
-    }
-
-    public function testContentBadResponse2()
-    {
-        $guzzle = $this->getMockBuilder('Guzzle\Http\Client')
-            ->disableOriginalConstructor()
-            ->getMock();
-
-        $request = $this->getMockBuilder('Guzzle\Http\Message\Request')
-            ->disableOriginalConstructor()
-            ->getMock();
-
-        $response = $this->getMockBuilder('Guzzle\Http\Message\Response')
-            ->disableOriginalConstructor()
-            ->getMock();
-
-        $guzzle->expects($this->any())
-            ->method('get')
-            ->will($this->returnValue($request));
-
-        $request->expects($this->any())
-            ->method('send')
-            ->will($this->returnValue($response));
-
-        $response->expects($this->any())
-            ->method('json')
-            ->will($this->throwException(new \Guzzle\Http\Exception\RequestException()));
-
-        $twitter = new Twitter($guzzle);
+        $twitter = new Twitter($twitterOAuth);
         $twitter->match('https://twitter.com/DoerteDev/statuses/506522223860277248');
 
         $this->assertEmpty($twitter->getContent());
@@ -126,11 +78,11 @@ class TwitterTest extends \PHPUnit_Framework_TestCase
 
     public function testNoTweet()
     {
-        $guzzle = $this->getMockBuilder('Guzzle\Http\Client')
+        $twitterOAuth = $this->getMockBuilder('TwitterOAuth\TwitterOAuth')
             ->disableOriginalConstructor()
             ->getMock();
 
-        $twitter = new Twitter($guzzle);
+        $twitter = new Twitter($twitterOAuth);
         $twitter->match('http://localhost');
 
         $this->assertEmpty($twitter->getContent());

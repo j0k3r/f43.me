@@ -25,7 +25,8 @@
         "ekino/newrelic-bundle": "~1.2",
         "adyg/php-imgur-api-client": "~1.0",
         "guzzle/guzzle": "~3.9",
-        "mnsami/composer-custom-directory-installer": "~1.0"
+        "mnsami/composer-custom-directory-installer": "~1.0",
+        "ricardoper/twitteroauth": "~1.0"
     },
     "require-dev": {
         "sensio/generator-bundle": "~2.3",
