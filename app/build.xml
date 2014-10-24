@@ -58,6 +58,8 @@
     <exec executable="composer">
       <arg value="install"/>
       <arg value="--dev"/>
+      <arg value="--prefer-source"/>
+      <arg value="--no-interaction"/>
       <arg value="--working-dir=.."/>
     </exec>
     <exec executable="php">
