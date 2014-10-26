@@ -41,7 +41,7 @@ class Imgur extends AbstractExtractor
         // find the hash and the type (gallery or single image)
         preg_match('/(?:\/(a|gallery|signin))?\/([^\W_]{5,7})(?:\/|\.[a-zA-Z]+|#([^\W_]{5,7}|\d+))?$/', $url, $matches);
 
-        if (0 !== strpos($host, 'imgur') || false !== strpos($path, '.') || !isset($matches[2])) {
+        if ((0 !== strpos($host, 'imgur') && 0 !== strpos($host, 'i.imgur')) || !isset($matches[2])) {
             return false;
         }
 
@@ -82,7 +82,9 @@ class Imgur extends AbstractExtractor
         }
 
         foreach ($images as $image) {
-            $info = '<p>'.$image->getTitle().' – '.$image->getDescription().'</p>';
+            $info = '<p>'.$image->getTitle();
+            $info .= $image->getDescription() ? ' – '.$image->getDescription() : '';
+            $info .= '</p>';
 
             if (!$image->getTitle() && !$image->getDescription()) {
                 $info = '';

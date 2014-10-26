@@ -10,10 +10,10 @@ class ImgurTest extends \PHPUnit_Framework_TestCase
     public function dataMatch()
     {
         return array(
-            array('http://i.imgur.com/IoKwI7E.jpg', false),
-            array('http://i.imgur.com/IoKwI7E', false),
-            array('https://i.imgur.com/IoKwI7E.jpg', false),
-            array('https://i.imgur.com/IoKwI7E', false),
+            array('http://i.imgur.com/IoKwI7E.jpg', true),
+            array('http://i.imgur.com/IoKwI7E', true),
+            array('https://i.imgur.com/IoKwI7E.jpg', true),
+            array('https://i.imgur.com/IoKwI7E', true),
             array('http://imgur.com/IoKwI7E', true),
             array('https://imgur.com/IoKwI7E', true),
             array('https://imgur.com/a/dLaMy', true),
@@ -21,6 +21,7 @@ class ImgurTest extends \PHPUnit_Framework_TestCase
             array('https://imgur.com/gallery/dLaMy', true),
             array('https://imgur.com/duziauziaozaoLaMy', false),
             array('https://imgur.com/Ay', false),
+            array('http://imgur.com/UMOCfIk.gifv', true),
         );
     }
 
