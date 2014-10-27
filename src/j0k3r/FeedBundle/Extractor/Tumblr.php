@@ -73,6 +73,8 @@ class Tumblr extends AbstractExtractor
                 ->send()
                 ->json();
         } catch (RequestException $e) {
+            trigger_error('Tumblr extract failed for "'.$this->tumblrId.'" & "'.$this->tumblrHost.'": '.$e->getMessage());
+
             return '';
         }
 

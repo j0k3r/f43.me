@@ -79,6 +79,9 @@ class TumblrTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse($tumblr->match('http://thecodinglove.com/post/96365413702/client-giving-us-his-feedback-on-his-new-project'));
     }
 
+    /**
+     * @expectedException PHPUnit_Framework_Error
+     */
     public function testContent()
     {
         $guzzle = $this->getMockBuilder('Guzzle\Http\Client')

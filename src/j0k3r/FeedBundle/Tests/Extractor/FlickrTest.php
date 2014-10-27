@@ -52,6 +52,9 @@ class FlickrTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($expected, $flickr->match($url));
     }
 
+    /**
+     * @expectedException PHPUnit_Framework_Error
+     */
     public function testContent()
     {
         $guzzle = $this->getMockBuilder('Guzzle\Http\Client')

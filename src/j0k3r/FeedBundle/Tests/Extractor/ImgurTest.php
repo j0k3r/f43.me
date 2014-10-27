@@ -137,6 +137,9 @@ class ImgurTest extends \PHPUnit_Framework_TestCase
         $this->assertEmpty($imgur->getContent());
     }
 
+    /**
+     * @expectedException PHPUnit_Framework_Error
+     */
     public function testImgurFail()
     {
         $imgurClient = $this->getMockBuilder('Imgur\Client')

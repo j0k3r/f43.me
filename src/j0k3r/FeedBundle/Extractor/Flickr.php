@@ -67,6 +67,8 @@ class Flickr extends AbstractExtractor
                 ->send()
                 ->json();
         } catch (RequestException $e) {
+            trigger_error('Flickr extract failed for "'.$this->flickrId.'": '.$e->getMessage());
+
             return '';
         }
 

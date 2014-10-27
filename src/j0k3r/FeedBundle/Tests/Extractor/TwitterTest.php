@@ -60,6 +60,9 @@ class TwitterTest extends \PHPUnit_Framework_TestCase
         $this->assertContains('img', $content);
     }
 
+    /**
+     * @expectedException PHPUnit_Framework_Error
+     */
     public function testContentBadResponse()
     {
         $twitterOAuth = $this->getMockBuilder('TwitterOAuth\TwitterOAuth')
