@@ -60,6 +60,34 @@ class TwitterTest extends \PHPUnit_Framework_TestCase
         $this->assertContains('img', $content);
     }
 
+    public function testContentNoEntities()
+    {
+        $twitterOAuth = $this->getMockBuilder('TwitterOAuth\TwitterOAuth')
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $twitterOAuth->expects($this->once())
+            ->method('get')
+            ->will($this->returnValue(array(
+                'user' => array(
+                    'name' => 'the name',
+                    'screen_name' => 'the_name',
+                ),
+                'text' => 'my awesome tweet',
+                'created_at' => 'Sun Oct 19 11:31:10 +0000 2014',
+            )));
+
+        $twitter = new Twitter($twitterOAuth);
+        $twitter->match('https://twitter.com/DoerteDev/statuses/506522223860277248');
+
+        $content = $twitter->getContent();
+
+        $this->assertContains('the name', $content);
+        $this->assertContains('the_name', $content);
+        $this->assertContains('my awesome tweet', $content);
+        $this->assertContains('Sun Oct 19', $content);
+    }
+
     /**
      * @expectedException PHPUnit_Framework_Error
      */

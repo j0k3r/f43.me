@@ -61,6 +61,10 @@ class Twitter extends AbstractExtractor
         $tweet .= '<br/>'.$twitterData['text'];
         $tweet .= '<br/><em>'.$twitterData['created_at'].'</em></p>';
 
+        if (!isset($twitterData['extended_entities']['media'])) {
+            return $tweet;
+        }
+
         foreach ($twitterData['extended_entities']['media'] as $media) {
             $tweet .= '<p><img src="'.$media['media_url_https'].'" /></p>';
         }
