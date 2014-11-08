@@ -67,7 +67,7 @@ class InternalTest extends \PHPUnit_Framework_TestCase
             200,
             array(
                 'Content-Encoding' => 'deflate',
-                'Content-Type' => 'text',
+                'Content-Type' => 'text/html; charset=iso',
             ),
             '<div></div>'
         );
