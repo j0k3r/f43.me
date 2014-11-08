@@ -95,7 +95,7 @@ class FeedController extends Controller
     {
         $feed = new Feed();
         $form = $this->createForm(new FeedType(), $feed);
-        $form->submit($request);
+        $form->handleRequest($request);
 
         if ($form->isValid()) {
             $dm = $this->getDocumentManager();
@@ -127,7 +127,7 @@ class FeedController extends Controller
      */
     public function editAction(Request $request, Feed $feed)
     {
-        $dm   = $this->getDocumentManager();
+        $dm = $this->getDocumentManager();
 
         $editForm   = $this->createForm(new FeedType(), $feed);
         $deleteForm = $this->createDeleteForm();
@@ -136,8 +136,8 @@ class FeedController extends Controller
         $lastLog    = $dm->getRepository('j0k3rFeedBundle:FeedLog')->findLastItemByFeedId($feed->getId());
         $nbLogs     = $dm->getRepository('j0k3rFeedBundle:FeedLog')->countByFeedId($feed->getId());
 
-        if ($request->isMethod('POST')) {
-            $editForm->submit($request);
+        if ($editForm->isSubmitted()) {
+            $editForm->handleRequest($request);
 
             if ($editForm->isValid()) {
                 $dm->persist($feed);
@@ -177,7 +177,7 @@ class FeedController extends Controller
     public function deleteAction(Request $request, Feed $feed)
     {
         $form = $this->createDeleteForm();
-        $form->submit($request);
+        $form->handleRequest($request);
 
         if ($form->isValid()) {
             $dm = $this->getDocumentManager();

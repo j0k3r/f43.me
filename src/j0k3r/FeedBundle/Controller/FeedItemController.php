@@ -47,7 +47,7 @@ class FeedItemController extends Controller
     public function deleteAllAction(Request $request, Feed $feed)
     {
         $form = $this->createDeleteAllForm();
-        $form->submit($request);
+        $form->handleRequest($request);
 
         if ($form->isValid()) {
             $dm = $this->getDocumentManager();
