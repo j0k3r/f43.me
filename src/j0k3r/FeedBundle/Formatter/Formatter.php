@@ -12,7 +12,7 @@ use j0k3r\FeedBundle\DomDocument\XDOMElement;
  *
  * This class provides formatter methods
  */
-class Formatter
+abstract class Formatter
 {
     /**
      * @var Feed $feed A feed instance
@@ -59,6 +59,8 @@ class Formatter
         $this->url = $url;
         $this->generator = $generator;
 
+        $this->dom = new XDOMDocument('1.0', 'utf-8');
+
         $this->setItemFields();
         $this->initialize();
     }
@@ -69,18 +71,12 @@ class Formatter
      *     - method: will be the method to retrieve content to put in this node
      *
      */
-    public function setItemFields()
-    {
-        $this->fields = array();
-    }
+    abstract public function setItemFields();
 
     /**
      * Initialize XML DOMDocument nodes and call addItem on all items
      */
-    public function initialize()
-    {
-        $this->dom = new XDOMDocument('1.0', 'utf-8');
-    }
+    abstract public function initialize();
 
     /**
      * Format field

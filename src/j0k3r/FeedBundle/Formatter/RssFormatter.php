@@ -42,8 +42,6 @@ class RssFormatter extends Formatter
      */
     public function initialize()
     {
-        parent::initialize();
-
         $root = $this->dom->createElement('rss');
         $root->setAttribute('version', '2.0');
         $root->setAttribute('xmlns:atom', 'http://www.w3.org/2005/Atom');
