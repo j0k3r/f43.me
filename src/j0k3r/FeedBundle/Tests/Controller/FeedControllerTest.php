@@ -16,7 +16,7 @@ class FeedControllerTest extends FeedWebTestCase
         $this->assertCount(1, $crawler->filter('h1'));
         $this->assertCount(1, $crawler->filter('h2.title'));
         $this->assertCount(2, $crawler->filter('h2.subheader'));
-        $this->assertGreaterThan(0, $crawler->filter('tr td div img.favicon')->count());
+        $this->assertGreaterThan(0, $crawler->filter('tr td img.favicon')->count());
 
         // private field won't show up
         $this->assertNotContains('Bonjour', $client->getResponse()->getContent());

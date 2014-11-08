@@ -51,3 +51,10 @@ function callParser (context, link, parser) {
         }
     });
 }
+
+$(function(){
+    $('.time-ago').each(function() {
+        var time = $(this);
+        time.text(moment(time.attr('title')).fromNow());
+    });
+});

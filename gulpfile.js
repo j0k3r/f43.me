@@ -19,6 +19,7 @@ var paths = {
         'app/Resources/lib/foundation/js/foundation/foundation.placeholder.js',
         'app/Resources/lib/foundation/js/foundation/foundation.reveal.js',
         'app/Resources/lib/foundation/js/foundation/foundation.section.js',
+        'node_modules/moment/min/moment.min.js',
         'src/**/app.js'
     ],
     morris: [

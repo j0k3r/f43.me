@@ -49,7 +49,5 @@ stof_doctrine_extensions:
             timestampable: true
             sluggable: true
 
-knp_time: ~
-
 ekino_new_relic:
     enabled: false

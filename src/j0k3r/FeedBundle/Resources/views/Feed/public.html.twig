@@ -6,7 +6,7 @@
 
 {% block content %}
 <div class="row">
-    <div class="large-8 columns">
+    <div class="large-12 columns">
         <h2 class="subheader">What's that?</h2>
         <p>I'm reading a lot of feeds in the subway. Mostly when I go to work and when I come back home. We are lucky in Paris because we have data network in the subway, but sometimes, network is saturated and you can't load the webpage of an item of your feed. You're stuck with only 3 lines from the feed...</p>
         <p>That's why I've built a <em>kind of</em> proxy for RSS feeds that I read the most, called <strong>f43.me</strong>.</p>
@@ -20,29 +20,30 @@
         </ul>
         <p>And it's available on <a href="https://github.com/j0k3r/f43.me">Github</a>.</p>
     </div>
-
-    <div class="large-4 columns">
+</div>
+<div class="row">
+    <div class="large-12 columns">
         <h2 class="subheader"><em>Readable</em> feeds</h2>
         {% if feeds|length > 0 %}
             <table class="table-public">
                 <thead>
                     <tr>
-                        <th>RSS link</th>
-                        <th>Last update</th>
+                        <th>Site</th>
+                        <th>RSS</th>
+                        <th>Updated</th>
+                        <th>Items</th>
                     </tr>
                 </thead>
                 <tbody>
                 {% for feed in feeds %}
                     <tr>
                         <td>
-                            <div>
-                                {{ include('j0k3rFeedBundle:Feed:_favicon.html.twig', {'host': feed.host}) }}
-                                <a href="{{ url('feed_xml', { 'slug': feed.slug }) }}" target="_blank" title="{{ feed.name }}">
-                                    {{ feed.name }}
-                                </a>
-                            </div>
+                            {{ include('j0k3rFeedBundle:Feed:_favicon.html.twig', {'host': feed.host}) }}
+                            <a rel="nofollow" href="//{{ feed.host }}" target="_blank" title="{{ feed.name }}">{{ feed.name }}</a>
                         </td>
-                        <td>{{ feed.lastitemcachedat|date('H:i:s - d/m/y') }}</td>
+                        <td><a href="{{ url('feed_xml', { 'slug': feed.slug }) }}" target="_blank">{{ url('feed_xml', { 'slug': feed.slug })|replace({'http://': ''}) }}</a></td>
+                        <td class="time-ago" title="{{ feed.lastitemcachedat|date('r') }}">{{ feed.lastitemcachedat|date('d/m/y - H:i:s') }}</td>
+                        <td class="items-count">{{ feed.nbitems }}</td>
                     </tr>
                 {% endfor %}
                 </tbody>
