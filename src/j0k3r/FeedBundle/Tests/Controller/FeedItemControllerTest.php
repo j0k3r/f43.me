@@ -28,7 +28,7 @@ class FeedItemControllerTest extends FeedWebTestCase
         $client->request('GET', '/feed/nawak/items');
 
         $this->assertEquals(404, $client->getResponse()->getStatusCode());
-        $this->assertContains('Unable to find Feed document.', $client->getResponse()->getContent());
+        $this->assertContains('Feed object not found', $client->getResponse()->getContent());
     }
 
     public function testIndex()
@@ -74,7 +74,7 @@ class FeedItemControllerTest extends FeedWebTestCase
         $client->request('GET', '/item/3456789/preview');
 
         $this->assertEquals(404, $client->getResponse()->getStatusCode());
-        $this->assertContains('Unable to find FeedItem document.', $client->getResponse()->getContent());
+        $this->assertContains('FeedItem object not found', $client->getResponse()->getContent());
     }
 
     public function testTestItem()
@@ -97,7 +97,7 @@ class FeedItemControllerTest extends FeedWebTestCase
         $client->request('GET', '/feed/nawak/testItem');
 
         $this->assertEquals(404, $client->getResponse()->getStatusCode());
-        $this->assertContains('Unable to find Feed document.', $client->getResponse()->getContent());
+        $this->assertContains('Feed object not found', $client->getResponse()->getContent());
     }
 
     public function testPreviewItemInternal()
@@ -138,7 +138,7 @@ class FeedItemControllerTest extends FeedWebTestCase
         $client->request('GET', '/feed/nawak/previewItem');
 
         $this->assertEquals(404, $client->getResponse()->getStatusCode());
-        $this->assertContains('Unable to find Feed document.', $client->getResponse()->getContent());
+        $this->assertContains('Feed object not found', $client->getResponse()->getContent());
     }
 
     public function testDeleteAll()
@@ -176,6 +176,6 @@ class FeedItemControllerTest extends FeedWebTestCase
         $client->request('POST', '/feed/nawak/items/deleteAll');
 
         $this->assertEquals(404, $client->getResponse()->getStatusCode());
-        $this->assertContains('Unable to find Feed document.', $client->getResponse()->getContent());
+        $this->assertContains('Feed object not found', $client->getResponse()->getContent());
     }
 }

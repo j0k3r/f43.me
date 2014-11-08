@@ -6,6 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use j0k3r\FeedBundle\Document\Feed;
 
 /**
  * FeedLog controller.
@@ -34,20 +35,15 @@ class FeedLogController extends Controller
      * Lists all FeedLog documents related to a given feed
      *
      * @Template()
-     * @param string $slug The Feed slug
+     * @param Feed $feed The document Feed (retrieving for a ParamConverter with the slug)
      *
      * @return array
      */
-    public function feedAction($slug)
+    public function feedAction(Feed $feed)
     {
-        $dm   = $this->getDocumentManager();
-        $feed = $dm->getRepository('j0k3rFeedBundle:Feed')->findOneBySlug($slug);
-
-        if (!$feed) {
-            throw $this->createNotFoundException('Unable to find Feed document.');
-        }
-
-        $feedlogs = $dm->getRepository('j0k3rFeedBundle:FeedLog')->findByFeedId($feed->getId());
+        $feedlogs = $this->getDocumentManager()
+            ->getRepository('j0k3rFeedBundle:FeedLog')
+            ->findByFeedId($feed->getId());
 
         $deleteAllForm = $this->createDeleteAllForm();
 
@@ -63,29 +59,24 @@ class FeedLogController extends Controller
      * Delete all logs for a given Feed
      *
      * @param Request $request
-     * @param string  $slug    The Feed slug
+     * @param Feed    $feed    The document Feed (retrieving for a ParamConverter with the slug)
      *
      * @return RedirectResponse
      */
-    public function deleteAllAction(Request $request, $slug)
+    public function deleteAllAction(Request $request, Feed $feed)
     {
-        $dm   = $this->getDocumentManager();
-        $feed = $dm->getRepository('j0k3rFeedBundle:Feed')->findOneBySlug($slug);
-
-        if (!$feed) {
-            throw $this->createNotFoundException('Unable to find Feed document.');
-        }
-
         $form = $this->createDeleteAllForm();
         $form->submit($request);
 
         if ($form->isValid()) {
-            $res = $dm->getRepository('j0k3rFeedBundle:FeedLog')->deleteAllByFeedId($feed->getId());
+            $res = $this->getDocumentManager()
+                ->getRepository('j0k3rFeedBundle:FeedLog')
+                ->deleteAllByFeedId($feed->getId());
 
             $this->get('session')->getFlashBag()->add('notice', $res['n'].' documents deleted!');
         }
 
-        return $this->redirect($this->generateUrl('feed_edit', array('slug' => $slug)));
+        return $this->redirect($this->generateUrl('feed_edit', array('slug' => $feed->getSlug())));
     }
 
     private function createDeleteAllForm()

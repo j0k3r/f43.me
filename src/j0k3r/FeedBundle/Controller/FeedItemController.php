@@ -6,6 +6,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use j0k3r\FeedBundle\Document\Feed;
+use j0k3r\FeedBundle\Document\FeedItem;
 
 /**
  * FeedItem controller.
@@ -16,20 +18,13 @@ class FeedItemController extends Controller
      * Lists all Items documents related to a Feed
      *
      * @Template()
-     * @param string $slug Feed slug
+     * @param Feed $feed The document Feed (retrieving for a ParamConverter with the slug)
      *
      * @return array
      */
-    public function indexAction($slug)
+    public function indexAction(Feed $feed)
     {
-        $dm   = $this->getDocumentManager();
-        $feed = $dm->getRepository('j0k3rFeedBundle:Feed')->findOneBySlug($slug);
-
-        if (!$feed) {
-            throw $this->createNotFoundException('Unable to find Feed document.');
-        }
-
-        $feeditems = $dm->getRepository('j0k3rFeedBundle:FeedItem')->findByFeed(
+        $feeditems = $this->getDocumentManager()->getRepository('j0k3rFeedBundle:FeedItem')->findByFeed(
             $feed->getId(),
             $feed->getSortBy()
         );
@@ -48,23 +43,17 @@ class FeedItemController extends Controller
      * Delete all items for a given Feed
      *
      * @param Request $request
-     * @param string  $slug    The Feed slug
+     * @param Feed    $feed    The document Feed (retrieving for a ParamConverter with the slug)
      *
      * @return RedirectResponse
      */
-    public function deleteAllAction(Request $request, $slug)
+    public function deleteAllAction(Request $request, Feed $feed)
     {
-        $dm   = $this->getDocumentManager();
-        $feed = $dm->getRepository('j0k3rFeedBundle:Feed')->findOneBySlug($slug);
-
-        if (!$feed) {
-            throw $this->createNotFoundException('Unable to find Feed document.');
-        }
-
         $form = $this->createDeleteAllForm();
         $form->submit($request);
 
         if ($form->isValid()) {
+            $dm = $this->getDocumentManager();
             $res = $dm->getRepository('j0k3rFeedBundle:FeedItem')->deleteAllByFeedId($feed->getId());
 
             $feed->setNbItems(0);
@@ -74,29 +63,22 @@ class FeedItemController extends Controller
             $this->get('session')->getFlashBag()->add('notice', $res['n'].' documents deleted!');
         }
 
-        return $this->redirect($this->generateUrl('feed_edit', array('slug' => $slug)));
+        return $this->redirect($this->generateUrl('feed_edit', array('slug' => $feed->getSlug())));
     }
 
     /**
      * Preview an item that is already cached
      *
-     * @param string $id Item id
+     * @param FeedItem $feedItem The document FeedItem (retrieving for a ParamConverter with the id)
      *
      * @return string
      */
-    public function previewCachedAction($id)
+    public function previewCachedAction(FeedItem $feedItem)
     {
-        $dm       = $this->getDocumentManager();
-        $feeditem = $dm->getRepository('j0k3rFeedBundle:FeedItem')->find($id);
-
-        if (!$feeditem) {
-            throw $this->createNotFoundException('Unable to find FeedItem document.');
-        }
-
         return $this->container->get('templating')->renderResponse('j0k3rFeedBundle:FeedItem:content.html.twig', array(
-            'title'   => $feeditem->getTitle(),
-            'content' => $feeditem->getContent(),
-            'url'     => $feeditem->getLink(),
+            'title'   => $feedItem->getTitle(),
+            'content' => $feedItem->getContent(),
+            'url'     => $feedItem->getLink(),
             'modal'   => true,
         ));
     }
@@ -105,19 +87,12 @@ class FeedItemController extends Controller
      * Display a modal to preview the first item from a Feed.
      * It will allow to preview the parsed item (which isn't cached) using the internal or the external parser
      *
-     * @param string $slug The Feed slug
+     * @param Feed $feed The document Feed (retrieving for a ParamConverter with the slug)
      *
      * @return string
      */
-    public function testItemAction($slug)
+    public function testItemAction(Feed $feed)
     {
-        $dm   = $this->getDocumentManager();
-        $feed = $dm->getRepository('j0k3rFeedBundle:Feed')->findOneBySlug($slug);
-
-        if (!$feed) {
-            throw $this->createNotFoundException('Unable to find Feed document.');
-        }
-
         return $this->container->get('templating')->renderResponse('j0k3rFeedBundle:FeedItem:preview.html.twig', array(
             'feed' => $feed
         ));
@@ -127,19 +102,12 @@ class FeedItemController extends Controller
      * Following the previous action, this one will actually parse the content (for both parser)
      *
      * @param Request $request
-     * @param string  $slug    The Feed slug
+     * @param Feed    $feed    The document Feed (retrieving for a ParamConverter with the slug)
      *
      * @return string
      */
-    public function previewNewAction(Request $request, $slug)
+    public function previewNewAction(Request $request, Feed $feed)
     {
-        $dm   = $this->getDocumentManager();
-        $feed = $dm->getRepository('j0k3rFeedBundle:Feed')->findOneBySlug($slug);
-
-        if (!$feed) {
-            throw $this->createNotFoundException('Unable to find Feed document.');
-        }
-
         $rssFeed = $this
             ->get('simple_pie_proxy')
             ->setUrl($feed->getLink())

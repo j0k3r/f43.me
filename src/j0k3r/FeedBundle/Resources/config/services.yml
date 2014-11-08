@@ -1,4 +1,11 @@
 services:
+    # https://coderwall.com/p/4gamjq
+    feed.converter.doctrine.mongodb:
+        class: Sensio\Bundle\FrameworkExtraBundle\Request\ParamConverter\DoctrineParamConverter
+        arguments: [@doctrine_mongodb]
+        tags:
+            - { name: request.param_converter }
+
     # external service
     imgur.client:
         class: Imgur\Client

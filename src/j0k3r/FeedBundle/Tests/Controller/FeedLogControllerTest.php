@@ -44,7 +44,7 @@ class FeedLogControllerTest extends FeedWebTestCase
 
         $client->request('GET', '/feed/toto/logs');
         $this->assertEquals(404, $client->getResponse()->getStatusCode());
-        $this->assertContains('Unable to find Feed document.', $client->getResponse()->getContent());
+        $this->assertContains('Feed object not found', $client->getResponse()->getContent());
     }
 
     public function testLogsFeed()
@@ -95,6 +95,6 @@ class FeedLogControllerTest extends FeedWebTestCase
         $client->request('POST', '/feed/nawak/logs/deleteAll');
 
         $this->assertEquals(404, $client->getResponse()->getStatusCode());
-        $this->assertContains('Unable to find Feed document.', $client->getResponse()->getContent());
+        $this->assertContains('Feed object not found', $client->getResponse()->getContent());
     }
 }

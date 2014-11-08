@@ -192,7 +192,7 @@ class FeedControllerTest extends FeedWebTestCase
         $client->request('GET', '/feed/nawak/edit');
 
         $this->assertEquals(404, $client->getResponse()->getStatusCode());
-        $this->assertContains('Unable to find Feed document.', $client->getResponse()->getContent());
+        $this->assertContains('Feed object not found', $client->getResponse()->getContent());
     }
 
     public function testFeedEditOk()
@@ -287,7 +287,7 @@ class FeedControllerTest extends FeedWebTestCase
         $client->request('POST', '/feed/nawak/edit');
 
         $this->assertEquals(404, $client->getResponse()->getStatusCode());
-        $this->assertContains('Unable to find Feed document.', $client->getResponse()->getContent());
+        $this->assertContains('Feed object not found', $client->getResponse()->getContent());
     }
 
     public function testDeleteFormNotValid()
@@ -311,7 +311,7 @@ class FeedControllerTest extends FeedWebTestCase
         $client->request('POST', '/feed/nawak/delete', $form->getPhpValues());
 
         $this->assertEquals(404, $client->getResponse()->getStatusCode());
-        $this->assertContains('Unable to find Feed document.', $client->getResponse()->getContent());
+        $this->assertContains('Feed object not found', $client->getResponse()->getContent());
     }
 
     /**
@@ -343,7 +343,7 @@ class FeedControllerTest extends FeedWebTestCase
         $client->request('GET', '/nawak.xml');
 
         $this->assertEquals(404, $client->getResponse()->getStatusCode());
-        $this->assertContains('does not exists.', $client->getResponse()->getContent());
+        $this->assertContains('Not Found', $client->getResponse()->getContent());
     }
 
     public function testRedditFeed()

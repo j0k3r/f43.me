@@ -132,20 +132,15 @@ class FeedController extends Controller
      *
      * @Template()
      *
-     * @param string $slug The document Slug
+     * @param Feed $feed The document Feed (retrieving for a ParamConverter with the slug)
      *
      * @return RedirectResponse|array
      *
      * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException If document doesn't exists
      */
-    public function editAction(Request $request, $slug)
+    public function editAction(Request $request, Feed $feed)
     {
         $dm   = $this->getDocumentManager();
-        $feed = $dm->getRepository('j0k3rFeedBundle:Feed')->findOneBySlug($slug);
-
-        if (!$feed) {
-            throw $this->createNotFoundException('Unable to find Feed document.');
-        }
 
         $editForm   = $this->createForm(new FeedType(), $feed);
         $deleteForm = $this->createDeleteForm();
@@ -163,7 +158,7 @@ class FeedController extends Controller
 
                 $this->get('session')->getFlashBag()->add('notice', 'Document updated!');
 
-                return $this->redirect($this->generateUrl('feed_edit', array('slug' => $slug)));
+                return $this->redirect($this->generateUrl('feed_edit', array('slug' => $feed->getSlug())));
             } else {
                 $this->get('session')->getFlashBag()->add('error', 'Form is invalid.');
             }
@@ -186,25 +181,19 @@ class FeedController extends Controller
      * Deletes a Feed document.
      *
      * @param Request $request The request object
-     * @param string  $slug    The document Slug
+     * @param Feed    $feed    The document Feed (retrieving for a ParamConverter with the slug)
      *
      * @return RedirectResponse
      *
      * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException If document doesn't exists
      */
-    public function deleteAction(Request $request, $slug)
+    public function deleteAction(Request $request, Feed $feed)
     {
         $form = $this->createDeleteForm();
         $form->submit($request);
 
         if ($form->isValid()) {
-            $dm   = $this->getDocumentManager();
-            $feed = $dm->getRepository('j0k3rFeedBundle:Feed')->findOneBySlug($slug);
-
-            if (!$feed) {
-                throw $this->createNotFoundException('Unable to find Feed document.');
-            }
-
+            $dm = $this->getDocumentManager();
             $dm->remove($feed);
             $dm->flush();
 
@@ -222,20 +211,12 @@ class FeedController extends Controller
     /**
      * Display some information about feeds, items, logs, etc ...
      *
-     * @Template
-     * @param string $slug Feed slug
+     * @param Feed $feed The document Feed (retrieving for a ParamConverter with the slug)
      *
      * @return Response
      */
-    public function xmlAction($slug)
+    public function xmlAction(Feed $feed)
     {
-        $dm   = $this->getDocumentManager();
-        $feed = $dm->getRepository('j0k3rFeedBundle:Feed')->findOneBySlug($slug);
-
-        if (!$feed) {
-            throw $this->createNotFoundException('Feed "'.$slug.'" does not exists.');
-        }
-
         return new Response(
             $this->get('rss_render')->render($feed),
             200,
