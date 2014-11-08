@@ -5,7 +5,6 @@ namespace j0k3r\FeedBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RedirectResponse;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use j0k3r\FeedBundle\Document\Feed;
 use j0k3r\FeedBundle\Document\FeedItem;
 
@@ -16,8 +15,6 @@ class FeedItemController extends Controller
 {
     /**
      * Lists all Items documents related to a Feed
-     *
-     * @Template()
      * @param Feed $feed The document Feed (retrieving for a ParamConverter with the slug)
      *
      * @return array
@@ -31,12 +28,12 @@ class FeedItemController extends Controller
 
         $deleteAllForm = $this->createDeleteAllForm();
 
-        return array(
+        return $this->render('j0k3rFeedBundle:FeedItem:index.html.twig', array(
             'menu'            => 'feed',
             'feed'            => $feed,
             'feeditems'       => $feeditems,
             'delete_all_form' => $deleteAllForm->createView(),
-        );
+        ));
     }
 
     /**
@@ -75,7 +72,7 @@ class FeedItemController extends Controller
      */
     public function previewCachedAction(FeedItem $feedItem)
     {
-        return $this->container->get('templating')->renderResponse('j0k3rFeedBundle:FeedItem:content.html.twig', array(
+        return $this->render('j0k3rFeedBundle:FeedItem:content.html.twig', array(
             'title'   => $feedItem->getTitle(),
             'content' => $feedItem->getContent(),
             'url'     => $feedItem->getLink(),
@@ -93,7 +90,7 @@ class FeedItemController extends Controller
      */
     public function testItemAction(Feed $feed)
     {
-        return $this->container->get('templating')->renderResponse('j0k3rFeedBundle:FeedItem:preview.html.twig', array(
+        return $this->render('j0k3rFeedBundle:FeedItem:preview.html.twig', array(
             'feed' => $feed
         ));
     }
@@ -131,7 +128,7 @@ class FeedItemController extends Controller
             $firstItem->get_description()
         );
 
-        return $this->container->get('templating')->renderResponse('j0k3rFeedBundle:FeedItem:content.html.twig', array(
+        return $this->render('j0k3rFeedBundle:FeedItem:content.html.twig', array(
             'title'   => html_entity_decode($firstItem->get_title(), ENT_COMPAT, 'UTF-8'),
             'content' => $content->content,
             'modal'   => false,

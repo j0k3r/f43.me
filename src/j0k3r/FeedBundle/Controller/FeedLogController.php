@@ -5,7 +5,6 @@ namespace j0k3r\FeedBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RedirectResponse;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use j0k3r\FeedBundle\Document\Feed;
 
 /**
@@ -16,8 +15,6 @@ class FeedLogController extends Controller
     /**
      * Lists all FeedLog documents.
      *
-     * @Template()
-     *
      * @return array
      */
     public function indexAction()
@@ -25,16 +22,14 @@ class FeedLogController extends Controller
         $dm       = $this->getDocumentManager();
         $feedlogs = $dm->getRepository('j0k3rFeedBundle:FeedLog')->findAllOrderedById(100);
 
-        return array(
+        return $this->render('j0k3rFeedBundle:FeedLog:index.html.twig', array(
             'menu'     => 'log',
             'feedlogs' => $feedlogs,
-        );
+        ));
     }
 
     /**
      * Lists all FeedLog documents related to a given feed
-     *
-     * @Template()
      * @param Feed $feed The document Feed (retrieving for a ParamConverter with the slug)
      *
      * @return array
@@ -47,12 +42,12 @@ class FeedLogController extends Controller
 
         $deleteAllForm = $this->createDeleteAllForm();
 
-        return array(
+        return $this->render('j0k3rFeedBundle:FeedLog:feed.html.twig', array(
             'menu'            => 'log',
             'feed'            => $feed,
             'feedlogs'        => $feedlogs,
             'delete_all_form' => $deleteAllForm->createView(),
-        );
+        ));
     }
 
     /**

@@ -6,7 +6,6 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\RedirectResponse;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use j0k3r\FeedBundle\Document\Feed;
 use j0k3r\FeedBundle\Form\FeedType;
 
@@ -18,8 +17,6 @@ class FeedController extends Controller
     /**
      * Display some information about feeds, items, logs, etc ...
      *
-     * @Template()
-     *
      * @return array
      */
     public function dashboardAction()
@@ -29,18 +26,16 @@ class FeedController extends Controller
         $feedlogs    = $dm->getRepository('j0k3rFeedBundle:FeedLog')->findAllOrderedById(10);
         $historylogs = $dm->getRepository('j0k3rFeedBundle:FeedLog')->findStatsForLastDays();
 
-        return array(
+        return $this->render('j0k3rFeedBundle:Feed:dashboard.html.twig', array(
             'menu'        => 'dashboard',
             'feedlogs'    => $feedlogs,
             'feeds'       => $feeds,
             'historylogs' => $historylogs,
-        );
+        ));
     }
 
     /**
      * Display a public view
-     *
-     * @Template()
      *
      * @return array
      */
@@ -50,15 +45,13 @@ class FeedController extends Controller
             ->getRepository('j0k3rFeedBundle:Feed')
             ->findForPublic();
 
-        return array(
+        return $this->render('j0k3rFeedBundle:Feed:public.html.twig', array(
             'feeds' => $feeds,
-        );
+        ));
     }
 
     /**
      * Lists all Feed documents.
-     *
-     * @Template()
      *
      * @return array
      */
@@ -68,16 +61,14 @@ class FeedController extends Controller
             ->getRepository('j0k3rFeedBundle:Feed')
             ->findAllOrderedByDate();
 
-        return array(
+        return $this->render('j0k3rFeedBundle:Feed:index.html.twig', array(
             'menu'  => 'feed',
             'feeds' => $feeds
-        );
+        ));
     }
 
     /**
      * Displays a form to create a new Feed document.
-     *
-     * @Template()
      *
      * @return array
      */
@@ -86,17 +77,15 @@ class FeedController extends Controller
         $feed = new Feed();
         $form = $this->createForm(new FeedType(), $feed);
 
-        return array(
+        return $this->render('j0k3rFeedBundle:Feed:new.html.twig', array(
             'menu' => 'feed',
             'feed' => $feed,
             'form' => $form->createView()
-        );
+        ));
     }
 
     /**
      * Creates a new Feed document.
-     *
-     * @Template("j0k3rFeedBundle:Feed:new.html.twig")
      *
      * @param Request $request
      *
@@ -120,17 +109,15 @@ class FeedController extends Controller
             $this->get('session')->getFlashBag()->add('error', 'Form is invalid.');
         }
 
-        return array(
+        return $this->render('j0k3rFeedBundle:Feed:new.html.twig', array(
             'menu' => 'feed',
             'feed' => $feed,
             'form' => $form->createView()
-        );
+        ));
     }
 
     /**
      * Displays a form to edit an existing Feed document.
-     *
-     * @Template()
      *
      * @param Feed $feed The document Feed (retrieving for a ParamConverter with the slug)
      *
@@ -164,7 +151,7 @@ class FeedController extends Controller
             }
         }
 
-        return array(
+        return $this->render('j0k3rFeedBundle:Feed:edit.html.twig', array(
             'menu'        => 'feed',
             'feed'        => $feed,
             'infos'       => array(
@@ -174,7 +161,7 @@ class FeedController extends Controller
             ),
             'edit_form'   => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
-        );
+        ));
     }
 
     /**

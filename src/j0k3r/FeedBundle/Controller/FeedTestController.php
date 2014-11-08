@@ -4,7 +4,6 @@ namespace j0k3r\FeedBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use j0k3r\FeedBundle\Form\ItemTestType;
 
 /**
@@ -17,8 +16,6 @@ class FeedTestController extends Controller
      * - check bug
      * - improve parser
      * - chose the best parser
-     *
-     * @Template()
      *
      * @return array
      */
@@ -39,10 +36,10 @@ class FeedTestController extends Controller
             }
         }
 
-        return array(
+        return $this->render('j0k3rFeedBundle:FeedTest:index.html.twig', array(
             'menu'    => 'test',
             'content' => $content,
             'form'    => $form->createView(),
-        );
+        ));
     }
 }
