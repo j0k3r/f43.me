@@ -25,7 +25,7 @@
                             <a href="{{ path('feed_edit', { 'slug': feedlog.feed.slug }) }}">{{ feedlog.feed.name }}</a>
                         </td>
                         <td class="items-count">{{ feedlog.itemsnumber }}</td>
-                        <td title="{{ feedlog.createdat|date('d/m/y - H:i:s') }}">{{ time_diff(feedlog.createdat) }}</td>
+                        <td class="time-ago" title="{{ feedlog.createdat|date('r') }}">{{ feedlog.createdat|date('d/m/y - H:i:s') }}</td>
                     </tr>
                 {% endfor %}
                 </tbody>

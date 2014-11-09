@@ -52,8 +52,8 @@
             <li>
                 <span class="info">Last cached item</span>
                 {% if infos.last_item.publishedat is defined %}
-                    <a href="{{ path('feeditem_homepage', { 'slug': feed.slug }) }}" title="{{ infos.last_item.publishedat|date('d/m/y - H:i:s') }}">
-                        {{ time_diff(infos.last_item.publishedat) }}
+                    <a href="{{ path('feeditem_homepage', { 'slug': feed.slug }) }}" class="time-ago" title="{{ infos.last_item.createdat|date('r') }}">
+                        {{ infos.last_item.createdat|date('d/m/y - H:i:s') }}
                     </a>
                 {% else %}
                     <span><i>Never</i></span>
@@ -68,8 +68,8 @@
             <li>
                 <span class="info">Last log</span>
                 {% if infos.last_log.createdat is defined %}
-                    <a href="{{ path('feedlog_feed', { 'slug': feed.slug }) }}" title="{{ infos.last_log.createdat|date('d/m/y - H:i:s') }}">
-                        {{ time_diff(infos.last_log.createdat) }}
+                    <a href="{{ path('feedlog_feed', { 'slug': feed.slug }) }}" class="time-ago" title="{{ infos.last_log.createdat|date('r') }}">
+                        {{ infos.last_log.createdat|date('d/m/y - H:i:s') }}
                     </a>
                 {% else %}
                     <span><i>Never</i></span>

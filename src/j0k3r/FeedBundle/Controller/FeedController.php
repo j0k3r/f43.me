@@ -127,18 +127,13 @@ class FeedController extends Controller
      */
     public function editAction(Request $request, Feed $feed)
     {
-        $dm = $this->getDocumentManager();
 
         $editForm   = $this->createForm(new FeedType(), $feed);
-        $deleteForm = $this->createDeleteForm();
+        $editForm->handleRequest($request);
 
-        $lastItem   = $dm->getRepository('j0k3rFeedBundle:FeedItem')->findLastItemByFeedId($feed->getId());
-        $lastLog    = $dm->getRepository('j0k3rFeedBundle:FeedLog')->findLastItemByFeedId($feed->getId());
-        $nbLogs     = $dm->getRepository('j0k3rFeedBundle:FeedLog')->countByFeedId($feed->getId());
+        $dm = $this->getDocumentManager();
 
         if ($editForm->isSubmitted()) {
-            $editForm->handleRequest($request);
-
             if ($editForm->isValid()) {
                 $dm->persist($feed);
                 $dm->flush();
@@ -150,6 +145,12 @@ class FeedController extends Controller
                 $this->get('session')->getFlashBag()->add('error', 'Form is invalid.');
             }
         }
+
+        $lastItem   = $dm->getRepository('j0k3rFeedBundle:FeedItem')->findLastItemByFeedId($feed->getId());
+        $lastLog    = $dm->getRepository('j0k3rFeedBundle:FeedLog')->findLastItemByFeedId($feed->getId());
+        $nbLogs     = $dm->getRepository('j0k3rFeedBundle:FeedLog')->countByFeedId($feed->getId());
+
+        $deleteForm = $this->createDeleteForm();
 
         return $this->render('j0k3rFeedBundle:Feed:edit.html.twig', array(
             'menu'        => 'feed',

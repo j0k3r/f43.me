@@ -39,7 +39,7 @@
                             <a href="{{ path('feed_edit', { 'slug': feedlog.feed.slug }) }}">{{ feedlog.feed.name }}</a>
                         </td>
                         <td>{{ feedlog.itemsnumber }}</td>
-                        <td>{{ feedlog.createdat|date('d/m/y - H:i:s') }}</td>
+                        <td class="time-ago" title="{{ feedlog.createdat|date('r') }}">{{ feedlog.createdat|date('d/m/y - H:i:s') }}</td>
                     </tr>
                 {% endfor %}
                 </tbody>

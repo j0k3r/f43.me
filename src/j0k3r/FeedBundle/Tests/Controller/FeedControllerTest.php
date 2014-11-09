@@ -296,8 +296,7 @@ class FeedControllerTest extends FeedWebTestCase
 
         $client->request('POST', '/feed/nawak/delete');
 
-        $this->assertEquals(302, $client->getResponse()->getStatusCode());
-        $this->assertContains('/feeds', $client->getResponse()->headers->get('location'));
+        $this->assertEquals(404, $client->getResponse()->getStatusCode());
     }
 
     public function testDeleteBadSlug()

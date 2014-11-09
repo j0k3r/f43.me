@@ -22,18 +22,16 @@ class FeedTestController extends Controller
     public function indexAction(Request $request)
     {
         $form = $this->createForm(new ItemTestType());
+        $form->handleRequest($request);
+
         $content = null;
 
-        if ($form->isSubmitted()) {
-            $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $parser = $this
+                ->get('readability_proxy')
+                ->init($form->get('parser')->getData());
 
-            if ($form->isValid()) {
-                $parser = $this
-                    ->get('readability_proxy')
-                    ->init($form->get('parser')->getData());
-
-                $content = $parser->parseContent($form->get('link')->getData());
-            }
+            $content = $parser->parseContent($form->get('link')->getData());
         }
 
         return $this->render('j0k3rFeedBundle:FeedTest:index.html.twig', array(
