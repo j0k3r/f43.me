@@ -54,8 +54,6 @@ class Flickr extends AbstractExtractor
 
     /**
      * {@inheritdoc}
-     *
-     * @see https://www.flickr.com/services/api/explore/flickr.photos.getSizes
      */
     public function getContent()
     {
@@ -70,6 +68,8 @@ class Flickr extends AbstractExtractor
 
     /**
      * Grab one photo from Flickr
+     *
+     * @see https://www.flickr.com/services/api/explore/flickr.photos.getSizes
      *
      * @return string
      */
@@ -98,6 +98,8 @@ class Flickr extends AbstractExtractor
 
     /**
      * Grab photos from a photo set
+     *
+     * @see https://www.flickr.com/services/api/flickr.photosets.getPhotos.htm
      *
      * @return string
      */
