@@ -107,6 +107,13 @@ services:
         tags:
             -  { name: feed.extractor, alias: github }
 
+    feed.extractor.deviantart:
+        class: j0k3r\FeedBundle\Extractor\Deviantart
+        arguments:
+            - @guzzle.client
+        tags:
+            -  { name: feed.extractor, alias: deviantart }
+
     # improver
     feed.improver.chain:
         class: j0k3r\FeedBundle\Improver\ImproverChain
