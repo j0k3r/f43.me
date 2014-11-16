@@ -16,7 +16,7 @@ abstract class AbstractExtractor
     /**
      * Return the content from the extractor
      *
-     * @return string Content expanded
+     * @return string|false Content expanded
      */
     abstract public function getContent();
 }
