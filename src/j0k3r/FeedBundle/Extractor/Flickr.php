@@ -42,7 +42,7 @@ class Flickr extends AbstractExtractor
         if (1 === preg_match('/\/([0-9]{17})/', $path, $matches)) {
             // find flickr photoSet id: /72157638315605535
             $this->flickrSetId = $matches[1];
-        } elseif(1 === preg_match('/\/([0-9]{11})/', $path, $matches)) {
+        } elseif (1 === preg_match('/\/([0-9]{11})/', $path, $matches)) {
             // find flickr photo id: /15000967102
             $this->flickrId = $matches[1];
         } else {
