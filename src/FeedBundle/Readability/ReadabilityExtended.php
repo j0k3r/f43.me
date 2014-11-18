@@ -8,7 +8,7 @@ namespace Api43\FeedBundle\Readability;
  *     - convert relative path to absolute
  *
  */
-class ReadabilityExtended extends \Readability
+class ReadabilityExtended extends Readability
 {
     /**
      * Get article content as html
