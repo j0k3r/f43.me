@@ -114,6 +114,13 @@ services:
         tags:
             -  { name: feed.extractor, alias: deviantart }
 
+    feed.extractor.camplus:
+        class: j0k3r\FeedBundle\Extractor\Camplus
+        arguments:
+            - @guzzle.client
+        tags:
+            -  { name: feed.extractor, alias: camplus }
+
     # improver
     feed.improver.chain:
         class: j0k3r\FeedBundle\Improver\ImproverChain

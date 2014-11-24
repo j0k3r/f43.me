@@ -2,22 +2,21 @@
 
 namespace j0k3r\FeedBundle\Tests\Extractor;
 
-use j0k3r\FeedBundle\Extractor\Deviantart;
+use j0k3r\FeedBundle\Extractor\Camplus;
 use Guzzle\Http\Exception\RequestException;
 
-class DeviantartTest extends \PHPUnit_Framework_TestCase
+class CamplusTest extends \PHPUnit_Framework_TestCase
 {
     public function dataMatch()
     {
         return array(
-            array('http://mibreit.deviantart.com/art/A-Piece-of-Heaven-357105002', true),
-            array('http://lndi.deviantart.com/art/Maybe-we-ll-get-luck-and-we-ll-both-live-again-494273522', true),
-            array('http://fav.me/d7gab7p', true),
-            array('http://sta.sh/06x5m3s9bms', true),
-
-            array('http://www.deviantart.com/browse/all/', false),
-            array('http://nixielupus.deviantart.com/', false),
-            array('http://sta.sh/', false),
+            array('http://campl.us/rL9Q', true),
+            array('http://campl.us/jQKwkTKxLHG', true),
+            array('https://campl.us/rL9Q', true),
+            array('https://campl.us/hvGw', true),
+            array('http://campl.us/ozu1', true),
+            array('http://pics.campl.us/f/6/6283.e61ef28b1535e624f30e4ef96fcd3f52.jpg', false),
+            array('http://github.com/symfony/symfony', false),
         );
     }
 
@@ -46,8 +45,8 @@ class DeviantartTest extends \PHPUnit_Framework_TestCase
             ->method('send')
             ->will($this->returnValue($response));
 
-        $deviantart = new Deviantart($guzzle);
-        $this->assertEquals($expected, $deviantart->match($url));
+        $camplus = new Camplus($guzzle);
+        $this->assertEquals($expected, $camplus->match($url));
     }
 
     public function testContent()
@@ -75,24 +74,25 @@ class DeviantartTest extends \PHPUnit_Framework_TestCase
         $response->expects($this->any())
             ->method('json')
             ->will($this->returnValue(array(
-                'url' => 'http://0.0.0.0/youpi.jpg',
-                'title' => 'youpi',
-                'author_url' => 'http://youpi.0.0.0.0',
-                'author_name' => 'youpi',
-                'category' => 'Pic > Landscape',
-                'html' => '<iframe></iframe>',
+                'page' => array('tweet' => array(
+                    'id' => '123',
+                    'username' => 'j0k',
+                    'realname' => 'j0k',
+                    'text' => 'yay',
+                )), 'pictures' => array(array(
+                    '480px' => 'http://0.0.0.0/youpi.jpg'
+                ))
             )));
 
-        $deviantart = new Deviantart($guzzle);
+        $camplus = new Camplus($guzzle);
 
-        // first test fail because we didn't match an url, so DeviantartId isn't defined
-        $this->assertEmpty($deviantart->getContent());
+        // first test fail because we didn't match an url, so camplusId isn't defined
+        $this->assertEmpty($camplus->getContent());
 
-        $deviantart->match('http://mibreit.deviantart.com/art/A-Piece-of-Heaven-357105002');
+        $camplus->match('http://campl.us/rL9Q');
 
-        $this->assertContains('<img src="http://0.0.0.0/youpi.jpg" />', $deviantart->getContent());
-        $this->assertContains('<p>By <a href="http://youpi.0.0.0.0">@youpi</a></p>', $deviantart->getContent());
-        $this->assertContains('<iframe></iframe>', $deviantart->getContent());
+        $this->assertContains('<h2>Photo from j0k</h2>', $camplus->getContent());
+        $this->assertContains('<p><img src="http://0.0.0.0/youpi.jpg" /></p>', $camplus->getContent());
     }
 
     /**
@@ -124,11 +124,11 @@ class DeviantartTest extends \PHPUnit_Framework_TestCase
             ->method('json')
             ->will($this->throwException(new RequestException()));
 
-        $deviantart = new Deviantart($guzzle);
+        $camplus = new Camplus($guzzle);
 
-        $deviantart->match('http://mibreit.deviantart.com/art/A-Piece-of-Heaven-357105002');
+        $camplus->match('http://campl.us/rL9Q');
 
         // this one will catch an exception
-        $this->assertEmpty($deviantart->getContent());
+        $this->assertEmpty($camplus->getContent());
     }
 }
