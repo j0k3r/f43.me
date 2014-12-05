@@ -1,0 +1,57 @@
+{% extends "Api43FeedBundle::layout.html.twig" %}
+
+{% block h2_title %}
+    <span>f43.me <small class="hide-for-small">readable &amp; cleaner feeds</small></span>
+{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="large-12 columns">
+        <h2 class="subheader">What's that?</h2>
+        <p>I'm reading a lot of feeds in the subway. Mostly when I go to work and when I come back home. We are lucky in Paris because we have data network in the subway, but sometimes, network is saturated and you can't load the webpage of an item of your feed. You're stuck with only 3 lines from the feed...</p>
+        <p>That's why I've built a <em>kind of</em> proxy for RSS feeds that I read the most, called <strong>f43.me</strong>.</p>
+        <p>It's simple:</p>
+        <ul class="square">
+            <li>fetch items from a feed</li>
+            <li>grab the content</li>
+            <li>make it <em>readable</em> using an <a href="http://www.keyvan.net/2010/08/php-readability/">internal</a> or <a href="https://www.readability.com/">external</a> method</li>
+            <li>store it</li>
+            <li>create a new feed with readable items</li>
+        </ul>
+        <p>And it's available on <a href="https://github.com/j0k3r/f43.me">Github</a>.</p>
+    </div>
+</div>
+<div class="row">
+    <div class="large-12 columns">
+        <h2 class="subheader"><em>Readable</em> feeds</h2>
+        {% if feeds|length > 0 %}
+            <table class="table-public">
+                <thead>
+                    <tr>
+                        <th>Site</th>
+                        <th>RSS</th>
+                        <th>Updated</th>
+                        <th>Items</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for feed in feeds %}
+                    <tr>
+                        <td>
+                            {{ include('Api43FeedBundle:Feed:_favicon.html.twig', {'host': feed.host}) }}
+                            <a rel="nofollow" href="//{{ feed.host }}" target="_blank" title="{{ feed.name }}">{{ feed.name }}</a>
+                        </td>
+                        <td><a href="{{ url('feed_xml', { 'slug': feed.slug }) }}" target="_blank">{{ url('feed_xml', { 'slug': feed.slug })|replace({'http://': ''}) }}</a></td>
+                        <td class="time-ago" title="{{ feed.lastitemcachedat|date('r') }}">{{ feed.lastitemcachedat|date('d/m/y - H:i:s') }}</td>
+                        <td class="items-count">{{ feed.nbitems }}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <p>No updated feed for the moment.</p>
+        {% endif %}
+    </div>
+</div>
+
+{% endblock %}

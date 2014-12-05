@@ -1,0 +1,102 @@
+# auth
+login:
+    pattern:  /login
+    defaults: { _controller: Api43FeedBundle:Security:login }
+    methods:  [GET]
+
+login_check:
+    pattern:  /login_check
+    methods:  [POST]
+
+logout:
+    path:     /logout
+    methods:  [GET]
+
+# test
+feed_test:
+    pattern:  /feed/test
+    defaults: { _controller: Api43FeedBundle:FeedTest:index }
+    methods:  [GET, POST]
+
+# feed
+feed_dashboard:
+    pattern:  /dashboard
+    defaults: { _controller: Api43FeedBundle:Feed:dashboard }
+    methods:  [GET]
+
+feed_publicview:
+    pattern:  /
+    defaults: { _controller: Api43FeedBundle:Feed:public }
+    methods:  [GET]
+
+feed_homepage:
+    pattern:  /feeds
+    defaults: { _controller: Api43FeedBundle:Feed:index }
+    methods:  [GET]
+
+feed_new:
+    pattern:  /feed/new
+    defaults: { _controller: Api43FeedBundle:Feed:new }
+    methods:  [GET]
+
+feed_create:
+    pattern:  /feed/create
+    defaults: { _controller: Api43FeedBundle:Feed:create }
+    methods:  [POST]
+
+feed_edit:
+    pattern:  /feed/{slug}/edit
+    defaults: { _controller: Api43FeedBundle:Feed:edit }
+    methods:  [GET, POST]
+
+feed_delete:
+    pattern:  /feed/{slug}/delete
+    defaults: { _controller: Api43FeedBundle:Feed:delete }
+    methods:  [POST]
+
+feed_xml:
+    path:     /{slug}.xml
+    defaults: { _controller: Api43FeedBundle:Feed:xml, _format: xml }
+    methods:  [HEAD, GET]
+
+# feed item
+feeditem_homepage:
+    pattern:  /feed/{slug}/items
+    defaults: { _controller: Api43FeedBundle:FeedItem:index }
+    methods:  [GET]
+
+feeditem_preview_new:
+    pattern:  /feed/{slug}/previewItem
+    defaults: { _controller: Api43FeedBundle:FeedItem:previewNew }
+    methods:  [GET]
+
+feeditem_test:
+    pattern:  /feed/{slug}/testItem
+    defaults: { _controller: Api43FeedBundle:FeedItem:testItem }
+    methods:  [GET]
+
+feeditem_preview_cached:
+    pattern:  /item/{id}/preview
+    defaults: { _controller: Api43FeedBundle:FeedItem:previewCached }
+    methods:  [GET]
+
+feeditem_delete_all:
+    pattern:  /feed/{slug}/items/deleteAll
+    defaults: { _controller: Api43FeedBundle:FeedItem:deleteAll }
+    methods:  [POST]
+
+# feed log
+feedlog_homepage:
+    pattern:  /logs
+    defaults: { _controller: Api43FeedBundle:FeedLog:index }
+    methods:  [GET]
+
+feedlog_feed:
+    pattern:  /feed/{slug}/logs
+    defaults: { _controller: Api43FeedBundle:FeedLog:feed }
+    methods:  [GET]
+
+feedlog_delete_all:
+    pattern:  /feed/{slug}/logs/deleteAll
+    defaults: { _controller: Api43FeedBundle:FeedLog:deleteAll }
+    methods:  [POST]

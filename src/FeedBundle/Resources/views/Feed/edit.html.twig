@@ -1,0 +1,108 @@
+{% extends "Api43FeedBundle::layout.html.twig" %}
+{% form_theme edit_form 'Api43FeedBundle:Form:_form.html.twig' %}
+
+{% block h2_title %}
+    {{ include('Api43FeedBundle:Feed:_favicon.html.twig', {'host': feed.host}) }}
+    {{ feed.name }}'s feed
+{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="large-12 columns">
+        <h3 class="subheader">Feed information</h3>
+    </div>
+
+    <div class="large-8 columns">
+        <form action="{{ path('feed_edit', { 'slug': feed.slug }) }}" method="post" {{ form_enctype(edit_form) }} class="custom">
+            {{ form_widget(edit_form) }}
+
+            <div class="row">
+                <div class="small-3 columns">
+                    <label class="right inline">Created</label>
+                </div>
+                <div class="small-9 columns">
+                    <input disabled="disabled" type="text" value="{{ feed.createdat|date('Y-m-d H:i:s') }}" />
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="small-3 columns">
+                    <label class="right inline">Updated</label>
+                </div>
+                <div class="small-9 columns">
+                    <input disabled="disabled" type="text" value="{{ feed.updatedat|date('Y-m-d H:i:s') }}" />
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="small-9 small-offset-3 columns">
+                    <button type="submit" class="small button radius success">Save</button>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="large-4 columns feed-info">
+        <ul>
+            <li>
+                <span class="info">Readable feed link</span>
+                <a href="{{ url('feed_xml', { 'slug': feed.slug }) }}" target="_blank">
+                    {{ url('feed_xml', { 'slug': feed.slug }) }}
+                </a>
+            </li>
+            <li>
+                <span class="info">Last cached item</span>
+                {% if infos.last_item.publishedat is defined %}
+                    <a href="{{ path('feeditem_homepage', { 'slug': feed.slug }) }}" class="time-ago" title="{{ infos.last_item.createdat|date('r') }}">
+                        {{ infos.last_item.createdat|date('d/m/y - H:i:s') }}
+                    </a>
+                {% else %}
+                    <span><i>Never</i></span>
+                {% endif %}
+            </li>
+            <li>
+                <span class="info">Cached items</span>
+                <a href="{{ path('feeditem_homepage', { 'slug': feed.slug }) }}">
+                    {{ feed.nbitems }} items
+                </a>
+            </li>
+            <li>
+                <span class="info">Last log</span>
+                {% if infos.last_log.createdat is defined %}
+                    <a href="{{ path('feedlog_feed', { 'slug': feed.slug }) }}" class="time-ago" title="{{ infos.last_log.createdat|date('r') }}">
+                        {{ infos.last_log.createdat|date('d/m/y - H:i:s') }}
+                    </a>
+                {% else %}
+                    <span><i>Never</i></span>
+                {% endif %}
+            </li>
+            <li>
+                <span class="info">Logs</span>
+                <a href="{{ path('feedlog_feed', { 'slug': feed.slug }) }}">
+                    {{ infos.nb_logs }} items
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>
+
+<div class="row">
+    <div class="large-12 columns">
+        <h3 class="subheader">PubSubHubbub information</h3>
+        <iframe class="pubsubhubbub" src="https://pubsubhubbub.appspot.com/topic-details?hub.url={{ url('feed_xml', { 'slug': feed.slug }) }}"></iframe>
+    </div>
+</div>
+
+<div class="row">
+    <div class="large-12 columns">
+        <hr/>
+        <ul class="inline-list">
+            <li><a class="secondary button radius small" href="{{ path('feed_homepage') }}">&lArr; Back to the list</a></li>
+            <li class="hide-for-small"><a class="button radius small" data-tooltip class="has-tip" title="It can take few seconds to load" data-reveal-id="modal-test-item" data-reveal-ajax="{{ path('feeditem_test', { 'slug': feed.slug }) }}">Test parsing</a></li>
+            <li><form class="delete_form" action="{{ path('feed_delete', { 'slug': feed.slug }) }}" method="post">{{ form_widget(delete_form) }}<button class="alert button radius small" type="submit">Delete</button></form></li>
+        </ul>
+    </div>
+</div>
+
+<div id="modal-test-item" class="reveal-modal"></div>
+
+{% endblock %}

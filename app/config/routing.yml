@@ -1,3 +1,3 @@
 f43me:
-    resource: "@j0k3rFeedBundle/Resources/config/routing.yml"
+    resource: "@Api43FeedBundle/Resources/config/routing.yml"
     prefix:   /

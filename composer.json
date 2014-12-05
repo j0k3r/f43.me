@@ -3,10 +3,12 @@
     "description": "A more readable & cleaner feed",
     "license": "MIT",
     "autoload": {
-        "psr-0": { "": "src/" }
+        "psr-4": {
+            "Api43\\": "src"
+        }
     },
     "require": {
-        "php": ">=5.3.3",
+        "php": ">=5.4",
         "ext-mongo": ">=1.3.0",
         "ext-tidy": ">=1.2",
         "symfony/symfony": "~2.5",
@@ -52,7 +54,8 @@
     "config": {
         "bin-dir": "bin"
     },
-    "minimum-stability": "stable",
+    "minimum-stability": "dev",
+    "prefer-stable": true,
     "extra": {
         "symfony-app-dir": "app",
         "symfony-web-dir": "web",

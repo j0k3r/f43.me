@@ -14,7 +14,7 @@
 
     <testsuites>
         <testsuite name="f43.me Test Suite">
-            <directory>../src/*/*Bundle/Tests</directory>
+            <directory>../src/FeedBundle/Tests</directory>
         </testsuite>
     </testsuites>
 <!--
@@ -27,9 +27,9 @@
             <directory suffix=".php">../src</directory>
             <exclude>
                 <directory>../vendor</directory>
-                <directory>../src/*/*Bundle/Resources</directory>
-                <directory>../src/*/*Bundle/Tests</directory>
-                <directory>../src/*/*Bundle/DataFixtures</directory>
+                <directory>../src/FeedBundle/Resources</directory>
+                <directory>../src/FeedBundle/Tests</directory>
+                <directory>../src/FeedBundle/DataFixtures</directory>
             </exclude>
         </whitelist>
     </filter>

@@ -3,7 +3,7 @@ filter:
         - 'vendor/*'
         - 'app/*'
         - 'web/*'
-        - 'src/j0k3r/FeedBundle/Tests/*'
+        - 'src/Api43/FeedBundle/Tests/*'
         - '*Test.php'
 
 tools:

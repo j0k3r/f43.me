@@ -82,7 +82,7 @@ gulp.task('css-app', function () {
     return gulp.src(paths.sassApp)
         .pipe(compass({
             css: 'web/build/css',
-            sass: 'src/j0k3r/FeedBundle/Resources/sass'
+            sass: 'src/FeedBundle/Resources/sass'
         }))
         .pipe(gulp.dest('web/build/css'));
 });

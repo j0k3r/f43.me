@@ -10,16 +10,16 @@
     <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
 
     {% stylesheets filter='compass' output='css/compiled/main.css'
-        '@j0k3rFeedBundle/Resources/foundation/scss/normalize.scss'
-        '@j0k3rFeedBundle/Resources/foundation/scss/foundation.scss'
-        '@j0k3rFeedBundle/Resources/sass/app.sass'
+        '@Api43FeedBundle/Resources/foundation/scss/normalize.scss'
+        '@Api43FeedBundle/Resources/foundation/scss/foundation.scss'
+        '@Api43FeedBundle/Resources/sass/app.sass'
     %}
         <link rel="stylesheet" href="{{ asset_url }}" />
     {% endstylesheets %}
 
     {% javascripts output='js/compiled/zepto.modernizr.js'
-        '@j0k3rFeedBundle/Resources/foundation/js/vendor/zepto.js'
-        '@j0k3rFeedBundle/Resources/foundation/js/vendor/custom.modernizr.js' %}
+        '@Api43FeedBundle/Resources/foundation/js/vendor/zepto.js'
+        '@Api43FeedBundle/Resources/foundation/js/vendor/custom.modernizr.js' %}
         <script type="text/javascript" src="{{ asset_url }}"></script>
     {% endjavascripts %}
     <script type="text/javascript"> function delayer() {window.location = "/"} </script>
