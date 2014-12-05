@@ -7,7 +7,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Api43\FeedBundle\Document\Feed;
-use Api43\FeedBundle\Form\FeedType;
+use Api43\FeedBundle\Form\Type\FeedType;
 
 /**
  * Feed controller.

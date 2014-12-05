@@ -4,7 +4,7 @@ namespace Api43\FeedBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
-use Api43\FeedBundle\Form\ItemTestType;
+use Api43\FeedBundle\Form\Type\ItemTestType;
 
 /**
  * FeedTest controller.
