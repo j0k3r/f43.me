@@ -7,21 +7,11 @@
     <meta name="viewport" content="width=device-width" />
     <title>f43.me</title>
 
-    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
 
-    {% stylesheets filter='compass' output='css/compiled/main.css'
-        '@Api43FeedBundle/Resources/foundation/scss/normalize.scss'
-        '@Api43FeedBundle/Resources/foundation/scss/foundation.scss'
-        '@Api43FeedBundle/Resources/sass/app.sass'
-    %}
-        <link rel="stylesheet" href="{{ asset_url }}" />
-    {% endstylesheets %}
+    <link rel="stylesheet" href="/build/main.css" />
 
-    {% javascripts output='js/compiled/zepto.modernizr.js'
-        '@Api43FeedBundle/Resources/foundation/js/vendor/zepto.js'
-        '@Api43FeedBundle/Resources/foundation/js/vendor/custom.modernizr.js' %}
-        <script type="text/javascript" src="{{ asset_url }}"></script>
-    {% endjavascripts %}
+    <script type="text/javascript" src="/build/zepto.modernizr.js"></script>
     <script type="text/javascript"> function delayer() {window.location = "/"} </script>
 </head>
 <body onLoad="setTimeout('delayer()', 7000)">

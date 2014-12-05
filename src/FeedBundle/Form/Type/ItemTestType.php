@@ -1,6 +1,6 @@
 <?php
 
-namespace Api43\FeedBundle\Form;
+namespace Api43\FeedBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
