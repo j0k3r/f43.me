@@ -32,7 +32,7 @@ class ReadabilityExtendedTest extends \PHPUnit_Framework_TestCase
         $this->dom = new \DOMDocument();
         $this->dom->preserveWhiteSpace = false;
         $this->dom->loadHTML('<html/>');
-        $this->dom->registerNodeClass('DOMElement', 'j0k3r\FeedBundle\Readability\JSLikeHTMLElement');
+        $this->dom->registerNodeClass('DOMElement', 'Api43\FeedBundle\Readability\JSLikeHTMLElement');
     }
 
     protected function tearDown()

@@ -1,6 +1,6 @@
 <?php
 
-namespace j0k3r\FeedBundle\Readability;
+namespace Api43\FeedBundle\Readability;
 
 /**
 * Arc90's Readability ported to PHP for FiveFilters.org
@@ -213,7 +213,7 @@ class Readability
             @$this->dom->loadHTML($html, LIBXML_NOBLANKS | LIBXML_COMPACT | LIBXML_NOERROR);
             libxml_use_internal_errors(false);
         }
-        $this->dom->registerNodeClass('DOMElement', 'j0k3r\FeedBundle\Readability\JSLikeHTMLElement');
+        $this->dom->registerNodeClass('DOMElement', 'Api43\FeedBundle\Readability\JSLikeHTMLElement');
     }
     /**
     * Get article title element

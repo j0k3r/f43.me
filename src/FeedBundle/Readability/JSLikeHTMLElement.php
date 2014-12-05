@@ -1,6 +1,6 @@
 <?php
 
-namespace j0k3r\FeedBundle\Readability;
+namespace Api43\FeedBundle\Readability;
 
 /**
 * JavaScript-like HTML DOM Element
