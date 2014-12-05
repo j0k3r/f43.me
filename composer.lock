@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "dd31e9465db8e306ee777ee5e8d640fe",
+    "hash": "8d77d1b4fead2dfff758e002a00faae7",
     "packages": [
         {
             "name": "adyg/php-imgur-api-client",
@@ -1928,30 +1928,14 @@
         },
         {
             "name": "zurb/foundation",
-            "version": "v4.3.2",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/zurb/foundation.git",
-                "reference": "a2a39011003b6ade6cb522a206449070b8b8ccd3"
-            },
+            "version": "4.3.2",
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/zurb/foundation/zipball/a2a39011003b6ade6cb522a206449070b8b8ccd3",
-                "reference": "a2a39011003b6ade6cb522a206449070b8b8ccd3",
-                "shasum": ""
+                "url": "https://github.com/zurb/foundation/archive/v4.3.2.zip",
+                "reference": null,
+                "shasum": null
             },
-            "type": "library",
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "description": "The most advanced responsive front-end framework in the world.",
-            "homepage": "http://foundation.zurb.com",
-            "keywords": [
-                "foundation",
-                "scss"
-            ],
-            "time": "2013-09-23 18:37:31"
+            "type": "library"
         }
     ],
     "packages-dev": [
