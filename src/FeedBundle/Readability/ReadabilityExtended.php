@@ -18,7 +18,7 @@ class ReadabilityExtended extends Readability
     public function getHtmlContent()
     {
         $innerHTML = '';
-        $children = $this->articleContent->childNodes;
+        $children = $this->getContent()->childNodes;
         foreach ($children as $child) {
             $innerHTML .= $child->ownerDocument->saveXML($child);
         }
