@@ -66,7 +66,7 @@ class Internal extends AbstractParser
                 $content = gzdecode($content);
             }
 
-            if ($response->isContentType('charset') && !$response->isContentType('utf-8')) {
+            if (!$response->isContentType('utf-8') && !mb_check_encoding($content, 'UTF-8')) {
                 $content = mb_convert_encoding($content, 'UTF-8');
             }
         } catch (RequestException $e) {

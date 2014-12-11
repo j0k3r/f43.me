@@ -26,12 +26,13 @@ class ReadabilityExtendedTest extends \PHPUnit_Framework_TestCase
             'skipFootnoteLink' => '/^\s*(\[?[a-z0-9]{1,2}\]?|^|edit|citation needed)\s*$/i',
             'attrToRemove' => 'onclick|rel|class|target|fs:definition|alt|id|onload|name|onchange',
             'tagToRemove' => 'select|form|header|footer|aside',
+            'media' => '!//(?:[^\.\?/]+\.)?(?:youtu(?:be)?|soundcloud|dailymotion|vimeo|pornhub|xvideos|twitvid|rutube|viddler)\.(?:com|be|org|net)/!i',
         );
 
         $this->dom = new \DOMDocument();
         $this->dom->preserveWhiteSpace = false;
         $this->dom->loadHTML('<html/>');
-        $this->dom->registerNodeClass('DOMElement', 'JSLikeHTMLElement');
+        $this->dom->registerNodeClass('DOMElement', 'Api43\FeedBundle\Readability\JSLikeHTMLElement');
     }
 
     protected function tearDown()
