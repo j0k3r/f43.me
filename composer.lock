@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "8d77d1b4fead2dfff758e002a00faae7",
+    "hash": "c3b7cc68a2c3c9a0839c24ab53b40eea",
     "packages": [
         {
             "name": "adyg/php-imgur-api-client",
@@ -949,52 +949,6 @@
                 "performance"
             ],
             "time": "2014-02-04 17:20:36"
-        },
-        {
-            "name": "fivefilters/php-readability",
-            "version": "v1.0",
-            "source": {
-                "type": "git",
-                "url": "http://code.fivefilters.org/php-readability.git",
-                "reference": "4f56053bd1fd540969b6cfb7f799a31c7352faee"
-            },
-            "require": {
-                "php": ">=5.2"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-0": {
-                    "Readability": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "Apache-2.0"
-            ],
-            "authors": [
-                {
-                    "name": "Keyvan Minoukadeh",
-                    "email": "keyvan@keyvan.net",
-                    "homepage": "http://keyvan.net",
-                    "role": "Developer (ported original JS code to PHP)"
-                },
-                {
-                    "name": "Arc90",
-                    "homepage": "http://arc90.com",
-                    "role": "Developer (original JS version)"
-                }
-            ],
-            "description": "Automatic article extraction from HTML",
-            "homepage": "http://code.fivefilters.org/php-readability/",
-            "keywords": [
-                "article",
-                "article extraction",
-                "content",
-                "content extraction",
-                "extraction",
-                "html"
-            ],
-            "time": "2013-04-17 13:51:09"
         },
         {
             "name": "gedmo/doctrine-extensions",
@@ -2165,21 +2119,21 @@
         },
         {
             "name": "sensio/generator-bundle",
-            "version": "v2.4.3",
+            "version": "v2.5.0",
             "target-dir": "Sensio/Bundle/GeneratorBundle",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sensiolabs/SensioGeneratorBundle.git",
-                "reference": "2e2d8096a65cfec2658bd3f21e506fa1058b962e"
+                "reference": "0225fcd08e94de2165ffa85de50c3c9d9592e96b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sensiolabs/SensioGeneratorBundle/zipball/2e2d8096a65cfec2658bd3f21e506fa1058b962e",
-                "reference": "2e2d8096a65cfec2658bd3f21e506fa1058b962e",
+                "url": "https://api.github.com/repos/sensiolabs/SensioGeneratorBundle/zipball/0225fcd08e94de2165ffa85de50c3c9d9592e96b",
+                "reference": "0225fcd08e94de2165ffa85de50c3c9d9592e96b",
                 "shasum": ""
             },
             "require": {
-                "symfony/console": "~2.0",
+                "symfony/console": "~2.5",
                 "symfony/framework-bundle": "~2.2"
             },
             "require-dev": {
@@ -2190,7 +2144,7 @@
             "type": "symfony-bundle",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.4.x-dev"
+                    "dev-master": "2.5.x-dev"
                 }
             },
             "autoload": {
@@ -2209,7 +2163,7 @@
                 }
             ],
             "description": "This bundle generates code for you",
-            "time": "2014-12-04 05:46:34"
+            "time": "2014-12-07 18:30:52"
         },
         {
             "name": "sensiolabs/security-checker",
