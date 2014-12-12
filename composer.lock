@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "1614d275a4b717055607f25594d51a10",
+    "hash": "eacf598e9e5769008a943461fba6012f",
     "packages": [
         {
             "name": "adyg/php-imgur-api-client",
@@ -1223,6 +1223,69 @@
                 "parameters management"
             ],
             "time": "2013-12-07 10:10:39"
+        },
+        {
+            "name": "j0k3r/php-readability",
+            "version": "v1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/j0k3r/php-readability.git",
+                "reference": "ddd013e3f8f2900fa0426d386fb8a74f5a9d63ba"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/j0k3r/php-readability/zipball/ddd013e3f8f2900fa0426d386fb8a74f5a9d63ba",
+                "reference": "ddd013e3f8f2900fa0426d386fb8a74f5a9d63ba",
+                "shasum": ""
+            },
+            "require": {
+                "ext-tidy": ">=1.2",
+                "php": ">=5.4"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Readability\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "Apache-2.0"
+            ],
+            "authors": [
+                {
+                    "name": "Keyvan Minoukadeh",
+                    "email": "keyvan@keyvan.net",
+                    "homepage": "http://keyvan.net",
+                    "role": "Developer (ported original JS code to PHP)"
+                },
+                {
+                    "name": "Arc90",
+                    "homepage": "http://arc90.com",
+                    "role": "Developer (original JS version)"
+                },
+                {
+                    "name": "Jeremy Benoist",
+                    "email": "jeremy.benoist@gmail.com",
+                    "homepage": "http://www.j0k3r.net",
+                    "role": "Developer"
+                },
+                {
+                    "name": "DitherSky",
+                    "homepage": "https://github.com/Dither",
+                    "role": "Developer (https://github.com/Dither/full-text-rss)"
+                }
+            ],
+            "description": "Automatic article extraction from HTML",
+            "keywords": [
+                "article",
+                "article extraction",
+                "content",
+                "content extraction",
+                "extraction",
+                "html"
+            ],
+            "time": "2014-12-12 11:14:40"
         },
         {
             "name": "jdorn/sql-formatter",

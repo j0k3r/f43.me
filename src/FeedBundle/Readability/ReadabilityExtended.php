@@ -2,6 +2,8 @@
 
 namespace Api43\FeedBundle\Readability;
 
+use Readability\Readability;
+
 /**
  * This class extends the Readability one to add more fine tuning on content:
  *     - remove some unwanted attributes
