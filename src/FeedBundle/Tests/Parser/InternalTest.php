@@ -91,7 +91,7 @@ class InternalTest extends \PHPUnit_Framework_TestCase
             ->getMock();
 
         $internal = new Internal($guzzle, $this->regexs);
-        $this->assertEquals('<iframe src="http://www.youtube.com/embed/8b7t5iUV0pQ" width="560" height="315"></iframe>', $internal->parse('https://www.youtube.com/watch?v=8b7t5iUV0pQ'));
+        $this->assertContains('<iframe src="http://www.youtube.com/embed/8b7t5iUV0pQ" width="560" height="315"', $internal->parse('https://www.youtube.com/watch?v=8b7t5iUV0pQ'));
     }
 
     /**

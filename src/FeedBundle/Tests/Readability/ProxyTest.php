@@ -132,7 +132,7 @@ class ProxyTest extends \PHPUnit_Framework_TestCase
         $proxy->parseContent('https://www.youtube.com/watch?v=8b7t5iUV0pQ', 'default content');
 
         $this->assertEquals('https://www.youtube.com/watch?v=8b7t5iUV0pQ', $proxy->url);
-        $this->assertEquals('<iframe src="http://www.youtube.com/embed/8b7t5iUV0pQ" width="560" height="315"></iframe>', $proxy->content);
+        $this->assertContains('<iframe src="http://www.youtube.com/embed/8b7t5iUV0pQ" width="560" height="315"', $proxy->content);
     }
 
     public function testWithExceptionFromGuzzle()
