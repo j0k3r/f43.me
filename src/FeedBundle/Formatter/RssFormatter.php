@@ -25,10 +25,10 @@ class RssFormatter extends Formatter
                 'cdata'       => true,
             ), array(
                 'name'        => 'link',
-                'method'      => 'getLink'
+                'method'      => 'getLink',
             ), array(
                 'name'        => 'guid',
-                'method'      => 'getLink'
+                'method'      => 'getLink',
             ), array(
                 'name'        => 'pubDate',
                 'method'      => 'getPubDate',

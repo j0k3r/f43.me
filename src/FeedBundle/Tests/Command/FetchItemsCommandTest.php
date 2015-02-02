@@ -3,7 +3,6 @@
 namespace Api43\FeedBundle\Tests\Command;
 
 use Api43\FeedBundle\Command\FetchItemsCommand;
-
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Component\Console\Tester\CommandTester;
@@ -86,7 +85,7 @@ class FetchItemsCommandTest extends WebTestCase
     {
         $this->commandTester->execute(array(
             'command' => $this->command->getName(),
-            '--slug' => 'toto'
+            '--slug' => 'toto',
         ));
 
         $this->assertRegExp('`Unable to find Feed document`', $this->commandTester->getDisplay());
@@ -97,7 +96,7 @@ class FetchItemsCommandTest extends WebTestCase
         $this->commandTester->execute(array(
             'command' => $this->command->getName(),
             '--slug' => 'hackernews',
-            '-t' => true
+            '-t' => true,
         ));
 
         $this->assertRegExp('`items cached.`', $this->commandTester->getDisplay());
@@ -108,7 +107,7 @@ class FetchItemsCommandTest extends WebTestCase
         $this->commandTester->execute(array(
             'command' => $this->command->getName(),
             '--age' => 'new',
-            '-t' => true
+            '-t' => true,
         ));
 
         $this->assertRegExp('`items cached.`', $this->commandTester->getDisplay());
@@ -119,7 +118,7 @@ class FetchItemsCommandTest extends WebTestCase
         $this->commandTester->execute(array(
             'command' => $this->command->getName(),
             '--age' => 'old',
-            '-t' => true
+            '-t' => true,
         ));
 
         $this->assertRegExp('`items cached.`', $this->commandTester->getDisplay());

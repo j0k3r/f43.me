@@ -109,7 +109,7 @@ class FeedLogRepository extends DocumentRepository
                         '_id' => array(
                             'years'  => array('$year' => '$created_at'),
                             'months' => array('$month' => '$created_at'),
-                            'days'   => array('$dayOfMonth' => '$created_at')
+                            'days'   => array('$dayOfMonth' => '$created_at'),
                         ),
                         'number' => array('$sum' => '$items_number'),
                     ),
@@ -195,7 +195,7 @@ class FeedLogRepository extends DocumentRepository
             $results[$oneRes['max_created_at']] = array(
                 // we get milliseconds, so we convert it to seconds
                 'created_at' => new \DateTime('@'.$oneRes['max_created_at']/1000),
-                'feed_id'    => (string) $oneRes['feed']['$id']
+                'feed_id'    => (string) $oneRes['feed']['$id'],
             );
         }
 

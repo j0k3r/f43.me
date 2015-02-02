@@ -3,7 +3,6 @@
 namespace Api43\FeedBundle\Tests\Command;
 
 use Api43\FeedBundle\Command\RemoveItemsCommand;
-
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Component\Console\Tester\CommandTester;

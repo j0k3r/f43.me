@@ -4,7 +4,6 @@ namespace Api43\FeedBundle\Services;
 
 use Api43\FeedBundle\Document\Feed;
 use Api43\FeedBundle\Formatter;
-
 use Doctrine\ODM\MongoDB\DocumentManager;
 use Symfony\Bundle\FrameworkBundle\Routing\Router;
 

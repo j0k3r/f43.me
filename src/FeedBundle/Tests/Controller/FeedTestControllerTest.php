@@ -29,7 +29,7 @@ class FeedTestControllerTest extends FeedWebTestCase
 
         $crawler = $client->submit($form, array(
             'feedbundle_itemtesttype[link]' => 'http://www.nextinpact.com/news/89458-gouvernement-valls2-fleur-pellerin-a-culture.htm',
-            'feedbundle_itemtesttype[parser]' => 'internal'
+            'feedbundle_itemtesttype[parser]' => 'internal',
         ));
 
         $this->assertEquals(200, $client->getResponse()->getStatusCode());

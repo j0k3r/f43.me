@@ -3,7 +3,6 @@
 namespace Api43\FeedBundle\Tests\Parser;
 
 use Symfony\Component\DependencyInjection\ContainerBuilder;
-
 use Api43\FeedBundle\Parser\ParserCompilerPass;
 
 class ParserCompilerPassTest extends \PHPUnit_Framework_TestCase

@@ -3,7 +3,6 @@
 namespace Api43\FeedBundle\Tests\Extractor;
 
 use Symfony\Component\DependencyInjection\ContainerBuilder;
-
 use Api43\FeedBundle\Extractor\ExtractorCompilerPass;
 
 class ExtractorCompilerPassTest extends \PHPUnit_Framework_TestCase

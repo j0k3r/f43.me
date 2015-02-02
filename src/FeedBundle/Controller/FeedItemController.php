@@ -91,7 +91,7 @@ class FeedItemController extends Controller
     public function testItemAction(Feed $feed)
     {
         return $this->render('Api43FeedBundle:FeedItem:preview.html.twig', array(
-            'feed' => $feed
+            'feed' => $feed,
         ));
     }
 

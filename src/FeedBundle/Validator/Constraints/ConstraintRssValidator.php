@@ -4,7 +4,6 @@ namespace Api43\FeedBundle\Validator\Constraints;
 
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
-
 use Guzzle\Http\Client;
 use Guzzle\Http\Exception\RequestException;
 

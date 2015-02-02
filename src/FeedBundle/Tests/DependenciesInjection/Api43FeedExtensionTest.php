@@ -2,7 +2,6 @@
 
 namespace Api43\FeedBundle\DependencyInjection;
 
-use Api43\FeedBundle\DependencyInjection\Api43FeedExtension;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 class Api43FeedExtensionTest extends \PHPUnit_Framework_TestCase

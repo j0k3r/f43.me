@@ -32,7 +32,7 @@ class ParserChain
     public function getParser($alias)
     {
         if (array_key_exists($alias, $this->parsers)) {
-           return $this->parsers[$alias];
+            return $this->parsers[$alias];
         }
 
         return false;

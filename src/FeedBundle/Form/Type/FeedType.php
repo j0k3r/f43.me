@@ -18,19 +18,19 @@ class FeedType extends AbstractType
             ->add('parser', 'choice', array(
                 'choices' => array(
                     'internal' => 'Internal',
-                    'external' => 'External'
+                    'external' => 'External',
                 ),
             ))
             ->add('formatter', 'choice', array(
                 'choices' => array(
                     'rss'  => 'RSS',
-                    'atom' => 'Atom'
+                    'atom' => 'Atom',
                 ),
             ))
             ->add('sort_by', 'choice', array(
                 'choices' => array(
                     'published_at' => 'Published (when item arrive in the original feed)',
-                    'created_at' => 'Created (when feed item are fetched)'
+                    'created_at' => 'Created (when feed item are fetched)',
                 ),
             ))
             ->add('is_private', 'checkbox', array('required' => false))
@@ -40,7 +40,7 @@ class FeedType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'Api43\FeedBundle\Document\Feed'
+            'data_class' => 'Api43\FeedBundle\Document\Feed',
         ));
     }
 

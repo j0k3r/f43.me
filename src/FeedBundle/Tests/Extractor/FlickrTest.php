@@ -87,7 +87,7 @@ class FlickrTest extends \PHPUnit_Framework_TestCase
             ->will($this->onConsecutiveCalls(
                 $this->returnValue(array('stat' => 'ok', 'sizes' => array('size' => array(
                     array('label' => 'Medium', 'source' => 'https://0.0.0.0/medium.jpg'),
-                    array('label' => 'Large', 'source' => 'https://0.0.0.0/large.jpg')
+                    array('label' => 'Large', 'source' => 'https://0.0.0.0/large.jpg'),
                 )))),
                 $this->returnValue(array()),
                 $this->throwException(new RequestException())
@@ -138,7 +138,7 @@ class FlickrTest extends \PHPUnit_Framework_TestCase
             ->will($this->onConsecutiveCalls(
                 $this->returnValue(array('stat' => 'ok', 'photoset' => array('photo' => array(
                     array('title' => 'Super title', 'url_l' => 'https://0.0.0.0/medium.jpg'),
-                    array('title' => 'Ugly title', 'url_o' => 'https://0.0.0.0/large.jpg')
+                    array('title' => 'Ugly title', 'url_o' => 'https://0.0.0.0/large.jpg'),
                 )))),
                 $this->returnValue(array()),
                 $this->throwException(new RequestException())

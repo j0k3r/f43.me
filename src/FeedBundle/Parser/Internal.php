@@ -4,10 +4,8 @@ namespace Api43\FeedBundle\Parser;
 
 use Guzzle\Http\Client;
 use Guzzle\Http\Exception\RequestException;
-
 use TubeLink\TubeLink;
 use TubeLink\Exception\ServiceNotFoundException;
-
 use Api43\FeedBundle\Readability\ReadabilityExtended;
 
 /**
@@ -73,7 +71,7 @@ class Internal extends AbstractParser
             // catch timeout, ssl verification that failed, etc ...
             // so try an alternative using basic file_get_contents
             $content = @file_get_contents($url, false, stream_context_create(array(
-                'http' => array('timeout' => 10)
+                'http' => array('timeout' => 10),
             )));
 
             // all characters are not printable, this mean it's not a string but a binary

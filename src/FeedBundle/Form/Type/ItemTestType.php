@@ -14,7 +14,7 @@ class ItemTestType extends AbstractType
             ->add('parser', 'choice', array(
                 'choices' => array(
                     'internal' => 'Internal',
-                    'external' => 'External'
+                    'external' => 'External',
                 ),
             ))
         ;

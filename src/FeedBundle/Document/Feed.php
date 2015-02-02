@@ -269,10 +269,10 @@ class Feed
     }
 
     /**
-    * Remove feeditems
-    *
-    * @param \Api43\FeedBundle\Document\FeedItem $feeditems
-    */
+     * Remove feeditems
+     *
+     * @param \Api43\FeedBundle\Document\FeedItem $feeditems
+     */
     public function removeFeeditem(\Api43\FeedBundle\Document\FeedItem $feeditems)
     {
         $this->feeditems->removeElement($feeditems);
@@ -322,10 +322,10 @@ class Feed
     }
 
     /**
-    * Remove feedlogs
-    *
-    * @param \Api43\FeedBundle\Document\FeedLog $feedlogs
-    */
+     * Remove feedlogs
+     *
+     * @param \Api43\FeedBundle\Document\FeedLog $feedlogs
+     */
     public function removeFeedlog(\Api43\FeedBundle\Document\FeedLog $feedlogs)
     {
         $this->feedlogs->removeElement($feedlogs);

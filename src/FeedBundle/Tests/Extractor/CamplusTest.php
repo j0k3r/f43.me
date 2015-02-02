@@ -80,8 +80,8 @@ class CamplusTest extends \PHPUnit_Framework_TestCase
                     'realname' => 'j0k',
                     'text' => 'yay',
                 )), 'pictures' => array(array(
-                    '480px' => 'http://0.0.0.0/youpi.jpg'
-                ))
+                    '480px' => 'http://0.0.0.0/youpi.jpg',
+                )),
             )));
 
         $camplus = new Camplus($guzzle);

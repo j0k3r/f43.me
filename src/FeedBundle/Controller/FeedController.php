@@ -63,7 +63,7 @@ class FeedController extends Controller
 
         return $this->render('Api43FeedBundle:Feed:index.html.twig', array(
             'menu'  => 'feed',
-            'feeds' => $feeds
+            'feeds' => $feeds,
         ));
     }
 
@@ -80,7 +80,7 @@ class FeedController extends Controller
         return $this->render('Api43FeedBundle:Feed:new.html.twig', array(
             'menu' => 'feed',
             'feed' => $feed,
-            'form' => $form->createView()
+            'form' => $form->createView(),
         ));
     }
 
@@ -112,7 +112,7 @@ class FeedController extends Controller
         return $this->render('Api43FeedBundle:Feed:new.html.twig', array(
             'menu' => 'feed',
             'feed' => $feed,
-            'form' => $form->createView()
+            'form' => $form->createView(),
         ));
     }
 
@@ -127,7 +127,6 @@ class FeedController extends Controller
      */
     public function editAction(Request $request, Feed $feed)
     {
-
         $editForm   = $this->createForm(new FeedType(), $feed);
         $editForm->handleRequest($request);
 

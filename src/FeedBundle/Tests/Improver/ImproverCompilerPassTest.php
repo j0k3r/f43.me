@@ -3,7 +3,6 @@
 namespace Api43\FeedBundle\Tests\Improver;
 
 use Symfony\Component\DependencyInjection\ContainerBuilder;
-
 use Api43\FeedBundle\Improver\ImproverCompilerPass;
 
 class ImproverCompilerPassTest extends \PHPUnit_Framework_TestCase

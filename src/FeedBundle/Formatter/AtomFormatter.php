@@ -29,7 +29,7 @@ class AtomFormatter extends Formatter
             ), array(
                 'name'        => 'link',
                 'method'      => 'getLink',
-                'attribute'   => 'href'
+                'attribute'   => 'href',
             ), array(
                 'name'        => 'updated',
                 'method'      => 'getPubDate',
