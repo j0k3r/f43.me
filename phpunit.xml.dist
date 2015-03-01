@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<phpunit backupGlobals="false"
+         backupStaticAttributes="false"
+         colors="true"
+         convertErrorsToExceptions="true"
+         convertNoticesToExceptions="true"
+         convertWarningsToExceptions="true"
+         processIsolation="false"
+         stopOnFailure="false"
+         syntaxCheck="false"
+         bootstrap="app/bootstrap.php.cache"
+        >
+
+    <testsuites>
+        <testsuite name="f43.me Test Suite">
+            <directory>./src/FeedBundle/Tests</directory>
+        </testsuite>
+    </testsuites>
+
+    <php>
+        <server name="KERNEL_DIR" value="./app" />
+    </php>
+
+    <filter>
+        <whitelist>
+            <directory suffix=".php">./src</directory>
+            <exclude>
+                <directory>./vendor</directory>
+                <directory>./src/FeedBundle/Resources</directory>
+                <directory>./src/FeedBundle/Tests</directory>
+                <directory>./src/FeedBundle/DataFixtures</directory>
+            </exclude>
+        </whitelist>
+        <blacklist>
+            <directory>./vendor</directory>
+            <directory>./web</directory>
+        </blacklist>
+    </filter>
+</phpunit>

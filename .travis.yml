@@ -16,8 +16,8 @@ before_script:
   - printf "\n" | pecl install -f mongo
 
 script:
-  - ant -f app/build.xml prepare
-  - phpunit -c app --coverage-clover=coverage.clover
+  - ant prepare
+  - phpunit --coverage-clover=coverage.clover
 
 after_script:
   - wget https://scrutinizer-ci.com/ocular.phar
