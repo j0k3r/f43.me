@@ -14,12 +14,11 @@ matrix:
   allow_failures:
     - php: hhvm
     - php: nightly
-  
+
 sudo: false
 
 before_script:
   - composer self-update
-  - echo 'date.timezone = "Europe/Paris"' >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
   # this trick simulate a "no interaction"
   - printf "\n" | pecl install -f channel://pecl.php.net/apcu-4.0.7 # still no stable version ...
   - printf "\n" | pecl install -f mongo
