@@ -1,32 +1,46 @@
 language: php
 
 services:
-  - mongodb
+    - mongodb
 
 php:
-  - 5.4
-  - 5.5
-  - 5.6
-  - hhvm
-  - nightly
+    - 5.4
+    - 5.5
+    - 5.6
+    - nightly
+    - hhvm-nightly
 
+# run build against nightly but allow them to fail
 matrix:
-  allow_failures:
-    - php: hhvm
-    - php: nightly
+    fast_finish: true
+    allow_failures:
+        - php: nightly
+        - php: hhvm-nightly
 
+# faster builds on new travis setup not using sudo
 sudo: false
 
+# cache vendor dirs
+cache:
+    directories:
+        - vendor
+        - $HOME/.composer/cache
+
+install:
+    - composer self-update
+
 before_script:
-  - composer self-update
-  # this trick simulate a "no interaction"
-  - printf "\n" | pecl install -f channel://pecl.php.net/apcu-4.0.7 # still no stable version ...
-  - printf "\n" | pecl install -f mongo
+    - if [[ "$TRAVIS_PHP_VERSION" != *"nightly" ]]; then echo "extension = mongo.so" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini; fi;
+    - if [[ "$TRAVIS_PHP_VERSION" != *"nightly" ]] && [ $(php -r "echo PHP_MINOR_VERSION;") -le 4 ]; then echo "extension = apc.so" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini; fi;
+    - if [[ "$TRAVIS_PHP_VERSION" = "5.6" ]]; then PHPUNIT_FLAGS="--coverage-clover=coverage.clover"; fi;
 
 script:
-  - ant prepare
-  - phpunit --coverage-clover=coverage.clover
+    - ant prepare
+    - phpunit $PHPUNIT_FLAGS
 
 after_script:
-  - wget https://scrutinizer-ci.com/ocular.phar
-  - php ocular.phar code-coverage:upload --format=php-clover coverage.clover
+    - |
+        if [ $TRAVIS_PHP_VERSION = '5.6' ]; then
+            wget https://scrutinizer-ci.com/ocular.phar
+            php ocular.phar code-coverage:upload --format=php-clover coverage.clover
+        fi

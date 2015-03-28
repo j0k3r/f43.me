@@ -56,6 +56,20 @@ class LoadFeedData extends AbstractFixture implements OrderedFixtureInterface
         $manager->persist($feedMadame);
         $this->addReference('feed-bonjourmadame', $feedMadame);
 
+        $feedWild = new Feed();
+        $feedWild->setName('Blog Wildtrip');
+        $feedWild->setDescription('');
+        $feedWild->setLink('http://blog.wildtrip.net/rss.xml');
+        $feedWild->setParser('internal');
+        $feedWild->setFormatter('atom');
+        $feedWild->setHost('blog.wildtrip.net');
+        $feedWild->setIsPrivate(false);
+        $feedWild->setSortBy('published_at');
+        $feedWild->setNbItems(3);
+        $feedWild->setLastItemCachedAt(new \DateTime());
+        $manager->persist($feedWild);
+        $this->addReference('feed-wild', $feedWild);
+
         $manager->flush();
     }
 
