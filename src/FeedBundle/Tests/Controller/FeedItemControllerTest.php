@@ -104,7 +104,7 @@ class FeedItemControllerTest extends FeedWebTestCase
     {
         $client = static::getAuthorizedClient();
 
-        $crawler = $client->request('GET', '/feed/hackernews/previewItem?parser=internal');
+        $crawler = $client->request('GET', '/feed/blog-wildtrip/previewItem?parser=internal');
 
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
         $this->assertCount(1, $crawler->filter('ul.no-bullet'));
@@ -115,7 +115,7 @@ class FeedItemControllerTest extends FeedWebTestCase
     {
         $client = static::getAuthorizedClient();
 
-        $crawler = $client->request('GET', '/feed/hackernews/previewItem?parser=external');
+        $crawler = $client->request('GET', '/feed/blog-wildtrip/previewItem?parser=external');
 
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
         $this->assertCount(1, $crawler->filter('ul.no-bullet'));
