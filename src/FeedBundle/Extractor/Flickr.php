@@ -13,7 +13,6 @@ class Flickr extends AbstractExtractor
     protected $flickrSetId = null;
 
     /**
-     *
      * @param Client $guzzle
      * @param string $flickrApiKey
      */
@@ -67,7 +66,7 @@ class Flickr extends AbstractExtractor
     }
 
     /**
-     * Grab one photo from Flickr
+     * Grab one photo from Flickr.
      *
      * @see https://www.flickr.com/services/api/explore/flickr.photos.getSizes
      *
@@ -97,7 +96,7 @@ class Flickr extends AbstractExtractor
     }
 
     /**
-     * Grab photos from a photo set
+     * Grab photos from a photo set.
      *
      * @see https://www.flickr.com/services/api/flickr.photosets.getPhotos.htm
      *

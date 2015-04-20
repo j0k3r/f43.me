@@ -9,7 +9,7 @@ use Guzzle\Http\Exception\RequestException;
 
 /**
  * Validate a XML feed.
- * Wait 3s before timeout
+ * Wait 3s before timeout.
  */
 class ConstraintRssValidator extends ConstraintValidator
 {

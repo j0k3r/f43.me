@@ -12,7 +12,7 @@ class ExtractorChain
     }
 
     /**
-     * Add an extrator to the chain
+     * Add an extrator to the chain.
      *
      * @param AbstractExtractor $extractor
      * @param string            $alias
@@ -23,7 +23,7 @@ class ExtractorChain
     }
 
     /**
-     * Loop thru all extractor and return one that match
+     * Loop thru all extractor and return one that match.
      *
      * @param string $url An url
      *

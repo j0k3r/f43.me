@@ -11,7 +11,6 @@ class Deviantart extends AbstractExtractor
     protected $deviantartUrl = null;
 
     /**
-     *
      * @param Client $guzzle
      */
     public function __construct(Client $guzzle)

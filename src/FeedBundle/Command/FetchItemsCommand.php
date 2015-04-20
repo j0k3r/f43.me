@@ -31,7 +31,7 @@ class FetchItemsCommand extends ContainerAwareCommand
         $lock = new LockHandler($this->getName());
 
         if (!$lock->lock()) {
-            $output->writeLn("<error>The command is already running in another process.</error>");
+            $output->writeLn('<error>The command is already running in another process.</error>');
 
             return 0;
         }
@@ -52,7 +52,7 @@ class FetchItemsCommand extends ContainerAwareCommand
         if ($slug = $input->getOption('slug')) {
             $feed = $feedRepo->findOneBySlug($slug);
             if (!$feed) {
-                return $output->writeLn("<error>Unable to find Feed document:</error> <comment>".$slug."</comment>");
+                return $output->writeLn('<error>Unable to find Feed document:</error> <comment>'.$slug.'</comment>');
             }
             $feeds = array($feed);
         } elseif (in_array($input->getOption('age'), array('new', 'old'))) {
@@ -68,7 +68,7 @@ class FetchItemsCommand extends ContainerAwareCommand
                 $feeds = $feedRepo->findByIds($feedsWithItems, 'notIn');
             }
         } else {
-            return $output->writeLn("<error>You must add some options to the task :</error> an <comment>age</comment> or a <comment>slug</comment>");
+            return $output->writeLn('<error>You must add some options to the task :</error> an <comment>age</comment> or a <comment>slug</comment>');
         }
 
         if ($input->getOption('with-trace')) {

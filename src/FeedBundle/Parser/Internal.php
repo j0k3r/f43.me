@@ -10,7 +10,7 @@ use Api43\FeedBundle\Readability\ReadabilityExtended;
 
 /**
  * Retrieve content from an internal library instead of a webservice.
- * It's a fallback by default, but can be the only solution if specified
+ * It's a fallback by default, but can be the only solution if specified.
  */
 class Internal extends AbstractParser
 {
@@ -18,7 +18,6 @@ class Internal extends AbstractParser
     protected $regexps = array();
 
     /**
-     *
      * @param Client $guzzle
      * @param array  $regexps Regex to remove/escape content
      */

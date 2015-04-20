@@ -3,7 +3,7 @@
 namespace Api43\FeedBundle\Formatter;
 
 /**
- * Atom formatter
+ * Atom formatter.
  *
  * This class provides an Atom formatter
  */

@@ -7,14 +7,14 @@ use Symfony\Component\EventDispatcher\Event;
 class FeedItemEvent extends Event
 {
     /**
-     * Feeds slug
+     * Feeds slug.
      *
      * @var array
      */
     protected $feedSlugs = array();
 
     /**
-     * Store slug feeds that need to be dispatched
+     * Store slug feeds that need to be dispatched.
      *
      * @param array $feedSlugs
      */

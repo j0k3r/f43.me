@@ -12,7 +12,7 @@ class ImproverChain
     }
 
     /**
-     * Add an improver to the chain
+     * Add an improver to the chain.
      *
      * @param Nothing $improver
      * @param string  $alias
@@ -23,7 +23,7 @@ class ImproverChain
     }
 
     /**
-     * Loop thru all improver and return one that match
+     * Loop thru all improver and return one that match.
      *
      * @param string $host A host
      *

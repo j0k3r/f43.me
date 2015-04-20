@@ -40,7 +40,7 @@ class FeedLog
     protected $feeditem;
 
     /**
-     * Get id
+     * Get id.
      *
      * @return id $id
      */
@@ -50,9 +50,10 @@ class FeedLog
     }
 
     /**
-     * Set items_number
+     * Set items_number.
      *
-     * @param  int  $itemsNumber
+     * @param int $itemsNumber
+     *
      * @return self
      */
     public function setItemsNumber($itemsNumber)
@@ -63,7 +64,7 @@ class FeedLog
     }
 
     /**
-     * Get items_number
+     * Get items_number.
      *
      * @return int $itemsNumber
      */
@@ -73,9 +74,10 @@ class FeedLog
     }
 
     /**
-     * Set created_at
+     * Set created_at.
      *
-     * @param  date $createdAt
+     * @param date $createdAt
+     *
      * @return self
      */
     public function setCreatedAt($createdAt)
@@ -86,7 +88,7 @@ class FeedLog
     }
 
     /**
-     * Get created_at
+     * Get created_at.
      *
      * @return date $createdAt
      */
@@ -96,9 +98,10 @@ class FeedLog
     }
 
     /**
-     * Set feed
+     * Set feed.
      *
-     * @param  \Api43\FeedBundle\Document\Feed $feed
+     * @param \Api43\FeedBundle\Document\Feed $feed
+     *
      * @return self
      */
     public function setFeed(\Api43\FeedBundle\Document\Feed $feed)
@@ -109,7 +112,7 @@ class FeedLog
     }
 
     /**
-     * Get feed
+     * Get feed.
      *
      * @return Api43\FeedBundle\Document\Feed $feed
      */

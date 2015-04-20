@@ -13,7 +13,6 @@ class Tumblr extends AbstractExtractor
     protected $tumblrHost = null;
 
     /**
-     *
      * @param Client $guzzle
      * @param string $tumblrApiKey
      */

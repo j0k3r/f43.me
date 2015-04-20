@@ -29,7 +29,8 @@ class FeedLogController extends Controller
     }
 
     /**
-     * Lists all FeedLog documents related to a given feed
+     * Lists all FeedLog documents related to a given feed.
+     *
      * @param Feed $feed The document Feed (retrieving for a ParamConverter with the slug)
      *
      * @return array
@@ -51,7 +52,7 @@ class FeedLogController extends Controller
     }
 
     /**
-     * Delete all logs for a given Feed
+     * Delete all logs for a given Feed.
      *
      * @param Request $request
      * @param Feed    $feed    The document Feed (retrieving for a ParamConverter with the slug)
@@ -80,7 +81,7 @@ class FeedLogController extends Controller
     }
 
     /**
-     * Returns the DocumentManager
+     * Returns the DocumentManager.
      *
      * @return DocumentManager
      */

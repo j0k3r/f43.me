@@ -15,7 +15,7 @@ class FeedTestController extends Controller
      * The only purpose is to be able to quickly see a convert article
      * - check bug
      * - improve parser
-     * - chose the best parser
+     * - chose the best parser.
      *
      * @return array
      */

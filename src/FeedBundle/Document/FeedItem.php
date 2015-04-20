@@ -71,7 +71,7 @@ class FeedItem
     protected $feedlogs;
 
     /**
-     * Get id
+     * Get id.
      *
      * @return id $id
      */
@@ -81,9 +81,10 @@ class FeedItem
     }
 
     /**
-     * Set title
+     * Set title.
      *
-     * @param  string $title
+     * @param string $title
+     *
      * @return self
      */
     public function setTitle($title)
@@ -94,7 +95,7 @@ class FeedItem
     }
 
     /**
-     * Get title
+     * Get title.
      *
      * @return string $title
      */
@@ -104,9 +105,10 @@ class FeedItem
     }
 
     /**
-     * Set link
+     * Set link.
      *
-     * @param  string $link
+     * @param string $link
+     *
      * @return self
      */
     public function setLink($link)
@@ -117,7 +119,7 @@ class FeedItem
     }
 
     /**
-     * Get link
+     * Get link.
      *
      * @return string $link
      */
@@ -127,9 +129,10 @@ class FeedItem
     }
 
     /**
-     * Set content
+     * Set content.
      *
-     * @param  string $content
+     * @param string $content
+     *
      * @return self
      */
     public function setContent($content)
@@ -140,7 +143,7 @@ class FeedItem
     }
 
     /**
-     * Get content
+     * Get content.
      *
      * @return string $content
      */
@@ -150,9 +153,10 @@ class FeedItem
     }
 
     /**
-     * Set created_at
+     * Set created_at.
      *
-     * @param  date $createdAt
+     * @param date $createdAt
+     *
      * @return self
      */
     public function setCreatedAt($createdAt)
@@ -163,7 +167,7 @@ class FeedItem
     }
 
     /**
-     * Get created_at
+     * Get created_at.
      *
      * @return date $createdAt
      */
@@ -173,9 +177,10 @@ class FeedItem
     }
 
     /**
-     * Set updated_at
+     * Set updated_at.
      *
-     * @param  date $updatedAt
+     * @param date $updatedAt
+     *
      * @return self
      */
     public function setUpdatedAt($updatedAt)
@@ -186,7 +191,7 @@ class FeedItem
     }
 
     /**
-     * Get updated_at
+     * Get updated_at.
      *
      * @return date $updatedAt
      */
@@ -196,9 +201,10 @@ class FeedItem
     }
 
     /**
-     * Set permalink
+     * Set permalink.
      *
-     * @param  string $permalink
+     * @param string $permalink
+     *
      * @return self
      */
     public function setPermalink($permalink)
@@ -209,7 +215,7 @@ class FeedItem
     }
 
     /**
-     * Get permalink
+     * Get permalink.
      *
      * @return string $permalink
      */
@@ -219,9 +225,10 @@ class FeedItem
     }
 
     /**
-     * Set feed
+     * Set feed.
      *
-     * @param  \Api43\FeedBundle\Document\Feed $feed
+     * @param \Api43\FeedBundle\Document\Feed $feed
+     *
      * @return self
      */
     public function setFeed(\Api43\FeedBundle\Document\Feed $feed)
@@ -232,7 +239,7 @@ class FeedItem
     }
 
     /**
-     * Get feed
+     * Get feed.
      *
      * @return Api43\FeedBundle\Document\Feed $feed
      */
@@ -242,9 +249,10 @@ class FeedItem
     }
 
     /**
-     * Set published_at
+     * Set published_at.
      *
-     * @param  date $publishedAt
+     * @param date $publishedAt
+     *
      * @return self
      */
     public function setPublishedAt($publishedAt)
@@ -255,7 +263,7 @@ class FeedItem
     }
 
     /**
-     * Get published_at
+     * Get published_at.
      *
      * @return date $publishedAt
      */
@@ -271,7 +279,7 @@ class FeedItem
 
     /**
      * Retrieve the "publication" date *only* used in the RSS/Atom feed.
-     * Depending on the feed, we want the published_at date or the created_at date
+     * Depending on the feed, we want the published_at date or the created_at date.
      *
      * @return date
      */

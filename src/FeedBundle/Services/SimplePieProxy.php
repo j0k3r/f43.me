@@ -7,11 +7,11 @@ class SimplePieProxy
     protected $feed;
 
     /**
-     * Create a new Proxy for SimplePie
+     * Create a new Proxy for SimplePie.
      *
-     * @param string  $cache        Path to cache folder
-     * @param integer $item_limit   The maximum number of items to return.
-     * @param boolean $enable_cache Enable caching
+     * @param string $cache        Path to cache folder
+     * @param int    $item_limit   The maximum number of items to return.
+     * @param bool   $enable_cache Enable caching
      */
     public function __construct($cache, $item_limit = 25, $enable_cache = true)
     {
@@ -31,7 +31,7 @@ class SimplePieProxy
     }
 
     /**
-     * Set the URL of the feed you want to parse
+     * Set the URL of the feed you want to parse.
      *
      * @param string $url
      *
@@ -45,7 +45,7 @@ class SimplePieProxy
     }
 
     /**
-     * Initialize the feed object
+     * Initialize the feed object.
      *
      * @return \SimplePie
      *

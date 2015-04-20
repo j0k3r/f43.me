@@ -25,7 +25,7 @@ class ParserCompilerPass implements CompilerPassInterface
             foreach ($tagAttributes as $attributes) {
                 $definition->addMethodCall(
                     'addParser',
-                    array(new Reference($id), $attributes["alias"])
+                    array(new Reference($id), $attributes['alias'])
                 );
             }
         }

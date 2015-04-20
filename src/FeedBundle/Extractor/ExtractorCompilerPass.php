@@ -25,7 +25,7 @@ class ExtractorCompilerPass implements CompilerPassInterface
             foreach ($tagAttributes as $attributes) {
                 $definition->addMethodCall(
                     'addExtractor',
-                    array(new Reference($id), $attributes["alias"])
+                    array(new Reference($id), $attributes['alias'])
                 );
             }
         }

@@ -11,7 +11,6 @@ class Github extends AbstractExtractor
     protected $githubRepo;
 
     /**
-     *
      * @param Client $guzzle
      */
     public function __construct(Client $guzzle)

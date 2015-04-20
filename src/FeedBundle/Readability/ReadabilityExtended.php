@@ -7,13 +7,12 @@ use Readability\Readability;
 /**
  * This class extends the Readability one to add more fine tuning on content:
  *     - remove some unwanted attributes
- *     - convert relative path to absolute
- *
+ *     - convert relative path to absolute.
  */
 class ReadabilityExtended extends Readability
 {
     /**
-     * Get article content as html
+     * Get article content as html.
      *
      * @return string
      */
@@ -87,7 +86,7 @@ class ReadabilityExtended extends Readability
     }
 
     /**
-     * Convert relative image path to absolute
+     * Convert relative image path to absolute.
      *
      * @param DOMElement $e
      */
@@ -130,7 +129,7 @@ class ReadabilityExtended extends Readability
     }
 
     /**
-     * Convert relative url absolute
+     * Convert relative url absolute.
      *
      * @param DOMElement $e
      */
@@ -156,7 +155,7 @@ class ReadabilityExtended extends Readability
 
     /**
      * Convert h1 tag to h2.
-     * Since Readability removes h1
+     * Since Readability removes h1.
      *
      * @param DOMElement $e
      */

@@ -26,7 +26,8 @@ class FeedItemSubscriber
      *
      * http://nathangrigg.net/2012/09/real-time-publishing/
      *
-     * @param  FeedItemEvent $event
+     * @param FeedItemEvent $event
+     *
      * @return bool
      */
     public function pingHub(FeedItemEvent $event)
@@ -49,9 +50,9 @@ class FeedItemSubscriber
 
         // ping publisher
         // https://code.google.com/p/pubsubhubbub/source/browse/trunk/publisher_clients/php/library/publisher.php
-        $params = "hub.mode=publish";
+        $params = 'hub.mode=publish';
         foreach ($urls as $url) {
-            $params .= "&hub.url=".urlencode($url);
+            $params .= '&hub.url='.urlencode($url);
         }
 
         // make the request
@@ -59,7 +60,7 @@ class FeedItemSubscriber
             CURLOPT_URL        => $this->hub,
             CURLOPT_POST       => true,
             CURLOPT_POSTFIELDS => $params,
-            CURLOPT_USERAGENT  => "PubSubHubbub-Publisher-PHP/1.0",
+            CURLOPT_USERAGENT  => 'PubSubHubbub-Publisher-PHP/1.0',
         );
 
         $ch = curl_init();

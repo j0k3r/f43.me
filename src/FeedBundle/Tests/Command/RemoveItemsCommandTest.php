@@ -25,6 +25,7 @@ class RemoveItemsCommandTest extends WebTestCase
 
     /**
      * @see http://symfony.com/doc/current/components/console/helpers/dialoghelper.html#testing-a-command-which-expects-input
+     *
      * @param string $input
      */
     protected function getInputStream($input)

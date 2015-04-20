@@ -8,44 +8,44 @@ use Api43\FeedBundle\DomDocument\XDOMDocument;
 use Api43\FeedBundle\DomDocument\XDOMElement;
 
 /**
- * Formatter
+ * Formatter.
  *
  * This class provides formatter methods
  */
 abstract class Formatter
 {
     /**
-     * @var Feed $feed A feed instance
+     * @var Feed A feed instance
      */
     protected $feed;
 
     /**
-     * @var Collection $items A collection of item
+     * @var Collection A collection of item
      */
     protected $items;
 
     /**
-     * @var string $generator Generator name
+     * @var string Generator name
      */
     protected $generator;
 
     /**
-     * @var string $url Feed url
+     * @var string Feed url
      */
     protected $url;
 
     /**
-     * @var XDOMDocument $dom XML (X)DOMDocument
+     * @var XDOMDocument XML (X)DOMDocument
      */
     protected $dom;
 
     /**
-     * @var array $fields Contain arrays for this formatter
+     * @var array Contain arrays for this formatter
      */
     protected $fields;
 
     /**
-     * Construct a formatter with given feed
+     * Construct a formatter with given feed.
      *
      * @param Feed        $feed      A feed instance
      * @param array       $items     An array of FeedItem object
@@ -68,18 +68,17 @@ abstract class Formatter
     /**
      * Define fields that will inside an item
      *     - name: will be the node name
-     *     - method: will be the method to retrieve content to put in this node
-     *
+     *     - method: will be the method to retrieve content to put in this node.
      */
     abstract public function setItemFields();
 
     /**
-     * Initialize XML DOMDocument nodes and call addItem on all items
+     * Initialize XML DOMDocument nodes and call addItem on all items.
      */
     abstract public function initialize();
 
     /**
-     * Format field
+     * Format field.
      *
      * @param array    $field A field instance
      * @param FeedItem $item  An entity instance
@@ -117,7 +116,7 @@ abstract class Formatter
     }
 
     /**
-     * This method render the given feed transforming the DOMDocument to XML
+     * This method render the given feed transforming the DOMDocument to XML.
      *
      * @return string
      */
@@ -129,7 +128,7 @@ abstract class Formatter
     }
 
     /**
-     * Add an entity item to the feed
+     * Add an entity item to the feed.
      *
      * @param XDOMElement $root The root (feed) DOM element
      * @param FeedItem    $item An entity object

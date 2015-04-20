@@ -26,7 +26,7 @@ class RemoveItemsCommand extends ContainerAwareCommand
         $lock = new LockHandler($this->getName());
 
         if (!$lock->lock()) {
-            $output->writeLn("<error>The command is already running in another process.</error>");
+            $output->writeLn('<error>The command is already running in another process.</error>');
 
             return 0;
         }
@@ -35,7 +35,7 @@ class RemoveItemsCommand extends ContainerAwareCommand
         if (0 >= $input->getOption('max')) {
             $dialog = $this->getHelperSet()->get('dialog');
             if (!$dialog->askConfirmation($output, '<question>You will remove ALL items, are your sure?</question>', false)) {
-                return $output->writeLn("<comment>You *almost* remove everything from your database, pfiou !</comment> Be sure to define a <comment>max</comment> option greater than 0.");
+                return $output->writeLn('<comment>You *almost* remove everything from your database, pfiou !</comment> Be sure to define a <comment>max</comment> option greater than 0.');
             }
         }
 
@@ -48,7 +48,7 @@ class RemoveItemsCommand extends ContainerAwareCommand
         if ($slug = $input->getOption('slug')) {
             $feed = $feedRepo->findOneBySlug($slug);
             if (!$feed) {
-                return $output->writeLn("<error>Unable to find Feed document:</error> <comment>".$slug."</comment>");
+                return $output->writeLn('<error>Unable to find Feed document:</error> <comment>'.$slug.'</comment>');
             }
             $feeds = array($feed);
         } else {

@@ -12,7 +12,7 @@ class ParserChain
     }
 
     /**
-     * Add an parser to the chain
+     * Add an parser to the chain.
      *
      * @param AbstractParser $parser
      * @param string         $alias
@@ -23,7 +23,7 @@ class ParserChain
     }
 
     /**
-     * Get one parser by alias
+     * Get one parser by alias.
      *
      * @param string $alias
      *
@@ -39,7 +39,7 @@ class ParserChain
     }
 
     /**
-     * Loop thru all parser to find one that parse the content
+     * Loop thru all parser to find one that parse the content.
      *
      * @param string $url
      *

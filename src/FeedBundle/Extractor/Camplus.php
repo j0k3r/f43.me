@@ -11,7 +11,6 @@ class Camplus extends AbstractExtractor
     protected $camplusId = null;
 
     /**
-     *
      * @param Client $guzzle
      */
     public function __construct(Client $guzzle)

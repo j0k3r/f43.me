@@ -5,7 +5,7 @@ namespace Api43\FeedBundle\Parser;
 abstract class AbstractParser
 {
     /**
-     * Make a readable content from the given url
+     * Make a readable content from the given url.
      *
      * @param string $url
      *

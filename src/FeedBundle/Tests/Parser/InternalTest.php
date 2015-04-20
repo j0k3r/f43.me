@@ -95,7 +95,7 @@ class InternalTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * This will throw an exception but the fallback will try to retrieve content using file_get_contents
+     * This will throw an exception but the fallback will try to retrieve content using file_get_contents.
      */
     public function testParseGuzzleException()
     {

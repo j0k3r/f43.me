@@ -6,7 +6,7 @@ use Guzzle\Http\Client;
 use Guzzle\Http\Exception\RequestException;
 
 /**
- * Default Improver (aka Nothing)
+ * Default Improver (aka Nothing).
  *
  * This class provides Improver methods
  */
@@ -17,7 +17,6 @@ class Nothing
     protected $guzzle;
 
     /**
-     *
      * @param Client $guzzle
      */
     public function __construct(Client $guzzle)
@@ -26,7 +25,7 @@ class Nothing
     }
 
     /**
-     * Set RSS item url
+     * Set RSS item url.
      *
      * @param string $url
      */
@@ -36,7 +35,7 @@ class Nothing
     }
 
     /**
-     * Set RSS item content
+     * Set RSS item content.
      *
      * @param string $itemContent
      */
@@ -60,7 +59,7 @@ class Nothing
     /**
      * This a method to retrieve url from the item content.
      * For example, if we want to extract the url from the item instead of using the default link.
-     * Could be the case for Reddit (retrieving the [link] url instead of the Reddit one)
+     * Could be the case for Reddit (retrieving the [link] url instead of the Reddit one).
      *
      * @param string $url RSS item url
      *

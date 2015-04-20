@@ -3,14 +3,14 @@
 namespace Api43\FeedBundle\DomDocument;
 
 /**
- * Custom class to handle bad "unterminated entity references"
+ * Custom class to handle bad "unterminated entity references".
  *
  * @see http://www.php.net/manual/fr/domdocument.createelement.php#73617
  */
 class XDOMDocument extends \DOMDocument
 {
     /**
-     * Create a new XDOMDocument
+     * Create a new XDOMDocument.
      *
      * @param string|null $version  The version number of the document as part of the XML declaration.
      * @param string|null $encoding The encoding of the document as part of the XML declaration.
@@ -23,7 +23,7 @@ class XDOMDocument extends \DOMDocument
     }
 
     /**
-     * Create a new instance of XDOMElement
+     * Create a new instance of XDOMElement.
      *
      * @param string      $name         The tag name of the element.
      * @param string|null $value        The value of the element.

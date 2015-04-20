@@ -14,7 +14,7 @@ abstract class AbstractExtractor
     abstract public function match($url);
 
     /**
-     * Return the content from the extractor
+     * Return the content from the extractor.
      *
      * @return string|false Content expanded
      */

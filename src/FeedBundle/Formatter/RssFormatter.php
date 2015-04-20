@@ -3,7 +3,7 @@
 namespace Api43\FeedBundle\Formatter;
 
 /**
- * RSS formatter
+ * RSS formatter.
  *
  * This class provides an RSS formatter
  */

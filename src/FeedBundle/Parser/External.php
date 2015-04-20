@@ -7,7 +7,7 @@ use Guzzle\Http\Exception\RequestException;
 
 /**
  * Retrieve content from an external webservice.
- * In this case, we use the excellent Readability web service: https://www.readability.com/developers/api/parser
+ * In this case, we use the excellent Readability web service: https://www.readability.com/developers/api/parser.
  */
 class External extends AbstractParser
 {
@@ -16,7 +16,6 @@ class External extends AbstractParser
     protected $token;
 
     /**
-     *
      * @param Client $guzzle
      * @param string $urlApi Readability API url
      * @param string $token  Readability API token

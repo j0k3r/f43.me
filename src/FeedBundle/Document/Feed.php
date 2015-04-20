@@ -106,7 +106,7 @@ class Feed
     protected $feedlogs;
 
     /**
-     * Get id
+     * Get id.
      *
      * @return id $id
      */
@@ -116,9 +116,10 @@ class Feed
     }
 
     /**
-     * Set name
+     * Set name.
      *
-     * @param  string $name
+     * @param string $name
+     *
      * @return self
      */
     public function setName($name)
@@ -129,7 +130,7 @@ class Feed
     }
 
     /**
-     * Get name
+     * Get name.
      *
      * @return string $name
      */
@@ -139,9 +140,10 @@ class Feed
     }
 
     /**
-     * Set description
+     * Set description.
      *
-     * @param  string $description
+     * @param string $description
+     *
      * @return self
      */
     public function setDescription($description)
@@ -152,7 +154,7 @@ class Feed
     }
 
     /**
-     * Get description
+     * Get description.
      *
      * @return string $description
      */
@@ -162,9 +164,10 @@ class Feed
     }
 
     /**
-     * Set link
+     * Set link.
      *
-     * @param  string $link
+     * @param string $link
+     *
      * @return self
      */
     public function setLink($link)
@@ -175,7 +178,7 @@ class Feed
     }
 
     /**
-     * Get link
+     * Get link.
      *
      * @return string $link
      */
@@ -185,9 +188,10 @@ class Feed
     }
 
     /**
-     * Set created_at
+     * Set created_at.
      *
-     * @param  date $createdAt
+     * @param date $createdAt
+     *
      * @return self
      */
     public function setCreatedAt($createdAt)
@@ -198,7 +202,7 @@ class Feed
     }
 
     /**
-     * Get created_at
+     * Get created_at.
      *
      * @return date $createdAt
      */
@@ -208,9 +212,10 @@ class Feed
     }
 
     /**
-     * Set updated_at
+     * Set updated_at.
      *
-     * @param  date $updatedAt
+     * @param date $updatedAt
+     *
      * @return self
      */
     public function setUpdatedAt($updatedAt)
@@ -221,7 +226,7 @@ class Feed
     }
 
     /**
-     * Get updated_at
+     * Get updated_at.
      *
      * @return date $updatedAt
      */
@@ -231,9 +236,10 @@ class Feed
     }
 
     /**
-     * Set slug
+     * Set slug.
      *
-     * @param  string $slug
+     * @param string $slug
+     *
      * @return self
      */
     public function setSlug($slug)
@@ -244,7 +250,7 @@ class Feed
     }
 
     /**
-     * Get slug
+     * Get slug.
      *
      * @return string $slug
      */
@@ -259,7 +265,7 @@ class Feed
     }
 
     /**
-     * Add feeditems
+     * Add feeditems.
      *
      * @param \Api43\FeedBundle\Document\FeedItem $feeditems
      */
@@ -269,7 +275,7 @@ class Feed
     }
 
     /**
-     * Remove feeditems
+     * Remove feeditems.
      *
      * @param \Api43\FeedBundle\Document\FeedItem $feeditems
      */
@@ -279,7 +285,7 @@ class Feed
     }
 
     /**
-     * Get feeditems
+     * Get feeditems.
      *
      * @return Doctrine\Common\Collections\Collection $feeditems
      */
@@ -289,9 +295,10 @@ class Feed
     }
 
     /**
-     * Set parser
+     * Set parser.
      *
-     * @param  string $parser
+     * @param string $parser
+     *
      * @return self
      */
     public function setParser($parser)
@@ -302,7 +309,7 @@ class Feed
     }
 
     /**
-     * Get parser
+     * Get parser.
      *
      * @return string $parser
      */
@@ -312,7 +319,7 @@ class Feed
     }
 
     /**
-     * Add feedlogs
+     * Add feedlogs.
      *
      * @param \Api43\FeedBundle\Document\FeedLog $feedlogs
      */
@@ -322,7 +329,7 @@ class Feed
     }
 
     /**
-     * Remove feedlogs
+     * Remove feedlogs.
      *
      * @param \Api43\FeedBundle\Document\FeedLog $feedlogs
      */
@@ -332,7 +339,7 @@ class Feed
     }
 
     /**
-     * Get feedlogs
+     * Get feedlogs.
      *
      * @return Doctrine\Common\Collections\Collection $feedlogs
      */
@@ -342,9 +349,10 @@ class Feed
     }
 
     /**
-     * Set formatter
+     * Set formatter.
      *
-     * @param  string $formatter
+     * @param string $formatter
+     *
      * @return self
      */
     public function setFormatter($formatter)
@@ -355,7 +363,7 @@ class Feed
     }
 
     /**
-     * Get formatter
+     * Get formatter.
      *
      * @return string $formatter
      */
@@ -365,9 +373,10 @@ class Feed
     }
 
     /**
-     * Set host
+     * Set host.
      *
-     * @param  string $host
+     * @param string $host
+     *
      * @return self
      */
     public function setHost($host)
@@ -385,7 +394,7 @@ class Feed
     }
 
     /**
-     * Get host
+     * Get host.
      *
      * @return string $host
      */
@@ -395,9 +404,10 @@ class Feed
     }
 
     /**
-     * Set is_private
+     * Set is_private.
      *
-     * @param  boolean $isPrivate
+     * @param bool $isPrivate
+     *
      * @return self
      */
     public function setIsPrivate($isPrivate)
@@ -408,9 +418,9 @@ class Feed
     }
 
     /**
-     * Get is_private
+     * Get is_private.
      *
-     * @return boolean $isPrivate
+     * @return bool $isPrivate
      */
     public function getIsPrivate()
     {
@@ -418,9 +428,10 @@ class Feed
     }
 
     /**
-     * Set sort_by
+     * Set sort_by.
      *
-     * @param  string $sortBy
+     * @param string $sortBy
+     *
      * @return self
      */
     public function setSortBy($sortBy)
@@ -431,7 +442,7 @@ class Feed
     }
 
     /**
-     * Get sort_by
+     * Get sort_by.
      *
      * @return string $sortBy
      */
@@ -441,9 +452,10 @@ class Feed
     }
 
     /**
-     * Set lastItemCachedAt
+     * Set lastItemCachedAt.
      *
-     * @param  date $lastItemCachedAt
+     * @param date $lastItemCachedAt
+     *
      * @return self
      */
     public function setLastItemCachedAt($lastItemCachedAt)
@@ -454,7 +466,7 @@ class Feed
     }
 
     /**
-     * Get lastItemCachedAt
+     * Get lastItemCachedAt.
      *
      * @return date $lastItemCachedAt
      */
@@ -464,9 +476,10 @@ class Feed
     }
 
     /**
-     * Set nbItems
+     * Set nbItems.
      *
-     * @param  int  $nbItems
+     * @param int $nbItems
+     *
      * @return self
      */
     public function setNbItems($nbItems)
@@ -477,7 +490,7 @@ class Feed
     }
 
     /**
-     * Get nbItems
+     * Get nbItems.
      *
      * @return int $nbItems
      */

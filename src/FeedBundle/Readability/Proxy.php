@@ -21,7 +21,7 @@ class Proxy
     public $useDefault = false;
 
     /**
-     * Create a new Proxy for Readability
+     * Create a new Proxy for Readability.
      *
      * @param ExtractorChain $extractorChain
      * @param ImproverChain  $improverChain
@@ -35,7 +35,7 @@ class Proxy
     }
 
     /**
-     * Initialize some common variable
+     * Initialize some common variable.
      *
      * @param string    $chosenParser   Could be "internal" or "external"
      * @param null|Feed $feed           Define the Feed object to work on
@@ -58,7 +58,7 @@ class Proxy
     }
 
     /**
-     * Try to retrieve content from a given url
+     * Try to retrieve content from a given url.
      *
      * @param string      $url         RSS item url
      * @param string|null $itemContent RSS item content, which will be taken if we can't extract content from url

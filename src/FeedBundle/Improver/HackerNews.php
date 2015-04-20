@@ -3,7 +3,7 @@
 namespace Api43\FeedBundle\Improver;
 
 /**
- * HackerNews Improver
+ * HackerNews Improver.
  *
  * This class provides a custom parser for news.ycombinator.com feed
  */
@@ -20,7 +20,7 @@ class HackerNews extends Nothing
     /**
      * We append the readable content to something a bit more friendly:
      * - a link to the original article with the host as value
-     * - a link to comments on Hacker News
+     * - a link to comments on Hacker News.
      *
      * {@inheritdoc}
      */

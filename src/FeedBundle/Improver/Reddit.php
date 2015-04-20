@@ -3,7 +3,7 @@
 namespace Api43\FeedBundle\Improver;
 
 /**
- * Reddit Improver
+ * Reddit Improver.
  *
  * This class provides a custom parser for reddit feeds
  */
@@ -35,7 +35,7 @@ class Reddit extends Nothing
     }
 
     /**
-     * We just happen the readable item to the default one
+     * We just happen the readable item to the default one.
      *
      * {@inheritdoc}
      */

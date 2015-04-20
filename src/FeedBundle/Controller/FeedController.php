@@ -35,7 +35,7 @@ class FeedController extends Controller
     }
 
     /**
-     * Display a public view
+     * Display a public view.
      *
      * @return array
      */
@@ -212,7 +212,7 @@ class FeedController extends Controller
     }
 
     /**
-     * Returns the DocumentManager
+     * Returns the DocumentManager.
      *
      * @return DocumentManager
      */

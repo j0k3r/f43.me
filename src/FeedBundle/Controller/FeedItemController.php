@@ -14,7 +14,8 @@ use Api43\FeedBundle\Document\FeedItem;
 class FeedItemController extends Controller
 {
     /**
-     * Lists all Items documents related to a Feed
+     * Lists all Items documents related to a Feed.
+     *
      * @param Feed $feed The document Feed (retrieving for a ParamConverter with the slug)
      *
      * @return array
@@ -37,7 +38,7 @@ class FeedItemController extends Controller
     }
 
     /**
-     * Delete all items for a given Feed
+     * Delete all items for a given Feed.
      *
      * @param Request $request
      * @param Feed    $feed    The document Feed (retrieving for a ParamConverter with the slug)
@@ -64,7 +65,7 @@ class FeedItemController extends Controller
     }
 
     /**
-     * Preview an item that is already cached
+     * Preview an item that is already cached.
      *
      * @param FeedItem $feedItem The document FeedItem (retrieving for a ParamConverter with the id)
      *
@@ -82,7 +83,7 @@ class FeedItemController extends Controller
 
     /**
      * Display a modal to preview the first item from a Feed.
-     * It will allow to preview the parsed item (which isn't cached) using the internal or the external parser
+     * It will allow to preview the parsed item (which isn't cached) using the internal or the external parser.
      *
      * @param Feed $feed The document Feed (retrieving for a ParamConverter with the slug)
      *
@@ -96,7 +97,7 @@ class FeedItemController extends Controller
     }
 
     /**
-     * Following the previous action, this one will actually parse the content (for both parser)
+     * Following the previous action, this one will actually parse the content (for both parser).
      *
      * @param Request $request
      * @param Feed    $feed    The document Feed (retrieving for a ParamConverter with the slug)
@@ -143,7 +144,7 @@ class FeedItemController extends Controller
     }
 
     /**
-     * Returns the DocumentManager
+     * Returns the DocumentManager.
      *
      * @return DocumentManager
      */
