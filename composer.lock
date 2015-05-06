@@ -983,23 +983,27 @@
         },
         {
             "name": "ekino/newrelic-bundle",
-            "version": "1.2.2",
+            "version": "1.2.3",
             "target-dir": "Ekino/Bundle/NewRelicBundle",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ekino/EkinoNewRelicBundle.git",
-                "reference": "802a854bc948dca90523c5f87b8f137f4fb56796"
+                "reference": "73a57d7fc24806cce0c8dbd5da5792caa395c593"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ekino/EkinoNewRelicBundle/zipball/802a854bc948dca90523c5f87b8f137f4fb56796",
-                "reference": "802a854bc948dca90523c5f87b8f137f4fb56796",
+                "url": "https://api.github.com/repos/ekino/EkinoNewRelicBundle/zipball/73a57d7fc24806cce0c8dbd5da5792caa395c593",
+                "reference": "73a57d7fc24806cce0c8dbd5da5792caa395c593",
                 "shasum": ""
             },
             "require-dev": {
                 "silex/silex": "~1.0",
                 "symfony/console": "~2.2",
-                "symfony/framework-bundle": "~2.2"
+                "symfony/framework-bundle": "~2.2",
+                "twig/twig": "1.*"
+            },
+            "suggest": {
+                "sonata-project/block-bundle": "2.2.*@dev"
             },
             "type": "symfony-bundle",
             "extra": {
@@ -1030,7 +1034,7 @@
                 "monitoring",
                 "performance"
             ],
-            "time": "2014-02-04 17:20:36"
+            "time": "2015-04-28 09:26:55"
         },
         {
             "name": "gedmo/doctrine-extensions",
@@ -1309,16 +1313,16 @@
         },
         {
             "name": "j0k3r/php-readability",
-            "version": "v1.0",
+            "version": "v1.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/j0k3r/php-readability.git",
-                "reference": "ddd013e3f8f2900fa0426d386fb8a74f5a9d63ba"
+                "reference": "b69619d386b7aab900d01171bb54a3164527dcf0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/j0k3r/php-readability/zipball/ddd013e3f8f2900fa0426d386fb8a74f5a9d63ba",
-                "reference": "ddd013e3f8f2900fa0426d386fb8a74f5a9d63ba",
+                "url": "https://api.github.com/repos/j0k3r/php-readability/zipball/b69619d386b7aab900d01171bb54a3164527dcf0",
+                "reference": "b69619d386b7aab900d01171bb54a3164527dcf0",
                 "shasum": ""
             },
             "require": {
@@ -1368,7 +1372,7 @@
                 "extraction",
                 "html"
             ],
-            "time": "2014-12-12 11:14:40"
+            "time": "2015-04-29 08:27:50"
         },
         {
             "name": "jdorn/sql-formatter",
@@ -2160,17 +2164,17 @@
         },
         {
             "name": "sensio/distribution-bundle",
-            "version": "v3.0.21",
+            "version": "v3.0.22",
             "target-dir": "Sensio/Bundle/DistributionBundle",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sensiolabs/SensioDistributionBundle.git",
-                "reference": "da23c78093676a823a1ff43a214987ea3fbf83c8"
+                "reference": "0fe4ec86db57c232becb694e01cdabe3c4d9af7c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sensiolabs/SensioDistributionBundle/zipball/da23c78093676a823a1ff43a214987ea3fbf83c8",
-                "reference": "da23c78093676a823a1ff43a214987ea3fbf83c8",
+                "url": "https://api.github.com/repos/sensiolabs/SensioDistributionBundle/zipball/0fe4ec86db57c232becb694e01cdabe3c4d9af7c",
+                "reference": "0fe4ec86db57c232becb694e01cdabe3c4d9af7c",
                 "shasum": ""
             },
             "require": {
@@ -2216,7 +2220,7 @@
                 "configuration",
                 "distribution"
             ],
-            "time": "2015-04-10 06:20:46"
+            "time": "2015-05-02 16:23:08"
         },
         {
             "name": "sensio/framework-extra-bundle",
@@ -2323,16 +2327,16 @@
         },
         {
             "name": "sensiolabs/security-checker",
-            "version": "v2.0.1",
+            "version": "v2.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sensiolabs/security-checker.git",
-                "reference": "134cecf1c61256bd8e973e11376891a724543820"
+                "reference": "cecb1397087dc9c733796eda6e9d121336039cdc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sensiolabs/security-checker/zipball/134cecf1c61256bd8e973e11376891a724543820",
-                "reference": "134cecf1c61256bd8e973e11376891a724543820",
+                "url": "https://api.github.com/repos/sensiolabs/security-checker/zipball/cecb1397087dc9c733796eda6e9d121336039cdc",
+                "reference": "cecb1397087dc9c733796eda6e9d121336039cdc",
                 "shasum": ""
             },
             "require": {
@@ -2364,7 +2368,7 @@
                 }
             ],
             "description": "A security checker for your composer.lock",
-            "time": "2015-01-26 16:25:19"
+            "time": "2015-04-21 07:52:05"
         }
     ],
     "aliases": [],
