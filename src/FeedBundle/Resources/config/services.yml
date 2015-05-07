@@ -92,6 +92,13 @@ services:
         tags:
             -  { name: feed.extractor, alias: tumblr }
 
+    feed.extractor.vine:
+        class: Api43\FeedBundle\Extractor\Vine
+        arguments:
+            - @guzzle.client
+        tags:
+            -  { name: feed.extractor, alias: vine }
+
     feed.extractor.flickr:
         class: Api43\FeedBundle\Extractor\Flickr
         arguments:
