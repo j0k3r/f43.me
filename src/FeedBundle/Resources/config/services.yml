@@ -99,6 +99,13 @@ services:
         tags:
             -  { name: feed.extractor, alias: vine }
 
+    feed.extractor.instagram:
+        class: Api43\FeedBundle\Extractor\Instagram
+        arguments:
+            - @guzzle.client
+        tags:
+            -  { name: feed.extractor, alias: instagram }
+
     feed.extractor.flickr:
         class: Api43\FeedBundle\Extractor\Flickr
         arguments:
