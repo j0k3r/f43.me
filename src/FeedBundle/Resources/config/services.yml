@@ -106,6 +106,13 @@ services:
         tags:
             -  { name: feed.extractor, alias: instagram }
 
+    feed.extractor.vidme:
+        class: Api43\FeedBundle\Extractor\Vidme
+        arguments:
+            - @guzzle.client
+        tags:
+            -  { name: feed.extractor, alias: vidme }
+
     feed.extractor.flickr:
         class: Api43\FeedBundle\Extractor\Flickr
         arguments:
