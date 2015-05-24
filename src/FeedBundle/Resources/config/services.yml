@@ -113,6 +113,13 @@ services:
         tags:
             -  { name: feed.extractor, alias: vidme }
 
+    feed.extractor.gfycat:
+        class: Api43\FeedBundle\Extractor\Gfycat
+        arguments:
+            - @guzzle.client
+        tags:
+            -  { name: feed.extractor, alias: gfycat }
+
     feed.extractor.flickr:
         class: Api43\FeedBundle\Extractor\Flickr
         arguments:
