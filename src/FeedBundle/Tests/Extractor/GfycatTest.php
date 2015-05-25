@@ -75,7 +75,7 @@ class GfycatTest extends \PHPUnit_Framework_TestCase
         $response->expects($this->any())
             ->method('json')
             ->will($this->onConsecutiveCalls(
-                $this->returnValue(array('gifUrl' => 'http://0.0.0.0/img.gif')),
+                $this->returnValue(array('gfyItem' => array('title' => 'my title', 'gifUrl' => 'http://0.0.0.0/img.gif'))),
                 $this->returnValue(''),
                 $this->throwException(new RequestException())
             ));
@@ -88,7 +88,7 @@ class GfycatTest extends \PHPUnit_Framework_TestCase
         $gfycat->match('http://gfycat.com/SingleUntriedBudgie');
 
         // consecutive calls
-        $this->assertEquals('<div><p><img src="http://0.0.0.0/img.gif"></p></div>', $gfycat->getContent());
+        $this->assertEquals('<div><h2>my title</h2><p><img src="http://0.0.0.0/img.gif"></p></div>', $gfycat->getContent());
         // this one will got an empty array
         $this->assertEmpty($gfycat->getContent());
         // this one will catch an exception

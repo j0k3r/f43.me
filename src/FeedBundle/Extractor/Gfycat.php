@@ -66,10 +66,10 @@ class Gfycat extends AbstractExtractor
             return '';
         }
 
-        if (!is_array($data) || empty($data) || !isset($data['gifUrl'])) {
+        if (!is_array($data) || empty($data) || !isset($data['gfyItem'])) {
             return '';
         }
 
-        return '<div><p><img src="'.$data['gifUrl'].'"></p></div>';
+        return '<div><h2>'.$data['gfyItem']['title'].'</h2><p><img src="'.$data['gfyItem']['gifUrl'].'"></p></div>';
     }
 }
