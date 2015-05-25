@@ -26,7 +26,7 @@
         "symfony/monolog-bundle": "~2.6",
         "incenteev/composer-parameter-handler": "~2.1",
         "doctrine/mongodb-odm": "1.0.*@dev",
-        "doctrine/mongodb-odm-bundle": "3.0.*@dev",
+        "doctrine/mongodb-odm-bundle": "^3.0.0",
         "stof/doctrine-extensions-bundle": "~1.1",
         "j0k3r/php-readability": "~1.0",
         "simplepie/simplepie": "~1.3",
