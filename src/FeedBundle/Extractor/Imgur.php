@@ -65,11 +65,14 @@ class Imgur extends AbstractExtractor
         try {
             switch ($this->type) {
                 case 'a':
-                case 'gallery':
                     $album = $this->imgurClient->api('album')->album($this->hash);
                     $images = $album->getImages();
 
                     $content = '<h2>'.$album->getTitle().'</h2><p>'.$album->getDescription().'</p>';
+                    break;
+
+                case 'gallery':
+                    $images[] = $this->imgurClient->api('gallery')->image($this->hash);
                     break;
 
                 default:

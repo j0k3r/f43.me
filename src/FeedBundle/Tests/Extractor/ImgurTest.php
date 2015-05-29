@@ -19,6 +19,7 @@ class ImgurTest extends \PHPUnit_Framework_TestCase
             array('https://imgur.com/a/dLaMy', true),
             array('https://imgur.com/a/dLaMy?gallery', true),
             array('https://imgur.com/gallery/dLaMy', true),
+            array('http://imgur.com/gallery/IDuXHMJ', true),
             array('https://imgur.com/duziauziaozaoLaMy', false),
             array('https://imgur.com/Ay', false),
             array('http://imgur.com/UMOCfIk.gifv', true),
@@ -76,7 +77,7 @@ class ImgurTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('<div><p>title – description</p><img src="http://localhost" /></div>', $imgur->getContent());
     }
 
-    public function testContentGallery()
+    public function testContentAlbum()
     {
         $imgurClient = $this->getMockBuilder('Imgur\Client')
             ->disableOriginalConstructor()
@@ -120,9 +121,47 @@ class ImgurTest extends \PHPUnit_Framework_TestCase
             ->will($this->returnValue($apiAlbum));
 
         $imgur = new Imgur($imgurClient);
-        $imgur->match('http://imgur.com/gallery/IoKwI7E');
+        $imgur->match('http://imgur.com/a/IoKwI7E');
 
         $this->assertEquals('<h2>album title</h2><p></p><div><img src="http://localhost" /></div>', $imgur->getContent());
+    }
+
+    public function testContentGallery()
+    {
+        $imgurClient = $this->getMockBuilder('Imgur\Client')
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $apiGallery = $this->getMockBuilder('Imgur\Api\Gallery')
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $image = $this->getMockBuilder('Imgur\Api\Model\Image')
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $image->expects($this->any())
+            ->method('getTitle')
+            ->will($this->returnValue(''));
+        $image->expects($this->any())
+            ->method('getDescription')
+            ->will($this->returnValue(''));
+        $image->expects($this->any())
+            ->method('getLink')
+            ->will($this->returnValue('http://localhost'));
+
+        $apiGallery->expects($this->any())
+            ->method('image')
+            ->will($this->returnValue($image));
+
+        $imgurClient->expects($this->any())
+            ->method('api')
+            ->will($this->returnValue($apiGallery));
+
+        $imgur = new Imgur($imgurClient);
+        $imgur->match('http://imgur.com/gallery/IoKwI7E');
+
+        $this->assertEquals('<div><img src="http://localhost" /></div>', $imgur->getContent());
     }
 
     public function testNoHashNoType()
