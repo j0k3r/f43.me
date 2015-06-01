@@ -34,6 +34,6 @@ class FeedTestControllerTest extends FeedWebTestCase
 
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
         $this->assertCount(1, $crawler->filter('ul.no-bullet'));
-        $this->assertCount(1, $crawler->filter('div[itemprop=articleBody]'));
+        $this->assertNotContains('We failed to make this item readable, the default text from the feed item will be displayed instead.', $client->getResponse()->getContent());
     }
 }
