@@ -23,7 +23,7 @@ class FeedType extends AbstractType
             ))
             ->add('formatter', 'choice', array(
                 'choices' => array(
-                    'rss'  => 'RSS',
+                    'rss' => 'RSS',
                     'atom' => 'Atom',
                 ),
             ))

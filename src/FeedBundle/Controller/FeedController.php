@@ -21,15 +21,15 @@ class FeedController extends Controller
      */
     public function dashboardAction()
     {
-        $dm          = $this->getDocumentManager();
-        $feeds       = $dm->getRepository('Api43FeedBundle:Feed')->findAllOrderedByDate(20);
-        $feedlogs    = $dm->getRepository('Api43FeedBundle:FeedLog')->findAllOrderedById(10);
+        $dm = $this->getDocumentManager();
+        $feeds = $dm->getRepository('Api43FeedBundle:Feed')->findAllOrderedByDate(20);
+        $feedlogs = $dm->getRepository('Api43FeedBundle:FeedLog')->findAllOrderedById(10);
         $historylogs = $dm->getRepository('Api43FeedBundle:FeedLog')->findStatsForLastDays();
 
         return $this->render('Api43FeedBundle:Feed:dashboard.html.twig', array(
-            'menu'        => 'dashboard',
-            'feedlogs'    => $feedlogs,
-            'feeds'       => $feeds,
+            'menu' => 'dashboard',
+            'feedlogs' => $feedlogs,
+            'feeds' => $feeds,
             'historylogs' => $historylogs,
         ));
     }
@@ -62,7 +62,7 @@ class FeedController extends Controller
             ->findAllOrderedByDate();
 
         return $this->render('Api43FeedBundle:Feed:index.html.twig', array(
-            'menu'  => 'feed',
+            'menu' => 'feed',
             'feeds' => $feeds,
         ));
     }
@@ -127,7 +127,7 @@ class FeedController extends Controller
      */
     public function editAction(Request $request, Feed $feed)
     {
-        $editForm   = $this->createForm(new FeedType(), $feed);
+        $editForm = $this->createForm(new FeedType(), $feed);
         $editForm->handleRequest($request);
 
         $dm = $this->getDocumentManager();
@@ -145,21 +145,21 @@ class FeedController extends Controller
             }
         }
 
-        $lastItem   = $dm->getRepository('Api43FeedBundle:FeedItem')->findLastItemByFeedId($feed->getId());
-        $lastLog    = $dm->getRepository('Api43FeedBundle:FeedLog')->findLastItemByFeedId($feed->getId());
-        $nbLogs     = $dm->getRepository('Api43FeedBundle:FeedLog')->countByFeedId($feed->getId());
+        $lastItem = $dm->getRepository('Api43FeedBundle:FeedItem')->findLastItemByFeedId($feed->getId());
+        $lastLog = $dm->getRepository('Api43FeedBundle:FeedLog')->findLastItemByFeedId($feed->getId());
+        $nbLogs = $dm->getRepository('Api43FeedBundle:FeedLog')->countByFeedId($feed->getId());
 
         $deleteForm = $this->createDeleteForm();
 
         return $this->render('Api43FeedBundle:Feed:edit.html.twig', array(
-            'menu'        => 'feed',
-            'feed'        => $feed,
-            'infos'       => array(
+            'menu' => 'feed',
+            'feed' => $feed,
+            'infos' => array(
                 'last_item' => $lastItem,
-                'last_log'  => $lastLog,
-                'nb_logs'   => $nbLogs,
+                'last_log' => $lastLog,
+                'nb_logs' => $nbLogs,
             ),
-            'edit_form'   => $editForm->createView(),
+            'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
         ));
     }

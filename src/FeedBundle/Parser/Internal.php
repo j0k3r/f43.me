@@ -44,7 +44,7 @@ class Internal extends AbstractParser
 
         try {
             $response = $this->guzzle->get($url)->send();
-            $content  = $response->getBody(true);
+            $content = $response->getBody(true);
 
             // if it's a binary file (in fact, not a 'text'), we handle it differently
             if (!$response->isContentType('text')) {
@@ -84,29 +84,29 @@ class Internal extends AbstractParser
         }
 
         $tidyConfig = array(
-            'tidy-mark'                   => false,
-            'vertical-space'              => false,
-            'doctype'                     => 'omit',
-            'numeric-entities'            => false,
+            'tidy-mark' => false,
+            'vertical-space' => false,
+            'doctype' => 'omit',
+            'numeric-entities' => false,
             // 'preserve-entities'        => true,
-            'break-before-br'             => false,
-            'clean'                       => true,
-            'output-xhtml'                => true,
-            'logical-emphasis'            => true,
-            'show-body-only'              => false,
-            'new-blocklevel-tags'         => 'article aside audio details dialog figcaption figure footer header hgroup nav section source summary temp track video',
-            'new-empty-tags'              => 'command embed keygen source track wbr',
-            'new-inline-tags'             => 'audio canvas command data datalist embed keygen mark meter output progress time video wbr',
-            'wrap'                        => 0,
-            'drop-empty-paras'            => true,
+            'break-before-br' => false,
+            'clean' => true,
+            'output-xhtml' => true,
+            'logical-emphasis' => true,
+            'show-body-only' => false,
+            'new-blocklevel-tags' => 'article aside audio details dialog figcaption figure footer header hgroup nav section source summary temp track video',
+            'new-empty-tags' => 'command embed keygen source track wbr',
+            'new-inline-tags' => 'audio canvas command data datalist embed keygen mark meter output progress time video wbr',
+            'wrap' => 0,
+            'drop-empty-paras' => true,
             'drop-proprietary-attributes' => true,
-            'enclose-text'                => true,
-            'enclose-block-text'          => true,
-            'merge-divs'                  => true,
-            'merge-spans'              => true,
+            'enclose-text' => true,
+            'enclose-block-text' => true,
+            'merge-divs' => true,
+            'merge-spans' => true,
             // 'input-encoding'           => '????',
-            'output-encoding'             => 'utf8',
-            'hide-comments'               => true,
+            'output-encoding' => 'utf8',
+            'hide-comments' => true,
         );
 
         // let's clean up input.
@@ -125,8 +125,8 @@ class Internal extends AbstractParser
         $tidy = tidy_parse_string(
             $readability->getHtmlContent(),
             array(
-                'wrap'           => 0,
-                'indent'         => false,
+                'wrap' => 0,
+                'indent' => false,
                 'show-body-only' => true,
             ),
             'UTF8'

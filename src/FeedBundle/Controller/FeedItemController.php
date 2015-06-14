@@ -30,9 +30,9 @@ class FeedItemController extends Controller
         $deleteAllForm = $this->createDeleteAllForm();
 
         return $this->render('Api43FeedBundle:FeedItem:index.html.twig', array(
-            'menu'            => 'feed',
-            'feed'            => $feed,
-            'feeditems'       => $feeditems,
+            'menu' => 'feed',
+            'feed' => $feed,
+            'feeditems' => $feeditems,
             'delete_all_form' => $deleteAllForm->createView(),
         ));
     }
@@ -74,10 +74,10 @@ class FeedItemController extends Controller
     public function previewCachedAction(FeedItem $feedItem)
     {
         return $this->render('Api43FeedBundle:FeedItem:content.html.twig', array(
-            'title'   => $feedItem->getTitle(),
+            'title' => $feedItem->getTitle(),
             'content' => $feedItem->getContent(),
-            'url'     => $feedItem->getLink(),
-            'modal'   => true,
+            'url' => $feedItem->getLink(),
+            'modal' => true,
         ));
     }
 
@@ -130,10 +130,10 @@ class FeedItemController extends Controller
         );
 
         return $this->render('Api43FeedBundle:FeedItem:content.html.twig', array(
-            'title'   => html_entity_decode($firstItem->get_title(), ENT_COMPAT, 'UTF-8'),
+            'title' => html_entity_decode($firstItem->get_title(), ENT_COMPAT, 'UTF-8'),
             'content' => $content->content,
-            'modal'   => false,
-            'url'     => $content->url,
+            'modal' => false,
+            'url' => $content->url,
             'defaultContent' => $content->useDefault,
         ));
     }

@@ -16,22 +16,22 @@ class RssFormatter extends Formatter
     {
         $this->fields = array(
             array(
-                'name'        => 'title',
-                'method'      => 'getTitle',
-                'cdata'       => true,
+                'name' => 'title',
+                'method' => 'getTitle',
+                'cdata' => true,
             ), array(
-                'name'        => 'description',
-                'method'      => 'getContent',
-                'cdata'       => true,
+                'name' => 'description',
+                'method' => 'getContent',
+                'cdata' => true,
             ), array(
-                'name'        => 'link',
-                'method'      => 'getLink',
+                'name' => 'link',
+                'method' => 'getLink',
             ), array(
-                'name'        => 'guid',
-                'method'      => 'getLink',
+                'name' => 'guid',
+                'method' => 'getLink',
             ), array(
-                'name'        => 'pubDate',
-                'method'      => 'getPubDate',
+                'name' => 'pubDate',
+                'method' => 'getPubDate',
                 'date_format' => \DateTime::RSS,
             ),
         );
@@ -59,10 +59,10 @@ class RssFormatter extends Formatter
         $hub->setAttribute('href', 'http://pubsubhubbub.appspot.com/');
         $hub->setAttribute('rel', 'hub');
 
-        $generator   = $this->dom->createElement('generator', htmlspecialchars($this->generator));
-        $title       = $this->dom->createElement('title', htmlspecialchars($this->feed->getName()));
+        $generator = $this->dom->createElement('generator', htmlspecialchars($this->generator));
+        $title = $this->dom->createElement('title', htmlspecialchars($this->feed->getName()));
         $description = $this->dom->createElement('description', htmlspecialchars($this->feed->getDescription()));
-        $link        = $this->dom->createElement('link', 'http://'.$this->feed->getHost());
+        $link = $this->dom->createElement('link', 'http://'.$this->feed->getHost());
 
         $channel->appendChild($hub);
         $channel->appendChild($self);

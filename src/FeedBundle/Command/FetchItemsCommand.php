@@ -36,17 +36,17 @@ class FetchItemsCommand extends ContainerAwareCommand
             return 0;
         }
 
-        $feeds        = array();
-        $container    = $this->getContainer();
-        $dm           = $container->get('doctrine.odm.mongodb.document_manager');
+        $feeds = array();
+        $container = $this->getContainer();
+        $dm = $container->get('doctrine.odm.mongodb.document_manager');
 
         // define host for generating route
         $context = $container->get('router')->getContext();
         $context->setHost($container->getParameter('domain'));
 
-        $feedRepo     = $dm->getRepository('Api43FeedBundle:Feed');
+        $feedRepo = $dm->getRepository('Api43FeedBundle:Feed');
         $feedItemRepo = $dm->getRepository('Api43FeedBundle:FeedItem');
-        $progress     = $this->getHelperSet()->get('progress');
+        $progress = $this->getHelperSet()->get('progress');
 
         // retrieve feed to work on
         if ($slug = $input->getOption('slug')) {
@@ -100,7 +100,7 @@ class FetchItemsCommand extends ContainerAwareCommand
                 ->init($feed->getParser(), $feed, true);
 
             $cachedLinks = $feedItemRepo->getAllLinks($feed->getId());
-            $cached      = 0;
+            $cached = 0;
 
             // show progress bar in trace mode only
             if ($input->getOption('with-trace')) {

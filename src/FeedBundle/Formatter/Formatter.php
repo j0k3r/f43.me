@@ -87,9 +87,9 @@ abstract class Formatter
      */
     protected function format($field, FeedItem $item)
     {
-        $name   = $field['name'];
+        $name = $field['name'];
         $method = $field['method'];
-        $value  = $item->{$method}();
+        $value = $item->{$method}();
 
         if (isset($field['cdata'])) {
             $value = $this->dom->createCDATASection($value);

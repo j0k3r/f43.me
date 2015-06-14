@@ -39,9 +39,9 @@ class RemoveItemsCommand extends ContainerAwareCommand
             }
         }
 
-        $container    = $this->getContainer();
-        $dm           = $container->get('doctrine.odm.mongodb.document_manager');
-        $feedRepo     = $dm->getRepository('Api43FeedBundle:Feed');
+        $container = $this->getContainer();
+        $dm = $container->get('doctrine.odm.mongodb.document_manager');
+        $feedRepo = $dm->getRepository('Api43FeedBundle:Feed');
         $feedItemRepo = $dm->getRepository('Api43FeedBundle:FeedItem');
 
         // retrieve feed to work on

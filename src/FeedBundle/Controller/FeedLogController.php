@@ -19,11 +19,11 @@ class FeedLogController extends Controller
      */
     public function indexAction()
     {
-        $dm       = $this->getDocumentManager();
+        $dm = $this->getDocumentManager();
         $feedlogs = $dm->getRepository('Api43FeedBundle:FeedLog')->findAllOrderedById(100);
 
         return $this->render('Api43FeedBundle:FeedLog:index.html.twig', array(
-            'menu'     => 'log',
+            'menu' => 'log',
             'feedlogs' => $feedlogs,
         ));
     }
@@ -44,9 +44,9 @@ class FeedLogController extends Controller
         $deleteAllForm = $this->createDeleteAllForm();
 
         return $this->render('Api43FeedBundle:FeedLog:feed.html.twig', array(
-            'menu'            => 'log',
-            'feed'            => $feed,
-            'feedlogs'        => $feedlogs,
+            'menu' => 'log',
+            'feed' => $feed,
+            'feedlogs' => $feedlogs,
             'delete_all_form' => $deleteAllForm->createView(),
         ));
     }

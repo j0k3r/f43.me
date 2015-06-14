@@ -35,9 +35,9 @@ class FeedTestController extends Controller
         }
 
         return $this->render('Api43FeedBundle:FeedTest:index.html.twig', array(
-            'menu'    => 'test',
+            'menu' => 'test',
             'content' => $content,
-            'form'    => $form->createView(),
+            'form' => $form->createView(),
         ));
     }
 }

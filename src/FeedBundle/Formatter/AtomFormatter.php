@@ -16,23 +16,23 @@ class AtomFormatter extends Formatter
     {
         $this->fields = array(
             array(
-                'name'        => 'id',
-                'method'      => 'getLink',
+                'name' => 'id',
+                'method' => 'getLink',
             ), array(
-                'name'        => 'title',
-                'method'      => 'getTitle',
-                'cdata'       => false,
+                'name' => 'title',
+                'method' => 'getTitle',
+                'cdata' => false,
             ), array(
-                'name'        => 'summary',
-                'method'      => 'getContent',
-                'cdata'       => true,
+                'name' => 'summary',
+                'method' => 'getContent',
+                'cdata' => true,
             ), array(
-                'name'        => 'link',
-                'method'      => 'getLink',
-                'attribute'   => 'href',
+                'name' => 'link',
+                'method' => 'getLink',
+                'attribute' => 'href',
             ), array(
-                'name'        => 'updated',
-                'method'      => 'getPubDate',
+                'name' => 'updated',
+                'method' => 'getPubDate',
                 'date_format' => \DateTime::ATOM,
             ),
         );
@@ -48,10 +48,10 @@ class AtomFormatter extends Formatter
         $root = $this->dom->appendChild($root);
 
         $identifier = $this->dom->createElement('id', 'http://'.$this->feed->getHost().'/');
-        $title      = $this->dom->createElement('title', htmlspecialchars($this->feed->getName()));
-        $subtitle   = $this->dom->createElement('subtitle', htmlspecialchars($this->feed->getDescription()));
-        $name       = $this->dom->createElement('name', htmlspecialchars($this->feed->getName()));
-        $generator  = $this->dom->createElement('generator', htmlspecialchars($this->generator));
+        $title = $this->dom->createElement('title', htmlspecialchars($this->feed->getName()));
+        $subtitle = $this->dom->createElement('subtitle', htmlspecialchars($this->feed->getDescription()));
+        $name = $this->dom->createElement('name', htmlspecialchars($this->feed->getName()));
+        $generator = $this->dom->createElement('generator', htmlspecialchars($this->generator));
 
         $self = $this->dom->createElement('link');
         $self->setAttribute('href', $this->url);
