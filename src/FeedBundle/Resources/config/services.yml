@@ -163,6 +163,13 @@ services:
         tags:
             -  { name: feed.extractor, alias: vimeo }
 
+    feed.extractor.youtube:
+        class: Api43\FeedBundle\Extractor\Youtube
+        arguments:
+            - @guzzle.client
+        tags:
+            -  { name: feed.extractor, alias: youtube }
+
     # improver
     feed.improver.chain:
         class: Api43\FeedBundle\Improver\ImproverChain
