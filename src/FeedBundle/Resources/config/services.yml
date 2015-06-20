@@ -170,6 +170,13 @@ services:
         tags:
             -  { name: feed.extractor, alias: youtube }
 
+    feed.extractor.dailymotion:
+        class: Api43\FeedBundle\Extractor\Dailymotion
+        arguments:
+            - @guzzle.client
+        tags:
+            -  { name: feed.extractor, alias: dailymotion }
+
     # improver
     feed.improver.chain:
         class: Api43\FeedBundle\Improver\ImproverChain
