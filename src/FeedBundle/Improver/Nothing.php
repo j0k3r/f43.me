@@ -68,7 +68,13 @@ class Nothing
     public function updateUrl($url)
     {
         try {
-            $response = $this->guzzle->get($url)->send();
+            $response = $this->guzzle
+                ->get(
+                    $url,
+                    // force user agent for some provider (to avoid bad browser detection)
+                    array('User-Agent' => 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/535.2 (KHTML, like Gecko) Chrome/15.0.874.92 Safari/535.2')
+                )
+                ->send();
         } catch (RequestException $e) {
             // catch timeout, ssl verification that failed, etc ...
             return $url.(strpos($url, '?') ? '&' : '?').'not-changed';

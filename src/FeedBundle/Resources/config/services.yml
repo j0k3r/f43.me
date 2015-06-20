@@ -177,6 +177,13 @@ services:
         tags:
             -  { name: feed.extractor, alias: dailymotion }
 
+    feed.extractor.spotify:
+        class: Api43\FeedBundle\Extractor\Spotify
+        arguments:
+            - @guzzle.client
+        tags:
+            -  { name: feed.extractor, alias: spotify }
+
     # improver
     feed.improver.chain:
         class: Api43\FeedBundle\Improver\ImproverChain
