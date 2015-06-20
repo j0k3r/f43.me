@@ -156,6 +156,13 @@ services:
         tags:
             -  { name: feed.extractor, alias: soundcloud }
 
+    feed.extractor.vimeo:
+        class: Api43\FeedBundle\Extractor\Vimeo
+        arguments:
+            - @guzzle.client
+        tags:
+            -  { name: feed.extractor, alias: vimeo }
+
     # improver
     feed.improver.chain:
         class: Api43\FeedBundle\Improver\ImproverChain
