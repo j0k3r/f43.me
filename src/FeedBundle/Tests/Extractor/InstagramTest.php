@@ -12,6 +12,7 @@ class InstagramTest extends \PHPUnit_Framework_TestCase
         return array(
             array('https://instagram.com/p/2N5UHfChAZ/', true),
             array('http://instagr.am/p/fA9uwTtkSN/', true),
+            array('https://instagram.com/p/4FKIIdJ9LM/?taken-by=j0k', true),
             array('https://instagram.com', false),
             array('https://goog.co', false),
         );

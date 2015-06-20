@@ -81,7 +81,7 @@ class SoundcloudTest extends \PHPUnit_Framework_TestCase
 
         $soundCloud = new Soundcloud($guzzle);
 
-        // first test fail because we didn't match an url, so SoundcloudId isn't defined
+        // first test fail because we didn't match an url, so SoundcloudUrl isn't defined
         $this->assertEmpty($soundCloud->getContent());
 
         $soundCloud->match('https://soundcloud.com/birdfeeder/jurassic-park-theme-1000-slower');

@@ -82,7 +82,7 @@ class VimeoTest extends \PHPUnit_Framework_TestCase
 
         $vimeo = new Vimeo($guzzle);
 
-        // first test fail because we didn't match an url, so VimeoId isn't defined
+        // first test fail because we didn't match an url, so VimeoUrl isn't defined
         $this->assertEmpty($vimeo->getContent());
 
         $vimeo->match('https://vimeo.com/groups/motion/videos/131034832');
