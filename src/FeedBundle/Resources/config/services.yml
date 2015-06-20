@@ -149,6 +149,13 @@ services:
         tags:
             -  { name: feed.extractor, alias: camplus }
 
+    feed.extractor.soundcloud:
+        class: Api43\FeedBundle\Extractor\Soundcloud
+        arguments:
+            - @guzzle.client
+        tags:
+            -  { name: feed.extractor, alias: soundcloud }
+
     # improver
     feed.improver.chain:
         class: Api43\FeedBundle\Improver\ImproverChain
