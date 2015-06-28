@@ -13,6 +13,7 @@ class GfycatTest extends \PHPUnit_Framework_TestCase
             array('http://gfycat.com/SingleUntriedBudgie', true),
             array('https://gfycat.com/SingleUntriedBudgie', true),
             array('http://gfycat.com/NeatSpitefulCapeghostfrog', true),
+            array('http://www.gfycat.com/NeatSpitefulCapeghostfrog', true),
             array('http://gfycat.com/', false),
             array('https://goog.co', false),
         );

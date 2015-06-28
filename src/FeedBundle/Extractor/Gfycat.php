@@ -30,7 +30,7 @@ class Gfycat extends AbstractExtractor
             return false;
         }
 
-        if (0 !== strpos($host, 'gfycat.com')) {
+        if (false === strpos($host, 'gfycat.com')) {
             return false;
         }
 
