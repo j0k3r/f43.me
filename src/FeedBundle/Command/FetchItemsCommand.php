@@ -172,9 +172,9 @@ class FetchItemsCommand extends ContainerAwareCommand
             if ($input->getOption('with-trace')) {
                 $output->writeln('<info>New cached items</info>: '.$cached);
             }
-        }
 
-        $dm->flush();
+            $dm->flush();
+        }
 
         if (!empty($feedUpdated)) {
             if ($input->getOption('with-trace')) {
