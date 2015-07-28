@@ -41,11 +41,17 @@ class Tumblr extends AbstractExtractor
             return false;
         }
 
-        // retrieve the tumblr user to validate that's a tumblr post
-        $tumblrUser = $this->guzzle
-            ->get($url)
-            ->send()
-            ->getHeader('X-Tumblr-User');
+        try {
+            // retrieve the tumblr user to validate that's a tumblr post
+            $tumblrUser = $this->guzzle
+                ->get($url)
+                ->send()
+                ->getHeader('X-Tumblr-User');
+        } catch (RequestException $e) {
+            trigger_error('Tumblr match failed for "'.$url.'" : '.$e->getMessage());
+
+            return false;
+        }
 
         if (!$tumblrUser) {
             return false;

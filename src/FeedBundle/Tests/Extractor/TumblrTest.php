@@ -49,6 +49,35 @@ class TumblrTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($expected, $tumblr->match($url));
     }
 
+    /**
+     * @expectedException PHPUnit_Framework_Error
+     */
+    public function testMatchFailRequest()
+    {
+        $guzzle = $this->getMockBuilder('Guzzle\Http\Client')
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $request = $this->getMockBuilder('Guzzle\Http\Message\Request')
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $response = $this->getMockBuilder('Guzzle\Http\Message\Response')
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $guzzle->expects($this->any())
+            ->method('get')
+            ->will($this->returnValue($request));
+
+        $request->expects($this->any())
+            ->method('send')
+            ->will($this->throwException(new RequestException()));
+
+        $tumblr = new Tumblr($guzzle, 'apikey');
+        $tumblr->match('http://lesjoiesducode.fr/post/125256171232/quand-après-une-heure-de-dev-je-teste-mon-code-en');
+    }
+
     public function testMatchNotTumblrUser()
     {
         $guzzle = $this->getMockBuilder('Guzzle\Http\Client')
