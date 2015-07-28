@@ -995,14 +995,14 @@
             "target-dir": "Ekino/Bundle/NewRelicBundle",
             "source": {
                 "type": "git",
-                "url": "git@git.ger-multimedia.com:mirror/ekinonewrelicbundle.git",
+                "url": "https://github.com/ekino/EkinoNewRelicBundle.git",
                 "reference": "c151167253b2c07613812eb29b7fefdfe9c18987"
             },
             "dist": {
                 "type": "zip",
-                "url": "http://satis.ger-multimedia.com/mirrors/dist/ekino-newrelic-bundle-1.3.0-03871e.zip",
+                "url": "https://api.github.com/repos/ekino/EkinoNewRelicBundle/zipball/c151167253b2c07613812eb29b7fefdfe9c18987",
                 "reference": "c151167253b2c07613812eb29b7fefdfe9c18987",
-                "shasum": "5eb80d99d20930e28ba6a34ace082a014be46c81"
+                "shasum": ""
             },
             "require-dev": {
                 "silex/silex": "~1.0",
@@ -1024,6 +1024,7 @@
                     "Ekino\\Bundle\\NewRelicBundle": ""
                 }
             },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -1486,14 +1487,14 @@
             "version": "1.15.0",
             "source": {
                 "type": "git",
-                "url": "git@git.ger-multimedia.com:mirror/mirror_monolog.git",
+                "url": "https://github.com/Seldaek/monolog.git",
                 "reference": "dc5150cc608f2334c72c3b6a553ec9668a4156b0"
             },
             "dist": {
                 "type": "zip",
-                "url": "http://satis.ger-multimedia.com/mirrors/dist/monolog-monolog-1.15.0-22a23a.zip",
+                "url": "https://api.github.com/repos/Seldaek/monolog/zipball/dc5150cc608f2334c72c3b6a553ec9668a4156b0",
                 "reference": "dc5150cc608f2334c72c3b6a553ec9668a4156b0",
-                "shasum": "877f2a0cc71c449dda3ef119186689c021b4c0eb"
+                "shasum": ""
             },
             "require": {
                 "php": ">=5.3.0",
@@ -1537,16 +1538,7 @@
                     "Monolog\\": "src/Monolog"
                 }
             },
-            "autoload-dev": {
-                "psr-4": {
-                    "Monolog\\": "tests/Monolog"
-                }
-            },
-            "scripts": {
-                "test": [
-                    "phpunit"
-                ]
-            },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -1564,7 +1556,7 @@
                 "logging",
                 "psr-3"
             ],
-            "time": "2015-07-12 13:54:02"
+            "time": "2015-07-12 13:54:09"
         },
         {
             "name": "psr/log",
@@ -1829,14 +1821,14 @@
             "version": "v2.7.2",
             "source": {
                 "type": "git",
-                "url": "git@git.ger-multimedia.com:mirror/mirror_symfony.git",
-                "reference": "d3830ee100ad71f1eb7b728a8a4986f1c6c67f1c"
+                "url": "https://github.com/symfony/symfony.git",
+                "reference": "969d709ad428076bf1084e386dc26dd904d9fb84"
             },
             "dist": {
                 "type": "zip",
-                "url": "http://satis.ger-multimedia.com/mirrors/dist/symfony-symfony-v2.7.2-0c9322.zip",
-                "reference": "d3830ee100ad71f1eb7b728a8a4986f1c6c67f1c",
-                "shasum": "2c98d624448e85038ca207d4908499e0f46c3721"
+                "url": "https://api.github.com/repos/symfony/symfony/zipball/969d709ad428076bf1084e386dc26dd904d9fb84",
+                "reference": "969d709ad428076bf1084e386dc26dd904d9fb84",
+                "shasum": ""
             },
             "require": {
                 "doctrine/common": "~2.3",
@@ -1925,6 +1917,7 @@
                     "src/Symfony/Component/Intl/Resources/stubs/functions.php"
                 ]
             },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
