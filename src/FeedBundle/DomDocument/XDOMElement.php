@@ -18,6 +18,6 @@ class XDOMElement extends \DOMElement
      */
     public function __construct($name, $value = null, $namespaceURI = null)
     {
-        parent::__construct($name, null, $namespaceURI);
+        parent::__construct($name, $value, $namespaceURI);
     }
 }

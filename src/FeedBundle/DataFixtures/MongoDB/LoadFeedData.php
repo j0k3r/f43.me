@@ -15,12 +15,14 @@ class LoadFeedData extends AbstractFixture implements OrderedFixtureInterface
     public function load(ObjectManager $manager)
     {
         $feedReddit = new Feed();
-        $feedReddit->setName('Reddit');
-        $feedReddit->setDescription('Reddit');
+        $feedReddit->setName('reddit');
+        $feedReddit->setDescription('reddit');
         $feedReddit->setLink('http://reddit.com/.rss');
         $feedReddit->setParser('internal');
         $feedReddit->setFormatter('rss');
         $feedReddit->setHost('http://reddit.com');
+        $feedReddit->setLogo('https://www.redditstatic.com/about/assets/reddit-logo.png');
+        $feedReddit->setColor('#336699');
         $feedReddit->setIsPrivate(false);
         $feedReddit->setSortBy('created_at');
         $feedReddit->setNbItems(3);
@@ -35,6 +37,8 @@ class LoadFeedData extends AbstractFixture implements OrderedFixtureInterface
         $feedHN->setParser('internal');
         $feedHN->setFormatter('atom');
         $feedHN->setHost('news.ycombinator.com');
+        $feedHN->setLogo('https://news.ycombinator.com/yc500.gif');
+        $feedHN->setColor('#ff6600');
         $feedHN->setIsPrivate(false);
         $feedHN->setSortBy('published_at');
         $feedHN->setNbItems(3);

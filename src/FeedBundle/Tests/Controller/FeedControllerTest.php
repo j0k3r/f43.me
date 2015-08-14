@@ -99,8 +99,8 @@ class FeedControllerTest extends FeedWebTestCase
         $this->assertCount(1, $crawler->filter('h1'));
         $this->assertCount(1, $crawler->filter('h2.title'));
         $this->assertCount(1, $crawler->filter('form.custom'));
-        $this->assertCount(2, $crawler->filter('input[type=text]'));
-        $this->assertCount(1, $crawler->filter('input[type=url]'));
+        $this->assertCount(3, $crawler->filter('input[type=text]'));
+        $this->assertCount(2, $crawler->filter('input[type=url]'));
         $this->assertCount(1, $crawler->filter('input[type=checkbox]'));
         $this->assertCount(1, $crawler->filter('input[type=hidden]'));
         $this->assertCount(3, $crawler->filter('select'));
@@ -207,8 +207,8 @@ class FeedControllerTest extends FeedWebTestCase
         $this->assertCount(2, $crawler->filter('h3.subheader'));
         $this->assertCount(1, $crawler->filter('form.custom'));
         // 2 normal + 2 disabled on the right
-        $this->assertCount(4, $crawler->filter('form.custom input[type=text]'));
-        $this->assertCount(1, $crawler->filter('form.custom input[type=url]'));
+        $this->assertCount(5, $crawler->filter('form.custom input[type=text]'));
+        $this->assertCount(2, $crawler->filter('form.custom input[type=url]'));
         $this->assertCount(1, $crawler->filter('form.custom input[type=checkbox]'));
         $this->assertCount(1, $crawler->filter('form.custom input[type=hidden]'));
         $this->assertCount(3, $crawler->filter('form.custom select'));
