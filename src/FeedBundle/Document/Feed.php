@@ -49,6 +49,16 @@ class Feed
     /**
      * @MongoDB\String
      */
+    protected $logo;
+
+    /**
+     * @MongoDB\String
+     */
+    protected $color;
+
+    /**
+     * @MongoDB\String
+     */
     protected $parser;
 
     /**
@@ -497,5 +507,53 @@ class Feed
     public function getNbItems()
     {
         return $this->nb_items;
+    }
+
+    /**
+     * Set logo.
+     *
+     * @param int $logo
+     *
+     * @return self
+     */
+    public function setLogo($logo)
+    {
+        $this->logo = $logo;
+
+        return $this;
+    }
+
+    /**
+     * Get logo.
+     *
+     * @return int $logo
+     */
+    public function getLogo()
+    {
+        return $this->logo;
+    }
+
+    /**
+     * Set color.
+     *
+     * @param int $color
+     *
+     * @return self
+     */
+    public function setColor($color)
+    {
+        $this->color = $color;
+
+        return $this;
+    }
+
+    /**
+     * Get color.
+     *
+     * @return int $color
+     */
+    public function getColor()
+    {
+        return $this->color;
     }
 }

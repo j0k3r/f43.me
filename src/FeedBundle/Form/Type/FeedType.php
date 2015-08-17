@@ -15,6 +15,8 @@ class FeedType extends AbstractType
             ->add('description', 'textarea', array('required' => false))
             ->add('host', 'text', array('attr' => array('placeholder' => 'www.website.com')))
             ->add('link', 'url', array('attr' => array('placeholder' => 'http://www.website.com/rss')))
+            ->add('logo', 'url', array('required' => false))
+            ->add('color', 'text', array('required' => false))
             ->add('parser', 'choice', array(
                 'choices' => array(
                     'internal' => 'Internal',
