@@ -184,6 +184,13 @@ services:
         tags:
             -  { name: feed.extractor, alias: spotify }
 
+    feed.extractor.hackernews:
+        class: Api43\FeedBundle\Extractor\HackerNews
+        arguments:
+            - @guzzle.client
+        tags:
+            -  { name: feed.extractor, alias: hackernews }
+
     # improver
     feed.improver.chain:
         class: Api43\FeedBundle\Improver\ImproverChain

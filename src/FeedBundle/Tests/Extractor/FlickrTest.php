@@ -33,26 +33,6 @@ class FlickrTest extends \PHPUnit_Framework_TestCase
             ->disableOriginalConstructor()
             ->getMock();
 
-        $request = $this->getMockBuilder('Guzzle\Http\Message\Request')
-            ->disableOriginalConstructor()
-            ->getMock();
-
-        $response = $this->getMockBuilder('Guzzle\Http\Message\Response')
-            ->disableOriginalConstructor()
-            ->getMock();
-
-        $guzzle->expects($this->any())
-            ->method('get')
-            ->will($this->returnValue($request));
-
-        $request->expects($this->any())
-            ->method('send')
-            ->will($this->returnValue($response));
-
-        $response->expects($this->any())
-            ->method('getHeader')
-            ->will($this->returnValue('test'));
-
         $flickr = new Flickr($guzzle, 'apikey');
         $this->assertEquals($expected, $flickr->match($url));
     }

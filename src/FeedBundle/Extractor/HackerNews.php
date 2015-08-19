@@ -1,0 +1,74 @@
+<?php
+
+namespace Api43\FeedBundle\Extractor;
+
+use Guzzle\Http\Client;
+use Guzzle\Http\Exception\RequestException;
+
+class HackerNews extends AbstractExtractor
+{
+    protected $guzzle;
+    protected $text = null;
+
+    /**
+     * @param Client $guzzle
+     */
+    public function __construct(Client $guzzle)
+    {
+        $this->guzzle = $guzzle;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function match($url)
+    {
+        $host = parse_url($url, PHP_URL_HOST);
+        $query = parse_url($url, PHP_URL_QUERY);
+
+        if (false === $host || false === $query) {
+            return false;
+        }
+
+        if (0 !== strpos($host, 'news.ycombinator.com')) {
+            return false;
+        }
+
+        // match HN id
+        preg_match('/id\=([0-9]+)/i', $query, $matches);
+
+        if (!isset($matches[1])) {
+            return false;
+        }
+
+        try {
+            $data = $this->guzzle
+                ->get('https://hacker-news.firebaseio.com/v0/item/'.$matches[1].'.json')
+                ->send()
+                ->json();
+        } catch (RequestException $e) {
+            return false;
+        }
+
+        if (in_array($data['type'], array('comment', 'pollopt'))
+            || trim($data['text']) === '') {
+            return false;
+        }
+
+        $this->text = $data['text'];
+
+        return true;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getContent()
+    {
+        if (!$this->text) {
+            return '';
+        }
+
+        return '<p>'.$this->text.'</p>';
+    }
+}

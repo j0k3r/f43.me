@@ -26,22 +26,6 @@ class VidmeTest extends \PHPUnit_Framework_TestCase
             ->disableOriginalConstructor()
             ->getMock();
 
-        $request = $this->getMockBuilder('Guzzle\Http\Message\Request')
-            ->disableOriginalConstructor()
-            ->getMock();
-
-        $response = $this->getMockBuilder('Guzzle\Http\Message\Response')
-            ->disableOriginalConstructor()
-            ->getMock();
-
-        $guzzle->expects($this->any())
-            ->method('get')
-            ->will($this->returnValue($request));
-
-        $request->expects($this->any())
-            ->method('send')
-            ->will($this->returnValue($response));
-
         $vidme = new Vidme($guzzle);
         $this->assertEquals($expected, $vidme->match($url));
     }
