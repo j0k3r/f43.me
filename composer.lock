@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "d2b6db4be4ff30ddd1916770d5e672f0",
+    "hash": "55495162a7f14f9ced6e0da24c40d653",
     "packages": [
         {
             "name": "adyg/php-imgur-api-client",
@@ -777,25 +777,25 @@
         },
         {
             "name": "doctrine/mongodb",
-            "version": "1.1.8",
+            "version": "1.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/mongodb.git",
-                "reference": "5cd7ab2aeb6783b9f2345a47767b5c0b2d2b3305"
+                "reference": "05869c503605d9f29a469393a2e2d901959930ef"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/mongodb/zipball/5cd7ab2aeb6783b9f2345a47767b5c0b2d2b3305",
-                "reference": "5cd7ab2aeb6783b9f2345a47767b5c0b2d2b3305",
+                "url": "https://api.github.com/repos/doctrine/mongodb/zipball/05869c503605d9f29a469393a2e2d901959930ef",
+                "reference": "05869c503605d9f29a469393a2e2d901959930ef",
                 "shasum": ""
             },
             "require": {
-                "doctrine/common": "~2.1",
-                "ext-mongo": ">=1.2.12,<1.7-dev",
+                "doctrine/common": "^2.2",
+                "ext-mongo": "^1.2.12",
                 "php": ">=5.3.2"
             },
             "require-dev": {
-                "jmikola/geojson": "~1.0"
+                "jmikola/geojson": "^1.0"
             },
             "suggest": {
                 "jmikola/geojson": "Support GeoJSON geometry objects in 2dsphere queries"
@@ -826,6 +826,14 @@
                 {
                     "name": "Kris Wallsmith",
                     "email": "kris.wallsmith@gmail.com"
+                },
+                {
+                    "name": "Maciej Malarz",
+                    "email": "malarzm@gmail.com"
+                },
+                {
+                    "name": "Andreas Braun",
+                    "email": "alcaeus@alcaeus.org"
                 }
             ],
             "description": "Doctrine MongoDB Abstraction Layer",
@@ -835,20 +843,20 @@
                 "mongodb",
                 "persistence"
             ],
-            "time": "2015-02-25 00:38:50"
+            "time": "2015-08-18 08:33:01"
         },
         {
             "name": "doctrine/mongodb-odm",
-            "version": "1.0.0-BETA13",
+            "version": "1.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/mongodb-odm.git",
-                "reference": "f9d26e2839c657659dc129fe5b4aaa7f87d0ea55"
+                "reference": "502803f39c238fe03af9a99be80d180b4fdee555"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/mongodb-odm/zipball/f9d26e2839c657659dc129fe5b4aaa7f87d0ea55",
-                "reference": "f9d26e2839c657659dc129fe5b4aaa7f87d0ea55",
+                "url": "https://api.github.com/repos/doctrine/mongodb-odm/zipball/502803f39c238fe03af9a99be80d180b4fdee555",
+                "reference": "502803f39c238fe03af9a99be80d180b4fdee555",
                 "shasum": ""
             },
             "require": {
@@ -858,7 +866,7 @@
                 "doctrine/common": "~2.4",
                 "doctrine/inflector": "~1.0",
                 "doctrine/instantiator": "~1.0.1",
-                "doctrine/mongodb": ">=1.1.5,<2.0",
+                "doctrine/mongodb": "~1.2",
                 "php": ">=5.3.2",
                 "symfony/console": "~2.3|~3.0"
             },
@@ -917,7 +925,7 @@
                 "odm",
                 "persistence"
             ],
-            "time": "2015-05-22 07:35:15"
+            "time": "2015-08-19 08:01:07"
         },
         {
             "name": "doctrine/mongodb-odm-bundle",
@@ -1321,16 +1329,16 @@
         },
         {
             "name": "j0k3r/php-readability",
-            "version": "v1.0.2",
+            "version": "v1.0.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/j0k3r/php-readability.git",
-                "reference": "8667dae74b7c39eac5642fc0f41c96ae42051978"
+                "reference": "91b80b70e2193fb852d96daf1fe17303876881dc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/j0k3r/php-readability/zipball/8667dae74b7c39eac5642fc0f41c96ae42051978",
-                "reference": "8667dae74b7c39eac5642fc0f41c96ae42051978",
+                "url": "https://api.github.com/repos/j0k3r/php-readability/zipball/91b80b70e2193fb852d96daf1fe17303876881dc",
+                "reference": "91b80b70e2193fb852d96daf1fe17303876881dc",
                 "shasum": ""
             },
             "require": {
@@ -1380,7 +1388,7 @@
                 "extraction",
                 "html"
             ],
-            "time": "2015-06-11 07:39:26"
+            "time": "2015-08-19 21:12:31"
         },
         {
             "name": "jdorn/sql-formatter",
