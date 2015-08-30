@@ -48,6 +48,3 @@ stof_doctrine_extensions:
         default:
             timestampable: true
             sluggable: true
-
-ekino_new_relic:
-    enabled: false

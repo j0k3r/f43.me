@@ -17,7 +17,6 @@ class AppKernel extends Kernel
             new Doctrine\Bundle\MongoDBBundle\DoctrineMongoDBBundle(),
             new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
             new Api43\FeedBundle\Api43FeedBundle(),
-            new Ekino\Bundle\NewRelicBundle\EkinoNewRelicBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {
