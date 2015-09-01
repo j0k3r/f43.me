@@ -2,8 +2,8 @@
 
 namespace Api43\FeedBundle\Extractor;
 
-use Guzzle\Http\Client;
-use Guzzle\Http\Exception\RequestException;
+use GuzzleHttp\Client;
+use GuzzleHttp\Exception\RequestException;
 
 class Soundcloud extends AbstractExtractor
 {
@@ -51,7 +51,6 @@ class Soundcloud extends AbstractExtractor
         try {
             $data = $this->guzzle
                 ->get('http://soundcloud.com/oembed?format=json&url='.$this->soundCloundUrl)
-                ->send()
                 ->json();
         } catch (RequestException $e) {
             trigger_error('Soundcloud extract failed for "'.$this->soundCloundUrl.'": '.$e->getMessage());

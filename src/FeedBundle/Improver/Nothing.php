@@ -2,8 +2,8 @@
 
 namespace Api43\FeedBundle\Improver;
 
-use Guzzle\Http\Client;
-use Guzzle\Http\Exception\RequestException;
+use GuzzleHttp\Client;
+use GuzzleHttp\Exception\RequestException;
 
 /**
  * Default Improver (aka Nothing).
@@ -72,9 +72,8 @@ class Nothing
                 ->get(
                     $url,
                     // force user agent for some provider (to avoid bad browser detection)
-                    array('User-Agent' => 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/535.2 (KHTML, like Gecko) Chrome/15.0.874.92 Safari/535.2')
-                )
-                ->send();
+                    array('headers' => array('User-Agent' => 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/535.2 (KHTML, like Gecko) Chrome/15.0.874.92 Safari/535.2'))
+                );
         } catch (RequestException $e) {
             // catch timeout, ssl verification that failed, etc ...
             return $url.(strpos($url, '?') ? '&' : '?').'not-changed';

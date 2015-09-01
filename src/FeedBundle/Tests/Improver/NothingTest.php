@@ -3,7 +3,7 @@
 namespace Api43\FeedBundle\Tests\Improver;
 
 use Api43\FeedBundle\Improver\Nothing;
-use Guzzle\Http\Exception\RequestException;
+use GuzzleHttp\Exception\RequestException;
 
 class NothingTest extends \PHPUnit_Framework_TestCase
 {
@@ -23,24 +23,20 @@ class NothingTest extends \PHPUnit_Framework_TestCase
      */
     public function testUpdateUrl($url, $expected)
     {
-        $guzzle = $this->getMockBuilder('Guzzle\Http\Client')
+        $guzzle = $this->getMockBuilder('GuzzleHttp\Client')
             ->disableOriginalConstructor()
             ->getMock();
 
-        $request = $this->getMockBuilder('Guzzle\Http\Message\Request')
+        $request = $this->getMockBuilder('GuzzleHttp\Message\Request')
             ->disableOriginalConstructor()
             ->getMock();
 
-        $response = $this->getMockBuilder('Guzzle\Http\Message\Response')
+        $response = $this->getMockBuilder('GuzzleHttp\Message\Response')
             ->disableOriginalConstructor()
             ->getMock();
 
         $guzzle->expects($this->any())
             ->method('get')
-            ->will($this->returnValue($request));
-
-        $request->expects($this->any())
-            ->method('send')
             ->will($this->returnValue($response));
 
         $response->expects($this->any())
@@ -53,13 +49,17 @@ class NothingTest extends \PHPUnit_Framework_TestCase
 
     public function testUpdateUrlFail()
     {
-        $guzzle = $this->getMockBuilder('Guzzle\Http\Client')
+        $guzzle = $this->getMockBuilder('GuzzleHttp\Client')
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $request = $this->getMockBuilder('GuzzleHttp\Message\Request')
             ->disableOriginalConstructor()
             ->getMock();
 
         $guzzle->expects($this->any())
             ->method('get')
-            ->will($this->throwException(new RequestException()));
+            ->will($this->throwException(new RequestException('oops', $request)));
 
         $nothing = new Nothing($guzzle);
         $this->assertEquals('http://0.0.0.0/content?not-changed', $nothing->updateUrl('http://0.0.0.0/content'));

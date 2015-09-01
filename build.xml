@@ -65,8 +65,6 @@
     <exec executable="phpunit" failonerror="true">
       <arg value="--coverage-html"/>
       <arg value="build/coverage"/>
-      <arg value="--coverage-clover"/>
-      <arg value="build/logs/clover.xml"/>
     </exec>
   </target>
 </project>

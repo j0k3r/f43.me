@@ -2,8 +2,8 @@
 
 namespace Api43\FeedBundle\Extractor;
 
-use Guzzle\Http\Client;
-use Guzzle\Http\Exception\RequestException;
+use GuzzleHttp\Client;
+use GuzzleHttp\Exception\RequestException;
 
 class Flickr extends AbstractExtractor
 {
@@ -77,7 +77,6 @@ class Flickr extends AbstractExtractor
         try {
             $data = $this->guzzle
                 ->get('https://api.flickr.com/services/rest/?method=flickr.photos.getSizes&api_key='.$this->flickrApiKey.'&photo_id='.$this->flickrId.'&format=json&nojsoncallback=1')
-                ->send()
                 ->json();
         } catch (RequestException $e) {
             trigger_error('Flickr extract failed for "'.$this->flickrId.'": '.$e->getMessage());
@@ -107,7 +106,6 @@ class Flickr extends AbstractExtractor
         try {
             $data = $this->guzzle
                 ->get('https://api.flickr.com/services/rest/?method=flickr.photosets.getPhotos&api_key='.$this->flickrApiKey.'&photoset_id='.$this->flickrSetId.'&extras=url_l,url_o&format=json&nojsoncallback=1')
-                ->send()
                 ->json();
         } catch (RequestException $e) {
             trigger_error('Flickr extract failed for "'.$this->flickrSetId.'": '.$e->getMessage());

@@ -3,7 +3,7 @@
 namespace Api43\FeedBundle\Tests\Extractor;
 
 use Api43\FeedBundle\Extractor\HackerNews;
-use Guzzle\Http\Exception\RequestException;
+use GuzzleHttp\Exception\RequestException;
 
 class HackerNewsTest extends \PHPUnit_Framework_TestCase
 {
@@ -26,24 +26,20 @@ class HackerNewsTest extends \PHPUnit_Framework_TestCase
      */
     public function testMatch($url, $expected, $valueReturned = null)
     {
-        $guzzle = $this->getMockBuilder('Guzzle\Http\Client')
+        $guzzle = $this->getMockBuilder('GuzzleHttp\Client')
             ->disableOriginalConstructor()
             ->getMock();
 
-        $request = $this->getMockBuilder('Guzzle\Http\Message\Request')
+        $request = $this->getMockBuilder('GuzzleHttp\Message\Request')
             ->disableOriginalConstructor()
             ->getMock();
 
-        $response = $this->getMockBuilder('Guzzle\Http\Message\Response')
+        $response = $this->getMockBuilder('GuzzleHttp\Message\Response')
             ->disableOriginalConstructor()
             ->getMock();
 
         $guzzle->expects($this->any())
             ->method('get')
-            ->will($this->returnValue($request));
-
-        $request->expects($this->any())
-            ->method('send')
             ->will($this->returnValue($response));
 
         $response->expects($this->any())
@@ -56,29 +52,25 @@ class HackerNewsTest extends \PHPUnit_Framework_TestCase
 
     public function testMatchGuzzleFail()
     {
-        $guzzle = $this->getMockBuilder('Guzzle\Http\Client')
+        $guzzle = $this->getMockBuilder('GuzzleHttp\Client')
             ->disableOriginalConstructor()
             ->getMock();
 
-        $request = $this->getMockBuilder('Guzzle\Http\Message\Request')
+        $request = $this->getMockBuilder('GuzzleHttp\Message\Request')
             ->disableOriginalConstructor()
             ->getMock();
 
-        $response = $this->getMockBuilder('Guzzle\Http\Message\Response')
+        $response = $this->getMockBuilder('GuzzleHttp\Message\Response')
             ->disableOriginalConstructor()
             ->getMock();
 
         $guzzle->expects($this->any())
             ->method('get')
-            ->will($this->returnValue($request));
-
-        $request->expects($this->any())
-            ->method('send')
             ->will($this->returnValue($response));
 
         $response->expects($this->any())
             ->method('json')
-            ->will($this->throwException(new RequestException()));
+            ->will($this->throwException(new RequestException('oops', $request)));
 
         $hn = new HackerNews($guzzle);
         $this->assertEquals(false, $hn->match('http://news.ycombinator.com/item?id=10074364'));
@@ -86,24 +78,20 @@ class HackerNewsTest extends \PHPUnit_Framework_TestCase
 
     public function testContent()
     {
-        $guzzle = $this->getMockBuilder('Guzzle\Http\Client')
+        $guzzle = $this->getMockBuilder('GuzzleHttp\Client')
             ->disableOriginalConstructor()
             ->getMock();
 
-        $request = $this->getMockBuilder('Guzzle\Http\Message\Request')
+        $request = $this->getMockBuilder('GuzzleHttp\Message\Request')
             ->disableOriginalConstructor()
             ->getMock();
 
-        $response = $this->getMockBuilder('Guzzle\Http\Message\Response')
+        $response = $this->getMockBuilder('GuzzleHttp\Message\Response')
             ->disableOriginalConstructor()
             ->getMock();
 
         $guzzle->expects($this->any())
             ->method('get')
-            ->will($this->returnValue($request));
-
-        $request->expects($this->any())
-            ->method('send')
             ->will($this->returnValue($response));
 
         $response->expects($this->any())

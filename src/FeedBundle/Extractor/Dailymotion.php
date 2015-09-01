@@ -2,8 +2,8 @@
 
 namespace Api43\FeedBundle\Extractor;
 
-use Guzzle\Http\Client;
-use Guzzle\Http\Exception\RequestException;
+use GuzzleHttp\Client;
+use GuzzleHttp\Exception\RequestException;
 
 class Dailymotion extends AbstractExtractor
 {
@@ -51,7 +51,6 @@ class Dailymotion extends AbstractExtractor
         try {
             $data = $this->guzzle
                 ->get('http://www.dailymotion.com/services/oembed?format=json&url='.$this->dailymotionUrl)
-                ->send()
                 ->json();
         } catch (RequestException $e) {
             trigger_error('Dailymotion extract failed for "'.$this->dailymotionUrl.'": '.$e->getMessage());

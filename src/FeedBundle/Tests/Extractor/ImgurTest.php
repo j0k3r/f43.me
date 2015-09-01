@@ -3,7 +3,6 @@
 namespace Api43\FeedBundle\Tests\Extractor;
 
 use Api43\FeedBundle\Extractor\Imgur;
-use Guzzle\Http\Exception\RequestException;
 
 class ImgurTest extends \PHPUnit_Framework_TestCase
 {
@@ -187,7 +186,7 @@ class ImgurTest extends \PHPUnit_Framework_TestCase
 
         $imgurClient->expects($this->any())
             ->method('api')
-            ->will($this->throwException(new RequestException()));
+            ->will($this->throwException(new \Guzzle\Http\Exception\RequestException()));
 
         $imgur = new Imgur($imgurClient);
         $imgur->match('http://imgur.com/gallery/IoKwI7E');

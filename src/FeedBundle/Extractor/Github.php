@@ -2,8 +2,8 @@
 
 namespace Api43\FeedBundle\Extractor;
 
-use Guzzle\Http\Client;
-use Guzzle\Http\Exception\RequestException;
+use GuzzleHttp\Client;
+use GuzzleHttp\Exception\RequestException;
 
 class Github extends AbstractExtractor
 {
@@ -64,7 +64,6 @@ class Github extends AbstractExtractor
                         'User-Agent' => 'f43.me / Github Extractor',
                     )
                 )
-                ->send()
                 ->getBody(true);
         } catch (RequestException $e) {
             // Github will return a 404 if no readme are found
