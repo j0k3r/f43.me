@@ -64,7 +64,7 @@ class Github extends AbstractExtractor
                         'User-Agent' => 'f43.me / Github Extractor',
                     )
                 )
-                ->getBody(true);
+                ->getBody();
         } catch (RequestException $e) {
             // Github will return a 404 if no readme are found
             return '';

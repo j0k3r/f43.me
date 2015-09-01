@@ -60,7 +60,7 @@ class Internal extends AbstractParser
 
         try {
             $response = $this->guzzle->get($url);
-            $content = $response->getBody(true);
+            $content = $response->getBody();
 
             // if it's a binary file (in fact, not a 'text'), we handle it differently
             if (!$this->isContentType($response, 'text')) {

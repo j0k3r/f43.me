@@ -28,13 +28,13 @@ class ConstraintRssValidator extends ConstraintValidator
         try {
             $content = $this->guzzle
                 ->get('http://validator.w3.org/feed/check.cgi?url='.$value)
-                ->getBody(true);
+                ->getBody();
         } catch (RequestException $e) {
             // if thing goes wrong, let's try with an alternative
             try {
                 $content = $this->guzzle
                     ->get('http://feedvalidator.org/check.cgi?url='.$value)
-                    ->getBody(true);
+                    ->getBody();
             } catch (RequestException $e) {
                 $content = false;
             }
