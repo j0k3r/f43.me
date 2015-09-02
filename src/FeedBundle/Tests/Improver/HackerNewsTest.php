@@ -19,7 +19,7 @@ class HackerNewsTest extends \PHPUnit_Framework_TestCase
      */
     public function testMatch($url, $expected)
     {
-        $guzzle = $this->getMockBuilder('Guzzle\Http\Client')
+        $guzzle = $this->getMockBuilder('GuzzleHttp\Client')
             ->disableOriginalConstructor()
             ->getMock();
 
@@ -29,7 +29,7 @@ class HackerNewsTest extends \PHPUnit_Framework_TestCase
 
     public function testUpdateContent()
     {
-        $guzzle = $this->getMockBuilder('Guzzle\Http\Client')
+        $guzzle = $this->getMockBuilder('GuzzleHttp\Client')
             ->disableOriginalConstructor()
             ->getMock();
 

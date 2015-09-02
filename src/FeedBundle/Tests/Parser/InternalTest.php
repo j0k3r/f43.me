@@ -3,7 +3,7 @@
 namespace Api43\FeedBundle\Tests\Parser;
 
 use Api43\FeedBundle\Parser\Internal;
-use Guzzle\Http\Exception\RequestException;
+use GuzzleHttp\Exception\RequestException;
 
 class InternalTest extends \PHPUnit_Framework_TestCase
 {
@@ -25,24 +25,20 @@ class InternalTest extends \PHPUnit_Framework_TestCase
 
     public function testParseEmpty()
     {
-        $guzzle = $this->getMockBuilder('Guzzle\Http\Client')
+        $guzzle = $this->getMockBuilder('GuzzleHttp\Client')
             ->disableOriginalConstructor()
             ->getMock();
 
-        $request = $this->getMockBuilder('Guzzle\Http\Message\Request')
+        $request = $this->getMockBuilder('GuzzleHttp\Message\Request')
             ->disableOriginalConstructor()
             ->getMock();
 
-        $response = $this->getMockBuilder('Guzzle\Http\Message\Response')
+        $response = $this->getMockBuilder('GuzzleHttp\Message\Response')
             ->disableOriginalConstructor()
             ->getMock();
 
         $guzzle->expects($this->any())
             ->method('get')
-            ->will($this->returnValue($request));
-
-        $request->expects($this->any())
-            ->method('send')
             ->will($this->returnValue($response));
 
         $response->expects($this->any())
@@ -55,29 +51,25 @@ class InternalTest extends \PHPUnit_Framework_TestCase
 
     public function testParse()
     {
-        $guzzle = $this->getMockBuilder('Guzzle\Http\Client')
+        $guzzle = $this->getMockBuilder('GuzzleHttp\Client')
             ->disableOriginalConstructor()
             ->getMock();
 
-        $request = $this->getMockBuilder('Guzzle\Http\Message\Request')
+        $request = $this->getMockBuilder('GuzzleHttp\Message\Request')
             ->disableOriginalConstructor()
             ->getMock();
 
-        $response = new \Guzzle\Http\Message\Response(
+        $response = new \GuzzleHttp\Message\Response(
             200,
             array(
                 'Content-Encoding' => 'deflate',
                 'Content-Type' => 'text/html; charset=iso',
             ),
-            '<div></div>'
+            \GuzzleHttp\Stream\Stream::factory('<div></div>')
         );
 
         $guzzle->expects($this->any())
             ->method('get')
-            ->will($this->returnValue($request));
-
-        $request->expects($this->any())
-            ->method('send')
             ->will($this->returnValue($response));
 
         $internal = new Internal($guzzle, $this->regexs);
@@ -86,7 +78,7 @@ class InternalTest extends \PHPUnit_Framework_TestCase
 
     public function testParseVideo()
     {
-        $guzzle = $this->getMockBuilder('Guzzle\Http\Client')
+        $guzzle = $this->getMockBuilder('GuzzleHttp\Client')
             ->disableOriginalConstructor()
             ->getMock();
 
@@ -99,13 +91,17 @@ class InternalTest extends \PHPUnit_Framework_TestCase
      */
     public function testParseGuzzleException()
     {
-        $guzzle = $this->getMockBuilder('Guzzle\Http\Client')
+        $guzzle = $this->getMockBuilder('GuzzleHttp\Client')
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $request = $this->getMockBuilder('GuzzleHttp\Message\Request')
             ->disableOriginalConstructor()
             ->getMock();
 
         $guzzle->expects($this->any())
             ->method('get')
-            ->will($this->throwException(new RequestException()));
+            ->will($this->throwException(new RequestException('oops', $request)));
 
         $internal = new Internal($guzzle, $this->regexs);
         $this->assertEmpty($internal->parse('http://foo.bar.youpla'));
@@ -113,24 +109,20 @@ class InternalTest extends \PHPUnit_Framework_TestCase
 
     public function testParseFalse()
     {
-        $guzzle = $this->getMockBuilder('Guzzle\Http\Client')
+        $guzzle = $this->getMockBuilder('GuzzleHttp\Client')
             ->disableOriginalConstructor()
             ->getMock();
 
-        $request = $this->getMockBuilder('Guzzle\Http\Message\Request')
+        $request = $this->getMockBuilder('GuzzleHttp\Message\Request')
             ->disableOriginalConstructor()
             ->getMock();
 
-        $response = $this->getMockBuilder('Guzzle\Http\Message\Response')
+        $response = $this->getMockBuilder('GuzzleHttp\Message\Response')
             ->disableOriginalConstructor()
             ->getMock();
 
         $guzzle->expects($this->any())
             ->method('get')
-            ->will($this->returnValue($request));
-
-        $request->expects($this->any())
-            ->method('send')
             ->will($this->returnValue($response));
 
         $response->expects($this->any())
@@ -143,29 +135,25 @@ class InternalTest extends \PHPUnit_Framework_TestCase
 
     public function testParseImage()
     {
-        $guzzle = $this->getMockBuilder('Guzzle\Http\Client')
+        $guzzle = $this->getMockBuilder('GuzzleHttp\Client')
             ->disableOriginalConstructor()
             ->getMock();
 
-        $request = $this->getMockBuilder('Guzzle\Http\Message\Request')
+        $request = $this->getMockBuilder('GuzzleHttp\Message\Request')
             ->disableOriginalConstructor()
             ->getMock();
 
-        $response = new \Guzzle\Http\Message\Response(
+        $response = new \GuzzleHttp\Message\Response(
             200,
             array(
                 'Content-Encoding' => 'deflate',
                 'Content-Type' => 'image',
             ),
-            '<div></div>'
+            \GuzzleHttp\Stream\Stream::factory('<div></div>')
         );
 
         $guzzle->expects($this->any())
             ->method('get')
-            ->will($this->returnValue($request));
-
-        $request->expects($this->any())
-            ->method('send')
             ->will($this->returnValue($response));
 
         $internal = new Internal($guzzle, $this->regexs);
@@ -174,29 +162,25 @@ class InternalTest extends \PHPUnit_Framework_TestCase
 
     public function testParseGzip()
     {
-        $guzzle = $this->getMockBuilder('Guzzle\Http\Client')
+        $guzzle = $this->getMockBuilder('GuzzleHttp\Client')
             ->disableOriginalConstructor()
             ->getMock();
 
-        $request = $this->getMockBuilder('Guzzle\Http\Message\Request')
+        $request = $this->getMockBuilder('GuzzleHttp\Message\Request')
             ->disableOriginalConstructor()
             ->getMock();
 
-        $response = new \Guzzle\Http\Message\Response(
+        $response = new \GuzzleHttp\Message\Response(
             200,
             array(
                 'Content-Encoding' => 'gzip',
                 'Content-Type' => 'text',
             ),
-            gzencode("<p>Le Lorem Ipsum est simplement du faux texte employé dans la composition et la mise en page avant impression. Le Lorem Ipsum est le faux texte standard de l'imprimerie depuis les années 1500, quand un peintre anonyme assembla ensemble des morceaux de texte pour réaliser un livre spécimen de polices de texte.</p>")
+            \GuzzleHttp\Stream\Stream::factory(gzencode("<p>Le Lorem Ipsum est simplement du faux texte employé dans la composition et la mise en page avant impression. Le Lorem Ipsum est le faux texte standard de l'imprimerie depuis les années 1500, quand un peintre anonyme assembla ensemble des morceaux de texte pour réaliser un livre spécimen de polices de texte.</p>"))
         );
 
         $guzzle->expects($this->any())
             ->method('get')
-            ->will($this->returnValue($request));
-
-        $request->expects($this->any())
-            ->method('send')
             ->will($this->returnValue($response));
 
         $internal = new Internal($guzzle, $this->regexs);

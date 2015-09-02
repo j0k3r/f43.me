@@ -34,7 +34,7 @@
         "zurb/foundation": "4.3.2",
         "ekino/newrelic-bundle": "~1.2",
         "adyg/php-imgur-api-client": "~1.0",
-        "guzzle/guzzle": "~3.9",
+        "guzzlehttp/guzzle": "~5.0",
         "mnsami/composer-custom-directory-installer": "~1.0",
         "ricardoper/twitteroauth": "~1.0"
     },

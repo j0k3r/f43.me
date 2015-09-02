@@ -4,8 +4,8 @@ namespace Api43\FeedBundle\Validator\Constraints;
 
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
-use Guzzle\Http\Client;
-use Guzzle\Http\Exception\RequestException;
+use GuzzleHttp\Client;
+use GuzzleHttp\Exception\RequestException;
 
 /**
  * Validate a XML feed.
@@ -28,15 +28,13 @@ class ConstraintRssValidator extends ConstraintValidator
         try {
             $content = $this->guzzle
                 ->get('http://validator.w3.org/feed/check.cgi?url='.$value)
-                ->send()
-                ->getBody(true);
+                ->getBody();
         } catch (RequestException $e) {
             // if thing goes wrong, let's try with an alternative
             try {
                 $content = $this->guzzle
                     ->get('http://feedvalidator.org/check.cgi?url='.$value)
-                    ->send()
-                    ->getBody(true);
+                    ->getBody();
             } catch (RequestException $e) {
                 $content = false;
             }

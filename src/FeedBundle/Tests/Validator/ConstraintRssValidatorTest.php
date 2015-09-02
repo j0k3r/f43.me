@@ -4,7 +4,7 @@ namespace Api43\FeedBundle\Tests\Validator;
 
 use Api43\FeedBundle\Validator\Constraints\ConstraintRssValidator;
 use Api43\FeedBundle\Validator\Constraints\ConstraintRss;
-use Guzzle\Http\Exception\RequestException;
+use GuzzleHttp\Exception\RequestException;
 
 class ConstraintRssValidatorTest extends \PHPUnit_Framework_TestCase
 {
@@ -12,24 +12,20 @@ class ConstraintRssValidatorTest extends \PHPUnit_Framework_TestCase
     {
         $constraint = new ConstraintRss();
 
-        $guzzle = $this->getMockBuilder('Guzzle\Http\Client')
+        $guzzle = $this->getMockBuilder('GuzzleHttp\Client')
             ->disableOriginalConstructor()
             ->getMock();
 
-        $request = $this->getMockBuilder('Guzzle\Http\Message\Request')
+        $request = $this->getMockBuilder('GuzzleHttp\Message\Request')
             ->disableOriginalConstructor()
             ->getMock();
 
-        $response = $this->getMockBuilder('Guzzle\Http\Message\Response')
+        $response = $this->getMockBuilder('GuzzleHttp\Message\Response')
             ->disableOriginalConstructor()
             ->getMock();
 
         $guzzle->expects($this->any())
             ->method('get')
-            ->will($this->returnValue($request));
-
-        $request->expects($this->any())
-            ->method('send')
             ->will($this->returnValue($response));
 
         $response->expects($this->any())
@@ -55,24 +51,20 @@ class ConstraintRssValidatorTest extends \PHPUnit_Framework_TestCase
                 $this->equalTo(array('%string%' => 'http://0.0.0.0'))
             );
 
-        $guzzle = $this->getMockBuilder('Guzzle\Http\Client')
+        $guzzle = $this->getMockBuilder('GuzzleHttp\Client')
             ->disableOriginalConstructor()
             ->getMock();
 
-        $request = $this->getMockBuilder('Guzzle\Http\Message\Request')
+        $request = $this->getMockBuilder('GuzzleHttp\Message\Request')
             ->disableOriginalConstructor()
             ->getMock();
 
-        $response = $this->getMockBuilder('Guzzle\Http\Message\Response')
+        $response = $this->getMockBuilder('GuzzleHttp\Message\Response')
             ->disableOriginalConstructor()
             ->getMock();
 
         $guzzle->expects($this->any())
             ->method('get')
-            ->will($this->returnValue($request));
-
-        $request->expects($this->any())
-            ->method('send')
             ->will($this->returnValue($response));
 
         $response->expects($this->any())
@@ -99,30 +91,26 @@ class ConstraintRssValidatorTest extends \PHPUnit_Framework_TestCase
                 $this->equalTo(array('%string%' => 'http://0.0.0.0'))
             );
 
-        $guzzle = $this->getMockBuilder('Guzzle\Http\Client')
+        $guzzle = $this->getMockBuilder('GuzzleHttp\Client')
             ->disableOriginalConstructor()
             ->getMock();
 
-        $request = $this->getMockBuilder('Guzzle\Http\Message\Request')
+        $request = $this->getMockBuilder('GuzzleHttp\Message\Request')
             ->disableOriginalConstructor()
             ->getMock();
 
-        $response = $this->getMockBuilder('Guzzle\Http\Message\Response')
+        $response = $this->getMockBuilder('GuzzleHttp\Message\Response')
             ->disableOriginalConstructor()
             ->getMock();
 
         $guzzle->expects($this->any())
             ->method('get')
-            ->will($this->returnValue($request));
-
-        $request->expects($this->any())
-            ->method('send')
             ->will($this->returnValue($response));
 
         $response->expects($this->any())
             ->method('getBody')
             ->will($this->onConsecutiveCalls(
-                $this->throwException(new RequestException()),
+                $this->throwException(new RequestException('oops', $request)),
                 'This is a not valid'
             ));
 
@@ -139,31 +127,27 @@ class ConstraintRssValidatorTest extends \PHPUnit_Framework_TestCase
 
         $constraint = new ConstraintRss();
 
-        $guzzle = $this->getMockBuilder('Guzzle\Http\Client')
+        $guzzle = $this->getMockBuilder('GuzzleHttp\Client')
             ->disableOriginalConstructor()
             ->getMock();
 
-        $request = $this->getMockBuilder('Guzzle\Http\Message\Request')
+        $request = $this->getMockBuilder('GuzzleHttp\Message\Request')
             ->disableOriginalConstructor()
             ->getMock();
 
-        $response = $this->getMockBuilder('Guzzle\Http\Message\Response')
+        $response = $this->getMockBuilder('GuzzleHttp\Message\Response')
             ->disableOriginalConstructor()
             ->getMock();
 
         $guzzle->expects($this->any())
             ->method('get')
-            ->will($this->returnValue($request));
-
-        $request->expects($this->any())
-            ->method('send')
             ->will($this->returnValue($response));
 
         $response->expects($this->any())
             ->method('getBody')
             ->will($this->onConsecutiveCalls(
-                $this->throwException(new RequestException()),
-                $this->throwException(new RequestException())
+                $this->throwException(new RequestException('oops', $request)),
+                $this->throwException(new RequestException('oops', $request))
             ));
 
         $validator = new ConstraintRssValidator($guzzle);

@@ -2,8 +2,8 @@
 
 namespace Api43\FeedBundle\Parser;
 
-use Guzzle\Http\Client;
-use Guzzle\Http\Exception\RequestException;
+use GuzzleHttp\Client;
+use GuzzleHttp\Exception\RequestException;
 
 /**
  * Retrieve content from an external webservice.
@@ -35,7 +35,6 @@ class External extends AbstractParser
         try {
             $data = $this->guzzle
                 ->get($this->urlApi.'?token='.$this->token.'&url='.urlencode($url))
-                ->send()
                 ->json();
         } catch (RequestException $e) {
             return '';

@@ -2,8 +2,8 @@
 
 namespace Api43\FeedBundle\Parser;
 
-use Guzzle\Http\Client;
-use Guzzle\Http\Exception\RequestException;
+use GuzzleHttp\Client;
+use GuzzleHttp\Exception\RequestException;
 use TubeLink\TubeLink;
 use TubeLink\Exception\ServiceNotFoundException;
 use Api43\FeedBundle\Readability\ReadabilityExtended;
@@ -29,6 +29,21 @@ class Internal extends AbstractParser
     }
 
     /**
+     * Checks if the Content-Type is of a certain type.  This is useful if the
+     * Content-Type header contains charset information and you need to know if
+     * the Content-Type matches a particular type.
+     *
+     * @param GuzzleHttp\Message\Response $response
+     * @param string $type Content type to check against
+     *
+     * @return bool
+     */
+    private function isContentType(\GuzzleHttp\Message\Response $response, $type)
+    {
+        return stripos($response->getHeader('Content-Type'), $type) !== false;
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function parse($url)
@@ -44,13 +59,13 @@ class Internal extends AbstractParser
         }
 
         try {
-            $response = $this->guzzle->get($url)->send();
-            $content = $response->getBody(true);
+            $response = $this->guzzle->get($url);
+            $content = $response->getBody();
 
             // if it's a binary file (in fact, not a 'text'), we handle it differently
-            if (!$response->isContentType('text')) {
+            if (!$this->isContentType($response, 'text')) {
                 // if content is an image, just return it
-                if ($response->isContentType('image')) {
+                if ($this->isContentType($response, 'image')) {
                     return '<img src="'.$url.'" />';
                 }
 
@@ -60,11 +75,11 @@ class Internal extends AbstractParser
             }
 
             // decode gzip content (most of the time it's a Tumblr website)
-            if ('gzip' == $response->getContentEncoding()) {
+            if ('gzip' == (string) $response->getHeader('Content-Encoding')) {
                 $content = gzdecode($content);
             }
 
-            if (!$response->isContentType('utf-8') && !mb_check_encoding($content, 'UTF-8')) {
+            if (!$this->isContentType($response, 'utf-8') && !mb_check_encoding($content, 'UTF-8')) {
                 $content = mb_convert_encoding($content, 'UTF-8');
             }
         } catch (RequestException $e) {

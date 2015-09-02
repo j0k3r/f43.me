@@ -4,7 +4,7 @@ namespace Api43\FeedBundle\Tests\Readability;
 
 use Api43\FeedBundle\Readability\Proxy;
 use Api43\FeedBundle\Parser\Internal;
-use Guzzle\Http\Exception\RequestException;
+use GuzzleHttp\Exception\RequestException;
 
 class ProxyTest extends \PHPUnit_Framework_TestCase
 {
@@ -54,24 +54,20 @@ class ProxyTest extends \PHPUnit_Framework_TestCase
             ->method('match')
             ->willReturn($nothingImprover);
 
-        $guzzle = $this->getMockBuilder('Guzzle\Http\Client')
+        $guzzle = $this->getMockBuilder('GuzzleHttp\Client')
             ->disableOriginalConstructor()
             ->getMock();
 
-        $request = $this->getMockBuilder('Guzzle\Http\Message\Request')
+        $request = $this->getMockBuilder('GuzzleHttp\Message\Request')
             ->disableOriginalConstructor()
             ->getMock();
 
-        $this->response = $this->getMockBuilder('Guzzle\Http\Message\Response')
+        $this->response = $this->getMockBuilder('GuzzleHttp\Message\Response')
             ->disableOriginalConstructor()
             ->getMock();
 
         $guzzle->expects($this->any())
             ->method('get')
-            ->will($this->returnValue($request));
-
-        $request->expects($this->any())
-            ->method('send')
             ->will($this->returnValue($this->response));
 
         $this->internalParser = new Internal($guzzle, array(
@@ -140,9 +136,13 @@ class ProxyTest extends \PHPUnit_Framework_TestCase
         $proxy = new Proxy($this->extractorChain, $this->improverChain, $this->parserChain);
         $proxy->init('internal', $this->feed, true);
 
+        $request = $this->getMockBuilder('GuzzleHttp\Message\Request')
+            ->disableOriginalConstructor()
+            ->getMock();
+
         $this->response->expects($this->any())
             ->method('getBody')
-            ->will($this->throwException(new RequestException()));
+            ->will($this->throwException(new RequestException('oops', $request)));
 
         $proxy->parseContent('http://foo.bar.nowhere/test.html', 'default content');
 
@@ -160,15 +160,14 @@ class ProxyTest extends \PHPUnit_Framework_TestCase
             ->willReturn(gzencode("<p>Le Lorem Ipsum est simplement du faux texte employé dans la composition et la mise en page avant impression. Le Lorem Ipsum est le faux texte standard de l'imprimerie depuis les années 1500, quand un peintre anonyme assembla ensemble des morceaux de texte pour réaliser un livre spécimen de polices de texte.</p>"));
 
         $this->response->expects($this->any())
-            ->method('getContentEncoding')
-            ->willReturn('gzip');
-
-        $this->response->expects($this->any())
-            ->method('isContentType')
+            ->method('getHeader')
             ->will($this->returnCallback(function ($param) {
                 switch ($param) {
-                    case 'text':
-                        return true;
+                    case 'Content-Type':
+                        return 'text';
+
+                    case 'Content-Encoding':
+                        return 'gzip';
                 }
             }));
 
@@ -184,16 +183,11 @@ class ProxyTest extends \PHPUnit_Framework_TestCase
         $proxy->init('internal', $this->feed, true);
 
         $this->response->expects($this->any())
-            ->method('isContentType')
-            ->will($this->returnCallback(function ($param) {
-                switch ($param) {
-                    case 'text':
-                        return false;
-
-                    case 'image':
-                        return true;
-                }
-            }));
+            ->method('getHeader')
+            ->will($this->onConsecutiveCalls(
+                $this->returnValue('image'),
+                $this->returnValue('image')
+            ));
 
         $proxy->parseContent('http://foo.bar.nowhere/test.html', 'default content');
 

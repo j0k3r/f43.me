@@ -2,8 +2,8 @@
 
 namespace Api43\FeedBundle\Extractor;
 
-use Guzzle\Http\Client;
-use Guzzle\Http\Exception\RequestException;
+use GuzzleHttp\Client;
+use GuzzleHttp\Exception\RequestException;
 
 class HackerNews extends AbstractExtractor
 {
@@ -44,7 +44,6 @@ class HackerNews extends AbstractExtractor
         try {
             $data = $this->guzzle
                 ->get('https://hacker-news.firebaseio.com/v0/item/'.$matches[1].'.json')
-                ->send()
                 ->json();
         } catch (RequestException $e) {
             return false;

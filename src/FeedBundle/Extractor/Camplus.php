@@ -2,8 +2,8 @@
 
 namespace Api43\FeedBundle\Extractor;
 
-use Guzzle\Http\Client;
-use Guzzle\Http\Exception\RequestException;
+use GuzzleHttp\Client;
+use GuzzleHttp\Exception\RequestException;
 
 class Camplus extends AbstractExtractor
 {
@@ -58,7 +58,6 @@ class Camplus extends AbstractExtractor
         try {
             $data = $this->guzzle
                 ->get('http://campl.us/'.$this->camplusId.':info')
-                ->send()
                 ->json();
         } catch (RequestException $e) {
             trigger_error('Camplus extract failed for "'.$this->camplusId.'": '.$e->getMessage());

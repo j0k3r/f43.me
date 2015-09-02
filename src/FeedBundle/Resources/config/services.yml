@@ -14,9 +14,8 @@ services:
             - [ setOption, [ 'client_secret', %imgur.client_secret% ] ]
 
     guzzle.client:
-        class: Guzzle\Http\Client
+        class: GuzzleHttp\Client
         arguments:
-            - ''
             - %guzzle.options%
 
     twitter.client:
