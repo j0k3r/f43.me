@@ -4,6 +4,8 @@ namespace Api43\FeedBundle\Tests\Extractor;
 
 use Api43\FeedBundle\Extractor\Camplus;
 use GuzzleHttp\Exception\RequestException;
+use Monolog\Logger;
+use Monolog\Handler\TestHandler;
 
 class CamplusTest extends \PHPUnit_Framework_TestCase
 {
@@ -29,7 +31,8 @@ class CamplusTest extends \PHPUnit_Framework_TestCase
             ->disableOriginalConstructor()
             ->getMock();
 
-        $camplus = new Camplus($guzzle);
+        $camplus = new Camplus();
+        $camplus->setGuzzle($guzzle);
         $this->assertEquals($expected, $camplus->match($url));
     }
 
@@ -64,7 +67,8 @@ class CamplusTest extends \PHPUnit_Framework_TestCase
                 )),
             )));
 
-        $camplus = new Camplus($guzzle);
+        $camplus = new Camplus();
+        $camplus->setGuzzle($guzzle);
 
         // first test fail because we didn't match an url, so camplusId isn't defined
         $this->assertEmpty($camplus->getContent());
@@ -75,9 +79,6 @@ class CamplusTest extends \PHPUnit_Framework_TestCase
         $this->assertContains('<p><img src="http://0.0.0.0/youpi.jpg" /></p>', $camplus->getContent());
     }
 
-    /**
-     * @expectedException PHPUnit_Framework_Error
-     */
     public function testContentWithException()
     {
         $guzzle = $this->getMockBuilder('GuzzleHttp\Client')
@@ -100,11 +101,18 @@ class CamplusTest extends \PHPUnit_Framework_TestCase
             ->method('json')
             ->will($this->throwException(new RequestException('oops', $request)));
 
-        $camplus = new Camplus($guzzle);
+        $camplus = new Camplus();
+        $camplus->setGuzzle($guzzle);
+
+        $logHandler = new TestHandler();
+        $logger = new Logger('test', array($logHandler));
+        $camplus->setLogger($logger);
 
         $camplus->match('http://campl.us/rL9Q');
 
         // this one will catch an exception
         $this->assertEmpty($camplus->getContent());
+
+        $this->assertTrue($logHandler->hasWarning('Camplus extract failed for: rL9Q'), 'Warning message matched');
     }
 }

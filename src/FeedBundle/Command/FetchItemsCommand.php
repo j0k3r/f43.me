@@ -141,7 +141,7 @@ class FetchItemsCommand extends ContainerAwareCommand
                 $feedItem->setFeed($feed);
                 $dm->persist($feedItem);
 
-                $cached++;
+                ++$cached;
 
                 if ($input->getOption('with-trace')) {
                     $progress->advance();

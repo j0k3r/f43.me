@@ -4,6 +4,8 @@ namespace Api43\FeedBundle\Tests\Extractor;
 
 use Api43\FeedBundle\Extractor\Soundcloud;
 use GuzzleHttp\Exception\RequestException;
+use Monolog\Logger;
+use Monolog\Handler\TestHandler;
 
 class SoundcloudTest extends \PHPUnit_Framework_TestCase
 {
@@ -26,13 +28,11 @@ class SoundcloudTest extends \PHPUnit_Framework_TestCase
             ->disableOriginalConstructor()
             ->getMock();
 
-        $soundCloud = new Soundcloud($guzzle);
+        $soundCloud = new Soundcloud();
+        $soundCloud->setGuzzle($guzzle);
         $this->assertEquals($expected, $soundCloud->match($url));
     }
 
-    /**
-     * @expectedException PHPUnit_Framework_Error
-     */
     public function testContent()
     {
         $guzzle = $this->getMockBuilder('GuzzleHttp\Client')
@@ -59,7 +59,12 @@ class SoundcloudTest extends \PHPUnit_Framework_TestCase
                 $this->throwException(new RequestException('oops', $request))
             ));
 
-        $soundCloud = new Soundcloud($guzzle);
+        $soundCloud = new Soundcloud();
+        $soundCloud->setGuzzle($guzzle);
+
+        $logHandler = new TestHandler();
+        $logger = new Logger('test', array($logHandler));
+        $soundCloud->setLogger($logger);
 
         // first test fail because we didn't match an url, so SoundcloudUrl isn't defined
         $this->assertEmpty($soundCloud->getContent());
@@ -72,5 +77,7 @@ class SoundcloudTest extends \PHPUnit_Framework_TestCase
         $this->assertEmpty($soundCloud->getContent());
         // this one will catch an exception
         $this->assertEmpty($soundCloud->getContent());
+
+        $this->assertTrue($logHandler->hasWarning('Soundcloud extract failed for: https://soundcloud.com/birdfeeder/jurassic-park-theme-1000-slower'), 'Warning message matched');
     }
 }

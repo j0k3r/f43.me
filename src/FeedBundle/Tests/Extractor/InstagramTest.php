@@ -4,6 +4,8 @@ namespace Api43\FeedBundle\Tests\Extractor;
 
 use Api43\FeedBundle\Extractor\Instagram;
 use GuzzleHttp\Exception\RequestException;
+use Monolog\Logger;
+use Monolog\Handler\TestHandler;
 
 class InstagramTest extends \PHPUnit_Framework_TestCase
 {
@@ -27,13 +29,11 @@ class InstagramTest extends \PHPUnit_Framework_TestCase
             ->disableOriginalConstructor()
             ->getMock();
 
-        $instagram = new Instagram($guzzle);
+        $instagram = new Instagram();
+        $instagram->setGuzzle($guzzle);
         $this->assertEquals($expected, $instagram->match($url));
     }
 
-    /**
-     * @expectedException PHPUnit_Framework_Error
-     */
     public function testContent()
     {
         $guzzle = $this->getMockBuilder('GuzzleHttp\Client')
@@ -60,7 +60,12 @@ class InstagramTest extends \PHPUnit_Framework_TestCase
                 $this->throwException(new RequestException('oops', $request))
             ));
 
-        $instagram = new Instagram($guzzle);
+        $instagram = new Instagram();
+        $instagram->setGuzzle($guzzle);
+
+        $logHandler = new TestHandler();
+        $logger = new Logger('test', array($logHandler));
+        $instagram->setLogger($logger);
 
         // first test fail because we didn't match an url, so InstagramId isn't defined
         $this->assertEmpty($instagram->getContent());
@@ -73,5 +78,7 @@ class InstagramTest extends \PHPUnit_Framework_TestCase
         $this->assertEmpty($instagram->getContent());
         // this one will catch an exception
         $this->assertEmpty($instagram->getContent());
+
+        $this->assertTrue($logHandler->hasWarning('Instagram extract failed for: https://instagram.com/p/2N5UHfChAZ/'), 'Warning message matched');
     }
 }

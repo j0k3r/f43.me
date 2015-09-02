@@ -4,6 +4,8 @@ namespace Api43\FeedBundle\Tests\Extractor;
 
 use Api43\FeedBundle\Extractor\Deviantart;
 use GuzzleHttp\Exception\RequestException;
+use Monolog\Logger;
+use Monolog\Handler\TestHandler;
 
 class DeviantartTest extends \PHPUnit_Framework_TestCase
 {
@@ -30,7 +32,8 @@ class DeviantartTest extends \PHPUnit_Framework_TestCase
             ->disableOriginalConstructor()
             ->getMock();
 
-        $deviantart = new Deviantart($guzzle);
+        $deviantart = new Deviantart();
+        $deviantart->setGuzzle($guzzle);
         $this->assertEquals($expected, $deviantart->match($url));
     }
 
@@ -63,7 +66,8 @@ class DeviantartTest extends \PHPUnit_Framework_TestCase
                 'html' => '<iframe></iframe>',
             )));
 
-        $deviantart = new Deviantart($guzzle);
+        $deviantart = new Deviantart();
+        $deviantart->setGuzzle($guzzle);
 
         // first test fail because we didn't match an url, so DeviantartId isn't defined
         $this->assertEmpty($deviantart->getContent());
@@ -75,9 +79,6 @@ class DeviantartTest extends \PHPUnit_Framework_TestCase
         $this->assertContains('<iframe></iframe>', $deviantart->getContent());
     }
 
-    /**
-     * @expectedException PHPUnit_Framework_Error
-     */
     public function testContentWithException()
     {
         $guzzle = $this->getMockBuilder('GuzzleHttp\Client')
@@ -100,11 +101,18 @@ class DeviantartTest extends \PHPUnit_Framework_TestCase
             ->method('json')
             ->will($this->throwException(new RequestException('oops', $request)));
 
-        $deviantart = new Deviantart($guzzle);
+        $deviantart = new Deviantart();
+        $deviantart->setGuzzle($guzzle);
+
+        $logHandler = new TestHandler();
+        $logger = new Logger('test', array($logHandler));
+        $deviantart->setLogger($logger);
 
         $deviantart->match('http://mibreit.deviantart.com/art/A-Piece-of-Heaven-357105002');
 
         // this one will catch an exception
         $this->assertEmpty($deviantart->getContent());
+
+        $this->assertTrue($logHandler->hasWarning('Deviantart extract failed for: http://mibreit.deviantart.com/art/A-Piece-of-Heaven-357105002'), 'Warning message matched');
     }
 }

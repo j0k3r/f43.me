@@ -2,8 +2,30 @@
 
 namespace Api43\FeedBundle\Extractor;
 
+use Psr\Log\LoggerInterface;
+use GuzzleHttp\Client;
+
 abstract class AbstractExtractor
 {
+    protected $logger;
+    protected $guzzle;
+
+    /**
+     * @param LoggerInterface $logger
+     */
+    public function setLogger(LoggerInterface $logger)
+    {
+        $this->logger = $logger;
+    }
+
+    /**
+     * @param Client $guzzle
+     */
+    public function setGuzzle(Client $guzzle)
+    {
+        $this->guzzle = $guzzle;
+    }
+
     /**
      * Will tell if this url should be handled by this extrator.
      *

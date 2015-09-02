@@ -4,6 +4,8 @@ namespace Api43\FeedBundle\Tests\Extractor;
 
 use Api43\FeedBundle\Extractor\Vine;
 use GuzzleHttp\Exception\RequestException;
+use Monolog\Logger;
+use Monolog\Handler\TestHandler;
 
 class VineTest extends \PHPUnit_Framework_TestCase
 {
@@ -26,13 +28,11 @@ class VineTest extends \PHPUnit_Framework_TestCase
             ->disableOriginalConstructor()
             ->getMock();
 
-        $vine = new Vine($guzzle);
+        $vine = new Vine();
+        $vine->setGuzzle($guzzle);
         $this->assertEquals($expected, $vine->match($url));
     }
 
-    /**
-     * @expectedException PHPUnit_Framework_Error
-     */
     public function testContent()
     {
         $guzzle = $this->getMockBuilder('GuzzleHttp\Client')
@@ -59,7 +59,12 @@ class VineTest extends \PHPUnit_Framework_TestCase
                 $this->throwException(new RequestException('oops', $request))
             ));
 
-        $vine = new Vine($guzzle);
+        $vine = new Vine();
+        $vine->setGuzzle($guzzle);
+
+        $logHandler = new TestHandler();
+        $logger = new Logger('test', array($logHandler));
+        $vine->setLogger($logger);
 
         // first test fail because we didn't match an url, so VineId isn't defined
         $this->assertEmpty($vine->getContent());
@@ -72,5 +77,7 @@ class VineTest extends \PHPUnit_Framework_TestCase
         $this->assertEmpty($vine->getContent());
         // this one will catch an exception
         $this->assertEmpty($vine->getContent());
+
+        $this->assertTrue($logHandler->hasWarning('Vine extract failed for: e7V1hLdF1bP'), 'Warning message matched');
     }
 }

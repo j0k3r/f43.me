@@ -15,7 +15,7 @@ use Symfony\Component\DependencyInjection\Loader;
 class Api43FeedExtension extends Extension
 {
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function load(array $configs, ContainerBuilder $container)
     {

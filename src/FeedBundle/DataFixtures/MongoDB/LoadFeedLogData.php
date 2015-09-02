@@ -10,7 +10,7 @@ use Api43\FeedBundle\Document\FeedLog;
 class LoadFeedLogData extends AbstractFixture implements OrderedFixtureInterface
 {
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function load(ObjectManager $manager)
     {

@@ -2,23 +2,19 @@
 
 namespace Api43\FeedBundle\Extractor;
 
-use GuzzleHttp\Client;
 use GuzzleHttp\Exception\RequestException;
 
 class Flickr extends AbstractExtractor
 {
-    protected $guzzle;
     protected $flickrApiKey;
     protected $flickrId = null;
     protected $flickrSetId = null;
 
     /**
-     * @param Client $guzzle
      * @param string $flickrApiKey
      */
-    public function __construct(Client $guzzle, $flickrApiKey)
+    public function __construct($flickrApiKey)
     {
-        $this->guzzle = $guzzle;
         $this->flickrApiKey = $flickrApiKey;
     }
 
@@ -79,7 +75,9 @@ class Flickr extends AbstractExtractor
                 ->get('https://api.flickr.com/services/rest/?method=flickr.photos.getSizes&api_key='.$this->flickrApiKey.'&photo_id='.$this->flickrId.'&format=json&nojsoncallback=1')
                 ->json();
         } catch (RequestException $e) {
-            trigger_error('Flickr extract failed for "'.$this->flickrId.'": '.$e->getMessage());
+            $this->logger->warning('Flickr extract failed for: '.$this->flickrId, array(
+                'exception' => $e,
+            ));
 
             return '';
         }
@@ -108,7 +106,9 @@ class Flickr extends AbstractExtractor
                 ->get('https://api.flickr.com/services/rest/?method=flickr.photosets.getPhotos&api_key='.$this->flickrApiKey.'&photoset_id='.$this->flickrSetId.'&extras=url_l,url_o&format=json&nojsoncallback=1')
                 ->json();
         } catch (RequestException $e) {
-            trigger_error('Flickr extract failed for "'.$this->flickrSetId.'": '.$e->getMessage());
+            $this->logger->warning('Flickr extract failed for: '.$this->flickrSetId, array(
+                'exception' => $e,
+            ));
 
             return '';
         }

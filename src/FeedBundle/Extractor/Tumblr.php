@@ -2,23 +2,19 @@
 
 namespace Api43\FeedBundle\Extractor;
 
-use GuzzleHttp\Client;
 use GuzzleHttp\Exception\RequestException;
 
 class Tumblr extends AbstractExtractor
 {
-    protected $guzzle;
     protected $tumblrApiKey;
     protected $tumblrId = null;
     protected $tumblrHost = null;
 
     /**
-     * @param Client $guzzle
      * @param string $tumblrApiKey
      */
-    public function __construct(Client $guzzle, $tumblrApiKey)
+    public function __construct($tumblrApiKey)
     {
-        $this->guzzle = $guzzle;
         $this->tumblrApiKey = $tumblrApiKey;
     }
 
@@ -47,7 +43,9 @@ class Tumblr extends AbstractExtractor
                 ->get($url)
                 ->getHeader('X-Tumblr-User');
         } catch (RequestException $e) {
-            trigger_error('Tumblr match failed for "'.$url.'" : '.$e->getMessage());
+            $this->logger->warning('Tumblr extract failed for: '.$url, array(
+                'exception' => $e,
+            ));
 
             return false;
         }
@@ -76,7 +74,9 @@ class Tumblr extends AbstractExtractor
                 ->get('http://api.tumblr.com/v2/blog/'.$this->tumblrHost.'/posts/text?api_key='.$this->tumblrApiKey.'&id='.$this->tumblrId)
                 ->json();
         } catch (RequestException $e) {
-            trigger_error('Tumblr extract failed for "'.$this->tumblrId.'" & "'.$this->tumblrHost.'": '.$e->getMessage());
+            $this->logger->warning('Tumblr extract failed for: '.$this->tumblrId.' & '.$this->tumblrHost, array(
+                'exception' => $e,
+            ));
 
             return '';
         }

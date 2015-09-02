@@ -80,7 +80,9 @@ class Imgur extends AbstractExtractor
                     break;
             }
         } catch (RuntimeException $e) {
-            trigger_error('Imgur extract failed for "'.$this->hash.'": '.$e->getMessage());
+            $this->logger->warning('Imgur extract failed for: '.$this->hash, array(
+                'exception' => $e,
+            ));
 
             return '';
         }

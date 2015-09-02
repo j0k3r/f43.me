@@ -29,7 +29,8 @@ class GithubTest extends \PHPUnit_Framework_TestCase
             ->disableOriginalConstructor()
             ->getMock();
 
-        $github = new Github($guzzle);
+        $github = new Github();
+        $github->setGuzzle($guzzle);
         $this->assertEquals($expected, $github->match($url));
     }
 
@@ -59,7 +60,8 @@ class GithubTest extends \PHPUnit_Framework_TestCase
                 $this->throwException(new RequestException('oops', $request))
             ));
 
-        $github = new Github($guzzle);
+        $github = new Github();
+        $github->setGuzzle($guzzle);
 
         // first test fail because we didn't match an url, so GithubId isn't defined
         $this->assertEmpty($github->getContent());

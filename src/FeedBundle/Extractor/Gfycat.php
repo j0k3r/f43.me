@@ -2,21 +2,11 @@
 
 namespace Api43\FeedBundle\Extractor;
 
-use GuzzleHttp\Client;
 use GuzzleHttp\Exception\RequestException;
 
 class Gfycat extends AbstractExtractor
 {
-    protected $guzzle;
     protected $gfycatId = null;
-
-    /**
-     * @param Client $guzzle
-     */
-    public function __construct(Client $guzzle)
-    {
-        $this->guzzle = $guzzle;
-    }
 
     /**
      * {@inheritdoc}
@@ -60,7 +50,9 @@ class Gfycat extends AbstractExtractor
                 ->get('http://gfycat.com/cajax/get/'.$this->gfycatId)
                 ->json();
         } catch (RequestException $e) {
-            trigger_error('Gfycat extract failed for "'.$this->gfycatId.'": '.$e->getMessage());
+            $this->logger->warning('Gfycat extract failed for: '.$this->gfycatId, array(
+                'exception' => $e,
+            ));
 
             return '';
         }
