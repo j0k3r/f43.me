@@ -18,6 +18,7 @@ class HackerNewsTest extends \PHPUnit_Framework_TestCase
             array('http://news.ycombinator.com/item?id=160705', false, array('text' => 'toto', 'type' => 'pollopt')),
             array('https://goog.co', false),
             array('http://news.ycombinator.com/item?id=rtyui', false),
+            array('http://user@:80', false),
         );
     }
 

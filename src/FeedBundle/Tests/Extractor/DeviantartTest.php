@@ -20,6 +20,7 @@ class DeviantartTest extends \PHPUnit_Framework_TestCase
             array('http://www.deviantart.com/browse/all/', false),
             array('http://nixielupus.deviantart.com/', false),
             array('http://sta.sh/', false),
+            array('http://user@:80', false),
         );
     }
 

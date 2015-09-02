@@ -17,6 +17,7 @@ class GithubTest extends \PHPUnit_Framework_TestCase
             array('https://github.com/phpcr/phpcr.github.io/', true),
             array('https://gitlab.com/gitlab', false),
             array('https://github.com/alebcay/awesome-shell/blob/master/README.md', false),
+            array('http://user@:80', false),
         );
     }
 

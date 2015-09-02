@@ -24,6 +24,7 @@ class ImgurTest extends \PHPUnit_Framework_TestCase
             array('https://imgur.com/duziauziaozaoLaMy', false),
             array('https://imgur.com/Ay', false),
             array('http://imgur.com/UMOCfIk.gifv', true),
+            array('http://user@:80', false),
         );
     }
 

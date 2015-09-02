@@ -19,6 +19,7 @@ class CamplusTest extends \PHPUnit_Framework_TestCase
             array('http://campl.us/ozu1', true),
             array('http://pics.campl.us/f/6/6283.e61ef28b1535e624f30e4ef96fcd3f52.jpg', false),
             array('http://github.com/symfony/symfony', false),
+            array('http://user@:80', false),
         );
     }
 

@@ -18,6 +18,7 @@ class GfycatTest extends \PHPUnit_Framework_TestCase
             array('http://www.gfycat.com/NeatSpitefulCapeghostfrog', true),
             array('http://gfycat.com/', false),
             array('https://goog.co', false),
+            array('http://user@:80', false),
         );
     }
 

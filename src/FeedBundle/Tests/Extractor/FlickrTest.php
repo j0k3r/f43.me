@@ -23,6 +23,7 @@ class FlickrTest extends \PHPUnit_Framework_TestCase
 
             # photo set
             array('https://www.flickr.com/photos/europeanspaceagency/sets/72157638315605535/', true),
+            array('http://user@:80', false),
         );
     }
 

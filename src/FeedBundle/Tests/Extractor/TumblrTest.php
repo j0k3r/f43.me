@@ -15,6 +15,7 @@ class TumblrTest extends \PHPUnit_Framework_TestCase
             array('http://thecodinglove.com/post/96365413702/client-giving-us-his-feedback-on-his-new-project', true),
             array('http://thecodinglove.com/post/100483712123/monday-morning', true),
             array('http://google.com', false),
+            array('http://user@:80', false),
         );
     }
 

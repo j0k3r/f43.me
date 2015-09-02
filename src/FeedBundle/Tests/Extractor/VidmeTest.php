@@ -16,6 +16,7 @@ class VidmeTest extends \PHPUnit_Framework_TestCase
             array('http://vid.me/e/WaJr', true),
             array('https://vid.me', false),
             array('https://goog.co', false),
+            array('http://user@:80', false),
         );
     }
 

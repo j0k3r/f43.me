@@ -16,6 +16,7 @@ class VineTest extends \PHPUnit_Framework_TestCase
             array('http://vine.co/v/e7V1hLdF1bP', true),
             array('https://vine.co', false),
             array('https://goog.co', false),
+            array('http://user@:80', false),
         );
     }
 

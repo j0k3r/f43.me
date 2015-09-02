@@ -16,6 +16,7 @@ class SoundcloudTest extends \PHPUnit_Framework_TestCase
             array('http://soundcloud.com/birdfeeder/jurassic-park-theme-1000-slower#t=0:02', true),
             array('https://soundcloud.com/birdfeeder', true),
             array('https://goog.co', false),
+            array('http://user@:80', false),
         );
     }
 

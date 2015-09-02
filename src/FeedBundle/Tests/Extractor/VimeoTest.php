@@ -17,6 +17,7 @@ class VimeoTest extends \PHPUnit_Framework_TestCase
             array('https://vimeo.com/channels/staffpicks/130365792', true),
             array('https://vimeo.com/groups/motion/videos/131034832', true),
             array('https://goog.co', false),
+            array('http://user@:80', false),
         );
     }
 

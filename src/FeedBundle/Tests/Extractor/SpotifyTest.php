@@ -18,6 +18,7 @@ class SpotifyTest extends \PHPUnit_Framework_TestCase
             array('https://play.spotify.com/album/6yGp5e6Puhx155c8dQ8e6P', true),
             array('https://play.spotify.com/track/2wIC3jqtTK78zQMdj1DRLu', true),
             array('https://goog.co', false),
+            array('http://user@:80', false),
         );
     }
 

@@ -17,6 +17,7 @@ class YoutubeTest extends \PHPUnit_Framework_TestCase
             array('https://youtu.be/UacN1xwVK2Y', true),
             array('http://youtu.be/UacN1xwVK2Y?t=1s', true),
             array('https://goog.co', false),
+            array('http://user@:80', false),
         );
     }
 

@@ -17,6 +17,7 @@ class DailymotionTest extends \PHPUnit_Framework_TestCase
             array('https://www.dailymotion.com/video/xockol_planete-des-hommes-partie-1-2_travel', true),
             array('http://dailymotion.com/video/xockol_planete-des-hommes-partie-1-2_travel', true),
             array('https://goog.co', false),
+            array('http://user@:80', false),
         );
     }
 
