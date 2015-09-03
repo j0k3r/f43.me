@@ -4,6 +4,8 @@ namespace Api43\FeedBundle\Tests\Extractor;
 
 use Api43\FeedBundle\Extractor\Tumblr;
 use GuzzleHttp\Exception\RequestException;
+use Monolog\Logger;
+use Monolog\Handler\TestHandler;
 
 class TumblrTest extends \PHPUnit_Framework_TestCase
 {
@@ -13,6 +15,7 @@ class TumblrTest extends \PHPUnit_Framework_TestCase
             array('http://thecodinglove.com/post/96365413702/client-giving-us-his-feedback-on-his-new-project', true),
             array('http://thecodinglove.com/post/100483712123/monday-morning', true),
             array('http://google.com', false),
+            array('http://user@:80', false),
         );
     }
 
@@ -41,13 +44,11 @@ class TumblrTest extends \PHPUnit_Framework_TestCase
             ->method('getHeader')
             ->will($this->returnValue('test'));
 
-        $tumblr = new Tumblr($guzzle, 'apikey');
+        $tumblr = new Tumblr('apikey');
+        $tumblr->setGuzzle($guzzle);
         $this->assertEquals($expected, $tumblr->match($url));
     }
 
-    /**
-     * @expectedException PHPUnit_Framework_Error
-     */
     public function testMatchFailRequest()
     {
         $guzzle = $this->getMockBuilder('GuzzleHttp\Client')
@@ -66,8 +67,16 @@ class TumblrTest extends \PHPUnit_Framework_TestCase
             ->method('get')
             ->will($this->throwException(new RequestException('oops', $request)));
 
-        $tumblr = new Tumblr($guzzle, 'apikey');
+        $tumblr = new Tumblr('apikey');
+        $tumblr->setGuzzle($guzzle);
+
+        $logHandler = new TestHandler();
+        $logger = new Logger('test', array($logHandler));
+        $tumblr->setLogger($logger);
+
         $tumblr->match('http://lesjoiesducode.fr/post/125256171232/quand-après-une-heure-de-dev-je-teste-mon-code-en');
+
+        $this->assertTrue($logHandler->hasWarning('Tumblr extract failed for: http://lesjoiesducode.fr/post/125256171232/quand-après-une-heure-de-dev-je-teste-mon-code-en'), 'Warning message matched');
     }
 
     public function testMatchNotTumblrUser()
@@ -92,13 +101,11 @@ class TumblrTest extends \PHPUnit_Framework_TestCase
             ->method('getHeader')
             ->will($this->returnValue(null));
 
-        $tumblr = new Tumblr($guzzle, 'apikey');
+        $tumblr = new Tumblr('apikey');
+        $tumblr->setGuzzle($guzzle);
         $this->assertFalse($tumblr->match('http://thecodinglove.com/post/96365413702/client-giving-us-his-feedback-on-his-new-project'));
     }
 
-    /**
-     * @expectedException PHPUnit_Framework_Error
-     */
     public function testContent()
     {
         $guzzle = $this->getMockBuilder('GuzzleHttp\Client')
@@ -129,7 +136,12 @@ class TumblrTest extends \PHPUnit_Framework_TestCase
                 $this->throwException(new RequestException('oops', $request))
             ));
 
-        $tumblr = new Tumblr($guzzle, 'apikey');
+        $tumblr = new Tumblr('apikey');
+        $tumblr->setGuzzle($guzzle);
+
+        $logHandler = new TestHandler();
+        $logger = new Logger('test', array($logHandler));
+        $tumblr->setLogger($logger);
 
         // first test fail because we didn't match an url, so TumblrId isn't defined
         $this->assertEmpty($tumblr->getContent());
@@ -142,5 +154,7 @@ class TumblrTest extends \PHPUnit_Framework_TestCase
         $this->assertEmpty($tumblr->getContent());
         // this one will catch an exception
         $this->assertEmpty($tumblr->getContent());
+
+        $this->assertTrue($logHandler->hasWarning('Tumblr extract failed for: 96365413702 & thecodinglove.com'), 'Warning message matched');
     }
 }

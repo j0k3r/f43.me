@@ -2,21 +2,11 @@
 
 namespace Api43\FeedBundle\Extractor;
 
-use GuzzleHttp\Client;
 use GuzzleHttp\Exception\RequestException;
 
 class Vidme extends AbstractExtractor
 {
-    protected $guzzle;
     protected $vidmeUrl = null;
-
-    /**
-     * @param Client $guzzle
-     */
-    public function __construct(Client $guzzle)
-    {
-        $this->guzzle = $guzzle;
-    }
 
     /**
      * {@inheritdoc}
@@ -60,7 +50,9 @@ class Vidme extends AbstractExtractor
                 ->get('https://api.vid.me/videoByUrl?url='.$this->vidmeUrl)
                 ->json();
         } catch (RequestException $e) {
-            trigger_error('Vidme extract failed for "'.$this->vidmeUrl.'": '.$e->getMessage());
+            $this->logger->warning('Vidme extract failed for: '.$this->vidmeUrl, array(
+                'exception' => $e,
+            ));
 
             return '';
         }

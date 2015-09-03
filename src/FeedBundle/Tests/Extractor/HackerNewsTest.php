@@ -18,6 +18,7 @@ class HackerNewsTest extends \PHPUnit_Framework_TestCase
             array('http://news.ycombinator.com/item?id=160705', false, array('text' => 'toto', 'type' => 'pollopt')),
             array('https://goog.co', false),
             array('http://news.ycombinator.com/item?id=rtyui', false),
+            array('http://user@:80', false),
         );
     }
 
@@ -46,7 +47,8 @@ class HackerNewsTest extends \PHPUnit_Framework_TestCase
             ->method('json')
             ->will($this->returnValue($valueReturned));
 
-        $hn = new HackerNews($guzzle);
+        $hn = new HackerNews();
+        $hn->setGuzzle($guzzle);
         $this->assertEquals($expected, $hn->match($url));
     }
 
@@ -72,7 +74,8 @@ class HackerNewsTest extends \PHPUnit_Framework_TestCase
             ->method('json')
             ->will($this->throwException(new RequestException('oops', $request)));
 
-        $hn = new HackerNews($guzzle);
+        $hn = new HackerNews();
+        $hn->setGuzzle($guzzle);
         $this->assertEquals(false, $hn->match('http://news.ycombinator.com/item?id=10074364'));
     }
 
@@ -98,7 +101,8 @@ class HackerNewsTest extends \PHPUnit_Framework_TestCase
             ->method('json')
             ->will($this->returnValue(array('text' => 'toto', 'type' => 'story')));
 
-        $hn = new HackerNews($guzzle);
+        $hn = new HackerNews();
+        $hn->setGuzzle($guzzle);
 
         // first test fail because we didn't match an url, so HackerNewsId isn't defined
         $this->assertEmpty($hn->getContent());

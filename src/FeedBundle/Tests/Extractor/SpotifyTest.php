@@ -4,6 +4,8 @@ namespace Api43\FeedBundle\Tests\Extractor;
 
 use Api43\FeedBundle\Extractor\Spotify;
 use GuzzleHttp\Exception\RequestException;
+use Monolog\Logger;
+use Monolog\Handler\TestHandler;
 
 class SpotifyTest extends \PHPUnit_Framework_TestCase
 {
@@ -16,6 +18,7 @@ class SpotifyTest extends \PHPUnit_Framework_TestCase
             array('https://play.spotify.com/album/6yGp5e6Puhx155c8dQ8e6P', true),
             array('https://play.spotify.com/track/2wIC3jqtTK78zQMdj1DRLu', true),
             array('https://goog.co', false),
+            array('http://user@:80', false),
         );
     }
 
@@ -28,13 +31,11 @@ class SpotifyTest extends \PHPUnit_Framework_TestCase
             ->disableOriginalConstructor()
             ->getMock();
 
-        $spotify = new Spotify($guzzle);
+        $spotify = new Spotify();
+        $spotify->setGuzzle($guzzle);
         $this->assertEquals($expected, $spotify->match($url));
     }
 
-    /**
-     * @expectedException PHPUnit_Framework_Error
-     */
     public function testContent()
     {
         $guzzle = $this->getMockBuilder('GuzzleHttp\Client')
@@ -61,7 +62,12 @@ class SpotifyTest extends \PHPUnit_Framework_TestCase
                 $this->throwException(new RequestException('oops', $request))
             ));
 
-        $spotify = new Spotify($guzzle);
+        $spotify = new Spotify();
+        $spotify->setGuzzle($guzzle);
+
+        $logHandler = new TestHandler();
+        $logger = new Logger('test', array($logHandler));
+        $spotify->setLogger($logger);
 
         // first test fail because we didn't match an url, so SpotifyUrl isn't defined
         $this->assertEmpty($spotify->getContent());
@@ -74,5 +80,7 @@ class SpotifyTest extends \PHPUnit_Framework_TestCase
         $this->assertEmpty($spotify->getContent());
         // this one will catch an exception
         $this->assertEmpty($spotify->getContent());
+
+        $this->assertTrue($logHandler->hasWarning('Spotify extract failed for: https://play.spotify.com/artist/4njdEjTnLfcGImKZu1iSrz'), 'Warning message matched');
     }
 }

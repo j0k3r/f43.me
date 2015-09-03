@@ -2,21 +2,11 @@
 
 namespace Api43\FeedBundle\Extractor;
 
-use GuzzleHttp\Client;
 use GuzzleHttp\Exception\RequestException;
 
 class Spotify extends AbstractExtractor
 {
-    protected $guzzle;
     protected $spotifyUrl = null;
-
-    /**
-     * @param Client $guzzle
-     */
-    public function __construct(Client $guzzle)
-    {
-        $this->guzzle = $guzzle;
-    }
 
     /**
      * {@inheritdoc}
@@ -53,7 +43,9 @@ class Spotify extends AbstractExtractor
                 ->get('https://embed.spotify.com/oembed/?format=json&url='.$this->spotifyUrl)
                 ->json();
         } catch (RequestException $e) {
-            trigger_error('Spotify extract failed for "'.$this->spotifyUrl.'": '.$e->getMessage());
+            $this->logger->warning('Spotify extract failed for: '.$this->spotifyUrl, array(
+                'exception' => $e,
+            ));
 
             return '';
         }

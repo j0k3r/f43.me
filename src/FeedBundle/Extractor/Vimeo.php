@@ -2,21 +2,11 @@
 
 namespace Api43\FeedBundle\Extractor;
 
-use GuzzleHttp\Client;
 use GuzzleHttp\Exception\RequestException;
 
 class Vimeo extends AbstractExtractor
 {
-    protected $guzzle;
     protected $vimeoUrl = null;
-
-    /**
-     * @param Client $guzzle
-     */
-    public function __construct(Client $guzzle)
-    {
-        $this->guzzle = $guzzle;
-    }
 
     /**
      * {@inheritdoc}
@@ -53,7 +43,9 @@ class Vimeo extends AbstractExtractor
                 ->get('https://vimeo.com/api/oembed.xml?format=json&url='.$this->vimeoUrl)
                 ->json();
         } catch (RequestException $e) {
-            trigger_error('Vimeo extract failed for "'.$this->vimeoUrl.'": '.$e->getMessage());
+            $this->logger->warning('Vimeo extract failed for: '.$this->vimeoUrl, array(
+                'exception' => $e,
+            ));
 
             return '';
         }

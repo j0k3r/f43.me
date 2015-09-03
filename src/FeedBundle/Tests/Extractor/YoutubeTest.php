@@ -4,6 +4,8 @@ namespace Api43\FeedBundle\Tests\Extractor;
 
 use Api43\FeedBundle\Extractor\Youtube;
 use GuzzleHttp\Exception\RequestException;
+use Monolog\Logger;
+use Monolog\Handler\TestHandler;
 
 class YoutubeTest extends \PHPUnit_Framework_TestCase
 {
@@ -15,6 +17,7 @@ class YoutubeTest extends \PHPUnit_Framework_TestCase
             array('https://youtu.be/UacN1xwVK2Y', true),
             array('http://youtu.be/UacN1xwVK2Y?t=1s', true),
             array('https://goog.co', false),
+            array('http://user@:80', false),
         );
     }
 
@@ -27,13 +30,11 @@ class YoutubeTest extends \PHPUnit_Framework_TestCase
             ->disableOriginalConstructor()
             ->getMock();
 
-        $youtube = new Youtube($guzzle);
+        $youtube = new Youtube();
+        $youtube->setGuzzle($guzzle);
         $this->assertEquals($expected, $youtube->match($url));
     }
 
-    /**
-     * @expectedException PHPUnit_Framework_Error
-     */
     public function testContent()
     {
         $guzzle = $this->getMockBuilder('GuzzleHttp\Client')
@@ -60,7 +61,12 @@ class YoutubeTest extends \PHPUnit_Framework_TestCase
                 $this->throwException(new RequestException('oops', $request))
             ));
 
-        $youtube = new Youtube($guzzle);
+        $youtube = new Youtube();
+        $youtube->setGuzzle($guzzle);
+
+        $logHandler = new TestHandler();
+        $logger = new Logger('test', array($logHandler));
+        $youtube->setLogger($logger);
 
         // first test fail because we didn't match an url, so YoutubeUrl isn't defined
         $this->assertEmpty($youtube->getContent());
@@ -73,5 +79,7 @@ class YoutubeTest extends \PHPUnit_Framework_TestCase
         $this->assertEmpty($youtube->getContent());
         // this one will catch an exception
         $this->assertEmpty($youtube->getContent());
+
+        $this->assertTrue($logHandler->hasWarning('Youtube extract failed for: https://www.youtube.com/watch?v=UacN1xwVK2Y'), 'Warning message matched');
     }
 }

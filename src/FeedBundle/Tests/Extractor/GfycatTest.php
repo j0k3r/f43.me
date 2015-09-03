@@ -4,6 +4,8 @@ namespace Api43\FeedBundle\Tests\Extractor;
 
 use Api43\FeedBundle\Extractor\Gfycat;
 use GuzzleHttp\Exception\RequestException;
+use Monolog\Logger;
+use Monolog\Handler\TestHandler;
 
 class GfycatTest extends \PHPUnit_Framework_TestCase
 {
@@ -16,6 +18,7 @@ class GfycatTest extends \PHPUnit_Framework_TestCase
             array('http://www.gfycat.com/NeatSpitefulCapeghostfrog', true),
             array('http://gfycat.com/', false),
             array('https://goog.co', false),
+            array('http://user@:80', false),
         );
     }
 
@@ -28,13 +31,11 @@ class GfycatTest extends \PHPUnit_Framework_TestCase
             ->disableOriginalConstructor()
             ->getMock();
 
-        $gfycat = new Gfycat($guzzle);
+        $gfycat = new Gfycat();
+        $gfycat->setGuzzle($guzzle);
         $this->assertEquals($expected, $gfycat->match($url));
     }
 
-    /**
-     * @expectedException PHPUnit_Framework_Error
-     */
     public function testContent()
     {
         $guzzle = $this->getMockBuilder('GuzzleHttp\Client')
@@ -61,7 +62,12 @@ class GfycatTest extends \PHPUnit_Framework_TestCase
                 $this->throwException(new RequestException('oops', $request))
             ));
 
-        $gfycat = new Gfycat($guzzle);
+        $gfycat = new Gfycat();
+        $gfycat->setGuzzle($guzzle);
+
+        $logHandler = new TestHandler();
+        $logger = new Logger('test', array($logHandler));
+        $gfycat->setLogger($logger);
 
         // first test fail because we didn't match an url, so GfycatId isn't defined
         $this->assertEmpty($gfycat->getContent());
@@ -74,5 +80,7 @@ class GfycatTest extends \PHPUnit_Framework_TestCase
         $this->assertEmpty($gfycat->getContent());
         // this one will catch an exception
         $this->assertEmpty($gfycat->getContent());
+
+        $this->assertTrue($logHandler->hasWarning('Gfycat extract failed for: SingleUntriedBudgie'), 'Warning message matched');
     }
 }

@@ -4,6 +4,8 @@ namespace Api43\FeedBundle\Tests\Extractor;
 
 use Api43\FeedBundle\Extractor\Vidme;
 use GuzzleHttp\Exception\RequestException;
+use Monolog\Logger;
+use Monolog\Handler\TestHandler;
 
 class VidmeTest extends \PHPUnit_Framework_TestCase
 {
@@ -14,6 +16,7 @@ class VidmeTest extends \PHPUnit_Framework_TestCase
             array('http://vid.me/e/WaJr', true),
             array('https://vid.me', false),
             array('https://goog.co', false),
+            array('http://user@:80', false),
         );
     }
 
@@ -26,13 +29,11 @@ class VidmeTest extends \PHPUnit_Framework_TestCase
             ->disableOriginalConstructor()
             ->getMock();
 
-        $vidme = new Vidme($guzzle);
+        $vidme = new Vidme();
+        $vidme->setGuzzle($guzzle);
         $this->assertEquals($expected, $vidme->match($url));
     }
 
-    /**
-     * @expectedException PHPUnit_Framework_Error
-     */
     public function testContent()
     {
         $guzzle = $this->getMockBuilder('GuzzleHttp\Client')
@@ -59,7 +60,12 @@ class VidmeTest extends \PHPUnit_Framework_TestCase
                 $this->throwException(new RequestException('oops', $request))
             ));
 
-        $vidme = new Vidme($guzzle);
+        $vidme = new Vidme();
+        $vidme->setGuzzle($guzzle);
+
+        $logHandler = new TestHandler();
+        $logger = new Logger('test', array($logHandler));
+        $vidme->setLogger($logger);
 
         // first test fail because we didn't match an url, so VidmeId isn't defined
         $this->assertEmpty($vidme->getContent());
@@ -72,5 +78,7 @@ class VidmeTest extends \PHPUnit_Framework_TestCase
         $this->assertEmpty($vidme->getContent());
         // this one will catch an exception
         $this->assertEmpty($vidme->getContent());
+
+        $this->assertTrue($logHandler->hasWarning('Vidme extract failed for: https://vid.me/WaJr'), 'Warning message matched');
     }
 }

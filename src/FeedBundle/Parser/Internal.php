@@ -7,7 +7,6 @@ use GuzzleHttp\Exception\RequestException;
 use TubeLink\TubeLink;
 use TubeLink\Exception\ServiceNotFoundException;
 use Api43\FeedBundle\Readability\ReadabilityExtended;
-use Readability\Readability;
 
 /**
  * Retrieve content from an internal library instead of a webservice.
@@ -34,7 +33,7 @@ class Internal extends AbstractParser
      * the Content-Type matches a particular type.
      *
      * @param GuzzleHttp\Message\Response $response
-     * @param string $type Content type to check against
+     * @param string                      $type     Content type to check against
      *
      * @return bool
      */

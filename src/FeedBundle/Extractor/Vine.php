@@ -2,21 +2,11 @@
 
 namespace Api43\FeedBundle\Extractor;
 
-use GuzzleHttp\Client;
 use GuzzleHttp\Exception\RequestException;
 
 class Vine extends AbstractExtractor
 {
-    protected $guzzle;
     protected $vineId = null;
-
-    /**
-     * @param Client $guzzle
-     */
-    public function __construct(Client $guzzle)
-    {
-        $this->guzzle = $guzzle;
-    }
 
     /**
      * {@inheritdoc}
@@ -60,7 +50,9 @@ class Vine extends AbstractExtractor
                 ->get('https://vine.co/oembed.json?id='.$this->vineId)
                 ->json();
         } catch (RequestException $e) {
-            trigger_error('Vine extract failed for "'.$this->vineId.'": '.$e->getMessage());
+            $this->logger->warning('Vine extract failed for: '.$this->vineId, array(
+                'exception' => $e,
+            ));
 
             return '';
         }

@@ -4,6 +4,8 @@ namespace Api43\FeedBundle\Tests\Extractor;
 
 use Api43\FeedBundle\Extractor\Twitter;
 use TwitterOAuth\Exception\TwitterException;
+use Monolog\Logger;
+use Monolog\Handler\TestHandler;
 
 class TwitterTest extends \PHPUnit_Framework_TestCase
 {
@@ -14,6 +16,7 @@ class TwitterTest extends \PHPUnit_Framework_TestCase
             array('https://twitter.com/DoerteDev/statuses/506522223860277248', true),
             array('http://twitter.com/statuses/506522223860277248', true),
             array('http://twitter.com/_youhadonejob/status/522835690665807872/photo/1', true),
+            array('http://user@:80', false),
         );
     }
 
@@ -88,9 +91,6 @@ class TwitterTest extends \PHPUnit_Framework_TestCase
         $this->assertContains('Sun Oct 19', $content);
     }
 
-    /**
-     * @expectedException PHPUnit_Framework_Error
-     */
     public function testContentBadResponse()
     {
         $twitterOAuth = $this->getMockBuilder('TwitterOAuth\TwitterOAuth')
@@ -102,9 +102,16 @@ class TwitterTest extends \PHPUnit_Framework_TestCase
             ->will($this->throwException(new TwitterException()));
 
         $twitter = new Twitter($twitterOAuth);
+
+        $logHandler = new TestHandler();
+        $logger = new Logger('test', array($logHandler));
+        $twitter->setLogger($logger);
+
         $twitter->match('https://twitter.com/DoerteDev/statuses/506522223860277248');
 
         $this->assertEmpty($twitter->getContent());
+
+        $this->assertTrue($logHandler->hasWarning('Twitter extract failed for: 506522223860277248'), 'Warning message matched');
     }
 
     public function testNoTweet()

@@ -4,6 +4,8 @@ namespace Api43\FeedBundle\Tests\Extractor;
 
 use Api43\FeedBundle\Extractor\Vimeo;
 use GuzzleHttp\Exception\RequestException;
+use Monolog\Logger;
+use Monolog\Handler\TestHandler;
 
 class VimeoTest extends \PHPUnit_Framework_TestCase
 {
@@ -15,6 +17,7 @@ class VimeoTest extends \PHPUnit_Framework_TestCase
             array('https://vimeo.com/channels/staffpicks/130365792', true),
             array('https://vimeo.com/groups/motion/videos/131034832', true),
             array('https://goog.co', false),
+            array('http://user@:80', false),
         );
     }
 
@@ -27,13 +30,11 @@ class VimeoTest extends \PHPUnit_Framework_TestCase
             ->disableOriginalConstructor()
             ->getMock();
 
-        $vimeo = new Vimeo($guzzle);
+        $vimeo = new Vimeo();
+        $vimeo->setGuzzle($guzzle);
         $this->assertEquals($expected, $vimeo->match($url));
     }
 
-    /**
-     * @expectedException PHPUnit_Framework_Error
-     */
     public function testContent()
     {
         $guzzle = $this->getMockBuilder('GuzzleHttp\Client')
@@ -60,7 +61,12 @@ class VimeoTest extends \PHPUnit_Framework_TestCase
                 $this->throwException(new RequestException('oops', $request))
             ));
 
-        $vimeo = new Vimeo($guzzle);
+        $vimeo = new Vimeo();
+        $vimeo->setGuzzle($guzzle);
+
+        $logHandler = new TestHandler();
+        $logger = new Logger('test', array($logHandler));
+        $vimeo->setLogger($logger);
 
         // first test fail because we didn't match an url, so VimeoUrl isn't defined
         $this->assertEmpty($vimeo->getContent());
@@ -73,5 +79,7 @@ class VimeoTest extends \PHPUnit_Framework_TestCase
         $this->assertEmpty($vimeo->getContent());
         // this one will catch an exception
         $this->assertEmpty($vimeo->getContent());
+
+        $this->assertTrue($logHandler->hasWarning('Vimeo extract failed for: https://vimeo.com/groups/motion/videos/131034832'), 'Warning message matched');
     }
 }

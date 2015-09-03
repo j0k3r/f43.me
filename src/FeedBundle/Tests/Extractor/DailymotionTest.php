@@ -4,6 +4,8 @@ namespace Api43\FeedBundle\Tests\Extractor;
 
 use Api43\FeedBundle\Extractor\Dailymotion;
 use GuzzleHttp\Exception\RequestException;
+use Monolog\Logger;
+use Monolog\Handler\TestHandler;
 
 class DailymotionTest extends \PHPUnit_Framework_TestCase
 {
@@ -15,6 +17,7 @@ class DailymotionTest extends \PHPUnit_Framework_TestCase
             array('https://www.dailymotion.com/video/xockol_planete-des-hommes-partie-1-2_travel', true),
             array('http://dailymotion.com/video/xockol_planete-des-hommes-partie-1-2_travel', true),
             array('https://goog.co', false),
+            array('http://user@:80', false),
         );
     }
 
@@ -27,13 +30,11 @@ class DailymotionTest extends \PHPUnit_Framework_TestCase
             ->disableOriginalConstructor()
             ->getMock();
 
-        $dailymotion = new Dailymotion($guzzle);
+        $dailymotion = new Dailymotion();
+        $dailymotion->setGuzzle($guzzle);
         $this->assertEquals($expected, $dailymotion->match($url));
     }
 
-    /**
-     * @expectedException PHPUnit_Framework_Error
-     */
     public function testContent()
     {
         $guzzle = $this->getMockBuilder('GuzzleHttp\Client')
@@ -60,7 +61,12 @@ class DailymotionTest extends \PHPUnit_Framework_TestCase
                 $this->throwException(new RequestException('oops', $request))
             ));
 
-        $dailymotion = new Dailymotion($guzzle);
+        $dailymotion = new Dailymotion();
+        $dailymotion->setGuzzle($guzzle);
+
+        $logHandler = new TestHandler();
+        $logger = new Logger('test', array($logHandler));
+        $dailymotion->setLogger($logger);
 
         // first test fail because we didn't match an url, so DailymotionUrl isn't defined
         $this->assertEmpty($dailymotion->getContent());
@@ -73,5 +79,7 @@ class DailymotionTest extends \PHPUnit_Framework_TestCase
         $this->assertEmpty($dailymotion->getContent());
         // this one will catch an exception
         $this->assertEmpty($dailymotion->getContent());
+
+        $this->assertTrue($logHandler->hasWarning('Dailymotion extract failed for: https://www.dailymotion.com/video/xockol_planete-des-hommes-partie-1-2_travel'), 'Warning message matched');
     }
 }

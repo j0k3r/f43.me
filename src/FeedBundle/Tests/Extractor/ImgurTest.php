@@ -3,6 +3,8 @@
 namespace Api43\FeedBundle\Tests\Extractor;
 
 use Api43\FeedBundle\Extractor\Imgur;
+use Monolog\Logger;
+use Monolog\Handler\TestHandler;
 
 class ImgurTest extends \PHPUnit_Framework_TestCase
 {
@@ -22,6 +24,7 @@ class ImgurTest extends \PHPUnit_Framework_TestCase
             array('https://imgur.com/duziauziaozaoLaMy', false),
             array('https://imgur.com/Ay', false),
             array('http://imgur.com/UMOCfIk.gifv', true),
+            array('http://user@:80', false),
         );
     }
 
@@ -175,9 +178,6 @@ class ImgurTest extends \PHPUnit_Framework_TestCase
         $this->assertEmpty($imgur->getContent());
     }
 
-    /**
-     * @expectedException PHPUnit_Framework_Error
-     */
     public function testImgurFail()
     {
         $imgurClient = $this->getMockBuilder('Imgur\Client')
@@ -189,8 +189,15 @@ class ImgurTest extends \PHPUnit_Framework_TestCase
             ->will($this->throwException(new \Guzzle\Http\Exception\RequestException()));
 
         $imgur = new Imgur($imgurClient);
+
+        $logHandler = new TestHandler();
+        $logger = new Logger('test', array($logHandler));
+        $imgur->setLogger($logger);
+
         $imgur->match('http://imgur.com/gallery/IoKwI7E');
 
         $this->assertEmpty($imgur->getContent());
+
+        $this->assertTrue($logHandler->hasWarning('Imgur extract failed for: IoKwI7E'), 'Warning message matched');
     }
 }

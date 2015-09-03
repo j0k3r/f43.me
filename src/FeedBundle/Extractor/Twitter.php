@@ -51,7 +51,9 @@ class Twitter extends AbstractExtractor
         try {
             $twitterData = $this->twitter->get('statuses/show', array('id' => $this->tweetId));
         } catch (TwitterException $e) {
-            trigger_error('Twitter extract failed for "'.$this->tweetId.'": '.$e->getMessage());
+            $this->logger->warning('Twitter extract failed for: '.$this->tweetId, array(
+                'exception' => $e,
+            ));
 
             return '';
         }

@@ -4,6 +4,8 @@ namespace Api43\FeedBundle\Tests\Extractor;
 
 use Api43\FeedBundle\Extractor\Flickr;
 use GuzzleHttp\Exception\RequestException;
+use Monolog\Logger;
+use Monolog\Handler\TestHandler;
 
 class FlickrTest extends \PHPUnit_Framework_TestCase
 {
@@ -21,6 +23,7 @@ class FlickrTest extends \PHPUnit_Framework_TestCase
 
             # photo set
             array('https://www.flickr.com/photos/europeanspaceagency/sets/72157638315605535/', true),
+            array('http://user@:80', false),
         );
     }
 
@@ -33,13 +36,11 @@ class FlickrTest extends \PHPUnit_Framework_TestCase
             ->disableOriginalConstructor()
             ->getMock();
 
-        $flickr = new Flickr($guzzle, 'apikey');
+        $flickr = new Flickr('apikey');
+        $flickr->setGuzzle($guzzle);
         $this->assertEquals($expected, $flickr->match($url));
     }
 
-    /**
-     * @expectedException PHPUnit_Framework_Error
-     */
     public function testSinglePhoto()
     {
         $guzzle = $this->getMockBuilder('GuzzleHttp\Client')
@@ -69,7 +70,12 @@ class FlickrTest extends \PHPUnit_Framework_TestCase
                 $this->throwException(new RequestException('oops', $request))
             ));
 
-        $flickr = new Flickr($guzzle, 'apikey');
+        $flickr = new Flickr('apikey');
+        $flickr->setGuzzle($guzzle);
+
+        $logHandler = new TestHandler();
+        $logger = new Logger('test', array($logHandler));
+        $flickr->setLogger($logger);
 
         // first test fail because we didn't match an url, so FlickrId isn't defined
         $this->assertEmpty($flickr->getContent());
@@ -82,11 +88,10 @@ class FlickrTest extends \PHPUnit_Framework_TestCase
         $this->assertEmpty($flickr->getContent());
         // this one will catch an exception
         $this->assertEmpty($flickr->getContent());
+
+        $this->assertTrue($logHandler->hasWarning('Flickr extract failed for: 15000967102'), 'Warning message matched');
     }
 
-    /**
-     * @expectedException PHPUnit_Framework_Error
-     */
     public function testPhotoSet()
     {
         $guzzle = $this->getMockBuilder('GuzzleHttp\Client')
@@ -116,7 +121,12 @@ class FlickrTest extends \PHPUnit_Framework_TestCase
                 $this->throwException(new RequestException('oops', $request))
             ));
 
-        $flickr = new Flickr($guzzle, 'apikey');
+        $flickr = new Flickr('apikey');
+        $flickr->setGuzzle($guzzle);
+
+        $logHandler = new TestHandler();
+        $logger = new Logger('test', array($logHandler));
+        $flickr->setLogger($logger);
 
         // first test fail because we didn't match an url, so FlickrId isn't defined
         $this->assertEmpty($flickr->getContent());
@@ -129,5 +139,7 @@ class FlickrTest extends \PHPUnit_Framework_TestCase
         $this->assertEmpty($flickr->getContent());
         // this one will catch an exception
         $this->assertEmpty($flickr->getContent());
+
+        $this->assertTrue($logHandler->hasWarning('Flickr extract failed for: 72157638315605535'), 'Warning message matched');
     }
 }

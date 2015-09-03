@@ -2,21 +2,11 @@
 
 namespace Api43\FeedBundle\Extractor;
 
-use GuzzleHttp\Client;
 use GuzzleHttp\Exception\RequestException;
 
 class Youtube extends AbstractExtractor
 {
-    protected $guzzle;
     protected $youtubeUrl = null;
-
-    /**
-     * @param Client $guzzle
-     */
-    public function __construct(Client $guzzle)
-    {
-        $this->guzzle = $guzzle;
-    }
 
     /**
      * {@inheritdoc}
@@ -53,7 +43,9 @@ class Youtube extends AbstractExtractor
                 ->get('http://www.youtube.com/oembed?format=json&url='.$this->youtubeUrl)
                 ->json();
         } catch (RequestException $e) {
-            trigger_error('Youtube extract failed for "'.$this->youtubeUrl.'": '.$e->getMessage());
+            $this->logger->warning('Youtube extract failed for: '.$this->youtubeUrl, array(
+                'exception' => $e,
+            ));
 
             return '';
         }
