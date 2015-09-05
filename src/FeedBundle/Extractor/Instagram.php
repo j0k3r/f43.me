@@ -20,7 +20,7 @@ class Instagram extends AbstractExtractor
             return false;
         }
 
-        if (0 !== strpos($host, 'instagram.com') && 0 !== strpos($host, 'instagr.am')) {
+        if (!in_array($host, array('instagr.am', 'instagram.com'))) {
             return false;
         }
 
