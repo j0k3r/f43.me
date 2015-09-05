@@ -16,6 +16,7 @@ class TwitterTest extends \PHPUnit_Framework_TestCase
             array('https://twitter.com/DoerteDev/statuses/506522223860277248', true),
             array('http://twitter.com/statuses/506522223860277248', true),
             array('http://twitter.com/_youhadonejob/status/522835690665807872/photo/1', true),
+            array('https://mobile.twitter.com/kcimc/status/638877262092337152/photo/1', true),
             array('http://user@:80', false),
         );
     }
