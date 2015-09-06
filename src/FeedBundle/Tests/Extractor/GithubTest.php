@@ -106,7 +106,7 @@ class GithubTest extends \PHPUnit_Framework_TestCase
                     'html_url' => 'http://1.1.1.1',
                     'title' => 'test',
                     'comments' => 0,
-                    'created_at' => '2015-08-04T23:49:04Z',
+                    'created_at' => '2015-08-04T13:49:04Z',
                     'body_html' => 'body',
                     'user' => array('html_url' => 'http://2.2.2.2', 'login' => 'login'), )),
                 $this->throwException(new RequestException('oops', $request))
@@ -125,7 +125,7 @@ class GithubTest extends \PHPUnit_Framework_TestCase
         $github->match('https://github.com/octocat/Hello-World/issues/212');
 
         // consecutive calls
-        $this->assertEquals('<div><em>Issue on Github</em><h2><a href="http://1.1.1.1">test</a></h2><ul><li>by <a href="http://2.2.2.2">login</a></li><li>on 05/08/2015</li><li>0 comments</li></ul></ul>body</div>', $github->getContent());
+        $this->assertEquals('<div><em>Issue on Github</em><h2><a href="http://1.1.1.1">test</a></h2><ul><li>by <a href="http://2.2.2.2">login</a></li><li>on 04/08/2015</li><li>0 comments</li></ul></ul>body</div>', $github->getContent());
         // this one will catch an exception
         $this->assertEmpty($github->getContent());
     }
@@ -157,7 +157,7 @@ class GithubTest extends \PHPUnit_Framework_TestCase
                     'title' => 'test',
                     'commits' => 0,
                     'comments' => 0,
-                    'created_at' => '2015-08-04T23:49:04Z',
+                    'created_at' => '2015-08-04T13:49:04Z',
                     'body_html' => 'body',
                     'user' => array('html_url' => 'http://2.2.2.2', 'login' => 'login'), )),
                 $this->throwException(new RequestException('oops', $request))
@@ -176,7 +176,7 @@ class GithubTest extends \PHPUnit_Framework_TestCase
         $github->match('https://github.com/msporny/dna/pull/1');
 
         // consecutive calls
-        $this->assertEquals('<div><em>Pull request on Github</em><h2><a href="http://0.0.0.0">name</a></h2><p>desc</p><h3>PR: <a href="http://1.1.1.1">test</a></h3><ul><li>by <a href="http://2.2.2.2">login</a></li><li>on 05/08/2015</li><li>0 commits</li><li>0 comments</li></ul>body</div>', $github->getContent());
+        $this->assertEquals('<div><em>Pull request on Github</em><h2><a href="http://0.0.0.0">name</a></h2><p>desc</p><h3>PR: <a href="http://1.1.1.1">test</a></h3><ul><li>by <a href="http://2.2.2.2">login</a></li><li>on 04/08/2015</li><li>0 commits</li><li>0 comments</li></ul>body</div>', $github->getContent());
         // this one will catch an exception
         $this->assertEmpty($github->getContent());
     }
