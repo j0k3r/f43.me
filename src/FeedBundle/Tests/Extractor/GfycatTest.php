@@ -3,9 +3,12 @@
 namespace Api43\FeedBundle\Tests\Extractor;
 
 use Api43\FeedBundle\Extractor\Gfycat;
-use GuzzleHttp\Exception\RequestException;
 use Monolog\Logger;
 use Monolog\Handler\TestHandler;
+use GuzzleHttp\Client;
+use GuzzleHttp\Subscriber\Mock;
+use GuzzleHttp\Message\Response;
+use GuzzleHttp\Stream\Stream;
 
 class GfycatTest extends \PHPUnit_Framework_TestCase
 {
@@ -27,43 +30,24 @@ class GfycatTest extends \PHPUnit_Framework_TestCase
      */
     public function testMatch($url, $expected)
     {
-        $guzzle = $this->getMockBuilder('GuzzleHttp\Client')
-            ->disableOriginalConstructor()
-            ->getMock();
-
         $gfycat = new Gfycat();
-        $gfycat->setGuzzle($guzzle);
         $this->assertEquals($expected, $gfycat->match($url));
     }
 
     public function testContent()
     {
-        $guzzle = $this->getMockBuilder('GuzzleHttp\Client')
-            ->disableOriginalConstructor()
-            ->getMock();
+        $client = new Client();
 
-        $request = $this->getMockBuilder('GuzzleHttp\Message\Request')
-            ->disableOriginalConstructor()
-            ->getMock();
+        $mock = new Mock([
+            new Response(200, [], Stream::factory(json_encode(array('gfyItem' => array('title' => 'my title', 'gifUrl' => 'http://0.0.0.0/img.gif'))))),
+            new Response(200, [], Stream::factory('')),
+            new Response(400, [], Stream::factory('oops')),
+        ]);
 
-        $response = $this->getMockBuilder('GuzzleHttp\Message\Response')
-            ->disableOriginalConstructor()
-            ->getMock();
-
-        $guzzle->expects($this->any())
-            ->method('get')
-            ->will($this->returnValue($response));
-
-        $response->expects($this->any())
-            ->method('json')
-            ->will($this->onConsecutiveCalls(
-                $this->returnValue(array('gfyItem' => array('title' => 'my title', 'gifUrl' => 'http://0.0.0.0/img.gif'))),
-                $this->returnValue(''),
-                $this->throwException(new RequestException('oops', $request))
-            ));
+        $client->getEmitter()->attach($mock);
 
         $gfycat = new Gfycat();
-        $gfycat->setGuzzle($guzzle);
+        $gfycat->setClient($client);
 
         $logHandler = new TestHandler();
         $logger = new Logger('test', array($logHandler));

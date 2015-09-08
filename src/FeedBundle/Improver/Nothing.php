@@ -14,14 +14,14 @@ class Nothing
 {
     protected $url;
     protected $itemContent;
-    protected $guzzle;
+    protected $client;
 
     /**
-     * @param Client $guzzle
+     * @param Client $client
      */
-    public function __construct(Client $guzzle)
+    public function __construct(Client $client)
     {
-        $this->guzzle = $guzzle;
+        $this->client = $client;
     }
 
     /**
@@ -68,7 +68,7 @@ class Nothing
     public function updateUrl($url)
     {
         try {
-            $response = $this->guzzle
+            $response = $this->client
                 ->get(
                     $url,
                     // force user agent for some provider (to avoid bad browser detection)
@@ -80,9 +80,7 @@ class Nothing
         }
 
         // remove utm parameters & fragment
-        $effectiveUrl = preg_replace('/((\?)?(&(amp;)?)?utm_(.*?)\=[^&]+)|(#(.*?)\=[^&]+)/', '', urldecode($response->getEffectiveUrl()));
-
-        return $effectiveUrl;
+        return preg_replace('/((\?)?(&(amp;)?)?utm_(.*?)\=[^&]+)|(#(.*?)\=[^&]+)/', '', $response->getEffectiveUrl());
     }
 
     /**

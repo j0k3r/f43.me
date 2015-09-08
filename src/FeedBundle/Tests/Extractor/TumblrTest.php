@@ -3,9 +3,12 @@
 namespace Api43\FeedBundle\Tests\Extractor;
 
 use Api43\FeedBundle\Extractor\Tumblr;
-use GuzzleHttp\Exception\RequestException;
 use Monolog\Logger;
 use Monolog\Handler\TestHandler;
+use GuzzleHttp\Client;
+use GuzzleHttp\Subscriber\Mock;
+use GuzzleHttp\Message\Response;
+use GuzzleHttp\Stream\Stream;
 
 class TumblrTest extends \PHPUnit_Framework_TestCase
 {
@@ -24,51 +27,31 @@ class TumblrTest extends \PHPUnit_Framework_TestCase
      */
     public function testMatch($url, $expected)
     {
-        $guzzle = $this->getMockBuilder('GuzzleHttp\Client')
-            ->disableOriginalConstructor()
-            ->getMock();
+        $client = new Client();
 
-        $request = $this->getMockBuilder('GuzzleHttp\Message\Request')
-            ->disableOriginalConstructor()
-            ->getMock();
+        $mock = new Mock([
+            new Response(200, ['X-Tumblr-User' => 'test']),
+        ]);
 
-        $response = $this->getMockBuilder('GuzzleHttp\Message\Response')
-            ->disableOriginalConstructor()
-            ->getMock();
-
-        $guzzle->expects($this->any())
-            ->method('get')
-            ->will($this->returnValue($response));
-
-        $response->expects($this->any())
-            ->method('getHeader')
-            ->will($this->returnValue('test'));
+        $client->getEmitter()->attach($mock);
 
         $tumblr = new Tumblr('apikey');
-        $tumblr->setGuzzle($guzzle);
+        $tumblr->setClient($client);
         $this->assertEquals($expected, $tumblr->match($url));
     }
 
     public function testMatchFailRequest()
     {
-        $guzzle = $this->getMockBuilder('GuzzleHttp\Client')
-            ->disableOriginalConstructor()
-            ->getMock();
+        $client = new Client();
 
-        $request = $this->getMockBuilder('GuzzleHttp\Message\Request')
-            ->disableOriginalConstructor()
-            ->getMock();
+        $mock = new Mock([
+            new Response(400, ['X-Tumblr-User' => 'test']),
+        ]);
 
-        $response = $this->getMockBuilder('GuzzleHttp\Message\Response')
-            ->disableOriginalConstructor()
-            ->getMock();
-
-        $guzzle->expects($this->any())
-            ->method('get')
-            ->will($this->throwException(new RequestException('oops', $request)));
+        $client->getEmitter()->attach($mock);
 
         $tumblr = new Tumblr('apikey');
-        $tumblr->setGuzzle($guzzle);
+        $tumblr->setClient($client);
 
         $logHandler = new TestHandler();
         $logger = new Logger('test', array($logHandler));
@@ -81,63 +64,35 @@ class TumblrTest extends \PHPUnit_Framework_TestCase
 
     public function testMatchNotTumblrUser()
     {
-        $guzzle = $this->getMockBuilder('GuzzleHttp\Client')
-            ->disableOriginalConstructor()
-            ->getMock();
+        $client = new Client();
 
-        $request = $this->getMockBuilder('GuzzleHttp\Message\Request')
-            ->disableOriginalConstructor()
-            ->getMock();
+        $mock = new Mock([
+            new Response(200, ['X-Tumblr-User' => null]),
+        ]);
 
-        $response = $this->getMockBuilder('GuzzleHttp\Message\Response')
-            ->disableOriginalConstructor()
-            ->getMock();
-
-        $guzzle->expects($this->any())
-            ->method('get')
-            ->will($this->returnValue($response));
-
-        $response->expects($this->any())
-            ->method('getHeader')
-            ->will($this->returnValue(null));
+        $client->getEmitter()->attach($mock);
 
         $tumblr = new Tumblr('apikey');
-        $tumblr->setGuzzle($guzzle);
+        $tumblr->setClient($client);
         $this->assertFalse($tumblr->match('http://thecodinglove.com/post/96365413702/client-giving-us-his-feedback-on-his-new-project'));
     }
 
     public function testContent()
     {
-        $guzzle = $this->getMockBuilder('GuzzleHttp\Client')
-            ->disableOriginalConstructor()
-            ->getMock();
+        $client = new Client();
 
-        $request = $this->getMockBuilder('GuzzleHttp\Message\Request')
-            ->disableOriginalConstructor()
-            ->getMock();
+        $mock = new Mock([
+            // match()
+            new Response(200, ['X-Tumblr-User' => 'test']),
+            new Response(200, ['X-Tumblr-User' => 'test'], Stream::factory(json_encode(array('response' => array('posts' => array(array('body' => '<div>content</div>'))))))),
+            new Response(200, ['X-Tumblr-User' => 'test'], Stream::factory(json_encode(array()))),
+            new Response(400, ['X-Tumblr-User' => 'test'], Stream::factory('oops')),
+        ]);
 
-        $response = $this->getMockBuilder('GuzzleHttp\Message\Response')
-            ->disableOriginalConstructor()
-            ->getMock();
-
-        $guzzle->expects($this->any())
-            ->method('get')
-            ->will($this->returnValue($response));
-
-        $response->expects($this->any())
-            ->method('getHeader')
-            ->will($this->returnValue('test'));
-
-        $response->expects($this->any())
-            ->method('json')
-            ->will($this->onConsecutiveCalls(
-                $this->returnValue(array('response' => array('posts' => array(array('body' => '<div>content</div>'))))),
-                $this->returnValue(array()),
-                $this->throwException(new RequestException('oops', $request))
-            ));
+        $client->getEmitter()->attach($mock);
 
         $tumblr = new Tumblr('apikey');
-        $tumblr->setGuzzle($guzzle);
+        $tumblr->setClient($client);
 
         $logHandler = new TestHandler();
         $logger = new Logger('test', array($logHandler));

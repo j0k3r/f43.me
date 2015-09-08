@@ -3,9 +3,12 @@
 namespace Api43\FeedBundle\Tests\Extractor;
 
 use Api43\FeedBundle\Extractor\Deviantart;
-use GuzzleHttp\Exception\RequestException;
 use Monolog\Logger;
 use Monolog\Handler\TestHandler;
+use GuzzleHttp\Client;
+use GuzzleHttp\Subscriber\Mock;
+use GuzzleHttp\Message\Response;
+use GuzzleHttp\Stream\Stream;
 
 class DeviantartTest extends \PHPUnit_Framework_TestCase
 {
@@ -29,81 +32,54 @@ class DeviantartTest extends \PHPUnit_Framework_TestCase
      */
     public function testMatch($url, $expected)
     {
-        $guzzle = $this->getMockBuilder('GuzzleHttp\Client')
-            ->disableOriginalConstructor()
-            ->getMock();
-
         $deviantart = new Deviantart();
-        $deviantart->setGuzzle($guzzle);
         $this->assertEquals($expected, $deviantart->match($url));
     }
 
     public function testContent()
     {
-        $guzzle = $this->getMockBuilder('GuzzleHttp\Client')
-            ->disableOriginalConstructor()
-            ->getMock();
+        $client = new Client();
 
-        $request = $this->getMockBuilder('GuzzleHttp\Message\Request')
-            ->disableOriginalConstructor()
-            ->getMock();
-
-        $response = $this->getMockBuilder('GuzzleHttp\Message\Response')
-            ->disableOriginalConstructor()
-            ->getMock();
-
-        $guzzle->expects($this->any())
-            ->method('get')
-            ->will($this->returnValue($response));
-
-        $response->expects($this->any())
-            ->method('json')
-            ->will($this->returnValue(array(
+        $mock = new Mock([
+            new Response(200, [], Stream::factory(json_encode(array(
                 'url' => 'http://0.0.0.0/youpi.jpg',
                 'title' => 'youpi',
                 'author_url' => 'http://youpi.0.0.0.0',
                 'author_name' => 'youpi',
                 'category' => 'Pic > Landscape',
                 'html' => '<iframe></iframe>',
-            )));
+            )))),
+        ]);
+
+        $client->getEmitter()->attach($mock);
 
         $deviantart = new Deviantart();
-        $deviantart->setGuzzle($guzzle);
+        $deviantart->setClient($client);
 
         // first test fail because we didn't match an url, so DeviantartId isn't defined
         $this->assertEmpty($deviantart->getContent());
 
         $deviantart->match('http://mibreit.deviantart.com/art/A-Piece-of-Heaven-357105002');
 
-        $this->assertContains('<img src="http://0.0.0.0/youpi.jpg" />', $deviantart->getContent());
-        $this->assertContains('<p>By <a href="http://youpi.0.0.0.0">@youpi</a></p>', $deviantart->getContent());
-        $this->assertContains('<iframe></iframe>', $deviantart->getContent());
+        $content = $deviantart->getContent();
+
+        $this->assertContains('<img src="http://0.0.0.0/youpi.jpg" />', $content);
+        $this->assertContains('<p>By <a href="http://youpi.0.0.0.0">@youpi</a></p>', $content);
+        $this->assertContains('<iframe></iframe>', $content);
     }
 
     public function testContentWithException()
     {
-        $guzzle = $this->getMockBuilder('GuzzleHttp\Client')
-            ->disableOriginalConstructor()
-            ->getMock();
+        $client = new Client();
 
-        $request = $this->getMockBuilder('GuzzleHttp\Message\Request')
-            ->disableOriginalConstructor()
-            ->getMock();
+        $mock = new Mock([
+            new Response(400, [], Stream::factory('oops')),
+        ]);
 
-        $response = $this->getMockBuilder('GuzzleHttp\Message\Response')
-            ->disableOriginalConstructor()
-            ->getMock();
-
-        $guzzle->expects($this->any())
-            ->method('get')
-            ->will($this->returnValue($response));
-
-        $response->expects($this->any())
-            ->method('json')
-            ->will($this->throwException(new RequestException('oops', $request)));
+        $client->getEmitter()->attach($mock);
 
         $deviantart = new Deviantart();
-        $deviantart->setGuzzle($guzzle);
+        $deviantart->setClient($client);
 
         $logHandler = new TestHandler();
         $logger = new Logger('test', array($logHandler));

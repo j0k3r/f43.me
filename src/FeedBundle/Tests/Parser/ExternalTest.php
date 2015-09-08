@@ -3,77 +3,52 @@
 namespace Api43\FeedBundle\Tests\Parser;
 
 use Api43\FeedBundle\Parser\External;
-use GuzzleHttp\Exception\RequestException;
+use GuzzleHttp\Client;
+use GuzzleHttp\Subscriber\Mock;
+use GuzzleHttp\Message\Response;
+use GuzzleHttp\Stream\Stream;
 
 class ExternalTest extends \PHPUnit_Framework_TestCase
 {
     public function testParseEmpty()
     {
-        $guzzle = $this->getMockBuilder('GuzzleHttp\Client')
-            ->disableOriginalConstructor()
-            ->getMock();
+        $client = new Client();
 
-        $request = $this->getMockBuilder('GuzzleHttp\Message\Request')
-            ->disableOriginalConstructor()
-            ->getMock();
+        $mock = new Mock([
+            new Response(200, []),
+        ]);
 
-        $response = $this->getMockBuilder('GuzzleHttp\Message\Response')
-            ->disableOriginalConstructor()
-            ->getMock();
+        $client->getEmitter()->attach($mock);
 
-        $guzzle->expects($this->any())
-            ->method('get')
-            ->will($this->returnValue($response));
-
-        $response->expects($this->any())
-            ->method('json')
-            ->will($this->returnValue(array()));
-
-        $external = new External($guzzle, 'http//0.0.0.0/api', 'token');
+        $external = new External($client, 'http//0.0.0.0/api', 'token');
         $this->assertEmpty($external->parse('http://0.0.0.0/content'));
     }
 
     public function testParse()
     {
-        $guzzle = $this->getMockBuilder('GuzzleHttp\Client')
-            ->disableOriginalConstructor()
-            ->getMock();
+        $client = new Client();
 
-        $request = $this->getMockBuilder('GuzzleHttp\Message\Request')
-            ->disableOriginalConstructor()
-            ->getMock();
+        $mock = new Mock([
+            new Response(200, [], Stream::factory(json_encode(array('content' => '<div></div>', 'url' => 'http://1.1.1.1/content')))),
+        ]);
 
-        $response = $this->getMockBuilder('GuzzleHttp\Message\Response')
-            ->disableOriginalConstructor()
-            ->getMock();
+        $client->getEmitter()->attach($mock);
 
-        $guzzle->expects($this->any())
-            ->method('get')
-            ->will($this->returnValue($response));
-
-        $response->expects($this->any())
-            ->method('json')
-            ->will($this->returnValue(array('content' => '<div></div>', 'url' => 'http://1.1.1.1/content')));
-
-        $external = new External($guzzle, 'http//0.0.0.0/api', 'token');
+        $external = new External($client, 'http//0.0.0.0/api', 'token');
         $this->assertEquals('<div></div>', $external->parse('http://0.0.0.0/content'));
     }
 
     public function testParseException()
     {
-        $guzzle = $this->getMockBuilder('GuzzleHttp\Client')
-            ->disableOriginalConstructor()
-            ->getMock();
+        $client = new Client();
 
-        $request = $this->getMockBuilder('GuzzleHttp\Message\Request')
-            ->disableOriginalConstructor()
-            ->getMock();
+        $mock = new Mock([
+            new Response(400, [], Stream::factory('oops')),
+        ]);
 
-        $guzzle->expects($this->any())
-            ->method('get')
-            ->will($this->throwException(new RequestException('oops', $request)));
+        $client->getEmitter()->attach($mock);
 
-        $external = new External($guzzle, 'http//0.0.0.0/api', 'token');
+        $external = new External($client, 'http//0.0.0.0/api', 'token');
         $this->assertEmpty($external->parse('http://0.0.0.0/content'));
     }
 }

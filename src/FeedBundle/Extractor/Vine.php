@@ -46,7 +46,7 @@ class Vine extends AbstractExtractor
         }
 
         try {
-            $data = $this->guzzle
+            $data = $this->client
                 ->get('https://vine.co/oembed.json?id='.$this->vineId)
                 ->json();
         } catch (RequestException $e) {

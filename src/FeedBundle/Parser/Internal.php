@@ -94,7 +94,7 @@ class Internal extends AbstractParser
             }
         }
 
-        if (false === $content) {
+        if (!$content) {
             return '';
         }
 

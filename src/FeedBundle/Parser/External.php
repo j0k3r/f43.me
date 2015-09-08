@@ -11,18 +11,18 @@ use GuzzleHttp\Exception\RequestException;
  */
 class External extends AbstractParser
 {
-    protected $guzzle;
+    protected $client;
     protected $urlApi;
     protected $token;
 
     /**
-     * @param Client $guzzle
+     * @param Client $client
      * @param string $urlApi Readability API url
      * @param string $token  Readability API token
      */
-    public function __construct(Client $guzzle, $urlApi, $token)
+    public function __construct(Client $client, $urlApi, $token)
     {
-        $this->guzzle = $guzzle;
+        $this->client = $client;
         $this->urlApi = $urlApi;
         $this->token = $token;
     }
@@ -33,7 +33,7 @@ class External extends AbstractParser
     public function parse($url)
     {
         try {
-            $data = $this->guzzle
+            $data = $this->client
                 ->get($this->urlApi.'?token='.$this->token.'&url='.urlencode($url))
                 ->json();
         } catch (RequestException $e) {

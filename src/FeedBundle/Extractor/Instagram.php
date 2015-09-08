@@ -44,7 +44,7 @@ class Instagram extends AbstractExtractor
         }
 
         try {
-            $data = $this->guzzle
+            $data = $this->client
                 ->get('http://api.instagram.com/oembed?url='.$this->instagramUrl)
                 ->json();
         } catch (RequestException $e) {

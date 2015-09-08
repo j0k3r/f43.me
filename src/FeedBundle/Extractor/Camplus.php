@@ -46,7 +46,7 @@ class Camplus extends AbstractExtractor
         }
 
         try {
-            $data = $this->guzzle
+            $data = $this->client
                 ->get('http://campl.us/'.$this->camplusId.':info')
                 ->json();
         } catch (RequestException $e) {

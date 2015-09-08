@@ -3,7 +3,10 @@
 namespace Api43\FeedBundle\Tests\Extractor;
 
 use Api43\FeedBundle\Extractor\HackerNews;
-use GuzzleHttp\Exception\RequestException;
+use GuzzleHttp\Client;
+use GuzzleHttp\Subscriber\Mock;
+use GuzzleHttp\Message\Response;
+use GuzzleHttp\Stream\Stream;
 
 class HackerNewsTest extends \PHPUnit_Framework_TestCase
 {
@@ -27,82 +30,49 @@ class HackerNewsTest extends \PHPUnit_Framework_TestCase
      */
     public function testMatch($url, $expected, $valueReturned = null)
     {
-        $guzzle = $this->getMockBuilder('GuzzleHttp\Client')
-            ->disableOriginalConstructor()
-            ->getMock();
+        $client = new Client();
 
-        $request = $this->getMockBuilder('GuzzleHttp\Message\Request')
-            ->disableOriginalConstructor()
-            ->getMock();
+        $response = new Response(200, []);
+        if (null !== $valueReturned) {
+            $response = new Response(200, [], Stream::factory(json_encode($valueReturned)));
+        }
 
-        $response = $this->getMockBuilder('GuzzleHttp\Message\Response')
-            ->disableOriginalConstructor()
-            ->getMock();
+        $mock = new Mock([$response]);
 
-        $guzzle->expects($this->any())
-            ->method('get')
-            ->will($this->returnValue($response));
-
-        $response->expects($this->any())
-            ->method('json')
-            ->will($this->returnValue($valueReturned));
+        $client->getEmitter()->attach($mock);
 
         $hn = new HackerNews();
-        $hn->setGuzzle($guzzle);
+        $hn->setClient($client);
         $this->assertEquals($expected, $hn->match($url));
     }
 
     public function testMatchGuzzleFail()
     {
-        $guzzle = $this->getMockBuilder('GuzzleHttp\Client')
-            ->disableOriginalConstructor()
-            ->getMock();
+        $client = new Client();
 
-        $request = $this->getMockBuilder('GuzzleHttp\Message\Request')
-            ->disableOriginalConstructor()
-            ->getMock();
+        $mock = new Mock([
+            new Response(400, [], Stream::factory('oops')),
+        ]);
 
-        $response = $this->getMockBuilder('GuzzleHttp\Message\Response')
-            ->disableOriginalConstructor()
-            ->getMock();
-
-        $guzzle->expects($this->any())
-            ->method('get')
-            ->will($this->returnValue($response));
-
-        $response->expects($this->any())
-            ->method('json')
-            ->will($this->throwException(new RequestException('oops', $request)));
+        $client->getEmitter()->attach($mock);
 
         $hn = new HackerNews();
-        $hn->setGuzzle($guzzle);
+        $hn->setClient($client);
         $this->assertEquals(false, $hn->match('http://news.ycombinator.com/item?id=10074364'));
     }
 
     public function testContent()
     {
-        $guzzle = $this->getMockBuilder('GuzzleHttp\Client')
-            ->disableOriginalConstructor()
-            ->getMock();
+        $client = new Client();
 
-        $request = $this->getMockBuilder('GuzzleHttp\Message\Request')
-            ->disableOriginalConstructor()
-            ->getMock();
+        $mock = new Mock([
+            new Response(200, [], Stream::factory(json_encode(array('text' => 'toto', 'type' => 'story')))),
+        ]);
 
-        $response = $this->getMockBuilder('GuzzleHttp\Message\Response')
-            ->disableOriginalConstructor()
-            ->getMock();
-
-        $guzzle->expects($this->any())
-            ->method('get')
-            ->will($this->returnValue($response));
-
-        $response->expects($this->any())
-            ->method('json')
-            ->will($this->returnValue(array('text' => 'toto', 'type' => 'story')));
+        $client->getEmitter()->attach($mock);
 
         $hn = new HackerNews();
-        $hn->setGuzzle($guzzle);
+        $hn->setClient($client);
 
         // first test fail because we didn't match an url, so HackerNewsId isn't defined
         $this->assertEmpty($hn->getContent());

@@ -4,35 +4,25 @@ namespace Api43\FeedBundle\Tests\Validator;
 
 use Api43\FeedBundle\Validator\Constraints\ConstraintRssValidator;
 use Api43\FeedBundle\Validator\Constraints\ConstraintRss;
-use GuzzleHttp\Exception\RequestException;
+use GuzzleHttp\Client;
+use GuzzleHttp\Subscriber\Mock;
+use GuzzleHttp\Message\Response;
+use GuzzleHttp\Stream\Stream;
 
 class ConstraintRssValidatorTest extends \PHPUnit_Framework_TestCase
 {
     public function testValidatorValid()
     {
         $constraint = new ConstraintRss();
+        $client = new Client();
 
-        $guzzle = $this->getMockBuilder('GuzzleHttp\Client')
-            ->disableOriginalConstructor()
-            ->getMock();
+        $mock = new Mock([
+            new Response(200, [], Stream::factory('This is a valid')),
+        ]);
 
-        $request = $this->getMockBuilder('GuzzleHttp\Message\Request')
-            ->disableOriginalConstructor()
-            ->getMock();
+        $client->getEmitter()->attach($mock);
 
-        $response = $this->getMockBuilder('GuzzleHttp\Message\Response')
-            ->disableOriginalConstructor()
-            ->getMock();
-
-        $guzzle->expects($this->any())
-            ->method('get')
-            ->will($this->returnValue($response));
-
-        $response->expects($this->any())
-            ->method('getBody')
-            ->will($this->returnValue('This is a valid'));
-
-        $validator = new ConstraintRssValidator($guzzle);
+        $validator = new ConstraintRssValidator($client);
         $validator->validate('http://0.0.0.0', $constraint);
     }
 
@@ -51,27 +41,15 @@ class ConstraintRssValidatorTest extends \PHPUnit_Framework_TestCase
                 $this->equalTo(array('%string%' => 'http://0.0.0.0'))
             );
 
-        $guzzle = $this->getMockBuilder('GuzzleHttp\Client')
-            ->disableOriginalConstructor()
-            ->getMock();
+        $client = new Client();
 
-        $request = $this->getMockBuilder('GuzzleHttp\Message\Request')
-            ->disableOriginalConstructor()
-            ->getMock();
+        $mock = new Mock([
+            new Response(200, [], Stream::factory('This is a not valid')),
+        ]);
 
-        $response = $this->getMockBuilder('GuzzleHttp\Message\Response')
-            ->disableOriginalConstructor()
-            ->getMock();
+        $client->getEmitter()->attach($mock);
 
-        $guzzle->expects($this->any())
-            ->method('get')
-            ->will($this->returnValue($response));
-
-        $response->expects($this->any())
-            ->method('getBody')
-            ->will($this->returnValue('This is a not valid'));
-
-        $validator = new ConstraintRssValidator($guzzle);
+        $validator = new ConstraintRssValidator($client);
         $validator->initialize($context);
         $validator->validate('http://0.0.0.0', $constraint);
     }
@@ -91,30 +69,16 @@ class ConstraintRssValidatorTest extends \PHPUnit_Framework_TestCase
                 $this->equalTo(array('%string%' => 'http://0.0.0.0'))
             );
 
-        $guzzle = $this->getMockBuilder('GuzzleHttp\Client')
-            ->disableOriginalConstructor()
-            ->getMock();
+        $client = new Client();
 
-        $request = $this->getMockBuilder('GuzzleHttp\Message\Request')
-            ->disableOriginalConstructor()
-            ->getMock();
+        $mock = new Mock([
+            new Response(400, [], Stream::factory('oops')),
+            new Response(200, [], Stream::factory('This is a not valid')),
+        ]);
 
-        $response = $this->getMockBuilder('GuzzleHttp\Message\Response')
-            ->disableOriginalConstructor()
-            ->getMock();
+        $client->getEmitter()->attach($mock);
 
-        $guzzle->expects($this->any())
-            ->method('get')
-            ->will($this->returnValue($response));
-
-        $response->expects($this->any())
-            ->method('getBody')
-            ->will($this->onConsecutiveCalls(
-                $this->throwException(new RequestException('oops', $request)),
-                'This is a not valid'
-            ));
-
-        $validator = new ConstraintRssValidator($guzzle);
+        $validator = new ConstraintRssValidator($client);
         $validator->initialize($context);
         $validator->validate('http://0.0.0.0', $constraint);
     }
@@ -127,30 +91,16 @@ class ConstraintRssValidatorTest extends \PHPUnit_Framework_TestCase
 
         $constraint = new ConstraintRss();
 
-        $guzzle = $this->getMockBuilder('GuzzleHttp\Client')
-            ->disableOriginalConstructor()
-            ->getMock();
+        $client = new Client();
 
-        $request = $this->getMockBuilder('GuzzleHttp\Message\Request')
-            ->disableOriginalConstructor()
-            ->getMock();
+        $mock = new Mock([
+            new Response(400, [], Stream::factory('oops')),
+            new Response(400, [], Stream::factory('oops')),
+        ]);
 
-        $response = $this->getMockBuilder('GuzzleHttp\Message\Response')
-            ->disableOriginalConstructor()
-            ->getMock();
+        $client->getEmitter()->attach($mock);
 
-        $guzzle->expects($this->any())
-            ->method('get')
-            ->will($this->returnValue($response));
-
-        $response->expects($this->any())
-            ->method('getBody')
-            ->will($this->onConsecutiveCalls(
-                $this->throwException(new RequestException('oops', $request)),
-                $this->throwException(new RequestException('oops', $request))
-            ));
-
-        $validator = new ConstraintRssValidator($guzzle);
+        $validator = new ConstraintRssValidator($client);
         $validator->initialize($context);
         $validator->validate('http://0.0.0.0', $constraint);
     }

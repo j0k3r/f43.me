@@ -39,7 +39,7 @@ class Tumblr extends AbstractExtractor
 
         try {
             // retrieve the tumblr user to validate that's a tumblr post
-            $tumblrUser = $this->guzzle
+            $tumblrUser = $this->client
                 ->get($url)
                 ->getHeader('X-Tumblr-User');
         } catch (RequestException $e) {
@@ -70,7 +70,7 @@ class Tumblr extends AbstractExtractor
         }
 
         try {
-            $data = $this->guzzle
+            $data = $this->client
                 ->get('http://api.tumblr.com/v2/blog/'.$this->tumblrHost.'/posts/text?api_key='.$this->tumblrApiKey.'&id='.$this->tumblrId)
                 ->json();
         } catch (RequestException $e) {

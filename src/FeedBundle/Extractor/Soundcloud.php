@@ -39,7 +39,7 @@ class Soundcloud extends AbstractExtractor
         }
 
         try {
-            $data = $this->guzzle
+            $data = $this->client
                 ->get('http://soundcloud.com/oembed?format=json&url='.$this->soundCloundUrl)
                 ->json();
         } catch (RequestException $e) {
