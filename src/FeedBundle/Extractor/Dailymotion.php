@@ -39,7 +39,7 @@ class Dailymotion extends AbstractExtractor
         }
 
         try {
-            $data = $this->guzzle
+            $data = $this->client
                 ->get('http://www.dailymotion.com/services/oembed?format=json&url='.$this->dailymotionUrl)
                 ->json();
         } catch (RequestException $e) {

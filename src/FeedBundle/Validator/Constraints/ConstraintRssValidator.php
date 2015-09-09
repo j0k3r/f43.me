@@ -13,11 +13,11 @@ use GuzzleHttp\Exception\RequestException;
  */
 class ConstraintRssValidator extends ConstraintValidator
 {
-    private $guzzle;
+    private $client;
 
-    public function __construct(Client $guzzle)
+    public function __construct(Client $client)
     {
-        $this->guzzle = $guzzle;
+        $this->client = $client;
     }
 
     /**
@@ -26,13 +26,13 @@ class ConstraintRssValidator extends ConstraintValidator
     public function validate($value, Constraint $constraint)
     {
         try {
-            $content = $this->guzzle
+            $content = $this->client
                 ->get('http://validator.w3.org/feed/check.cgi?url='.$value)
                 ->getBody();
         } catch (RequestException $e) {
             // if thing goes wrong, let's try with an alternative
             try {
-                $content = $this->guzzle
+                $content = $this->client
                     ->get('http://feedvalidator.org/check.cgi?url='.$value)
                     ->getBody();
             } catch (RequestException $e) {

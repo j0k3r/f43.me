@@ -4,37 +4,51 @@ namespace Api43\FeedBundle\Tests\Readability;
 
 use Api43\FeedBundle\Readability\Proxy;
 use Api43\FeedBundle\Parser\Internal;
-use GuzzleHttp\Exception\RequestException;
+use GuzzleHttp\Client;
+use GuzzleHttp\Subscriber\Mock;
+use GuzzleHttp\Message\Response;
+use GuzzleHttp\Stream\Stream;
 
 class ProxyTest extends \PHPUnit_Framework_TestCase
 {
-    private $response;
-    private $feed;
-    private $internalParser;
-    private $parserChain;
-    private $extractorChain;
-    private $improverChain;
-
-    protected function setUp()
+    protected function getProxy(Response $response, $customParser = false, $customExtractor = false)
     {
-        $this->feed = $this->getMockBuilder('Api43\FeedBundle\Document\Feed')
+        $feed = $this->getMockBuilder('Api43\FeedBundle\Document\Feed')
             ->setMethods(array('getFormatter', 'getHost'))
             ->disableOriginalConstructor()
             ->getMock();
 
-        $this->feed->expects($this->any())
+        $feed->expects($this->any())
             ->method('getFormatter')
             ->willReturn('atom');
 
-        $this->extractorChain = $this->getMockBuilder('Api43\FeedBundle\Extractor\ExtractorChain')
+        $extractorChain = $this->getMockBuilder('Api43\FeedBundle\Extractor\ExtractorChain')
             ->disableOriginalConstructor()
             ->getMock();
 
-        $this->extractorChain->expects($this->any())
+        $extractorChain->expects($this->any())
             ->method('match')
             ->willReturn(false);
 
-        $this->improverChain = $this->getMockBuilder('Api43\FeedBundle\Improver\ImproverChain')
+        if (true === $customExtractor) {
+            $extractorChain = $this->getMockBuilder('Api43\FeedBundle\Extractor\ExtractorChain')
+                ->disableOriginalConstructor()
+                ->getMock();
+
+            $extractor = $this->getMockBuilder('Api43\FeedBundle\Extractor\Twitter')
+                ->disableOriginalConstructor()
+                ->getMock();
+
+            $extractor->expects($this->any())
+                ->method('getContent')
+                ->willReturn('<html/>');
+
+            $extractorChain->expects($this->any())
+                ->method('match')
+                ->willReturn($extractor);
+        }
+
+        $improverChain = $this->getMockBuilder('Api43\FeedBundle\Improver\ImproverChain')
             ->disableOriginalConstructor()
             ->getMock();
 
@@ -50,27 +64,17 @@ class ProxyTest extends \PHPUnit_Framework_TestCase
             ->method('updateUrl')
             ->will($this->returnArgument(0));
 
-        $this->improverChain->expects($this->any())
+        $improverChain->expects($this->any())
             ->method('match')
             ->willReturn($nothingImprover);
 
-        $guzzle = $this->getMockBuilder('GuzzleHttp\Client')
-            ->disableOriginalConstructor()
-            ->getMock();
+        $client = new Client();
 
-        $request = $this->getMockBuilder('GuzzleHttp\Message\Request')
-            ->disableOriginalConstructor()
-            ->getMock();
+        $mock = new Mock([$response]);
 
-        $this->response = $this->getMockBuilder('GuzzleHttp\Message\Response')
-            ->disableOriginalConstructor()
-            ->getMock();
+        $client->getEmitter()->attach($mock);
 
-        $guzzle->expects($this->any())
-            ->method('get')
-            ->will($this->returnValue($this->response));
-
-        $this->internalParser = new Internal($guzzle, array(
+        $internalParser = new Internal($client, array(
             'unlikelyCandidates' => '/combx|comment|community|disqus|extra|foot|header|menu|remark|rss|shoutbox|sidebar|sponsor|ad-break|agegate|pagination|pager|popup|addthis|response|slate_associated_bn|reseaux|sharing|auteur|tag|feedback|meta|kudo|sidebar|copyright|bio|moreInfo|legal|share/i',
             'okMaybeItsACandidate' => '/and|article|body|column|main|shadow/i',
             'positive' => '/article|body|content|entry|hentry|main|page|attachment|pagination|post|text|blog|story/i',
@@ -86,19 +90,29 @@ class ProxyTest extends \PHPUnit_Framework_TestCase
             'tagToRemove' => 'select|form|header|footer|aside',
         ));
 
-        $this->parserChain = $this->getMockBuilder('Api43\FeedBundle\Parser\ParserChain')
+        $parserChain = $this->getMockBuilder('Api43\FeedBundle\Parser\ParserChain')
             ->disableOriginalConstructor()
             ->getMock();
 
-        $this->parserChain->expects($this->any())
+        $parserChain->expects($this->any())
             ->method('getParser')
-            ->willReturn($this->internalParser);
+            ->willReturn($internalParser);
+
+        $proxy = new Proxy($extractorChain, $improverChain, $parserChain);
+        $proxy->init('internal', $feed, true);
+
+        if (true === $customParser) {
+            $feed->expects($this->any())
+                ->method('getHost')
+                ->will($this->returnValue('Default'));
+        }
+
+        return $proxy;
     }
 
     public function testWithEmptyContent()
     {
-        $proxy = new Proxy($this->extractorChain, $this->improverChain, $this->parserChain);
-        $proxy->init('internal', $this->feed, true);
+        $proxy = $this->getProxy(new Response(200, []));
 
         $proxy->parseContent('http://0.0.0.0', 'default content');
 
@@ -107,12 +121,7 @@ class ProxyTest extends \PHPUnit_Framework_TestCase
 
     public function testWithFalseContent()
     {
-        $proxy = new Proxy($this->extractorChain, $this->improverChain, $this->parserChain);
-        $proxy->init('internal', $this->feed, true);
-
-        $this->response->expects($this->any())
-            ->method('getBody')
-            ->willReturn(false);
+        $proxy = $this->getProxy(new Response(200, ['Content-Type' => 'text']));
 
         $proxy->parseContent('http://0.0.0.0/content.html', 'default content');
 
@@ -122,8 +131,7 @@ class ProxyTest extends \PHPUnit_Framework_TestCase
 
     public function testWithVideoContent()
     {
-        $proxy = new Proxy($this->extractorChain, $this->improverChain, $this->parserChain);
-        $proxy->init('internal', $this->feed, true);
+        $proxy = $this->getProxy(new Response(200, ['Content-Type' => 'text']));
 
         $proxy->parseContent('https://www.youtube.com/watch?v=8b7t5iUV0pQ', 'default content');
 
@@ -133,16 +141,7 @@ class ProxyTest extends \PHPUnit_Framework_TestCase
 
     public function testWithExceptionFromGuzzle()
     {
-        $proxy = new Proxy($this->extractorChain, $this->improverChain, $this->parserChain);
-        $proxy->init('internal', $this->feed, true);
-
-        $request = $this->getMockBuilder('GuzzleHttp\Message\Request')
-            ->disableOriginalConstructor()
-            ->getMock();
-
-        $this->response->expects($this->any())
-            ->method('getBody')
-            ->will($this->throwException(new RequestException('oops', $request)));
+        $proxy = $this->getProxy(new Response(400, []));
 
         $proxy->parseContent('http://foo.bar.nowhere/test.html', 'default content');
 
@@ -152,24 +151,7 @@ class ProxyTest extends \PHPUnit_Framework_TestCase
 
     public function testWithGzipContent()
     {
-        $proxy = new Proxy($this->extractorChain, $this->improverChain, $this->parserChain);
-        $proxy->init('internal', $this->feed, true);
-
-        $this->response->expects($this->any())
-            ->method('getBody')
-            ->willReturn(gzencode("<p>Le Lorem Ipsum est simplement du faux texte employé dans la composition et la mise en page avant impression. Le Lorem Ipsum est le faux texte standard de l'imprimerie depuis les années 1500, quand un peintre anonyme assembla ensemble des morceaux de texte pour réaliser un livre spécimen de polices de texte.</p>"));
-
-        $this->response->expects($this->any())
-            ->method('getHeader')
-            ->will($this->returnCallback(function ($param) {
-                switch ($param) {
-                    case 'Content-Type':
-                        return 'text';
-
-                    case 'Content-Encoding':
-                        return 'gzip';
-                }
-            }));
+        $proxy = $this->getProxy(new Response(200, ['Content-Encoding' => 'gzip', 'Content-Type' => 'text'], Stream::factory(gzencode("<p>Le Lorem Ipsum est simplement du faux texte employé dans la composition et la mise en page avant impression. Le Lorem Ipsum est le faux texte standard de l'imprimerie depuis les années 1500, quand un peintre anonyme assembla ensemble des morceaux de texte pour réaliser un livre spécimen de polices de texte.</p>"))));
 
         $proxy->parseContent('http://foo.bar.nowhere/test.html', 'default content');
 
@@ -179,15 +161,7 @@ class ProxyTest extends \PHPUnit_Framework_TestCase
 
     public function testWithImageContent()
     {
-        $proxy = new Proxy($this->extractorChain, $this->improverChain, $this->parserChain);
-        $proxy->init('internal', $this->feed, true);
-
-        $this->response->expects($this->any())
-            ->method('getHeader')
-            ->will($this->onConsecutiveCalls(
-                $this->returnValue('image'),
-                $this->returnValue('image')
-            ));
+        $proxy = $this->getProxy(new Response(200, ['Content-Type' => 'image']));
 
         $proxy->parseContent('http://foo.bar.nowhere/test.html', 'default content');
 
@@ -197,12 +171,7 @@ class ProxyTest extends \PHPUnit_Framework_TestCase
 
     public function testWithCustomParser()
     {
-        $proxy = new Proxy($this->extractorChain, $this->improverChain, $this->parserChain);
-        $proxy->init('internal', $this->feed, true);
-
-        $this->feed->expects($this->any())
-            ->method('getHost')
-            ->will($this->returnValue('Default'));
+        $proxy = $this->getProxy(new Response(200, []), true);
 
         $proxy->parseContent('http://0.0.0.0', 'default content');
 
@@ -211,27 +180,28 @@ class ProxyTest extends \PHPUnit_Framework_TestCase
 
     public function testWithCustomExtractor()
     {
-        $extractorChain = $this->getMockBuilder('Api43\FeedBundle\Extractor\ExtractorChain')
-            ->disableOriginalConstructor()
-            ->getMock();
-
-        $extractor = $this->getMockBuilder('Api43\FeedBundle\Extractor\Twitter')
-            ->disableOriginalConstructor()
-            ->getMock();
-
-        $extractor->expects($this->any())
-            ->method('getContent')
-            ->willReturn('<html/>');
-
-        $extractorChain->expects($this->any())
-            ->method('match')
-            ->willReturn($extractor);
-
-        $proxy = new Proxy($extractorChain, $this->improverChain, $this->parserChain);
-        $proxy->init('internal', $this->feed, true);
+        $proxy = $this->getProxy(new Response(200, []), false, true);
 
         $proxy->parseContent('http://0.0.0.0', 'default content');
 
         $this->assertEquals('<html/>', $proxy->content);
+    }
+
+    /**
+     * @expectedException InvalidArgumentException
+     * @expectedExceptionMessage The given parser "oops" does not exists.
+     */
+    public function testInvalidParser()
+    {
+        $extractorChain = $this->getMockBuilder('Api43\FeedBundle\Extractor\ExtractorChain')
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $improverChain = $this->getMockBuilder('Api43\FeedBundle\Improver\ImproverChain')
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $proxy = new Proxy($extractorChain, $improverChain, new \Api43\FeedBundle\Parser\ParserChain());
+        $proxy->init('oops');
     }
 }

@@ -39,7 +39,7 @@ class Spotify extends AbstractExtractor
         }
 
         try {
-            $data = $this->guzzle
+            $data = $this->client
                 ->get('https://embed.spotify.com/oembed/?format=json&url='.$this->spotifyUrl)
                 ->json();
         } catch (RequestException $e) {

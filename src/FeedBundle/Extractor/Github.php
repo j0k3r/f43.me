@@ -64,7 +64,7 @@ class Github extends AbstractExtractor
 
         if (null !== $this->pullNumber) {
             try {
-                $data = $this->guzzle
+                $data = $this->client
                     ->get(
                         'https://api.github.com/repos/'.$this->githubRepo.'/pulls/'.$this->pullNumber,
                         array(
@@ -96,7 +96,7 @@ class Github extends AbstractExtractor
 
         if (null !== $this->issueNumber) {
             try {
-                $data = $this->guzzle
+                $data = $this->client
                     ->get(
                         'https://api.github.com/repos/'.$this->githubRepo.'/issues/'.$this->issueNumber,
                         array(
@@ -124,7 +124,7 @@ class Github extends AbstractExtractor
         }
 
         try {
-            return $this->guzzle
+            return $this->client
                 ->get(
                     'https://api.github.com/repos/'.$this->githubRepo.'/readme',
                     array(

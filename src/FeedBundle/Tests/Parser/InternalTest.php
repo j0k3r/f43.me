@@ -3,7 +3,10 @@
 namespace Api43\FeedBundle\Tests\Parser;
 
 use Api43\FeedBundle\Parser\Internal;
-use GuzzleHttp\Exception\RequestException;
+use GuzzleHttp\Client;
+use GuzzleHttp\Subscriber\Mock;
+use GuzzleHttp\Message\Response;
+use GuzzleHttp\Stream\Stream;
 
 class InternalTest extends \PHPUnit_Framework_TestCase
 {
@@ -25,64 +28,35 @@ class InternalTest extends \PHPUnit_Framework_TestCase
 
     public function testParseEmpty()
     {
-        $guzzle = $this->getMockBuilder('GuzzleHttp\Client')
-            ->disableOriginalConstructor()
-            ->getMock();
+        $client = new Client();
 
-        $request = $this->getMockBuilder('GuzzleHttp\Message\Request')
-            ->disableOriginalConstructor()
-            ->getMock();
+        $mock = new Mock([
+            new Response(200, []),
+        ]);
 
-        $response = $this->getMockBuilder('GuzzleHttp\Message\Response')
-            ->disableOriginalConstructor()
-            ->getMock();
+        $client->getEmitter()->attach($mock);
 
-        $guzzle->expects($this->any())
-            ->method('get')
-            ->will($this->returnValue($response));
-
-        $response->expects($this->any())
-            ->method('getBody')
-            ->will($this->returnValue(''));
-
-        $internal = new Internal($guzzle, $this->regexs);
+        $internal = new Internal($client, $this->regexs);
         $this->assertEmpty($internal->parse('http://localhost'));
     }
 
     public function testParse()
     {
-        $guzzle = $this->getMockBuilder('GuzzleHttp\Client')
-            ->disableOriginalConstructor()
-            ->getMock();
+        $client = new Client();
 
-        $request = $this->getMockBuilder('GuzzleHttp\Message\Request')
-            ->disableOriginalConstructor()
-            ->getMock();
+        $mock = new Mock([
+            new Response(200, ['Content-Encoding' => 'deflate', 'Content-Type' => 'text/html; charset=iso'], Stream::factory('<div></div>')),
+        ]);
 
-        $response = new \GuzzleHttp\Message\Response(
-            200,
-            array(
-                'Content-Encoding' => 'deflate',
-                'Content-Type' => 'text/html; charset=iso',
-            ),
-            \GuzzleHttp\Stream\Stream::factory('<div></div>')
-        );
+        $client->getEmitter()->attach($mock);
 
-        $guzzle->expects($this->any())
-            ->method('get')
-            ->will($this->returnValue($response));
-
-        $internal = new Internal($guzzle, $this->regexs);
+        $internal = new Internal($client, $this->regexs);
         $this->assertEmpty($internal->parse('http://localhost'));
     }
 
     public function testParseVideo()
     {
-        $guzzle = $this->getMockBuilder('GuzzleHttp\Client')
-            ->disableOriginalConstructor()
-            ->getMock();
-
-        $internal = new Internal($guzzle, $this->regexs);
+        $internal = new Internal(new Client(), $this->regexs);
         $this->assertContains('<iframe src="http://www.youtube.com/embed/8b7t5iUV0pQ" width="560" height="315"', $internal->parse('https://www.youtube.com/watch?v=8b7t5iUV0pQ'));
     }
 
@@ -91,99 +65,57 @@ class InternalTest extends \PHPUnit_Framework_TestCase
      */
     public function testParseGuzzleException()
     {
-        $guzzle = $this->getMockBuilder('GuzzleHttp\Client')
-            ->disableOriginalConstructor()
-            ->getMock();
+        $client = new Client();
 
-        $request = $this->getMockBuilder('GuzzleHttp\Message\Request')
-            ->disableOriginalConstructor()
-            ->getMock();
+        $mock = new Mock([
+            new Response(400, [], Stream::factory('oops')),
+        ]);
 
-        $guzzle->expects($this->any())
-            ->method('get')
-            ->will($this->throwException(new RequestException('oops', $request)));
+        $client->getEmitter()->attach($mock);
 
-        $internal = new Internal($guzzle, $this->regexs);
+        $internal = new Internal($client, $this->regexs);
         $this->assertEmpty($internal->parse('http://foo.bar.youpla'));
     }
 
     public function testParseFalse()
     {
-        $guzzle = $this->getMockBuilder('GuzzleHttp\Client')
-            ->disableOriginalConstructor()
-            ->getMock();
+        $client = new Client();
 
-        $request = $this->getMockBuilder('GuzzleHttp\Message\Request')
-            ->disableOriginalConstructor()
-            ->getMock();
+        $mock = new Mock([
+            new Response(200, ['Content-Type' => 'text']),
+        ]);
 
-        $response = $this->getMockBuilder('GuzzleHttp\Message\Response')
-            ->disableOriginalConstructor()
-            ->getMock();
+        $client->getEmitter()->attach($mock);
 
-        $guzzle->expects($this->any())
-            ->method('get')
-            ->will($this->returnValue($response));
-
-        $response->expects($this->any())
-            ->method('getBody')
-            ->willReturn(false);
-
-        $internal = new Internal($guzzle, $this->regexs);
+        $internal = new Internal($client, $this->regexs);
         $this->assertEmpty($internal->parse('http://localhost'));
     }
 
     public function testParseImage()
     {
-        $guzzle = $this->getMockBuilder('GuzzleHttp\Client')
-            ->disableOriginalConstructor()
-            ->getMock();
+        $client = new Client();
 
-        $request = $this->getMockBuilder('GuzzleHttp\Message\Request')
-            ->disableOriginalConstructor()
-            ->getMock();
+        $mock = new Mock([
+            new Response(200, ['Content-Encoding' => 'deflate', 'Content-Type' => 'image'], Stream::factory('<div></div>')),
+        ]);
 
-        $response = new \GuzzleHttp\Message\Response(
-            200,
-            array(
-                'Content-Encoding' => 'deflate',
-                'Content-Type' => 'image',
-            ),
-            \GuzzleHttp\Stream\Stream::factory('<div></div>')
-        );
+        $client->getEmitter()->attach($mock);
 
-        $guzzle->expects($this->any())
-            ->method('get')
-            ->will($this->returnValue($response));
-
-        $internal = new Internal($guzzle, $this->regexs);
+        $internal = new Internal($client, $this->regexs);
         $this->assertEquals('<img src="http://localhost" />', $internal->parse('http://localhost'));
     }
 
     public function testParseGzip()
     {
-        $guzzle = $this->getMockBuilder('GuzzleHttp\Client')
-            ->disableOriginalConstructor()
-            ->getMock();
+        $client = new Client();
 
-        $request = $this->getMockBuilder('GuzzleHttp\Message\Request')
-            ->disableOriginalConstructor()
-            ->getMock();
+        $mock = new Mock([
+            new Response(200, ['Content-Encoding' => 'gzip', 'Content-Type' => 'text'], Stream::factory(gzencode("<p>Le Lorem Ipsum est simplement du faux texte employé dans la composition et la mise en page avant impression. Le Lorem Ipsum est le faux texte standard de l'imprimerie depuis les années 1500, quand un peintre anonyme assembla ensemble des morceaux de texte pour réaliser un livre spécimen de polices de texte.</p>"))),
+        ]);
 
-        $response = new \GuzzleHttp\Message\Response(
-            200,
-            array(
-                'Content-Encoding' => 'gzip',
-                'Content-Type' => 'text',
-            ),
-            \GuzzleHttp\Stream\Stream::factory(gzencode("<p>Le Lorem Ipsum est simplement du faux texte employé dans la composition et la mise en page avant impression. Le Lorem Ipsum est le faux texte standard de l'imprimerie depuis les années 1500, quand un peintre anonyme assembla ensemble des morceaux de texte pour réaliser un livre spécimen de polices de texte.</p>"))
-        );
+        $client->getEmitter()->attach($mock);
 
-        $guzzle->expects($this->any())
-            ->method('get')
-            ->will($this->returnValue($response));
-
-        $internal = new Internal($guzzle, $this->regexs);
+        $internal = new Internal($client, $this->regexs);
         $this->assertContains('readability', $internal->parse('http://localhost'));
     }
 }

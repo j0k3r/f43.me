@@ -3,9 +3,12 @@
 namespace Api43\FeedBundle\Tests\Extractor;
 
 use Api43\FeedBundle\Extractor\Flickr;
-use GuzzleHttp\Exception\RequestException;
 use Monolog\Logger;
 use Monolog\Handler\TestHandler;
+use GuzzleHttp\Client;
+use GuzzleHttp\Subscriber\Mock;
+use GuzzleHttp\Message\Response;
+use GuzzleHttp\Stream\Stream;
 
 class FlickrTest extends \PHPUnit_Framework_TestCase
 {
@@ -32,46 +35,27 @@ class FlickrTest extends \PHPUnit_Framework_TestCase
      */
     public function testMatch($url, $expected)
     {
-        $guzzle = $this->getMockBuilder('GuzzleHttp\Client')
-            ->disableOriginalConstructor()
-            ->getMock();
-
         $flickr = new Flickr('apikey');
-        $flickr->setGuzzle($guzzle);
         $this->assertEquals($expected, $flickr->match($url));
     }
 
     public function testSinglePhoto()
     {
-        $guzzle = $this->getMockBuilder('GuzzleHttp\Client')
-            ->disableOriginalConstructor()
-            ->getMock();
+        $client = new Client();
 
-        $request = $this->getMockBuilder('GuzzleHttp\Message\Request')
-            ->disableOriginalConstructor()
-            ->getMock();
+        $mock = new Mock([
+            new Response(200, [], Stream::factory(json_encode(array('stat' => 'ok', 'sizes' => array('size' => array(
+                array('label' => 'Medium', 'source' => 'https://0.0.0.0/medium.jpg'),
+                array('label' => 'Large', 'source' => 'https://0.0.0.0/large.jpg'),
+            )))))),
+            new Response(200, [], Stream::factory('')),
+            new Response(400, [], Stream::factory('oops')),
+        ]);
 
-        $response = $this->getMockBuilder('GuzzleHttp\Message\Response')
-            ->disableOriginalConstructor()
-            ->getMock();
-
-        $guzzle->expects($this->any())
-            ->method('get')
-            ->will($this->returnValue($response));
-
-        $response->expects($this->any())
-            ->method('json')
-            ->will($this->onConsecutiveCalls(
-                $this->returnValue(array('stat' => 'ok', 'sizes' => array('size' => array(
-                    array('label' => 'Medium', 'source' => 'https://0.0.0.0/medium.jpg'),
-                    array('label' => 'Large', 'source' => 'https://0.0.0.0/large.jpg'),
-                )))),
-                $this->returnValue(array()),
-                $this->throwException(new RequestException('oops', $request))
-            ));
+        $client->getEmitter()->attach($mock);
 
         $flickr = new Flickr('apikey');
-        $flickr->setGuzzle($guzzle);
+        $flickr->setClient($client);
 
         $logHandler = new TestHandler();
         $logger = new Logger('test', array($logHandler));
@@ -94,35 +78,21 @@ class FlickrTest extends \PHPUnit_Framework_TestCase
 
     public function testPhotoSet()
     {
-        $guzzle = $this->getMockBuilder('GuzzleHttp\Client')
-            ->disableOriginalConstructor()
-            ->getMock();
+        $client = new Client();
 
-        $request = $this->getMockBuilder('GuzzleHttp\Message\Request')
-            ->disableOriginalConstructor()
-            ->getMock();
+        $mock = new Mock([
+            new Response(200, [], Stream::factory(json_encode(array('stat' => 'ok', 'photoset' => array('photo' => array(
+                array('title' => 'Super title', 'url_l' => 'https://0.0.0.0/medium.jpg'),
+                array('title' => 'Ugly title', 'url_o' => 'https://0.0.0.0/large.jpg'),
+            )))))),
+            new Response(200, [], Stream::factory('')),
+            new Response(400, [], Stream::factory('oops')),
+        ]);
 
-        $response = $this->getMockBuilder('GuzzleHttp\Message\Response')
-            ->disableOriginalConstructor()
-            ->getMock();
-
-        $guzzle->expects($this->any())
-            ->method('get')
-            ->will($this->returnValue($response));
-
-        $response->expects($this->any())
-            ->method('json')
-            ->will($this->onConsecutiveCalls(
-                $this->returnValue(array('stat' => 'ok', 'photoset' => array('photo' => array(
-                    array('title' => 'Super title', 'url_l' => 'https://0.0.0.0/medium.jpg'),
-                    array('title' => 'Ugly title', 'url_o' => 'https://0.0.0.0/large.jpg'),
-                )))),
-                $this->returnValue(array()),
-                $this->throwException(new RequestException('oops', $request))
-            ));
+        $client->getEmitter()->attach($mock);
 
         $flickr = new Flickr('apikey');
-        $flickr->setGuzzle($guzzle);
+        $flickr->setClient($client);
 
         $logHandler = new TestHandler();
         $logger = new Logger('test', array($logHandler));

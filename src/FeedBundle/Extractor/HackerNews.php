@@ -32,7 +32,7 @@ class HackerNews extends AbstractExtractor
         }
 
         try {
-            $data = $this->guzzle
+            $data = $this->client
                 ->get('https://hacker-news.firebaseio.com/v0/item/'.$matches[1].'.json')
                 ->json();
         } catch (RequestException $e) {

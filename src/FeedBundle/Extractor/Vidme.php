@@ -46,7 +46,7 @@ class Vidme extends AbstractExtractor
         }
 
         try {
-            $data = $this->guzzle
+            $data = $this->client
                 ->get('https://api.vid.me/videoByUrl?url='.$this->vidmeUrl)
                 ->json();
         } catch (RequestException $e) {

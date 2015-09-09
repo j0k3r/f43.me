@@ -3,9 +3,12 @@
 namespace Api43\FeedBundle\Tests\Extractor;
 
 use Api43\FeedBundle\Extractor\Github;
-use GuzzleHttp\Exception\RequestException;
 use Monolog\Logger;
 use Monolog\Handler\TestHandler;
+use GuzzleHttp\Client;
+use GuzzleHttp\Subscriber\Mock;
+use GuzzleHttp\Message\Response;
+use GuzzleHttp\Stream\Stream;
 
 class GithubTest extends \PHPUnit_Framework_TestCase
 {
@@ -30,43 +33,24 @@ class GithubTest extends \PHPUnit_Framework_TestCase
      */
     public function testMatch($url, $expected)
     {
-        $guzzle = $this->getMockBuilder('GuzzleHttp\Client')
-            ->disableOriginalConstructor()
-            ->getMock();
-
         $github = new Github();
-        $github->setGuzzle($guzzle);
         $this->assertEquals($expected, $github->match($url));
     }
 
     public function testContent()
     {
-        $guzzle = $this->getMockBuilder('GuzzleHttp\Client')
-            ->disableOriginalConstructor()
-            ->getMock();
+        $client = new Client();
 
-        $request = $this->getMockBuilder('GuzzleHttp\Message\Request')
-            ->disableOriginalConstructor()
-            ->getMock();
+        $mock = new Mock([
+            new Response(200, [], Stream::factory('<div>README</div>')),
+            new Response(200, []),
+            new Response(400, [], Stream::factory('oops')),
+        ]);
 
-        $response = $this->getMockBuilder('GuzzleHttp\Message\Response')
-            ->disableOriginalConstructor()
-            ->getMock();
-
-        $guzzle->expects($this->any())
-            ->method('get')
-            ->will($this->returnValue($response));
-
-        $response->expects($this->any())
-            ->method('getBody')
-            ->will($this->onConsecutiveCalls(
-                $this->returnValue('<div>README</div>'),
-                $this->returnValue(''),
-                $this->throwException(new RequestException('oops', $request))
-            ));
+        $client->getEmitter()->attach($mock);
 
         $github = new Github();
-        $github->setGuzzle($guzzle);
+        $github->setClient($client);
 
         // first test fail because we didn't match an url, so GithubId isn't defined
         $this->assertEmpty($github->getContent());
@@ -83,37 +67,23 @@ class GithubTest extends \PHPUnit_Framework_TestCase
 
     public function testIssue()
     {
-        $guzzle = $this->getMockBuilder('GuzzleHttp\Client')
-            ->disableOriginalConstructor()
-            ->getMock();
+        $client = new Client();
 
-        $request = $this->getMockBuilder('GuzzleHttp\Message\Request')
-            ->disableOriginalConstructor()
-            ->getMock();
-
-        $response = $this->getMockBuilder('GuzzleHttp\Message\Response')
-            ->disableOriginalConstructor()
-            ->getMock();
-
-        $guzzle->expects($this->any())
-            ->method('get')
-            ->will($this->returnValue($response));
-
-        $response->expects($this->any())
-            ->method('json')
-            ->will($this->onConsecutiveCalls(
-                $this->returnValue(array(
+        $mock = new Mock([
+            new Response(200, [], Stream::factory(json_encode(array(
                     'html_url' => 'http://1.1.1.1',
                     'title' => 'test',
                     'comments' => 0,
                     'created_at' => '2015-08-04T13:49:04Z',
                     'body_html' => 'body',
-                    'user' => array('html_url' => 'http://2.2.2.2', 'login' => 'login'), )),
-                $this->throwException(new RequestException('oops', $request))
-            ));
+                    'user' => array('html_url' => 'http://2.2.2.2', 'login' => 'login'), )))),
+            new Response(400, [], Stream::factory('oops')),
+        ]);
+
+        $client->getEmitter()->attach($mock);
 
         $github = new Github();
-        $github->setGuzzle($guzzle);
+        $github->setClient($client);
 
         $logHandler = new TestHandler();
         $logger = new Logger('test', array($logHandler));
@@ -132,39 +102,25 @@ class GithubTest extends \PHPUnit_Framework_TestCase
 
     public function testPR()
     {
-        $guzzle = $this->getMockBuilder('GuzzleHttp\Client')
-            ->disableOriginalConstructor()
-            ->getMock();
+        $client = new Client();
 
-        $request = $this->getMockBuilder('GuzzleHttp\Message\Request')
-            ->disableOriginalConstructor()
-            ->getMock();
+        $mock = new Mock([
+            new Response(200, [], Stream::factory(json_encode(array(
+                'base' => array('description' => 'test', 'repo' => array('html_url' => 'http://0.0.0.0', 'full_name' => 'name', 'description' => 'desc')),
+                'html_url' => 'http://1.1.1.1',
+                'title' => 'test',
+                'commits' => 0,
+                'comments' => 0,
+                'created_at' => '2015-08-04T13:49:04Z',
+                'body_html' => 'body',
+                'user' => array('html_url' => 'http://2.2.2.2', 'login' => 'login'), )))),
+            new Response(400, [], Stream::factory('oops')),
+        ]);
 
-        $response = $this->getMockBuilder('GuzzleHttp\Message\Response')
-            ->disableOriginalConstructor()
-            ->getMock();
-
-        $guzzle->expects($this->any())
-            ->method('get')
-            ->will($this->returnValue($response));
-
-        $response->expects($this->any())
-            ->method('json')
-            ->will($this->onConsecutiveCalls(
-                $this->returnValue(array(
-                    'base' => array('description' => 'test', 'repo' => array('html_url' => 'http://0.0.0.0', 'full_name' => 'name', 'description' => 'desc')),
-                    'html_url' => 'http://1.1.1.1',
-                    'title' => 'test',
-                    'commits' => 0,
-                    'comments' => 0,
-                    'created_at' => '2015-08-04T13:49:04Z',
-                    'body_html' => 'body',
-                    'user' => array('html_url' => 'http://2.2.2.2', 'login' => 'login'), )),
-                $this->throwException(new RequestException('oops', $request))
-            ));
+        $client->getEmitter()->attach($mock);
 
         $github = new Github();
-        $github->setGuzzle($guzzle);
+        $github->setClient($client);
 
         $logHandler = new TestHandler();
         $logger = new Logger('test', array($logHandler));

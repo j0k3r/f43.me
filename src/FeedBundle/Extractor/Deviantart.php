@@ -45,7 +45,7 @@ class Deviantart extends AbstractExtractor
         }
 
         try {
-            $data = $this->guzzle
+            $data = $this->client
                 ->get('http://backend.deviantart.com/oembed?url='.$this->deviantartUrl)
                 ->json();
         } catch (RequestException $e) {

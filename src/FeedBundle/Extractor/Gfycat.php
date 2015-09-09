@@ -46,7 +46,7 @@ class Gfycat extends AbstractExtractor
         }
 
         try {
-            $data = $this->guzzle
+            $data = $this->client
                 ->get('http://gfycat.com/cajax/get/'.$this->gfycatId)
                 ->json();
         } catch (RequestException $e) {

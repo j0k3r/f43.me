@@ -75,7 +75,7 @@ services:
             - @imgur.client
         calls:
             - [ setLogger, [ @logger ]]
-            - [ setGuzzle, [ @guzzle.client ]]
+            - [ setClient, [ @guzzle.client ]]
         tags:
             -  { name: feed.extractor, alias: imgur }
 
@@ -85,7 +85,7 @@ services:
             - @twitter.client
         calls:
             - [ setLogger, [ @logger ]]
-            - [ setGuzzle, [ @guzzle.client ]]
+            - [ setClient, [ @guzzle.client ]]
         tags:
             -  { name: feed.extractor, alias: twitter }
 
@@ -95,7 +95,7 @@ services:
             - %tumblr.api_key%
         calls:
             - [ setLogger, [ @logger ]]
-            - [ setGuzzle, [ @guzzle.client ]]
+            - [ setClient, [ @guzzle.client ]]
         tags:
             -  { name: feed.extractor, alias: tumblr }
 
@@ -103,7 +103,7 @@ services:
         class: Api43\FeedBundle\Extractor\Vine
         calls:
             - [ setLogger, [ @logger ]]
-            - [ setGuzzle, [ @guzzle.client ]]
+            - [ setClient, [ @guzzle.client ]]
         tags:
             -  { name: feed.extractor, alias: vine }
 
@@ -111,7 +111,7 @@ services:
         class: Api43\FeedBundle\Extractor\Instagram
         calls:
             - [ setLogger, [ @logger ]]
-            - [ setGuzzle, [ @guzzle.client ]]
+            - [ setClient, [ @guzzle.client ]]
         tags:
             -  { name: feed.extractor, alias: instagram }
 
@@ -119,7 +119,7 @@ services:
         class: Api43\FeedBundle\Extractor\Vidme
         calls:
             - [ setLogger, [ @logger ]]
-            - [ setGuzzle, [ @guzzle.client ]]
+            - [ setClient, [ @guzzle.client ]]
         tags:
             -  { name: feed.extractor, alias: vidme }
 
@@ -127,7 +127,7 @@ services:
         class: Api43\FeedBundle\Extractor\Gfycat
         calls:
             - [ setLogger, [ @logger ]]
-            - [ setGuzzle, [ @guzzle.client ]]
+            - [ setClient, [ @guzzle.client ]]
         tags:
             -  { name: feed.extractor, alias: gfycat }
 
@@ -137,7 +137,7 @@ services:
             - %flickr.api_key%
         calls:
             - [ setLogger, [ @logger ]]
-            - [ setGuzzle, [ @guzzle.client ]]
+            - [ setClient, [ @guzzle.client ]]
         tags:
             -  { name: feed.extractor, alias: flickr }
 
@@ -145,7 +145,7 @@ services:
         class: Api43\FeedBundle\Extractor\Github
         calls:
             - [ setLogger, [ @logger ]]
-            - [ setGuzzle, [ @guzzle.client ]]
+            - [ setClient, [ @guzzle.client ]]
         tags:
             -  { name: feed.extractor, alias: github }
 
@@ -153,7 +153,7 @@ services:
         class: Api43\FeedBundle\Extractor\Deviantart
         calls:
             - [ setLogger, [ @logger ]]
-            - [ setGuzzle, [ @guzzle.client ]]
+            - [ setClient, [ @guzzle.client ]]
         tags:
             -  { name: feed.extractor, alias: deviantart }
 
@@ -161,7 +161,7 @@ services:
         class: Api43\FeedBundle\Extractor\Camplus
         calls:
             - [ setLogger, [ @logger ]]
-            - [ setGuzzle, [ @guzzle.client ]]
+            - [ setClient, [ @guzzle.client ]]
         tags:
             -  { name: feed.extractor, alias: camplus }
 
@@ -169,7 +169,7 @@ services:
         class: Api43\FeedBundle\Extractor\Soundcloud
         calls:
             - [ setLogger, [ @logger ]]
-            - [ setGuzzle, [ @guzzle.client ]]
+            - [ setClient, [ @guzzle.client ]]
         tags:
             -  { name: feed.extractor, alias: soundcloud }
 
@@ -177,7 +177,7 @@ services:
         class: Api43\FeedBundle\Extractor\Vimeo
         calls:
             - [ setLogger, [ @logger ]]
-            - [ setGuzzle, [ @guzzle.client ]]
+            - [ setClient, [ @guzzle.client ]]
         tags:
             -  { name: feed.extractor, alias: vimeo }
 
@@ -185,7 +185,7 @@ services:
         class: Api43\FeedBundle\Extractor\Youtube
         calls:
             - [ setLogger, [ @logger ]]
-            - [ setGuzzle, [ @guzzle.client ]]
+            - [ setClient, [ @guzzle.client ]]
         tags:
             -  { name: feed.extractor, alias: youtube }
 
@@ -193,7 +193,7 @@ services:
         class: Api43\FeedBundle\Extractor\Dailymotion
         calls:
             - [ setLogger, [ @logger ]]
-            - [ setGuzzle, [ @guzzle.client ]]
+            - [ setClient, [ @guzzle.client ]]
         tags:
             -  { name: feed.extractor, alias: dailymotion }
 
@@ -201,7 +201,7 @@ services:
         class: Api43\FeedBundle\Extractor\Spotify
         calls:
             - [ setLogger, [ @logger ]]
-            - [ setGuzzle, [ @guzzle.client ]]
+            - [ setClient, [ @guzzle.client ]]
         tags:
             -  { name: feed.extractor, alias: spotify }
 
@@ -209,7 +209,7 @@ services:
         class: Api43\FeedBundle\Extractor\HackerNews
         calls:
             - [ setLogger, [ @logger ]]
-            - [ setGuzzle, [ @guzzle.client ]]
+            - [ setClient, [ @guzzle.client ]]
         tags:
             -  { name: feed.extractor, alias: hackernews }
 

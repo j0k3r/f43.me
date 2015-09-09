@@ -3,7 +3,10 @@
 namespace Api43\FeedBundle\Tests\Improver;
 
 use Api43\FeedBundle\Improver\Nothing;
-use GuzzleHttp\Exception\RequestException;
+use GuzzleHttp\Client;
+use GuzzleHttp\Subscriber\Mock;
+use GuzzleHttp\Message\Response;
+use GuzzleHttp\Stream\Stream;
 
 class NothingTest extends \PHPUnit_Framework_TestCase
 {
@@ -23,45 +26,32 @@ class NothingTest extends \PHPUnit_Framework_TestCase
      */
     public function testUpdateUrl($url, $expected)
     {
-        $guzzle = $this->getMockBuilder('GuzzleHttp\Client')
-            ->disableOriginalConstructor()
-            ->getMock();
+        $client = new Client();
 
-        $request = $this->getMockBuilder('GuzzleHttp\Message\Request')
-            ->disableOriginalConstructor()
-            ->getMock();
+        $response = new Response(200, []);
+        $response->setEffectiveUrl($expected);
 
-        $response = $this->getMockBuilder('GuzzleHttp\Message\Response')
-            ->disableOriginalConstructor()
-            ->getMock();
+        $mock = new Mock([
+            new Response(200, []),
+        ]);
 
-        $guzzle->expects($this->any())
-            ->method('get')
-            ->will($this->returnValue($response));
+        $client->getEmitter()->attach($mock);
 
-        $response->expects($this->any())
-            ->method('getEffectiveUrl')
-            ->will($this->returnValue($expected));
-
-        $nothing = new Nothing($guzzle);
+        $nothing = new Nothing($client);
         $this->assertEquals($expected, $nothing->updateUrl($url));
     }
 
     public function testUpdateUrlFail()
     {
-        $guzzle = $this->getMockBuilder('GuzzleHttp\Client')
-            ->disableOriginalConstructor()
-            ->getMock();
+        $client = new Client();
 
-        $request = $this->getMockBuilder('GuzzleHttp\Message\Request')
-            ->disableOriginalConstructor()
-            ->getMock();
+        $mock = new Mock([
+            new Response(400, [], Stream::factory('oops')),
+        ]);
 
-        $guzzle->expects($this->any())
-            ->method('get')
-            ->will($this->throwException(new RequestException('oops', $request)));
+        $client->getEmitter()->attach($mock);
 
-        $nothing = new Nothing($guzzle);
+        $nothing = new Nothing($client);
         $this->assertEquals('http://0.0.0.0/content?not-changed', $nothing->updateUrl('http://0.0.0.0/content'));
     }
 }

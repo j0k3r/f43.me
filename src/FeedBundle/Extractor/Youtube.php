@@ -39,7 +39,7 @@ class Youtube extends AbstractExtractor
         }
 
         try {
-            $data = $this->guzzle
+            $data = $this->client
                 ->get('http://www.youtube.com/oembed?format=json&url='.$this->youtubeUrl)
                 ->json();
         } catch (RequestException $e) {

@@ -71,7 +71,7 @@ class Flickr extends AbstractExtractor
     private function getPhoto()
     {
         try {
-            $data = $this->guzzle
+            $data = $this->client
                 ->get('https://api.flickr.com/services/rest/?method=flickr.photos.getSizes&api_key='.$this->flickrApiKey.'&photo_id='.$this->flickrId.'&format=json&nojsoncallback=1')
                 ->json();
         } catch (RequestException $e) {
@@ -102,7 +102,7 @@ class Flickr extends AbstractExtractor
     private function getPhotoFromSet()
     {
         try {
-            $data = $this->guzzle
+            $data = $this->client
                 ->get('https://api.flickr.com/services/rest/?method=flickr.photosets.getPhotos&api_key='.$this->flickrApiKey.'&photoset_id='.$this->flickrSetId.'&extras=url_l,url_o&format=json&nojsoncallback=1')
                 ->json();
         } catch (RequestException $e) {

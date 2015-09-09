@@ -39,7 +39,7 @@ class Vimeo extends AbstractExtractor
         }
 
         try {
-            $data = $this->guzzle
+            $data = $this->client
                 ->get('https://vimeo.com/api/oembed.xml?format=json&url='.$this->vimeoUrl)
                 ->json();
         } catch (RequestException $e) {

@@ -8,7 +8,7 @@ use GuzzleHttp\Client;
 abstract class AbstractExtractor
 {
     protected $logger;
-    protected $guzzle;
+    protected $client;
 
     /**
      * @param LoggerInterface $logger
@@ -19,11 +19,11 @@ abstract class AbstractExtractor
     }
 
     /**
-     * @param Client $guzzle
+     * @param Client $client
      */
-    public function setGuzzle(Client $guzzle)
+    public function setClient(Client $client)
     {
-        $this->guzzle = $guzzle;
+        $this->client = $client;
     }
 
     /**
