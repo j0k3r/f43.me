@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "8766935dc97ec2bd17c06f96775c3090",
+    "hash": "ebaccb8af996b113d357fd3ca24c2e9c",
     "packages": [
         {
             "name": "adyg/php-imgur-api-client",
@@ -998,6 +998,52 @@
             "time": "2015-08-31 13:07:17"
         },
         {
+            "name": "fin1te/safecurl",
+            "version": "v1.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/fin1te/safecurl.git",
+                "reference": "98aae75a1f4f8dec2194ce889d418d16c3c877e4"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/fin1te/safecurl/zipball/98aae75a1f4f8dec2194ce889d418d16c3c877e4",
+                "reference": "98aae75a1f4f8dec2194ce889d418d16c3c877e4",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "3.7.*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "fin1te\\SafeCurl": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Jack W",
+                    "email": "jack@fin1te.net"
+                }
+            ],
+            "description": "A drop-in replacement for 'curl_exec', designed to prevent SSRF attacks.",
+            "keywords": [
+                "curl",
+                "safe",
+                "safecurl",
+                "ssrf",
+                "websec"
+            ],
+            "time": "2014-05-20 12:10:12"
+        },
+        {
             "name": "gedmo/doctrine-extensions",
             "version": "v2.4.6",
             "source": {
@@ -1075,56 +1121,6 @@
                 "uploadable"
             ],
             "time": "2015-08-28 11:07:14"
-        },
-        {
-            "name": "grom/tube-link",
-            "version": "v1.2.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/GromNaN/TubeLink.git",
-                "reference": "a1d9bdd0c92b043d297b95e8069a5b30ceaded9a"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/GromNaN/TubeLink/zipball/a1d9bdd0c92b043d297b95e8069a5b30ceaded9a",
-                "reference": "a1d9bdd0c92b043d297b95e8069a5b30ceaded9a",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.3.0"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.1-dev"
-                }
-            },
-            "autoload": {
-                "psr-0": {
-                    "TubeLink": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Jérôme Tamarelle",
-                    "email": "jerome@tamarelle.net"
-                }
-            ],
-            "description": "Extract video/music information from any URL and render HTML",
-            "keywords": [
-                "dailymotion",
-                "parser",
-                "spotify",
-                "url",
-                "video",
-                "vimeo",
-                "youtube"
-            ],
-            "time": "2014-09-08 14:34:13"
         },
         {
             "name": "guzzle/guzzle",
@@ -1381,6 +1377,52 @@
             "time": "2014-10-12 19:18:40"
         },
         {
+            "name": "htmlawed/htmlawed",
+            "version": "1.1.19",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/kesar/HTMLawed.git",
+                "reference": "620c38edd57e680260ebd8dd0e98167d97e9a7bf"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/kesar/HTMLawed/zipball/620c38edd57e680260ebd8dd0e98167d97e9a7bf",
+                "reference": "620c38edd57e680260ebd8dd0e98167d97e9a7bf",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">4.4.0"
+            },
+            "type": "library",
+            "autoload": {
+                "files": [
+                    "htmLawed.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPL-2.0+",
+                "LGPL-3.0"
+            ],
+            "authors": [
+                {
+                    "name": "Santosh Patnaik",
+                    "homepage": "http://www.bioinformatics.org/people/index.php?user_hash=558b661f92d0ff7b",
+                    "role": "Developer"
+                }
+            ],
+            "description": "htmLawed - Process text with HTML markup to make it more compliant with HTML  standards and administrative policies",
+            "homepage": "http://www.bioinformatics.org/phplabware/internal_utilities/htmLawed/",
+            "keywords": [
+                "HTMLtidy",
+                "html",
+                "sanitize",
+                "strip",
+                "tags"
+            ],
+            "time": "2015-04-05 17:23:05"
+        },
+        {
             "name": "incenteev/composer-parameter-handler",
             "version": "v2.1.1",
             "source": {
@@ -1430,6 +1472,93 @@
                 "parameters management"
             ],
             "time": "2015-06-03 08:27:03"
+        },
+        {
+            "name": "j0k3r/graby",
+            "version": "1.0.0-alpha.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/j0k3r/graby.git",
+                "reference": "553a5ddd35e89f37fce2275e1423cc4451c40dbf"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/j0k3r/graby/zipball/553a5ddd35e89f37fce2275e1423cc4451c40dbf",
+                "reference": "553a5ddd35e89f37fce2275e1423cc4451c40dbf",
+                "shasum": ""
+            },
+            "require": {
+                "fin1te/safecurl": "~1.1",
+                "guzzlehttp/guzzle": "^5.2.0",
+                "htmlawed/htmlawed": "^1.1.19",
+                "j0k3r/graby-site-config": "dev-master",
+                "j0k3r/php-readability": "^1.0",
+                "monolog/monolog": "^1.13.1",
+                "neitanod/forceutf8": "^1.4",
+                "php": ">=5.4",
+                "simplepie/simplepie": "^1.3.1",
+                "symfony/options-resolver": "^2.6.6"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Graby\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "AGPL-3.0"
+            ],
+            "authors": [
+                {
+                    "name": "Jeremy Benoist",
+                    "email": "jeremy.benoist@gmail.com",
+                    "role": "Developer"
+                },
+                {
+                    "name": "FiveFilters.org",
+                    "email": "fivefilters@fivefilters.org",
+                    "role": "Developer (original version)"
+                }
+            ],
+            "description": "Graby helps you extract article content from web pages",
+            "time": "2015-08-29 10:16:47"
+        },
+        {
+            "name": "j0k3r/graby-site-config",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/j0k3r/graby-site-config.git",
+                "reference": "ea4de15217819c6974414edd2c9940f964fb628c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/j0k3r/graby-site-config/zipball/ea4de15217819c6974414edd2c9940f964fb628c",
+                "reference": "ea4de15217819c6974414edd2c9940f964fb628c",
+                "shasum": ""
+            },
+            "require": {
+                "symfony/finder": "^2.6.6"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "GrabySiteConfig\\SiteConfig\\": "/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "AGPL-3.0"
+            ],
+            "authors": [
+                {
+                    "name": "Jeremy Benoist",
+                    "email": "jeremy.benoist@gmail.com"
+                }
+            ],
+            "description": "Graby site config files",
+            "time": "2015-09-08 17:14:39"
         },
         {
             "name": "j0k3r/php-readability",
@@ -1670,6 +1799,40 @@
                 "psr-3"
             ],
             "time": "2015-08-31 09:17:37"
+        },
+        {
+            "name": "neitanod/forceutf8",
+            "version": "v1.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/neitanod/forceutf8.git",
+                "reference": "28d50d579179abac1f6a55b03c6d9d3f6573867c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/neitanod/forceutf8/zipball/28d50d579179abac1f6a55b03c6d9d3f6573867c",
+                "reference": "28d50d579179abac1f6a55b03c6d9d3f6573867c",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.2.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "ForceUTF8\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "authors": [
+                {
+                    "name": "Sebastián Grignoli",
+                    "email": "grignoli@gmail.com"
+                }
+            ],
+            "description": "PHP Class Encoding featuring popular Encoding::toUTF8() function --formerly known as forceUTF8()-- that fixes mixed encoded strings.",
+            "homepage": "https://github.com/neitanod/forceutf8",
+            "time": "2014-09-24 14:59:43"
         },
         {
             "name": "psr/log",
@@ -2547,9 +2710,7 @@
     ],
     "aliases": [],
     "minimum-stability": "dev",
-    "stability-flags": {
-        "doctrine/mongodb-odm": 20
-    },
+    "stability-flags": [],
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {

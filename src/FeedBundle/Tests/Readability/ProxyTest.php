@@ -11,7 +11,7 @@ use GuzzleHttp\Stream\Stream;
 
 class ProxyTest extends \PHPUnit_Framework_TestCase
 {
-    protected function getProxy(Response $response, $customParser = false, $customExtractor = false)
+    protected function getProxy($customParser = false, $customExtractor = false)
     {
         $feed = $this->getMockBuilder('Api43\FeedBundle\Document\Feed')
             ->setMethods(array('getFormatter', 'getHost'))
@@ -68,27 +68,12 @@ class ProxyTest extends \PHPUnit_Framework_TestCase
             ->method('match')
             ->willReturn($nothingImprover);
 
-        $client = new Client();
+        $this->graby = $this->getMockBuilder('Graby\Graby')
+            ->setMethods(array('fetchContent'))
+            ->disableOriginalConstructor()
+            ->getMock();
 
-        $mock = new Mock([$response]);
-
-        $client->getEmitter()->attach($mock);
-
-        $internalParser = new Internal($client, array(
-            'unlikelyCandidates' => '/combx|comment|community|disqus|extra|foot|header|menu|remark|rss|shoutbox|sidebar|sponsor|ad-break|agegate|pagination|pager|popup|addthis|response|slate_associated_bn|reseaux|sharing|auteur|tag|feedback|meta|kudo|sidebar|copyright|bio|moreInfo|legal|share/i',
-            'okMaybeItsACandidate' => '/and|article|body|column|main|shadow/i',
-            'positive' => '/article|body|content|entry|hentry|main|page|attachment|pagination|post|text|blog|story/i',
-            'negative' => '/combx|comment|com-|contact|foot|footer|_nav|footnote|masthead|media|meta|outbrain|promo|related|scroll|shoutbox|sidebar|sponsor|shopping|tags|tool|widget|header|aside/i',
-            'divToPElements' => '/<(a|blockquote|dl|div|img|ol|p|pre|table|ul)/i',
-            'replaceBrs' => '/(<br[^>]*>[ \n\r\t]*){2,}/i',
-            'replaceFonts' => '/<(\/?)font[^>]*>/i',
-            'normalize' => '/\s{2,}/',
-            'killBreaks' => '/(<br\s*\/?>(\s|&nbsp;?)*){1,}/',
-            'video' => '!//(player\.|www\.)?(youtube|vimeo|viddler|dailymotion)\.com!i',
-            'skipFootnoteLink' => '/^\s*(\[?[a-z0-9]{1,2}\]?|^|edit|citation needed)\s*$/i',
-            'attrToRemove' => 'onclick|rel|class|target|fs:definition|alt|id|onload|name|onchange',
-            'tagToRemove' => 'select|form|header|footer|aside',
-        ));
+        $internalParser = new Internal($this->graby);
 
         $parserChain = $this->getMockBuilder('Api43\FeedBundle\Parser\ParserChain')
             ->disableOriginalConstructor()
@@ -112,66 +97,38 @@ class ProxyTest extends \PHPUnit_Framework_TestCase
 
     public function testWithEmptyContent()
     {
-        $proxy = $this->getProxy(new Response(200, []));
+        $proxy = $this->getProxy();
+
+        $this->graby->expects($this->any())
+            ->method('fetchContent')
+            ->willReturn(array('html' => false));
 
         $proxy->parseContent('http://0.0.0.0', 'default content');
 
         $this->assertEquals('default content', $proxy->content);
     }
 
-    public function testWithFalseContent()
+    public function testWithException()
     {
-        $proxy = $this->getProxy(new Response(200, ['Content-Type' => 'text']));
+        $proxy = $this->getProxy();
 
-        $proxy->parseContent('http://0.0.0.0/content.html', 'default content');
-
-        $this->assertEquals('http://0.0.0.0/content.html', $proxy->url);
-        $this->assertEquals('default content', $proxy->content);
-    }
-
-    public function testWithVideoContent()
-    {
-        $proxy = $this->getProxy(new Response(200, ['Content-Type' => 'text']));
-
-        $proxy->parseContent('https://www.youtube.com/watch?v=8b7t5iUV0pQ', 'default content');
-
-        $this->assertEquals('https://www.youtube.com/watch?v=8b7t5iUV0pQ', $proxy->url);
-        $this->assertContains('<iframe src="http://www.youtube.com/embed/8b7t5iUV0pQ" width="560" height="315"', $proxy->content);
-    }
-
-    public function testWithExceptionFromGuzzle()
-    {
-        $proxy = $this->getProxy(new Response(400, []));
+        $this->graby->expects($this->any())
+            ->method('fetchContent')
+            ->will($this->throwException(new \Exception));
 
         $proxy->parseContent('http://foo.bar.nowhere/test.html', 'default content');
 
         $this->assertEquals('http://foo.bar.nowhere/test.html', $proxy->url);
         $this->assertEquals('default content', $proxy->content);
-    }
-
-    public function testWithGzipContent()
-    {
-        $proxy = $this->getProxy(new Response(200, ['Content-Encoding' => 'gzip', 'Content-Type' => 'text'], Stream::factory(gzencode("<p>Le Lorem Ipsum est simplement du faux texte employé dans la composition et la mise en page avant impression. Le Lorem Ipsum est le faux texte standard de l'imprimerie depuis les années 1500, quand un peintre anonyme assembla ensemble des morceaux de texte pour réaliser un livre spécimen de polices de texte.</p>"))));
-
-        $proxy->parseContent('http://foo.bar.nowhere/test.html', 'default content');
-
-        $this->assertEquals('http://foo.bar.nowhere/test.html', $proxy->url);
-        $this->assertContains('readability', $proxy->content);
-    }
-
-    public function testWithImageContent()
-    {
-        $proxy = $this->getProxy(new Response(200, ['Content-Type' => 'image']));
-
-        $proxy->parseContent('http://foo.bar.nowhere/test.html', 'default content');
-
-        $this->assertEquals('http://foo.bar.nowhere/test.html', $proxy->url);
-        $this->assertContains('<img src="http://foo.bar.nowhere/test.html"', $proxy->content);
     }
 
     public function testWithCustomParser()
     {
-        $proxy = $this->getProxy(new Response(200, []), true);
+        $proxy = $this->getProxy(true);
+
+        $this->graby->expects($this->any())
+            ->method('fetchContent')
+            ->willReturn(array('html' => false));
 
         $proxy->parseContent('http://0.0.0.0', 'default content');
 
@@ -180,7 +137,11 @@ class ProxyTest extends \PHPUnit_Framework_TestCase
 
     public function testWithCustomExtractor()
     {
-        $proxy = $this->getProxy(new Response(200, []), false, true);
+        $proxy = $this->getProxy(false, true);
+
+        $this->graby->expects($this->any())
+            ->method('fetchContent')
+            ->willReturn(array('html' => false));
 
         $proxy->parseContent('http://0.0.0.0', 'default content');
 

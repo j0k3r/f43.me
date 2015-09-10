@@ -18,6 +18,11 @@ services:
         arguments:
             - %guzzle.options%
 
+    graby:
+        class: Graby\Graby
+        arguments:
+            - { error_message: false}
+
     twitter.client:
         class: TwitterOAuth\TwitterOAuth
         arguments:
@@ -255,7 +260,6 @@ services:
     feed.parser.internal:
         class: Api43\FeedBundle\Parser\Internal
         arguments:
-            - @guzzle.client
-            - %parser.regexps%
+            - @graby
         tags:
             -  { name: feed.parser, alias: internal }

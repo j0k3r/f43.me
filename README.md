@@ -63,7 +63,7 @@ And finally, when we have the (most of the time, little) content from the feed, 
 
 This involve 2 kind of parser:
 
- * the **Internal** one, that use a [local PHP library](http://www.keyvan.net/2010/08/php-readability/)
+ * the **Internal** one, that uses a local PHP libray, called [graby](https://github.com/j0k3r/graby).
  * the **External** one, that uses the excellent [Parser API](https://www.readability.com/developers/api) from Readability.
 
 Since the use of the Parser API is *freely available for non-commercial use* I tend to use it less and less.
