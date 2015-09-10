@@ -3,10 +3,6 @@
 namespace Api43\FeedBundle\Tests\Parser;
 
 use Api43\FeedBundle\Parser\Internal;
-use GuzzleHttp\Client;
-use GuzzleHttp\Subscriber\Mock;
-use GuzzleHttp\Message\Response;
-use GuzzleHttp\Stream\Stream;
 
 class InternalTest extends \PHPUnit_Framework_TestCase
 {
@@ -64,7 +60,7 @@ class InternalTest extends \PHPUnit_Framework_TestCase
 
         $graby->expects($this->any())
             ->method('fetchContent')
-            ->will($this->throwException(new \Exception));
+            ->will($this->throwException(new \Exception()));
 
         $internal = new Internal($graby);
         $this->assertEmpty($internal->parse('http://localhost'));

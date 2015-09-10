@@ -4,10 +4,6 @@ namespace Api43\FeedBundle\Tests\Readability;
 
 use Api43\FeedBundle\Readability\Proxy;
 use Api43\FeedBundle\Parser\Internal;
-use GuzzleHttp\Client;
-use GuzzleHttp\Subscriber\Mock;
-use GuzzleHttp\Message\Response;
-use GuzzleHttp\Stream\Stream;
 
 class ProxyTest extends \PHPUnit_Framework_TestCase
 {
@@ -114,7 +110,7 @@ class ProxyTest extends \PHPUnit_Framework_TestCase
 
         $this->graby->expects($this->any())
             ->method('fetchContent')
-            ->will($this->throwException(new \Exception));
+            ->will($this->throwException(new \Exception()));
 
         $proxy->parseContent('http://foo.bar.nowhere/test.html', 'default content');
 
