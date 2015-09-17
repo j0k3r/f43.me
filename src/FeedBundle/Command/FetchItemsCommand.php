@@ -96,7 +96,7 @@ class FetchItemsCommand extends ContainerAwareCommand
             }
 
             $parser = $container
-                ->get('readability_proxy')
+                ->get('content_extractor')
                 ->init($feed->getParser(), $feed, true);
 
             $cachedLinks = $feedItemRepo->getAllLinks($feed->getId());

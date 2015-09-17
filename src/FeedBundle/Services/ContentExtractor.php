@@ -1,13 +1,13 @@
 <?php
 
-namespace Api43\FeedBundle\Readability;
+namespace Api43\FeedBundle\Services;
 
 use Api43\FeedBundle\Document\Feed;
 use Api43\FeedBundle\Extractor\ExtractorChain;
 use Api43\FeedBundle\Improver\ImproverChain;
 use Api43\FeedBundle\Parser\ParserChain;
 
-class Proxy
+class ContentExtractor
 {
     protected $feed = null;
     protected $extractorChain;
@@ -21,7 +21,7 @@ class Proxy
     public $useDefault = false;
 
     /**
-     * Create a new Proxy for Readability.
+     * Content Extractor will use Extractor, Improver & Parser to get the readable content.
      *
      * @param ExtractorChain $extractorChain
      * @param ImproverChain  $improverChain
@@ -42,7 +42,7 @@ class Proxy
      * @param bool      $allowAllParser Define if we have to use all *known* parser to get the content if the defined one failed.
      *                                  For example, Internal parser can't make content readable, it will use the External one, etc ..
      *
-     * @return Proxy Current object
+     * @return ContentExtractor Current object
      */
     public function init($chosenParser, Feed $feed = null, $allowAllParser = false)
     {
@@ -63,7 +63,7 @@ class Proxy
      * @param string      $url         RSS item url
      * @param string|null $itemContent RSS item content, which will be taken if we can't extract content from url
      *
-     * @return Proxy
+     * @return ContentExtrator
      */
     public function parseContent($url, $itemContent = null)
     {

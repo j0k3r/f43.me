@@ -113,7 +113,7 @@ class FeedItemController extends Controller
 
         try {
             $parser = $this
-                ->get('readability_proxy')
+                ->get('content_extractor')
                 ->init($request->get('parser'), $feed);
         } catch (\InvalidArgumentException $e) {
             throw $this->createNotFoundException($e->getMessage());

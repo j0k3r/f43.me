@@ -2,12 +2,12 @@
 
 namespace Api43\FeedBundle\Tests\Readability;
 
-use Api43\FeedBundle\Readability\Proxy;
+use Api43\FeedBundle\Services\ContentExtractor;
 use Api43\FeedBundle\Parser\Internal;
 
-class ProxyTest extends \PHPUnit_Framework_TestCase
+class ContentExtractorTest extends \PHPUnit_Framework_TestCase
 {
-    protected function getProxy($customParser = false, $customExtractor = false)
+    protected function getContentExtrator($customParser = false, $customExtractor = false)
     {
         $feed = $this->getMockBuilder('Api43\FeedBundle\Document\Feed')
             ->setMethods(array('getFormatter', 'getHost'))
@@ -79,8 +79,8 @@ class ProxyTest extends \PHPUnit_Framework_TestCase
             ->method('getParser')
             ->willReturn($internalParser);
 
-        $proxy = new Proxy($extractorChain, $improverChain, $parserChain);
-        $proxy->init('internal', $feed, true);
+        $contentExtractor = new ContentExtractor($extractorChain, $improverChain, $parserChain);
+        $contentExtractor->init('internal', $feed, true);
 
         if (true === $customParser) {
             $feed->expects($this->any())
@@ -88,60 +88,60 @@ class ProxyTest extends \PHPUnit_Framework_TestCase
                 ->will($this->returnValue('Default'));
         }
 
-        return $proxy;
+        return $contentExtractor;
     }
 
     public function testWithEmptyContent()
     {
-        $proxy = $this->getProxy();
+        $contentExtractor = $this->getContentExtrator();
 
         $this->graby->expects($this->any())
             ->method('fetchContent')
             ->willReturn(array('html' => false));
 
-        $proxy->parseContent('http://0.0.0.0', 'default content');
+        $contentExtractor->parseContent('http://0.0.0.0', 'default content');
 
-        $this->assertEquals('default content', $proxy->content);
+        $this->assertEquals('default content', $contentExtractor->content);
     }
 
     public function testWithException()
     {
-        $proxy = $this->getProxy();
+        $contentExtractor = $this->getContentExtrator();
 
         $this->graby->expects($this->any())
             ->method('fetchContent')
             ->will($this->throwException(new \Exception()));
 
-        $proxy->parseContent('http://foo.bar.nowhere/test.html', 'default content');
+        $contentExtractor->parseContent('http://foo.bar.nowhere/test.html', 'default content');
 
-        $this->assertEquals('http://foo.bar.nowhere/test.html', $proxy->url);
-        $this->assertEquals('default content', $proxy->content);
+        $this->assertEquals('http://foo.bar.nowhere/test.html', $contentExtractor->url);
+        $this->assertEquals('default content', $contentExtractor->content);
     }
 
     public function testWithCustomParser()
     {
-        $proxy = $this->getProxy(true);
+        $contentExtractor = $this->getContentExtrator(true);
 
         $this->graby->expects($this->any())
             ->method('fetchContent')
             ->willReturn(array('html' => false));
 
-        $proxy->parseContent('http://0.0.0.0', 'default content');
+        $contentExtractor->parseContent('http://0.0.0.0', 'default content');
 
-        $this->assertEquals('default content', $proxy->content);
+        $this->assertEquals('default content', $contentExtractor->content);
     }
 
     public function testWithCustomExtractor()
     {
-        $proxy = $this->getProxy(false, true);
+        $contentExtractor = $this->getContentExtrator(false, true);
 
         $this->graby->expects($this->any())
             ->method('fetchContent')
             ->willReturn(array('html' => false));
 
-        $proxy->parseContent('http://0.0.0.0', 'default content');
+        $contentExtractor->parseContent('http://0.0.0.0', 'default content');
 
-        $this->assertEquals('<html/>', $proxy->content);
+        $this->assertEquals('<html/>', $contentExtractor->content);
     }
 
     /**
@@ -158,7 +158,7 @@ class ProxyTest extends \PHPUnit_Framework_TestCase
             ->disableOriginalConstructor()
             ->getMock();
 
-        $proxy = new Proxy($extractorChain, $improverChain, new \Api43\FeedBundle\Parser\ParserChain());
-        $proxy->init('oops');
+        $contentExtractor = new ContentExtractor($extractorChain, $improverChain, new \Api43\FeedBundle\Parser\ParserChain());
+        $contentExtractor->init('oops');
     }
 }
