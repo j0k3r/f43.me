@@ -369,16 +369,16 @@
         },
         {
             "name": "doctrine/dbal",
-            "version": "v2.5.1",
+            "version": "v2.5.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/dbal.git",
-                "reference": "628c2256b646ae2417d44e063bce8aec5199d48d"
+                "reference": "01dbcbc5cd0a913d751418e635434a18a2f2a75c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/dbal/zipball/628c2256b646ae2417d44e063bce8aec5199d48d",
-                "reference": "628c2256b646ae2417d44e063bce8aec5199d48d",
+                "url": "https://api.github.com/repos/doctrine/dbal/zipball/01dbcbc5cd0a913d751418e635434a18a2f2a75c",
+                "reference": "01dbcbc5cd0a913d751418e635434a18a2f2a75c",
                 "shasum": ""
             },
             "require": {
@@ -436,7 +436,7 @@
                 "persistence",
                 "queryobject"
             ],
-            "time": "2015-01-12 21:52:47"
+            "time": "2015-09-16 16:29:33"
         },
         {
             "name": "doctrine/doctrine-bundle",
@@ -1475,28 +1475,29 @@
         },
         {
             "name": "j0k3r/graby",
-            "version": "1.0.0-alpha.0",
+            "version": "1.0.0-alpha.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/j0k3r/graby.git",
-                "reference": "553a5ddd35e89f37fce2275e1423cc4451c40dbf"
+                "reference": "9cc399bbe70f12b302ea65e604a80ea738042599"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/j0k3r/graby/zipball/553a5ddd35e89f37fce2275e1423cc4451c40dbf",
-                "reference": "553a5ddd35e89f37fce2275e1423cc4451c40dbf",
+                "url": "https://api.github.com/repos/j0k3r/graby/zipball/9cc399bbe70f12b302ea65e604a80ea738042599",
+                "reference": "9cc399bbe70f12b302ea65e604a80ea738042599",
                 "shasum": ""
             },
             "require": {
                 "fin1te/safecurl": "~1.1",
                 "guzzlehttp/guzzle": "^5.2.0",
                 "htmlawed/htmlawed": "^1.1.19",
-                "j0k3r/graby-site-config": "dev-master",
+                "j0k3r/graby-site-config": "^1.0.0",
                 "j0k3r/php-readability": "^1.0",
                 "monolog/monolog": "^1.13.1",
                 "neitanod/forceutf8": "^1.4",
                 "php": ">=5.4",
                 "simplepie/simplepie": "^1.3.1",
+                "smalot/pdfparser": "~0.9.24",
                 "symfony/options-resolver": "^2.6.6"
             },
             "type": "library",
@@ -1522,20 +1523,20 @@
                 }
             ],
             "description": "Graby helps you extract article content from web pages",
-            "time": "2015-08-29 10:16:47"
+            "time": "2015-09-17 11:43:10"
         },
         {
             "name": "j0k3r/graby-site-config",
-            "version": "dev-master",
+            "version": "1.0.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/j0k3r/graby-site-config.git",
-                "reference": "ea4de15217819c6974414edd2c9940f964fb628c"
+                "reference": "1b0ac25687aa33785c5d9d8ede92b26f757354f5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/j0k3r/graby-site-config/zipball/ea4de15217819c6974414edd2c9940f964fb628c",
-                "reference": "ea4de15217819c6974414edd2c9940f964fb628c",
+                "url": "https://api.github.com/repos/j0k3r/graby-site-config/zipball/1b0ac25687aa33785c5d9d8ede92b26f757354f5",
+                "reference": "1b0ac25687aa33785c5d9d8ede92b26f757354f5",
                 "shasum": ""
             },
             "require": {
@@ -1544,7 +1545,7 @@
             "type": "library",
             "autoload": {
                 "psr-4": {
-                    "GrabySiteConfig\\SiteConfig\\": "/"
+                    "GrabySiteConfig\\SiteConfig\\": "src/"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -1558,20 +1559,20 @@
                 }
             ],
             "description": "Graby site config files",
-            "time": "2015-09-08 17:14:39"
+            "time": "2015-09-17 17:32:42"
         },
         {
             "name": "j0k3r/php-readability",
-            "version": "v1.0.4",
+            "version": "v1.0.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/j0k3r/php-readability.git",
-                "reference": "c5a4a490e155fa20809c9bbcf3e318defbb7a261"
+                "reference": "2b5af601d5a1576235d4e4e9093a056041ca8ff8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/j0k3r/php-readability/zipball/c5a4a490e155fa20809c9bbcf3e318defbb7a261",
-                "reference": "c5a4a490e155fa20809c9bbcf3e318defbb7a261",
+                "url": "https://api.github.com/repos/j0k3r/php-readability/zipball/2b5af601d5a1576235d4e4e9093a056041ca8ff8",
+                "reference": "2b5af601d5a1576235d4e4e9093a056041ca8ff8",
                 "shasum": ""
             },
             "require": {
@@ -1621,7 +1622,7 @@
                 "extraction",
                 "html"
             ],
-            "time": "2015-08-24 09:10:54"
+            "time": "2015-09-15 20:25:08"
         },
         {
             "name": "jdorn/sql-formatter",
@@ -1802,20 +1803,20 @@
         },
         {
             "name": "neitanod/forceutf8",
-            "version": "v1.4",
+            "version": "v1.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/neitanod/forceutf8.git",
-                "reference": "28d50d579179abac1f6a55b03c6d9d3f6573867c"
+                "reference": "1b577b9430cb7bd20d8dd7435f36120b85880ace"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/neitanod/forceutf8/zipball/28d50d579179abac1f6a55b03c6d9d3f6573867c",
-                "reference": "28d50d579179abac1f6a55b03c6d9d3f6573867c",
+                "url": "https://api.github.com/repos/neitanod/forceutf8/zipball/1b577b9430cb7bd20d8dd7435f36120b85880ace",
+                "reference": "1b577b9430cb7bd20d8dd7435f36120b85880ace",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.2.0"
+                "php": ">=5.3.0"
             },
             "type": "library",
             "autoload": {
@@ -1832,7 +1833,7 @@
             ],
             "description": "PHP Class Encoding featuring popular Encoding::toUTF8() function --formerly known as forceUTF8()-- that fixes mixed encoded strings.",
             "homepage": "https://github.com/neitanod/forceutf8",
-            "time": "2014-09-24 14:59:43"
+            "time": "2015-01-02 13:36:36"
         },
         {
             "name": "psr/log",
@@ -2014,6 +2015,49 @@
                 "rss"
             ],
             "time": "2012-10-30 17:54:03"
+        },
+        {
+            "name": "smalot/pdfparser",
+            "version": "v0.9.24",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/smalot/pdfparser.git",
+                "reference": "613d00cde8d91825bc3ed8b41411aaf9c75c1d6e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/smalot/pdfparser/zipball/613d00cde8d91825bc3ed8b41411aaf9c75c1d6e",
+                "reference": "613d00cde8d91825bc3ed8b41411aaf9c75c1d6e",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0",
+                "tecnick.com/tcpdf": ">=6.0.050"
+            },
+            "require-dev": {
+                "atoum/atoum": "dev-master"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Smalot\\PdfParser\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPL-3.0"
+            ],
+            "authors": [
+                {
+                    "name": "Sebastien MALOT",
+                    "email": "sebastien@malot.fr",
+                    "homepage": "http://www.malot.fr",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Pdf parser library. Can read and extract information from pdf file.",
+            "homepage": "http://www.pdfparser.org",
+            "time": "2015-05-26 08:06:39"
         },
         {
             "name": "stof/doctrine-extensions-bundle",
@@ -2258,6 +2302,70 @@
             "time": "2015-09-08 14:26:39"
         },
         {
+            "name": "tecnick.com/tcpdf",
+            "version": "6.2.11",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/tecnickcom/TCPDF.git",
+                "reference": "354433a33946ae7497c3eab291eaaf814bccbfab"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/tecnickcom/TCPDF/zipball/354433a33946ae7497c3eab291eaaf814bccbfab",
+                "reference": "354433a33946ae7497c3eab291eaaf814bccbfab",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "type": "library",
+            "autoload": {
+                "classmap": [
+                    "fonts",
+                    "config",
+                    "include",
+                    "tcpdf.php",
+                    "tcpdf_parser.php",
+                    "tcpdf_import.php",
+                    "tcpdf_barcodes_1d.php",
+                    "tcpdf_barcodes_2d.php",
+                    "include/tcpdf_colors.php",
+                    "include/tcpdf_filters.php",
+                    "include/tcpdf_font_data.php",
+                    "include/tcpdf_fonts.php",
+                    "include/tcpdf_images.php",
+                    "include/tcpdf_static.php",
+                    "include/barcodes/datamatrix.php",
+                    "include/barcodes/pdf417.php",
+                    "include/barcodes/qrcode.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "LGPLv3"
+            ],
+            "authors": [
+                {
+                    "name": "Nicola Asuni",
+                    "email": "info@tecnick.com",
+                    "homepage": "http://nicolaasuni.tecnick.com"
+                }
+            ],
+            "description": "TCPDF is a PHP class for generating PDF documents and barcodes.",
+            "homepage": "http://www.tcpdf.org/",
+            "keywords": [
+                "PDFD32000-2008",
+                "TCPDF",
+                "barcodes",
+                "datamatrix",
+                "pdf",
+                "pdf417",
+                "qrcode"
+            ],
+            "abandoned": "tecnickcom/tcpdf",
+            "time": "2015-08-02 12:30:27"
+        },
+        {
             "name": "twig/extensions",
             "version": "v1.3.0",
             "source": {
@@ -2311,16 +2419,16 @@
         },
         {
             "name": "twig/twig",
-            "version": "v1.21.2",
+            "version": "v1.22.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/twigphp/Twig.git",
-                "reference": "ddce1136beb8db29b9cd7dffa8ab518b978c9db3"
+                "reference": "b7fc2469fa009897871fb95b68237286fc54a5ad"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/twigphp/Twig/zipball/ddce1136beb8db29b9cd7dffa8ab518b978c9db3",
-                "reference": "ddce1136beb8db29b9cd7dffa8ab518b978c9db3",
+                "url": "https://api.github.com/repos/twigphp/Twig/zipball/b7fc2469fa009897871fb95b68237286fc54a5ad",
+                "reference": "b7fc2469fa009897871fb95b68237286fc54a5ad",
                 "shasum": ""
             },
             "require": {
@@ -2333,7 +2441,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.21-dev"
+                    "dev-master": "1.22-dev"
                 }
             },
             "autoload": {
@@ -2368,7 +2476,7 @@
             "keywords": [
                 "templating"
             ],
-            "time": "2015-09-09 05:28:51"
+            "time": "2015-09-15 06:50:16"
         },
         {
             "name": "zurb/foundation",

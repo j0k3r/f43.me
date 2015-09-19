@@ -33,8 +33,8 @@ services:
                 oauth_token_secret: %twitter.access_token_secret%
                 output_format: 'array'
 
-    readability_proxy:
-        class: Api43\FeedBundle\Readability\Proxy
+    content_extractor:
+        class: Api43\FeedBundle\Services\ContentExtractor
         arguments:
             extractor: @feed.extractor.chain
             improver: @feed.improver.chain

@@ -28,7 +28,7 @@ class FeedTestController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) {
             $parser = $this
-                ->get('readability_proxy')
+                ->get('content_extractor')
                 ->init($form->get('parser')->getData());
 
             $content = $parser->parseContent($form->get('link')->getData());
