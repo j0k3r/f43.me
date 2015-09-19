@@ -15,7 +15,7 @@ class FeedItemSubscriber
     /**
      * Create a new subscriber.
      *
-     * @param string $hub A hub (url) to ping
+     * @param string $hub    A hub (url) to ping
      * @param Router $router Symfony Router to generate the feed xml
      * @param Client $client Guzzle client to send the request
      */

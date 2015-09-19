@@ -7,7 +7,6 @@ use Api43\FeedBundle\EventListener\FeedItemSubscriber;
 use GuzzleHttp\Client;
 use GuzzleHttp\Subscriber\Mock;
 use GuzzleHttp\Message\Response;
-use GuzzleHttp\Stream\Stream;
 
 class FeedItemSubscriberTest extends \PHPUnit_Framework_TestCase
 {
