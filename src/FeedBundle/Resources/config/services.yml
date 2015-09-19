@@ -59,6 +59,7 @@ services:
         arguments:
             hub: "http://pubsubhubbub.appspot.com"
             router: "@router"
+            client: "@guzzle.client"
         tags:
             - { name: kernel.event_listener, event: api43_feed.after_item_cached, method: pingHub }
 

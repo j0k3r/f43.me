@@ -4,21 +4,26 @@ namespace Api43\FeedBundle\EventListener;
 
 use Api43\FeedBundle\Event\FeedItemEvent;
 use Symfony\Bundle\FrameworkBundle\Routing\Router;
+use GuzzleHttp\Client;
 
 class FeedItemSubscriber
 {
     protected $hub = '';
     protected $router;
+    protected $client;
 
     /**
      * Create a new subscriber.
      *
      * @param string $hub A hub (url) to ping
+     * @param Router $router Symfony Router to generate the feed xml
+     * @param Client $client Guzzle client to send the request
      */
-    public function __construct($hub, Router $router)
+    public function __construct($hub, Router $router, Client $client)
     {
         $this->hub = $hub;
         $this->router = $router;
+        $this->client = $client;
     }
 
     /**
@@ -49,29 +54,25 @@ class FeedItemSubscriber
         }
 
         // ping publisher
-        // https://code.google.com/p/pubsubhubbub/source/browse/trunk/publisher_clients/php/library/publisher.php
+        // https://github.com/pubsubhubbub/php-publisher/blob/master/library/publisher.php
         $params = 'hub.mode=publish';
         foreach ($urls as $url) {
-            $params .= '&hub.url='.urlencode($url);
+            $params .= '&hub.url='.$url;
         }
 
-        // make the request
-        $options = array(
-            CURLOPT_URL => $this->hub,
-            CURLOPT_POST => true,
-            CURLOPT_POSTFIELDS => $params,
-            CURLOPT_USERAGENT => 'PubSubHubbub-Publisher-PHP/1.0',
+        $response = $this->client->post(
+            $this->hub,
+            array(
+                'exceptions' => false,
+                'body' => $params,
+                'headers' => array(
+                    'Content-Type' => 'application/x-www-form-urlencoded',
+                    'User-Agent' => 'PubSubHubbub-Publisher-PHP/1.0',
+                ),
+            )
         );
 
-        $ch = curl_init();
-        curl_setopt_array($ch, $options);
-        curl_exec($ch);
-
-        // receive the response
-        $info = curl_getinfo($ch);
-        curl_close($ch);
-
-        // hub doesn't respond correctly, do something ?
-        return !($info['http_code'] != 204);
+        // hub should response 204 if everything went fine
+        return !($response->getStatusCode() != 204);
     }
 }
