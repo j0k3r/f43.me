@@ -39,6 +39,7 @@ class NothingTest extends \PHPUnit_Framework_TestCase
 
         $nothing = new Nothing($client);
         $this->assertEquals($expected, $nothing->updateUrl($url));
+        $this->assertEquals('', $nothing->updateContent(''));
     }
 
     public function testUpdateUrlFail()
