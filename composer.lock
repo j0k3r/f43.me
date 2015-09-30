@@ -999,16 +999,16 @@
         },
         {
             "name": "fin1te/safecurl",
-            "version": "v1.1",
+            "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/fin1te/safecurl.git",
-                "reference": "98aae75a1f4f8dec2194ce889d418d16c3c877e4"
+                "reference": "a7c3d703c06e827b33f1dcdbdcbe0796beb5a86d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/fin1te/safecurl/zipball/98aae75a1f4f8dec2194ce889d418d16c3c877e4",
-                "reference": "98aae75a1f4f8dec2194ce889d418d16c3c877e4",
+                "url": "https://api.github.com/repos/fin1te/safecurl/zipball/a7c3d703c06e827b33f1dcdbdcbe0796beb5a86d",
+                "reference": "a7c3d703c06e827b33f1dcdbdcbe0796beb5a86d",
                 "shasum": ""
             },
             "require": {
@@ -1041,7 +1041,7 @@
                 "ssrf",
                 "websec"
             ],
-            "time": "2014-05-20 12:10:12"
+            "time": "2014-05-22 14:28:18"
         },
         {
             "name": "gedmo/doctrine-extensions",
@@ -1475,20 +1475,20 @@
         },
         {
             "name": "j0k3r/graby",
-            "version": "1.0.0-alpha.2",
+            "version": "1.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/j0k3r/graby.git",
-                "reference": "9cc399bbe70f12b302ea65e604a80ea738042599"
+                "reference": "71d4fd5d923192eaeac1e2e292bfd4d932b9384b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/j0k3r/graby/zipball/9cc399bbe70f12b302ea65e604a80ea738042599",
-                "reference": "9cc399bbe70f12b302ea65e604a80ea738042599",
+                "url": "https://api.github.com/repos/j0k3r/graby/zipball/71d4fd5d923192eaeac1e2e292bfd4d932b9384b",
+                "reference": "71d4fd5d923192eaeac1e2e292bfd4d932b9384b",
                 "shasum": ""
             },
             "require": {
-                "fin1te/safecurl": "~1.1",
+                "fin1te/safecurl": "dev-master",
                 "guzzlehttp/guzzle": "^5.2.0",
                 "htmlawed/htmlawed": "^1.1.19",
                 "j0k3r/graby-site-config": "^1.0.0",
@@ -1523,7 +1523,7 @@
                 }
             ],
             "description": "Graby helps you extract article content from web pages",
-            "time": "2015-09-17 11:43:10"
+            "time": "2015-09-30 18:59:50"
         },
         {
             "name": "j0k3r/graby-site-config",
@@ -2122,34 +2122,34 @@
         },
         {
             "name": "symfony/monolog-bundle",
-            "version": "v2.7.1",
+            "version": "v2.8.0",
             "source": {
                 "type": "git",
-                "url": "https://github.com/symfony/MonologBundle.git",
-                "reference": "9320b6863404c70ebe111e9040dab96f251de7ac"
+                "url": "https://github.com/symfony/monolog-bundle.git",
+                "reference": "78883d8c1cfa523ac3a28a482b7793036b243f7d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/MonologBundle/zipball/9320b6863404c70ebe111e9040dab96f251de7ac",
-                "reference": "9320b6863404c70ebe111e9040dab96f251de7ac",
+                "url": "https://api.github.com/repos/symfony/monolog-bundle/zipball/78883d8c1cfa523ac3a28a482b7793036b243f7d",
+                "reference": "78883d8c1cfa523ac3a28a482b7793036b243f7d",
                 "shasum": ""
             },
             "require": {
                 "monolog/monolog": "~1.8",
                 "php": ">=5.3.2",
-                "symfony/config": "~2.3",
-                "symfony/dependency-injection": "~2.3",
-                "symfony/http-kernel": "~2.3",
-                "symfony/monolog-bridge": "~2.3"
+                "symfony/config": "~2.3|3.*",
+                "symfony/dependency-injection": "~2.3|3.*",
+                "symfony/http-kernel": "~2.3|3.*",
+                "symfony/monolog-bridge": "~2.3|3.*"
             },
             "require-dev": {
-                "symfony/console": "~2.3",
+                "symfony/console": "~2.3|3.*",
                 "symfony/yaml": "~2.3"
             },
             "type": "symfony-bundle",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.7.x-dev"
+                    "dev-master": "2.8.x-dev"
                 }
             },
             "autoload": {
@@ -2177,7 +2177,7 @@
                 "log",
                 "logging"
             ],
-            "time": "2015-01-04 20:21:17"
+            "time": "2015-09-29 17:13:11"
         },
         {
             "name": "symfony/symfony",
