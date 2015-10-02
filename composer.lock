@@ -998,52 +998,6 @@
             "time": "2015-08-31 13:07:17"
         },
         {
-            "name": "fin1te/safecurl",
-            "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/fin1te/safecurl.git",
-                "reference": "a7c3d703c06e827b33f1dcdbdcbe0796beb5a86d"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/fin1te/safecurl/zipball/a7c3d703c06e827b33f1dcdbdcbe0796beb5a86d",
-                "reference": "a7c3d703c06e827b33f1dcdbdcbe0796beb5a86d",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.3.0"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "3.7.*"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-0": {
-                    "fin1te\\SafeCurl": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Jack W",
-                    "email": "jack@fin1te.net"
-                }
-            ],
-            "description": "A drop-in replacement for 'curl_exec', designed to prevent SSRF attacks.",
-            "keywords": [
-                "curl",
-                "safe",
-                "safecurl",
-                "ssrf",
-                "websec"
-            ],
-            "time": "2014-05-22 14:28:18"
-        },
-        {
             "name": "gedmo/doctrine-extensions",
             "version": "v2.4.7",
             "source": {
@@ -1475,24 +1429,24 @@
         },
         {
             "name": "j0k3r/graby",
-            "version": "1.0.0",
+            "version": "1.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/j0k3r/graby.git",
-                "reference": "71d4fd5d923192eaeac1e2e292bfd4d932b9384b"
+                "reference": "f1d655bb680eded0dde8cf26fae1e931f69b6b12"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/j0k3r/graby/zipball/71d4fd5d923192eaeac1e2e292bfd4d932b9384b",
-                "reference": "71d4fd5d923192eaeac1e2e292bfd4d932b9384b",
+                "url": "https://api.github.com/repos/j0k3r/graby/zipball/f1d655bb680eded0dde8cf26fae1e931f69b6b12",
+                "reference": "f1d655bb680eded0dde8cf26fae1e931f69b6b12",
                 "shasum": ""
             },
             "require": {
-                "fin1te/safecurl": "dev-master",
                 "guzzlehttp/guzzle": "^5.2.0",
                 "htmlawed/htmlawed": "^1.1.19",
                 "j0k3r/graby-site-config": "^1.0.0",
                 "j0k3r/php-readability": "^1.0",
+                "j0k3r/safecurl": "1.1.1",
                 "monolog/monolog": "^1.13.1",
                 "neitanod/forceutf8": "^1.4",
                 "php": ">=5.4",
@@ -1523,7 +1477,7 @@
                 }
             ],
             "description": "Graby helps you extract article content from web pages",
-            "time": "2015-09-30 18:59:50"
+            "time": "2015-10-01 18:39:53"
         },
         {
             "name": "j0k3r/graby-site-config",
@@ -1623,6 +1577,54 @@
                 "html"
             ],
             "time": "2015-09-23 19:09:38"
+        },
+        {
+            "name": "j0k3r/safecurl",
+            "version": "v1.1.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/j0k3r/safecurl.git",
+                "reference": "3e8594a944ede2b74f3e24e371f2770bbfed6aa5"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/j0k3r/safecurl/zipball/3e8594a944ede2b74f3e24e371f2770bbfed6aa5",
+                "reference": "3e8594a944ede2b74f3e24e371f2770bbfed6aa5",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "fin1te\\SafeCurl": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Jeremy Benoist",
+                    "email": "jeremy.benoist@gmail.com"
+                },
+                {
+                    "name": "Jack W",
+                    "email": "jack@fin1te.net",
+                    "role": "Developer (original version)"
+                }
+            ],
+            "description": "A drop-in replacement for 'curl_exec', designed to prevent SSRF attacks.",
+            "keywords": [
+                "curl",
+                "safe",
+                "safecurl",
+                "ssrf",
+                "websec"
+            ],
+            "time": "2015-10-01 18:30:41"
         },
         {
             "name": "jdorn/sql-formatter",
