@@ -1,10 +1,11 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
     "hash": "9a8e56e3d7213c70197168256843b3b3",
+    "content-hash": "4a257adfe6b5882d08d3126e075d702e",
     "packages": [
         {
             "name": "adyg/php-imgur-api-client",
@@ -1481,16 +1482,16 @@
         },
         {
             "name": "j0k3r/graby-site-config",
-            "version": "1.0.3",
+            "version": "1.0.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/j0k3r/graby-site-config.git",
-                "reference": "1b0ac25687aa33785c5d9d8ede92b26f757354f5"
+                "reference": "cf088ca2100eeec3f230cc187a5b489e61fe97f1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/j0k3r/graby-site-config/zipball/1b0ac25687aa33785c5d9d8ede92b26f757354f5",
-                "reference": "1b0ac25687aa33785c5d9d8ede92b26f757354f5",
+                "url": "https://api.github.com/repos/j0k3r/graby-site-config/zipball/cf088ca2100eeec3f230cc187a5b489e61fe97f1",
+                "reference": "cf088ca2100eeec3f230cc187a5b489e61fe97f1",
                 "shasum": ""
             },
             "require": {
@@ -1513,7 +1514,7 @@
                 }
             ],
             "description": "Graby site config files",
-            "time": "2015-09-17 17:32:42"
+            "time": "2015-10-06 07:07:37"
         },
         {
             "name": "j0k3r/php-readability",
@@ -2124,16 +2125,16 @@
         },
         {
             "name": "symfony/monolog-bundle",
-            "version": "v2.8.0",
+            "version": "2.8.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/monolog-bundle.git",
-                "reference": "78883d8c1cfa523ac3a28a482b7793036b243f7d"
+                "reference": "7117b9a145722e3c5768db4585f6ad0643ed5c4a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/monolog-bundle/zipball/78883d8c1cfa523ac3a28a482b7793036b243f7d",
-                "reference": "78883d8c1cfa523ac3a28a482b7793036b243f7d",
+                "url": "https://api.github.com/repos/symfony/monolog-bundle/zipball/7117b9a145722e3c5768db4585f6ad0643ed5c4a",
+                "reference": "7117b9a145722e3c5768db4585f6ad0643ed5c4a",
                 "shasum": ""
             },
             "require": {
@@ -2179,7 +2180,7 @@
                 "log",
                 "logging"
             ],
-            "time": "2015-09-29 17:13:11"
+            "time": "2015-10-02 11:51:59"
         },
         {
             "name": "symfony/symfony",

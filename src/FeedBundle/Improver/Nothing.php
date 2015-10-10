@@ -72,15 +72,40 @@ class Nothing
                 ->get(
                     $url,
                     // force user agent for some provider (to avoid bad browser detection)
-                    array('headers' => array('User-Agent' => 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/535.2 (KHTML, like Gecko) Chrome/15.0.874.92 Safari/535.2'))
+                    array('headers' => array(
+                        'User-Agent' => 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/535.2 (KHTML, like Gecko) Chrome/15.0.874.92 Safari/535.2'
+                    ))
                 );
         } catch (RequestException $e) {
             // catch timeout, ssl verification that failed, etc ...
             return $url.(strpos($url, '?') ? '&' : '?').'not-changed';
         }
 
-        // remove utm parameters & fragment
-        return preg_replace('/((\?)?(&(amp;)?)?utm_(.*?)\=[^&]+)|(#(.*?)\=[^&]+)/', '', $response->getEffectiveUrl());
+        $url = $response->getEffectiveUrl();
+        // convert bad encoded character
+        $url = str_replace('&amp%3B', '&', $url);
+
+        // extract query parameters
+        $query = parse_url($url, PHP_URL_QUERY);
+        if (empty($query)) {
+            return $url;
+        }
+
+        // remove utm parameters (utm_source, utm_medium, utm_campaign, etc ...)
+        parse_str($query, $queryExploded);
+
+        $notUtmParameters = array_filter(array_keys($queryExploded), function ($k){ return strpos($k, 'utm') !== 0; });
+        $newQuery = array_intersect_key($queryExploded, array_flip($notUtmParameters));
+
+        // remove all parameters from url to re-add them later
+        $url = strtok($url, '?');
+
+        if (empty($newQuery)) {
+            return $url;
+        }
+
+        // re-add allowed parameters
+        return $url.'?'.http_build_query($newQuery);
     }
 
     /**
