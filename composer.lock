@@ -1430,16 +1430,16 @@
         },
         {
             "name": "j0k3r/graby",
-            "version": "1.0.1",
+            "version": "1.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/j0k3r/graby.git",
-                "reference": "f1d655bb680eded0dde8cf26fae1e931f69b6b12"
+                "reference": "878523d1719fad08c3307d7dc8866339195bf93f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/j0k3r/graby/zipball/f1d655bb680eded0dde8cf26fae1e931f69b6b12",
-                "reference": "f1d655bb680eded0dde8cf26fae1e931f69b6b12",
+                "url": "https://api.github.com/repos/j0k3r/graby/zipball/878523d1719fad08c3307d7dc8866339195bf93f",
+                "reference": "878523d1719fad08c3307d7dc8866339195bf93f",
                 "shasum": ""
             },
             "require": {
@@ -1478,20 +1478,20 @@
                 }
             ],
             "description": "Graby helps you extract article content from web pages",
-            "time": "2015-10-01 18:39:53"
+            "time": "2015-10-14 17:55:10"
         },
         {
             "name": "j0k3r/graby-site-config",
-            "version": "1.0.4",
+            "version": "1.0.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/j0k3r/graby-site-config.git",
-                "reference": "cf088ca2100eeec3f230cc187a5b489e61fe97f1"
+                "reference": "44afb3d6a90a816752426537e92e85160bdb40b9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/j0k3r/graby-site-config/zipball/cf088ca2100eeec3f230cc187a5b489e61fe97f1",
-                "reference": "cf088ca2100eeec3f230cc187a5b489e61fe97f1",
+                "url": "https://api.github.com/repos/j0k3r/graby-site-config/zipball/44afb3d6a90a816752426537e92e85160bdb40b9",
+                "reference": "44afb3d6a90a816752426537e92e85160bdb40b9",
                 "shasum": ""
             },
             "require": {
@@ -1514,7 +1514,7 @@
                 }
             ],
             "description": "Graby site config files",
-            "time": "2015-10-06 07:07:37"
+            "time": "2015-10-15 06:13:58"
         },
         {
             "name": "j0k3r/php-readability",
@@ -1730,16 +1730,16 @@
         },
         {
             "name": "monolog/monolog",
-            "version": "1.17.1",
+            "version": "1.17.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Seldaek/monolog.git",
-                "reference": "0524c87587ab85bc4c2d6f5b41253ccb930a5422"
+                "reference": "bee7f0dc9c3e0b69a6039697533dca1e845c8c24"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Seldaek/monolog/zipball/0524c87587ab85bc4c2d6f5b41253ccb930a5422",
-                "reference": "0524c87587ab85bc4c2d6f5b41253ccb930a5422",
+                "url": "https://api.github.com/repos/Seldaek/monolog/zipball/bee7f0dc9c3e0b69a6039697533dca1e845c8c24",
+                "reference": "bee7f0dc9c3e0b69a6039697533dca1e845c8c24",
                 "shasum": ""
             },
             "require": {
@@ -1753,10 +1753,11 @@
                 "aws/aws-sdk-php": "^2.4.9",
                 "doctrine/couchdb": "~1.0@dev",
                 "graylog2/gelf-php": "~1.0",
+                "jakub-onderka/php-parallel-lint": "0.9",
                 "php-console/php-console": "^3.1.3",
                 "phpunit/phpunit": "~4.5",
                 "phpunit/phpunit-mock-objects": "2.3.0",
-                "raven/raven": "~0.11",
+                "raven/raven": "^0.13",
                 "ruflin/elastica": ">=0.90 <3.0",
                 "swiftmailer/swiftmailer": "~5.3",
                 "videlalvaro/php-amqplib": "~2.4"
@@ -1802,7 +1803,7 @@
                 "logging",
                 "psr-3"
             ],
-            "time": "2015-08-31 09:17:37"
+            "time": "2015-10-14 12:51:02"
         },
         {
             "name": "neitanod/forceutf8",
@@ -2421,16 +2422,16 @@
         },
         {
             "name": "twig/twig",
-            "version": "v1.22.2",
+            "version": "v1.22.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/twigphp/Twig.git",
-                "reference": "79249fc8c9ff62e41e217e0c630e2e00bcadda6a"
+                "reference": "ebfc36b7e77b0c1175afe30459cf943010245540"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/twigphp/Twig/zipball/79249fc8c9ff62e41e217e0c630e2e00bcadda6a",
-                "reference": "79249fc8c9ff62e41e217e0c630e2e00bcadda6a",
+                "url": "https://api.github.com/repos/twigphp/Twig/zipball/ebfc36b7e77b0c1175afe30459cf943010245540",
+                "reference": "ebfc36b7e77b0c1175afe30459cf943010245540",
                 "shasum": ""
             },
             "require": {
@@ -2478,7 +2479,7 @@
             "keywords": [
                 "templating"
             ],
-            "time": "2015-09-22 13:59:32"
+            "time": "2015-10-13 07:07:02"
         },
         {
             "name": "zurb/foundation",
