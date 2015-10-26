@@ -1430,16 +1430,16 @@
         },
         {
             "name": "j0k3r/graby",
-            "version": "1.0.2",
+            "version": "1.0.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/j0k3r/graby.git",
-                "reference": "878523d1719fad08c3307d7dc8866339195bf93f"
+                "reference": "23e0217dcc3bd715f05376ca67175c316be3de36"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/j0k3r/graby/zipball/878523d1719fad08c3307d7dc8866339195bf93f",
-                "reference": "878523d1719fad08c3307d7dc8866339195bf93f",
+                "url": "https://api.github.com/repos/j0k3r/graby/zipball/23e0217dcc3bd715f05376ca67175c316be3de36",
+                "reference": "23e0217dcc3bd715f05376ca67175c316be3de36",
                 "shasum": ""
             },
             "require": {
@@ -1478,20 +1478,20 @@
                 }
             ],
             "description": "Graby helps you extract article content from web pages",
-            "time": "2015-10-14 17:55:10"
+            "time": "2015-10-26 09:22:23"
         },
         {
             "name": "j0k3r/graby-site-config",
-            "version": "1.0.5",
+            "version": "1.0.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/j0k3r/graby-site-config.git",
-                "reference": "44afb3d6a90a816752426537e92e85160bdb40b9"
+                "reference": "6631451c1be563ff3bc8fa16c60ef7df38f8e65b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/j0k3r/graby-site-config/zipball/44afb3d6a90a816752426537e92e85160bdb40b9",
-                "reference": "44afb3d6a90a816752426537e92e85160bdb40b9",
+                "url": "https://api.github.com/repos/j0k3r/graby-site-config/zipball/6631451c1be563ff3bc8fa16c60ef7df38f8e65b",
+                "reference": "6631451c1be563ff3bc8fa16c60ef7df38f8e65b",
                 "shasum": ""
             },
             "require": {
@@ -1514,7 +1514,7 @@
                 }
             ],
             "description": "Graby site config files",
-            "time": "2015-10-15 06:13:58"
+            "time": "2015-10-24 14:44:25"
         },
         {
             "name": "j0k3r/php-readability",
@@ -2613,17 +2613,17 @@
         },
         {
             "name": "sensio/distribution-bundle",
-            "version": "v3.0.31",
+            "version": "v3.0.32",
             "target-dir": "Sensio/Bundle/DistributionBundle",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sensiolabs/SensioDistributionBundle.git",
-                "reference": "3a900814bd57bf20f9453ae81ff8772bc95d7fff"
+                "reference": "e46293aa6dd94f054c500ef990538d822c763ebd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sensiolabs/SensioDistributionBundle/zipball/3a900814bd57bf20f9453ae81ff8772bc95d7fff",
-                "reference": "3a900814bd57bf20f9453ae81ff8772bc95d7fff",
+                "url": "https://api.github.com/repos/sensiolabs/SensioDistributionBundle/zipball/e46293aa6dd94f054c500ef990538d822c763ebd",
+                "reference": "e46293aa6dd94f054c500ef990538d822c763ebd",
                 "shasum": ""
             },
             "require": {
@@ -2669,7 +2669,7 @@
                 "configuration",
                 "distribution"
             ],
-            "time": "2015-08-03 10:07:12"
+            "time": "2015-10-20 06:53:22"
         },
         {
             "name": "sensio/framework-extra-bundle",
