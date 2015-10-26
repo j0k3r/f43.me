@@ -21,7 +21,11 @@ services:
     graby:
         class: Graby\Graby
         arguments:
-            - { error_message: false}
+            - { error_message: false }
+        calls:
+            - [ setLogger, [ @logger ] ]
+        tags:
+            - { name: monolog.logger, channel: graby }
 
     twitter.client:
         class: TwitterOAuth\TwitterOAuth

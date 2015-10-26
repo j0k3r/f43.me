@@ -63,7 +63,7 @@ class ContentExtractor
      * @param string      $url         RSS item url
      * @param string|null $itemContent RSS item content, which will be taken if we can't extract content from url
      *
-     * @return ContentExtrator
+     * @return ContentExtractor
      */
     public function parseContent($url, $itemContent = null)
     {
