@@ -223,6 +223,14 @@ services:
         tags:
             -  { name: feed.extractor, alias: hackernews }
 
+    feed.extractor.rue89:
+        class: Api43\FeedBundle\Extractor\Rue89
+        calls:
+            - [ setLogger, [ @logger ]]
+            - [ setClient, [ @guzzle.client ]]
+        tags:
+            -  { name: feed.extractor, alias: rue89 }
+
     # improver
     feed.improver.chain:
         class: Api43\FeedBundle\Improver\ImproverChain
