@@ -60,6 +60,6 @@ class Rue89 extends AbstractExtractor
             return '';
         }
 
-        return '<div><h2>'.$data['node']['title'].'</h2><p>'.$data['node']['intro'].'</p><p><img src="'.$data['node']['imgTabletteCarousel'].'"></p>'.$data['node']['body'].'</div>';
+        return '<div><p>'.$data['node']['intro'].'</p><p><img src="'.$data['node']['imgTabletteCarousel'].'"></p>'.$data['node']['body'].'</div>';
     }
 }

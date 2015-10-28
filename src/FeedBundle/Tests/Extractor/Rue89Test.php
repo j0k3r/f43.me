@@ -58,7 +58,7 @@ class Rue89Test extends \PHPUnit_Framework_TestCase
         $rue89->match('http://rue89.nouvelobs.com/2015/10/26/algorithmes-antimensonge-fin-bobards-politique-261827');
 
         // consecutive calls
-        $this->assertEquals('<div><h2>my title</h2><p>my description</p><p><img src="http://0.0.0.0/img.jpg"></p><iframe/></div>', $rue89->getContent());
+        $this->assertEquals('<div><p>my description</p><p><img src="http://0.0.0.0/img.jpg"></p><iframe/></div>', $rue89->getContent());
         // this one will got an empty array
         $this->assertEmpty($rue89->getContent());
         // this one will catch an exception
