@@ -5,7 +5,7 @@
 {% block content %}
 <div class="row">
     <div class="large-12 columns">
-        <form action="{{ path('feed_test') }}" method="post" {{ form_enctype(form) }} class="custom">
+        {{ form_start(form, {'attr': {'class': 'custom' }}) }}
             {{ form_errors(form) }}
 
             <div class="row">

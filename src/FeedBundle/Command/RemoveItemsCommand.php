@@ -7,6 +7,7 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Filesystem\LockHandler;
+use Symfony\Component\Console\Question\ConfirmationQuestion;
 
 class RemoveItemsCommand extends ContainerAwareCommand
 {
@@ -33,8 +34,10 @@ class RemoveItemsCommand extends ContainerAwareCommand
 
         // ask user as it will remove all items from its database
         if (0 >= $input->getOption('max')) {
-            $dialog = $this->getHelperSet()->get('dialog');
-            if (!$dialog->askConfirmation($output, '<question>You will remove ALL items, are your sure?</question>', false)) {
+            $helper = $this->getHelper('question');
+            $question = new ConfirmationQuestion('<question>You will remove ALL items, are your sure?</question>', false);
+
+            if (!$helper->ask($input, $output, $question)) {
                 return $output->writeLn('<comment>You *almost* remove everything from your database, pfiou !</comment> Be sure to define a <comment>max</comment> option greater than 0.');
             }
         }

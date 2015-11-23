@@ -68,8 +68,8 @@ class RemoveItemsCommandTest extends WebTestCase
 
     public function testRemoveAllMaxYes()
     {
-        $dialog = $this->command->getHelper('dialog');
-        $dialog->setInputStream($this->getInputStream("yes\n"));
+        $helper = $this->command->getHelper('question');
+        $helper->setInputStream($this->getInputStream('yes\\n'));
 
         $this->commandTester->execute(array(
             'command' => $this->command->getName(),
@@ -83,8 +83,8 @@ class RemoveItemsCommandTest extends WebTestCase
 
     public function testRemoveAllMaxNo()
     {
-        $dialog = $this->command->getHelper('dialog');
-        $dialog->setInputStream($this->getInputStream("no\n"));
+        $helper = $this->command->getHelper('question');
+        $helper->setInputStream($this->getInputStream('no\\n'));
 
         $this->commandTester->execute(array(
             'command' => $this->command->getName(),
