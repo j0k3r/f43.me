@@ -1483,16 +1483,16 @@
         },
         {
             "name": "j0k3r/graby-site-config",
-            "version": "1.0.7",
+            "version": "1.0.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/j0k3r/graby-site-config.git",
-                "reference": "1e7d79c7b03d684965e0d010bacb612a087342e9"
+                "reference": "568361fc00f4414d68b3338c62ccc4dd3cf58b7f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/j0k3r/graby-site-config/zipball/1e7d79c7b03d684965e0d010bacb612a087342e9",
-                "reference": "1e7d79c7b03d684965e0d010bacb612a087342e9",
+                "url": "https://api.github.com/repos/j0k3r/graby-site-config/zipball/568361fc00f4414d68b3338c62ccc4dd3cf58b7f",
+                "reference": "568361fc00f4414d68b3338c62ccc4dd3cf58b7f",
                 "shasum": ""
             },
             "require": {
@@ -1515,7 +1515,7 @@
                 }
             ],
             "description": "Graby site config files",
-            "time": "2015-11-12 19:14:21"
+            "time": "2015-11-23 08:54:27"
         },
         {
             "name": "j0k3r/php-readability",
@@ -1581,16 +1581,16 @@
         },
         {
             "name": "j0k3r/safecurl",
-            "version": "2.0.1",
+            "version": "2.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/j0k3r/safecurl.git",
-                "reference": "2c9723607f306ecec9a1ad5e6feb94c865388838"
+                "reference": "d5b7a0dcda23f8fd6a3f0ca3dac080e38388ba4b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/j0k3r/safecurl/zipball/2c9723607f306ecec9a1ad5e6feb94c865388838",
-                "reference": "2c9723607f306ecec9a1ad5e6feb94c865388838",
+                "url": "https://api.github.com/repos/j0k3r/safecurl/zipball/d5b7a0dcda23f8fd6a3f0ca3dac080e38388ba4b",
+                "reference": "d5b7a0dcda23f8fd6a3f0ca3dac080e38388ba4b",
                 "shasum": ""
             },
             "require": {
@@ -1629,7 +1629,7 @@
                 "ssrf",
                 "websec"
             ],
-            "time": "2015-11-15 08:46:16"
+            "time": "2015-11-23 08:16:01"
         },
         {
             "name": "jdorn/sql-formatter",
@@ -2130,29 +2130,29 @@
         },
         {
             "name": "symfony/monolog-bundle",
-            "version": "2.8.1",
+            "version": "v2.8.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/monolog-bundle.git",
-                "reference": "7117b9a145722e3c5768db4585f6ad0643ed5c4a"
+                "reference": "84785c4d44801c4dd82829fa2e1820cacfe2c46f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/monolog-bundle/zipball/7117b9a145722e3c5768db4585f6ad0643ed5c4a",
-                "reference": "7117b9a145722e3c5768db4585f6ad0643ed5c4a",
+                "url": "https://api.github.com/repos/symfony/monolog-bundle/zipball/84785c4d44801c4dd82829fa2e1820cacfe2c46f",
+                "reference": "84785c4d44801c4dd82829fa2e1820cacfe2c46f",
                 "shasum": ""
             },
             "require": {
                 "monolog/monolog": "~1.8",
                 "php": ">=5.3.2",
-                "symfony/config": "~2.3|3.*",
-                "symfony/dependency-injection": "~2.3|3.*",
-                "symfony/http-kernel": "~2.3|3.*",
-                "symfony/monolog-bridge": "~2.3|3.*"
+                "symfony/config": "~2.3|~3.0",
+                "symfony/dependency-injection": "~2.3|~3.0",
+                "symfony/http-kernel": "~2.3|~3.0",
+                "symfony/monolog-bridge": "~2.3|~3.0"
             },
             "require-dev": {
-                "symfony/console": "~2.3|3.*",
-                "symfony/yaml": "~2.3"
+                "symfony/console": "~2.3|~3.0",
+                "symfony/yaml": "~2.3|~3.0"
             },
             "type": "symfony-bundle",
             "extra": {
@@ -2185,7 +2185,7 @@
                 "log",
                 "logging"
             ],
-            "time": "2015-10-02 11:51:59"
+            "time": "2015-11-17 10:02:29"
         },
         {
             "name": "symfony/symfony",
