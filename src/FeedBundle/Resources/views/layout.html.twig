@@ -9,9 +9,9 @@
 
     <link rel="icon" type="image/x-icon" href="/favicon.ico" />
 
-    <link rel="stylesheet" href="/build/main.css" />
+    <link rel="stylesheet" href="{{ asset('/build/main.css') }}" />
 
-    <script type="text/javascript" src="/build/zepto.modernizr.js"></script>
+    <script type="text/javascript" src="{{ asset('/build/zepto.modernizr.js') }}"></script>
 </head>
 <body>
     <nav class="top-bar">
@@ -87,7 +87,7 @@
 
     {% block content %}{% endblock %}
 
-    <script type="text/javascript" src="/build/app.js"></script>
+    <script type="text/javascript" src="{{ asset('/build/app.js') }}"></script>
 
     <script type="text/javascript">
         $(document).foundation();
