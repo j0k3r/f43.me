@@ -11,6 +11,7 @@ class ItemTestType extends AbstractType
     {
         $builder
             ->add('link', 'url')
+            ->add('siteconfig', 'textarea')
             ->add('parser', 'choice', array(
                 'choices' => array(
                     'internal' => 'Internal',

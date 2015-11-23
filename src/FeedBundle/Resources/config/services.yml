@@ -21,7 +21,12 @@ services:
     graby:
         class: Graby\Graby
         arguments:
-            - { error_message: false }
+            -
+                error_message: false
+                extractor:
+                    config_builder:
+                        site_config:
+                            - %kernel.root_dir%/site_config
         calls:
             - [ setLogger, [ @logger ] ]
         tags:

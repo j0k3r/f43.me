@@ -1,6 +1,6 @@
 {% extends "Api43FeedBundle::layout.html.twig" %}
 
-{% block h2_title %}Testing item{% endblock %}
+{% block h2_title %}Testing a link{% endblock %}
 
 {% block content %}
 <div class="row">
@@ -33,6 +33,13 @@
                     <div class="row collapse">
                         <button type="submit" class="small button radius success">Test</button>
                     </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="large-10 columns">
+                    <label for="right-label">{{ form_label(form.siteconfig) }}</label>
+                    {{ form_widget(form.siteconfig, {'attr': { 'placeholder': 'Put your config file here'}}) }}
                 </div>
             </div>
             {{ form_rest(form) }}
