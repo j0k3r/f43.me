@@ -37,9 +37,10 @@
             </div>
 
             <div class="row">
-                <div class="large-10 columns">
-                    <label for="right-label">{{ form_label(form.siteconfig) }}</label>
-                    {{ form_widget(form.siteconfig, {'attr': { 'placeholder': 'Put your config file here', 'class': 'siteconfig'}}) }}
+                <div class="large-10 columns siteconfig">
+                    <p><a href="#" class="try-siteconfig">Want to try a custom siteconfig?</a> A tool is <a target="_blank" href="http://siteconfig.fivefilters.org/">available</a> to help build site-specific extraction rules.</p>
+
+                    {{ form_widget(form.siteconfig, {'attr': { 'placeholder': 'Put your config file here'}}) }}
                 </div>
             </div>
             {{ form_rest(form) }}

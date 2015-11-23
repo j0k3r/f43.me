@@ -57,4 +57,21 @@ $(function(){
         var time = $(this);
         time.text(moment(time.attr('title')).fromNow());
     });
+
+    // hide textarea for config file when it's empty
+    var siteconfig = $('div.siteconfig');
+    var siteconfigTextarea = $('div.siteconfig').find('textarea');
+    if (siteconfigTextarea.val().trim() == '') {
+        siteconfigTextarea.hide();
+    }
+
+    // display textarea siteconfig on label click, but don't toggle when it's not empty
+    $(document).on('click', siteconfig.find('.try-siteconfig'), function (e) {
+        if (siteconfigTextarea.val().trim() != '') {
+            return false;
+        }
+
+        siteconfigTextarea.toggle();
+        return false;
+    })
 });

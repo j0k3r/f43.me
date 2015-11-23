@@ -25,7 +25,7 @@ class FeedTestController extends Controller
         $form = $this->createForm(new ItemTestType());
         $form->handleRequest($request);
 
-        $filePath = null;
+        $filePath = '';
         $content = null;
 
         if ($form->isSubmitted() && $form->isValid()) {

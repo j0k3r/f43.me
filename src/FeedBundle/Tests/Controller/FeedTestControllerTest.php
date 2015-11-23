@@ -36,4 +36,23 @@ class FeedTestControllerTest extends FeedWebTestCase
         $this->assertCount(1, $crawler->filter('ul.no-bullet'));
         $this->assertNotContains('We failed to make this item readable, the default text from the feed item will be displayed instead.', $client->getResponse()->getContent());
     }
+
+    public function testFeedTestSubmitWithSiteConfig()
+    {
+        $client = static::getAuthorizedClient();
+
+        $crawler = $client->request('GET', '/feed/test');
+
+        $form = $crawler->filter('form.custom button[type=submit]')->form();
+
+        $crawler = $client->submit($form, array(
+            'feedbundle_itemtesttype[link]' => 'http://www.nextinpact.com/news/89458-gouvernement-valls2-fleur-pellerin-a-culture.htm',
+            'feedbundle_itemtesttype[parser]' => 'internal',
+            'feedbundle_itemtesttype[siteconfig]' => 'body: //body',
+        ));
+
+        $this->assertEquals(200, $client->getResponse()->getStatusCode());
+        $this->assertCount(1, $crawler->filter('ul.no-bullet'));
+        $this->assertNotContains('We failed to make this item readable, the default text from the feed item will be displayed instead.', $client->getResponse()->getContent());
+    }
 }
