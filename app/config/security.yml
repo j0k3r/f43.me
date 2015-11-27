@@ -34,4 +34,5 @@ security:
 
     access_control:
         - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY}
+        - { path: ^/feed/test, roles: IS_AUTHENTICATED_ANONYMOUSLY}
         - { path: ^/(feed)|(logs)|(item)|(dashboard)|(login_check), roles: ROLE_ADMIN }
