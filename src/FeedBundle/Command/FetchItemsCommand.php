@@ -7,6 +7,7 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Filesystem\LockHandler;
+use Symfony\Component\Console\Helper\ProgressBar;
 use Api43\FeedBundle\Document\Feed;
 use Api43\FeedBundle\Document\FeedItem;
 use Api43\FeedBundle\Document\FeedLog;
@@ -46,7 +47,6 @@ class FetchItemsCommand extends ContainerAwareCommand
 
         $feedRepo = $dm->getRepository('Api43FeedBundle:Feed');
         $feedItemRepo = $dm->getRepository('Api43FeedBundle:FeedItem');
-        $progress = $this->getHelperSet()->get('progress');
 
         // retrieve feed to work on
         if ($slug = $input->getOption('slug')) {
@@ -105,7 +105,8 @@ class FetchItemsCommand extends ContainerAwareCommand
             // show progress bar in trace mode only
             if ($input->getOption('with-trace')) {
                 $total = $rssFeed->get_item_quantity();
-                $progress->start($output, $total);
+                $progress = new ProgressBar($output, $total);
+                $progress->start();
             }
 
             foreach ($rssFeed->get_items() as $item) {

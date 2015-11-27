@@ -5,7 +5,6 @@ namespace Api43\FeedBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RedirectResponse;
-use Symfony\Component\Security\Core\SecurityContext;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 
 /**
@@ -22,26 +21,16 @@ class SecurityController extends Controller
      */
     public function loginAction(Request $request)
     {
-        if (true === $this->get('security.context')->isGranted('ROLE_ADMIN')) {
+        if (true === $this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')) {
             return $this->redirect($this->generateUrl('feed_dashboard'));
         }
 
-        $session = $request->getSession();
-
-        // get the login error if there is one
-        if ($request->attributes->has(SecurityContext::AUTHENTICATION_ERROR)) {
-            $error = $request->attributes->get(
-                SecurityContext::AUTHENTICATION_ERROR
-            );
-        } else {
-            $error = $session->get(SecurityContext::AUTHENTICATION_ERROR);
-            $session->remove(SecurityContext::AUTHENTICATION_ERROR);
-        }
+        $helper = $this->get('security.authentication_utils');
 
         return array(
             // last username entered by the user
-            'last_username' => $session->get(SecurityContext::LAST_USERNAME),
-            'error' => $error,
+            'last_username' => $helper->getLastUsername(),
+            'error' => $helper->getLastAuthenticationError(),
         );
     }
 }

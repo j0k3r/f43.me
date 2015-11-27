@@ -75,7 +75,7 @@ class FeedController extends Controller
     public function newAction()
     {
         $feed = new Feed();
-        $form = $this->createForm(new FeedType(), $feed);
+        $form = $this->createForm(new FeedType(), $feed, array('action' => $this->generateUrl('feed_create')));
 
         return $this->render('Api43FeedBundle:Feed:new.html.twig', array(
             'menu' => 'feed',

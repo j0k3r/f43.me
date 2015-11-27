@@ -13,7 +13,7 @@
     </div>
 
     <div class="large-8 columns">
-        <form action="{{ path('feed_edit', { 'slug': feed.slug }) }}" method="post" {{ form_enctype(edit_form) }} class="custom">
+        {{ form_start(edit_form, {'attr': {'class': 'custom' }}) }}
             {{ form_widget(edit_form) }}
 
             <div class="row">
