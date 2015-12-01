@@ -6,6 +6,7 @@ use Api43\FeedBundle\Command\FetchItemsCommand;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Component\Console\Tester\CommandTester;
+use Symfony\Component\Console\Output\OutputInterface;
 
 class FetchItemsCommandTest extends WebTestCase
 {
@@ -97,8 +98,7 @@ class FetchItemsCommandTest extends WebTestCase
         $this->commandTester->execute(array(
             'command' => $this->command->getName(),
             '--slug' => 'hackernews',
-            '-t' => true,
-        ));
+        ), array('verbosity' => OutputInterface::VERBOSITY_VERBOSE));
 
         $this->assertRegExp('`items cached.`', $this->commandTester->getDisplay());
     }
@@ -108,8 +108,7 @@ class FetchItemsCommandTest extends WebTestCase
         $this->commandTester->execute(array(
             'command' => $this->command->getName(),
             '--age' => 'new',
-            '-t' => true,
-        ));
+        ), array('verbosity' => OutputInterface::VERBOSITY_VERBOSE));
 
         $this->assertRegExp('`items cached.`', $this->commandTester->getDisplay());
     }
@@ -119,8 +118,7 @@ class FetchItemsCommandTest extends WebTestCase
         $this->commandTester->execute(array(
             'command' => $this->command->getName(),
             '--age' => 'old',
-            '-t' => true,
-        ));
+        ), array('verbosity' => OutputInterface::VERBOSITY_VERBOSE));
 
         $this->assertRegExp('`items cached.`', $this->commandTester->getDisplay());
     }

@@ -23,7 +23,6 @@ class FetchItemsCommand extends ContainerAwareCommand
             ->setDescription('Fetch items from feed to cache them')
             ->addOption('age', null, InputOption::VALUE_OPTIONAL, '`old` to fetch old feed or `new` to fetch recent feed with no item')
             ->addOption('slug', null, InputOption::VALUE_OPTIONAL, 'To fetch item for one particular feed (using its slug)')
-            ->addOption('with-trace', 't', InputOption::VALUE_NONE, 'Display debug')
         ;
     }
 
@@ -71,7 +70,7 @@ class FetchItemsCommand extends ContainerAwareCommand
             return $output->writeLn('<error>You must add some options to the task :</error> an <comment>age</comment> or a <comment>slug</comment>');
         }
 
-        if ($input->getOption('with-trace')) {
+        if ($output->isVerbose()) {
             $output->writeln('<info>Feeds to check</info>: '.count($feeds));
         }
 
@@ -79,7 +78,7 @@ class FetchItemsCommand extends ContainerAwareCommand
         $feedUpdated = array();
 
         foreach ($feeds as $feed) {
-            if ($input->getOption('with-trace')) {
+            if ($output->isVerbose()) {
                 $output->writeln('<info>Working on</info>: '.$feed->getName().' (parser: <comment>'.$feed->getParser().'</comment>)');
             }
 
@@ -103,13 +102,17 @@ class FetchItemsCommand extends ContainerAwareCommand
             $cached = 0;
 
             // show progress bar in trace mode only
-            if ($input->getOption('with-trace')) {
+            if ($output->isVerbose()) {
                 $total = $rssFeed->get_item_quantity();
                 $progress = new ProgressBar($output, $total);
                 $progress->start();
             }
 
             foreach ($rssFeed->get_items() as $item) {
+                if ($output->isVerbose()) {
+                    $progress->advance();
+                }
+
                 // if an item already exists, we skip it
                 // or if the item doesn't have a link, we won't cache it - will be useless
                 if (isset($cachedLinks[$item->get_permalink()]) || null === $item->get_permalink()) {
@@ -143,17 +146,14 @@ class FetchItemsCommand extends ContainerAwareCommand
                 $dm->persist($feedItem);
 
                 ++$cached;
+            }
 
-                if ($input->getOption('with-trace')) {
-                    $progress->advance();
-                }
+            if ($output->isVerbose()) {
+                $progress->finish();
+                $output->writeln('');
             }
 
             if ($cached) {
-                if ($input->getOption('with-trace')) {
-                    $progress->finish();
-                }
-
                 // save the last time items where updated
                 $feed->setLastItemCachedAt(date('j F Y, g:i:s a'));
                 $dm->persist($feed);
@@ -170,7 +170,7 @@ class FetchItemsCommand extends ContainerAwareCommand
                 $feedUpdated[] = $feed->getSlug();
             }
 
-            if ($input->getOption('with-trace')) {
+            if ($output->isVerbose()) {
                 $output->writeln('<info>New cached items</info>: '.$cached);
             }
 
@@ -178,7 +178,7 @@ class FetchItemsCommand extends ContainerAwareCommand
         }
 
         if (!empty($feedUpdated)) {
-            if ($input->getOption('with-trace')) {
+            if ($output->isVerbose()) {
                 $output->writeln('<info>Ping hubs...</info>');
             }
 
@@ -202,7 +202,7 @@ class FetchItemsCommand extends ContainerAwareCommand
             $feed->setNbItems($nbItems);
             $dm->persist($feed);
 
-            if ($input->getOption('with-trace')) {
+            if ($output->isVerbose()) {
                 $output->writeln('<info>'.$feed->getName().'</info> items updated: <comment>'.$nbItems.'</comment>');
             }
         }
