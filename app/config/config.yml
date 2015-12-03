@@ -15,7 +15,7 @@ framework:
     templating:
         engines: ['twig']
     assets:
-        version: v20151127
+        version: v20151203
         version_format: '%%s?version=%%s'
         base_path: ~
     default_locale:  "%locale%"
