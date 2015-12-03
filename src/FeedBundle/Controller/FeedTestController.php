@@ -22,7 +22,7 @@ class FeedTestController extends Controller
      */
     public function indexAction(Request $request)
     {
-        $form = $this->createForm(new ItemTestType());
+        $form = $this->createForm(ItemTestType::class);
         $form->handleRequest($request);
 
         $filePath = '';

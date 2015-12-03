@@ -28,8 +28,8 @@ class FeedTestControllerTest extends FeedWebTestCase
         $form = $crawler->filter('form.custom button[type=submit]')->form();
 
         $crawler = $client->submit($form, array(
-            'feedbundle_itemtesttype[link]' => 'http://www.nextinpact.com/news/89458-gouvernement-valls2-fleur-pellerin-a-culture.htm',
-            'feedbundle_itemtesttype[parser]' => 'internal',
+            'item_test[link]' => 'http://www.nextinpact.com/news/89458-gouvernement-valls2-fleur-pellerin-a-culture.htm',
+            'item_test[parser]' => 'internal',
         ));
 
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
@@ -46,9 +46,9 @@ class FeedTestControllerTest extends FeedWebTestCase
         $form = $crawler->filter('form.custom button[type=submit]')->form();
 
         $crawler = $client->submit($form, array(
-            'feedbundle_itemtesttype[link]' => 'http://www.nextinpact.com/news/89458-gouvernement-valls2-fleur-pellerin-a-culture.htm',
-            'feedbundle_itemtesttype[parser]' => 'internal',
-            'feedbundle_itemtesttype[siteconfig]' => 'body: //body',
+            'item_test[link]' => 'http://www.nextinpact.com/news/89458-gouvernement-valls2-fleur-pellerin-a-culture.htm',
+            'item_test[parser]' => 'internal',
+            'item_test[siteconfig]' => 'body: //body',
         ));
 
         $this->assertEquals(200, $client->getResponse()->getStatusCode());

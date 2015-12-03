@@ -4,6 +4,7 @@ namespace Api43\FeedBundle\EventListener;
 
 use Api43\FeedBundle\Event\FeedItemEvent;
 use Symfony\Bundle\FrameworkBundle\Routing\Router;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use GuzzleHttp\Client;
 
 class FeedItemSubscriber
@@ -49,7 +50,7 @@ class FeedItemSubscriber
             $urls[] = $this->router->generate(
                 'feed_xml',
                 array('slug' => $slug),
-                true
+                UrlGeneratorInterface::ABSOLUTE_PATH
             );
         }
 

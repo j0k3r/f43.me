@@ -2,6 +2,11 @@
 
 namespace Api43\FeedBundle\Form\Type;
 
+use Symfony\Component\Form\Extension\Core\Type\UrlType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -11,31 +16,34 @@ class FeedType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name')
-            ->add('description', 'textarea', array('required' => false))
-            ->add('host', 'text', array('attr' => array('placeholder' => 'www.website.com')))
-            ->add('link', 'url', array('attr' => array('placeholder' => 'http://www.website.com/rss')))
-            ->add('logo', 'url', array('required' => false))
-            ->add('color', 'text', array('required' => false))
-            ->add('parser', 'choice', array(
+            ->add('name', TextType::class)
+            ->add('description', TextareaType::class, array('required' => false))
+            ->add('host', TextType::class, array('attr' => array('placeholder' => 'www.website.com')))
+            ->add('link', UrlType::class, array('attr' => array('placeholder' => 'http://www.website.com/rss')))
+            ->add('logo', UrlType::class, array('required' => false))
+            ->add('color', TextType::class, array('required' => false))
+            ->add('parser', ChoiceType::class, array(
                 'choices' => array(
-                    'internal' => 'Internal',
-                    'external' => 'External',
+                    'Internal' => 'internal',
+                    'External' => 'external',
                 ),
+                'choices_as_values' => true,
             ))
-            ->add('formatter', 'choice', array(
+            ->add('formatter', ChoiceType::class, array(
                 'choices' => array(
-                    'rss' => 'RSS',
-                    'atom' => 'Atom',
+                    'RSS' => 'rss',
+                    'Atom' => 'atom',
                 ),
+                'choices_as_values' => true,
             ))
-            ->add('sort_by', 'choice', array(
+            ->add('sort_by', ChoiceType::class, array(
                 'choices' => array(
-                    'published_at' => 'Published (when item arrive in the original feed)',
-                    'created_at' => 'Created (when feed item are fetched)',
+                    'Published (when item arrive in the original feed)' => 'published_at',
+                    'Created (when feed item are fetched)' => 'created_at',
                 ),
+                'choices_as_values' => true,
             ))
-            ->add('is_private', 'checkbox', array('required' => false))
+            ->add('is_private', CheckboxType::class, array('required' => false))
         ;
     }
 
@@ -44,10 +52,5 @@ class FeedType extends AbstractType
         $resolver->setDefaults(array(
             'data_class' => 'Api43\FeedBundle\Document\Feed',
         ));
-    }
-
-    public function getName()
-    {
-        return 'feedbundle_feedtype';
     }
 }

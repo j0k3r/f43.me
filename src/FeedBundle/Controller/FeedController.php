@@ -75,7 +75,7 @@ class FeedController extends Controller
     public function newAction()
     {
         $feed = new Feed();
-        $form = $this->createForm(new FeedType(), $feed, array('action' => $this->generateUrl('feed_create')));
+        $form = $this->createForm(FeedType::class, $feed, array('action' => $this->generateUrl('feed_create')));
 
         return $this->render('Api43FeedBundle:Feed:new.html.twig', array(
             'menu' => 'feed',
@@ -94,7 +94,7 @@ class FeedController extends Controller
     public function createAction(Request $request)
     {
         $feed = new Feed();
-        $form = $this->createForm(new FeedType(), $feed);
+        $form = $this->createForm(FeedType::class, $feed);
         $form->handleRequest($request);
 
         if ($form->isValid()) {
@@ -127,7 +127,7 @@ class FeedController extends Controller
      */
     public function editAction(Request $request, Feed $feed)
     {
-        $editForm = $this->createForm(new FeedType(), $feed);
+        $editForm = $this->createForm(FeedType::class, $feed);
         $editForm->handleRequest($request);
 
         $dm = $this->getDocumentManager();

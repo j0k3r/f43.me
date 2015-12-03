@@ -6,6 +6,7 @@ use Api43\FeedBundle\Document\Feed;
 use Api43\FeedBundle\Formatter;
 use Doctrine\ODM\MongoDB\DocumentManager;
 use Symfony\Bundle\FrameworkBundle\Routing\Router;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 class RssRender
 {
@@ -44,7 +45,7 @@ class RssRender
         $feedUrl = $this->router->generate(
             'feed_xml',
             array('slug' => $feed->getSlug()),
-            true
+            UrlGeneratorInterface::ABSOLUTE_PATH
         );
 
         switch ($feed->getFormatter()) {
