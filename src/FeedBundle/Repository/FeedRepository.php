@@ -51,7 +51,7 @@ class FeedRepository extends DocumentRepository
      * Find feed by ids.
      * Used in FetchItemCommand to retrieve feed that have / or not items.
      *
-     * @param Array  $ids  An array of MongoID
+     * @param array  $ids  An array of MongoID
      * @param string $type in or notIn
      *
      * @return \Doctrine\ODM\MongoDB\EagerCursor|bool

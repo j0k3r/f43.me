@@ -7,7 +7,6 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Api43\FeedBundle\Document\Feed;
-use Api43\FeedBundle\Form\Type\FeedType;
 
 /**
  * Feed controller.
@@ -75,7 +74,7 @@ class FeedController extends Controller
     public function newAction()
     {
         $feed = new Feed();
-        $form = $this->createForm(new FeedType(), $feed, array('action' => $this->generateUrl('feed_create')));
+        $form = $this->createForm('Api43\FeedBundle\Form\Type\FeedType', $feed, array('action' => $this->generateUrl('feed_create')));
 
         return $this->render('Api43FeedBundle:Feed:new.html.twig', array(
             'menu' => 'feed',
@@ -94,7 +93,7 @@ class FeedController extends Controller
     public function createAction(Request $request)
     {
         $feed = new Feed();
-        $form = $this->createForm(new FeedType(), $feed);
+        $form = $this->createForm('Api43\FeedBundle\Form\Type\FeedType', $feed);
         $form->handleRequest($request);
 
         if ($form->isValid()) {
@@ -127,7 +126,7 @@ class FeedController extends Controller
      */
     public function editAction(Request $request, Feed $feed)
     {
-        $editForm = $this->createForm(new FeedType(), $feed);
+        $editForm = $this->createForm('Api43\FeedBundle\Form\Type\FeedType', $feed);
         $editForm->handleRequest($request);
 
         $dm = $this->getDocumentManager();

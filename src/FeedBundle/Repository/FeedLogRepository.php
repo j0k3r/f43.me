@@ -95,7 +95,7 @@ class FeedLogRepository extends DocumentRepository
      *
      * @param int $limit Limit of results to show in the dashboard chart
      *
-     * @return Array
+     * @return array
      */
     public function findStatsForLastDays($limit = 20)
     {

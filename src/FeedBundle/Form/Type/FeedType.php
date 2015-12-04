@@ -11,31 +11,34 @@ class FeedType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name')
-            ->add('description', 'textarea', array('required' => false))
-            ->add('host', 'text', array('attr' => array('placeholder' => 'www.website.com')))
-            ->add('link', 'url', array('attr' => array('placeholder' => 'http://www.website.com/rss')))
-            ->add('logo', 'url', array('required' => false))
-            ->add('color', 'text', array('required' => false))
-            ->add('parser', 'choice', array(
+            ->add('name', 'Symfony\Component\Form\Extension\Core\Type\TextType')
+            ->add('description', 'Symfony\Component\Form\Extension\Core\Type\TextareaType', array('required' => false))
+            ->add('host', 'Symfony\Component\Form\Extension\Core\Type\TextType', array('attr' => array('placeholder' => 'www.website.com')))
+            ->add('link', 'Symfony\Component\Form\Extension\Core\Type\UrlType', array('attr' => array('placeholder' => 'http://www.website.com/rss')))
+            ->add('logo', 'Symfony\Component\Form\Extension\Core\Type\UrlType', array('required' => false))
+            ->add('color', 'Symfony\Component\Form\Extension\Core\Type\TextType', array('required' => false))
+            ->add('parser', 'Symfony\Component\Form\Extension\Core\Type\ChoiceType', array(
                 'choices' => array(
-                    'internal' => 'Internal',
-                    'external' => 'External',
+                    'Internal' => 'internal',
+                    'External' => 'external',
                 ),
+                'choices_as_values' => true,
             ))
-            ->add('formatter', 'choice', array(
+            ->add('formatter', 'Symfony\Component\Form\Extension\Core\Type\ChoiceType', array(
                 'choices' => array(
-                    'rss' => 'RSS',
-                    'atom' => 'Atom',
+                    'RSS' => 'rss',
+                    'Atom' => 'atom',
                 ),
+                'choices_as_values' => true,
             ))
-            ->add('sort_by', 'choice', array(
+            ->add('sort_by', 'Symfony\Component\Form\Extension\Core\Type\ChoiceType', array(
                 'choices' => array(
-                    'published_at' => 'Published (when item arrive in the original feed)',
-                    'created_at' => 'Created (when feed item are fetched)',
+                    'Published (when item arrive in the original feed)' => 'published_at',
+                    'Created (when feed item are fetched)' => 'created_at',
                 ),
+                'choices_as_values' => true,
             ))
-            ->add('is_private', 'checkbox', array('required' => false))
+            ->add('is_private', 'Symfony\Component\Form\Extension\Core\Type\CheckboxType', array('required' => false))
         ;
     }
 
@@ -44,10 +47,5 @@ class FeedType extends AbstractType
         $resolver->setDefaults(array(
             'data_class' => 'Api43\FeedBundle\Document\Feed',
         ));
-    }
-
-    public function getName()
-    {
-        return 'feedbundle_feedtype';
     }
 }

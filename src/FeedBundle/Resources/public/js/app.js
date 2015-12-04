@@ -61,7 +61,8 @@ $(function(){
     // hide textarea for config file when it's empty
     var siteconfig = $('div.siteconfig');
     var siteconfigTextarea = $('div.siteconfig').find('textarea');
-    if (siteconfigTextarea.val().trim() == '') {
+
+    if (siteconfigTextarea.length && siteconfigTextarea.val().trim() == '') {
         siteconfigTextarea.hide();
     }
 

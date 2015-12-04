@@ -10,19 +10,15 @@ class ItemTestType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('link', 'url')
-            ->add('siteconfig', 'textarea', array('required' => false))
-            ->add('parser', 'choice', array(
-                'choices' => array(
+            ->add('link', 'Symfony\Component\Form\Extension\Core\Type\UrlType')
+            ->add('siteconfig', 'Symfony\Component\Form\Extension\Core\Type\TextareaType', array('required' => false))
+            ->add('parser', 'Symfony\Component\Form\Extension\Core\Type\ChoiceType', array(
+                'choices' => array_flip(array(
                     'internal' => 'Internal',
                     'external' => 'External',
-                ),
+                )),
+                'choices_as_values' => true,
             ))
         ;
-    }
-
-    public function getName()
-    {
-        return 'feedbundle_itemtesttype';
     }
 }

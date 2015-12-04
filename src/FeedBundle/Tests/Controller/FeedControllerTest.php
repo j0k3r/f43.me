@@ -127,15 +127,15 @@ class FeedControllerTest extends FeedWebTestCase
     public function dataNewFeedOk()
     {
         return array(array(array(
-            'feedbundle_feedtype[name]' => 'Google News',
-            'feedbundle_feedtype[description]' => 'À la une - Google Actualités',
-            'feedbundle_feedtype[host]' => 'http://news.google.com',
+            'feed[name]' => 'Google News',
+            'feed[description]' => 'À la une - Google Actualités',
+            'feed[host]' => 'http://news.google.com',
             // be sure that link is almost always different
-            'feedbundle_feedtype[link]' => 'http://news.google.fr/?output=rss&rand='.time(),
-            'feedbundle_feedtype[parser]' => 'external',
-            'feedbundle_feedtype[formatter]' => 'rss',
-            'feedbundle_feedtype[sort_by]' => 'published_at',
-            'feedbundle_feedtype[is_private]' => 1,
+            'feed[link]' => 'http://news.google.fr/?output=rss&rand='.time(),
+            'feed[parser]' => 'external',
+            'feed[formatter]' => 'rss',
+            'feed[sort_by]' => 'published_at',
+            'feed[is_private]' => 1,
         )));
     }
 
@@ -153,7 +153,7 @@ class FeedControllerTest extends FeedWebTestCase
         $form = $crawler->filter('button[type=submit]')->form();
 
         // bad rss link
-        $data['feedbundle_feedtype[link]'] = 'http://google.com';
+        $data['feed[link]'] = 'http://google.com';
 
         $crawler = $client->submit($form, $data);
 
@@ -224,14 +224,14 @@ class FeedControllerTest extends FeedWebTestCase
     public function dataEditFeedOk()
     {
         return array(array(array(
-            'feedbundle_feedtype[name]' => 'Bonjour Madame edited !',
-            'feedbundle_feedtype[description]' => 'Bonjour Madame edited !',
-            'feedbundle_feedtype[host]' => 'bonjourmadame.fr',
-            'feedbundle_feedtype[link]' => 'http://feeds2.feedburner.com/BonjourMadame',
-            'feedbundle_feedtype[parser]' => 'internal',
-            'feedbundle_feedtype[formatter]' => 'atom',
-            'feedbundle_feedtype[sort_by]' => 'published_at',
-            // 'feedbundle_feedtype[is_private]' => 0,
+            'feed[name]' => 'Bonjour Madame edited !',
+            'feed[description]' => 'Bonjour Madame edited !',
+            'feed[host]' => 'bonjourmadame.fr',
+            'feed[link]' => 'http://feeds2.feedburner.com/BonjourMadame',
+            'feed[parser]' => 'internal',
+            'feed[formatter]' => 'atom',
+            'feed[sort_by]' => 'published_at',
+            // 'feed[is_private]' => 0,
         )));
     }
 
@@ -245,7 +245,7 @@ class FeedControllerTest extends FeedWebTestCase
         $crawler = $client->request('GET', '/feed/bonjour-madame/edit');
 
         // bad link
-        $data['feedbundle_feedtype[link]'] = 'uzioau .oa';
+        $data['feed[link]'] = 'uzioau .oa';
 
         $form = $crawler->filter('button[type=submit]')->form();
 
