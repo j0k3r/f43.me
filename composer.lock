@@ -161,16 +161,16 @@
         },
         {
             "name": "doctrine/cache",
-            "version": "v1.5.1",
+            "version": "v1.5.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/cache.git",
-                "reference": "2b9cec5a5e722010cbebc91713d4c11eaa064d5e"
+                "reference": "47c7128262da274f590ae6f86eb137a7a64e82af"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/cache/zipball/2b9cec5a5e722010cbebc91713d4c11eaa064d5e",
-                "reference": "2b9cec5a5e722010cbebc91713d4c11eaa064d5e",
+                "url": "https://api.github.com/repos/doctrine/cache/zipball/47c7128262da274f590ae6f86eb137a7a64e82af",
+                "reference": "47c7128262da274f590ae6f86eb137a7a64e82af",
                 "shasum": ""
             },
             "require": {
@@ -227,7 +227,7 @@
                 "cache",
                 "caching"
             ],
-            "time": "2015-11-02 18:35:48"
+            "time": "2015-12-03 10:50:37"
         },
         {
             "name": "doctrine/collections",
@@ -1475,16 +1475,16 @@
         },
         {
             "name": "j0k3r/graby",
-            "version": "1.0.5",
+            "version": "1.0.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/j0k3r/graby.git",
-                "reference": "349b59b4857b13982d372cc5006e08d86e9c65aa"
+                "reference": "c9f5543fad60dc4efd12195733f96bb4fdb0e6e0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/j0k3r/graby/zipball/349b59b4857b13982d372cc5006e08d86e9c65aa",
-                "reference": "349b59b4857b13982d372cc5006e08d86e9c65aa",
+                "url": "https://api.github.com/repos/j0k3r/graby/zipball/c9f5543fad60dc4efd12195733f96bb4fdb0e6e0",
+                "reference": "c9f5543fad60dc4efd12195733f96bb4fdb0e6e0",
                 "shasum": ""
             },
             "require": {
@@ -1499,7 +1499,7 @@
                 "php": ">=5.4",
                 "simplepie/simplepie": "^1.3.1",
                 "smalot/pdfparser": "~0.9.24",
-                "symfony/options-resolver": "^2.6.6"
+                "symfony/options-resolver": "~2.6|~3.0"
             },
             "type": "library",
             "autoload": {
@@ -1524,24 +1524,24 @@
                 }
             ],
             "description": "Graby helps you extract article content from web pages",
-            "time": "2015-11-12 19:27:15"
+            "time": "2015-12-02 13:22:19"
         },
         {
             "name": "j0k3r/graby-site-config",
-            "version": "1.0.8",
+            "version": "1.0.9",
             "source": {
                 "type": "git",
                 "url": "https://github.com/j0k3r/graby-site-config.git",
-                "reference": "568361fc00f4414d68b3338c62ccc4dd3cf58b7f"
+                "reference": "7666fed2a2cd211ef366f6fed9ccddd8e0b9e623"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/j0k3r/graby-site-config/zipball/568361fc00f4414d68b3338c62ccc4dd3cf58b7f",
-                "reference": "568361fc00f4414d68b3338c62ccc4dd3cf58b7f",
+                "url": "https://api.github.com/repos/j0k3r/graby-site-config/zipball/7666fed2a2cd211ef366f6fed9ccddd8e0b9e623",
+                "reference": "7666fed2a2cd211ef366f6fed9ccddd8e0b9e623",
                 "shasum": ""
             },
             "require": {
-                "symfony/finder": "^2.6.6"
+                "symfony/finder": "~2.6|~3.0"
             },
             "type": "library",
             "autoload": {
@@ -1560,7 +1560,7 @@
                 }
             ],
             "description": "Graby site config files",
-            "time": "2015-11-23 08:54:27"
+            "time": "2015-12-03 19:49:20"
         },
         {
             "name": "j0k3r/php-readability",
