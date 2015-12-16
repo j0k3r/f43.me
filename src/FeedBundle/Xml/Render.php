@@ -1,14 +1,13 @@
 <?php
 
-namespace Api43\FeedBundle\Services;
+namespace Api43\FeedBundle\Xml;
 
 use Api43\FeedBundle\Document\Feed;
-use Api43\FeedBundle\Formatter;
 use Doctrine\ODM\MongoDB\DocumentManager;
 use Symfony\Bundle\FrameworkBundle\Routing\Router;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
-class RssRender
+class Render
 {
     protected $generator;
     protected $dm;

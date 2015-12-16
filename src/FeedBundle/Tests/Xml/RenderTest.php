@@ -1,10 +1,10 @@
 <?php
 
-namespace Api43\FeedBundle\Tests\Services;
+namespace Api43\FeedBundle\Tests\Xml;
 
-use Api43\FeedBundle\Services\RssRender;
+use Api43\FeedBundle\Xml\Render;
 
-class RssRenderTest extends \PHPUnit_Framework_TestCase
+class RenderTest extends \PHPUnit_Framework_TestCase
 {
     private $dm;
     private $router;
@@ -45,7 +45,7 @@ class RssRenderTest extends \PHPUnit_Framework_TestCase
     {
         $feed = $this->getMock('Api43\FeedBundle\Document\Feed');
 
-        $render = new RssRender('toto', $this->dm, $this->router);
+        $render = new Render('toto', $this->dm, $this->router);
         $render->render($feed);
     }
 
@@ -60,7 +60,7 @@ class RssRenderTest extends \PHPUnit_Framework_TestCase
             ->method('getFormatter')
             ->willReturn('atom');
 
-        $render = new RssRender('tata', $this->dm, $this->router);
+        $render = new Render('tata', $this->dm, $this->router);
         $content = $render->render($feed);
 
         libxml_use_internal_errors(true);
@@ -85,7 +85,7 @@ class RssRenderTest extends \PHPUnit_Framework_TestCase
             ->method('getFormatter')
             ->willReturn('rss');
 
-        $render = new RssRender('tata', $this->dm, $this->router);
+        $render = new Render('tata', $this->dm, $this->router);
         $content = $render->render($feed);
 
         libxml_use_internal_errors(true);

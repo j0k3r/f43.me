@@ -1,13 +1,13 @@
 <?php
 
-namespace Api43\FeedBundle\Services;
+namespace Api43\FeedBundle\Content;
 
 use Api43\FeedBundle\Document\Feed;
 use Api43\FeedBundle\Extractor\ExtractorChain;
 use Api43\FeedBundle\Improver\ImproverChain;
 use Api43\FeedBundle\Parser\ParserChain;
 
-class ContentExtractor
+class Extractor
 {
     protected $feed = null;
     protected $extractorChain;

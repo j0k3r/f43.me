@@ -1,6 +1,6 @@
 <?php
 
-namespace Api43\FeedBundle\Formatter;
+namespace Api43\FeedBundle\Xml\Formatter;
 
 /**
  * Atom formatter.

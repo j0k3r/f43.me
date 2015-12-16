@@ -1,11 +1,11 @@
 <?php
 
-namespace Api43\FeedBundle\Tests\Readability;
+namespace Api43\FeedBundle\Tests\Content;
 
-use Api43\FeedBundle\Services\ContentExtractor;
+use Api43\FeedBundle\Content\Extractor;
 use Api43\FeedBundle\Parser\Internal;
 
-class ContentExtractorTest extends \PHPUnit_Framework_TestCase
+class ExtractorTest extends \PHPUnit_Framework_TestCase
 {
     protected function getContentExtrator($customParser = false, $customExtractor = false)
     {
@@ -79,7 +79,7 @@ class ContentExtractorTest extends \PHPUnit_Framework_TestCase
             ->method('getParser')
             ->willReturn($internalParser);
 
-        $contentExtractor = new ContentExtractor($extractorChain, $improverChain, $parserChain);
+        $contentExtractor = new Extractor($extractorChain, $improverChain, $parserChain);
         $contentExtractor->init('internal', $feed, true);
 
         if (true === $customParser) {
@@ -158,7 +158,7 @@ class ContentExtractorTest extends \PHPUnit_Framework_TestCase
             ->disableOriginalConstructor()
             ->getMock();
 
-        $contentExtractor = new ContentExtractor($extractorChain, $improverChain, new \Api43\FeedBundle\Parser\ParserChain());
+        $contentExtractor = new Extractor($extractorChain, $improverChain, new \Api43\FeedBundle\Parser\ParserChain());
         $contentExtractor->init('oops');
     }
 }
