@@ -4,7 +4,6 @@ namespace Api43\FeedBundle\Content;
 
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Doctrine\ODM\MongoDB\DocumentManager;
-use Psr\Log\NullLogger;
 use Psr\Log\LoggerInterface;
 use Api43\FeedBundle\Xml\SimplePieProxy;
 use Api43\FeedBundle\Document\FeedItem;
