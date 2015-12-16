@@ -17,7 +17,7 @@ class FeedTestController extends Controller
      * - chose the best parser
      * - test a site configuration.
      *
-     * @return array
+     * @return \Symfony\Component\HttpFoundation\Response
      */
     public function indexAction(Request $request)
     {

@@ -42,7 +42,7 @@ class Extractor
      * @param bool      $allowAllParser Define if we have to use all *known* parser to get the content if the defined one failed.
      *                                  For example, Internal parser can't make content readable, it will use the External one, etc ..
      *
-     * @return ContentExtractor Current object
+     * @return Extractor Current object
      */
     public function init($chosenParser, Feed $feed = null, $allowAllParser = false)
     {
@@ -63,7 +63,7 @@ class Extractor
      * @param string      $url         RSS item url
      * @param string|null $itemContent RSS item content, which will be taken if we can't extract content from url
      *
-     * @return ContentExtractor
+     * @return Extractor
      */
     public function parseContent($url, $itemContent = null)
     {

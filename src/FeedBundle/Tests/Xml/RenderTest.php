@@ -46,7 +46,7 @@ class RenderTest extends \PHPUnit_Framework_TestCase
         $feed = $this->getMock('Api43\FeedBundle\Document\Feed');
 
         $render = new Render('toto', $this->dm, $this->router);
-        $render->render($feed);
+        $render->doRender($feed);
     }
 
     public function testRenderAtom()
@@ -61,7 +61,7 @@ class RenderTest extends \PHPUnit_Framework_TestCase
             ->willReturn('atom');
 
         $render = new Render('tata', $this->dm, $this->router);
-        $content = $render->render($feed);
+        $content = $render->doRender($feed);
 
         libxml_use_internal_errors(true);
 
@@ -86,7 +86,7 @@ class RenderTest extends \PHPUnit_Framework_TestCase
             ->willReturn('rss');
 
         $render = new Render('tata', $this->dm, $this->router);
-        $content = $render->render($feed);
+        $content = $render->doRender($feed);
 
         libxml_use_internal_errors(true);
 

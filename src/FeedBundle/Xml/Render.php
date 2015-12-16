@@ -34,7 +34,7 @@ class Render
      *
      * @throws \InvalidArgumentException if given format formatter does not exists
      */
-    public function render(Feed $feed)
+    public function doRender(Feed $feed)
     {
         $items = $this->dm->getRepository('Api43FeedBundle:FeedItem')->findByFeed(
             $feed->getId(),
