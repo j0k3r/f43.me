@@ -4,6 +4,7 @@ namespace Api43\FeedBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Api43\FeedBundle\Form\Type\ItemTestType;
 
 /**
  * FeedTest controller.
@@ -21,7 +22,7 @@ class FeedTestController extends Controller
      */
     public function indexAction(Request $request)
     {
-        $form = $this->createForm('Api43\FeedBundle\Form\Type\ItemTestType');
+        $form = $this->createForm(ItemTestType::class);
         $form->handleRequest($request);
 
         $filePath = '';
