@@ -271,12 +271,12 @@ services:
             -  { name: feed.improver, alias: reddit }
 
     # this one should be the last one (because this is the default one :)
-    feed.improver.nothing:
-        class: Api43\FeedBundle\Improver\Nothing
+    feed.improver.default_improver:
+        class: Api43\FeedBundle\Improver\DefaultImprover
         arguments:
             - "@guzzle.client"
         tags:
-            -  { name: feed.improver, alias: nothing }
+            -  { name: feed.improver, alias: default_improver }
 
     # parser
     feed.parser.chain:

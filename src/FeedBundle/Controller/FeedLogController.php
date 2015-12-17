@@ -22,10 +22,10 @@ class FeedLogController extends Controller
         $dm = $this->getDocumentManager();
         $feedlogs = $dm->getRepository('Api43FeedBundle:FeedLog')->findAllOrderedById(100);
 
-        return $this->render('Api43FeedBundle:FeedLog:index.html.twig', array(
+        return $this->render('Api43FeedBundle:FeedLog:index.html.twig', [
             'menu' => 'log',
             'feedlogs' => $feedlogs,
-        ));
+        ]);
     }
 
     /**
@@ -43,12 +43,12 @@ class FeedLogController extends Controller
 
         $deleteAllForm = $this->createDeleteAllForm();
 
-        return $this->render('Api43FeedBundle:FeedLog:feed.html.twig', array(
+        return $this->render('Api43FeedBundle:FeedLog:feed.html.twig', [
             'menu' => 'log',
             'feed' => $feed,
             'feedlogs' => $feedlogs,
             'delete_all_form' => $deleteAllForm->createView(),
-        ));
+        ]);
     }
 
     /**
@@ -72,7 +72,7 @@ class FeedLogController extends Controller
             $this->get('session')->getFlashBag()->add('notice', $res['n'].' documents deleted!');
         }
 
-        return $this->redirect($this->generateUrl('feed_edit', array('slug' => $feed->getSlug())));
+        return $this->redirect($this->generateUrl('feed_edit', ['slug' => $feed->getSlug()]));
     }
 
     private function createDeleteAllForm()

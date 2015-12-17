@@ -50,9 +50,9 @@ class Vidme extends AbstractExtractor
                 ->get('https://api.vid.me/videoByUrl?url='.$this->vidmeUrl)
                 ->json();
         } catch (RequestException $e) {
-            $this->logger->warning('Vidme extract failed for: '.$this->vidmeUrl, array(
+            $this->logger->warning('Vidme extract failed for: '.$this->vidmeUrl, [
                 'exception' => $e,
-            ));
+            ]);
 
             return '';
         }

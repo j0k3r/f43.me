@@ -14,27 +14,27 @@ class RssFormatter extends Formatter
      */
     public function setItemFields()
     {
-        $this->fields = array(
-            array(
+        $this->fields = [
+            [
                 'name' => 'title',
                 'method' => 'getTitle',
                 'cdata' => true,
-            ), array(
+            ], [
                 'name' => 'description',
                 'method' => 'getContent',
                 'cdata' => true,
-            ), array(
+            ], [
                 'name' => 'link',
                 'method' => 'getLink',
-            ), array(
+            ], [
                 'name' => 'guid',
                 'method' => 'getLink',
-            ), array(
+            ], [
                 'name' => 'pubDate',
                 'method' => 'getPubDate',
                 'date_format' => \DateTime::RSS,
-            ),
-        );
+            ],
+        ];
     }
 
     /**

@@ -30,7 +30,7 @@ class Twitter extends AbstractExtractor
         // find tweet id
         preg_match('/([0-9]{18})/', $path, $matches);
 
-        if (!in_array($host, array('mobile.twitter.com', 'twitter.com')) || !isset($matches[1])) {
+        if (!in_array($host, ['mobile.twitter.com', 'twitter.com']) || !isset($matches[1])) {
             return false;
         }
 
@@ -49,11 +49,11 @@ class Twitter extends AbstractExtractor
         }
 
         try {
-            $twitterData = $this->twitter->get('statuses/show', array('id' => $this->tweetId));
+            $twitterData = $this->twitter->get('statuses/show', ['id' => $this->tweetId]);
         } catch (TwitterException $e) {
-            $this->logger->warning('Twitter extract failed for: '.$this->tweetId, array(
+            $this->logger->warning('Twitter extract failed for: '.$this->tweetId, [
                 'exception' => $e,
-            ));
+            ]);
 
             return '';
         }

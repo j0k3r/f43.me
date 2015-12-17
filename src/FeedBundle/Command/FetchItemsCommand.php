@@ -30,7 +30,7 @@ class FetchItemsCommand extends ContainerAwareCommand
             return 0;
         }
 
-        $feeds = array();
+        $feeds = [];
         $container = $this->getContainer();
         $dm = $container->get('doctrine.odm.mongodb.document_manager');
 
@@ -47,8 +47,8 @@ class FetchItemsCommand extends ContainerAwareCommand
             if (!$feed) {
                 return $output->writeLn('<error>Unable to find Feed document:</error> <comment>'.$slug.'</comment>');
             }
-            $feeds = array($feed);
-        } elseif (in_array($input->getOption('age'), array('new', 'old'))) {
+            $feeds = [$feed];
+        } elseif (in_array($input->getOption('age'), ['new', 'old'])) {
             $feedsWithItems = $feedItemRepo->findAllFeedWithItems();
 
             // retrieve feed that HAVE items

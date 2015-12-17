@@ -7,7 +7,7 @@ namespace Api43\FeedBundle\Improver;
  *
  * This class provides a custom parser for news.ycombinator.com feed
  */
-class HackerNews extends Nothing
+class HackerNews extends DefaultImprover
 {
     /**
      * {@inheritdoc}

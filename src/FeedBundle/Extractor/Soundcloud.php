@@ -43,9 +43,9 @@ class Soundcloud extends AbstractExtractor
                 ->get('http://soundcloud.com/oembed?format=json&url='.$this->soundCloundUrl)
                 ->json();
         } catch (RequestException $e) {
-            $this->logger->warning('Soundcloud extract failed for: '.$this->soundCloundUrl, array(
+            $this->logger->warning('Soundcloud extract failed for: '.$this->soundCloundUrl, [
                 'exception' => $e,
-            ));
+            ]);
 
             return '';
         }

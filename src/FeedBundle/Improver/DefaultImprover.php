@@ -6,11 +6,11 @@ use GuzzleHttp\Client;
 use GuzzleHttp\Exception\RequestException;
 
 /**
- * Default Improver (aka Nothing).
+ * Default Improver.
  *
  * This class provides Improver methods
  */
-class Nothing
+class DefaultImprover
 {
     protected $url;
     protected $itemContent;
@@ -72,9 +72,9 @@ class Nothing
                 ->get(
                     $url,
                     // force user agent for some provider (to avoid bad browser detection)
-                    array('headers' => array(
+                    ['headers' => [
                         'User-Agent' => 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/535.2 (KHTML, like Gecko) Chrome/15.0.874.92 Safari/535.2',
-                    ))
+                    ]]
                 );
         } catch (RequestException $e) {
             // catch timeout, ssl verification that failed, etc ...

@@ -42,7 +42,7 @@ class ConstraintRssValidator extends ConstraintValidator
 
         // if content is still false, we won't invalidate the feed, it means both alternative to check are unavailable
         if (false !== $content && 0 === preg_match('/This is a valid/', $content)) {
-            $this->context->addViolation($constraint->message, array('%string%' => $value));
+            $this->context->addViolation($constraint->message, ['%string%' => $value]);
         }
     }
 }

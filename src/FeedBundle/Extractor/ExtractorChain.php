@@ -8,7 +8,7 @@ class ExtractorChain
 
     public function __construct()
     {
-        $this->extractors = array();
+        $this->extractors = [];
     }
 
     /**

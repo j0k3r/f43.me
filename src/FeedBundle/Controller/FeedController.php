@@ -26,12 +26,12 @@ class FeedController extends Controller
         $feedlogs = $dm->getRepository('Api43FeedBundle:FeedLog')->findAllOrderedById(10);
         $historylogs = $dm->getRepository('Api43FeedBundle:FeedLog')->findStatsForLastDays();
 
-        return $this->render('Api43FeedBundle:Feed:dashboard.html.twig', array(
+        return $this->render('Api43FeedBundle:Feed:dashboard.html.twig', [
             'menu' => 'dashboard',
             'feedlogs' => $feedlogs,
             'feeds' => $feeds,
             'historylogs' => $historylogs,
-        ));
+        ]);
     }
 
     /**
@@ -45,9 +45,9 @@ class FeedController extends Controller
             ->getRepository('Api43FeedBundle:Feed')
             ->findForPublic();
 
-        return $this->render('Api43FeedBundle:Feed:public.html.twig', array(
+        return $this->render('Api43FeedBundle:Feed:public.html.twig', [
             'feeds' => $feeds,
-        ));
+        ]);
     }
 
     /**
@@ -61,10 +61,10 @@ class FeedController extends Controller
             ->getRepository('Api43FeedBundle:Feed')
             ->findAllOrderedByDate();
 
-        return $this->render('Api43FeedBundle:Feed:index.html.twig', array(
+        return $this->render('Api43FeedBundle:Feed:index.html.twig', [
             'menu' => 'feed',
             'feeds' => $feeds,
-        ));
+        ]);
     }
 
     /**
@@ -75,13 +75,13 @@ class FeedController extends Controller
     public function newAction()
     {
         $feed = new Feed();
-        $form = $this->createForm(FeedType::class, $feed, array('action' => $this->generateUrl('feed_create')));
+        $form = $this->createForm(FeedType::class, $feed, ['action' => $this->generateUrl('feed_create')]);
 
-        return $this->render('Api43FeedBundle:Feed:new.html.twig', array(
+        return $this->render('Api43FeedBundle:Feed:new.html.twig', [
             'menu' => 'feed',
             'feed' => $feed,
             'form' => $form->createView(),
-        ));
+        ]);
     }
 
     /**
@@ -104,16 +104,16 @@ class FeedController extends Controller
 
             $this->get('session')->getFlashBag()->add('notice', 'Document created!');
 
-            return $this->redirect($this->generateUrl('feed_edit', array('slug' => $feed->getSlug())));
+            return $this->redirect($this->generateUrl('feed_edit', ['slug' => $feed->getSlug()]));
         } else {
             $this->get('session')->getFlashBag()->add('error', 'Form is invalid.');
         }
 
-        return $this->render('Api43FeedBundle:Feed:new.html.twig', array(
+        return $this->render('Api43FeedBundle:Feed:new.html.twig', [
             'menu' => 'feed',
             'feed' => $feed,
             'form' => $form->createView(),
-        ));
+        ]);
     }
 
     /**
@@ -139,7 +139,7 @@ class FeedController extends Controller
 
                 $this->get('session')->getFlashBag()->add('notice', 'Document updated!');
 
-                return $this->redirect($this->generateUrl('feed_edit', array('slug' => $feed->getSlug())));
+                return $this->redirect($this->generateUrl('feed_edit', ['slug' => $feed->getSlug()]));
             } else {
                 $this->get('session')->getFlashBag()->add('error', 'Form is invalid.');
             }
@@ -151,17 +151,17 @@ class FeedController extends Controller
 
         $deleteForm = $this->createDeleteForm();
 
-        return $this->render('Api43FeedBundle:Feed:edit.html.twig', array(
+        return $this->render('Api43FeedBundle:Feed:edit.html.twig', [
             'menu' => 'feed',
             'feed' => $feed,
-            'infos' => array(
+            'infos' => [
                 'last_item' => $lastItem,
                 'last_log' => $lastLog,
                 'nb_logs' => $nbLogs,
-            ),
+            ],
             'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
-        ));
+        ]);
     }
 
     /**
@@ -207,7 +207,7 @@ class FeedController extends Controller
         return new Response(
             $this->get('xml_render')->doRender($feed),
             200,
-            array('Content-Type' => 'text/xml')
+            ['Content-Type' => 'text/xml']
         );
     }
 

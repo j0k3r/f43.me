@@ -14,14 +14,14 @@ class ItemTestType extends AbstractType
     {
         $builder
             ->add('link', UrlType::class)
-            ->add('siteconfig', TextareaType::class, array('required' => false))
-            ->add('parser', ChoiceType::class, array(
-                'choices' => array_flip(array(
+            ->add('siteconfig', TextareaType::class, ['required' => false])
+            ->add('parser', ChoiceType::class, [
+                'choices' => array_flip([
                     'internal' => 'Internal',
                     'external' => 'External',
-                )),
+                ]),
                 'choices_as_values' => true,
-            ))
+            ])
         ;
     }
 }

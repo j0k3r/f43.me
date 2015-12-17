@@ -2,13 +2,13 @@
 
 namespace Api43\FeedBundle\Tests\Improver;
 
-use Api43\FeedBundle\Improver\Nothing;
+use Api43\FeedBundle\Improver\DefaultImprover;
 use GuzzleHttp\Client;
 use GuzzleHttp\Subscriber\Mock;
 use GuzzleHttp\Message\Response;
 use GuzzleHttp\Stream\Stream;
 
-class NothingTest extends \PHPUnit_Framework_TestCase
+class DefaultImproverTest extends \PHPUnit_Framework_TestCase
 {
     public function dataUpdateUrl()
     {
@@ -39,9 +39,9 @@ class NothingTest extends \PHPUnit_Framework_TestCase
 
         $client->getEmitter()->attach($mock);
 
-        $nothing = new Nothing($client);
-        $this->assertEquals($expected, $nothing->updateUrl($url));
-        $this->assertEquals('', $nothing->updateContent(''));
+        $default = new DefaultImprover($client);
+        $this->assertEquals($expected, $default->updateUrl($url));
+        $this->assertEquals('', $default->updateContent(''));
     }
 
     public function testUpdateUrlFail()
@@ -54,7 +54,7 @@ class NothingTest extends \PHPUnit_Framework_TestCase
 
         $client->getEmitter()->attach($mock);
 
-        $nothing = new Nothing($client);
-        $this->assertEquals('http://0.0.0.0/content?not-changed', $nothing->updateUrl('http://0.0.0.0/content'));
+        $default = new DefaultImprover($client);
+        $this->assertEquals('http://0.0.0.0/content?not-changed', $default->updateUrl('http://0.0.0.0/content'));
     }
 }

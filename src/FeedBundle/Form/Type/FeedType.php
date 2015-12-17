@@ -17,40 +17,40 @@ class FeedType extends AbstractType
     {
         $builder
             ->add('name', TextType::class)
-            ->add('description', TextareaType::class, array('required' => false))
-            ->add('host', TextType::class, array('attr' => array('placeholder' => 'www.website.com')))
-            ->add('link', UrlType::class, array('attr' => array('placeholder' => 'http://www.website.com/rss')))
-            ->add('logo', UrlType::class, array('required' => false))
-            ->add('color', TextType::class, array('required' => false))
-            ->add('parser', ChoiceType::class, array(
-                'choices' => array(
+            ->add('description', TextareaType::class, ['required' => false])
+            ->add('host', TextType::class, ['attr' => ['placeholder' => 'www.website.com']])
+            ->add('link', UrlType::class, ['attr' => ['placeholder' => 'http://www.website.com/rss']])
+            ->add('logo', UrlType::class, ['required' => false])
+            ->add('color', TextType::class, ['required' => false])
+            ->add('parser', ChoiceType::class, [
+                'choices' => [
                     'Internal' => 'internal',
                     'External' => 'external',
-                ),
+                ],
                 'choices_as_values' => true,
-            ))
-            ->add('formatter', ChoiceType::class, array(
-                'choices' => array(
+            ])
+            ->add('formatter', ChoiceType::class, [
+                'choices' => [
                     'RSS' => 'rss',
                     'Atom' => 'atom',
-                ),
+                ],
                 'choices_as_values' => true,
-            ))
-            ->add('sort_by', ChoiceType::class, array(
-                'choices' => array(
+            ])
+            ->add('sort_by', ChoiceType::class, [
+                'choices' => [
                     'Published (when item arrive in the original feed)' => 'published_at',
                     'Created (when feed item are fetched)' => 'created_at',
-                ),
+                ],
                 'choices_as_values' => true,
-            ))
-            ->add('is_private', CheckboxType::class, array('required' => false))
+            ])
+            ->add('is_private', CheckboxType::class, ['required' => false])
         ;
     }
 
     public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefaults(array(
+        $resolver->setDefaults([
             'data_class' => 'Api43\FeedBundle\Document\Feed',
-        ));
+        ]);
     }
 }

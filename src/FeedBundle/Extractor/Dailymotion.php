@@ -20,7 +20,7 @@ class Dailymotion extends AbstractExtractor
             return false;
         }
 
-        if (!in_array($host, array('www.dailymotion.com', 'dailymotion.com', 'dai.ly'))) {
+        if (!in_array($host, ['www.dailymotion.com', 'dailymotion.com', 'dai.ly'])) {
             return false;
         }
 
@@ -43,9 +43,9 @@ class Dailymotion extends AbstractExtractor
                 ->get('http://www.dailymotion.com/services/oembed?format=json&url='.$this->dailymotionUrl)
                 ->json();
         } catch (RequestException $e) {
-            $this->logger->warning('Dailymotion extract failed for: '.$this->dailymotionUrl, array(
+            $this->logger->warning('Dailymotion extract failed for: '.$this->dailymotionUrl, [
                 'exception' => $e,
-            ));
+            ]);
 
             return '';
         }

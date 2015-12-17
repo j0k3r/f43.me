@@ -23,7 +23,7 @@ class Deviantart extends AbstractExtractor
         // if it's a fav.me or sta.sh, we just that there is a kind of id after
         // and for a deviantart url, we check for an art url
         if (
-            (in_array($host, array('fav.me', 'sta.sh')) && preg_match('/\/([a-z0-9]+)/i', $path, $matches))
+            (in_array($host, ['fav.me', 'sta.sh']) && preg_match('/\/([a-z0-9]+)/i', $path, $matches))
             || (strpos($host, 'deviantart.com') && preg_match('/\/art\/(.*)/i', $path, $matches))) {
             $this->deviantartUrl = $url;
 
@@ -49,9 +49,9 @@ class Deviantart extends AbstractExtractor
                 ->get('http://backend.deviantart.com/oembed?url='.$this->deviantartUrl)
                 ->json();
         } catch (RequestException $e) {
-            $this->logger->warning('Deviantart extract failed for: '.$this->deviantartUrl, array(
+            $this->logger->warning('Deviantart extract failed for: '.$this->deviantartUrl, [
                 'exception' => $e,
-            ));
+            ]);
 
             return false;
         }

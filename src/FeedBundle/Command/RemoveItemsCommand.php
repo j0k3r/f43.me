@@ -53,7 +53,7 @@ class RemoveItemsCommand extends ContainerAwareCommand
             if (!$feed) {
                 return $output->writeLn('<error>Unable to find Feed document:</error> <comment>'.$slug.'</comment>');
             }
-            $feeds = array($feed);
+            $feeds = [$feed];
         } else {
             $feeds = $feedRepo->findAll();
         }

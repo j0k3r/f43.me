@@ -30,7 +30,7 @@ class RenderTest extends \PHPUnit_Framework_TestCase
 
         $repo->expects($this->any())
             ->method('findByFeed')
-            ->willReturn(array());
+            ->willReturn([]);
     }
 
     protected function tearDown()

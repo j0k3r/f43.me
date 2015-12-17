@@ -43,7 +43,7 @@ class Import
     public function process($feeds)
     {
         $totalCached = 0;
-        $feedUpdated = array();
+        $feedUpdated = [];
         $feedRepo = $this->dm->getRepository('Api43FeedBundle:Feed');
         $feedItemRepo = $this->dm->getRepository('Api43FeedBundle:FeedItem');
 

@@ -48,21 +48,21 @@ class ExtractorTest extends \PHPUnit_Framework_TestCase
             ->disableOriginalConstructor()
             ->getMock();
 
-        $nothingImprover = $this->getMockBuilder('Api43\FeedBundle\Improver\Nothing')
+        $defaultImprover = $this->getMockBuilder('Api43\FeedBundle\Improver\DefaultImprover')
             ->disableOriginalConstructor()
             ->getMock();
 
-        $nothingImprover->expects($this->any())
+        $defaultImprover->expects($this->any())
             ->method('updateContent')
             ->will($this->returnArgument(0));
 
-        $nothingImprover->expects($this->any())
+        $defaultImprover->expects($this->any())
             ->method('updateUrl')
             ->will($this->returnArgument(0));
 
         $improverChain->expects($this->any())
             ->method('match')
-            ->willReturn($nothingImprover);
+            ->willReturn($defaultImprover);
 
         $this->graby = $this->getMockBuilder('Graby\Graby')
             ->setMethods(array('fetchContent'))

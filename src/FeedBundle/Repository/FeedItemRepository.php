@@ -20,7 +20,7 @@ class FeedItemRepository extends DocumentRepository
      *
      * @return \Doctrine\ODM\MongoDB\Query\Query
      */
-    private function getItemsByFeedIdQuery($feedId, $options = array())
+    private function getItemsByFeedIdQuery($feedId, $options = [])
     {
         $q = $this->createQueryBuilder()
             ->field('feed.id')->equals($feedId);
@@ -52,7 +52,7 @@ class FeedItemRepository extends DocumentRepository
      */
     public function findByFeed($feedId, $sortBy)
     {
-        return $this->getItemsByFeedIdQuery($feedId, array('sort_by' => $sortBy))
+        return $this->getItemsByFeedIdQuery($feedId, ['sort_by' => $sortBy])
             ->execute();
     }
 
@@ -65,7 +65,7 @@ class FeedItemRepository extends DocumentRepository
      */
     public function findLastItemByFeedId($feedId)
     {
-        return $this->getItemsByFeedIdQuery($feedId, array('limit' => 1))
+        return $this->getItemsByFeedIdQuery($feedId, ['limit' => 1])
             ->getSingleResult();
     }
 
@@ -100,7 +100,7 @@ class FeedItemRepository extends DocumentRepository
     {
         $items = $this->resultsForAllFeedsWithNbItems();
 
-        $res = array();
+        $res = [];
         foreach ($items as $item) {
             $res[] = (string) $item['_id'];
         }
@@ -128,7 +128,7 @@ class FeedItemRepository extends DocumentRepository
 
         // store as key to avoid duplicate (even if it doesn't have to happen)
         // and also because it's faster to isset than in_array to match a value
-        $results = array();
+        $results = [];
         foreach ($res as $item) {
             $results[$item['permalink']] = true;
         }

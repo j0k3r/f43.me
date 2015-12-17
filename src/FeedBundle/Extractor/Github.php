@@ -67,12 +67,12 @@ class Github extends AbstractExtractor
                 $data = $this->client
                     ->get(
                         'https://api.github.com/repos/'.$this->githubRepo.'/pulls/'.$this->pullNumber,
-                        array(
-                            'headers' => array(
+                        [
+                            'headers' => [
                                 'Accept' => 'application/vnd.github.v3.html+json',
                                 'User-Agent' => 'f43.me / Github Extractor',
-                            ),
-                        )
+                            ],
+                        ]
                     )
                     ->json();
 
@@ -86,9 +86,9 @@ class Github extends AbstractExtractor
                     '<li>'.$data['comments'].' comments</li></ul>'.
                     $data['body_html'].'</div>';
             } catch (RequestException $e) {
-                $this->logger->warning('Github (pull) extract failed for: '.$this->githubRepo.' & pr: '.$this->pullNumber, array(
+                $this->logger->warning('Github (pull) extract failed for: '.$this->githubRepo.' & pr: '.$this->pullNumber, [
                     'exception' => $e,
-                ));
+                ]);
 
                 return '';
             }
@@ -99,12 +99,12 @@ class Github extends AbstractExtractor
                 $data = $this->client
                     ->get(
                         'https://api.github.com/repos/'.$this->githubRepo.'/issues/'.$this->issueNumber,
-                        array(
-                            'headers' => array(
+                        [
+                            'headers' => [
                                 'Accept' => 'application/vnd.github.v3.html+json',
                                 'User-Agent' => 'f43.me / Github Extractor',
-                            ),
-                        )
+                            ],
+                        ]
                     )
                     ->json();
 
@@ -115,9 +115,9 @@ class Github extends AbstractExtractor
                     '<li>'.$data['comments'].' comments</li></ul></ul>'.
                     $data['body_html'].'</div>';
             } catch (RequestException $e) {
-                $this->logger->warning('Github (issue) extract failed for: '.$this->githubRepo.' & issue: '.$this->issueNumber, array(
+                $this->logger->warning('Github (issue) extract failed for: '.$this->githubRepo.' & issue: '.$this->issueNumber, [
                     'exception' => $e,
-                ));
+                ]);
 
                 return '';
             }
@@ -127,12 +127,12 @@ class Github extends AbstractExtractor
             return $this->client
                 ->get(
                     'https://api.github.com/repos/'.$this->githubRepo.'/readme',
-                    array(
-                        'headers' => array(
+                    [
+                        'headers' => [
                             'Accept' => 'application/vnd.github.v3.html',
                             'User-Agent' => 'f43.me / Github Extractor',
-                        ),
-                    )
+                        ],
+                    ]
                 )
                 ->getBody();
         } catch (RequestException $e) {

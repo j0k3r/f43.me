@@ -85,7 +85,7 @@ class TumblrTest extends \PHPUnit_Framework_TestCase
             // match()
             new Response(200, ['X-Tumblr-User' => 'test']),
             new Response(200, ['X-Tumblr-User' => 'test'], Stream::factory(json_encode(array('response' => array('posts' => array(array('body' => '<div>content</div>'))))))),
-            new Response(200, ['X-Tumblr-User' => 'test'], Stream::factory(json_encode(array()))),
+            new Response(200, ['X-Tumblr-User' => 'test'], Stream::factory(json_encode([]))),
             new Response(400, ['X-Tumblr-User' => 'test'], Stream::factory('oops')),
         ]);
 
