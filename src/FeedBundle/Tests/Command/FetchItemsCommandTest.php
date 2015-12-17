@@ -7,6 +7,8 @@ use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Component\Console\Tester\CommandTester;
 use Symfony\Component\Console\Output\OutputInterface;
+use Monolog\Logger;
+use Monolog\Handler\TestHandler;
 
 class FetchItemsCommandTest extends WebTestCase
 {
@@ -47,7 +49,7 @@ class FetchItemsCommandTest extends WebTestCase
             ->method('get_description')
             ->will($this->returnValue('desc'));
 
-        $simplePieProxy = $this->getMockBuilder('Api43\FeedBundle\Services\SimplePieProxy')
+        $simplePieProxy = $this->getMockBuilder('Api43\FeedBundle\Xml\SimplePieProxy')
             ->disableOriginalConstructor()
             ->getMock();
 
@@ -60,6 +62,12 @@ class FetchItemsCommandTest extends WebTestCase
             ->will($this->returnValue($simplePie));
 
         $client->getContainer()->set('simple_pie_proxy', $simplePieProxy);
+
+        $logger = new Logger('import');
+        $this->handler = new TestHandler();
+        $logger->pushHandler($this->handler);
+
+        $client->getContainer()->set('monolog.logger.import', $logger);
     }
 
     /**
@@ -100,6 +108,12 @@ class FetchItemsCommandTest extends WebTestCase
             '--slug' => 'hackernews',
         ), array('verbosity' => OutputInterface::VERBOSITY_VERBOSE));
 
+        $records = $this->handler->getRecords();
+
+        $this->assertGreaterThan(0, $records);
+        $this->assertContains('Working on', $records[0]['message']);
+        $this->assertContains('HackerNews', $records[0]['message']);
+
         $this->assertRegExp('`items cached.`', $this->commandTester->getDisplay());
     }
 
@@ -110,6 +124,11 @@ class FetchItemsCommandTest extends WebTestCase
             '--age' => 'new',
         ), array('verbosity' => OutputInterface::VERBOSITY_VERBOSE));
 
+        $records = $this->handler->getRecords();
+
+        $this->assertGreaterThan(0, $records);
+        $this->assertContains('Working on', $records[0]['message']);
+
         $this->assertRegExp('`items cached.`', $this->commandTester->getDisplay());
     }
 
@@ -119,6 +138,11 @@ class FetchItemsCommandTest extends WebTestCase
             'command' => $this->command->getName(),
             '--age' => 'old',
         ), array('verbosity' => OutputInterface::VERBOSITY_VERBOSE));
+
+        $records = $this->handler->getRecords();
+
+        $this->assertGreaterThan(0, $records);
+        $this->assertContains('Working on', $records[0]['message']);
 
         $this->assertRegExp('`items cached.`', $this->commandTester->getDisplay());
     }

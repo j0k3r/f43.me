@@ -28,7 +28,7 @@ class FeedTestControllerTest extends FeedWebTestCase
         $form = $crawler->filter('form.custom button[type=submit]')->form();
 
         $crawler = $client->submit($form, array(
-            'item_test[link]' => 'http://www.nextinpact.com/news/89458-gouvernement-valls2-fleur-pellerin-a-culture.htm',
+            'item_test[link]' => 'http://www.lemonde.fr/planete/article/2015/12/16/bisphenol-a-phtalates-pesticides-bruxelles-condamnee-pour-son-inaction_4833090_3244.html',
             'item_test[parser]' => 'internal',
         ));
 
@@ -46,7 +46,7 @@ class FeedTestControllerTest extends FeedWebTestCase
         $form = $crawler->filter('form.custom button[type=submit]')->form();
 
         $crawler = $client->submit($form, array(
-            'item_test[link]' => 'http://www.nextinpact.com/news/89458-gouvernement-valls2-fleur-pellerin-a-culture.htm',
+            'item_test[link]' => 'http://www.lemonde.fr/planete/article/2015/12/16/bisphenol-a-phtalates-pesticides-bruxelles-condamnee-pour-son-inaction_4833090_3244.html',
             'item_test[parser]' => 'internal',
             'item_test[siteconfig]' => 'body: //body',
         ));

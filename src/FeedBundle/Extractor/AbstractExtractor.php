@@ -3,15 +3,16 @@
 namespace Api43\FeedBundle\Extractor;
 
 use Psr\Log\LoggerInterface;
+use Psr\Log\LoggerAwareInterface;
 use GuzzleHttp\Client;
 
-abstract class AbstractExtractor
+abstract class AbstractExtractor implements LoggerAwareInterface
 {
     protected $logger;
     protected $client;
 
     /**
-     * @param LoggerInterface $logger
+     * {@inheritdoc}
      */
     public function setLogger(LoggerInterface $logger)
     {

@@ -1,14 +1,13 @@
 <?php
 
-namespace Api43\FeedBundle\Services;
+namespace Api43\FeedBundle\Xml;
 
 use Api43\FeedBundle\Document\Feed;
-use Api43\FeedBundle\Formatter;
 use Doctrine\ODM\MongoDB\DocumentManager;
 use Symfony\Bundle\FrameworkBundle\Routing\Router;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
-class RssRender
+class Render
 {
     protected $generator;
     protected $dm;
@@ -35,7 +34,7 @@ class RssRender
      *
      * @throws \InvalidArgumentException if given format formatter does not exists
      */
-    public function render(Feed $feed)
+    public function doRender(Feed $feed)
     {
         $items = $this->dm->getRepository('Api43FeedBundle:FeedItem')->findByFeed(
             $feed->getId(),

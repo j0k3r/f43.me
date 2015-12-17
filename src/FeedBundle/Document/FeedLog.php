@@ -100,11 +100,11 @@ class FeedLog
     /**
      * Set feed.
      *
-     * @param \Api43\FeedBundle\Document\Feed $feed
+     * @param Feed $feed
      *
      * @return self
      */
-    public function setFeed(\Api43\FeedBundle\Document\Feed $feed)
+    public function setFeed(Feed $feed)
     {
         $this->feed = $feed;
 

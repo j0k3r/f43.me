@@ -43,22 +43,37 @@ services:
                 oauth_token_secret: %twitter.access_token_secret%
                 output_format: 'array'
 
+    content_import:
+        class: Api43\FeedBundle\Content\Import
+        arguments:
+            - "@simple_pie_proxy"
+            - "@content_extractor"
+            - "@event_dispatcher"
+            - "@doctrine.odm.mongodb.document_manager"
+            - "@monolog.logger.import"
+
+    # custom formatter for import commande (below)
+    monolog.import.formatter:
+        class: Symfony\Bridge\Monolog\Formatter\ConsoleFormatter
+        arguments:
+            - "[%%datetime%%] %%start_tag%%%%message%%%%end_tag%% %%context%% %%extra%%\n"
+
     content_extractor:
-        class: Api43\FeedBundle\Services\ContentExtractor
+        class: Api43\FeedBundle\Content\Extractor
         arguments:
             extractor: "@feed.extractor.chain"
             improver: "@feed.improver.chain"
             parser: "@feed.parser.chain"
 
     simple_pie_proxy:
-        class: Api43\FeedBundle\Services\SimplePieProxy
+        class: Api43\FeedBundle\Xml\SimplePieProxy
         arguments:
             cache: "%kernel.root_dir%/cache/simplepie/"
             item_limit: 20
             enable_cache: false
 
-    rss_render:
-        class: Api43\FeedBundle\Services\RssRender
+    xml_render:
+        class: Api43\FeedBundle\Xml\Render
         arguments:
             generator: %domain%
             doctrine: "@doctrine.odm.mongodb.document_manager"

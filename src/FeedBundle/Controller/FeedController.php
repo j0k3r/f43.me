@@ -204,7 +204,7 @@ class FeedController extends Controller
     public function xmlAction(Feed $feed)
     {
         return new Response(
-            $this->get('rss_render')->render($feed),
+            $this->get('xml_render')->doRender($feed),
             200,
             array('Content-Type' => 'text/xml')
         );

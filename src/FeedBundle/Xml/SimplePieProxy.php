@@ -1,6 +1,6 @@
 <?php
 
-namespace Api43\FeedBundle\Services;
+namespace Api43\FeedBundle\Xml;
 
 class SimplePieProxy
 {

@@ -277,9 +277,9 @@ class Feed
     /**
      * Add feeditems.
      *
-     * @param \Api43\FeedBundle\Document\FeedItem $feeditems
+     * @param FeedItem $feeditems
      */
-    public function addFeeditem(\Api43\FeedBundle\Document\FeedItem $feeditems)
+    public function addFeeditem(FeedItem $feeditems)
     {
         $this->feeditems[] = $feeditems;
     }
@@ -287,9 +287,9 @@ class Feed
     /**
      * Remove feeditems.
      *
-     * @param \Api43\FeedBundle\Document\FeedItem $feeditems
+     * @param FeedItem $feeditems
      */
-    public function removeFeeditem(\Api43\FeedBundle\Document\FeedItem $feeditems)
+    public function removeFeeditem(FeedItem $feeditems)
     {
         $this->feeditems->removeElement($feeditems);
     }
@@ -297,7 +297,7 @@ class Feed
     /**
      * Get feeditems.
      *
-     * @return Doctrine\Common\Collections\Collection $feeditems
+     * @return \Doctrine\Common\Collections\ArrayCollection $feeditems
      */
     public function getFeeditems()
     {
@@ -331,9 +331,9 @@ class Feed
     /**
      * Add feedlogs.
      *
-     * @param \Api43\FeedBundle\Document\FeedLog $feedlogs
+     * @param FeedLog $feedlogs
      */
-    public function addFeedlog(\Api43\FeedBundle\Document\FeedLog $feedlogs)
+    public function addFeedlog(FeedLog $feedlogs)
     {
         $this->feedlogs[] = $feedlogs;
     }
@@ -341,9 +341,9 @@ class Feed
     /**
      * Remove feedlogs.
      *
-     * @param \Api43\FeedBundle\Document\FeedLog $feedlogs
+     * @param FeedLog $feedlogs
      */
-    public function removeFeedlog(\Api43\FeedBundle\Document\FeedLog $feedlogs)
+    public function removeFeedlog(FeedLog $feedlogs)
     {
         $this->feedlogs->removeElement($feedlogs);
     }
@@ -351,7 +351,7 @@ class Feed
     /**
      * Get feedlogs.
      *
-     * @return Doctrine\Common\Collections\Collection $feedlogs
+     * @return FeedLog[] $feedlogs
      */
     public function getFeedlogs()
     {
@@ -464,7 +464,7 @@ class Feed
     /**
      * Set lastItemCachedAt.
      *
-     * @param date $lastItemCachedAt
+     * @param \DateTime $lastItemCachedAt
      *
      * @return self
      */
@@ -478,7 +478,7 @@ class Feed
     /**
      * Get lastItemCachedAt.
      *
-     * @return date $lastItemCachedAt
+     * @return \DateTime $lastItemCachedAt
      */
     public function getLastItemCachedAt()
     {

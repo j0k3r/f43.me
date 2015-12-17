@@ -51,3 +51,13 @@ stof_doctrine_extensions:
         default:
             timestampable: true
             sluggable: true
+
+monolog:
+    channels: ['import']
+    handlers:
+        console:
+            type:   console
+            verbosity_levels:
+                VERBOSITY_NORMAL: DEBUG
+            channels: import
+            formatter: monolog.import.formatter

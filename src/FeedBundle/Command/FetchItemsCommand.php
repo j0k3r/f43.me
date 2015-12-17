@@ -7,12 +7,6 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Filesystem\LockHandler;
-use Symfony\Component\Console\Helper\ProgressBar;
-use Api43\FeedBundle\Document\Feed;
-use Api43\FeedBundle\Document\FeedItem;
-use Api43\FeedBundle\Document\FeedLog;
-use Api43\FeedBundle\Event\FeedItemEvent;
-use Api43\FeedBundle\Api43FeedEvents;
 
 class FetchItemsCommand extends ContainerAwareCommand
 {
@@ -74,140 +68,10 @@ class FetchItemsCommand extends ContainerAwareCommand
             $output->writeln('<info>Feeds to check</info>: '.count($feeds));
         }
 
-        $totalCached = 0;
-        $feedUpdated = array();
-
-        foreach ($feeds as $feed) {
-            if ($output->isVerbose()) {
-                $output->writeln('<info>Working on</info>: '.$feed->getName().' (parser: <comment>'.$feed->getParser().'</comment>)');
-            }
-
-            $rssFeed = $container
-                ->get('simple_pie_proxy')
-                ->setUrl($feed->getLink())
-                ->init();
-
-            // update feed description, in case it was empty
-            if (0 === strlen($feed->getDescription()) && 0 !== strlen($rssFeed->get_description())) {
-                $feed->setDescription(html_entity_decode($rssFeed->get_description(), ENT_COMPAT, 'UTF-8'));
-                $dm->persist($feed);
-                $dm->flush($feed);
-            }
-
-            $parser = $container
-                ->get('content_extractor')
-                ->init($feed->getParser(), $feed, true);
-
-            $cachedLinks = $feedItemRepo->getAllLinks($feed->getId());
-            $cached = 0;
-
-            // show progress bar in trace mode only
-            if ($output->isVerbose()) {
-                $total = $rssFeed->get_item_quantity();
-                $progress = new ProgressBar($output, $total);
-                $progress->start();
-            }
-
-            foreach ($rssFeed->get_items() as $item) {
-                if ($output->isVerbose()) {
-                    $progress->advance();
-                }
-
-                // if an item already exists, we skip it
-                // or if the item doesn't have a link, we won't cache it - will be useless
-                if (isset($cachedLinks[$item->get_permalink()]) || null === $item->get_permalink()) {
-                    continue;
-                }
-
-                $parsedContent = $parser->parseContent(
-                    $item->get_permalink(),
-                    $item->get_description()
-                );
-
-                // if readable content failed, use default one from feed item
-                $content = $parsedContent->content;
-                if (false === $content) {
-                    $content = $item->get_content();
-                }
-
-                // if there is no date in the feed, we use the current one
-                $date = $item->get_date();
-                if (null === $date) {
-                    $date = date('j F Y, g:i:s a');
-                }
-
-                $feedItem = new FeedItem();
-                $feedItem->setTitle(html_entity_decode($item->get_title(), ENT_COMPAT, 'UTF-8'));
-                $feedItem->setLink($parsedContent->url);
-                $feedItem->setContent($content);
-                $feedItem->setPermalink($item->get_permalink());
-                $feedItem->setPublishedAt($date);
-                $feedItem->setFeed($feed);
-                $dm->persist($feedItem);
-
-                ++$cached;
-            }
-
-            if ($output->isVerbose()) {
-                $progress->finish();
-                $output->writeln('');
-            }
-
-            if ($cached) {
-                // save the last time items where updated
-                $feed->setLastItemCachedAt(date('j F Y, g:i:s a'));
-                $dm->persist($feed);
-
-                $totalCached += $cached;
-
-                $feedLog = new FeedLog();
-                $feedLog->setItemsNumber($cached);
-                $feedLog->setFeed($feed);
-
-                $dm->persist($feedLog);
-
-                // store feed url updated, to ping hub later
-                $feedUpdated[] = $feed->getSlug();
-            }
-
-            if ($output->isVerbose()) {
-                $output->writeln('<info>New cached items</info>: '.$cached);
-            }
-
-            $dm->flush();
-        }
-
-        if (!empty($feedUpdated)) {
-            if ($output->isVerbose()) {
-                $output->writeln('<info>Ping hubs...</info>');
-            }
-
-            // send an event about new feed updated
-            $event = new FeedItemEvent($feedUpdated);
-
-            $container->get('event_dispatcher')->dispatch(
-                Api43FeedEvents::AFTER_ITEM_CACHED,
-                $event
-            );
-        }
+        // let's import some stuff !
+        $import = $container->get('content_import');
+        $totalCached = $import->process($feeds);
 
         $output->writeLn('<comment>'.$totalCached.'</comment> items cached.');
-
-        // update nb items for each udpated feed
-        foreach ($feedUpdated as $slug) {
-            $feed = $feedRepo->findOneByslug($slug);
-
-            $nbItems = $feedItemRepo->countByFeedId($feed->getId());
-
-            $feed->setNbItems($nbItems);
-            $dm->persist($feed);
-
-            if ($output->isVerbose()) {
-                $output->writeln('<info>'.$feed->getName().'</info> items updated: <comment>'.$nbItems.'</comment>');
-            }
-        }
-
-        $dm->flush();
-        $dm->clear();
     }
 }
