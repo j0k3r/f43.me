@@ -50,9 +50,9 @@ class Camplus extends AbstractExtractor
                 ->get('http://campl.us/'.$this->camplusId.':info')
                 ->json();
         } catch (RequestException $e) {
-            $this->logger->warning('Camplus extract failed for: '.$this->camplusId, array(
+            $this->logger->warning('Camplus extract failed for: '.$this->camplusId, [
                 'exception' => $e,
-            ));
+            ]);
 
             return false;
         }

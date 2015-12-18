@@ -45,11 +45,11 @@ class FeedItemSubscriber
         // retrieve feed urls
         $slugs = $event->getFeedSlugs();
 
-        $urls = array();
+        $urls = [];
         foreach ($slugs as $slug) {
             $urls[] = $this->router->generate(
                 'feed_xml',
-                array('slug' => $slug),
+                ['slug' => $slug],
                 UrlGeneratorInterface::ABSOLUTE_PATH
             );
         }
@@ -63,14 +63,14 @@ class FeedItemSubscriber
 
         $response = $this->client->post(
             $this->hub,
-            array(
+            [
                 'exceptions' => false,
                 'body' => $params,
-                'headers' => array(
+                'headers' => [
                     'Content-Type' => 'application/x-www-form-urlencoded',
                     'User-Agent' => 'PubSubHubbub-Publisher-PHP/1.0',
-                ),
-            )
+                ],
+            ]
         );
 
         // hub should response 204 if everything went fine

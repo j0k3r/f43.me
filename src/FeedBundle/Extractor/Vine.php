@@ -50,9 +50,9 @@ class Vine extends AbstractExtractor
                 ->get('https://vine.co/oembed.json?id='.$this->vineId)
                 ->json();
         } catch (RequestException $e) {
-            $this->logger->warning('Vine extract failed for: '.$this->vineId, array(
+            $this->logger->warning('Vine extract failed for: '.$this->vineId, [
                 'exception' => $e,
-            ));
+            ]);
 
             return '';
         }

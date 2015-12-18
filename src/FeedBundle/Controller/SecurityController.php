@@ -27,10 +27,10 @@ class SecurityController extends Controller
 
         $helper = $this->get('security.authentication_utils');
 
-        return array(
+        return [
             // last username entered by the user
             'last_username' => $helper->getLastUsername(),
             'error' => $helper->getLastAuthenticationError(),
-        );
+        ];
     }
 }

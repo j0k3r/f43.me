@@ -43,9 +43,9 @@ class Vimeo extends AbstractExtractor
                 ->get('https://vimeo.com/api/oembed.xml?format=json&url='.$this->vimeoUrl)
                 ->json();
         } catch (RequestException $e) {
-            $this->logger->warning('Vimeo extract failed for: '.$this->vimeoUrl, array(
+            $this->logger->warning('Vimeo extract failed for: '.$this->vimeoUrl, [
                 'exception' => $e,
-            ));
+            ]);
 
             return '';
         }

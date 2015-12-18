@@ -20,7 +20,7 @@ class Spotify extends AbstractExtractor
             return false;
         }
 
-        if (!in_array($host, array('open.spotify.com', 'play.spotify.com'))) {
+        if (!in_array($host, ['open.spotify.com', 'play.spotify.com'])) {
             return false;
         }
 
@@ -43,9 +43,9 @@ class Spotify extends AbstractExtractor
                 ->get('https://embed.spotify.com/oembed/?format=json&url='.$this->spotifyUrl)
                 ->json();
         } catch (RequestException $e) {
-            $this->logger->warning('Spotify extract failed for: '.$this->spotifyUrl, array(
+            $this->logger->warning('Spotify extract failed for: '.$this->spotifyUrl, [
                 'exception' => $e,
-            ));
+            ]);
 
             return '';
         }

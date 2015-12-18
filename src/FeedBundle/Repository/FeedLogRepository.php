@@ -104,27 +104,27 @@ class FeedLogRepository extends DocumentRepository
             ->getDocumentCollection('Api43\FeedBundle\Document\FeedLog')
             ->getMongoCollection()
             ->aggregate(
-                array(
-                    '$group' => array(
-                        '_id' => array(
-                            'years' => array('$year' => '$created_at'),
-                            'months' => array('$month' => '$created_at'),
-                            'days' => array('$dayOfMonth' => '$created_at'),
-                        ),
-                        'number' => array('$sum' => '$items_number'),
-                    ),
-                ), array(
-                    '$sort' => array('_id.years' => -1, '_id.months' => -1, '_id.days' => -1),
-                ), array(
+                [
+                    '$group' => [
+                        '_id' => [
+                            'years' => ['$year' => '$created_at'],
+                            'months' => ['$month' => '$created_at'],
+                            'days' => ['$dayOfMonth' => '$created_at'],
+                        ],
+                        'number' => ['$sum' => '$items_number'],
+                    ],
+                ], [
+                    '$sort' => ['_id.years' => -1, '_id.months' => -1, '_id.days' => -1],
+                ], [
                     '$limit' => $limit,
-                )
+                ]
             );
 
         if (!isset($res['result'])) {
-            return array();
+            return [];
         }
 
-        $results = array();
+        $results = [];
         foreach ($res['result'] as $day) {
             $results[$day['_id']['days'].'/'.$day['_id']['months'].'/'.$day['_id']['years']] = $day['number'];
         }
@@ -179,24 +179,24 @@ class FeedLogRepository extends DocumentRepository
             ->getDocumentCollection('Api43\FeedBundle\Document\FeedLog')
             ->getMongoCollection()
             ->group(
-                array('feed' => true),
-                array('count' => 0),
+                ['feed' => true],
+                ['count' => 0],
                 'function (obj, prev) {
                     prev.max_created_at = isNaN(prev.max_created_at) ? Math.max(obj.created_at) : Math.max(prev.max_created_at, obj.created_at);
                 }'
             );
 
         if (!isset($res['retval'])) {
-            return array();
+            return [];
         }
 
-        $results = array();
+        $results = [];
         foreach ($res['retval'] as $oneRes) {
-            $results[$oneRes['max_created_at']] = array(
+            $results[$oneRes['max_created_at']] = [
                 // we get milliseconds, so we convert it to seconds
                 'created_at' => new \DateTime('@'.$oneRes['max_created_at'] / 1000),
                 'feed_id' => (string) $oneRes['feed']['$id'],
-            );
+            ];
         }
 
         // sort by most recent first (and we don't care to keep key)

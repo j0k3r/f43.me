@@ -11,7 +11,7 @@ class FeedItemEvent extends Event
      *
      * @var array
      */
-    protected $feedSlugs = array();
+    protected $feedSlugs = [];
 
     /**
      * Store slug feeds that need to be dispatched.

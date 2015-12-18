@@ -8,7 +8,7 @@ class ImproverChainTest extends \PHPUnit_Framework_TestCase
 {
     public function testMatchTrue()
     {
-        $improver = $this->getMockBuilder('Api43\FeedBundle\Improver\Nothing')
+        $improver = $this->getMockBuilder('Api43\FeedBundle\Improver\DefaultImprover')
             ->disableOriginalConstructor()
             ->getMock();
 
@@ -24,7 +24,7 @@ class ImproverChainTest extends \PHPUnit_Framework_TestCase
 
     public function testMatchFalse()
     {
-        $improver = $this->getMockBuilder('Api43\FeedBundle\Improver\Nothing')
+        $improver = $this->getMockBuilder('Api43\FeedBundle\Improver\DefaultImprover')
             ->disableOriginalConstructor()
             ->getMock();
 

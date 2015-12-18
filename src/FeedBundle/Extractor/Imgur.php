@@ -59,7 +59,7 @@ class Imgur extends AbstractExtractor
             return '';
         }
 
-        $images = array();
+        $images = [];
         $content = '';
 
         try {
@@ -80,9 +80,9 @@ class Imgur extends AbstractExtractor
                     break;
             }
         } catch (RuntimeException $e) {
-            $this->logger->warning('Imgur extract failed for: '.$this->hash, array(
+            $this->logger->warning('Imgur extract failed for: '.$this->hash, [
                 'exception' => $e,
-            ));
+            ]);
 
             return '';
         }

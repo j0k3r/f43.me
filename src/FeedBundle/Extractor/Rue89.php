@@ -49,9 +49,9 @@ class Rue89 extends AbstractExtractor
                 ->get('http://api.rue89.nouvelobs.com/export/mobile2/node/'.$this->rue89Id.'/full')
                 ->json();
         } catch (RequestException $e) {
-            $this->logger->warning('Rue89 extract failed for: '.$this->rue89Id, array(
+            $this->logger->warning('Rue89 extract failed for: '.$this->rue89Id, [
                 'exception' => $e,
-            ));
+            ]);
 
             return '';
         }

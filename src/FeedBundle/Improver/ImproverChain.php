@@ -8,16 +8,16 @@ class ImproverChain
 
     public function __construct()
     {
-        $this->improvers = array();
+        $this->improvers = [];
     }
 
     /**
      * Add an improver to the chain.
      *
-     * @param Nothing $improver
-     * @param string  $alias
+     * @param DefaultImprover $improver
+     * @param string          $alias
      */
-    public function addImprover(Nothing $improver, $alias)
+    public function addImprover(DefaultImprover $improver, $alias)
     {
         $this->improvers[$alias] = $improver;
     }
@@ -27,7 +27,7 @@ class ImproverChain
      *
      * @param string $host A host
      *
-     * @return Nothing|false
+     * @return DefaultImprover|false
      */
     public function match($host)
     {

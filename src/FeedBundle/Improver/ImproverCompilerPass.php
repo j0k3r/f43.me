@@ -25,7 +25,7 @@ class ImproverCompilerPass implements CompilerPassInterface
             foreach ($tagAttributes as $attributes) {
                 $definition->addMethodCall(
                     'addImprover',
-                    array(new Reference($id), $attributes['alias'])
+                    [new Reference($id), $attributes['alias']]
                 );
             }
         }

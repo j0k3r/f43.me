@@ -50,9 +50,9 @@ class Gfycat extends AbstractExtractor
                 ->get('http://gfycat.com/cajax/get/'.$this->gfycatId)
                 ->json();
         } catch (RequestException $e) {
-            $this->logger->warning('Gfycat extract failed for: '.$this->gfycatId, array(
+            $this->logger->warning('Gfycat extract failed for: '.$this->gfycatId, [
                 'exception' => $e,
-            ));
+            ]);
 
             return '';
         }

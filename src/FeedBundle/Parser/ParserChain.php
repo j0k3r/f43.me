@@ -8,7 +8,7 @@ class ParserChain
 
     public function __construct()
     {
-        $this->parsers = array();
+        $this->parsers = [];
     }
 
     /**

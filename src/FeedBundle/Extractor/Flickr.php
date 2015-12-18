@@ -75,9 +75,9 @@ class Flickr extends AbstractExtractor
                 ->get('https://api.flickr.com/services/rest/?method=flickr.photos.getSizes&api_key='.$this->flickrApiKey.'&photo_id='.$this->flickrId.'&format=json&nojsoncallback=1')
                 ->json();
         } catch (RequestException $e) {
-            $this->logger->warning('Flickr extract failed for: '.$this->flickrId, array(
+            $this->logger->warning('Flickr extract failed for: '.$this->flickrId, [
                 'exception' => $e,
-            ));
+            ]);
 
             return '';
         }
@@ -106,9 +106,9 @@ class Flickr extends AbstractExtractor
                 ->get('https://api.flickr.com/services/rest/?method=flickr.photosets.getPhotos&api_key='.$this->flickrApiKey.'&photoset_id='.$this->flickrSetId.'&extras=url_l,url_o&format=json&nojsoncallback=1')
                 ->json();
         } catch (RequestException $e) {
-            $this->logger->warning('Flickr extract failed for: '.$this->flickrSetId, array(
+            $this->logger->warning('Flickr extract failed for: '.$this->flickrSetId, [
                 'exception' => $e,
-            ));
+            ]);
 
             return '';
         }

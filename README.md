@@ -72,9 +72,8 @@ Since the use of the Parser API is *freely available for non-commercial use* I t
 
 ### Requirements
 
- * PHP >= 5.4.0
+ * PHP >= 5.5.0
  * MongoDB & the `php-mongo` extension
- * `php-tidy` extension (which is a usually installed by default in PHP *or* by installing `php5-tidy` on Ubuntu)
  * [apcu](http://pecl.php.net/package/APCu) >= 4.0
 
 For each external API that improvers / extractors / parsers use, you will need an api key:

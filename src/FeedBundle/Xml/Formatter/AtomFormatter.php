@@ -14,28 +14,28 @@ class AtomFormatter extends Formatter
      */
     public function setItemFields()
     {
-        $this->fields = array(
-            array(
+        $this->fields = [
+            [
                 'name' => 'id',
                 'method' => 'getLink',
-            ), array(
+            ], [
                 'name' => 'title',
                 'method' => 'getTitle',
                 'cdata' => false,
-            ), array(
+            ], [
                 'name' => 'summary',
                 'method' => 'getContent',
                 'cdata' => true,
-            ), array(
+            ], [
                 'name' => 'link',
                 'method' => 'getLink',
                 'attribute' => 'href',
-            ), array(
+            ], [
                 'name' => 'updated',
                 'method' => 'getPubDate',
                 'date_format' => \DateTime::ATOM,
-            ),
-        );
+            ],
+        ];
     }
 
     /**
