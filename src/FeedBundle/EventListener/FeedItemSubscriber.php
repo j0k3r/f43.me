@@ -50,7 +50,7 @@ class FeedItemSubscriber
             $urls[] = $this->router->generate(
                 'feed_xml',
                 ['slug' => $slug],
-                UrlGeneratorInterface::ABSOLUTE_PATH
+                UrlGeneratorInterface::ABSOLUTE_URL
             );
         }
 

@@ -44,7 +44,7 @@ class Render
         $feedUrl = $this->router->generate(
             'feed_xml',
             ['slug' => $feed->getSlug()],
-            UrlGeneratorInterface::ABSOLUTE_PATH
+            UrlGeneratorInterface::ABSOLUTE_URL
         );
 
         switch ($feed->getFormatter()) {
