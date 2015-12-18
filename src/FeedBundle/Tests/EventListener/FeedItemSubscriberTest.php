@@ -7,6 +7,7 @@ use Api43\FeedBundle\EventListener\FeedItemSubscriber;
 use GuzzleHttp\Client;
 use GuzzleHttp\Subscriber\Mock;
 use GuzzleHttp\Message\Response;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 class FeedItemSubscriberTest extends \PHPUnit_Framework_TestCase
 {
@@ -35,7 +36,7 @@ class FeedItemSubscriberTest extends \PHPUnit_Framework_TestCase
 
         $router->expects($this->once())
             ->method('generate')
-            ->with('feed_xml', array('slug' => 'bar.unknown'), true)
+            ->with('feed_xml', array('slug' => 'bar.unknown'), UrlGeneratorInterface::ABSOLUTE_URL)
             ->will($this->returnValue('http://f43.me/rss.xml'));
 
         $client = new Client();
@@ -63,7 +64,7 @@ class FeedItemSubscriberTest extends \PHPUnit_Framework_TestCase
 
         $router->expects($this->once())
             ->method('generate')
-            ->with('feed_xml', array('slug' => 'bar.unknown'), true)
+            ->with('feed_xml', array('slug' => 'bar.unknown'), UrlGeneratorInterface::ABSOLUTE_URL)
             ->will($this->returnValue('http://f43.me/rss.xml'));
 
         $client = new Client();
