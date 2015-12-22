@@ -33,10 +33,16 @@ class FeedTestController extends Controller
             // add ability to test a siteconfig before submitting it
             $siteConfig = $form->get('siteconfig')->getData();
             if (trim($siteConfig)) {
-                $url = parse_url($form->get('link')->getData(), PHP_URL_HOST);
+                $host = parse_url($form->get('link')->getData(), PHP_URL_HOST);
 
-                if ($url) {
-                    $filePath = $this->getParameter('kernel.root_dir').'/site_config/'.$url.'.txt';
+                if ($host) {
+                    // remove www. from host because graby check for domain (without www.) first
+                    $host = strtolower($host);
+                    if (stripos($host, 'www.') === 0) {
+                        $host = substr($host, 4);
+                    }
+
+                    $filePath = $this->getParameter('kernel.root_dir').'/site_config/'.$host.'.txt';
                     file_put_contents($filePath, $siteConfig);
                 }
             }
