@@ -4,9 +4,8 @@
     "license": "MIT",
     "type": "project",
     "autoload": {
-        "psr-4": {
-            "Api43\\": "src"
-        }
+        "psr-4": { "Api43\\": "src" },
+        "exclude-from-classmap": ["/Tests/"]
     },
     "authors": [
         {
@@ -43,19 +42,18 @@
         "symfony/phpunit-bridge": "~2.7.0"
     },
     "scripts": {
-        "post-install-cmd": [
+        "post-cmd": [
             "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters",
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::buildBootstrap",
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::clearCache",
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installAssets",
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installRequirementsFile"
         ],
+        "post-install-cmd": [
+            "@post-cmd"
+        ],
         "post-update-cmd": [
-            "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters",
-            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::buildBootstrap",
-            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::clearCache",
-            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installAssets",
-            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installRequirementsFile"
+            "@post-cmd"
         ]
     },
     "config": {
