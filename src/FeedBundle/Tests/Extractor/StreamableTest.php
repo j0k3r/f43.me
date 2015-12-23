@@ -18,7 +18,6 @@ class StreamableTest extends \PHPUnit_Framework_TestCase
             array('https://streamable.com/7pfe', true),
             array('http://streamable.com/7pfe', true),
             array('https://www.streamable.com/7pfe', true),
-            array('https://www.streamable.com', false),
             array('https://goog.co', false),
             array('http://user@:80', false),
         );
@@ -55,7 +54,7 @@ class StreamableTest extends \PHPUnit_Framework_TestCase
         // first test fail because we didn't match an url, so StreamableUrl isn't defined
         $this->assertEmpty($streamable->getContent());
 
-        $streamable->match('https://www.streamable.com/watch?v=UacN1xwVK2Y');
+        $streamable->match('https://www.streamable.com/7pfe');
 
         // consecutive calls
         $this->assertEquals('<div><h2>my title</h2><p><img src="http://0.0.0.0/img.jpg"></p><iframe/></div>', $streamable->getContent());
@@ -64,6 +63,6 @@ class StreamableTest extends \PHPUnit_Framework_TestCase
         // this one will catch an exception
         $this->assertEmpty($streamable->getContent());
 
-        $this->assertTrue($logHandler->hasWarning('Streamable extract failed for: https://www.streamable.com/watch?v=UacN1xwVK2Y'), 'Warning message matched');
+        $this->assertTrue($logHandler->hasWarning('Streamable extract failed for: https://www.streamable.com/7pfe'), 'Warning message matched');
     }
 }
