@@ -41,5 +41,5 @@ script:
 after_script:
     - |
         if [ $TRAVIS_PHP_VERSION = '5.6' ]; then
-            php bin/coveralls -v
+            php vendor/satooshi/php-coveralls/bin/coveralls -v
         fi
