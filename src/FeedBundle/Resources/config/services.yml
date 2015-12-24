@@ -252,6 +252,14 @@ services:
         tags:
             -  { name: feed.extractor, alias: rue89 }
 
+    feed.extractor.streamable:
+        class: Api43\FeedBundle\Extractor\Streamable
+        calls:
+            - [ setLogger, [ "@logger" ]]
+            - [ setClient, [ "@guzzle.client" ]]
+        tags:
+            -  { name: feed.extractor, alias: streamable }
+
     # improver
     feed.improver.chain:
         class: Api43\FeedBundle\Improver\ImproverChain
