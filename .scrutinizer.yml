@@ -14,4 +14,4 @@ tools:
     php_code_sniffer: true
     php_pdepend: true
     sensiolabs_security_checker: true
-    external_code_coverage: true
+    external_code_coverage: false

@@ -1,7 +1,7 @@
 # f43.me
 
 [![Build Status](https://travis-ci.org/j0k3r/f43.me.svg?branch=master)](https://travis-ci.org/j0k3r/f43.me)
-[![Code Coverage](https://scrutinizer-ci.com/g/j0k3r/f43.me/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/j0k3r/f43.me/?branch=master)
+[![Coverage Status](https://coveralls.io/repos/j0k3r/f43.me/badge.svg?branch=master&service=github)](https://coveralls.io/github/j0k3r/f43.me?branch=master)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/j0k3r/f43.me/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/j0k3r/f43.me/?branch=master)
 
 ## What's that?
