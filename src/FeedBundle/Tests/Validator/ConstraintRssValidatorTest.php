@@ -30,7 +30,7 @@ class ConstraintRssValidatorTest extends \PHPUnit_Framework_TestCase
     {
         $constraint = new ConstraintRss();
 
-        $context = $this->getMockBuilder('Symfony\Component\Validator\ExecutionContextInterface')
+        $context = $this->getMockBuilder('Symfony\Component\Validator\Context\ExecutionContextInterface')
             ->disableOriginalConstructor()
             ->getMock();
 
@@ -58,7 +58,7 @@ class ConstraintRssValidatorTest extends \PHPUnit_Framework_TestCase
     {
         $constraint = new ConstraintRss();
 
-        $context = $this->getMockBuilder('Symfony\Component\Validator\ExecutionContextInterface')
+        $context = $this->getMockBuilder('Symfony\Component\Validator\Context\ExecutionContextInterface')
             ->disableOriginalConstructor()
             ->getMock();
 
@@ -85,7 +85,7 @@ class ConstraintRssValidatorTest extends \PHPUnit_Framework_TestCase
 
     public function testValidatorFailTwice()
     {
-        $context = $this->getMockBuilder('Symfony\Component\Validator\ExecutionContextInterface')
+        $context = $this->getMockBuilder('Symfony\Component\Validator\Context\ExecutionContextInterface')
             ->disableOriginalConstructor()
             ->getMock();
 
