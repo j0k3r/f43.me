@@ -2,6 +2,8 @@ filter:
     excluded_paths:
         - 'vendor/*'
         - 'app/*'
+        - 'var/*'
+        - 'bin/*'
         - 'web/*'
         - 'src/Api43/FeedBundle/Tests/*'
         - '*Test.php'
