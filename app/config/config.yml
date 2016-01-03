@@ -22,8 +22,9 @@ framework:
     trusted_proxies: ~
     session:
         name: f43me
-        save_path: %kernel.root_dir%/sessions
+        save_path: "%kernel.root_dir%/../var/sessions/%kernel.environment%"
     fragments:       ~
+    http_method_override: true
 
 # Twig Configuration
 twig:

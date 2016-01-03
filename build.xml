@@ -4,26 +4,26 @@
 
   <target name="clean-local" description="Cleanup build artifacts">
     <delete dir="${basedir}/build"/>
-    <delete dir="${basedir}/app/cache"/>
+    <delete dir="${basedir}/var/cache"/>
   </target>
 
   <target name="local" depends="clean-local" description="Prepare for build local test">
     <mkdir dir="${basedir}/build/coverage"/>
     <mkdir dir="${basedir}/build/logs"/>
-    <mkdir dir="${basedir}/app/cache"/>
+    <mkdir dir="${basedir}/var/cache"/>
 
     <exec executable="php">
-      <arg value="${basedir}/app/console"/>
+      <arg value="${basedir}/bin/console"/>
       <arg value="doctrine:mongodb:schema:create"/>
       <arg value="--env=test"/>
     </exec>
     <exec executable="php">
-      <arg value="${basedir}/app/console"/>
+      <arg value="${basedir}/bin/console"/>
       <arg value="doctrine:mongodb:fixtures:load"/>
       <arg value="--env=test"/>
     </exec>
     <exec executable="php">
-      <arg value="${basedir}/app/console"/>
+      <arg value="${basedir}/bin/console"/>
       <arg value="cache:clear"/>
       <arg value="--env=test"/>
     </exec>
@@ -32,29 +32,29 @@
   <target name="clean" description="Cleanup build artifacts">
     <delete dir="${basedir}/build/coverage"/>
     <delete dir="${basedir}/build/logs"/>
-    <delete dir="${basedir}/app/cache"/>
+    <delete dir="${basedir}/var/cache"/>
   </target>
 
   <target name="prepare" depends="clean" description="Prepare for build">
     <mkdir dir="${basedir}/build/coverage"/>
     <mkdir dir="${basedir}/build/logs"/>
-    <mkdir dir="${basedir}/app/cache"/>
+    <mkdir dir="${basedir}/var/cache"/>
     <exec executable="composer">
       <arg value="install"/>
       <arg value="--no-interaction"/>
     </exec>
     <exec executable="php">
-      <arg value="${basedir}/app/console"/>
+      <arg value="${basedir}/bin/console"/>
       <arg value="doctrine:mongodb:schema:create"/>
       <arg value="--env=test"/>
     </exec>
     <exec executable="php">
-      <arg value="${basedir}/app/console"/>
+      <arg value="${basedir}/bin/console"/>
       <arg value="doctrine:mongodb:fixtures:load"/>
       <arg value="--env=test"/>
     </exec>
     <exec executable="php">
-      <arg value="${basedir}/app/console"/>
+      <arg value="${basedir}/bin/console"/>
       <arg value="cache:clear"/>
       <arg value="--env=test"/>
     </exec>
