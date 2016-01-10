@@ -31,7 +31,7 @@ class FeedLogControllerTest extends FeedWebTestCase
         $this->assertEquals(1, $crawler->filter('h1')->count());
         $this->assertEquals(1, $crawler->filter('h2.title')->count());
         $this->assertGreaterThan(0, $crawler->filter('table.table-feedlogs tbody tr td img.favicon')->count());
-        $this->assertGreaterThan(0, $items = $crawler->filter('table.table-feedlogs tr td.items-count')->extract(array('_text')));
+        $this->assertGreaterThan(0, $items = $crawler->filter('table.table-feedlogs tr td.items-count')->extract(['_text']));
 
         foreach ($items as $item) {
             $this->assertGreaterThan(0, $item);
@@ -74,7 +74,7 @@ class FeedLogControllerTest extends FeedWebTestCase
         $this->assertContains('reddit', $client->getResponse()->headers->get('location'));
 
         $crawler = $client->followRedirect();
-        $this->assertCount(1, $alert = $crawler->filter('div.alert-box')->extract(array('_text')));
+        $this->assertCount(1, $alert = $crawler->filter('div.alert-box')->extract(['_text']));
         $this->assertContains('documents deleted!', $alert[0]);
     }
 

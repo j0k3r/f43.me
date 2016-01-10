@@ -2,12 +2,12 @@
 
 namespace Api43\FeedBundle\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpFoundation\RedirectResponse;
 use Api43\FeedBundle\Document\Feed;
 use Api43\FeedBundle\Form\Type\FeedType;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 /**
  * Feed controller.
@@ -27,9 +27,9 @@ class FeedController extends Controller
         $historylogs = $dm->getRepository('Api43FeedBundle:FeedLog')->findStatsForLastDays();
 
         return $this->render('Api43FeedBundle:Feed:dashboard.html.twig', [
-            'menu' => 'dashboard',
-            'feedlogs' => $feedlogs,
-            'feeds' => $feeds,
+            'menu'        => 'dashboard',
+            'feedlogs'    => $feedlogs,
+            'feeds'       => $feeds,
             'historylogs' => $historylogs,
         ]);
     }
@@ -62,7 +62,7 @@ class FeedController extends Controller
             ->findAllOrderedByDate();
 
         return $this->render('Api43FeedBundle:Feed:index.html.twig', [
-            'menu' => 'feed',
+            'menu'  => 'feed',
             'feeds' => $feeds,
         ]);
     }
@@ -121,9 +121,9 @@ class FeedController extends Controller
      *
      * @param Feed $feed The document Feed (retrieving for a ParamConverter with the slug)
      *
-     * @return RedirectResponse|array
-     *
      * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException If document doesn't exists
+     *
+     * @return RedirectResponse|array
      */
     public function editAction(Request $request, Feed $feed)
     {
@@ -152,14 +152,14 @@ class FeedController extends Controller
         $deleteForm = $this->createDeleteForm();
 
         return $this->render('Api43FeedBundle:Feed:edit.html.twig', [
-            'menu' => 'feed',
-            'feed' => $feed,
+            'menu'  => 'feed',
+            'feed'  => $feed,
             'infos' => [
                 'last_item' => $lastItem,
-                'last_log' => $lastLog,
-                'nb_logs' => $nbLogs,
+                'last_log'  => $lastLog,
+                'nb_logs'   => $nbLogs,
             ],
-            'edit_form' => $editForm->createView(),
+            'edit_form'   => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
         ]);
     }
@@ -170,9 +170,9 @@ class FeedController extends Controller
      * @param Request $request The request object
      * @param Feed    $feed    The document Feed (retrieving for a ParamConverter with the slug)
      *
-     * @return RedirectResponse
-     *
      * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException If document doesn't exists
+     *
+     * @return RedirectResponse
      */
     public function deleteAction(Request $request, Feed $feed)
     {

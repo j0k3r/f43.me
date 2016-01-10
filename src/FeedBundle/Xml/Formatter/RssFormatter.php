@@ -16,22 +16,22 @@ class RssFormatter extends Formatter
     {
         $this->fields = [
             [
-                'name' => 'title',
+                'name'   => 'title',
                 'method' => 'getTitle',
-                'cdata' => true,
+                'cdata'  => true,
             ], [
-                'name' => 'description',
+                'name'   => 'description',
                 'method' => 'getContent',
-                'cdata' => true,
+                'cdata'  => true,
             ], [
-                'name' => 'link',
+                'name'   => 'link',
                 'method' => 'getLink',
             ], [
-                'name' => 'guid',
+                'name'   => 'guid',
                 'method' => 'getLink',
             ], [
-                'name' => 'pubDate',
-                'method' => 'getPubDate',
+                'name'        => 'pubDate',
+                'method'      => 'getPubDate',
                 'date_format' => \DateTime::RSS,
             ],
         ];

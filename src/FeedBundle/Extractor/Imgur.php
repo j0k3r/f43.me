@@ -2,8 +2,8 @@
 
 namespace Api43\FeedBundle\Extractor;
 
-use Imgur\Client;
 use Guzzle\Common\Exception\RuntimeException;
+use Imgur\Client;
 
 class Imgur extends AbstractExtractor
 {

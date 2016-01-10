@@ -2,10 +2,10 @@
 
 namespace Api43\FeedBundle\Document;
 
+use Doctrine\Bundle\MongoDBBundle\Validator\Constraints\Unique as MongoDBUnique;
+use Doctrine\ODM\MongoDB\Mapping\Annotations as MongoDB;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Validator\Constraints as Assert;
-use Doctrine\ODM\MongoDB\Mapping\Annotations as MongoDB;
-use Doctrine\Bundle\MongoDBBundle\Validator\Constraints\Unique as MongoDBUnique;
 
 /**
  * @MongoDB\Document(collection="feeditems")

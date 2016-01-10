@@ -20,7 +20,7 @@ class Youtube extends AbstractExtractor
             return false;
         }
 
-        if (!in_array($host, array('www.youtube.com', 'youtube.com', 'youtu.be'))) {
+        if (!in_array($host, ['www.youtube.com', 'youtube.com', 'youtu.be'])) {
             return false;
         }
 

@@ -9,10 +9,10 @@ class RedditTest extends \PHPUnit_Framework_TestCase
 {
     public function dataMatch()
     {
-        return array(
-            array('reddit.com', true),
-            array('google.fr', false),
-        );
+        return [
+            ['reddit.com', true],
+            ['google.fr', false],
+        ];
     }
 
     /**

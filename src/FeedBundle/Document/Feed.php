@@ -2,11 +2,11 @@
 
 namespace Api43\FeedBundle\Document;
 
+use Api43\FeedBundle\Validator\Constraints as FeedAssert;
+use Doctrine\Bundle\MongoDBBundle\Validator\Constraints\Unique as MongoDBUnique;
+use Doctrine\ODM\MongoDB\Mapping\Annotations as MongoDB;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Validator\Constraints as Assert;
-use Api43\FeedBundle\Validator\Constraints as FeedAssert;
-use Doctrine\ODM\MongoDB\Mapping\Annotations as MongoDB;
-use Doctrine\Bundle\MongoDBBundle\Validator\Constraints\Unique as MongoDBUnique;
 
 /**
  * @MongoDB\Document(collection="feeds")

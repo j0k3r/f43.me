@@ -6,8 +6,8 @@ use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
-use Symfony\Component\Filesystem\LockHandler;
 use Symfony\Component\Console\Question\ConfirmationQuestion;
+use Symfony\Component\Filesystem\LockHandler;
 
 class RemoveItemsCommand extends ContainerAwareCommand
 {
@@ -18,8 +18,7 @@ class RemoveItemsCommand extends ContainerAwareCommand
             ->setDescription('Fetch items from feed to cache them')
             ->addOption('max', 'm', InputOption::VALUE_OPTIONAL, 'Number of items to keep in the feed', 100)
             ->addOption('slug', null, InputOption::VALUE_OPTIONAL, 'To work on one particular feed (using its slug)')
-            ->addOption('with-trace', 't', InputOption::VALUE_NONE, 'Display debug')
-        ;
+            ->addOption('with-trace', 't', InputOption::VALUE_NONE, 'Display debug');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)

@@ -2,12 +2,12 @@
 
 namespace Api43\FeedBundle\Form\Type;
 
-use Symfony\Component\Form\Extension\Core\Type\UrlType;
+use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
-use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\UrlType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -31,7 +31,7 @@ class FeedType extends AbstractType
             ])
             ->add('formatter', ChoiceType::class, [
                 'choices' => [
-                    'RSS' => 'rss',
+                    'RSS'  => 'rss',
                     'Atom' => 'atom',
                 ],
                 'choices_as_values' => true,
@@ -39,12 +39,11 @@ class FeedType extends AbstractType
             ->add('sort_by', ChoiceType::class, [
                 'choices' => [
                     'Published (when item arrive in the original feed)' => 'published_at',
-                    'Created (when feed item are fetched)' => 'created_at',
+                    'Created (when feed item are fetched)'              => 'created_at',
                 ],
                 'choices_as_values' => true,
             ])
-            ->add('is_private', CheckboxType::class, ['required' => false])
-        ;
+            ->add('is_private', CheckboxType::class, ['required' => false]);
     }
 
     public function configureOptions(OptionsResolver $resolver)

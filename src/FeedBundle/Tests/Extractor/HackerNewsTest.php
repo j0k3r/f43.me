@@ -4,25 +4,25 @@ namespace Api43\FeedBundle\Tests\Extractor;
 
 use Api43\FeedBundle\Extractor\HackerNews;
 use GuzzleHttp\Client;
-use GuzzleHttp\Subscriber\Mock;
 use GuzzleHttp\Message\Response;
 use GuzzleHttp\Stream\Stream;
+use GuzzleHttp\Subscriber\Mock;
 
 class HackerNewsTest extends \PHPUnit_Framework_TestCase
 {
     public function dataMatch()
     {
-        return array(
-            array('https://news.ycombinator.com/item?id=10074364', true, array('text' => 'toto', 'type' => 'story')),
-            array('http://news.ycombinator.com/item?id=10074364', true, array('text' => 'toto', 'type' => 'job')),
+        return [
+            ['https://news.ycombinator.com/item?id=10074364', true, ['text' => 'toto', 'type' => 'story']],
+            ['http://news.ycombinator.com/item?id=10074364', true, ['text' => 'toto', 'type' => 'job']],
             // comment
-            array('http://news.ycombinator.com/item?id=10077812', false, array('text' => 'toto', 'type' => 'comment')),
+            ['http://news.ycombinator.com/item?id=10077812', false, ['text' => 'toto', 'type' => 'comment']],
             // pollopt
-            array('http://news.ycombinator.com/item?id=160705', false, array('text' => 'toto', 'type' => 'pollopt')),
-            array('https://goog.co', false),
-            array('http://news.ycombinator.com/item?id=rtyui', false),
-            array('http://user@:80', false),
-        );
+            ['http://news.ycombinator.com/item?id=160705', false, ['text' => 'toto', 'type' => 'pollopt']],
+            ['https://goog.co', false],
+            ['http://news.ycombinator.com/item?id=rtyui', false],
+            ['http://user@:80', false],
+        ];
     }
 
     /**
@@ -66,7 +66,7 @@ class HackerNewsTest extends \PHPUnit_Framework_TestCase
         $client = new Client();
 
         $mock = new Mock([
-            new Response(200, [], Stream::factory(json_encode(array('text' => 'toto', 'type' => 'story')))),
+            new Response(200, [], Stream::factory(json_encode(['text' => 'toto', 'type' => 'story']))),
         ]);
 
         $client->getEmitter()->attach($mock);

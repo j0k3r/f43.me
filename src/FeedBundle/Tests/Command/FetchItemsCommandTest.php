@@ -3,12 +3,12 @@
 namespace Api43\FeedBundle\Tests\Command;
 
 use Api43\FeedBundle\Command\FetchItemsCommand;
-use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
-use Symfony\Bundle\FrameworkBundle\Console\Application;
-use Symfony\Component\Console\Tester\CommandTester;
-use Symfony\Component\Console\Output\OutputInterface;
-use Monolog\Logger;
 use Monolog\Handler\TestHandler;
+use Monolog\Logger;
+use Symfony\Bundle\FrameworkBundle\Console\Application;
+use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
+use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\Console\Tester\CommandTester;
 
 class FetchItemsCommandTest extends WebTestCase
 {
@@ -43,7 +43,7 @@ class FetchItemsCommandTest extends WebTestCase
 
         $simplePie->expects($this->any())
             ->method('get_items')
-            ->will($this->returnValue(array($simplePieItem)));
+            ->will($this->returnValue([$simplePieItem]));
 
         $simplePie->expects($this->any())
             ->method('get_description')
@@ -78,7 +78,7 @@ class FetchItemsCommandTest extends WebTestCase
     protected function getInputStream($input)
     {
         $stream = fopen('php://memory', 'r+', false);
-        fputs($stream, $input);
+        fwrite($stream, $input);
         rewind($stream);
 
         return $stream;
@@ -86,27 +86,27 @@ class FetchItemsCommandTest extends WebTestCase
 
     public function testNoParams()
     {
-        $this->commandTester->execute(array('command' => $this->command->getName()));
+        $this->commandTester->execute(['command' => $this->command->getName()]);
 
         $this->assertRegExp('`You must add some options to the task : an age or a slug`', $this->commandTester->getDisplay());
     }
 
     public function testWrongSlug()
     {
-        $this->commandTester->execute(array(
+        $this->commandTester->execute([
             'command' => $this->command->getName(),
-            '--slug' => 'toto',
-        ));
+            '--slug'  => 'toto',
+        ]);
 
         $this->assertRegExp('`Unable to find Feed document`', $this->commandTester->getDisplay());
     }
 
     public function testHN()
     {
-        $this->commandTester->execute(array(
+        $this->commandTester->execute([
             'command' => $this->command->getName(),
-            '--slug' => 'hackernews',
-        ), array('verbosity' => OutputInterface::VERBOSITY_VERBOSE));
+            '--slug'  => 'hackernews',
+        ], ['verbosity' => OutputInterface::VERBOSITY_VERBOSE]);
 
         $records = $this->handler->getRecords();
 
@@ -119,10 +119,10 @@ class FetchItemsCommandTest extends WebTestCase
 
     public function testNew()
     {
-        $this->commandTester->execute(array(
+        $this->commandTester->execute([
             'command' => $this->command->getName(),
-            '--age' => 'new',
-        ), array('verbosity' => OutputInterface::VERBOSITY_VERBOSE));
+            '--age'   => 'new',
+        ], ['verbosity' => OutputInterface::VERBOSITY_VERBOSE]);
 
         $records = $this->handler->getRecords();
 
@@ -134,10 +134,10 @@ class FetchItemsCommandTest extends WebTestCase
 
     public function testOld()
     {
-        $this->commandTester->execute(array(
+        $this->commandTester->execute([
             'command' => $this->command->getName(),
-            '--age' => 'old',
-        ), array('verbosity' => OutputInterface::VERBOSITY_VERBOSE));
+            '--age'   => 'old',
+        ], ['verbosity' => OutputInterface::VERBOSITY_VERBOSE]);
 
         $records = $this->handler->getRecords();
 

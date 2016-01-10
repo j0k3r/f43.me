@@ -3,29 +3,29 @@
 namespace Api43\FeedBundle\Tests\Extractor;
 
 use Api43\FeedBundle\Extractor\Imgur;
-use Monolog\Logger;
 use Monolog\Handler\TestHandler;
+use Monolog\Logger;
 
 class ImgurTest extends \PHPUnit_Framework_TestCase
 {
     public function dataMatch()
     {
-        return array(
-            array('http://i.imgur.com/IoKwI7E.jpg', true),
-            array('http://i.imgur.com/IoKwI7E', true),
-            array('https://i.imgur.com/IoKwI7E.jpg', true),
-            array('https://i.imgur.com/IoKwI7E', true),
-            array('http://imgur.com/IoKwI7E', true),
-            array('https://imgur.com/IoKwI7E', true),
-            array('https://imgur.com/a/dLaMy', true),
-            array('https://imgur.com/a/dLaMy?gallery', true),
-            array('https://imgur.com/gallery/dLaMy', true),
-            array('http://imgur.com/gallery/IDuXHMJ', true),
-            array('https://imgur.com/duziauziaozaoLaMy', false),
-            array('https://imgur.com/Ay', false),
-            array('http://imgur.com/UMOCfIk.gifv', true),
-            array('http://user@:80', false),
-        );
+        return [
+            ['http://i.imgur.com/IoKwI7E.jpg', true],
+            ['http://i.imgur.com/IoKwI7E', true],
+            ['https://i.imgur.com/IoKwI7E.jpg', true],
+            ['https://i.imgur.com/IoKwI7E', true],
+            ['http://imgur.com/IoKwI7E', true],
+            ['https://imgur.com/IoKwI7E', true],
+            ['https://imgur.com/a/dLaMy', true],
+            ['https://imgur.com/a/dLaMy?gallery', true],
+            ['https://imgur.com/gallery/dLaMy', true],
+            ['http://imgur.com/gallery/IDuXHMJ', true],
+            ['https://imgur.com/duziauziaozaoLaMy', false],
+            ['https://imgur.com/Ay', false],
+            ['http://imgur.com/UMOCfIk.gifv', true],
+            ['http://user@:80', false],
+        ];
     }
 
     /**
@@ -109,7 +109,7 @@ class ImgurTest extends \PHPUnit_Framework_TestCase
 
         $album->expects($this->any())
             ->method('getImages')
-            ->will($this->returnValue(array($image)));
+            ->will($this->returnValue([$image]));
         $album->expects($this->any())
             ->method('getTitle')
             ->will($this->returnValue('album title'));
@@ -191,7 +191,7 @@ class ImgurTest extends \PHPUnit_Framework_TestCase
         $imgur = new Imgur($imgurClient);
 
         $logHandler = new TestHandler();
-        $logger = new Logger('test', array($logHandler));
+        $logger = new Logger('test', [$logHandler]);
         $imgur->setLogger($logger);
 
         $imgur->match('http://imgur.com/gallery/IoKwI7E');

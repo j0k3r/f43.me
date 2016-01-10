@@ -2,12 +2,12 @@
 
 namespace Api43\FeedBundle\Tests\Validator;
 
-use Api43\FeedBundle\Validator\Constraints\ConstraintRssValidator;
 use Api43\FeedBundle\Validator\Constraints\ConstraintRss;
+use Api43\FeedBundle\Validator\Constraints\ConstraintRssValidator;
 use GuzzleHttp\Client;
-use GuzzleHttp\Subscriber\Mock;
 use GuzzleHttp\Message\Response;
 use GuzzleHttp\Stream\Stream;
+use GuzzleHttp\Subscriber\Mock;
 
 class ConstraintRssValidatorTest extends \PHPUnit_Framework_TestCase
 {
@@ -38,7 +38,7 @@ class ConstraintRssValidatorTest extends \PHPUnit_Framework_TestCase
             ->method('addViolation')
             ->with(
                 $this->equalTo($constraint->message),
-                $this->equalTo(array('%string%' => 'http://0.0.0.0'))
+                $this->equalTo(['%string%' => 'http://0.0.0.0'])
             );
 
         $client = new Client();
@@ -66,7 +66,7 @@ class ConstraintRssValidatorTest extends \PHPUnit_Framework_TestCase
             ->method('addViolation')
             ->with(
                 $this->equalTo($constraint->message),
-                $this->equalTo(array('%string%' => 'http://0.0.0.0'))
+                $this->equalTo(['%string%' => 'http://0.0.0.0'])
             );
 
         $client = new Client();

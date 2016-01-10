@@ -3,22 +3,22 @@
 namespace Api43\FeedBundle\Tests\Extractor;
 
 use Api43\FeedBundle\Extractor\Twitter;
-use TwitterOAuth\Exception\TwitterException;
-use Monolog\Logger;
 use Monolog\Handler\TestHandler;
+use Monolog\Logger;
+use TwitterOAuth\Exception\TwitterException;
 
 class TwitterTest extends \PHPUnit_Framework_TestCase
 {
     public function dataMatch()
     {
-        return array(
-            array('https://twitter.com/DoerteDev/statuses/50652222386027724', false),
-            array('https://twitter.com/DoerteDev/statuses/506522223860277248', true),
-            array('http://twitter.com/statuses/506522223860277248', true),
-            array('http://twitter.com/_youhadonejob/status/522835690665807872/photo/1', true),
-            array('https://mobile.twitter.com/kcimc/status/638877262092337152/photo/1', true),
-            array('http://user@:80', false),
-        );
+        return [
+            ['https://twitter.com/DoerteDev/statuses/50652222386027724', false],
+            ['https://twitter.com/DoerteDev/statuses/506522223860277248', true],
+            ['http://twitter.com/statuses/506522223860277248', true],
+            ['http://twitter.com/_youhadonejob/status/522835690665807872/photo/1', true],
+            ['https://mobile.twitter.com/kcimc/status/638877262092337152/photo/1', true],
+            ['http://user@:80', false],
+        ];
     }
 
     /**
@@ -42,15 +42,15 @@ class TwitterTest extends \PHPUnit_Framework_TestCase
 
         $twitterOAuth->expects($this->once())
             ->method('get')
-            ->will($this->returnValue(array(
-                'user' => array(
-                    'name' => 'the name',
+            ->will($this->returnValue([
+                'user' => [
+                    'name'        => 'the name',
                     'screen_name' => 'the_name',
-                ),
-                'text' => 'my awesome tweet',
-                'created_at' => 'Sun Oct 19 11:31:10 +0000 2014',
-                'extended_entities' => array('media' => array(array('media_url_https' => 'http://0.0.0.0/image.jpg'))),
-            )));
+                ],
+                'text'              => 'my awesome tweet',
+                'created_at'        => 'Sun Oct 19 11:31:10 +0000 2014',
+                'extended_entities' => ['media' => [['media_url_https' => 'http://0.0.0.0/image.jpg']]],
+            ]));
 
         $twitter = new Twitter($twitterOAuth);
         $twitter->match('https://twitter.com/DoerteDev/statuses/506522223860277248');
@@ -72,14 +72,14 @@ class TwitterTest extends \PHPUnit_Framework_TestCase
 
         $twitterOAuth->expects($this->once())
             ->method('get')
-            ->will($this->returnValue(array(
-                'user' => array(
-                    'name' => 'the name',
+            ->will($this->returnValue([
+                'user' => [
+                    'name'        => 'the name',
                     'screen_name' => 'the_name',
-                ),
-                'text' => 'my awesome tweet',
+                ],
+                'text'       => 'my awesome tweet',
                 'created_at' => 'Sun Oct 19 11:31:10 +0000 2014',
-            )));
+            ]));
 
         $twitter = new Twitter($twitterOAuth);
         $twitter->match('https://twitter.com/DoerteDev/statuses/506522223860277248');
@@ -105,7 +105,7 @@ class TwitterTest extends \PHPUnit_Framework_TestCase
         $twitter = new Twitter($twitterOAuth);
 
         $logHandler = new TestHandler();
-        $logger = new Logger('test', array($logHandler));
+        $logger = new Logger('test', [$logHandler]);
         $twitter->setLogger($logger);
 
         $twitter->match('https://twitter.com/DoerteDev/statuses/506522223860277248');
