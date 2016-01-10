@@ -3,29 +3,29 @@
 namespace Api43\FeedBundle\Tests\Extractor;
 
 use Api43\FeedBundle\Extractor\Github;
-use Monolog\Logger;
-use Monolog\Handler\TestHandler;
 use GuzzleHttp\Client;
-use GuzzleHttp\Subscriber\Mock;
 use GuzzleHttp\Message\Response;
 use GuzzleHttp\Stream\Stream;
+use GuzzleHttp\Subscriber\Mock;
+use Monolog\Handler\TestHandler;
+use Monolog\Logger;
 
 class GithubTest extends \PHPUnit_Framework_TestCase
 {
     public function dataMatch()
     {
-        return array(
-            array('https://github.com/j0k3r/f43.me', true),
-            array('http://github.com/symfony/symfony', true),
-            array('https://github.com/pomm-project/ModelManager', true),
-            array('https://github.com/Strider-CD/strider', true),
-            array('https://github.com/phpcr/phpcr.github.io/', true),
-            array('https://gitlab.com/gitlab', false),
-            array('https://github.com/alebcay/awesome-shell/blob/master/README.md', false),
-            array('https://github.com/msporny/dna/pull/1', true),
-            array('https://github.com/octocat/Hello-World/issues/212', true),
-            array('http://user@:80', false),
-        );
+        return [
+            ['https://github.com/j0k3r/f43.me', true],
+            ['http://github.com/symfony/symfony', true],
+            ['https://github.com/pomm-project/ModelManager', true],
+            ['https://github.com/Strider-CD/strider', true],
+            ['https://github.com/phpcr/phpcr.github.io/', true],
+            ['https://gitlab.com/gitlab', false],
+            ['https://github.com/alebcay/awesome-shell/blob/master/README.md', false],
+            ['https://github.com/msporny/dna/pull/1', true],
+            ['https://github.com/octocat/Hello-World/issues/212', true],
+            ['http://user@:80', false],
+        ];
     }
 
     /**
@@ -70,13 +70,13 @@ class GithubTest extends \PHPUnit_Framework_TestCase
         $client = new Client();
 
         $mock = new Mock([
-            new Response(200, [], Stream::factory(json_encode(array(
-                    'html_url' => 'http://1.1.1.1',
-                    'title' => 'test',
-                    'comments' => 0,
+            new Response(200, [], Stream::factory(json_encode([
+                    'html_url'   => 'http://1.1.1.1',
+                    'title'      => 'test',
+                    'comments'   => 0,
                     'created_at' => '2015-08-04T13:49:04Z',
-                    'body_html' => 'body',
-                    'user' => array('html_url' => 'http://2.2.2.2', 'login' => 'login'), )))),
+                    'body_html'  => 'body',
+                    'user'       => ['html_url' => 'http://2.2.2.2', 'login' => 'login'], ]))),
             new Response(400, [], Stream::factory('oops')),
         ]);
 
@@ -86,7 +86,7 @@ class GithubTest extends \PHPUnit_Framework_TestCase
         $github->setClient($client);
 
         $logHandler = new TestHandler();
-        $logger = new Logger('test', array($logHandler));
+        $logger = new Logger('test', [$logHandler]);
         $github->setLogger($logger);
 
         // first test fail because we didn't match an url, so GithubId isn't defined
@@ -105,15 +105,15 @@ class GithubTest extends \PHPUnit_Framework_TestCase
         $client = new Client();
 
         $mock = new Mock([
-            new Response(200, [], Stream::factory(json_encode(array(
-                'base' => array('description' => 'test', 'repo' => array('html_url' => 'http://0.0.0.0', 'full_name' => 'name', 'description' => 'desc')),
-                'html_url' => 'http://1.1.1.1',
-                'title' => 'test',
-                'commits' => 0,
-                'comments' => 0,
+            new Response(200, [], Stream::factory(json_encode([
+                'base'       => ['description' => 'test', 'repo' => ['html_url' => 'http://0.0.0.0', 'full_name' => 'name', 'description' => 'desc']],
+                'html_url'   => 'http://1.1.1.1',
+                'title'      => 'test',
+                'commits'    => 0,
+                'comments'   => 0,
                 'created_at' => '2015-08-04T13:49:04Z',
-                'body_html' => 'body',
-                'user' => array('html_url' => 'http://2.2.2.2', 'login' => 'login'), )))),
+                'body_html'  => 'body',
+                'user'       => ['html_url' => 'http://2.2.2.2', 'login' => 'login'], ]))),
             new Response(400, [], Stream::factory('oops')),
         ]);
 
@@ -123,7 +123,7 @@ class GithubTest extends \PHPUnit_Framework_TestCase
         $github->setClient($client);
 
         $logHandler = new TestHandler();
-        $logger = new Logger('test', array($logHandler));
+        $logger = new Logger('test', [$logHandler]);
         $github->setLogger($logger);
 
         // first test fail because we didn't match an url, so GithubId isn't defined

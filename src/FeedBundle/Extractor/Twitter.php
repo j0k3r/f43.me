@@ -2,8 +2,8 @@
 
 namespace Api43\FeedBundle\Extractor;
 
-use TwitterOAuth\TwitterOAuth;
 use TwitterOAuth\Exception\TwitterException;
+use TwitterOAuth\TwitterOAuth;
 
 class Twitter extends AbstractExtractor
 {

@@ -2,10 +2,10 @@
 
 namespace Api43\FeedBundle\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\RedirectResponse;
 use Api43\FeedBundle\Document\Feed;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\HttpFoundation\Request;
 
 /**
  * FeedLog controller.
@@ -23,7 +23,7 @@ class FeedLogController extends Controller
         $feedlogs = $dm->getRepository('Api43FeedBundle:FeedLog')->findAllOrderedById(100);
 
         return $this->render('Api43FeedBundle:FeedLog:index.html.twig', [
-            'menu' => 'log',
+            'menu'     => 'log',
             'feedlogs' => $feedlogs,
         ]);
     }
@@ -44,9 +44,9 @@ class FeedLogController extends Controller
         $deleteAllForm = $this->createDeleteAllForm();
 
         return $this->render('Api43FeedBundle:FeedLog:feed.html.twig', [
-            'menu' => 'log',
-            'feed' => $feed,
-            'feedlogs' => $feedlogs,
+            'menu'            => 'log',
+            'feed'            => $feed,
+            'feedlogs'        => $feedlogs,
             'delete_all_form' => $deleteAllForm->createView(),
         ]);
     }

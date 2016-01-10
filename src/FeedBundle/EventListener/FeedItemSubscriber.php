@@ -3,9 +3,9 @@
 namespace Api43\FeedBundle\EventListener;
 
 use Api43\FeedBundle\Event\FeedItemEvent;
+use GuzzleHttp\Client;
 use Symfony\Bundle\FrameworkBundle\Routing\Router;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
-use GuzzleHttp\Client;
 
 class FeedItemSubscriber
 {
@@ -65,10 +65,10 @@ class FeedItemSubscriber
             $this->hub,
             [
                 'exceptions' => false,
-                'body' => $params,
-                'headers' => [
+                'body'       => $params,
+                'headers'    => [
                     'Content-Type' => 'application/x-www-form-urlencoded',
-                    'User-Agent' => 'PubSubHubbub-Publisher-PHP/1.0',
+                    'User-Agent'   => 'PubSubHubbub-Publisher-PHP/1.0',
                 ],
             ]
         );

@@ -69,7 +69,7 @@ class Github extends AbstractExtractor
                         'https://api.github.com/repos/'.$this->githubRepo.'/pulls/'.$this->pullNumber,
                         [
                             'headers' => [
-                                'Accept' => 'application/vnd.github.v3.html+json',
+                                'Accept'     => 'application/vnd.github.v3.html+json',
                                 'User-Agent' => 'f43.me / Github Extractor',
                             ],
                         ]
@@ -101,7 +101,7 @@ class Github extends AbstractExtractor
                         'https://api.github.com/repos/'.$this->githubRepo.'/issues/'.$this->issueNumber,
                         [
                             'headers' => [
-                                'Accept' => 'application/vnd.github.v3.html+json',
+                                'Accept'     => 'application/vnd.github.v3.html+json',
                                 'User-Agent' => 'f43.me / Github Extractor',
                             ],
                         ]
@@ -129,7 +129,7 @@ class Github extends AbstractExtractor
                     'https://api.github.com/repos/'.$this->githubRepo.'/readme',
                     [
                         'headers' => [
-                            'Accept' => 'application/vnd.github.v3.html',
+                            'Accept'     => 'application/vnd.github.v3.html',
                             'User-Agent' => 'f43.me / Github Extractor',
                         ],
                     ]

@@ -2,14 +2,14 @@
 
 namespace Api43\FeedBundle\Content;
 
-use Symfony\Component\EventDispatcher\EventDispatcherInterface;
-use Doctrine\ODM\MongoDB\DocumentManager;
-use Psr\Log\LoggerInterface;
-use Api43\FeedBundle\Xml\SimplePieProxy;
+use Api43\FeedBundle\Api43FeedEvents;
 use Api43\FeedBundle\Document\FeedItem;
 use Api43\FeedBundle\Document\FeedLog;
 use Api43\FeedBundle\Event\FeedItemEvent;
-use Api43\FeedBundle\Api43FeedEvents;
+use Api43\FeedBundle\Xml\SimplePieProxy;
+use Doctrine\ODM\MongoDB\DocumentManager;
+use Psr\Log\LoggerInterface;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 class Import
 {

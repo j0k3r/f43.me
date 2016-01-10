@@ -2,9 +2,9 @@
 
 namespace Api43\FeedBundle\Controller;
 
+use Api43\FeedBundle\Form\Type\ItemTestType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
-use Api43\FeedBundle\Form\Type\ItemTestType;
 
 /**
  * FeedTest controller.
@@ -58,9 +58,9 @@ class FeedTestController extends Controller
         }
 
         return $this->render('Api43FeedBundle:FeedTest:index.html.twig', [
-            'menu' => 'test',
+            'menu'    => 'test',
             'content' => $content,
-            'form' => $form->createView(),
+            'form'    => $form->createView(),
         ]);
     }
 }

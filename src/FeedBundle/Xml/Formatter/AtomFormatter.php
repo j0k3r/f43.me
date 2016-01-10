@@ -16,23 +16,23 @@ class AtomFormatter extends Formatter
     {
         $this->fields = [
             [
-                'name' => 'id',
+                'name'   => 'id',
                 'method' => 'getLink',
             ], [
-                'name' => 'title',
+                'name'   => 'title',
                 'method' => 'getTitle',
-                'cdata' => false,
+                'cdata'  => false,
             ], [
-                'name' => 'summary',
+                'name'   => 'summary',
                 'method' => 'getContent',
-                'cdata' => true,
+                'cdata'  => true,
             ], [
-                'name' => 'link',
-                'method' => 'getLink',
+                'name'      => 'link',
+                'method'    => 'getLink',
                 'attribute' => 'href',
             ], [
-                'name' => 'updated',
-                'method' => 'getPubDate',
+                'name'        => 'updated',
+                'method'      => 'getPubDate',
                 'date_format' => \DateTime::ATOM,
             ],
         ];

@@ -27,10 +27,10 @@ class FeedTestControllerTest extends FeedWebTestCase
 
         $form = $crawler->filter('form.custom button[type=submit]')->form();
 
-        $crawler = $client->submit($form, array(
-            'item_test[link]' => 'http://www.lemonde.fr/planete/article/2015/12/16/bisphenol-a-phtalates-pesticides-bruxelles-condamnee-pour-son-inaction_4833090_3244.html',
+        $crawler = $client->submit($form, [
+            'item_test[link]'   => 'http://www.lemonde.fr/planete/article/2015/12/16/bisphenol-a-phtalates-pesticides-bruxelles-condamnee-pour-son-inaction_4833090_3244.html',
             'item_test[parser]' => 'internal',
-        ));
+        ]);
 
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
         $this->assertCount(1, $crawler->filter('ul.no-bullet'));
@@ -45,11 +45,11 @@ class FeedTestControllerTest extends FeedWebTestCase
 
         $form = $crawler->filter('form.custom button[type=submit]')->form();
 
-        $crawler = $client->submit($form, array(
-            'item_test[link]' => 'http://www.lemonde.fr/planete/article/2015/12/16/bisphenol-a-phtalates-pesticides-bruxelles-condamnee-pour-son-inaction_4833090_3244.html',
-            'item_test[parser]' => 'internal',
+        $crawler = $client->submit($form, [
+            'item_test[link]'       => 'http://www.lemonde.fr/planete/article/2015/12/16/bisphenol-a-phtalates-pesticides-bruxelles-condamnee-pour-son-inaction_4833090_3244.html',
+            'item_test[parser]'     => 'internal',
             'item_test[siteconfig]' => 'body: //body',
-        ));
+        ]);
 
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
         $this->assertCount(1, $crawler->filter('ul.no-bullet'));

@@ -16,8 +16,7 @@ class FetchItemsCommand extends ContainerAwareCommand
             ->setName('feed:fetch-items')
             ->setDescription('Fetch items from feed to cache them')
             ->addOption('age', null, InputOption::VALUE_OPTIONAL, '`old` to fetch old feed or `new` to fetch recent feed with no item')
-            ->addOption('slug', null, InputOption::VALUE_OPTIONAL, 'To fetch item for one particular feed (using its slug)')
-        ;
+            ->addOption('slug', null, InputOption::VALUE_OPTIONAL, 'To fetch item for one particular feed (using its slug)');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)

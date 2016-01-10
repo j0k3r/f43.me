@@ -2,8 +2,8 @@
 
 namespace Api43\FeedBundle\Validator\Constraints;
 
-use Symfony\Component\Validator\Constraint;
 use Doctrine\Common\Annotations\Annotation;
+use Symfony\Component\Validator\Constraint;
 
 /**
  * @Annotation

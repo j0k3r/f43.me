@@ -20,7 +20,7 @@ class Streamable extends AbstractExtractor
             return false;
         }
 
-        if (!in_array($host, array('www.streamable.com', 'streamable.com'))) {
+        if (!in_array($host, ['www.streamable.com', 'streamable.com'])) {
             return false;
         }
 

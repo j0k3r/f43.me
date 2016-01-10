@@ -56,16 +56,16 @@ class FeedControllerTest extends FeedWebTestCase
         $this->assertCount(1, $crawler->filter('ul.left'));
         $this->assertCount(9, $crawler->filter('ul.left li'));
         $this->assertCount(1, $crawler->filter('ul.left li.active'));
-        $this->assertCount(1, $logout = $crawler->filter('ul.right li.has-form a.alert')->extract(array('_text')));
+        $this->assertCount(1, $logout = $crawler->filter('ul.right li.has-form a.alert')->extract(['_text']));
         $this->assertEquals('Logout', $logout[0]);
         $this->assertGreaterThan(0, $crawler->filter('table.table-dashboard-feeds tbody tr td img.favicon')->count());
-        $this->assertGreaterThan(0, $items = $crawler->filter('table.table-dashboard-feeds tr td.items-count')->extract(array('_text')));
+        $this->assertGreaterThan(0, $items = $crawler->filter('table.table-dashboard-feeds tr td.items-count')->extract(['_text']));
 
         foreach ($items as $item) {
             $this->assertGreaterThanOrEqual(0, $item);
         }
 
-        $this->assertGreaterThan(0, $items = $crawler->filter('table.table-dashboard-feedlogs tr td.items-count')->extract(array('_text')));
+        $this->assertGreaterThan(0, $items = $crawler->filter('table.table-dashboard-feedlogs tr td.items-count')->extract(['_text']));
 
         foreach ($items as $item) {
             $this->assertGreaterThan(0, $item);
@@ -82,7 +82,7 @@ class FeedControllerTest extends FeedWebTestCase
         $this->assertCount(1, $crawler->filter('h1'));
         $this->assertCount(1, $crawler->filter('h2.title'));
         $this->assertGreaterThan(0, $crawler->filter('table.table-feeds tbody tr td img.favicon')->count());
-        $this->assertGreaterThan(0, $items = $crawler->filter('table.table-feeds tr td.items-count')->extract(array('_text')));
+        $this->assertGreaterThan(0, $items = $crawler->filter('table.table-feeds tr td.items-count')->extract(['_text']));
 
         foreach ($items as $item) {
             $this->assertGreaterThanOrEqual(0, $item);
@@ -119,24 +119,24 @@ class FeedControllerTest extends FeedWebTestCase
         $crawler = $client->submit($form);
 
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
-        $this->assertCount(1, $alert = $crawler->filter('div.alert-box')->extract(array('_text')));
+        $this->assertCount(1, $alert = $crawler->filter('div.alert-box')->extract(['_text']));
         $this->assertEquals('Form is invalid.', $alert[0]);
         $this->assertGreaterThanOrEqual(1, count($crawler->filter('small.error')));
     }
 
     public function dataNewFeedOk()
     {
-        return array(array(array(
-            'feed[name]' => 'Google News',
+        return [[[
+            'feed[name]'        => 'Google News',
             'feed[description]' => 'À la une - Google Actualités',
-            'feed[host]' => 'http://news.google.com',
+            'feed[host]'        => 'http://news.google.com',
             // be sure that link is almost always different
-            'feed[link]' => 'http://news.google.fr/?output=rss&rand='.time(),
-            'feed[parser]' => 'external',
-            'feed[formatter]' => 'rss',
-            'feed[sort_by]' => 'published_at',
+            'feed[link]'       => 'http://news.google.fr/?output=rss&rand='.time(),
+            'feed[parser]'     => 'external',
+            'feed[formatter]'  => 'rss',
+            'feed[sort_by]'    => 'published_at',
             'feed[is_private]' => 1,
-        )));
+        ]]];
     }
 
     /**
@@ -158,7 +158,7 @@ class FeedControllerTest extends FeedWebTestCase
         $crawler = $client->submit($form, $data);
 
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
-        $this->assertCount(1, $alert = $crawler->filter('div.alert-box')->extract(array('_text')));
+        $this->assertCount(1, $alert = $crawler->filter('div.alert-box')->extract(['_text']));
         $this->assertEquals('Form is invalid.', $alert[0]);
         $this->assertGreaterThanOrEqual(1, count($crawler->filter('small.error')));
     }
@@ -181,7 +181,7 @@ class FeedControllerTest extends FeedWebTestCase
         $this->assertContains('google-news', $location);
 
         $crawler = $client->followRedirect();
-        $this->assertCount(1, $alert = $crawler->filter('div.alert-box')->extract(array('_text')));
+        $this->assertCount(1, $alert = $crawler->filter('div.alert-box')->extract(['_text']));
         $this->assertEquals('Document created!', $alert[0]);
     }
 
@@ -223,16 +223,16 @@ class FeedControllerTest extends FeedWebTestCase
 
     public function dataEditFeedOk()
     {
-        return array(array(array(
-            'feed[name]' => 'Bonjour Madame edited !',
+        return [[[
+            'feed[name]'        => 'Bonjour Madame edited !',
             'feed[description]' => 'Bonjour Madame edited !',
-            'feed[host]' => 'bonjourmadame.fr',
-            'feed[link]' => 'http://feeds2.feedburner.com/BonjourMadame',
-            'feed[parser]' => 'internal',
-            'feed[formatter]' => 'atom',
-            'feed[sort_by]' => 'published_at',
+            'feed[host]'        => 'bonjourmadame.fr',
+            'feed[link]'        => 'http://feeds2.feedburner.com/BonjourMadame',
+            'feed[parser]'      => 'internal',
+            'feed[formatter]'   => 'atom',
+            'feed[sort_by]'     => 'published_at',
             // 'feed[is_private]' => 0,
-        )));
+        ]]];
     }
 
     /**
@@ -252,7 +252,7 @@ class FeedControllerTest extends FeedWebTestCase
         $crawler = $client->submit($form, $data);
 
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
-        $this->assertCount(1, $alert = $crawler->filter('div.alert-box')->extract(array('_text')));
+        $this->assertCount(1, $alert = $crawler->filter('div.alert-box')->extract(['_text']));
         $this->assertEquals('Form is invalid.', $alert[0]);
         // url invalid + feed invalid
         $this->assertGreaterThanOrEqual(1, $crawler->filter('small.error')->count());
@@ -276,7 +276,7 @@ class FeedControllerTest extends FeedWebTestCase
         $this->assertContains('bonjour-madame', $client->getResponse()->headers->get('location'));
 
         $crawler = $client->followRedirect();
-        $this->assertCount(1, $alert = $crawler->filter('div.alert-box')->extract(array('_text')));
+        $this->assertCount(1, $alert = $crawler->filter('div.alert-box')->extract(['_text']));
         $this->assertEquals('Document updated!', $alert[0]);
     }
 
@@ -331,7 +331,7 @@ class FeedControllerTest extends FeedWebTestCase
         $this->assertEquals(302, $client->getResponse()->getStatusCode());
 
         $crawler = $client->followRedirect();
-        $this->assertCount(1, $alert = $crawler->filter('div.alert-box')->extract(array('_text')));
+        $this->assertCount(1, $alert = $crawler->filter('div.alert-box')->extract(['_text']));
         $this->assertEquals('Document deleted!', $alert[0]);
     }
 

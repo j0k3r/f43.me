@@ -2,10 +2,10 @@
 
 namespace Api43\FeedBundle\DataFixtures\MongoDB;
 
+use Api43\FeedBundle\Document\FeedItem;
 use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
-use Api43\FeedBundle\Document\FeedItem;
 
 class LoadFeedItemData extends AbstractFixture implements OrderedFixtureInterface
 {
