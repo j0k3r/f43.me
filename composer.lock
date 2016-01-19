@@ -937,17 +937,17 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/DoctrineMongoDBBundle.git",
-                "reference": "f4de29990d8b7226c26e96ecb0c0b45bfe2f1ea6"
+                "reference": "635614cff0d690009c00a10d10f29183470479c0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/DoctrineMongoDBBundle/zipball/f4de29990d8b7226c26e96ecb0c0b45bfe2f1ea6",
-                "reference": "f4de29990d8b7226c26e96ecb0c0b45bfe2f1ea6",
+                "url": "https://api.github.com/repos/doctrine/DoctrineMongoDBBundle/zipball/635614cff0d690009c00a10d10f29183470479c0",
+                "reference": "635614cff0d690009c00a10d10f29183470479c0",
                 "shasum": ""
             },
             "require": {
                 "doctrine/mongodb-odm": "^1.0",
-                "php": "^5.5",
+                "php": "^5.5 || ^7.0",
                 "psr/log": "^1.0",
                 "symfony/config": "^2.8 || ^3.0",
                 "symfony/console": "^2.8 || ^3.0",
@@ -1001,7 +1001,7 @@
                 "persistence",
                 "symfony"
             ],
-            "time": "2015-12-31 13:23:21"
+            "time": "2016-01-17 17:59:28"
         },
         {
             "name": "gedmo/doctrine-extensions",
