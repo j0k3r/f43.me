@@ -20,7 +20,7 @@ class Instagram extends AbstractExtractor
             return false;
         }
 
-        if (!in_array($host, ['instagr.am', 'instagram.com'])) {
+        if (!in_array($host, ['instagr.am', 'instagram.com', 'www.instagram.com'])) {
             return false;
         }
 
@@ -45,7 +45,7 @@ class Instagram extends AbstractExtractor
 
         try {
             $data = $this->client
-                ->get('http://api.instagram.com/oembed?url='.$this->instagramUrl)
+                ->get('https://api.instagram.com/oembed?url='.$this->instagramUrl)
                 ->json();
         } catch (RequestException $e) {
             $this->logger->warning('Instagram extract failed for: '.$this->instagramUrl, [
