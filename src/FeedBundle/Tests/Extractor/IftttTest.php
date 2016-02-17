@@ -18,6 +18,7 @@ class IftttTest extends \PHPUnit_Framework_TestCase
             array('https://ifttt.com/recipes/385105-receive-notifications-for-a-jailbreak', true),
             array('http://ifttt.com/recipes/385105-receive-notifications-for-a-jailbreak', true),
             array('https://ifttt.com/recipes/385105', true),
+            array('https://ifttt.com', false),
             array('https://goog.co', false),
             array('http://user@:80', false),
         );
