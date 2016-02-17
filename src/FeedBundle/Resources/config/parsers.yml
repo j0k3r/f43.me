@@ -1,0 +1,20 @@
+services:
+    # parser
+    feed.parser.chain:
+        class: Api43\FeedBundle\Parser\ParserChain
+
+    feed.parser.external:
+        class: Api43\FeedBundle\Parser\External
+        arguments:
+            - "@guzzle.client"
+            - 'https://readability.com/api/content/v1/parser'
+            - %readability_token%
+        tags:
+            -  { name: feed.parser, alias: external }
+
+    feed.parser.internal:
+        class: Api43\FeedBundle\Parser\Internal
+        arguments:
+            - "@graby"
+        tags:
+            -  { name: feed.parser, alias: internal }
