@@ -441,16 +441,16 @@
         },
         {
             "name": "doctrine/doctrine-bundle",
-            "version": "1.6.1",
+            "version": "1.6.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/DoctrineBundle.git",
-                "reference": "c4ffef2b2296e9d0179eb0b5248e5ae25c9bba3b"
+                "reference": "e9c2ccf573b59b7cea566390f34254fed3c20ed9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/DoctrineBundle/zipball/c4ffef2b2296e9d0179eb0b5248e5ae25c9bba3b",
-                "reference": "c4ffef2b2296e9d0179eb0b5248e5ae25c9bba3b",
+                "url": "https://api.github.com/repos/doctrine/DoctrineBundle/zipball/e9c2ccf573b59b7cea566390f34254fed3c20ed9",
+                "reference": "e9c2ccf573b59b7cea566390f34254fed3c20ed9",
                 "shasum": ""
             },
             "require": {
@@ -466,6 +466,7 @@
                 "doctrine/orm": "~2.3",
                 "phpunit/phpunit": "~4",
                 "satooshi/php-coveralls": "~0.6.1",
+                "symfony/phpunit-bridge": "~2.7|~3.0",
                 "symfony/validator": "~2.2|~3.0",
                 "symfony/yaml": "~2.2|~3.0",
                 "twig/twig": "~1.10"
@@ -515,7 +516,7 @@
                 "orm",
                 "persistence"
             ],
-            "time": "2015-11-16 17:11:46"
+            "time": "2016-01-10 17:21:44"
         },
         {
             "name": "doctrine/doctrine-cache-bundle",
@@ -852,16 +853,16 @@
         },
         {
             "name": "doctrine/mongodb-odm",
-            "version": "1.0.4",
+            "version": "1.0.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/mongodb-odm.git",
-                "reference": "f14ee65af497ced2c01b3daeae8d9ee318265277"
+                "reference": "318c9651bdf18a3bcb6f88b0bddd385e1a82284e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/mongodb-odm/zipball/f14ee65af497ced2c01b3daeae8d9ee318265277",
-                "reference": "f14ee65af497ced2c01b3daeae8d9ee318265277",
+                "url": "https://api.github.com/repos/doctrine/mongodb-odm/zipball/318c9651bdf18a3bcb6f88b0bddd385e1a82284e",
+                "reference": "318c9651bdf18a3bcb6f88b0bddd385e1a82284e",
                 "shasum": ""
             },
             "require": {
@@ -876,6 +877,7 @@
                 "symfony/console": "~2.3|~3.0"
             },
             "require-dev": {
+                "phpunit/phpunit": "~4.8|~5.0",
                 "symfony/yaml": "~2.3|~3.0"
             },
             "suggest": {
@@ -930,7 +932,7 @@
                 "odm",
                 "persistence"
             ],
-            "time": "2015-12-15 14:42:32"
+            "time": "2016-02-16 10:02:45"
         },
         {
             "name": "doctrine/mongodb-odm-bundle",
@@ -938,30 +940,30 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/DoctrineMongoDBBundle.git",
-                "reference": "48900a076c03691a1c3f1e32292fa89400fcd6d2"
+                "reference": "2f9322b5ac5a947fb06d5b899e2f446feb7281ae"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/DoctrineMongoDBBundle/zipball/48900a076c03691a1c3f1e32292fa89400fcd6d2",
-                "reference": "48900a076c03691a1c3f1e32292fa89400fcd6d2",
+                "url": "https://api.github.com/repos/doctrine/DoctrineMongoDBBundle/zipball/2f9322b5ac5a947fb06d5b899e2f446feb7281ae",
+                "reference": "2f9322b5ac5a947fb06d5b899e2f446feb7281ae",
                 "shasum": ""
             },
             "require": {
                 "doctrine/mongodb-odm": "^1.0",
                 "php": "^5.5 || ^7.0",
                 "psr/log": "^1.0",
-                "symfony/config": "^2.8 || ^3.0",
-                "symfony/console": "^2.8 || ^3.0",
-                "symfony/dependency-injection": "^2.8 || ^3.0",
-                "symfony/doctrine-bridge": "^2.8 || ^3.0",
-                "symfony/framework-bundle": "^2.8 || ^3.0",
-                "symfony/options-resolver": "^2.8 || ^3.0"
+                "symfony/config": "^2.7 || ^3.0",
+                "symfony/console": "^2.7 || ^3.0",
+                "symfony/dependency-injection": "^2.7 || ^3.0",
+                "symfony/doctrine-bridge": "^2.7 || ^3.0",
+                "symfony/framework-bundle": "^2.7 || ^3.0",
+                "symfony/options-resolver": "^2.7 || ^3.0"
             },
             "require-dev": {
                 "doctrine/data-fixtures": "@dev",
-                "symfony/form": "^2.8 || ^3.0",
-                "symfony/phpunit-bridge": "^2.8 || ^3.0",
-                "symfony/yaml": "^2.8 || ^3.0"
+                "symfony/form": "^2.7 || ^3.0",
+                "symfony/phpunit-bridge": "^2.7 || ^3.0",
+                "symfony/yaml": "^2.7 || ^3.0"
             },
             "suggest": {
                 "doctrine/data-fixtures": "Load data fixtures"
@@ -1002,7 +1004,7 @@
                 "persistence",
                 "symfony"
             ],
-            "time": "2016-01-31 19:26:27"
+            "time": "2016-02-13 17:09:00"
         },
         {
             "name": "gedmo/doctrine-extensions",
@@ -1433,16 +1435,16 @@
         },
         {
             "name": "j0k3r/graby",
-            "version": "1.2.0",
+            "version": "1.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/j0k3r/graby.git",
-                "reference": "211971b6f6a03f56c735086bddb6c3bb51cdb794"
+                "reference": "461731eb9c2db848ec102b473703cb6f4220f589"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/j0k3r/graby/zipball/211971b6f6a03f56c735086bddb6c3bb51cdb794",
-                "reference": "211971b6f6a03f56c735086bddb6c3bb51cdb794",
+                "url": "https://api.github.com/repos/j0k3r/graby/zipball/461731eb9c2db848ec102b473703cb6f4220f589",
+                "reference": "461731eb9c2db848ec102b473703cb6f4220f589",
                 "shasum": ""
             },
             "require": {
@@ -1485,20 +1487,20 @@
                 }
             ],
             "description": "Graby helps you extract article content from web pages",
-            "time": "2016-01-19 08:17:40"
+            "time": "2016-02-12 08:30:42"
         },
         {
             "name": "j0k3r/graby-site-config",
-            "version": "1.0.12",
+            "version": "1.0.13",
             "source": {
                 "type": "git",
                 "url": "https://github.com/j0k3r/graby-site-config.git",
-                "reference": "ddd602cab137ee40ac3f5a8dd9b749bea7d2f541"
+                "reference": "20216adc8b3488027c0bf206edfd76336cc23cc9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/j0k3r/graby-site-config/zipball/ddd602cab137ee40ac3f5a8dd9b749bea7d2f541",
-                "reference": "ddd602cab137ee40ac3f5a8dd9b749bea7d2f541",
+                "url": "https://api.github.com/repos/j0k3r/graby-site-config/zipball/20216adc8b3488027c0bf206edfd76336cc23cc9",
+                "reference": "20216adc8b3488027c0bf206edfd76336cc23cc9",
                 "shasum": ""
             },
             "require": {
@@ -1521,7 +1523,7 @@
                 }
             ],
             "description": "Graby site config files",
-            "time": "2016-01-15 09:59:00"
+            "time": "2016-02-12 17:47:27"
         },
         {
             "name": "j0k3r/php-readability",
@@ -1853,16 +1855,16 @@
         },
         {
             "name": "paragonie/random_compat",
-            "version": "1.1.6",
+            "version": "v1.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/paragonie/random_compat.git",
-                "reference": "e6f80ab77885151908d0ec743689ca700886e8b0"
+                "reference": "b0e69d10852716b2ccbdff69c75c477637220790"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/paragonie/random_compat/zipball/e6f80ab77885151908d0ec743689ca700886e8b0",
-                "reference": "e6f80ab77885151908d0ec743689ca700886e8b0",
+                "url": "https://api.github.com/repos/paragonie/random_compat/zipball/b0e69d10852716b2ccbdff69c75c477637220790",
+                "reference": "b0e69d10852716b2ccbdff69c75c477637220790",
                 "shasum": ""
             },
             "require": {
@@ -1897,7 +1899,7 @@
                 "pseudorandom",
                 "random"
             ],
-            "time": "2016-01-29 16:19:52"
+            "time": "2016-02-06 03:52:05"
         },
         {
             "name": "psr/log",
@@ -2028,16 +2030,16 @@
         },
         {
             "name": "sensio/distribution-bundle",
-            "version": "v5.0.3",
+            "version": "v5.0.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sensiolabs/SensioDistributionBundle.git",
-                "reference": "419c1824af940e2be0f833aca2327e1181a6b503"
+                "reference": "2c167426fc24f9de116345195bc1697a748ee847"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sensiolabs/SensioDistributionBundle/zipball/419c1824af940e2be0f833aca2327e1181a6b503",
-                "reference": "419c1824af940e2be0f833aca2327e1181a6b503",
+                "url": "https://api.github.com/repos/sensiolabs/SensioDistributionBundle/zipball/2c167426fc24f9de116345195bc1697a748ee847",
+                "reference": "2c167426fc24f9de116345195bc1697a748ee847",
                 "shasum": ""
             },
             "require": {
@@ -2076,7 +2078,7 @@
                 "configuration",
                 "distribution"
             ],
-            "time": "2015-12-18 17:44:11"
+            "time": "2016-02-12 16:21:30"
         },
         {
             "name": "sensio/framework-extra-bundle",

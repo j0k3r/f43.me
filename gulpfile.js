@@ -1,10 +1,11 @@
 var gulp = require('gulp');
-var gutil = require('gulp-util');
-var concat = require('gulp-concat');
-var compass = require('gulp-compass');
-var minifycss = require('gulp-minify-css');
-var uglify = require('gulp-uglify');
-var rimraf = require('rimraf');
+    gutil = require('gulp-util'),
+    concat = require('gulp-concat'),
+    compass = require('gulp-compass'),
+    cssnano = require('gulp-cssnano'),
+    uglify = require('gulp-uglify'),
+    rimraf = require('rimraf')
+;
 
 var paths = {
     vendors: [
@@ -89,7 +90,7 @@ gulp.task('css-app', function () {
 
 gulp.task('css', ['css-app', 'css-foundation'], function () {
     return gulp.src(paths.css)
-        .pipe(minifycss({keepSpecialComments: 0}))
+        .pipe(cssnano())
         .pipe(concat({ path: 'main.css', stat: { mode: 0666 }}))
         .pipe(gulp.dest('web/build'));
 });
