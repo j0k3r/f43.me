@@ -1,0 +1,172 @@
+services:
+    # feed extractor
+    feed.extractor.chain:
+        class: Api43\FeedBundle\Extractor\ExtractorChain
+
+    feed.extractor.imgur:
+        class: Api43\FeedBundle\Extractor\Imgur
+        arguments:
+            - "@imgur.client"
+        calls:
+            - [ setLogger, [ "@logger" ]]
+            - [ setClient, [ "@guzzle.client" ]]
+        tags:
+            -  { name: feed.extractor, alias: imgur }
+
+    feed.extractor.twitter:
+        class: Api43\FeedBundle\Extractor\Twitter
+        arguments:
+            - "@twitter.client"
+        calls:
+            - [ setLogger, [ "@logger" ]]
+            - [ setClient, [ "@guzzle.client" ]]
+        tags:
+            -  { name: feed.extractor, alias: twitter }
+
+    feed.extractor.tumblr:
+        class: Api43\FeedBundle\Extractor\Tumblr
+        arguments:
+            - %tumblr.api_key%
+        calls:
+            - [ setLogger, [ "@logger" ]]
+            - [ setClient, [ "@guzzle.client" ]]
+        tags:
+            -  { name: feed.extractor, alias: tumblr }
+
+    feed.extractor.vine:
+        class: Api43\FeedBundle\Extractor\Vine
+        calls:
+            - [ setLogger, [ "@logger" ]]
+            - [ setClient, [ "@guzzle.client" ]]
+        tags:
+            -  { name: feed.extractor, alias: vine }
+
+    feed.extractor.instagram:
+        class: Api43\FeedBundle\Extractor\Instagram
+        calls:
+            - [ setLogger, [ "@logger" ]]
+            - [ setClient, [ "@guzzle.client" ]]
+        tags:
+            -  { name: feed.extractor, alias: instagram }
+
+    feed.extractor.vidme:
+        class: Api43\FeedBundle\Extractor\Vidme
+        calls:
+            - [ setLogger, [ "@logger" ]]
+            - [ setClient, [ "@guzzle.client" ]]
+        tags:
+            -  { name: feed.extractor, alias: vidme }
+
+    feed.extractor.gfycat:
+        class: Api43\FeedBundle\Extractor\Gfycat
+        calls:
+            - [ setLogger, [ "@logger" ]]
+            - [ setClient, [ "@guzzle.client" ]]
+        tags:
+            -  { name: feed.extractor, alias: gfycat }
+
+    feed.extractor.flickr:
+        class: Api43\FeedBundle\Extractor\Flickr
+        arguments:
+            - %flickr.api_key%
+        calls:
+            - [ setLogger, [ "@logger" ]]
+            - [ setClient, [ "@guzzle.client" ]]
+        tags:
+            -  { name: feed.extractor, alias: flickr }
+
+    feed.extractor.github:
+        class: Api43\FeedBundle\Extractor\Github
+        calls:
+            - [ setLogger, [ "@logger" ]]
+            - [ setClient, [ "@guzzle.client" ]]
+        tags:
+            -  { name: feed.extractor, alias: github }
+
+    feed.extractor.deviantart:
+        class: Api43\FeedBundle\Extractor\Deviantart
+        calls:
+            - [ setLogger, [ "@logger" ]]
+            - [ setClient, [ "@guzzle.client" ]]
+        tags:
+            -  { name: feed.extractor, alias: deviantart }
+
+    feed.extractor.camplus:
+        class: Api43\FeedBundle\Extractor\Camplus
+        calls:
+            - [ setLogger, [ "@logger" ]]
+            - [ setClient, [ "@guzzle.client" ]]
+        tags:
+            -  { name: feed.extractor, alias: camplus }
+
+    feed.extractor.soundcloud:
+        class: Api43\FeedBundle\Extractor\Soundcloud
+        calls:
+            - [ setLogger, [ "@logger" ]]
+            - [ setClient, [ "@guzzle.client" ]]
+        tags:
+            -  { name: feed.extractor, alias: soundcloud }
+
+    feed.extractor.vimeo:
+        class: Api43\FeedBundle\Extractor\Vimeo
+        calls:
+            - [ setLogger, [ "@logger" ]]
+            - [ setClient, [ "@guzzle.client" ]]
+        tags:
+            -  { name: feed.extractor, alias: vimeo }
+
+    feed.extractor.youtube:
+        class: Api43\FeedBundle\Extractor\Youtube
+        calls:
+            - [ setLogger, [ "@logger" ]]
+            - [ setClient, [ "@guzzle.client" ]]
+        tags:
+            -  { name: feed.extractor, alias: youtube }
+
+    feed.extractor.dailymotion:
+        class: Api43\FeedBundle\Extractor\Dailymotion
+        calls:
+            - [ setLogger, [ "@logger" ]]
+            - [ setClient, [ "@guzzle.client" ]]
+        tags:
+            -  { name: feed.extractor, alias: dailymotion }
+
+    feed.extractor.spotify:
+        class: Api43\FeedBundle\Extractor\Spotify
+        calls:
+            - [ setLogger, [ "@logger" ]]
+            - [ setClient, [ "@guzzle.client" ]]
+        tags:
+            -  { name: feed.extractor, alias: spotify }
+
+    feed.extractor.hackernews:
+        class: Api43\FeedBundle\Extractor\HackerNews
+        calls:
+            - [ setLogger, [ "@logger" ]]
+            - [ setClient, [ "@guzzle.client" ]]
+        tags:
+            -  { name: feed.extractor, alias: hackernews }
+
+    feed.extractor.rue89:
+        class: Api43\FeedBundle\Extractor\Rue89
+        calls:
+            - [ setLogger, [ "@logger" ]]
+            - [ setClient, [ "@guzzle.client" ]]
+        tags:
+            -  { name: feed.extractor, alias: rue89 }
+
+    feed.extractor.streamable:
+        class: Api43\FeedBundle\Extractor\Streamable
+        calls:
+            - [ setLogger, [ "@logger" ]]
+            - [ setClient, [ "@guzzle.client" ]]
+        tags:
+            -  { name: feed.extractor, alias: streamable }
+
+    feed.extractor.ifttt:
+        class: Api43\FeedBundle\Extractor\Ifttt
+        calls:
+            - [ setLogger, [ "@logger" ]]
+            - [ setClient, [ "@guzzle.client" ]]
+        tags:
+            -  { name: feed.extractor, alias: ifttt }
