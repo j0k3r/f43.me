@@ -42,6 +42,7 @@
     <exec executable="composer">
       <arg value="install"/>
       <arg value="--no-interaction"/>
+      <arg value="--prefer-dist"/>
     </exec>
     <exec executable="php">
       <arg value="${basedir}/bin/console"/>
