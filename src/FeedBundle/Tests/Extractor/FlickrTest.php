@@ -21,8 +21,9 @@ class FlickrTest extends \PHPUnit_Framework_TestCase
             array('https://farm6.staticflickr.com/5581/15000967103_8eb7552825_n.jpg', true),
             array('http://farm6.static.flickr.com/5581/15000967104_8eb7552825_n.jpg', true),
             array('http://farm6.static.flicker.com/5581/15000967104_8eb7552825_n.jpg', false),
-            array('http://farm6.static.flickr.com/5581/1500096710_8eb7552825_n.jpg', false),
+            array('http://farm6.static.flickr.com/5581/1500096710_8eb7552825_n.jpg', true),
             array('https://www.flickr.com/photos/europeanspaceagency/15739982196/in/set-72157638315605535', true),
+            array('https://www.flickr.com/photos/dfmagazine/8286098812/', true),
 
             # photo set
             array('https://www.flickr.com/photos/europeanspaceagency/sets/72157638315605535/', true),
