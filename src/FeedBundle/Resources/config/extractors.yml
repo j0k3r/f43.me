@@ -170,3 +170,10 @@ services:
             - [ setClient, [ "@guzzle.client" ]]
         tags:
             -  { name: feed.extractor, alias: ifttt }
+
+    feed.extractor.reddituploads:
+        class: Api43\FeedBundle\Extractor\Reddituploads
+        calls:
+            - [ setLogger, [ "@logger" ]]
+        tags:
+            -  { name: feed.extractor, alias: reddituploads }
