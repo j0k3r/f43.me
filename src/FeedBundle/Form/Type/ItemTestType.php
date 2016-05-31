@@ -20,7 +20,6 @@ class ItemTestType extends AbstractType
                     'internal' => 'Internal',
                     'external' => 'External',
                 ]),
-                'choices_as_values' => true,
             ])
         ;
     }

@@ -5,8 +5,10 @@
     "type": "project",
     "autoload": {
         "psr-4": { "Api43\\": "src" },
-        "classmap": [ "app/AppKernel.php", "app/AppCache.php" ],
-        "exclude-from-classmap": ["/Tests/"]
+        "classmap": [ "app/AppKernel.php", "app/AppCache.php" ]
+    },
+    "autoload-dev": {
+        "psr-4": { "Tests\\": "tests/" }
     },
     "authors": [
         {
@@ -19,7 +21,7 @@
     "require": {
         "php": ">=5.5.9",
         "ext-mongo": "^1.5",
-        "symfony/symfony": "3.0.*",
+        "symfony/symfony": "3.1.*",
         "doctrine/doctrine-bundle": "^1.6",
         "twig/extensions": "~1.1",
         "symfony/monolog-bundle": "^2.8",

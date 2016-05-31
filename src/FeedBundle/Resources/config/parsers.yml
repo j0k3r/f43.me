@@ -8,7 +8,7 @@ services:
         arguments:
             - "@guzzle.client"
             - 'https://readability.com/api/content/v1/parser'
-            - %readability_token%
+            - "%readability_token%"
         tags:
             -  { name: feed.parser, alias: external }
 

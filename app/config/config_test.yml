@@ -21,7 +21,7 @@ security:
         in_memory:
             memory:
                 users:
-                    admin: { password: %adminpass%, roles: [ 'ROLE_ADMIN' ] }
+                    admin: { password: "%adminpass%", roles: [ 'ROLE_ADMIN' ] }
 
 doctrine_mongodb:
     default_database: f43me_test
