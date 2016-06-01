@@ -16,13 +16,13 @@ services:
     imgur.client:
         class: Imgur\Client
         calls:
-            - [ setOption, [ 'client_id', %imgur.client_id% ] ]
-            - [ setOption, [ 'client_secret', %imgur.client_secret% ] ]
+            - [ setOption, [ 'client_id', "%imgur.client_id%" ] ]
+            - [ setOption, [ 'client_secret', "%imgur.client_secret%" ] ]
 
     guzzle.client:
         class: GuzzleHttp\Client
         arguments:
-            - %guzzle.options%
+            - "%guzzle.options%"
 
     graby:
         class: Graby\Graby
@@ -32,7 +32,7 @@ services:
                 extractor:
                     config_builder:
                         site_config:
-                            - %kernel.root_dir%/site_config
+                            - "%kernel.root_dir%/site_config"
         calls:
             - [ setLogger, [ "@logger" ] ]
         tags:
@@ -42,10 +42,10 @@ services:
         class: TwitterOAuth\TwitterOAuth
         arguments:
             -
-                consumer_key: %twitter.consumer_key%
-                consumer_secret: %twitter.consumer_secret%
-                oauth_token: %twitter.access_token%
-                oauth_token_secret: %twitter.access_token_secret%
+                consumer_key: "%twitter.consumer_key%"
+                consumer_secret: "%twitter.consumer_secret%"
+                oauth_token: "%twitter.access_token%"
+                oauth_token_secret: "%twitter.access_token_secret%"
                 output_format: 'array'
 
     content_import:
@@ -80,7 +80,7 @@ services:
     xml_render:
         class: Api43\FeedBundle\Xml\Render
         arguments:
-            generator: %domain%
+            generator: "%domain%"
             doctrine: "@doctrine.odm.mongodb.document_manager"
             router: "@router"
 

@@ -27,21 +27,18 @@ class FeedType extends AbstractType
                     'Internal' => 'internal',
                     'External' => 'external',
                 ],
-                'choices_as_values' => true,
             ])
             ->add('formatter', ChoiceType::class, [
                 'choices' => [
                     'RSS' => 'rss',
                     'Atom' => 'atom',
                 ],
-                'choices_as_values' => true,
             ])
             ->add('sort_by', ChoiceType::class, [
                 'choices' => [
                     'Published (when item arrive in the original feed)' => 'published_at',
                     'Created (when feed item are fetched)' => 'created_at',
                 ],
-                'choices_as_values' => true,
             ])
             ->add('is_private', CheckboxType::class, ['required' => false])
         ;

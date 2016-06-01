@@ -26,7 +26,7 @@ services:
     feed.extractor.tumblr:
         class: Api43\FeedBundle\Extractor\Tumblr
         arguments:
-            - %tumblr.api_key%
+            - "%tumblr.api_key%"
         calls:
             - [ setLogger, [ "@logger" ]]
             - [ setClient, [ "@guzzle.client" ]]
@@ -68,7 +68,7 @@ services:
     feed.extractor.flickr:
         class: Api43\FeedBundle\Extractor\Flickr
         arguments:
-            - %flickr.api_key%
+            - "%flickr.api_key%"
         calls:
             - [ setLogger, [ "@logger" ]]
             - [ setClient, [ "@guzzle.client" ]]

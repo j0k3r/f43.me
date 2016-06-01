@@ -28,17 +28,17 @@ framework:
 
 # Twig Configuration
 twig:
-    debug:            %kernel.debug%
-    strict_variables: %kernel.debug%
+    debug:            "%kernel.debug%"
+    strict_variables: "%kernel.debug%"
     globals:
-        ga_tracking: %google_analytics_code%
+        ga_tracking: "%google_analytics_code%"
 
 doctrine_mongodb:
     connections:
         default:
-            server: %database_server%
+            server: "%database_server%"
             options: {}
-    default_database: %database_name%
+    default_database: "%database_name%"
     document_managers:
         default:
             auto_mapping: true

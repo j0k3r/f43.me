@@ -14,7 +14,7 @@
 
     <testsuites>
         <testsuite name="f43.me Test Suite">
-            <directory>./src/FeedBundle/Tests</directory>
+            <directory>./tests</directory>
         </testsuite>
     </testsuites>
 
