@@ -18,12 +18,12 @@ class Reddituploads extends AbstractExtractor
             return false;
         }
 
-        if (false === strpos($host, 'i.reddituploads.com')) {
+        if (!in_array($host, ['i.reddituploads.com', 'i.redd.it'])) {
             return false;
         }
 
-        // match reddituploads id
-        preg_match('/\/([a-z0-9]{32})/', $path, $matches);
+        // match reddituploads id & redd.it id
+        preg_match('/\/([a-z0-9]{32})|([a-z0-9]{12}\.)/', $path, $matches);
 
         if (!isset($matches[1])) {
             return false;
