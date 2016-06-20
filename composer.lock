@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "c1aa1d4a07e30c04f7f58d6566f66424",
-    "content-hash": "74e25544e4d5386e30355a7377a13e21",
+    "hash": "1b43fbbc31c4bdc3d78921f7e4438732",
+    "content-hash": "5cdd511426a43e9c99e6159ddc379ba9",
     "packages": [
         {
             "name": "adyg/php-imgur-api-client",
@@ -860,16 +860,16 @@
         },
         {
             "name": "doctrine/mongodb-odm",
-            "version": "1.1.0",
+            "version": "1.0.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/mongodb-odm.git",
-                "reference": "1137922032d098a2e284575f2ce30e83abbecea2"
+                "reference": "df0771f572dc3deefa5b36b7509440ce3d791ba6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/mongodb-odm/zipball/1137922032d098a2e284575f2ce30e83abbecea2",
-                "reference": "1137922032d098a2e284575f2ce30e83abbecea2",
+                "url": "https://api.github.com/repos/doctrine/mongodb-odm/zipball/df0771f572dc3deefa5b36b7509440ce3d791ba6",
+                "reference": "df0771f572dc3deefa5b36b7509440ce3d791ba6",
                 "shasum": ""
             },
             "require": {
@@ -879,8 +879,8 @@
                 "doctrine/common": "~2.4",
                 "doctrine/inflector": "~1.0",
                 "doctrine/instantiator": "~1.0.1",
-                "doctrine/mongodb": "~1.3",
-                "php": "^5.6 || ^7.0",
+                "doctrine/mongodb": "~1.2",
+                "php": ">=5.3.2",
                 "symfony/console": "~2.3|~3.0"
             },
             "require-dev": {
@@ -893,7 +893,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.1.x-dev"
+                    "dev-master": "1.0.x-dev"
                 }
             },
             "autoload": {
@@ -939,7 +939,7 @@
                 "odm",
                 "persistence"
             ],
-            "time": "2016-06-09 14:21:30"
+            "time": "2016-06-09 13:23:17"
         },
         {
             "name": "doctrine/mongodb-odm-bundle",
@@ -3411,5 +3411,8 @@
         "php": ">=5.5.9",
         "ext-mongo": "^1.5"
     },
-    "platform-dev": []
+    "platform-dev": [],
+    "platform-overrides": {
+        "php": "5.5.9"
+    }
 }
