@@ -15,8 +15,8 @@ class GfycatTest extends \PHPUnit_Framework_TestCase
     public function dataMatch()
     {
         return array(
-            array('http://gfycat.com/SingleUntriedBudgie', true),
-            array('https://gfycat.com/SingleUntriedBudgie', true),
+            array('http://gfycat.com/RichPepperyFerret', true),
+            array('https://gfycat.com/RichPepperyFerret', true),
             array('http://gfycat.com/NeatSpitefulCapeghostfrog', true),
             array('http://www.gfycat.com/NeatSpitefulCapeghostfrog', true),
             array('http://gfycat.com/', false),
@@ -39,7 +39,7 @@ class GfycatTest extends \PHPUnit_Framework_TestCase
         $client = new Client();
 
         $mock = new Mock([
-            new Response(200, [], Stream::factory(json_encode(array('gfyItem' => array('title' => 'my title', 'gifUrl' => 'http://0.0.0.0/img.gif'))))),
+            new Response(200, [], Stream::factory(json_encode(array('gfyItem' => array('title' => 'my title', 'posterUrl' => 'http://0.0.0.0/img.gif'))))),
             new Response(200, [], Stream::factory('')),
             new Response(400, [], Stream::factory('oops')),
         ]);
@@ -56,15 +56,15 @@ class GfycatTest extends \PHPUnit_Framework_TestCase
         // first test fail because we didn't match an url, so GfycatId isn't defined
         $this->assertEmpty($gfycat->getContent());
 
-        $gfycat->match('http://gfycat.com/SingleUntriedBudgie');
+        $gfycat->match('http://gfycat.com/RichPepperyFerret');
 
         // consecutive calls
-        $this->assertEquals('<div><h2>my title</h2><p><img src="http://0.0.0.0/img.gif"></p></div>', $gfycat->getContent());
+        $this->assertEquals('<div><h2>my title</h2><p><img src="http://0.0.0.0/img.gif"></p></div><div style="position:relative;padding-bottom:calc(100% / 1.85)"><iframe src="https://gfycat.com/ifr/RichPepperyFerret" frameborder="0" scrolling="no" width="100%" height="100%" style="position:absolute;top:0;left:0;" allowfullscreen></iframe></div>', $gfycat->getContent());
         // this one will got an empty array
         $this->assertEmpty($gfycat->getContent());
         // this one will catch an exception
         $this->assertEmpty($gfycat->getContent());
 
-        $this->assertTrue($logHandler->hasWarning('Gfycat extract failed for: SingleUntriedBudgie'), 'Warning message matched');
+        $this->assertTrue($logHandler->hasWarning('Gfycat extract failed for: RichPepperyFerret'), 'Warning message matched');
     }
 }
