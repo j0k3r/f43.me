@@ -7,6 +7,7 @@ use GuzzleHttp\Exception\RequestException;
 class Rue89 extends AbstractExtractor
 {
     protected $rue89Id = null;
+    protected $isBlog = false;
 
     /**
      * {@inheritdoc}
@@ -23,6 +24,8 @@ class Rue89 extends AbstractExtractor
         if (false === strpos($host, 'rue89.nouvelobs.com')) {
             return false;
         }
+
+        $this->isBlog = 0 === strpos($path, '/blog/');
 
         preg_match('/\-([0-9]+)$/i', $path, $matches);
 
@@ -44,9 +47,14 @@ class Rue89 extends AbstractExtractor
             return '';
         }
 
+        $host = 'api.rue89.nouvelobs.com';
+        if ($this->isBlog) {
+            $host = 'api.blogs.rue89.nouvelobs.com';
+        }
+
         try {
             $data = $this->client
-                ->get('http://api.rue89.nouvelobs.com/export/mobile2/node/'.$this->rue89Id.'/full')
+                ->get('http://'.$host.'/export/mobile2/node/'.$this->rue89Id.'/full')
                 ->json();
         } catch (RequestException $e) {
             $this->logger->warning('Rue89 extract failed for: '.$this->rue89Id, [
