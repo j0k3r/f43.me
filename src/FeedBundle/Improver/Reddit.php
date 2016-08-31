@@ -31,7 +31,7 @@ class Reddit extends DefaultImprover
             return $url;
         }
 
-        return $matches[2];
+        return str_replace('&amp;', '&', $matches[2]);
     }
 
     /**
