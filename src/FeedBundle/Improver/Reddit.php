@@ -14,7 +14,7 @@ class Reddit extends DefaultImprover
      */
     public function match($host)
     {
-        return 0 === strpos('reddit.com', $host) ? true : false;
+        return 0 === strpos('reddit.com', $host);
     }
 
     /**

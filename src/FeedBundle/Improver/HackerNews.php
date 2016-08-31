@@ -14,7 +14,7 @@ class HackerNews extends DefaultImprover
      */
     public function match($host)
     {
-        return 0 === strpos('news.ycombinator.com', $host) ? true : false;
+        return 0 === strpos('news.ycombinator.com', $host);
     }
 
     /**

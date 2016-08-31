@@ -10,7 +10,7 @@ class SimplePieProxy
      * Create a new Proxy for SimplePie.
      *
      * @param string $cache        Path to cache folder
-     * @param int    $item_limit   The maximum number of items to return.
+     * @param int    $item_limit   The maximum number of items to return
      * @param bool   $enable_cache Enable caching
      */
     public function __construct($cache, $item_limit = 25, $enable_cache = true)
