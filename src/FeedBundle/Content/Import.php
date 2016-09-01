@@ -106,6 +106,8 @@ class Import
                 $feedItem->setFeed($feed);
                 $this->dm->persist($feedItem);
 
+                $feed->addFeeditem($feedItem);
+
                 ++$cached;
             }
 

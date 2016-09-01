@@ -14,7 +14,7 @@ class Reddit extends DefaultImprover
      */
     public function match($host)
     {
-        return 0 === strpos('reddit.com', $host) ? true : false;
+        return 0 === strpos('reddit.com', $host);
     }
 
     /**
@@ -31,7 +31,7 @@ class Reddit extends DefaultImprover
             return $url;
         }
 
-        return $matches[2];
+        return str_replace('&amp;', '&', $matches[2]);
     }
 
     /**
