@@ -43,7 +43,9 @@ class RenderTest extends \PHPUnit_Framework_TestCase
      */
     public function testRenderBadFormat()
     {
-        $feed = $this->getMock('Api43\FeedBundle\Document\Feed');
+        $feed = $this->getMockBuilder('Api43\FeedBundle\Document\Feed')
+            ->disableOriginalConstructor()
+            ->getMock();
 
         $render = new Render('toto', $this->dm, $this->router);
         $render->doRender($feed);
