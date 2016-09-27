@@ -67,8 +67,6 @@ services:
 
     feed.extractor.flickr:
         class: Api43\FeedBundle\Extractor\Flickr
-        arguments:
-            - "%flickr.api_key%"
         calls:
             - [ setLogger, [ "@logger" ]]
             - [ setClient, [ "@guzzle.client" ]]
