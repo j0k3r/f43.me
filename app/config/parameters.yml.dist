@@ -22,9 +22,6 @@ parameters:
     # https://www.tumblr.com/oauth/apps
     tumblr.api_key: xxxx
 
-    # https://www.flickr.com/services/apps/create/
-    flickr.api_key: xxxx
-
     parser.regexps:
         # class or id
         unlikelyCandidates: /noprint|hidden|avatar|ligatus|col_right|news-colonne-droite|combx|comment|community|disqus|extra|foot|header|menu|remark|rss|shoutbox|sidebar|sponsor|ad-break|agegate|pagination|pager|popup|addthis|response|slate_associated_bn|reseaux|sharing|auteur|tag|feedback|meta|kudo|sidebar|copyright|bio|moreInfo|legal|share|contributor/i

@@ -78,7 +78,6 @@ Since the use of the Parser API is *freely available for non-commercial use* I t
 
 For each external API that improvers / extractors / parsers use, you will need an api key:
 
- * Flickr: https://www.flickr.com/services/apps/create/apply
  * Tumblr: https://www.tumblr.com/oauth/apps
  * Imgur: https://api.imgur.com/oauth2/addclient
  * Readability: https://www.readability.com/settings/account#api

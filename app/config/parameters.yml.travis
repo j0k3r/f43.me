@@ -19,7 +19,6 @@ parameters:
     imgur.client_secret: xxxxx
 
     tumblr.api_key: xxxx
-    flickr.api_key: xxxx
 
     parser.regexps:
         # class or id

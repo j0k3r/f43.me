@@ -24,6 +24,7 @@ class FlickrTest extends \PHPUnit_Framework_TestCase
             array('http://farm6.static.flickr.com/5581/1500096710_8eb7552825_n.jpg', true),
             array('https://www.flickr.com/photos/europeanspaceagency/15739982196/in/set-72157638315605535', true),
             array('https://www.flickr.com/photos/dfmagazine/8286098812/', true),
+            array('https://www.flickr.com/photos/64871835@N04/29186070533/in/dateposted-public/', true),
 
             # photo set
             array('https://www.flickr.com/photos/europeanspaceagency/sets/72157638315605535/', true),
@@ -45,10 +46,14 @@ class FlickrTest extends \PHPUnit_Framework_TestCase
         $client = new Client();
 
         $mock = new Mock([
-            new Response(200, [], Stream::factory(json_encode(array('stat' => 'ok', 'sizes' => array('size' => array(
-                array('label' => 'Medium', 'source' => 'https://0.0.0.0/medium.jpg'),
-                array('label' => 'Large', 'source' => 'https://0.0.0.0/large.jpg'),
-            )))))),
+            new Response(200, [], Stream::factory(json_encode([
+                'flickr_type' => 'photo',
+                'url' => 'https://0.0.0.0/large.jpg',
+                'title' => 'title',
+                'author_name' => 'mememe',
+                'author_url' => 'https://0.0.0.0/me',
+                'html' => '<a data-flickr-embed="true"></a>',
+            ]))),
             new Response(200, [], Stream::factory('')),
             new Response(400, [], Stream::factory('oops')),
         ]);
@@ -68,13 +73,16 @@ class FlickrTest extends \PHPUnit_Framework_TestCase
         $flickr->match('http://www.flickr.com/photos/palnick/15000967102/');
 
         // consecutive calls
-        $this->assertEquals('<img src="https://0.0.0.0/large.jpg" />', $flickr->getContent());
+        $content = $flickr->getContent();
+        $this->assertContains('<img src="https://0.0.0.0/large.jpg" />', $content);
+        $this->assertContains('<h2>title</h2>', $content);
+        $this->assertContains('data-flickr-embed', $content);
         // this one will got an empty array
         $this->assertEmpty($flickr->getContent());
         // this one will catch an exception
         $this->assertEmpty($flickr->getContent());
 
-        $this->assertTrue($logHandler->hasWarning('Flickr extract failed for: 15000967102'), 'Warning message matched');
+        $this->assertTrue($logHandler->hasWarning('Flickr extract failed for: http://www.flickr.com/photos/palnick/15000967102/'), 'Warning message matched');
     }
 
     public function testPhotoSet()
@@ -82,10 +90,14 @@ class FlickrTest extends \PHPUnit_Framework_TestCase
         $client = new Client();
 
         $mock = new Mock([
-            new Response(200, [], Stream::factory(json_encode(array('stat' => 'ok', 'photoset' => array('photo' => array(
-                array('title' => 'Super title', 'url_l' => 'https://0.0.0.0/medium.jpg'),
-                array('title' => 'Ugly title', 'url_o' => 'https://0.0.0.0/large.jpg'),
-            )))))),
+            new Response(200, [], Stream::factory(json_encode([
+                'flickr_type' => 'album',
+                'thumbnail_url' => 'https://0.0.0.0/small.jpg',
+                'title' => 'title',
+                'author_name' => 'mememe',
+                'author_url' => 'https://0.0.0.0/me',
+                'html' => '<a data-flickr-embed="true"></a>',
+            ]))),
             new Response(200, [], Stream::factory('')),
             new Response(400, [], Stream::factory('oops')),
         ]);
@@ -105,12 +117,15 @@ class FlickrTest extends \PHPUnit_Framework_TestCase
         $flickr->match('https://www.flickr.com/photos/europeanspaceagency/sets/72157638315605535/');
 
         // consecutive calls
-        $this->assertContains('<div><p>Super title</p><img src="https://0.0.0.0/medium.jpg" /></div>', $flickr->getContent());
+        $content = $flickr->getContent();
+        $this->assertContains('<img src="https://0.0.0.0/small.jpg" />', $content);
+        $this->assertContains('<h2>title</h2>', $content);
+        $this->assertContains('data-flickr-embed', $content);
         // this one will got an empty array
         $this->assertEmpty($flickr->getContent());
         // this one will catch an exception
         $this->assertEmpty($flickr->getContent());
 
-        $this->assertTrue($logHandler->hasWarning('Flickr extract failed for: 72157638315605535'), 'Warning message matched');
+        $this->assertTrue($logHandler->hasWarning('Flickr extract failed for: https://www.flickr.com/photos/europeanspaceagency/sets/72157638315605535/'), 'Warning message matched');
     }
 }
