@@ -81,6 +81,7 @@ For each external API that improvers / extractors / parsers use, you will need a
  * Tumblr: https://www.tumblr.com/oauth/apps
  * Imgur: https://api.imgur.com/oauth2/addclient
  * Readability: https://www.readability.com/settings/account#api
+ * Twitch: https://www.twitch.tv/kraken/oauth2/clients/new
 
 ### Install
 
