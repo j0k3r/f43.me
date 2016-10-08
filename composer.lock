@@ -817,16 +817,16 @@
         },
         {
             "name": "doctrine/mongodb-odm",
-            "version": "1.0.7",
+            "version": "1.0.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/mongodb-odm.git",
-                "reference": "183ee0076aaad4950c0a07c7dd5bcbb0f379cc60"
+                "reference": "052971cd400fe0c6ea48dd3319fa98d145b0a843"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/mongodb-odm/zipball/183ee0076aaad4950c0a07c7dd5bcbb0f379cc60",
-                "reference": "183ee0076aaad4950c0a07c7dd5bcbb0f379cc60",
+                "url": "https://api.github.com/repos/doctrine/mongodb-odm/zipball/052971cd400fe0c6ea48dd3319fa98d145b0a843",
+                "reference": "052971cd400fe0c6ea48dd3319fa98d145b0a843",
                 "shasum": ""
             },
             "require": {
@@ -896,7 +896,7 @@
                 "odm",
                 "persistence"
             ],
-            "time": "2016-07-27 13:22:24"
+            "time": "2016-10-07 09:17:14"
         },
         {
             "name": "doctrine/mongodb-odm-bundle",
@@ -1394,16 +1394,16 @@
         },
         {
             "name": "j0k3r/graby",
-            "version": "1.4.3",
+            "version": "1.4.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/j0k3r/graby.git",
-                "reference": "8dbc799fac49d9c949a10c61e16cfec120c8dba9"
+                "reference": "99a28605b45a6f34429e4ae82d6fccc6301834df"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/j0k3r/graby/zipball/8dbc799fac49d9c949a10c61e16cfec120c8dba9",
-                "reference": "8dbc799fac49d9c949a10c61e16cfec120c8dba9",
+                "url": "https://api.github.com/repos/j0k3r/graby/zipball/99a28605b45a6f34429e4ae82d6fccc6301834df",
+                "reference": "99a28605b45a6f34429e4ae82d6fccc6301834df",
                 "shasum": ""
             },
             "require": {
@@ -1447,20 +1447,20 @@
                 }
             ],
             "description": "Graby helps you extract article content from web pages",
-            "time": "2016-09-07 09:28:22"
+            "time": "2016-10-03 07:13:42"
         },
         {
             "name": "j0k3r/graby-site-config",
-            "version": "1.0.24",
+            "version": "1.0.26",
             "source": {
                 "type": "git",
                 "url": "https://github.com/j0k3r/graby-site-config.git",
-                "reference": "ba8280f753133e4de1991c4fc30c77b98c9fb524"
+                "reference": "80b4e5f6a2255bf7b68bdde31141280125c07354"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/j0k3r/graby-site-config/zipball/ba8280f753133e4de1991c4fc30c77b98c9fb524",
-                "reference": "ba8280f753133e4de1991c4fc30c77b98c9fb524",
+                "url": "https://api.github.com/repos/j0k3r/graby-site-config/zipball/80b4e5f6a2255bf7b68bdde31141280125c07354",
+                "reference": "80b4e5f6a2255bf7b68bdde31141280125c07354",
                 "shasum": ""
             },
             "require": {
@@ -1483,7 +1483,7 @@
                 }
             ],
             "description": "Graby site config files",
-            "time": "2016-09-16 05:53:11"
+            "time": "2016-10-03 07:14:23"
         },
         {
             "name": "j0k3r/php-imgur-api-client",
@@ -1539,16 +1539,16 @@
         },
         {
             "name": "j0k3r/php-readability",
-            "version": "1.1.1",
+            "version": "1.1.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/j0k3r/php-readability.git",
-                "reference": "dec4514c00abf024c570ca496d844e70494b7cda"
+                "reference": "47ce4fb7f9fe5e5c314e975e789116d056f3ecbb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/j0k3r/php-readability/zipball/dec4514c00abf024c570ca496d844e70494b7cda",
-                "reference": "dec4514c00abf024c570ca496d844e70494b7cda",
+                "url": "https://api.github.com/repos/j0k3r/php-readability/zipball/47ce4fb7f9fe5e5c314e975e789116d056f3ecbb",
+                "reference": "47ce4fb7f9fe5e5c314e975e789116d056f3ecbb",
                 "shasum": ""
             },
             "require": {
@@ -1556,6 +1556,7 @@
                 "php": ">=5.3.3"
             },
             "require-dev": {
+                "friendsofphp/php-cs-fixer": "*",
                 "satooshi/php-coveralls": "~0.6"
             },
             "type": "library",
@@ -1601,7 +1602,7 @@
                 "extraction",
                 "html"
             ],
-            "time": "2016-03-01 14:14:36"
+            "time": "2016-10-03 07:13:35"
         },
         {
             "name": "j0k3r/safecurl",
@@ -2762,16 +2763,16 @@
         },
         {
             "name": "symfony/symfony",
-            "version": "v3.1.4",
+            "version": "v3.1.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/symfony.git",
-                "reference": "65ca9e4fbdb34f6d463ef77898ca583b101a4162"
+                "reference": "e7e1d01fe103de78bca6fbf7f6f4acf64482d63c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/symfony/zipball/65ca9e4fbdb34f6d463ef77898ca583b101a4162",
-                "reference": "65ca9e4fbdb34f6d463ef77898ca583b101a4162",
+                "url": "https://api.github.com/repos/symfony/symfony/zipball/e7e1d01fe103de78bca6fbf7f6f4acf64482d63c",
+                "reference": "e7e1d01fe103de78bca6fbf7f6f4acf64482d63c",
                 "shasum": ""
             },
             "require": {
@@ -2784,7 +2785,7 @@
                 "symfony/polyfill-php56": "~1.0",
                 "symfony/polyfill-php70": "~1.0",
                 "symfony/polyfill-util": "~1.0",
-                "twig/twig": "~1.23|~2.0"
+                "twig/twig": "~1.26|~2.0"
             },
             "conflict": {
                 "phpdocumentor/reflection-docblock": "<3.0",
@@ -2853,6 +2854,7 @@
                 "ocramius/proxy-manager": "~0.4|~1.0|~2.0",
                 "phpdocumentor/reflection-docblock": "^3.0",
                 "predis/predis": "~1.0",
+                "symfony/phpunit-bridge": "~3.2",
                 "symfony/polyfill-apcu": "~1.1",
                 "symfony/security-acl": "~2.8|~3.0"
             },
@@ -2898,7 +2900,7 @@
             "keywords": [
                 "framework"
             ],
-            "time": "2016-09-03 15:28:43"
+            "time": "2016-10-03 19:01:14"
         },
         {
             "name": "tecnickcom/tcpdf",
@@ -3063,16 +3065,16 @@
         },
         {
             "name": "twig/twig",
-            "version": "v1.25.0",
+            "version": "v1.26.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/twigphp/Twig.git",
-                "reference": "f16a634ab08d87e520da5671ec52153d627f10f6"
+                "reference": "a09d8ee17ac1cfea29ed60c83960ad685c6a898d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/twigphp/Twig/zipball/f16a634ab08d87e520da5671ec52153d627f10f6",
-                "reference": "f16a634ab08d87e520da5671ec52153d627f10f6",
+                "url": "https://api.github.com/repos/twigphp/Twig/zipball/a09d8ee17ac1cfea29ed60c83960ad685c6a898d",
+                "reference": "a09d8ee17ac1cfea29ed60c83960ad685c6a898d",
                 "shasum": ""
             },
             "require": {
@@ -3085,7 +3087,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.25-dev"
+                    "dev-master": "1.26-dev"
                 }
             },
             "autoload": {
@@ -3120,7 +3122,7 @@
             "keywords": [
                 "templating"
             ],
-            "time": "2016-09-21 23:05:12"
+            "time": "2016-10-05 18:57:41"
         },
         {
             "name": "zurb/foundation",
@@ -3361,7 +3363,7 @@
         },
         {
             "name": "symfony/phpunit-bridge",
-            "version": "v3.1.4",
+            "version": "v3.1.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/phpunit-bridge.git",
