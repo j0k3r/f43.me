@@ -183,3 +183,13 @@ services:
             - [ setClient, [ "@guzzle.client" ]]
         tags:
             -  { name: feed.extractor, alias: giphy }
+
+    feed.extractor.twitch:
+        class: Api43\FeedBundle\Extractor\Twitch
+        arguments:
+            - "%twitch.client_id%"
+        calls:
+            - [ setLogger, [ "@logger" ]]
+            - [ setClient, [ "@guzzle.client" ]]
+        tags:
+            -  { name: feed.extractor, alias: twitch }
