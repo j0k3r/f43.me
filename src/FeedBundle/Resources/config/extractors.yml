@@ -175,3 +175,11 @@ services:
             - [ setLogger, [ "@logger" ]]
         tags:
             -  { name: feed.extractor, alias: reddituploads }
+
+    feed.extractor.giphy:
+        class: Api43\FeedBundle\Extractor\Giphy
+        calls:
+            - [ setLogger, [ "@logger" ]]
+            - [ setClient, [ "@guzzle.client" ]]
+        tags:
+            -  { name: feed.extractor, alias: giphy }
