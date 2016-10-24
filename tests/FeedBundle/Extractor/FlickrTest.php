@@ -54,8 +54,8 @@ class FlickrTest extends \PHPUnit_Framework_TestCase
                 'author_url' => 'https://0.0.0.0/me',
                 'html' => '<a data-flickr-embed="true"></a>',
             ]))),
-            new Response(200, [], Stream::factory('')),
-            new Response(400, [], Stream::factory('oops')),
+            new Response(200, [], Stream::factory(json_encode(''))),
+            new Response(400, [], Stream::factory(json_encode('oops'))),
         ]);
 
         $client->getEmitter()->attach($mock);
@@ -98,8 +98,8 @@ class FlickrTest extends \PHPUnit_Framework_TestCase
                 'author_url' => 'https://0.0.0.0/me',
                 'html' => '<a data-flickr-embed="true"></a>',
             ]))),
-            new Response(200, [], Stream::factory('')),
-            new Response(400, [], Stream::factory('oops')),
+            new Response(200, [], Stream::factory(json_encode(''))),
+            new Response(400, [], Stream::factory(json_encode('oops'))),
         ]);
 
         $client->getEmitter()->attach($mock);

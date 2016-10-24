@@ -40,7 +40,7 @@ class TwitchTest extends \PHPUnit_Framework_TestCase
         $mock = new Mock([
             new Response(200, [], Stream::factory(json_encode(['title' => 'hihi', 'description' => 'hoho', 'preview' => 'http://0.0.0.0/image.jpg']))),
             new Response(200, [], Stream::factory(json_encode([]))),
-            new Response(400, [], Stream::factory('oops')),
+            new Response(400, [], Stream::factory(json_encode('oops'))),
         ]);
 
         $client->getEmitter()->attach($mock);

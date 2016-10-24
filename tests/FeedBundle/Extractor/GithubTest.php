@@ -71,13 +71,14 @@ class GithubTest extends \PHPUnit_Framework_TestCase
 
         $mock = new Mock([
             new Response(200, [], Stream::factory(json_encode(array(
-                    'html_url' => 'http://1.1.1.1',
-                    'title' => 'test',
-                    'comments' => 0,
-                    'created_at' => '2015-08-04T13:49:04Z',
-                    'body_html' => 'body',
-                    'user' => array('html_url' => 'http://2.2.2.2', 'login' => 'login'), )))),
-            new Response(400, [], Stream::factory('oops')),
+                'html_url' => 'http://1.1.1.1',
+                'title' => 'test',
+                'comments' => 0,
+                'created_at' => '2015-08-04T13:49:04Z',
+                'body_html' => 'body',
+                'user' => array('html_url' => 'http://2.2.2.2', 'login' => 'login'),
+            )))),
+            new Response(400, [], Stream::factory(json_encode('oops'))),
         ]);
 
         $client->getEmitter()->attach($mock);
@@ -114,7 +115,7 @@ class GithubTest extends \PHPUnit_Framework_TestCase
                 'created_at' => '2015-08-04T13:49:04Z',
                 'body_html' => 'body',
                 'user' => array('html_url' => 'http://2.2.2.2', 'login' => 'login'), )))),
-            new Response(400, [], Stream::factory('oops')),
+            new Response(400, [], Stream::factory(json_encode('oops'))),
         ]);
 
         $client->getEmitter()->attach($mock);
