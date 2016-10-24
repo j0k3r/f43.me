@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "868e76086787b2794ee2e5fd56fa883d",
-    "content-hash": "d9c5c552af71faea644f87a626eb15dd",
+    "hash": "0d3eaef8946927a0fd7e7a5f35e9c7f6",
+    "content-hash": "652113801ae25bb8a45960ce046fb36a",
     "packages": [
         {
             "name": "behat/transliterator",
@@ -817,16 +817,16 @@
         },
         {
             "name": "doctrine/mongodb-odm",
-            "version": "1.0.8",
+            "version": "1.1.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/mongodb-odm.git",
-                "reference": "052971cd400fe0c6ea48dd3319fa98d145b0a843"
+                "reference": "e839648ef7649757aae3b9818236a6fa47c016cd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/mongodb-odm/zipball/052971cd400fe0c6ea48dd3319fa98d145b0a843",
-                "reference": "052971cd400fe0c6ea48dd3319fa98d145b0a843",
+                "url": "https://api.github.com/repos/doctrine/mongodb-odm/zipball/e839648ef7649757aae3b9818236a6fa47c016cd",
+                "reference": "e839648ef7649757aae3b9818236a6fa47c016cd",
                 "shasum": ""
             },
             "require": {
@@ -836,8 +836,8 @@
                 "doctrine/common": "~2.4",
                 "doctrine/inflector": "~1.0",
                 "doctrine/instantiator": "~1.0.1",
-                "doctrine/mongodb": "~1.2",
-                "php": ">=5.3.2",
+                "doctrine/mongodb": "~1.3",
+                "php": "^5.6 || ^7.0",
                 "symfony/console": "~2.3|~3.0"
             },
             "require-dev": {
@@ -845,12 +845,13 @@
                 "symfony/yaml": "~2.3|~3.0"
             },
             "suggest": {
+                "alcaeus/mongo-php-adapter": "Allows usage of PHP 7",
                 "symfony/yaml": "Enables the YAML metadata mapping driver"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.0.x-dev"
+                    "dev-master": "1.1.x-dev"
                 }
             },
             "autoload": {
@@ -896,25 +897,25 @@
                 "odm",
                 "persistence"
             ],
-            "time": "2016-10-07 09:17:14"
+            "time": "2016-10-07 09:18:05"
         },
         {
             "name": "doctrine/mongodb-odm-bundle",
-            "version": "3.1.0",
+            "version": "3.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/DoctrineMongoDBBundle.git",
-                "reference": "5ecd5d553816a258bb5860a5a2eddb67b4446f75"
+                "reference": "e98a08a0c7ba495ef2436fffea1c225da1d0ac18"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/DoctrineMongoDBBundle/zipball/5ecd5d553816a258bb5860a5a2eddb67b4446f75",
-                "reference": "5ecd5d553816a258bb5860a5a2eddb67b4446f75",
+                "url": "https://api.github.com/repos/doctrine/DoctrineMongoDBBundle/zipball/e98a08a0c7ba495ef2436fffea1c225da1d0ac18",
+                "reference": "e98a08a0c7ba495ef2436fffea1c225da1d0ac18",
                 "shasum": ""
             },
             "require": {
-                "doctrine/mongodb-odm": "^1.0",
-                "php": "^5.5 || ^7.0",
+                "doctrine/mongodb-odm": "^1.1",
+                "php": "^5.6 || ^7.0",
                 "psr/log": "^1.0",
                 "symfony/config": "^2.7 || ^3.0",
                 "symfony/console": "^2.7 || ^3.0",
@@ -968,7 +969,7 @@
                 "persistence",
                 "symfony"
             ],
-            "time": "2016-04-10 19:04:45"
+            "time": "2016-06-30 12:19:21"
         },
         {
             "name": "gedmo/doctrine-extensions",
@@ -3103,27 +3104,29 @@
     "packages-dev": [
         {
             "name": "doctrine/data-fixtures",
-            "version": "v1.1.1",
+            "version": "v1.2.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/data-fixtures.git",
-                "reference": "bd44f6b6e40247b6530bc8abe802e4e4d914976a"
+                "reference": "b3cae5efef97191a08d53d733260f7eb667c16e4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/data-fixtures/zipball/bd44f6b6e40247b6530bc8abe802e4e4d914976a",
-                "reference": "bd44f6b6e40247b6530bc8abe802e4e4d914976a",
+                "url": "https://api.github.com/repos/doctrine/data-fixtures/zipball/b3cae5efef97191a08d53d733260f7eb667c16e4",
+                "reference": "b3cae5efef97191a08d53d733260f7eb667c16e4",
                 "shasum": ""
             },
             "require": {
                 "doctrine/common": "~2.2",
-                "php": ">=5.3.2"
+                "php": "^5.6 || ^7.0"
             },
             "conflict": {
                 "doctrine/orm": "< 2.4"
             },
             "require-dev": {
-                "doctrine/orm": "~2.4"
+                "doctrine/dbal": "^2.5.4",
+                "doctrine/orm": "^2.5.4",
+                "phpunit/phpunit": "^5.4.6"
             },
             "suggest": {
                 "doctrine/mongodb-odm": "For loading MongoDB ODM fixtures",
@@ -3133,7 +3136,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.1.x-dev"
+                    "dev-master": "1.3.x-dev"
                 }
             },
             "autoload": {
@@ -3156,7 +3159,7 @@
             "keywords": [
                 "database"
             ],
-            "time": "2015-03-30 12:14:13"
+            "time": "2016-06-20 18:08:26"
         },
         {
             "name": "doctrine/doctrine-fixtures-bundle",
@@ -3387,11 +3390,11 @@
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
-        "php": ">=5.5.9",
+        "php": ">=5.6",
         "ext-mongo": "^1.5"
     },
     "platform-dev": [],
     "platform-overrides": {
-        "php": "5.5.9"
+        "php": "5.6"
     }
 }
