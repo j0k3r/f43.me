@@ -16,7 +16,7 @@ use Psr\Log\NullLogger;
 use GuzzleHttp\Client;
 
 /**
- * Crazy complicated tests with too much mocks to replicate a bug where url with & in reddit feed are converted to &amp; and breaks the link
+ * Crazy complicated tests with too much mocks to replicate a bug where url with & in reddit feed are converted to &amp; and breaks the link.
  */
 class ImportTest extends \PHPUnit_Framework_TestCase
 {
@@ -59,15 +59,15 @@ class ImportTest extends \PHPUnit_Framework_TestCase
                         'xml_base_explicit' => false,
                         'xml_lang' => '',
                     ]],
-                ]
-            ]
+                ],
+            ],
         ]);
         $rssFeedItem->set_registry(new \SimplePie_Registry());
 
         $rssFeed->data = [
             'items' => [
-                $rssFeedItem
-            ]
+                $rssFeedItem,
+            ],
         ];
 
         $rssFeed->init();
@@ -181,15 +181,15 @@ class ImportTest extends \PHPUnit_Framework_TestCase
                         'xml_base_explicit' => false,
                         'xml_lang' => '',
                     ]],
-                ]
-            ]
+                ],
+            ],
         ]);
         $rssFeedItem->set_registry(new \SimplePie_Registry());
 
         $rssFeed->data = [
             'items' => [
-                $rssFeedItem
-            ]
+                $rssFeedItem,
+            ],
         ];
 
         $rssFeed->init();
