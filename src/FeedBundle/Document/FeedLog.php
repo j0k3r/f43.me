@@ -18,7 +18,7 @@ class FeedLog
     protected $id;
 
     /**
-     * @MongoDB\Int
+     * @MongoDB\Field(type="int")
      * @Assert\NotBlank()
      */
     protected $items_number;
