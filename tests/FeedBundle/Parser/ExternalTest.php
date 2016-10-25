@@ -15,7 +15,7 @@ class ExternalTest extends \PHPUnit_Framework_TestCase
         $client = new Client();
 
         $mock = new Mock([
-            new Response(200, []),
+            new Response(200, [], Stream::factory(json_encode(''))),
         ]);
 
         $client->getEmitter()->attach($mock);
@@ -43,7 +43,7 @@ class ExternalTest extends \PHPUnit_Framework_TestCase
         $client = new Client();
 
         $mock = new Mock([
-            new Response(400, [], Stream::factory('oops')),
+            new Response(400, [], Stream::factory(json_encode('oops'))),
         ]);
 
         $client->getEmitter()->attach($mock);

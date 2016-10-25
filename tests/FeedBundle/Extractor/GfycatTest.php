@@ -40,8 +40,8 @@ class GfycatTest extends \PHPUnit_Framework_TestCase
 
         $mock = new Mock([
             new Response(200, [], Stream::factory(json_encode(array('gfyItem' => array('title' => 'my title', 'posterUrl' => 'http://0.0.0.0/img.gif'))))),
-            new Response(200, [], Stream::factory('')),
-            new Response(400, [], Stream::factory('oops')),
+            new Response(200, [], Stream::factory(json_encode(''))),
+            new Response(400, [], Stream::factory(json_encode('oops'))),
         ]);
 
         $client->getEmitter()->attach($mock);

@@ -41,8 +41,8 @@ class Rue89Test extends \PHPUnit_Framework_TestCase
 
         $mock = new Mock([
             new Response(200, [], Stream::factory(json_encode(array('node' => array('title' => 'my title', 'intro' => 'my description', 'imgTabletteCarousel' => 'http://0.0.0.0/img.jpg', 'body' => '<iframe/>'))))),
-            new Response(200, [], Stream::factory('')),
-            new Response(400, [], Stream::factory('oops')),
+            new Response(200, [], Stream::factory(json_encode(''))),
+            new Response(400, [], Stream::factory(json_encode('oops'))),
         ]);
 
         $client->getEmitter()->attach($mock);
