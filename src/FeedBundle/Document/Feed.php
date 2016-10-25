@@ -22,18 +22,18 @@ class Feed
     protected $id;
 
     /**
-     * @MongoDB\String
+     * @MongoDB\Field(type="string")
      * @Assert\NotBlank()
      */
     protected $name;
 
     /**
-     * @MongoDB\String
+     * @MongoDB\Field(type="string")
      */
     protected $description;
 
     /**
-     * @MongoDB\String
+     * @MongoDB\Field(type="string")
      * @Assert\NotBlank()
      * @Assert\Url()
      * @FeedAssert\ConstraintRss
@@ -41,50 +41,50 @@ class Feed
     protected $link;
 
     /**
-     * @MongoDB\String
+     * @MongoDB\Field(type="string")
      * @Assert\NotBlank()
      */
     protected $host;
 
     /**
-     * @MongoDB\String
+     * @MongoDB\Field(type="string")
      */
     protected $logo;
 
     /**
-     * @MongoDB\String
+     * @MongoDB\Field(type="string")
      */
     protected $color;
 
     /**
-     * @MongoDB\String
+     * @MongoDB\Field(type="string")
      */
     protected $parser;
 
     /**
-     * @MongoDB\String
+     * @MongoDB\Field(type="string")
      */
     protected $formatter;
 
     /**
-     * @MongoDB\Int
+     * @MongoDB\Field(type="int")
      */
     protected $nb_items = 0;
 
     /**
      * @Gedmo\Slug(fields={"name"}, updatable=false, unique=true)
-     * @MongoDB\String
+     * @MongoDB\Field(type="string")
      * @MongoDB\Index
      */
     protected $slug;
 
     /**
-     * @MongoDB\Boolean
+     * @MongoDB\Field(type="bool")
      */
     protected $is_private = false;
 
     /**
-     * @MongoDB\String
+     * @MongoDB\Field(type="string")
      */
     protected $sort_by;
 

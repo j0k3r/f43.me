@@ -94,7 +94,7 @@ git clone git@github.com:j0k3r/f43.me.git
 cd f43.me
 composer install
 npm install
-php app/console doctrine:mongodb:schema:create
+php bin/console doctrine:mongodb:schema:create
 ./node_modules/gulp/bin/gulp.js
 ```
 
@@ -102,19 +102,19 @@ You'll need to setup 3 CRONs in order to fetch contents :
 
 ```
 # fetch content for existing feed
-*/2 * * * * php /path/to/f43.me/app/console feed:fetch-items --env=prod --age=old
+*/2 * * * * php /path/to/f43.me/bin/console feed:fetch-items --env=prod --age=old
 
 # fetch content for fresh created feed
-*/5 * * * * php /path/to/f43.me/app/console feed:fetch-items --env=prod --age=new
+*/5 * * * * php /path/to/f43.me/bin/console feed:fetch-items --env=prod --age=new
 
 # cleanup old item. You can remove this one if you want to keep ALL items
-0   3 * * * php /path/to/f43.me/app/console feed:remove-items --env=prod
+0   3 * * * php /path/to/f43.me/bin/console feed:remove-items --env=prod
 ```
 
 You can also run a command to fetch all new items from a given feed, using its slug:
 
 ```
-php /path/to/f43.me/app/console feed:fetch-items --env=prod --slug=reddit -t
+php /path/to/f43.me/bin/console feed:fetch-items --env=prod --slug=reddit -t
 ```
 
 ## License

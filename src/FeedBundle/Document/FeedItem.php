@@ -20,26 +20,26 @@ class FeedItem
     protected $id;
 
     /**
-     * @MongoDB\String
+     * @MongoDB\Field(type="string")
      */
     protected $title;
 
     /**
-     * @MongoDB\String
+     * @MongoDB\Field(type="string")
      * @Assert\NotBlank()
      * @Assert\Url()
      */
     protected $link;
 
     /**
-     * @MongoDB\String
+     * @MongoDB\Field(type="string")
      * @Assert\NotBlank()
      * @Assert\Url()
      */
     protected $permalink;
 
     /**
-     * @MongoDB\String
+     * @MongoDB\Field(type="string")
      */
     protected $content;
 
