@@ -1,10 +1,10 @@
 # create vhost
 bash /tmp/vhost.sh
 
-# launch php
+echo "Launch PHP..."
 php-fpm -D
 
-# cleanup build
+echo "Cleanup build..."
 cd /usr/share/nginx/html
 cp app/config/parameters.yml.docker app/config/parameters.yml
 chown www-data ./var/cache
@@ -15,11 +15,15 @@ chmod -R 777 var/cache/ var/logs/ var/sessions/
 # install mongdb adaptater for PHP7
 composer require "alcaeus/mongo-php-adapter=^1.0.0" --ignore-platform-reqs
 
-# install assets
+# re-source the bashrc, so nvm will be loaded
+. /root/.bashrc
+
+echo "Installing assets..."
 npm install
 ./node_modules/gulp/bin/gulp.js
 
-# setup database
+echo "Setup database..."
 php bin/console doctrine:mongodb:schema:create
 
+echo "Ready 🚀"
 exec nginx -g 'daemon off;'
