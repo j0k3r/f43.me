@@ -44,18 +44,18 @@ class FeedItem
     protected $content;
 
     /**
-     * @MongoDB\Date
+     * @MongoDB\Field(type="date")
      */
     protected $published_at;
 
     /**
-     * @MongoDB\Date
+     * @MongoDB\Field(type="date")
      * @Gedmo\Timestampable(on="create")
      */
     protected $created_at;
 
     /**
-     * @MongoDB\Date
+     * @MongoDB\Field(type="date")
      * @Gedmo\Timestampable(on="update")
      */
     protected $updated_at;
