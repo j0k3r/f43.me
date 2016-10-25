@@ -3,15 +3,15 @@ imports:
     - { resource: security.yml }
 
 framework:
-    #esi:             ~
-    translator:      { fallback: %locale% }
-    secret:          %secret%
+    #esi: ~
+    translator: { fallback: "%locale%" }
+    secret: "%secret%"
     router:
         resource: "%kernel.root_dir%/config/routing.yml"
-        strict_requirements: %kernel.debug%
-    form:            ~
+        strict_requirements: "%kernel.debug%"
+    form: ~
     csrf_protection: ~
-    validation:      { enable_annotations: true }
+    validation: { enable_annotations: true }
     templating:
         engines: ['twig']
     assets:
@@ -23,12 +23,12 @@ framework:
     session:
         name: f43me
         save_path: "%kernel.root_dir%/../var/sessions/%kernel.environment%"
-    fragments:       ~
+    fragments: ~
     http_method_override: true
 
 # Twig Configuration
 twig:
-    debug:            "%kernel.debug%"
+    debug: "%kernel.debug%"
     strict_variables: "%kernel.debug%"
     globals:
         ga_tracking: "%google_analytics_code%"
@@ -57,7 +57,7 @@ monolog:
     channels: ['import']
     handlers:
         console:
-            type:   console
+            type: console
             verbosity_levels:
                 VERBOSITY_NORMAL: DEBUG
             channels: import
