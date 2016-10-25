@@ -89,18 +89,18 @@ class Feed
     protected $sort_by;
 
     /**
-     * @MongoDB\Date
+     * @MongoDB\Field(type="date")
      */
     protected $last_item_cached_at;
 
     /**
-     * @MongoDB\Date
+     * @MongoDB\Field(type="date")
      * @Gedmo\Timestampable(on="create")
      */
     protected $created_at;
 
     /**
-     * @MongoDB\Date
+     * @MongoDB\Field(type="date")
      * @Gedmo\Timestampable(on="change", field={"name", "description", "link", "host", "parser", "formatter", "is_private", "sort_by"})
      */
     protected $updated_at;

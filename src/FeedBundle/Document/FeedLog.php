@@ -24,7 +24,7 @@ class FeedLog
     protected $items_number;
 
     /**
-     * @MongoDB\Date
+     * @MongoDB\Field(type="date")
      * @Gedmo\Timestampable(on="create")
      */
     protected $created_at;
