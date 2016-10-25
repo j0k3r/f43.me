@@ -1,0 +1,30 @@
+version: '2'
+services:
+  db:
+    image: mongo
+    ports:
+      - "27017:27017"
+
+  nginx-php7.0:
+    build:
+      context: ./docker
+      dockerfile: ./php7.0/Dockerfile
+    ports:
+      - "8100:8100"
+    links:
+      - db
+    volumes:
+      - ./:/usr/share/nginx/html
+    command: ["bash", "/usr/share/nginx/html/docker/php7.0/launch-f43me.sh"]
+
+  # nginx-php7.1:
+  #   build:
+  #     context: ./docker
+  #     dockerfile: ./php7.1/Dockerfile
+  #   ports:
+  #     - "8100:8100"
+  #   links:
+  #     - db
+  #   volumes:
+  #     - ./:/usr/share/nginx/html
+  #   command: ["bash", "/usr/share/nginx/html/docker/php7.1/launch-f43me.sh"]

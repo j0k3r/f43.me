@@ -72,8 +72,8 @@ Since the use of the Parser API is *freely available for non-commercial use* I t
 
 ### Requirements
 
- * PHP >= 5.5.0
- * MongoDB & the `php-mongo` extension
+ * PHP >= 5.6.0
+ * MongoDB & the `php-mongo` extension (or `php-mongodb` for PHP 7.0 with `alcaeus/mongo-php-adapter=^1.0.0`)
  * [apcu](http://pecl.php.net/package/APCu) >= 4.0
 
 For each external API that improvers / extractors / parsers use, you will need an api key:
@@ -116,6 +116,16 @@ You can also run a command to fetch all new items from a given feed, using its s
 ```
 php /path/to/f43.me/bin/console feed:fetch-items --env=prod --slug=reddit -t
 ```
+
+### Try it
+
+You can use the built-in Docker image using `docker-compose` (which will use PHP 7):
+
+```
+docker-composer up --build
+```
+
+You should be able to access the interface using `http://localhost:8100/app_dev.php`
 
 ## License
 
