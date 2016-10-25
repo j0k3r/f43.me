@@ -20,6 +20,8 @@ parameters:
 
     tumblr.api_key: xxxx
 
+    twitch.client_id: xxxx
+
     parser.regexps:
         # class or id
         unlikelyCandidates: /noprint|hidden|avatar|ligatus|col_right|news-colonne-droite|combx|comment|community|disqus|extra|foot|header|menu|remark|rss|shoutbox|sidebar|sponsor|ad-break|agegate|pagination|pager|popup|addthis|response|slate_associated_bn|reseaux|sharing|auteur|tag|feedback|meta|kudo|sidebar|copyright|bio|moreInfo|legal|share|contributor/i
@@ -40,3 +42,8 @@ parameters:
     guzzle.options:
         request.options:
             timeout: 10
+
+    twitter.consumer_key: xxx
+    twitter.consumer_secret: xxx
+    twitter.access_token: xxx
+    twitter.access_token_secret: xxx
