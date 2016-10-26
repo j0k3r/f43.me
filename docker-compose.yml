@@ -1,7 +1,7 @@
 version: '2'
 services:
   db:
-    image: mongo
+    image: mvertes/alpine-mongo
     ports:
       - "27017:27017"
 
