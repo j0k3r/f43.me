@@ -1,17 +1,18 @@
-FROM debian:jessie
+FROM php:7.1-rc-fpm
 
-# Install nginx, php7 & ruby stuff (for sass)
-RUN apt-get update && apt-get install -y -q wget \
-    && echo "deb http://packages.dotdeb.org jessie all" >> /etc/apt/sources.list \
-    && echo "deb-src http://packages.dotdeb.org jessie all" >> /etc/apt/sources.list \
-    && wget https://www.dotdeb.org/dotdeb.gpg \
-    && apt-key add dotdeb.gpg && apt-get update \
-    && apt-get install -y -q nginx php7.0 php7.0-fpm php7.0-curl php7.0-cli php7.0-xml php7.0-intl php7.0-iconv php7.0-json php7.0-tidy php7.0-mongodb php7.0-mongo php7.0-xdebug php7.0-mbstring php7.0-apcu php7.0-zip \
+# Install nginx & ruby stuff (for sass)
+RUN apt-get update && apt-get install -y -q nginx \
     && apt-get install -y -q libssl-dev build-essential vim git curl ruby2.1-dev rubygems
 
+RUN apt-get update \
+    && pecl install mongodb \
+    && docker-php-ext-enable mongodb \
+    && pecl install zip \
+    && docker-php-ext-enable zip
+
 ADD ./fastcgi-php.conf /etc/nginx/snippets/fastcgi-php.conf
-ADD ./php7.0/upstream-php.conf /etc/nginx/conf.d/php7.0-fpm.conf
-ADD ./php7.0/vhost.sh /tmp/vhost.sh
+ADD ./upstream-php.conf /etc/nginx/conf.d/php7.0-fpm.conf
+ADD ./vhost.sh /tmp/vhost.sh
 
 RUN curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.32.1/install.sh | bash
 

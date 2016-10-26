@@ -8,23 +8,23 @@ services:
   nginx-php7.0:
     build:
       context: ./docker
-      dockerfile: ./php7.0/Dockerfile
+      dockerfile: ./Dockerfile-php7.0
     ports:
       - "8100:8100"
     links:
       - db
     volumes:
       - ./:/usr/share/nginx/html
-    command: ["bash", "/usr/share/nginx/html/docker/php7.0/launch-f43me.sh"]
+    command: ["bash", "/usr/share/nginx/html/docker/launch-f43me.sh"]
 
   # nginx-php7.1:
   #   build:
   #     context: ./docker
-  #     dockerfile: ./php7.1/Dockerfile
+  #     dockerfile: ./Dockerfile-php7.1
   #   ports:
   #     - "8100:8100"
   #   links:
   #     - db
   #   volumes:
   #     - ./:/usr/share/nginx/html
-  #   command: ["bash", "/usr/share/nginx/html/docker/php7.1/launch-f43me.sh"]
+  #   command: ["bash", "/usr/share/nginx/html/docker/launch-f43me.sh"]

@@ -1,19 +1,20 @@
-FROM php:7.1-rc-fpm
+FROM php:7.0-fpm
 
 # Install nginx & ruby stuff (for sass)
-RUN apt-get update && apt-get install -y -q wget \
-    && apt-get install -y -q nginx \
+RUN apt-get update && apt-get install -y -q nginx \
     && apt-get install -y -q libssl-dev build-essential vim git curl ruby2.1-dev rubygems
 
 RUN apt-get update \
+    && pecl install xdebug \
+    && docker-php-ext-enable xdebug \
     && pecl install mongodb \
     && docker-php-ext-enable mongodb \
     && pecl install zip \
     && docker-php-ext-enable zip
 
 ADD ./fastcgi-php.conf /etc/nginx/snippets/fastcgi-php.conf
-ADD ./php7.1/upstream-php.conf /etc/nginx/conf.d/php7.0-fpm.conf
-ADD ./php7.1/vhost.sh /tmp/vhost.sh
+ADD ./upstream-php.conf /etc/nginx/conf.d/php7.0-fpm.conf
+ADD ./vhost.sh /tmp/vhost.sh
 
 RUN curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.32.1/install.sh | bash
 
