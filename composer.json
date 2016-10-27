@@ -19,19 +19,18 @@
         }
     ],
     "require": {
-        "php": ">=5.5.9",
-        "ext-mongo": "^1.5",
-        "symfony/symfony": "3.1.*",
+        "php": "^5.6 || ^7.0",
+        "symfony/symfony": "3.2.*",
         "doctrine/doctrine-bundle": "^1.6",
         "twig/extensions": "~1.1",
         "symfony/monolog-bundle": "^2.8",
         "sensio/distribution-bundle": "^5.0",
         "sensio/framework-extra-bundle": "^3.0.2",
         "incenteev/composer-parameter-handler": "^2.0",
-        "doctrine/mongodb-odm-bundle": "^3.1.0",
+        "doctrine/mongodb-odm-bundle": "^3.2.0",
         "stof/doctrine-extensions-bundle": "~1.1",
         "j0k3r/graby": "~1.0",
-        "simplepie/simplepie": "~1.3",
+        "simplepie/simplepie": "dev-master as 1.4.3",
         "zurb/foundation": "4.3.2",
         "j0k3r/php-imgur-api-client": "~1.0",
         "guzzlehttp/guzzle": "~5.0",
@@ -42,7 +41,8 @@
         "satooshi/php-coveralls": "~1.0",
         "sensio/generator-bundle": "~3.0",
         "doctrine/doctrine-fixtures-bundle": "~2.2",
-        "symfony/phpunit-bridge": "^3.0"
+        "symfony/phpunit-bridge": "^3.0",
+        "phpunit/phpunit": "^5.6"
     },
     "scripts": {
         "post-cmd": [
@@ -63,7 +63,7 @@
     "prefer-stable": true,
     "config": {
         "platform": {
-            "php": "5.5.9"
+            "php": "5.6"
         }
     },
     "extra": {

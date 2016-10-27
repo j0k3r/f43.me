@@ -3,18 +3,25 @@ language: php
 services:
     - mongodb
 
+env:
+    global:
+        - MONGO_DRIVER=mongodb
+
 php:
-    - 5.5
-    - 5.6
     - 7.0
-    - hhvm
+    - 7.1
+    - nightly
 
 # run build against nightly but allow them to fail
 matrix:
     fast_finish: true
-    allow_failures:
+    include:
+        - php: 5.6
+          env: MONGO_DRIVER=mongo
         - php: 7.0
-        - php: hhvm
+          env: COVERAGE=run
+    allow_failures:
+        - php: nightly
 
 # faster builds on new travis setup not using sudo
 sudo: false
@@ -30,16 +37,17 @@ install:
 
 before_script:
     - if [ -n "$GH_TOKEN" ]; then composer config github-oauth.github.com ${GH_TOKEN}; fi;
-    - if [[ "$TRAVIS_PHP_VERSION" != "7.0" ]]; then echo "extension = mongo.so" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini; fi;
-    - if [[ "$TRAVIS_PHP_VERSION" = "5.6" ]]; then PHPUNIT_FLAGS="--coverage-clover build/logs/clover.xml"; fi;
+    - yes '' | pecl -q install -f $MONGO_DRIVER
+    - if [[ ${TRAVIS_PHP_VERSION:0:2} == "7." || "$TRAVIS_PHP_VERSION" = "nightly" ]]; then composer require "alcaeus/mongo-php-adapter=^1.0.0" --ignore-platform-reqs; fi
+    - if [ $COVERAGE = run ]; then PHPUNIT_FLAGS="--coverage-clover build/logs/clover.xml"; fi;
 
 script:
     - ant prepare
     - mkdir -p build/logs
-    - phpunit -v $PHPUNIT_FLAGS
+    - ./vendor/bin/phpunit -v $PHPUNIT_FLAGS
 
 after_script:
     - |
-        if [ $TRAVIS_PHP_VERSION = '5.6' ]; then
+        if [ $COVERAGE = run ]; then
             php vendor/satooshi/php-coveralls/bin/coveralls -v
         fi
