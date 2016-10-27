@@ -64,7 +64,7 @@ class FeedLogController extends Controller
         $form = $this->createDeleteAllForm();
         $form->handleRequest($request);
 
-        if ($form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) {
             $res = $this->getDocumentManager()
                 ->getRepository('Api43FeedBundle:FeedLog')
                 ->deleteAllByFeedId($feed->getId());

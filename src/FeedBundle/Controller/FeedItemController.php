@@ -50,7 +50,7 @@ class FeedItemController extends Controller
         $form = $this->createDeleteAllForm();
         $form->handleRequest($request);
 
-        if ($form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) {
             $dm = $this->getDocumentManager();
             $res = $dm->getRepository('Api43FeedBundle:FeedItem')->deleteAllByFeedId($feed->getId());
 

@@ -68,9 +68,7 @@ class RemoveItemsCommandTest extends WebTestCase
 
     public function testRemoveAllMaxYes()
     {
-        $helper = $this->command->getHelper('question');
-        $helper->setInputStream($this->getInputStream('yes\\n'));
-
+        $this->commandTester->setInputs(['yes\\n']);
         $this->commandTester->execute(array(
             'command' => $this->command->getName(),
             '-t' => true,
@@ -83,9 +81,7 @@ class RemoveItemsCommandTest extends WebTestCase
 
     public function testRemoveAllMaxNo()
     {
-        $helper = $this->command->getHelper('question');
-        $helper->setInputStream($this->getInputStream('no\\n'));
-
+        $this->commandTester->setInputs(['no\\n']);
         $this->commandTester->execute(array(
             'command' => $this->command->getName(),
             '-t' => true,
