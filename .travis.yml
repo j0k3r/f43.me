@@ -44,7 +44,7 @@ before_script:
 script:
     - ant prepare
     - mkdir -p build/logs
-    - phpunit -v $PHPUNIT_FLAGS
+    - ./vendor/bin/phpunit -v $PHPUNIT_FLAGS
 
 after_script:
     - |
