@@ -47,9 +47,48 @@ class TwitterTest extends \PHPUnit_Framework_TestCase
                     'name' => 'the name',
                     'screen_name' => 'the_name',
                 ),
-                'text' => 'my awesome tweet',
+                'full_text' => 'My #awesome @tweet https://t.co/123456789 https://t.co/AfwH2EVRO3',
                 'created_at' => 'Sun Oct 19 11:31:10 +0000 2014',
-                'extended_entities' => array('media' => array(array('media_url_https' => 'http://0.0.0.0/image.jpg'))),
+                'extended_entities' => array(
+                    'media' => array(
+                        array(
+                            'media_url_https' => 'http://0.0.0.0/image.jpg',
+                            'url' => 'https://t.co/AfwH2EVRO3'
+                        )
+                    )
+                ),
+                'entities' => [
+                    'urls' => [
+                        [
+                            'url' => 'https://t.co/123456789',
+                            'expanded_url' => 'http://1.1.1.1',
+                            'display_url' => 'http://1.1.1...',
+                        ]
+                    ],
+                    'user_mentions' => [
+                        [
+                            'screen_name' => 'tweet',
+                        ]
+                    ],
+                    'hashtags' => [
+                        [
+                            'text' => 'awesome',
+                        ]
+                    ],
+                ],
+                'quoted_status' => [
+                    'user' => array(
+                        'name' => 'myself',
+                        'screen_name' => 'myself',
+                    ),
+                    'full_text' => 'myself !!',
+                    'created_at' => 'Mon Nov 20 11:31:10 +0000 2014',
+                    'entities' => [
+                        'urls' => [],
+                        'user_mentions' => [],
+                        'hashtags' => [],
+                    ],
+                ]
             )));
 
         $twitter = new Twitter($twitterOAuth);
@@ -58,10 +97,13 @@ class TwitterTest extends \PHPUnit_Framework_TestCase
         $content = $twitter->getContent();
 
         $this->assertContains('the name', $content);
-        $this->assertContains('the_name', $content);
-        $this->assertContains('my awesome tweet', $content);
+        $this->assertContains('<a href="https://twitter.com/the_name">@the_name</a>', $content, 'username ok');
+        $this->assertContains('<a href="https://twitter.com/hashtag/awesome?src=hash">#awesome</a>', $content, 'Hashtag ok');
+        $this->assertContains('<a href="https://twitter.com/tweet">@tweet</a>', $content, 'mention ok');
+        $this->assertContains('<a href="http://1.1.1.1">http://1.1.1...</a>', $content, 'link ok');
         $this->assertContains('Sun Oct 19', $content);
-        $this->assertContains('img', $content);
+        $this->assertContains('<img src="http://0.0.0.0/image.jpg" />', $content, 'media ok');
+        $this->assertContains('@myself', $content, 'quote status ok');
     }
 
     public function testContentNoEntities()
@@ -77,8 +119,13 @@ class TwitterTest extends \PHPUnit_Framework_TestCase
                     'name' => 'the name',
                     'screen_name' => 'the_name',
                 ),
-                'text' => 'my awesome tweet',
+                'full_text' => 'my awesome tweet',
                 'created_at' => 'Sun Oct 19 11:31:10 +0000 2014',
+                'entities' => [
+                    'urls' => [],
+                    'user_mentions' => [],
+                    'hashtags' => [],
+                ],
             )));
 
         $twitter = new Twitter($twitterOAuth);
