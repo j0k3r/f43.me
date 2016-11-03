@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\FeedBundle\Controller;
+namespace tests\FeedBundle\Controller;
 
 class SecurityControllerTest extends FeedWebTestCase
 {
@@ -13,7 +13,7 @@ class SecurityControllerTest extends FeedWebTestCase
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
         $this->assertCount(1, $crawler->filter('h1'));
         $this->assertCount(0, $crawler->filter('h2'));
-        $this->assertCount(1, $legend = $crawler->filter('fieldset legend')->extract(array('_text')));
+        $this->assertCount(1, $legend = $crawler->filter('fieldset legend')->extract(['_text']));
         $this->assertEquals('Secured area', $legend[0]);
         $this->assertCount(1, $crawler->filter('input[type=text]'));
         $this->assertCount(1, $crawler->filter('input[type=password]'));
@@ -29,10 +29,10 @@ class SecurityControllerTest extends FeedWebTestCase
         $form = $crawler->filter('button[type=submit]')->form();
 
         // bad password
-        $data = array(
+        $data = [
             '_username' => 'admin',
             '_password' => 'admin',
-        );
+        ];
 
         $client->submit($form, $data);
 

@@ -29,7 +29,7 @@ class Twitch extends AbstractExtractor
             return false;
         }
 
-        if (!in_array($host, array('www.twitch.tv', 'twitch.tv'))) {
+        if (!in_array($host, ['www.twitch.tv', 'twitch.tv'], true)) {
             return false;
         }
 
@@ -56,10 +56,10 @@ class Twitch extends AbstractExtractor
 
         try {
             $data = $this->client
-                ->get('https://api.twitch.tv/kraken/videos/v'.$this->twitchId, ['headers' => ['Client-ID' => $this->twitchCliendId]])
+                ->get('https://api.twitch.tv/kraken/videos/v' . $this->twitchId, ['headers' => ['Client-ID' => $this->twitchCliendId]])
                 ->json();
         } catch (RequestException $e) {
-            $this->logger->warning('Twitch extract failed for: '.$this->twitchId, [
+            $this->logger->warning('Twitch extract failed for: ' . $this->twitchId, [
                 'exception' => $e,
             ]);
 
@@ -70,6 +70,6 @@ class Twitch extends AbstractExtractor
             return '';
         }
 
-        return '<div><h2>'.$data['title'].'</h2><p>'.$data['description'].'</p><p><img src="'.$data['preview'].'"></p><iframe src="https://player.twitch.tv/?video=v'.$this->twitchId.'" frameborder="0" scrolling="no" height="378" width="620"></iframe></div>';
+        return '<div><h2>' . $data['title'] . '</h2><p>' . $data['description'] . '</p><p><img src="' . $data['preview'] . '"></p><iframe src="https://player.twitch.tv/?video=v' . $this->twitchId . '" frameborder="0" scrolling="no" height="378" width="620"></iframe></div>';
     }
 }

@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\FeedBundle\Controller;
+namespace tests\FeedBundle\Controller;
 
 class FeedItemControllerTest extends FeedWebTestCase
 {
@@ -46,7 +46,7 @@ class FeedItemControllerTest extends FeedWebTestCase
 
         $this->assertGreaterThan(0, $preview = $crawler
             ->filter('table.table-items tbody tr td a.secondary.button.small.radius')
-            ->extract(array('_text', 'data-reveal-ajax'))
+            ->extract(['_text', 'data-reveal-ajax'])
         );
 
         return $preview[0][1];
@@ -155,7 +155,7 @@ class FeedItemControllerTest extends FeedWebTestCase
         $this->assertContains('hackernews', $client->getResponse()->headers->get('location'));
 
         $crawler = $client->followRedirect();
-        $this->assertCount(1, $alert = $crawler->filter('div.alert-box')->extract(array('_text')));
+        $this->assertCount(1, $alert = $crawler->filter('div.alert-box')->extract(['_text']));
         $this->assertContains('documents deleted!', $alert[0]);
     }
 

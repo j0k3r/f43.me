@@ -20,7 +20,7 @@ class Youtube extends AbstractExtractor
             return false;
         }
 
-        if (!in_array($host, array('www.youtube.com', 'youtube.com', 'youtu.be'))) {
+        if (!in_array($host, ['www.youtube.com', 'youtube.com', 'youtu.be'], true)) {
             return false;
         }
 
@@ -40,10 +40,10 @@ class Youtube extends AbstractExtractor
 
         try {
             $data = $this->client
-                ->get('http://www.youtube.com/oembed?format=json&url='.$this->youtubeUrl)
+                ->get('http://www.youtube.com/oembed?format=json&url=' . $this->youtubeUrl)
                 ->json();
         } catch (RequestException $e) {
-            $this->logger->warning('Youtube extract failed for: '.$this->youtubeUrl, [
+            $this->logger->warning('Youtube extract failed for: ' . $this->youtubeUrl, [
                 'exception' => $e,
             ]);
 
@@ -54,6 +54,6 @@ class Youtube extends AbstractExtractor
             return '';
         }
 
-        return '<div><h2>'.$data['title'].'</h2><p><img src="'.$data['thumbnail_url'].'"></p>'.$data['html'].'</div>';
+        return '<div><h2>' . $data['title'] . '</h2><p><img src="' . $data['thumbnail_url'] . '"></p>' . $data['html'] . '</div>';
     }
 }

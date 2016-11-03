@@ -2,9 +2,9 @@
 
 namespace Api43\FeedBundle\Controller;
 
+use Api43\FeedBundle\Form\Type\ItemTestType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
-use Api43\FeedBundle\Form\Type\ItemTestType;
 
 /**
  * FeedTest controller.
@@ -42,7 +42,7 @@ class FeedTestController extends Controller
                         $host = substr($host, 4);
                     }
 
-                    $filePath = $this->getParameter('kernel.root_dir').'/site_config/'.$host.'.txt';
+                    $filePath = $this->getParameter('kernel.root_dir') . '/site_config/' . $host . '.txt';
                     file_put_contents($filePath, $siteConfig);
                 }
             }

@@ -6,8 +6,8 @@ use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
-use Symfony\Component\Filesystem\LockHandler;
 use Symfony\Component\Console\Question\ConfirmationQuestion;
+use Symfony\Component\Filesystem\LockHandler;
 
 class RemoveItemsCommand extends ContainerAwareCommand
 {
@@ -51,7 +51,7 @@ class RemoveItemsCommand extends ContainerAwareCommand
         if ($slug = $input->getOption('slug')) {
             $feed = $feedRepo->findOneBySlug($slug);
             if (!$feed) {
-                return $output->writeLn('<error>Unable to find Feed document:</error> <comment>'.$slug.'</comment>');
+                return $output->writeLn('<error>Unable to find Feed document:</error> <comment>' . $slug . '</comment>');
             }
             $feeds = [$feed];
         } else {
@@ -59,7 +59,7 @@ class RemoveItemsCommand extends ContainerAwareCommand
         }
 
         if ($input->getOption('with-trace')) {
-            $output->writeLn('<info>Feeds</info>: <comment>'.count($feeds).'</comment>');
+            $output->writeLn('<info>Feeds</info>: <comment>' . count($feeds) . '</comment>');
         }
 
         $totalRemoved = 0;
@@ -79,13 +79,13 @@ class RemoveItemsCommand extends ContainerAwareCommand
             $totalRemoved += $removed;
 
             if ($input->getOption('with-trace')) {
-                $output->writeLn('<info>'.$feed->getName().'</info>: <comment>'.$removed.'</comment> removed.');
+                $output->writeLn('<info>' . $feed->getName() . '</info>: <comment>' . $removed . '</comment> removed.');
             }
         }
 
         $dm->flush();
         $dm->clear();
 
-        $output->writeLn('<comment>'.$totalRemoved.'</comment> items removed.');
+        $output->writeLn('<comment>' . $totalRemoved . '</comment> items removed.');
     }
 }

@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\FeedBundle\Improver;
+namespace tests\FeedBundle\Improver;
 
 use Api43\FeedBundle\Improver\HackerNews;
 use GuzzleHttp\Client;
@@ -9,10 +9,10 @@ class HackerNewsTest extends \PHPUnit_Framework_TestCase
 {
     public function dataMatch()
     {
-        return array(
-            array('news.ycombinator.com', true),
-            array('google.fr', false),
-        );
+        return [
+            ['news.ycombinator.com', true],
+            ['google.fr', false],
+        ];
     }
 
     /**

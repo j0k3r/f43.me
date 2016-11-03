@@ -33,7 +33,7 @@ class Imgur extends AbstractExtractor
         // some gallery got an extra query like ?gallery to change the display, we don't want it
         $query = parse_url($url, PHP_URL_QUERY);
         if ($query) {
-            $url = str_replace('?'.$query, '', $url);
+            $url = str_replace('?' . $query, '', $url);
         }
 
         // find the hash and the type (gallery or single image)
@@ -65,7 +65,7 @@ class Imgur extends AbstractExtractor
         try {
             $albumOrImage = $this->imgurClient->api('albumOrImage')->find($this->hash);
         } catch (\Exception $e) {
-            $this->logger->warning('Imgur extract failed for: '.$this->hash, [
+            $this->logger->warning('Imgur extract failed for: ' . $this->hash, [
                 'exception' => $e,
             ]);
 
@@ -74,20 +74,20 @@ class Imgur extends AbstractExtractor
 
         $images[] = $albumOrImage;
         if (isset($albumOrImage['images'])) {
-            $content = '<h2>'.$albumOrImage['title'].'</h2><p>'.$albumOrImage['description'].'</p>';
+            $content = '<h2>' . $albumOrImage['title'] . '</h2><p>' . $albumOrImage['description'] . '</p>';
             $images = $albumOrImage['images'];
         }
 
         foreach ($images as $image) {
-            $info = '<p>'.trim($image['title']);
-            $info .= $image['description'] ? ' – '.trim($image['description']) : '';
+            $info = '<p>' . trim($image['title']);
+            $info .= $image['description'] ? ' – ' . trim($image['description']) : '';
             $info .= '</p>';
 
             if (!$image['title'] && !$image['description']) {
                 $info = '';
             }
 
-            $content .= '<div>'.$info.'<img src="'.$image['link'].'" /></div>';
+            $content .= '<div>' . $info . '<img src="' . $image['link'] . '" /></div>';
         }
 
         return $content;

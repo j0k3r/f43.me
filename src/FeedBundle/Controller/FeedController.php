@@ -2,12 +2,12 @@
 
 namespace Api43\FeedBundle\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpFoundation\RedirectResponse;
 use Api43\FeedBundle\Document\Feed;
 use Api43\FeedBundle\Form\Type\FeedType;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 /**
  * Feed controller.
@@ -121,9 +121,9 @@ class FeedController extends Controller
      *
      * @param Feed $feed The document Feed (retrieving for a ParamConverter with the slug)
      *
-     * @return RedirectResponse|array
-     *
      * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException If document doesn't exists
+     *
+     * @return RedirectResponse|array
      */
     public function editAction(Request $request, Feed $feed)
     {
@@ -170,9 +170,9 @@ class FeedController extends Controller
      * @param Request $request The request object
      * @param Feed    $feed    The document Feed (retrieving for a ParamConverter with the slug)
      *
-     * @return RedirectResponse
-     *
      * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException If document doesn't exists
+     *
+     * @return RedirectResponse
      */
     public function deleteAction(Request $request, Feed $feed)
     {

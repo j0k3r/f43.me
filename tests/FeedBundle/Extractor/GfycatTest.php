@@ -1,28 +1,28 @@
 <?php
 
-namespace Tests\FeedBundle\Extractor;
+namespace tests\FeedBundle\Extractor;
 
 use Api43\FeedBundle\Extractor\Gfycat;
-use Monolog\Logger;
-use Monolog\Handler\TestHandler;
 use GuzzleHttp\Client;
-use GuzzleHttp\Subscriber\Mock;
 use GuzzleHttp\Message\Response;
 use GuzzleHttp\Stream\Stream;
+use GuzzleHttp\Subscriber\Mock;
+use Monolog\Handler\TestHandler;
+use Monolog\Logger;
 
 class GfycatTest extends \PHPUnit_Framework_TestCase
 {
     public function dataMatch()
     {
-        return array(
-            array('http://gfycat.com/RichPepperyFerret', true),
-            array('https://gfycat.com/RichPepperyFerret', true),
-            array('http://gfycat.com/NeatSpitefulCapeghostfrog', true),
-            array('http://www.gfycat.com/NeatSpitefulCapeghostfrog', true),
-            array('http://gfycat.com/', false),
-            array('https://goog.co', false),
-            array('http://user@:80', false),
-        );
+        return [
+            ['http://gfycat.com/RichPepperyFerret', true],
+            ['https://gfycat.com/RichPepperyFerret', true],
+            ['http://gfycat.com/NeatSpitefulCapeghostfrog', true],
+            ['http://www.gfycat.com/NeatSpitefulCapeghostfrog', true],
+            ['http://gfycat.com/', false],
+            ['https://goog.co', false],
+            ['http://user@:80', false],
+        ];
     }
 
     /**
@@ -39,7 +39,7 @@ class GfycatTest extends \PHPUnit_Framework_TestCase
         $client = new Client();
 
         $mock = new Mock([
-            new Response(200, [], Stream::factory(json_encode(array('gfyItem' => array('title' => 'my title', 'posterUrl' => 'http://0.0.0.0/img.gif'))))),
+            new Response(200, [], Stream::factory(json_encode(['gfyItem' => ['title' => 'my title', 'posterUrl' => 'http://0.0.0.0/img.gif']]))),
             new Response(200, [], Stream::factory(json_encode(''))),
             new Response(400, [], Stream::factory(json_encode('oops'))),
         ]);
@@ -50,7 +50,7 @@ class GfycatTest extends \PHPUnit_Framework_TestCase
         $gfycat->setClient($client);
 
         $logHandler = new TestHandler();
-        $logger = new Logger('test', array($logHandler));
+        $logger = new Logger('test', [$logHandler]);
         $gfycat->setLogger($logger);
 
         // first test fail because we didn't match an url, so GfycatId isn't defined

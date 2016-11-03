@@ -54,10 +54,10 @@ class Rue89 extends AbstractExtractor
 
         try {
             $data = $this->client
-                ->get('http://'.$host.'/export/mobile2/node/'.$this->rue89Id.'/full')
+                ->get('http://' . $host . '/export/mobile2/node/' . $this->rue89Id . '/full')
                 ->json();
         } catch (RequestException $e) {
-            $this->logger->warning('Rue89 extract failed for: '.$this->rue89Id, [
+            $this->logger->warning('Rue89 extract failed for: ' . $this->rue89Id, [
                 'exception' => $e,
             ]);
 
@@ -68,6 +68,6 @@ class Rue89 extends AbstractExtractor
             return '';
         }
 
-        return '<div><p>'.$data['node']['intro'].'</p><p><img src="'.$data['node']['imgTabletteCarousel'].'"></p>'.$data['node']['body'].'</div>';
+        return '<div><p>' . $data['node']['intro'] . '</p><p><img src="' . $data['node']['imgTabletteCarousel'] . '"></p>' . $data['node']['body'] . '</div>';
     }
 }

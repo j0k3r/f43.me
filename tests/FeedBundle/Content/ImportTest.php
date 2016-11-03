@@ -1,19 +1,19 @@
 <?php
 
-namespace Tests\FeedBundle\Content;
+namespace tests\FeedBundle\Content;
 
 use Api43\FeedBundle\Content\Extractor;
 use Api43\FeedBundle\Content\Import;
-use Api43\FeedBundle\Parser\Internal;
 use Api43\FeedBundle\Document\Feed;
 use Api43\FeedBundle\Extractor\ExtractorChain;
-use Api43\FeedBundle\Improver\ImproverChain;
-use Api43\FeedBundle\Parser\ParserChain;
-use Api43\FeedBundle\Improver\Reddit;
 use Api43\FeedBundle\Extractor\Youtube;
+use Api43\FeedBundle\Improver\ImproverChain;
+use Api43\FeedBundle\Improver\Reddit;
+use Api43\FeedBundle\Parser\Internal;
+use Api43\FeedBundle\Parser\ParserChain;
 use Graby\Graby;
-use Psr\Log\NullLogger;
 use GuzzleHttp\Client;
+use Psr\Log\NullLogger;
 
 /**
  * Crazy complicated tests with too much mocks to replicate a bug where url with & in reddit feed are converted to &amp; and breaks the link.
@@ -50,7 +50,7 @@ class ImportTest extends \PHPUnit_Framework_TestCase
                         <table>
                             <tr>
                                 <td>
-                                    <span><a href="'.$link.'">[link]</a></span> &#32;
+                                    <span><a href="' . $link . '">[link]</a></span> &#32;
                                 </td>
                             </tr>
                         </table>',
@@ -172,7 +172,7 @@ class ImportTest extends \PHPUnit_Framework_TestCase
                         <table>
                             <tr>
                                 <td>
-                                    <span><a href="'.$link.'">[link]</a></span> &#32;
+                                    <span><a href="' . $link . '">[link]</a></span> &#32;
                                 </td>
                             </tr>
                         </table>',

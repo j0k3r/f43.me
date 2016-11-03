@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\FeedBundle\Content;
+namespace tests\FeedBundle\Content;
 
 use Api43\FeedBundle\Content\Extractor;
 use Api43\FeedBundle\Parser\Internal;
@@ -10,7 +10,7 @@ class ExtractorTest extends \PHPUnit_Framework_TestCase
     protected function getContentExtrator($customParser = false, $customExtractor = false)
     {
         $feed = $this->getMockBuilder('Api43\FeedBundle\Document\Feed')
-            ->setMethods(array('getFormatter', 'getHost'))
+            ->setMethods(['getFormatter', 'getHost'])
             ->disableOriginalConstructor()
             ->getMock();
 
@@ -65,7 +65,7 @@ class ExtractorTest extends \PHPUnit_Framework_TestCase
             ->willReturn($defaultImprover);
 
         $this->graby = $this->getMockBuilder('Graby\Graby')
-            ->setMethods(array('fetchContent'))
+            ->setMethods(['fetchContent'])
             ->disableOriginalConstructor()
             ->getMock();
 
@@ -97,7 +97,7 @@ class ExtractorTest extends \PHPUnit_Framework_TestCase
 
         $this->graby->expects($this->any())
             ->method('fetchContent')
-            ->willReturn(array('html' => false));
+            ->willReturn(['html' => false]);
 
         $contentExtractor->parseContent('http://0.0.0.0', 'default content');
 
@@ -124,7 +124,7 @@ class ExtractorTest extends \PHPUnit_Framework_TestCase
 
         $this->graby->expects($this->any())
             ->method('fetchContent')
-            ->willReturn(array('html' => false));
+            ->willReturn(['html' => false]);
 
         $contentExtractor->parseContent('http://0.0.0.0', 'default content');
 
@@ -137,7 +137,7 @@ class ExtractorTest extends \PHPUnit_Framework_TestCase
 
         $this->graby->expects($this->any())
             ->method('fetchContent')
-            ->willReturn(array('html' => false));
+            ->willReturn(['html' => false]);
 
         $contentExtractor->parseContent('http://0.0.0.0', 'default content');
 

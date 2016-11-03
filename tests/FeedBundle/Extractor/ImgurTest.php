@@ -1,32 +1,32 @@
 <?php
 
-namespace Tests\FeedBundle\Extractor;
+namespace tests\FeedBundle\Extractor;
 
 use Api43\FeedBundle\Extractor\Imgur;
-use Monolog\Logger;
 use Monolog\Handler\TestHandler;
+use Monolog\Logger;
 
 class ImgurTest extends \PHPUnit_Framework_TestCase
 {
     public function dataMatch()
     {
-        return array(
-            array('http://i.imgur.com/zNUC9TA.jpg', true),
-            array('http://i.imgur.com/zNUC9TA', true),
-            array('https://i.imgur.com/zNUC9TA.jpg', true),
-            array('https://i.imgur.com/zNUC9TA', true),
-            array('http://imgur.com/zNUC9TA', true),
-            array('https://imgur.com/zNUC9TA', true),
-            array('https://imgur.com/a/dLaMy', true),
-            array('https://imgur.com/a/dLaMy?gallery', true),
-            array('https://imgur.com/gallery/dLaMy', true),
-            array('http://imgur.com/gallery/IDuXHMJ', true),
-            array('https://imgur.com/duziauziaozaoLaMy', false),
-            array('https://imgur.com/Ay', false),
-            array('http://imgur.com/UMOCfIk.gifv', true),
-            array('https://imgur.com/gallery/GItbbVZ/new', true),
-            array('http://user@:80', false),
-        );
+        return [
+            ['http://i.imgur.com/zNUC9TA.jpg', true],
+            ['http://i.imgur.com/zNUC9TA', true],
+            ['https://i.imgur.com/zNUC9TA.jpg', true],
+            ['https://i.imgur.com/zNUC9TA', true],
+            ['http://imgur.com/zNUC9TA', true],
+            ['https://imgur.com/zNUC9TA', true],
+            ['https://imgur.com/a/dLaMy', true],
+            ['https://imgur.com/a/dLaMy?gallery', true],
+            ['https://imgur.com/gallery/dLaMy', true],
+            ['http://imgur.com/gallery/IDuXHMJ', true],
+            ['https://imgur.com/duziauziaozaoLaMy', false],
+            ['https://imgur.com/Ay', false],
+            ['http://imgur.com/UMOCfIk.gifv', true],
+            ['https://imgur.com/gallery/GItbbVZ/new', true],
+            ['http://user@:80', false],
+        ];
     }
 
     /**
@@ -206,7 +206,7 @@ class ImgurTest extends \PHPUnit_Framework_TestCase
         $imgur = new Imgur($imgurClient);
 
         $logHandler = new TestHandler();
-        $logger = new Logger('test', array($logHandler));
+        $logger = new Logger('test', [$logHandler]);
         $imgur->setLogger($logger);
 
         $imgur->match('http://imgur.com/gallery/xxxxxx');

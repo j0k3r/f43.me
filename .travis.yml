@@ -20,6 +20,8 @@ matrix:
           env: MONGO_DRIVER=mongo
         - php: 7.0
           env: COVERAGE=run
+        - php: 7.0
+          env: CS_FIXER=run
     allow_failures:
         - php: nightly
 
@@ -45,6 +47,7 @@ script:
     - ant prepare
     - mkdir -p build/logs
     - ./vendor/bin/phpunit -v $PHPUNIT_FLAGS
+    - if [ "$CS_FIXER" = "run" ]; then php bin/php-cs-fixer fix --verbose --dry-run ; fi;
 
 after_script:
     - |

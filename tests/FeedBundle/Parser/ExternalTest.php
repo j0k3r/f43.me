@@ -1,12 +1,12 @@
 <?php
 
-namespace Tests\FeedBundle\Parser;
+namespace tests\FeedBundle\Parser;
 
 use Api43\FeedBundle\Parser\External;
 use GuzzleHttp\Client;
-use GuzzleHttp\Subscriber\Mock;
 use GuzzleHttp\Message\Response;
 use GuzzleHttp\Stream\Stream;
+use GuzzleHttp\Subscriber\Mock;
 
 class ExternalTest extends \PHPUnit_Framework_TestCase
 {
@@ -29,7 +29,7 @@ class ExternalTest extends \PHPUnit_Framework_TestCase
         $client = new Client();
 
         $mock = new Mock([
-            new Response(200, [], Stream::factory(json_encode(array('content' => '<div></div>', 'url' => 'http://1.1.1.1/content')))),
+            new Response(200, [], Stream::factory(json_encode(['content' => '<div></div>', 'url' => 'http://1.1.1.1/content']))),
         ]);
 
         $client->getEmitter()->attach($mock);

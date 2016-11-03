@@ -20,7 +20,7 @@ class Giphy extends AbstractExtractor
             return false;
         }
 
-        if (!in_array($host, array('www.giphy.com', 'giphy.com'))) {
+        if (!in_array($host, ['www.giphy.com', 'giphy.com'], true)) {
             return false;
         }
 
@@ -46,10 +46,10 @@ class Giphy extends AbstractExtractor
 
         try {
             $data = $this->client
-                ->get('http://giphy.com/services/oembed/?url='.$this->giphyUrl)
+                ->get('http://giphy.com/services/oembed/?url=' . $this->giphyUrl)
                 ->json();
         } catch (RequestException $e) {
-            $this->logger->warning('Giphy extract failed for: '.$this->giphyUrl, [
+            $this->logger->warning('Giphy extract failed for: ' . $this->giphyUrl, [
                 'exception' => $e,
             ]);
 
@@ -60,6 +60,6 @@ class Giphy extends AbstractExtractor
             return '';
         }
 
-        return '<div><h2>'.$data['title'].'</h2><p><img src="'.$data['image'].'"></p></div>';
+        return '<div><h2>' . $data['title'] . '</h2><p><img src="' . $data['image'] . '"></p></div>';
     }
 }

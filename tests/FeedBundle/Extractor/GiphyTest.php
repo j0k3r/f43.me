@@ -1,28 +1,28 @@
 <?php
 
-namespace Tests\FeedBundle\Extractor;
+namespace tests\FeedBundle\Extractor;
 
 use Api43\FeedBundle\Extractor\Giphy;
-use Monolog\Logger;
-use Monolog\Handler\TestHandler;
 use GuzzleHttp\Client;
-use GuzzleHttp\Subscriber\Mock;
 use GuzzleHttp\Message\Response;
 use GuzzleHttp\Stream\Stream;
+use GuzzleHttp\Subscriber\Mock;
+use Monolog\Handler\TestHandler;
+use Monolog\Logger;
 
 class GiphyTest extends \PHPUnit_Framework_TestCase
 {
     public function dataMatch()
     {
-        return array(
-            array('http://giphy.com/gifs/linarf-l2SpOiTglzlu7yI3S', true),
-            array('http://www.giphy.com/gifs/linarf-l2SpOiTglzlu7yI3S', true),
-            array('https://giphy.com/gifs/linarf-l2SpOiTglzlu7yI3S', true),
-            array('https://giphy.com/gifs/mlb-baseball-nlds-l2Sq2Ri3w1rmrOTHq', true),
-            array('https://giphy.com/search/hello-kitty-stickers/', false),
-            array('https://goog.co', false),
-            array('http://user@:80', false),
-        );
+        return [
+            ['http://giphy.com/gifs/linarf-l2SpOiTglzlu7yI3S', true],
+            ['http://www.giphy.com/gifs/linarf-l2SpOiTglzlu7yI3S', true],
+            ['https://giphy.com/gifs/linarf-l2SpOiTglzlu7yI3S', true],
+            ['https://giphy.com/gifs/mlb-baseball-nlds-l2Sq2Ri3w1rmrOTHq', true],
+            ['https://giphy.com/search/hello-kitty-stickers/', false],
+            ['https://goog.co', false],
+            ['http://user@:80', false],
+        ];
     }
 
     /**
@@ -39,7 +39,7 @@ class GiphyTest extends \PHPUnit_Framework_TestCase
         $client = new Client();
 
         $mock = new Mock([
-            new Response(200, [], Stream::factory(json_encode(array('title' => 'my title', 'image' => 'http://0.0.0.0/img.jpg')))),
+            new Response(200, [], Stream::factory(json_encode(['title' => 'my title', 'image' => 'http://0.0.0.0/img.jpg']))),
             new Response(200, [], Stream::factory(json_encode(''))),
             new Response(400, [], Stream::factory(json_encode('oops'))),
         ]);
@@ -50,7 +50,7 @@ class GiphyTest extends \PHPUnit_Framework_TestCase
         $giphy->setClient($client);
 
         $logHandler = new TestHandler();
-        $logger = new Logger('test', array($logHandler));
+        $logger = new Logger('test', [$logHandler]);
         $giphy->setLogger($logger);
 
         // first test fail because we didn't match an url, so GiphyUrl isn't defined

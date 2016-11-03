@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\FeedBundle\Improver;
+namespace tests\FeedBundle\Improver;
 
 use Api43\FeedBundle\Improver\ImproverChain;
 

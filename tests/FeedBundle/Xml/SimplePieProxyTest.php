@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\FeedBundle\Xml;
+namespace tests\FeedBundle\Xml;
 
 use Api43\FeedBundle\Xml\SimplePieProxy;
 
@@ -10,7 +10,7 @@ class SimplePieProxyTest extends \PHPUnit_Framework_TestCase
 
     protected function setUp()
     {
-        $this->cacheDir = __DIR__.'/../../../../../app/cache/tmp-'.md5(time());
+        $this->cacheDir = __DIR__ . '/../../../../../app/cache/tmp-' . md5(time());
     }
 
     protected function tearDown()

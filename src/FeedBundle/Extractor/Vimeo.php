@@ -40,10 +40,10 @@ class Vimeo extends AbstractExtractor
 
         try {
             $data = $this->client
-                ->get('https://vimeo.com/api/oembed.xml?format=json&url='.$this->vimeoUrl)
+                ->get('https://vimeo.com/api/oembed.xml?format=json&url=' . $this->vimeoUrl)
                 ->json();
         } catch (RequestException $e) {
-            $this->logger->warning('Vimeo extract failed for: '.$this->vimeoUrl, [
+            $this->logger->warning('Vimeo extract failed for: ' . $this->vimeoUrl, [
                 'exception' => $e,
             ]);
 
@@ -54,6 +54,6 @@ class Vimeo extends AbstractExtractor
             return '';
         }
 
-        return '<div><h2>'.$data['title'].'</h2><p>'.$data['description'].'</p><p><img src="'.$data['thumbnail_url'].'"></p>'.$data['html'].'</div>';
+        return '<div><h2>' . $data['title'] . '</h2><p>' . $data['description'] . '</p><p><img src="' . $data['thumbnail_url'] . '"></p>' . $data['html'] . '</div>';
     }
 }

@@ -78,7 +78,7 @@ class DefaultImprover
                 );
         } catch (RequestException $e) {
             // catch timeout, ssl verification that failed, etc ...
-            return $url.(strpos($url, '?') ? '&' : '?').'not-changed';
+            return $url . (strpos($url, '?') ? '&' : '?') . 'not-changed';
         }
 
         $url = $response->getEffectiveUrl();
@@ -107,7 +107,7 @@ class DefaultImprover
         }
 
         // re-add allowed parameters
-        return $url.'?'.http_build_query($newQuery);
+        return $url . '?' . http_build_query($newQuery);
     }
 
     /**

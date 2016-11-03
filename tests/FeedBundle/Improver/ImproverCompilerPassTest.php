@@ -1,9 +1,9 @@
 <?php
 
-namespace Tests\FeedBundle\Improver;
+namespace tests\FeedBundle\Improver;
 
-use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Api43\FeedBundle\Improver\ImproverCompilerPass;
+use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 class ImproverCompilerPassTest extends \PHPUnit_Framework_TestCase
 {
@@ -25,7 +25,7 @@ class ImproverCompilerPassTest extends \PHPUnit_Framework_TestCase
 
         $container
             ->register('foo')
-            ->addTag('feed.improver', array('alias' => 'hackernews'))
+            ->addTag('feed.improver', ['alias' => 'hackernews'])
         ;
 
         $this->process($container);

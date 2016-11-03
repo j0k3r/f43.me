@@ -27,7 +27,7 @@ class Reddit extends DefaultImprover
     {
         // we extract the source of the reddit post
         preg_match('/(.*)\<a href\=\"(.*)\"\>\[link\]\<\/a\>/i', $this->itemContent, $matches);
-        if (count($matches) != 3) {
+        if (count($matches) !== 3) {
             return $url;
         }
 
@@ -41,6 +41,6 @@ class Reddit extends DefaultImprover
      */
     public function updateContent($readableContent)
     {
-        return $this->itemContent.'<br/><hr/><br/>'.$readableContent;
+        return $this->itemContent . '<br/><hr/><br/>' . $readableContent;
     }
 }

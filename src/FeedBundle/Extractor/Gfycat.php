@@ -47,10 +47,10 @@ class Gfycat extends AbstractExtractor
 
         try {
             $data = $this->client
-                ->get('http://gfycat.com/cajax/get/'.$this->gfycatId)
+                ->get('http://gfycat.com/cajax/get/' . $this->gfycatId)
                 ->json();
         } catch (RequestException $e) {
-            $this->logger->warning('Gfycat extract failed for: '.$this->gfycatId, [
+            $this->logger->warning('Gfycat extract failed for: ' . $this->gfycatId, [
                 'exception' => $e,
             ]);
 
@@ -61,7 +61,7 @@ class Gfycat extends AbstractExtractor
             return '';
         }
 
-        return '<div><h2>'.$data['gfyItem']['title'].'</h2><p><img src="'.$data['gfyItem']['posterUrl'].'"></p></div>'.
-            '<div style="position:relative;padding-bottom:calc(100% / 1.85)"><iframe src="https://gfycat.com/ifr/'.$this->gfycatId.'" frameborder="0" scrolling="no" width="100%" height="100%" style="position:absolute;top:0;left:0;" allowfullscreen></iframe></div>';
+        return '<div><h2>' . $data['gfyItem']['title'] . '</h2><p><img src="' . $data['gfyItem']['posterUrl'] . '"></p></div>' .
+            '<div style="position:relative;padding-bottom:calc(100% / 1.85)"><iframe src="https://gfycat.com/ifr/' . $this->gfycatId . '" frameborder="0" scrolling="no" width="100%" height="100%" style="position:absolute;top:0;left:0;" allowfullscreen></iframe></div>';
     }
 }

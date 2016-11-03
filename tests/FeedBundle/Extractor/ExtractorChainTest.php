@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\FeedBundle\Extractor;
+namespace tests\FeedBundle\Extractor;
 
 use Api43\FeedBundle\Extractor\ExtractorChain;
 

@@ -1,10 +1,10 @@
 <?php
 
-namespace Tests\FeedBundle\Command;
+namespace tests\FeedBundle\Command;
 
 use Api43\FeedBundle\Command\RemoveItemsCommand;
-use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Bundle\FrameworkBundle\Console\Application;
+use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\Console\Tester\CommandTester;
 
 class RemoveItemsCommandTest extends WebTestCase
@@ -39,29 +39,29 @@ class RemoveItemsCommandTest extends WebTestCase
 
     public function testRemoveAllAvailable()
     {
-        $this->commandTester->execute(array('command' => $this->command->getName()));
+        $this->commandTester->execute(['command' => $this->command->getName()]);
 
         $this->assertRegExp('`0 items removed.`', $this->commandTester->getDisplay());
     }
 
     public function testRemoveForOneFeed()
     {
-        $this->commandTester->execute(array(
+        $this->commandTester->execute([
             'command' => $this->command->getName(),
             '-t' => true,
             '--slug' => 'hackernews',
-        ));
+        ]);
 
         $this->assertRegExp('`0 items removed.`', $this->commandTester->getDisplay());
     }
 
     public function testRemoveBadSlug()
     {
-        $this->commandTester->execute(array(
+        $this->commandTester->execute([
             'command' => $this->command->getName(),
             '-t' => true,
             '--slug' => 'toto',
-        ));
+        ]);
 
         $this->assertRegExp('`Unable to find Feed document`', $this->commandTester->getDisplay());
     }
@@ -69,12 +69,12 @@ class RemoveItemsCommandTest extends WebTestCase
     public function testRemoveAllMaxYes()
     {
         $this->commandTester->setInputs(['yes\\n']);
-        $this->commandTester->execute(array(
+        $this->commandTester->execute([
             'command' => $this->command->getName(),
             '-t' => true,
             '--slug' => 'toto',
             '--max' => 0,
-        ));
+        ]);
 
         $this->assertRegExp('`You will remove ALL items, are your sure?`', $this->commandTester->getDisplay());
     }
@@ -82,24 +82,24 @@ class RemoveItemsCommandTest extends WebTestCase
     public function testRemoveAllMaxNo()
     {
         $this->commandTester->setInputs(['no\\n']);
-        $this->commandTester->execute(array(
+        $this->commandTester->execute([
             'command' => $this->command->getName(),
             '-t' => true,
             '--slug' => 'toto',
             '--max' => 0,
-        ));
+        ]);
 
         $this->assertRegExp('`remove everything from your database, pfiou`', $this->commandTester->getDisplay());
     }
 
     public function testRemove()
     {
-        $this->commandTester->execute(array(
+        $this->commandTester->execute([
             'command' => $this->command->getName(),
             '-t' => true,
             '--slug' => 'hackernews',
             '--max' => 2,
-        ));
+        ]);
 
         $this->assertRegExp('`items removed.`', $this->commandTester->getDisplay());
     }

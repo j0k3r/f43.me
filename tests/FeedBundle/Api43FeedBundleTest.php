@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\FeedBundle;
+namespace tests\FeedBundle;
 
 use Api43\FeedBundle\Api43FeedBundle;
 use Symfony\Component\DependencyInjection\ContainerBuilder;

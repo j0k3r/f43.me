@@ -1,27 +1,27 @@
 <?php
 
-namespace Tests\FeedBundle\Extractor;
+namespace tests\FeedBundle\Extractor;
 
 use Api43\FeedBundle\Extractor\Ifttt;
-use Monolog\Logger;
-use Monolog\Handler\TestHandler;
 use GuzzleHttp\Client;
-use GuzzleHttp\Subscriber\Mock;
 use GuzzleHttp\Message\Response;
 use GuzzleHttp\Stream\Stream;
+use GuzzleHttp\Subscriber\Mock;
+use Monolog\Handler\TestHandler;
+use Monolog\Logger;
 
 class IftttTest extends \PHPUnit_Framework_TestCase
 {
     public function dataMatch()
     {
-        return array(
-            array('https://ifttt.com/recipes/385105-receive-notifications-for-a-jailbreak', true),
-            array('http://ifttt.com/recipes/385105-receive-notifications-for-a-jailbreak', true),
-            array('https://ifttt.com/recipes/385105', true),
-            array('https://ifttt.com', false),
-            array('https://goog.co', false),
-            array('http://user@:80', false),
-        );
+        return [
+            ['https://ifttt.com/recipes/385105-receive-notifications-for-a-jailbreak', true],
+            ['http://ifttt.com/recipes/385105-receive-notifications-for-a-jailbreak', true],
+            ['https://ifttt.com/recipes/385105', true],
+            ['https://ifttt.com', false],
+            ['https://goog.co', false],
+            ['http://user@:80', false],
+        ];
     }
 
     /**
@@ -38,7 +38,7 @@ class IftttTest extends \PHPUnit_Framework_TestCase
         $client = new Client();
 
         $mock = new Mock([
-            new Response(200, [], Stream::factory(json_encode(array('title' => 'my title', 'description' => 'Cool stuff bro')))),
+            new Response(200, [], Stream::factory(json_encode(['title' => 'my title', 'description' => 'Cool stuff bro']))),
             new Response(200, [], Stream::factory(json_encode(''))),
             new Response(400, [], Stream::factory(json_encode('oops'))),
         ]);
@@ -49,7 +49,7 @@ class IftttTest extends \PHPUnit_Framework_TestCase
         $ifttt->setClient($client);
 
         $logHandler = new TestHandler();
-        $logger = new Logger('test', array($logHandler));
+        $logger = new Logger('test', [$logHandler]);
         $ifttt->setLogger($logger);
 
         // first test fail because we didn't match an url, so IftttUrl isn't defined

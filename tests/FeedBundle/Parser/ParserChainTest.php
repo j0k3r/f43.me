@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\FeedBundle\Parser;
+namespace tests\FeedBundle\Parser;
 
 use Api43\FeedBundle\Parser\ParserChain;
 

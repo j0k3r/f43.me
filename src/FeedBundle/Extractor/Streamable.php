@@ -20,7 +20,7 @@ class Streamable extends AbstractExtractor
             return false;
         }
 
-        if (!in_array($host, array('www.streamable.com', 'streamable.com'))) {
+        if (!in_array($host, ['www.streamable.com', 'streamable.com'], true)) {
             return false;
         }
 
@@ -40,10 +40,10 @@ class Streamable extends AbstractExtractor
 
         try {
             $data = $this->client
-                ->get('http://api.streamable.com/oembed.json?url='.$this->streamableUrl)
+                ->get('http://api.streamable.com/oembed.json?url=' . $this->streamableUrl)
                 ->json();
         } catch (RequestException $e) {
-            $this->logger->warning('Streamable extract failed for: '.$this->streamableUrl, [
+            $this->logger->warning('Streamable extract failed for: ' . $this->streamableUrl, [
                 'exception' => $e,
             ]);
 
@@ -54,6 +54,6 @@ class Streamable extends AbstractExtractor
             return '';
         }
 
-        return '<div><h2>'.$data['title'].'</h2><p><img src="'.$data['thumbnail_url'].'"></p>'.$data['html'].'</div>';
+        return '<div><h2>' . $data['title'] . '</h2><p><img src="' . $data['thumbnail_url'] . '"></p>' . $data['html'] . '</div>';
     }
 }

@@ -1,27 +1,27 @@
 <?php
 
-namespace Tests\FeedBundle\Extractor;
+namespace tests\FeedBundle\Extractor;
 
 use Api43\FeedBundle\Extractor\Dailymotion;
-use Monolog\Logger;
-use Monolog\Handler\TestHandler;
 use GuzzleHttp\Client;
-use GuzzleHttp\Subscriber\Mock;
 use GuzzleHttp\Message\Response;
 use GuzzleHttp\Stream\Stream;
+use GuzzleHttp\Subscriber\Mock;
+use Monolog\Handler\TestHandler;
+use Monolog\Logger;
 
 class DailymotionTest extends \PHPUnit_Framework_TestCase
 {
     public function dataMatch()
     {
-        return array(
-            array('http://dai.ly/xockol', true),
-            array('http://www.dailymotion.com/video/xockol_planete-des-hommes-partie-1-2_travel', true),
-            array('https://www.dailymotion.com/video/xockol_planete-des-hommes-partie-1-2_travel', true),
-            array('http://dailymotion.com/video/xockol_planete-des-hommes-partie-1-2_travel', true),
-            array('https://goog.co', false),
-            array('http://user@:80', false),
-        );
+        return [
+            ['http://dai.ly/xockol', true],
+            ['http://www.dailymotion.com/video/xockol_planete-des-hommes-partie-1-2_travel', true],
+            ['https://www.dailymotion.com/video/xockol_planete-des-hommes-partie-1-2_travel', true],
+            ['http://dailymotion.com/video/xockol_planete-des-hommes-partie-1-2_travel', true],
+            ['https://goog.co', false],
+            ['http://user@:80', false],
+        ];
     }
 
     /**
@@ -38,7 +38,7 @@ class DailymotionTest extends \PHPUnit_Framework_TestCase
         $client = new Client();
 
         $mock = new Mock([
-            new Response(200, [], Stream::factory(json_encode(array('title' => 'my title', 'thumbnail_url' => 'http://0.0.0.0/img.jpg', 'html' => '<iframe/>')))),
+            new Response(200, [], Stream::factory(json_encode(['title' => 'my title', 'thumbnail_url' => 'http://0.0.0.0/img.jpg', 'html' => '<iframe/>']))),
             new Response(200, [], Stream::factory(json_encode(''))),
             new Response(400, [], Stream::factory(json_encode('oops'))),
         ]);
@@ -49,7 +49,7 @@ class DailymotionTest extends \PHPUnit_Framework_TestCase
         $dailymotion->setClient($client);
 
         $logHandler = new TestHandler();
-        $logger = new Logger('test', array($logHandler));
+        $logger = new Logger('test', [$logHandler]);
         $dailymotion->setLogger($logger);
 
         // first test fail because we didn't match an url, so DailymotionUrl isn't defined

@@ -1,9 +1,9 @@
 <?php
 
-namespace Tests\FeedBundle\Parser;
+namespace tests\FeedBundle\Parser;
 
-use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Api43\FeedBundle\Parser\ParserCompilerPass;
+use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 class ParserCompilerPassTest extends \PHPUnit_Framework_TestCase
 {
@@ -25,7 +25,7 @@ class ParserCompilerPassTest extends \PHPUnit_Framework_TestCase
 
         $container
             ->register('foo')
-            ->addTag('feed.parser', array('alias' => 'internal'))
+            ->addTag('feed.parser', ['alias' => 'internal'])
         ;
 
         $this->process($container);

@@ -30,7 +30,7 @@ class Github extends AbstractExtractor
         preg_match('/^\/([\w\d\.-]+)\/([\w\d\.-]+)\/?$/i', $path, $matches);
 
         if (3 === count($matches)) {
-            $this->githubRepo = $matches[1].'/'.$matches[2];
+            $this->githubRepo = $matches[1] . '/' . $matches[2];
 
             return true;
         }
@@ -39,7 +39,7 @@ class Github extends AbstractExtractor
         preg_match('/^\/([\w\d\.-]+)\/([\w\d\.-]+)\/(pull|issues)\/([0-9]+)/i', $path, $matches);
 
         if (5 === count($matches)) {
-            $this->githubRepo = $matches[1].'/'.$matches[2];
+            $this->githubRepo = $matches[1] . '/' . $matches[2];
 
             if ('pull' === $matches[3]) {
                 $this->pullNumber = $matches[4];
@@ -66,7 +66,7 @@ class Github extends AbstractExtractor
             try {
                 $data = $this->client
                     ->get(
-                        'https://api.github.com/repos/'.$this->githubRepo.'/pulls/'.$this->pullNumber,
+                        'https://api.github.com/repos/' . $this->githubRepo . '/pulls/' . $this->pullNumber,
                         [
                             'headers' => [
                                 'Accept' => 'application/vnd.github.v3.html+json',
@@ -76,17 +76,17 @@ class Github extends AbstractExtractor
                     )
                     ->json();
 
-                return '<div><em>Pull request on Github</em>'.
-                    '<h2><a href="'.$data['base']['repo']['html_url'].'">'.$data['base']['repo']['full_name'].'</a></h2>'.
-                    '<p>'.$data['base']['repo']['description'].'</p>'.
-                    '<h3>PR: <a href="'.$data['html_url'].'">'.$data['title'].'</a></h3>'.
-                    '<ul><li>by <a href="'.$data['user']['html_url'].'">'.$data['user']['login'].'</a></li>'.
-                    '<li>on '.date('d/m/Y', strtotime($data['created_at'])).'</li>'.
-                    '<li>'.$data['commits'].' commits</li>'.
-                    '<li>'.$data['comments'].' comments</li></ul>'.
-                    $data['body_html'].'</div>';
+                return '<div><em>Pull request on Github</em>' .
+                    '<h2><a href="' . $data['base']['repo']['html_url'] . '">' . $data['base']['repo']['full_name'] . '</a></h2>' .
+                    '<p>' . $data['base']['repo']['description'] . '</p>' .
+                    '<h3>PR: <a href="' . $data['html_url'] . '">' . $data['title'] . '</a></h3>' .
+                    '<ul><li>by <a href="' . $data['user']['html_url'] . '">' . $data['user']['login'] . '</a></li>' .
+                    '<li>on ' . date('d/m/Y', strtotime($data['created_at'])) . '</li>' .
+                    '<li>' . $data['commits'] . ' commits</li>' .
+                    '<li>' . $data['comments'] . ' comments</li></ul>' .
+                    $data['body_html'] . '</div>';
             } catch (RequestException $e) {
-                $this->logger->warning('Github (pull) extract failed for: '.$this->githubRepo.' & pr: '.$this->pullNumber, [
+                $this->logger->warning('Github (pull) extract failed for: ' . $this->githubRepo . ' & pr: ' . $this->pullNumber, [
                     'exception' => $e,
                 ]);
 
@@ -98,7 +98,7 @@ class Github extends AbstractExtractor
             try {
                 $data = $this->client
                     ->get(
-                        'https://api.github.com/repos/'.$this->githubRepo.'/issues/'.$this->issueNumber,
+                        'https://api.github.com/repos/' . $this->githubRepo . '/issues/' . $this->issueNumber,
                         [
                             'headers' => [
                                 'Accept' => 'application/vnd.github.v3.html+json',
@@ -108,14 +108,14 @@ class Github extends AbstractExtractor
                     )
                     ->json();
 
-                return '<div><em>Issue on Github</em>'.
-                    '<h2><a href="'.$data['html_url'].'">'.$data['title'].'</a></h2>'.
-                    '<ul><li>by <a href="'.$data['user']['html_url'].'">'.$data['user']['login'].'</a></li>'.
-                    '<li>on '.date('d/m/Y', strtotime($data['created_at'])).'</li>'.
-                    '<li>'.$data['comments'].' comments</li></ul></ul>'.
-                    $data['body_html'].'</div>';
+                return '<div><em>Issue on Github</em>' .
+                    '<h2><a href="' . $data['html_url'] . '">' . $data['title'] . '</a></h2>' .
+                    '<ul><li>by <a href="' . $data['user']['html_url'] . '">' . $data['user']['login'] . '</a></li>' .
+                    '<li>on ' . date('d/m/Y', strtotime($data['created_at'])) . '</li>' .
+                    '<li>' . $data['comments'] . ' comments</li></ul></ul>' .
+                    $data['body_html'] . '</div>';
             } catch (RequestException $e) {
-                $this->logger->warning('Github (issue) extract failed for: '.$this->githubRepo.' & issue: '.$this->issueNumber, [
+                $this->logger->warning('Github (issue) extract failed for: ' . $this->githubRepo . ' & issue: ' . $this->issueNumber, [
                     'exception' => $e,
                 ]);
 
@@ -126,7 +126,7 @@ class Github extends AbstractExtractor
         try {
             return $this->client
                 ->get(
-                    'https://api.github.com/repos/'.$this->githubRepo.'/readme',
+                    'https://api.github.com/repos/' . $this->githubRepo . '/readme',
                     [
                         'headers' => [
                             'Accept' => 'application/vnd.github.v3.html',

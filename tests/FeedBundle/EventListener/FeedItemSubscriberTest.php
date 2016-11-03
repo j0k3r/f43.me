@@ -1,12 +1,12 @@
 <?php
 
-namespace Tests\FeedBundle\EventListener;
+namespace tests\FeedBundle\EventListener;
 
 use Api43\FeedBundle\Event\FeedItemEvent;
 use Api43\FeedBundle\EventListener\FeedItemSubscriber;
 use GuzzleHttp\Client;
-use GuzzleHttp\Subscriber\Mock;
 use GuzzleHttp\Message\Response;
+use GuzzleHttp\Subscriber\Mock;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 class FeedItemSubscriberTest extends \PHPUnit_Framework_TestCase
@@ -21,7 +21,7 @@ class FeedItemSubscriberTest extends \PHPUnit_Framework_TestCase
 
         $feedItemSubscriber = new FeedItemSubscriber('', $router, $client);
 
-        $event = new FeedItemEvent(array('bar.unknown'));
+        $event = new FeedItemEvent(['bar.unknown']);
         $res = $feedItemSubscriber->pingHub($event);
 
         // the hub url is invalid, so it will be generate an error and return false
@@ -36,7 +36,7 @@ class FeedItemSubscriberTest extends \PHPUnit_Framework_TestCase
 
         $router->expects($this->once())
             ->method('generate')
-            ->with('feed_xml', array('slug' => 'bar.unknown'), UrlGeneratorInterface::ABSOLUTE_URL)
+            ->with('feed_xml', ['slug' => 'bar.unknown'], UrlGeneratorInterface::ABSOLUTE_URL)
             ->will($this->returnValue('http://f43.me/rss.xml'));
 
         $client = new Client();
@@ -49,7 +49,7 @@ class FeedItemSubscriberTest extends \PHPUnit_Framework_TestCase
 
         $feedItemSubscriber = new FeedItemSubscriber('http://f43.me', $router, $client);
 
-        $event = new FeedItemEvent(array('bar.unknown'));
+        $event = new FeedItemEvent(['bar.unknown']);
         $res = $feedItemSubscriber->pingHub($event);
 
         // the hub url is invalid, so it will be generate an error and return false
@@ -64,7 +64,7 @@ class FeedItemSubscriberTest extends \PHPUnit_Framework_TestCase
 
         $router->expects($this->once())
             ->method('generate')
-            ->with('feed_xml', array('slug' => 'bar.unknown'), UrlGeneratorInterface::ABSOLUTE_URL)
+            ->with('feed_xml', ['slug' => 'bar.unknown'], UrlGeneratorInterface::ABSOLUTE_URL)
             ->will($this->returnValue('http://f43.me/rss.xml'));
 
         $client = new Client();
@@ -77,7 +77,7 @@ class FeedItemSubscriberTest extends \PHPUnit_Framework_TestCase
 
         $feedItemSubscriber = new FeedItemSubscriber('http://f43.me', $router, $client);
 
-        $event = new FeedItemEvent(array('bar.unknown'));
+        $event = new FeedItemEvent(['bar.unknown']);
         $res = $feedItemSubscriber->pingHub($event);
 
         $this->assertTrue($res);

@@ -2,14 +2,14 @@
 
 namespace Api43\FeedBundle\Content;
 
-use Symfony\Component\EventDispatcher\EventDispatcherInterface;
-use Doctrine\ODM\MongoDB\DocumentManager;
-use Psr\Log\LoggerInterface;
-use Api43\FeedBundle\Xml\SimplePieProxy;
+use Api43\FeedBundle\Api43FeedEvents;
 use Api43\FeedBundle\Document\FeedItem;
 use Api43\FeedBundle\Document\FeedLog;
 use Api43\FeedBundle\Event\FeedItemEvent;
-use Api43\FeedBundle\Api43FeedEvents;
+use Api43\FeedBundle\Xml\SimplePieProxy;
+use Doctrine\ODM\MongoDB\DocumentManager;
+use Psr\Log\LoggerInterface;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 class Import
 {
@@ -48,7 +48,7 @@ class Import
         $feedItemRepo = $this->dm->getRepository('Api43FeedBundle:FeedItem');
 
         foreach ($feeds as $feed) {
-            $this->logger->debug('<info>Working on</info>: '.$feed->getName().' (parser: <comment>'.$feed->getParser().'</comment>)');
+            $this->logger->debug('<info>Working on</info>: ' . $feed->getName() . ' (parser: <comment>' . $feed->getParser() . '</comment>)');
 
             $rssFeed = $this
                 ->simplePieProxy
@@ -69,7 +69,7 @@ class Import
             $cachedLinks = $feedItemRepo->getAllLinks($feed->getId());
             $cached = 0;
 
-            $this->logger->debug('<info>Link to check</info>: <comment>'.$rssFeed->get_item_quantity().'</comment>');
+            $this->logger->debug('<info>Link to check</info>: <comment>' . $rssFeed->get_item_quantity() . '</comment>');
 
             foreach ($rssFeed->get_items() as $item) {
                 // if an item already exists, we skip it
@@ -78,7 +78,7 @@ class Import
                     continue;
                 }
 
-                $this->logger->debug('    <info>Parse content for url</info>: <comment>'.$item->get_permalink().'</comment>');
+                $this->logger->debug('    <info>Parse content for url</info>: <comment>' . $item->get_permalink() . '</comment>');
 
                 $parsedContent = $parser->parseContent(
                     $item->get_permalink(),
@@ -128,7 +128,7 @@ class Import
                 $feedUpdated[] = $feed->getSlug();
             }
 
-            $this->logger->debug('<info>New cached items</info>: '.$cached);
+            $this->logger->debug('<info>New cached items</info>: ' . $cached);
 
             $this->dm->flush();
         }
@@ -154,7 +154,7 @@ class Import
             $feed->setNbItems($nbItems);
             $this->dm->persist($feed);
 
-            $this->logger->debug('<info>'.$feed->getName().'</info> items updated: <comment>'.$nbItems.'</comment>');
+            $this->logger->debug('<info>' . $feed->getName() . '</info> items updated: <comment>' . $nbItems . '</comment>');
         }
 
         $this->dm->flush();

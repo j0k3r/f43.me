@@ -47,7 +47,7 @@ class AtomFormatter extends Formatter
         $root->setAttribute('xmlns', 'http://www.w3.org/2005/Atom');
         $root = $this->dom->appendChild($root);
 
-        $identifier = $this->dom->createElement('id', 'http://'.$this->feed->getHost().'/');
+        $identifier = $this->dom->createElement('id', 'http://' . $this->feed->getHost() . '/');
         $title = $this->dom->createElement('title', htmlspecialchars($this->feed->getName()));
         $subtitle = $this->dom->createElement('subtitle', htmlspecialchars($this->feed->getDescription()));
         $name = $this->dom->createElement('name', htmlspecialchars($this->feed->getName()));
@@ -58,7 +58,7 @@ class AtomFormatter extends Formatter
         $self->setAttribute('rel', 'self');
 
         $link = $this->dom->createElement('link');
-        $link->setAttribute('href', 'http://'.$this->feed->getHost());
+        $link->setAttribute('href', 'http://' . $this->feed->getHost());
 
         $hub = $this->dom->createElement('link');
         $hub->setAttribute('href', 'http://pubsubhubbub.appspot.com/');

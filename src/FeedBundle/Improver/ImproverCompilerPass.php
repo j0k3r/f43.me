@@ -2,8 +2,8 @@
 
 namespace Api43\FeedBundle\Improver;
 
-use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
+use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Reference;
 
 class ImproverCompilerPass implements CompilerPassInterface
