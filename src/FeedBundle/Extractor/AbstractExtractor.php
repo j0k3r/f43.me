@@ -2,9 +2,9 @@
 
 namespace Api43\FeedBundle\Extractor;
 
-use Psr\Log\LoggerInterface;
-use Psr\Log\LoggerAwareInterface;
 use GuzzleHttp\Client;
+use Psr\Log\LoggerAwareInterface;
+use Psr\Log\LoggerInterface;
 
 abstract class AbstractExtractor implements LoggerAwareInterface
 {

@@ -2,10 +2,10 @@
 
 namespace Api43\FeedBundle\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\RedirectResponse;
 use Api43\FeedBundle\Document\Feed;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\HttpFoundation\Request;
 
 /**
  * FeedLog controller.
@@ -69,7 +69,7 @@ class FeedLogController extends Controller
                 ->getRepository('Api43FeedBundle:FeedLog')
                 ->deleteAllByFeedId($feed->getId());
 
-            $this->get('session')->getFlashBag()->add('notice', $res['n'].' documents deleted!');
+            $this->get('session')->getFlashBag()->add('notice', $res['n'] . ' documents deleted!');
         }
 
         return $this->redirect($this->generateUrl('feed_edit', ['slug' => $feed->getSlug()]));

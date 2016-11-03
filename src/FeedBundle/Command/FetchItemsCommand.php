@@ -45,19 +45,19 @@ class FetchItemsCommand extends ContainerAwareCommand
         if ($slug = $input->getOption('slug')) {
             $feed = $feedRepo->findOneBySlug($slug);
             if (!$feed) {
-                return $output->writeLn('<error>Unable to find Feed document:</error> <comment>'.$slug.'</comment>');
+                return $output->writeLn('<error>Unable to find Feed document:</error> <comment>' . $slug . '</comment>');
             }
             $feeds = [$feed];
-        } elseif (in_array($input->getOption('age'), ['new', 'old'])) {
+        } elseif (in_array($input->getOption('age'), ['new', 'old'], true)) {
             $feedsWithItems = $feedItemRepo->findAllFeedWithItems();
 
             // retrieve feed that HAVE items
-            if ('old' == $input->getOption('age')) {
+            if ('old' === $input->getOption('age')) {
                 $feeds = $feedRepo->findByIds($feedsWithItems, 'in');
             }
 
             // retrieve feeds that DOESN'T have items
-            if ('new' == $input->getOption('age')) {
+            if ('new' === $input->getOption('age')) {
                 $feeds = $feedRepo->findByIds($feedsWithItems, 'notIn');
             }
         } else {
@@ -65,13 +65,13 @@ class FetchItemsCommand extends ContainerAwareCommand
         }
 
         if ($output->isVerbose()) {
-            $output->writeln('<info>Feeds to check</info>: '.count($feeds));
+            $output->writeln('<info>Feeds to check</info>: ' . count($feeds));
         }
 
         // let's import some stuff !
         $import = $container->get('content_import');
         $totalCached = $import->process($feeds);
 
-        $output->writeLn('<comment>'.$totalCached.'</comment> items cached.');
+        $output->writeLn('<comment>' . $totalCached . '</comment> items cached.');
     }
 }

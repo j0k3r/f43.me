@@ -9,10 +9,10 @@ class HackerNewsTest extends \PHPUnit_Framework_TestCase
 {
     public function dataMatch()
     {
-        return array(
-            array('news.ycombinator.com', true),
-            array('google.fr', false),
-        );
+        return [
+            ['news.ycombinator.com', true],
+            ['google.fr', false],
+        ];
     }
 
     /**

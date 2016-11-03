@@ -126,7 +126,7 @@ class FeedLogRepository extends DocumentRepository
 
         $results = [];
         foreach ($res['result'] as $day) {
-            $results[$day['_id']['days'].'/'.$day['_id']['months'].'/'.$day['_id']['years']] = $day['number'];
+            $results[$day['_id']['days'] . '/' . $day['_id']['months'] . '/' . $day['_id']['years']] = $day['number'];
         }
 
         return array_reverse($results, true);
@@ -194,7 +194,7 @@ class FeedLogRepository extends DocumentRepository
         foreach ($res['retval'] as $oneRes) {
             $results[$oneRes['max_created_at']] = [
                 // we get milliseconds, so we convert it to seconds
-                'created_at' => new \DateTime('@'.$oneRes['max_created_at'] / 1000),
+                'created_at' => new \DateTime('@' . $oneRes['max_created_at'] / 1000),
                 'feed_id' => (string) $oneRes['feed']['$id'],
             ];
         }

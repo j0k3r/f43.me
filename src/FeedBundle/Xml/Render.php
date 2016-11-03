@@ -30,9 +30,9 @@ class Render
      *
      * @param Feed $feed Feed to render
      *
-     * @return string
-     *
      * @throws \InvalidArgumentException if given format formatter does not exists
+     *
+     * @return string
      */
     public function doRender(Feed $feed)
     {

@@ -3,24 +3,24 @@
 namespace Tests\FeedBundle\Extractor;
 
 use Api43\FeedBundle\Extractor\Vine;
-use Monolog\Logger;
-use Monolog\Handler\TestHandler;
 use GuzzleHttp\Client;
-use GuzzleHttp\Subscriber\Mock;
 use GuzzleHttp\Message\Response;
 use GuzzleHttp\Stream\Stream;
+use GuzzleHttp\Subscriber\Mock;
+use Monolog\Handler\TestHandler;
+use Monolog\Logger;
 
 class VineTest extends \PHPUnit_Framework_TestCase
 {
     public function dataMatch()
     {
-        return array(
-            array('https://vine.co/v/e7V1hLdF1bP', true),
-            array('http://vine.co/v/e7V1hLdF1bP', true),
-            array('https://vine.co', false),
-            array('https://goog.co', false),
-            array('http://user@:80', false),
-        );
+        return [
+            ['https://vine.co/v/e7V1hLdF1bP', true],
+            ['http://vine.co/v/e7V1hLdF1bP', true],
+            ['https://vine.co', false],
+            ['https://goog.co', false],
+            ['http://user@:80', false],
+        ];
     }
 
     /**
@@ -37,7 +37,7 @@ class VineTest extends \PHPUnit_Framework_TestCase
         $client = new Client();
 
         $mock = new Mock([
-            new Response(200, [], Stream::factory(json_encode(array('title' => 'my title', 'thumbnail_url' => 'http://0.0.0.0/img.jpg', 'html' => '<iframe/>')))),
+            new Response(200, [], Stream::factory(json_encode(['title' => 'my title', 'thumbnail_url' => 'http://0.0.0.0/img.jpg', 'html' => '<iframe/>']))),
             new Response(200, [], Stream::factory(json_encode(''))),
             new Response(400, [], Stream::factory(json_encode('oops'))),
         ]);
@@ -48,7 +48,7 @@ class VineTest extends \PHPUnit_Framework_TestCase
         $vine->setClient($client);
 
         $logHandler = new TestHandler();
-        $logger = new Logger('test', array($logHandler));
+        $logger = new Logger('test', [$logHandler]);
         $vine->setLogger($logger);
 
         // first test fail because we didn't match an url, so VineId isn't defined

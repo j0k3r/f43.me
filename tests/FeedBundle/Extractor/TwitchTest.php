@@ -3,25 +3,25 @@
 namespace Tests\FeedBundle\Extractor;
 
 use Api43\FeedBundle\Extractor\Twitch;
-use Monolog\Logger;
-use Monolog\Handler\TestHandler;
 use GuzzleHttp\Client;
-use GuzzleHttp\Subscriber\Mock;
 use GuzzleHttp\Message\Response;
 use GuzzleHttp\Stream\Stream;
+use GuzzleHttp\Subscriber\Mock;
+use Monolog\Handler\TestHandler;
+use Monolog\Logger;
 
 class TwitchTest extends \PHPUnit_Framework_TestCase
 {
     public function dataMatch()
     {
-        return array(
-            array('https://www.twitch.tv/tomfawkes/v/91819468', true),
-            array('https://twitch.tv/tomfawkes/v/91819468', true),
-            array('http://www.twitch.tv/tomfawkes/v/91819468', true),
-            array('https://www.twitch.tv/directory/game/Clustertruck', false),
-            array('http://google.com', false),
-            array('http://user@:80', false),
-        );
+        return [
+            ['https://www.twitch.tv/tomfawkes/v/91819468', true],
+            ['https://twitch.tv/tomfawkes/v/91819468', true],
+            ['http://www.twitch.tv/tomfawkes/v/91819468', true],
+            ['https://www.twitch.tv/directory/game/Clustertruck', false],
+            ['http://google.com', false],
+            ['http://user@:80', false],
+        ];
     }
 
     /**
@@ -49,7 +49,7 @@ class TwitchTest extends \PHPUnit_Framework_TestCase
         $twitch->setClient($client);
 
         $logHandler = new TestHandler();
-        $logger = new Logger('test', array($logHandler));
+        $logger = new Logger('test', [$logHandler]);
         $twitch->setLogger($logger);
 
         // first test fail because we didn't match an url, so TwitchId isn't defined

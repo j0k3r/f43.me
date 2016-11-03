@@ -43,7 +43,7 @@ class Tumblr extends AbstractExtractor
                 ->get($url)
                 ->getHeader('X-Tumblr-User');
         } catch (RequestException $e) {
-            $this->logger->warning('Tumblr extract failed for: '.$url, [
+            $this->logger->warning('Tumblr extract failed for: ' . $url, [
                 'exception' => $e,
             ]);
 
@@ -71,10 +71,10 @@ class Tumblr extends AbstractExtractor
 
         try {
             $data = $this->client
-                ->get('http://api.tumblr.com/v2/blog/'.$this->tumblrHost.'/posts/text?api_key='.$this->tumblrApiKey.'&id='.$this->tumblrId)
+                ->get('http://api.tumblr.com/v2/blog/' . $this->tumblrHost . '/posts/text?api_key=' . $this->tumblrApiKey . '&id=' . $this->tumblrId)
                 ->json();
         } catch (RequestException $e) {
-            $this->logger->warning('Tumblr extract failed for: '.$this->tumblrId.' & '.$this->tumblrHost, [
+            $this->logger->warning('Tumblr extract failed for: ' . $this->tumblrId . ' & ' . $this->tumblrHost, [
                 'exception' => $e,
             ]);
 

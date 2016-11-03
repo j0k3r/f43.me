@@ -3,23 +3,23 @@
 namespace Tests\FeedBundle\Extractor;
 
 use Api43\FeedBundle\Extractor\Tumblr;
-use Monolog\Logger;
-use Monolog\Handler\TestHandler;
 use GuzzleHttp\Client;
-use GuzzleHttp\Subscriber\Mock;
 use GuzzleHttp\Message\Response;
 use GuzzleHttp\Stream\Stream;
+use GuzzleHttp\Subscriber\Mock;
+use Monolog\Handler\TestHandler;
+use Monolog\Logger;
 
 class TumblrTest extends \PHPUnit_Framework_TestCase
 {
     public function dataMatch()
     {
-        return array(
-            array('http://thecodinglove.com/post/96365413702/client-giving-us-his-feedback-on-his-new-project', true),
-            array('http://thecodinglove.com/post/100483712123/monday-morning', true),
-            array('http://google.com', false),
-            array('http://user@:80', false),
-        );
+        return [
+            ['http://thecodinglove.com/post/96365413702/client-giving-us-his-feedback-on-his-new-project', true],
+            ['http://thecodinglove.com/post/100483712123/monday-morning', true],
+            ['http://google.com', false],
+            ['http://user@:80', false],
+        ];
     }
 
     /**
@@ -54,7 +54,7 @@ class TumblrTest extends \PHPUnit_Framework_TestCase
         $tumblr->setClient($client);
 
         $logHandler = new TestHandler();
-        $logger = new Logger('test', array($logHandler));
+        $logger = new Logger('test', [$logHandler]);
         $tumblr->setLogger($logger);
 
         $tumblr->match('http://lesjoiesducode.fr/post/125256171232/quand-après-une-heure-de-dev-je-teste-mon-code-en');
@@ -84,7 +84,7 @@ class TumblrTest extends \PHPUnit_Framework_TestCase
         $mock = new Mock([
             // match()
             new Response(200, ['X-Tumblr-User' => 'test']),
-            new Response(200, ['X-Tumblr-User' => 'test'], Stream::factory(json_encode(array('response' => array('posts' => array(array('body' => '<div>content</div>'))))))),
+            new Response(200, ['X-Tumblr-User' => 'test'], Stream::factory(json_encode(['response' => ['posts' => [['body' => '<div>content</div>']]]]))),
             new Response(200, ['X-Tumblr-User' => 'test'], Stream::factory(json_encode([]))),
             new Response(400, ['X-Tumblr-User' => 'test'], Stream::factory(json_encode('oops'))),
         ]);
@@ -95,7 +95,7 @@ class TumblrTest extends \PHPUnit_Framework_TestCase
         $tumblr->setClient($client);
 
         $logHandler = new TestHandler();
-        $logger = new Logger('test', array($logHandler));
+        $logger = new Logger('test', [$logHandler]);
         $tumblr->setLogger($logger);
 
         // first test fail because we didn't match an url, so TumblrId isn't defined

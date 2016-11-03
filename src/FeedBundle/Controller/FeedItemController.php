@@ -2,11 +2,11 @@
 
 namespace Api43\FeedBundle\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\RedirectResponse;
 use Api43\FeedBundle\Document\Feed;
 use Api43\FeedBundle\Document\FeedItem;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\HttpFoundation\Request;
 
 /**
  * FeedItem controller.
@@ -58,7 +58,7 @@ class FeedItemController extends Controller
             $dm->persist($feed);
             $dm->flush();
 
-            $this->get('session')->getFlashBag()->add('notice', $res['n'].' documents deleted!');
+            $this->get('session')->getFlashBag()->add('notice', $res['n'] . ' documents deleted!');
         }
 
         return $this->redirect($this->generateUrl('feed_edit', ['slug' => $feed->getSlug()]));

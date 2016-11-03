@@ -33,13 +33,13 @@ class HackerNews extends AbstractExtractor
 
         try {
             $data = $this->client
-                ->get('https://hacker-news.firebaseio.com/v0/item/'.$matches[1].'.json')
+                ->get('https://hacker-news.firebaseio.com/v0/item/' . $matches[1] . '.json')
                 ->json();
         } catch (RequestException $e) {
             return false;
         }
 
-        if (in_array($data['type'], ['comment', 'pollopt'])
+        if (in_array($data['type'], ['comment', 'pollopt'], true)
             || trim($data['text']) === '') {
             return false;
         }
@@ -58,6 +58,6 @@ class HackerNews extends AbstractExtractor
             return '';
         }
 
-        return '<p>'.$this->text.'</p>';
+        return '<p>' . $this->text . '</p>';
     }
 }

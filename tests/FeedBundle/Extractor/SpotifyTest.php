@@ -3,26 +3,26 @@
 namespace Tests\FeedBundle\Extractor;
 
 use Api43\FeedBundle\Extractor\Spotify;
-use Monolog\Logger;
-use Monolog\Handler\TestHandler;
 use GuzzleHttp\Client;
-use GuzzleHttp\Subscriber\Mock;
 use GuzzleHttp\Message\Response;
 use GuzzleHttp\Stream\Stream;
+use GuzzleHttp\Subscriber\Mock;
+use Monolog\Handler\TestHandler;
+use Monolog\Logger;
 
 class SpotifyTest extends \PHPUnit_Framework_TestCase
 {
     public function dataMatch()
     {
-        return array(
-            array('http://open.spotify.com/track/298gs9ATwr2rD9tGYJKlQR', true),
-            array('https://open.spotify.com/track/298gs9ATwr2rD9tGYJKlQR', true),
-            array('https://play.spotify.com/artist/4njdEjTnLfcGImKZu1iSrz', true),
-            array('https://play.spotify.com/album/6yGp5e6Puhx155c8dQ8e6P', true),
-            array('https://play.spotify.com/track/2wIC3jqtTK78zQMdj1DRLu', true),
-            array('https://goog.co', false),
-            array('http://user@:80', false),
-        );
+        return [
+            ['http://open.spotify.com/track/298gs9ATwr2rD9tGYJKlQR', true],
+            ['https://open.spotify.com/track/298gs9ATwr2rD9tGYJKlQR', true],
+            ['https://play.spotify.com/artist/4njdEjTnLfcGImKZu1iSrz', true],
+            ['https://play.spotify.com/album/6yGp5e6Puhx155c8dQ8e6P', true],
+            ['https://play.spotify.com/track/2wIC3jqtTK78zQMdj1DRLu', true],
+            ['https://goog.co', false],
+            ['http://user@:80', false],
+        ];
     }
 
     /**
@@ -39,7 +39,7 @@ class SpotifyTest extends \PHPUnit_Framework_TestCase
         $client = new Client();
 
         $mock = new Mock([
-            new Response(200, [], Stream::factory(json_encode(array('title' => 'my title', 'thumbnail_url' => 'http://0.0.0.0/img.jpg', 'html' => '<iframe/>')))),
+            new Response(200, [], Stream::factory(json_encode(['title' => 'my title', 'thumbnail_url' => 'http://0.0.0.0/img.jpg', 'html' => '<iframe/>']))),
             new Response(200, [], Stream::factory(json_encode(''))),
             new Response(400, [], Stream::factory(json_encode('oops'))),
         ]);
@@ -50,7 +50,7 @@ class SpotifyTest extends \PHPUnit_Framework_TestCase
         $spotify->setClient($client);
 
         $logHandler = new TestHandler();
-        $logger = new Logger('test', array($logHandler));
+        $logger = new Logger('test', [$logHandler]);
         $spotify->setLogger($logger);
 
         // first test fail because we didn't match an url, so SpotifyUrl isn't defined

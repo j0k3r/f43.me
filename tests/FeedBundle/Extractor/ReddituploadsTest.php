@@ -3,25 +3,25 @@
 namespace Tests\FeedBundle\Extractor;
 
 use Api43\FeedBundle\Extractor\Reddituploads;
-use Monolog\Logger;
 use Monolog\Handler\TestHandler;
+use Monolog\Logger;
 
 class ReddituploadsTest extends \PHPUnit_Framework_TestCase
 {
     public function dataMatch()
     {
-        return array(
-            array('https://i.reddituploads.com/21fc8e0b2984423e84fd59fbc58024c8?fit=max&h=1536&w=1536&s=9e3c0fa6d46a642c42eace91833cad93', true),
-            array('http://i.reddituploads.com/21fc8e0b2984423e84fd59fbc58024c8?fit=max&h=1536&w=1536&s=9e3c0fa6d46a642c42eace91833cad93', true),
-            array('https://i.reddituploads.com/21fc8e0b2984423e84fd59fbc58024c8', true),
-            array('https://i.redd.it/zldsan2mcq0x.jpg', true),
-            array('http://i.redd.it/zldsan2mcq0x.jpg', true),
-            array('https://i.redd.it/doyo06rfeo0x.gif', true),
-            array('http://i.redd.it/', false),
-            array('http://i.reddituploads.com/', false),
-            array('https://goog.co', false),
-            array('http://user@:80', false),
-        );
+        return [
+            ['https://i.reddituploads.com/21fc8e0b2984423e84fd59fbc58024c8?fit=max&h=1536&w=1536&s=9e3c0fa6d46a642c42eace91833cad93', true],
+            ['http://i.reddituploads.com/21fc8e0b2984423e84fd59fbc58024c8?fit=max&h=1536&w=1536&s=9e3c0fa6d46a642c42eace91833cad93', true],
+            ['https://i.reddituploads.com/21fc8e0b2984423e84fd59fbc58024c8', true],
+            ['https://i.redd.it/zldsan2mcq0x.jpg', true],
+            ['http://i.redd.it/zldsan2mcq0x.jpg', true],
+            ['https://i.redd.it/doyo06rfeo0x.gif', true],
+            ['http://i.redd.it/', false],
+            ['http://i.reddituploads.com/', false],
+            ['https://goog.co', false],
+            ['http://user@:80', false],
+        ];
     }
 
     /**
@@ -38,7 +38,7 @@ class ReddituploadsTest extends \PHPUnit_Framework_TestCase
         $reddituploads = new Reddituploads();
 
         $logHandler = new TestHandler();
-        $logger = new Logger('test', array($logHandler));
+        $logger = new Logger('test', [$logHandler]);
         $reddituploads->setLogger($logger);
 
         // first test fail because we didn't match an url, so reddituploadsUrl isn't defined

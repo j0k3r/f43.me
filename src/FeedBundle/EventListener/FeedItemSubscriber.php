@@ -3,9 +3,9 @@
 namespace Api43\FeedBundle\EventListener;
 
 use Api43\FeedBundle\Event\FeedItemEvent;
+use GuzzleHttp\Client;
 use Symfony\Bundle\FrameworkBundle\Routing\Router;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
-use GuzzleHttp\Client;
 
 class FeedItemSubscriber
 {
@@ -58,7 +58,7 @@ class FeedItemSubscriber
         // https://github.com/pubsubhubbub/php-publisher/blob/master/library/publisher.php
         $params = 'hub.mode=publish';
         foreach ($urls as $url) {
-            $params .= '&hub.url='.$url;
+            $params .= '&hub.url=' . $url;
         }
 
         $response = $this->client->post(
@@ -74,6 +74,6 @@ class FeedItemSubscriber
         );
 
         // hub should response 204 if everything went fine
-        return !($response->getStatusCode() != 204);
+        return !($response->getStatusCode() !== 204);
     }
 }

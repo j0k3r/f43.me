@@ -9,7 +9,7 @@ class InternalTest extends \PHPUnit_Framework_TestCase
     public function testParseEmpty()
     {
         $graby = $this->getMockBuilder('Graby\Graby')
-            ->setMethods(array('fetchContent'))
+            ->setMethods(['fetchContent'])
             ->disableOriginalConstructor()
             ->getMock();
 
@@ -24,13 +24,13 @@ class InternalTest extends \PHPUnit_Framework_TestCase
     public function testParseFalse()
     {
         $graby = $this->getMockBuilder('Graby\Graby')
-            ->setMethods(array('fetchContent'))
+            ->setMethods(['fetchContent'])
             ->disableOriginalConstructor()
             ->getMock();
 
         $graby->expects($this->any())
             ->method('fetchContent')
-            ->willReturn(array('html' => false));
+            ->willReturn(['html' => false]);
 
         $internal = new Internal($graby);
         $this->assertEmpty($internal->parse('http://localhost'));
@@ -39,13 +39,13 @@ class InternalTest extends \PHPUnit_Framework_TestCase
     public function testParseOk()
     {
         $graby = $this->getMockBuilder('Graby\Graby')
-            ->setMethods(array('fetchContent'))
+            ->setMethods(['fetchContent'])
             ->disableOriginalConstructor()
             ->getMock();
 
         $graby->expects($this->any())
             ->method('fetchContent')
-            ->willReturn(array('html' => '<p>test</p>'));
+            ->willReturn(['html' => '<p>test</p>']);
 
         $internal = new Internal($graby);
         $this->assertNotEmpty($internal->parse('http://localhost'));
@@ -54,7 +54,7 @@ class InternalTest extends \PHPUnit_Framework_TestCase
     public function testParseException()
     {
         $graby = $this->getMockBuilder('Graby\Graby')
-            ->setMethods(array('fetchContent'))
+            ->setMethods(['fetchContent'])
             ->disableOriginalConstructor()
             ->getMock();
 

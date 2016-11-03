@@ -19,7 +19,7 @@ class RenderTest extends \PHPUnit_Framework_TestCase
             ->getMock();
 
         $repo = $this->getMockBuilder('Doctrine\ODM\DocumentRepository')
-            ->setMethods(array('findByFeed'))
+            ->setMethods(['findByFeed'])
             ->disableOriginalConstructor()
             ->getMock();
 
@@ -54,7 +54,7 @@ class RenderTest extends \PHPUnit_Framework_TestCase
     public function testRenderAtom()
     {
         $feed = $this->getMockBuilder('Api43\FeedBundle\Document\Feed')
-            ->setMethods(array('getFormatter'))
+            ->setMethods(['getFormatter'])
             ->disableOriginalConstructor()
             ->getMock();
 
@@ -79,7 +79,7 @@ class RenderTest extends \PHPUnit_Framework_TestCase
     public function testRenderRss()
     {
         $feed = $this->getMockBuilder('Api43\FeedBundle\Document\Feed')
-            ->setMethods(array('getFormatter'))
+            ->setMethods(['getFormatter'])
             ->disableOriginalConstructor()
             ->getMock();
 

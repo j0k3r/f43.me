@@ -2,8 +2,8 @@
 
 namespace Api43\FeedBundle\Extractor;
 
-use TwitterOAuth\TwitterOAuth;
 use TwitterOAuth\Exception\TwitterException;
+use TwitterOAuth\TwitterOAuth;
 
 class Twitter extends AbstractExtractor
 {
@@ -30,7 +30,7 @@ class Twitter extends AbstractExtractor
         // find tweet id
         preg_match('/([0-9]{18})/', $path, $matches);
 
-        if (!in_array($host, ['mobile.twitter.com', 'twitter.com']) || !isset($matches[1])) {
+        if (!in_array($host, ['mobile.twitter.com', 'twitter.com'], true) || !isset($matches[1])) {
             return false;
         }
 
@@ -51,7 +51,7 @@ class Twitter extends AbstractExtractor
         try {
             $twitterData = $this->twitter->get('statuses/show', ['id' => $this->tweetId, 'tweet_mode' => 'extended']);
         } catch (TwitterException $e) {
-            $this->logger->warning('Twitter extract failed for: '.$this->tweetId, [
+            $this->logger->warning('Twitter extract failed for: ' . $this->tweetId, [
                 'exception' => $e,
             ]);
 
@@ -70,24 +70,24 @@ class Twitter extends AbstractExtractor
      */
     private function retrieveTweet($data)
     {
-        $tweet = '<p><strong>'.$data['user']['name'].'</strong>';
-        $tweet .= ' &ndash; <a href="https://twitter.com/'.$data['user']['screen_name'].'">@'.$data['user']['screen_name'].'</a>';
-        $tweet .= '<br/>'.nl2br($data['full_text']);
-        $tweet .= '<br/><em>'.$data['created_at'].'</em></p>';
+        $tweet = '<p><strong>' . $data['user']['name'] . '</strong>';
+        $tweet .= ' &ndash; <a href="https://twitter.com/' . $data['user']['screen_name'] . '">@' . $data['user']['screen_name'] . '</a>';
+        $tweet .= '<br/>' . nl2br($data['full_text']);
+        $tweet .= '<br/><em>' . $data['created_at'] . '</em></p>';
 
         // replace links with real links
         foreach ($data['entities']['urls'] as $url) {
-            $tweet = str_ireplace($url['url'], '<a href="'.$url['expanded_url'].'">'.$url['display_url'].'</a>', $tweet);
+            $tweet = str_ireplace($url['url'], '<a href="' . $url['expanded_url'] . '">' . $url['display_url'] . '</a>', $tweet);
         }
 
         // replace users with real links
         foreach ($data['entities']['user_mentions'] as $user) {
-            $tweet = str_ireplace('@'.$user['screen_name'], '<a href="https://twitter.com/'.$user['screen_name'].'">@'.$user['screen_name'].'</a>', $tweet);
+            $tweet = str_ireplace('@' . $user['screen_name'], '<a href="https://twitter.com/' . $user['screen_name'] . '">@' . $user['screen_name'] . '</a>', $tweet);
         }
 
         // replace hashtags with real links
         foreach ($data['entities']['hashtags'] as $hashtag) {
-            $tweet = str_ireplace('#'.$hashtag['text'], '<a href="https://twitter.com/hashtag/'.$hashtag['text'].'?src=hash">#'.$hashtag['text'].'</a>', $tweet);
+            $tweet = str_ireplace('#' . $hashtag['text'], '<a href="https://twitter.com/hashtag/' . $hashtag['text'] . '?src=hash">#' . $hashtag['text'] . '</a>', $tweet);
         }
 
         // insert medias
@@ -96,7 +96,7 @@ class Twitter extends AbstractExtractor
                 // remove link to that media from the tweet (to avoid confusion)
                 $tweet = str_ireplace($media['url'], '', $tweet);
 
-                $tweet .= '<p><img src="'.$media['media_url_https'].'" /></p>';
+                $tweet .= '<p><img src="' . $media['media_url_https'] . '" /></p>';
             }
         }
 

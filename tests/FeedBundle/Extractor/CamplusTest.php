@@ -3,27 +3,27 @@
 namespace Tests\FeedBundle\Extractor;
 
 use Api43\FeedBundle\Extractor\Camplus;
-use Monolog\Logger;
-use Monolog\Handler\TestHandler;
 use GuzzleHttp\Client;
-use GuzzleHttp\Subscriber\Mock;
 use GuzzleHttp\Message\Response;
 use GuzzleHttp\Stream\Stream;
+use GuzzleHttp\Subscriber\Mock;
+use Monolog\Handler\TestHandler;
+use Monolog\Logger;
 
 class CamplusTest extends \PHPUnit_Framework_TestCase
 {
     public function dataMatch()
     {
-        return array(
-            array('http://campl.us/rL9Q', true),
-            array('http://campl.us/jQKwkTKxLHG', true),
-            array('https://campl.us/rL9Q', true),
-            array('https://campl.us/hvGw', true),
-            array('http://campl.us/ozu1', true),
-            array('http://pics.campl.us/f/6/6283.e61ef28b1535e624f30e4ef96fcd3f52.jpg', false),
-            array('http://github.com/symfony/symfony', false),
-            array('http://user@:80', false),
-        );
+        return [
+            ['http://campl.us/rL9Q', true],
+            ['http://campl.us/jQKwkTKxLHG', true],
+            ['https://campl.us/rL9Q', true],
+            ['https://campl.us/hvGw', true],
+            ['http://campl.us/ozu1', true],
+            ['http://pics.campl.us/f/6/6283.e61ef28b1535e624f30e4ef96fcd3f52.jpg', false],
+            ['http://github.com/symfony/symfony', false],
+            ['http://user@:80', false],
+        ];
     }
 
     /**
@@ -40,16 +40,16 @@ class CamplusTest extends \PHPUnit_Framework_TestCase
         $client = new Client();
 
         $mock = new Mock([
-            new Response(200, [], Stream::factory(json_encode(array(
-                'page' => array('tweet' => array(
+            new Response(200, [], Stream::factory(json_encode([
+                'page' => ['tweet' => [
                     'id' => '123',
                     'username' => 'j0k',
                     'realname' => 'j0k',
                     'text' => 'yay',
-                )), 'pictures' => array(array(
+                ]], 'pictures' => [[
                     '480px' => 'http://0.0.0.0/youpi.jpg',
-                )),
-            )))),
+                ]],
+            ]))),
         ]);
 
         $client->getEmitter()->attach($mock);
@@ -82,7 +82,7 @@ class CamplusTest extends \PHPUnit_Framework_TestCase
         $camplus->setClient($client);
 
         $logHandler = new TestHandler();
-        $logger = new Logger('test', array($logHandler));
+        $logger = new Logger('test', [$logHandler]);
         $camplus->setLogger($logger);
 
         $camplus->match('http://campl.us/rL9Q');

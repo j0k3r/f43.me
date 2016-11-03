@@ -19,3 +19,7 @@
 /node_modules/
 /app/Resources/lib
 /web/build
+.php_cs.cache
+/bin/*
+!/bin/console
+!/bin/symfony_requirements

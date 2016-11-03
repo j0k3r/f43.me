@@ -47,10 +47,10 @@ class Ifttt extends AbstractExtractor
 
         try {
             $data = $this->client
-                ->get('https://ifttt.com/oembed/?url=https://ifttt.com/recipes/'.$this->recipeId.'&format=json')
+                ->get('https://ifttt.com/oembed/?url=https://ifttt.com/recipes/' . $this->recipeId . '&format=json')
                 ->json();
         } catch (RequestException $e) {
-            $this->logger->warning('Ifttt extract failed for: '.$this->recipeId, [
+            $this->logger->warning('Ifttt extract failed for: ' . $this->recipeId, [
                 'exception' => $e,
             ]);
 
@@ -61,6 +61,6 @@ class Ifttt extends AbstractExtractor
             return '';
         }
 
-        return '<div><h2>'.$data['title'].'</h2><p>'.$data['description'].'</p><p><a href="https://ifttt.com/recipes/'.$this->recipeId.'"><img src="https://ifttt.com/recipe_embed_img/'.$this->recipeId.'"></a></p></div>';
+        return '<div><h2>' . $data['title'] . '</h2><p>' . $data['description'] . '</p><p><a href="https://ifttt.com/recipes/' . $this->recipeId . '"><img src="https://ifttt.com/recipe_embed_img/' . $this->recipeId . '"></a></p></div>';
     }
 }

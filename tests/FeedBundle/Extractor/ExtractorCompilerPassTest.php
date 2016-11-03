@@ -2,8 +2,8 @@
 
 namespace Tests\FeedBundle\Extractor;
 
-use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Api43\FeedBundle\Extractor\ExtractorCompilerPass;
+use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 class ExtractorCompilerPassTest extends \PHPUnit_Framework_TestCase
 {
@@ -25,7 +25,7 @@ class ExtractorCompilerPassTest extends \PHPUnit_Framework_TestCase
 
         $container
             ->register('foo')
-            ->addTag('feed.extractor', array('alias' => 'imgur'))
+            ->addTag('feed.extractor', ['alias' => 'imgur'])
         ;
 
         $this->process($container);

@@ -64,7 +64,7 @@ class RssFormatter extends Formatter
         $title = $this->dom->createElement('title', htmlspecialchars($this->feed->getName()));
         $description = $this->dom->createElement('description', htmlspecialchars($this->feed->getDescription()));
 
-        $link = $this->dom->createElement('link', 'http://'.$this->feed->getHost());
+        $link = $this->dom->createElement('link', 'http://' . $this->feed->getHost());
 
         $channel->appendChild($hub);
         $channel->appendChild($self);
@@ -76,7 +76,7 @@ class RssFormatter extends Formatter
         $icon = $this->dom->createElementNS(
             'http://webfeeds.org/rss/1.0',
             'webfeeds:icon',
-            htmlspecialchars('https://s2.googleusercontent.com/s2/favicons?alt=feed&domain='.$this->feed->getHost())
+            htmlspecialchars('https://s2.googleusercontent.com/s2/favicons?alt=feed&domain=' . $this->feed->getHost())
         );
         $channel->appendChild($icon);
 

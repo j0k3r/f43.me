@@ -3,26 +3,26 @@
 namespace Tests\FeedBundle\Extractor;
 
 use Api43\FeedBundle\Extractor\Instagram;
-use Monolog\Logger;
-use Monolog\Handler\TestHandler;
 use GuzzleHttp\Client;
-use GuzzleHttp\Subscriber\Mock;
 use GuzzleHttp\Message\Response;
 use GuzzleHttp\Stream\Stream;
+use GuzzleHttp\Subscriber\Mock;
+use Monolog\Handler\TestHandler;
+use Monolog\Logger;
 
 class InstagramTest extends \PHPUnit_Framework_TestCase
 {
     public function dataMatch()
     {
-        return array(
-            array('https://instagram.com/p/2N5UHfChAZ/', true),
-            array('http://instagr.am/p/fA9uwTtkSN/', true),
-            array('https://instagram.com/p/4FKIIdJ9LM/?taken-by=j0k', true),
-            array('https://www.instagram.com/p/BAqirNbwEc0/', true),
-            array('https://instagram.com', false),
-            array('https://goog.co', false),
-            array('http://user@:80', false),
-        );
+        return [
+            ['https://instagram.com/p/2N5UHfChAZ/', true],
+            ['http://instagr.am/p/fA9uwTtkSN/', true],
+            ['https://instagram.com/p/4FKIIdJ9LM/?taken-by=j0k', true],
+            ['https://www.instagram.com/p/BAqirNbwEc0/', true],
+            ['https://instagram.com', false],
+            ['https://goog.co', false],
+            ['http://user@:80', false],
+        ];
     }
 
     /**
@@ -39,7 +39,7 @@ class InstagramTest extends \PHPUnit_Framework_TestCase
         $client = new Client();
 
         $mock = new Mock([
-            new Response(200, [], Stream::factory(json_encode(array('title' => 'my title', 'thumbnail_url' => 'http://0.0.0.0/img.jpg', 'html' => '<iframe/>')))),
+            new Response(200, [], Stream::factory(json_encode(['title' => 'my title', 'thumbnail_url' => 'http://0.0.0.0/img.jpg', 'html' => '<iframe/>']))),
             new Response(200, [], Stream::factory(json_encode(''))),
             new Response(400, [], Stream::factory(json_encode('oops'))),
         ]);
@@ -50,7 +50,7 @@ class InstagramTest extends \PHPUnit_Framework_TestCase
         $instagram->setClient($client);
 
         $logHandler = new TestHandler();
-        $logger = new Logger('test', array($logHandler));
+        $logger = new Logger('test', [$logHandler]);
         $instagram->setLogger($logger);
 
         // first test fail because we didn't match an url, so InstagramId isn't defined

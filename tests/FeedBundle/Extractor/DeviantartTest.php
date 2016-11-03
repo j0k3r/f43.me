@@ -3,28 +3,28 @@
 namespace Tests\FeedBundle\Extractor;
 
 use Api43\FeedBundle\Extractor\Deviantart;
-use Monolog\Logger;
-use Monolog\Handler\TestHandler;
 use GuzzleHttp\Client;
-use GuzzleHttp\Subscriber\Mock;
 use GuzzleHttp\Message\Response;
 use GuzzleHttp\Stream\Stream;
+use GuzzleHttp\Subscriber\Mock;
+use Monolog\Handler\TestHandler;
+use Monolog\Logger;
 
 class DeviantartTest extends \PHPUnit_Framework_TestCase
 {
     public function dataMatch()
     {
-        return array(
-            array('http://mibreit.deviantart.com/art/A-Piece-of-Heaven-357105002', true),
-            array('http://lndi.deviantart.com/art/Maybe-we-ll-get-luck-and-we-ll-both-live-again-494273522', true),
-            array('http://fav.me/d7gab7p', true),
-            array('http://sta.sh/06x5m3s9bms', true),
+        return [
+            ['http://mibreit.deviantart.com/art/A-Piece-of-Heaven-357105002', true],
+            ['http://lndi.deviantart.com/art/Maybe-we-ll-get-luck-and-we-ll-both-live-again-494273522', true],
+            ['http://fav.me/d7gab7p', true],
+            ['http://sta.sh/06x5m3s9bms', true],
 
-            array('http://www.deviantart.com/browse/all/', false),
-            array('http://nixielupus.deviantart.com/', false),
-            array('http://sta.sh/', false),
-            array('http://user@:80', false),
-        );
+            ['http://www.deviantart.com/browse/all/', false],
+            ['http://nixielupus.deviantart.com/', false],
+            ['http://sta.sh/', false],
+            ['http://user@:80', false],
+        ];
     }
 
     /**
@@ -41,14 +41,14 @@ class DeviantartTest extends \PHPUnit_Framework_TestCase
         $client = new Client();
 
         $mock = new Mock([
-            new Response(200, [], Stream::factory(json_encode(array(
+            new Response(200, [], Stream::factory(json_encode([
                 'url' => 'http://0.0.0.0/youpi.jpg',
                 'title' => 'youpi',
                 'author_url' => 'http://youpi.0.0.0.0',
                 'author_name' => 'youpi',
                 'category' => 'Pic > Landscape',
                 'html' => '<iframe></iframe>',
-            )))),
+            ]))),
         ]);
 
         $client->getEmitter()->attach($mock);
@@ -82,7 +82,7 @@ class DeviantartTest extends \PHPUnit_Framework_TestCase
         $deviantart->setClient($client);
 
         $logHandler = new TestHandler();
-        $logger = new Logger('test', array($logHandler));
+        $logger = new Logger('test', [$logHandler]);
         $deviantart->setLogger($logger);
 
         $deviantart->match('http://mibreit.deviantart.com/art/A-Piece-of-Heaven-357105002');

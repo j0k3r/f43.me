@@ -20,7 +20,7 @@ class Dailymotion extends AbstractExtractor
             return false;
         }
 
-        if (!in_array($host, ['www.dailymotion.com', 'dailymotion.com', 'dai.ly'])) {
+        if (!in_array($host, ['www.dailymotion.com', 'dailymotion.com', 'dai.ly'], true)) {
             return false;
         }
 
@@ -40,10 +40,10 @@ class Dailymotion extends AbstractExtractor
 
         try {
             $data = $this->client
-                ->get('http://www.dailymotion.com/services/oembed?format=json&url='.$this->dailymotionUrl)
+                ->get('http://www.dailymotion.com/services/oembed?format=json&url=' . $this->dailymotionUrl)
                 ->json();
         } catch (RequestException $e) {
-            $this->logger->warning('Dailymotion extract failed for: '.$this->dailymotionUrl, [
+            $this->logger->warning('Dailymotion extract failed for: ' . $this->dailymotionUrl, [
                 'exception' => $e,
             ]);
 
@@ -54,6 +54,6 @@ class Dailymotion extends AbstractExtractor
             return '';
         }
 
-        return '<div><h2>'.$data['title'].'</h2><p><img src="'.$data['thumbnail_url'].'"></p>'.$data['html'].'</div>';
+        return '<div><h2>' . $data['title'] . '</h2><p><img src="' . $data['thumbnail_url'] . '"></p>' . $data['html'] . '</div>';
     }
 }

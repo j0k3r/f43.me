@@ -34,7 +34,7 @@ class External extends AbstractParser
     {
         try {
             $data = $this->client
-                ->get($this->urlApi.'?token='.$this->token.'&url='.urlencode($url))
+                ->get($this->urlApi . '?token=' . $this->token . '&url=' . urlencode($url))
                 ->json();
         } catch (RequestException $e) {
             return '';

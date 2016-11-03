@@ -29,6 +29,6 @@ class HackerNews extends DefaultImprover
         $host = parse_url($this->url, PHP_URL_HOST);
 
         // $itemContent for HackerNews feed contains only a link to the HN page with "Comments" as name
-        return '<p><em>Original article on <a href="'.$this->url.'">'.$host.'</a> - '.$this->itemContent.' on Hacker News</em></p> '.$readableContent;
+        return '<p><em>Original article on <a href="' . $this->url . '">' . $host . '</a> - ' . $this->itemContent . ' on Hacker News</em></p> ' . $readableContent;
     }
 }

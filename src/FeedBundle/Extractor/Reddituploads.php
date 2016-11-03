@@ -18,7 +18,7 @@ class Reddituploads extends AbstractExtractor
             return false;
         }
 
-        if (!in_array($host, ['i.reddituploads.com', 'i.redd.it'])) {
+        if (!in_array($host, ['i.reddituploads.com', 'i.redd.it'], true)) {
             return false;
         }
 
@@ -43,6 +43,6 @@ class Reddituploads extends AbstractExtractor
             return '';
         }
 
-        return '<div><p><img src="'.$this->reddituploadsUrl.'"></p></div>';
+        return '<div><p><img src="' . $this->reddituploadsUrl . '"></p></div>';
     }
 }

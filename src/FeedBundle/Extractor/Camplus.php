@@ -47,10 +47,10 @@ class Camplus extends AbstractExtractor
 
         try {
             $data = $this->client
-                ->get('http://campl.us/'.$this->camplusId.':info')
+                ->get('http://campl.us/' . $this->camplusId . ':info')
                 ->json();
         } catch (RequestException $e) {
-            $this->logger->warning('Camplus extract failed for: '.$this->camplusId, [
+            $this->logger->warning('Camplus extract failed for: ' . $this->camplusId, [
                 'exception' => $e,
             ]);
 
@@ -58,12 +58,12 @@ class Camplus extends AbstractExtractor
         }
 
         $content = '<div>
-            <h2>Photo from '.$data['page']['tweet']['realname'].'</h2>
-            <p>By <a href="https://twitter.com/'.$data['page']['tweet']['username'].'">@'.$data['page']['tweet']['username'].'</a> – <a href="https://twitter.com/statuses/'.$data['page']['tweet']['id'].'">related tweet</a></p>
-            <p>'.$data['page']['tweet']['text'].'</p>';
+            <h2>Photo from ' . $data['page']['tweet']['realname'] . '</h2>
+            <p>By <a href="https://twitter.com/' . $data['page']['tweet']['username'] . '">@' . $data['page']['tweet']['username'] . '</a> – <a href="https://twitter.com/statuses/' . $data['page']['tweet']['id'] . '">related tweet</a></p>
+            <p>' . $data['page']['tweet']['text'] . '</p>';
 
         foreach ($data['pictures'] as $value) {
-            $content .= '<p><img src="'.$value['480px'].'" /></p>';
+            $content .= '<p><img src="' . $value['480px'] . '" /></p>';
         }
 
         $content .= '</div>';
