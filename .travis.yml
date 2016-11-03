@@ -46,11 +46,11 @@ before_script:
 script:
     - ant prepare
     - mkdir -p build/logs
-    - ./vendor/bin/phpunit -v $PHPUNIT_FLAGS
+    - php bin/phpunit -v $PHPUNIT_FLAGS
     - if [ "$CS_FIXER" = "run" ]; then php bin/php-cs-fixer fix --verbose --dry-run ; fi;
 
 after_script:
     - |
         if [ $COVERAGE = run ]; then
-            php vendor/satooshi/php-coveralls/bin/coveralls -v
+            php bin/coveralls -v
         fi
