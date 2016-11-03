@@ -11,12 +11,12 @@ class ImgurTest extends \PHPUnit_Framework_TestCase
     public function dataMatch()
     {
         return array(
-            array('http://i.imgur.com/IoKwI7E.jpg', true),
-            array('http://i.imgur.com/IoKwI7E', true),
-            array('https://i.imgur.com/IoKwI7E.jpg', true),
-            array('https://i.imgur.com/IoKwI7E', true),
-            array('http://imgur.com/IoKwI7E', true),
-            array('https://imgur.com/IoKwI7E', true),
+            array('http://i.imgur.com/zNUC9TA.jpg', true),
+            array('http://i.imgur.com/zNUC9TA', true),
+            array('https://i.imgur.com/zNUC9TA.jpg', true),
+            array('https://i.imgur.com/zNUC9TA', true),
+            array('http://imgur.com/zNUC9TA', true),
+            array('https://imgur.com/zNUC9TA', true),
             array('https://imgur.com/a/dLaMy', true),
             array('https://imgur.com/a/dLaMy?gallery', true),
             array('https://imgur.com/gallery/dLaMy', true),
@@ -48,36 +48,47 @@ class ImgurTest extends \PHPUnit_Framework_TestCase
             ->disableOriginalConstructor()
             ->getMock();
 
-        $apiImage = $this->getMockBuilder('Imgur\Api\Image')
+        $apiAlbumOrImage = $this->getMockBuilder('Imgur\Api\AlbumOrImage')
             ->disableOriginalConstructor()
             ->getMock();
 
-        $image = $this->getMockBuilder('Imgur\Api\Model\Image')
-            ->disableOriginalConstructor()
-            ->getMock();
-
-        $image->expects($this->any())
-            ->method('getTitle')
-            ->will($this->returnValue('title'));
-        $image->expects($this->any())
-            ->method('getDescription')
-            ->will($this->returnValue('description'));
-        $image->expects($this->any())
-            ->method('getLink')
-            ->will($this->returnValue('http://localhost'));
-
-        $apiImage->expects($this->any())
-            ->method('image')
-            ->will($this->returnValue($image));
+        $apiAlbumOrImage->expects($this->any())
+            ->method('find')
+            ->will($this->returnValue([
+                'id' => 'zNUC9TA',
+                'title' => null,
+                'description' => null,
+                'datetime' => 1474446337,
+                'type' => 'image/gif',
+                'animated' => true,
+                'width' => 720,
+                'height' => 720,
+                'size' => 15215783,
+                'views' => 7628085,
+                'bandwidth' => 116067286065555,
+                'vote' => null,
+                'favorite' => false,
+                'nsfw' => false,
+                'section' => 'nevertellmetheodds',
+                'account_url' => null,
+                'account_id' => null,
+                'is_ad' => false,
+                'in_gallery' => true,
+                'gifv' => 'http://i.imgur.com/zNUC9TA.gifv',
+                'mp4' => 'http://i.imgur.com/zNUC9TA.mp4',
+                'mp4_size' => 888929,
+                'link' => 'http://i.imgur.com/zNUC9TA.gif',
+                'looping' => true,
+            ]));
 
         $imgurClient->expects($this->any())
             ->method('api')
-            ->will($this->returnValue($apiImage));
+            ->will($this->returnValue($apiAlbumOrImage));
 
         $imgur = new Imgur($imgurClient);
-        $imgur->match('http://imgur.com/IoKwI7E');
+        $imgur->match('http://imgur.com/zNUC9TA');
 
-        $this->assertEquals('<div><p>title – description</p><img src="http://localhost" /></div>', $imgur->getContent());
+        $this->assertEquals('<div><img src="http://i.imgur.com/zNUC9TA.gif" /></div>', $imgur->getContent());
     }
 
     public function testContentAlbum()
@@ -86,85 +97,88 @@ class ImgurTest extends \PHPUnit_Framework_TestCase
             ->disableOriginalConstructor()
             ->getMock();
 
-        $apiAlbum = $this->getMockBuilder('Imgur\Api\Album')
+        $apiAlbumOrImage = $this->getMockBuilder('Imgur\Api\AlbumOrImage')
             ->disableOriginalConstructor()
             ->getMock();
 
-        $album = $this->getMockBuilder('Imgur\Api\Model\Album')
-            ->disableOriginalConstructor()
-            ->getMock();
-
-        $image = $this->getMockBuilder('Imgur\Api\Model\Image')
-            ->disableOriginalConstructor()
-            ->getMock();
-
-        $image->expects($this->any())
-            ->method('getTitle')
-            ->will($this->returnValue(''));
-        $image->expects($this->any())
-            ->method('getDescription')
-            ->will($this->returnValue(''));
-        $image->expects($this->any())
-            ->method('getLink')
-            ->will($this->returnValue('http://localhost'));
-
-        $album->expects($this->any())
-            ->method('getImages')
-            ->will($this->returnValue(array($image)));
-        $album->expects($this->any())
-            ->method('getTitle')
-            ->will($this->returnValue('album title'));
-
-        $apiAlbum->expects($this->any())
-            ->method('album')
-            ->will($this->returnValue($album));
+        $apiAlbumOrImage->expects($this->any())
+            ->method('find')
+            ->will($this->returnValue([
+                'id' => 'dLaMy',
+                'title' => 'Building the Spruce Moose',
+                'description' => null,
+                'datetime' => 1402349793,
+                'cover' => 'ZaSpdSG',
+                'cover_width' => 5472,
+                'cover_height' => 3648,
+                'account_url' => 'projectmoose',
+                'account_id' => 12282892,
+                'privacy' => 'public',
+                'layout' => 'blog',
+                'views' => 448788,
+                'link' => 'http://imgur.com/a/dLaMy',
+                'favorite' => false,
+                'nsfw' => false,
+                'section' => 'DIY',
+                'images_count' => 63,
+                'in_gallery' => true,
+                'is_ad' => false,
+                'images' => [
+                    [
+                        'id' => 'nrKAg6T',
+                        'title' => null,
+                        'description' => "Here's the finished product in Utah- State no. 3",
+                        'datetime' => 1402364481,
+                        'type' => 'image/jpeg',
+                        'animated' => false,
+                        'width' => 5184,
+                        'height' => 3456,
+                        'size' => 1835179,
+                        'views' => 728807,
+                        'bandwidth' => 1337491301453,
+                        'vote' => null,
+                        'favorite' => false,
+                        'nsfw' => null,
+                        'section' => null,
+                        'account_url' => null,
+                        'account_id' => null,
+                        'is_ad' => false,
+                        'in_gallery' => false,
+                        'link' => 'http://i.imgur.com/nrKAg6T.jpg',
+                    ],
+                    [
+                        'id' => 'HdcEO2X',
+                        'title' => null,
+                        'description' => 'Here she is. A 1986 Chevy Bluebird school bus...was an exciting day picking her up!',
+                        'datetime' => 1402356596,
+                        'type' => 'image/jpeg',
+                        'animated' => false,
+                        'width' => 3264,
+                        'height' => 2448,
+                        'size' => 2188601,
+                        'views' => 672879,
+                        'bandwidth' => 1472663652279,
+                        'vote' => null,
+                        'favorite' => false,
+                        'nsfw' => null,
+                        'section' => null,
+                        'account_url' => null,
+                        'account_id' => null,
+                        'is_ad' => false,
+                        'in_gallery' => false,
+                        'link' => 'http://i.imgur.com/HdcEO2X.jpg',
+                    ],
+                ],
+            ]));
 
         $imgurClient->expects($this->any())
             ->method('api')
-            ->will($this->returnValue($apiAlbum));
+            ->will($this->returnValue($apiAlbumOrImage));
 
         $imgur = new Imgur($imgurClient);
-        $imgur->match('http://imgur.com/a/IoKwI7E');
+        $imgur->match('http://imgur.com/a/dLaMy');
 
-        $this->assertEquals('<h2>album title</h2><p></p><div><img src="http://localhost" /></div>', $imgur->getContent());
-    }
-
-    public function testContentGallery()
-    {
-        $imgurClient = $this->getMockBuilder('Imgur\Client')
-            ->disableOriginalConstructor()
-            ->getMock();
-
-        $apiGallery = $this->getMockBuilder('Imgur\Api\Gallery')
-            ->disableOriginalConstructor()
-            ->getMock();
-
-        $image = $this->getMockBuilder('Imgur\Api\Model\Image')
-            ->disableOriginalConstructor()
-            ->getMock();
-
-        $image->expects($this->any())
-            ->method('getTitle')
-            ->will($this->returnValue(''));
-        $image->expects($this->any())
-            ->method('getDescription')
-            ->will($this->returnValue(''));
-        $image->expects($this->any())
-            ->method('getLink')
-            ->will($this->returnValue('http://localhost'));
-
-        $apiGallery->expects($this->any())
-            ->method('image')
-            ->will($this->returnValue($image));
-
-        $imgurClient->expects($this->any())
-            ->method('api')
-            ->will($this->returnValue($apiGallery));
-
-        $imgur = new Imgur($imgurClient);
-        $imgur->match('http://imgur.com/gallery/IoKwI7E');
-
-        $this->assertEquals('<div><img src="http://localhost" /></div>', $imgur->getContent());
+        $this->assertEquals('<h2>Building the Spruce Moose</h2><p></p><div><p> – Here\'s the finished product in Utah- State no. 3</p><img src="http://i.imgur.com/nrKAg6T.jpg" /></div><div><p> – Here she is. A 1986 Chevy Bluebird school bus...was an exciting day picking her up!</p><img src="http://i.imgur.com/HdcEO2X.jpg" /></div>', $imgur->getContent());
     }
 
     public function testNoHashNoType()
@@ -187,7 +201,7 @@ class ImgurTest extends \PHPUnit_Framework_TestCase
 
         $imgurClient->expects($this->any())
             ->method('api')
-            ->will($this->throwException(new \Guzzle\Http\Exception\RequestException()));
+            ->will($this->throwException(new \Imgur\Exception\ErrorException()));
 
         $imgur = new Imgur($imgurClient);
 
@@ -195,10 +209,10 @@ class ImgurTest extends \PHPUnit_Framework_TestCase
         $logger = new Logger('test', array($logHandler));
         $imgur->setLogger($logger);
 
-        $imgur->match('http://imgur.com/gallery/IoKwI7E');
+        $imgur->match('http://imgur.com/gallery/xxxxxx');
 
         $this->assertEmpty($imgur->getContent());
 
-        $this->assertTrue($logHandler->hasWarning('Imgur extract failed for: IoKwI7E'), 'Warning message matched');
+        $this->assertTrue($logHandler->hasWarning('Imgur extract failed for: xxxxxx'), 'Warning message matched');
     }
 }

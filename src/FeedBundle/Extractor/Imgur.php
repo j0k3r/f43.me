@@ -3,7 +3,6 @@
 namespace Api43\FeedBundle\Extractor;
 
 use Imgur\Client;
-use Guzzle\Common\Exception\RuntimeException;
 
 class Imgur extends AbstractExtractor
 {
@@ -64,23 +63,8 @@ class Imgur extends AbstractExtractor
         $content = '';
 
         try {
-            switch ($this->type) {
-                case 'a':
-                    $album = $this->imgurClient->api('album')->album($this->hash);
-                    $images = $album->getImages();
-
-                    $content = '<h2>'.$album->getTitle().'</h2><p>'.$album->getDescription().'</p>';
-                    break;
-
-                case 'gallery':
-                    $images[] = $this->imgurClient->api('gallery')->image($this->hash);
-                    break;
-
-                default:
-                    $images[] = $this->imgurClient->api('image')->image($this->hash);
-                    break;
-            }
-        } catch (RuntimeException $e) {
+            $albumOrImage = $this->imgurClient->api('albumOrImage')->find($this->hash);
+        } catch (\Exception $e) {
             $this->logger->warning('Imgur extract failed for: '.$this->hash, [
                 'exception' => $e,
             ]);
@@ -88,16 +72,22 @@ class Imgur extends AbstractExtractor
             return '';
         }
 
+        $images[] = $albumOrImage;
+        if (isset($albumOrImage['images'])) {
+            $content = '<h2>'.$albumOrImage['title'].'</h2><p>'.$albumOrImage['description'].'</p>';
+            $images = $albumOrImage['images'];
+        }
+
         foreach ($images as $image) {
-            $info = '<p>'.$image->getTitle();
-            $info .= $image->getDescription() ? ' – '.$image->getDescription() : '';
+            $info = '<p>'.trim($image['title']);
+            $info .= $image['description'] ? ' – '.trim($image['description']) : '';
             $info .= '</p>';
 
-            if (!$image->getTitle() && !$image->getDescription()) {
+            if (!$image['title'] && !$image['description']) {
                 $info = '';
             }
 
-            $content .= '<div>'.$info.'<img src="'.$image->getLink().'" /></div>';
+            $content .= '<div>'.$info.'<img src="'.$image['link'].'" /></div>';
         }
 
         return $content;

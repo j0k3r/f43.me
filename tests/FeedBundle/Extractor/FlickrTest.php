@@ -15,7 +15,7 @@ class FlickrTest extends \PHPUnit_Framework_TestCase
     public function dataMatch()
     {
         return array(
-            # single photo
+            // single photo
             array('https://www.flickr.com/photos/palnick/15000967101/in/photostream/lightbox/', true),
             array('http://www.flickr.com/photos/palnick/15000967102/', true),
             array('https://farm6.staticflickr.com/5581/15000967103_8eb7552825_n.jpg', true),
@@ -26,7 +26,7 @@ class FlickrTest extends \PHPUnit_Framework_TestCase
             array('https://www.flickr.com/photos/dfmagazine/8286098812/', true),
             array('https://www.flickr.com/photos/64871835@N04/29186070533/in/dateposted-public/', true),
 
-            # photo set
+            // photo set
             array('https://www.flickr.com/photos/europeanspaceagency/sets/72157638315605535/', true),
             array('http://user@:80', false),
         );

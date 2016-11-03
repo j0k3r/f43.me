@@ -53,9 +53,9 @@ class TwitterTest extends \PHPUnit_Framework_TestCase
                     'media' => array(
                         array(
                             'media_url_https' => 'http://0.0.0.0/image.jpg',
-                            'url' => 'https://t.co/AfwH2EVRO3'
-                        )
-                    )
+                            'url' => 'https://t.co/AfwH2EVRO3',
+                        ),
+                    ),
                 ),
                 'entities' => [
                     'urls' => [
@@ -63,17 +63,17 @@ class TwitterTest extends \PHPUnit_Framework_TestCase
                             'url' => 'https://t.co/123456789',
                             'expanded_url' => 'http://1.1.1.1',
                             'display_url' => 'http://1.1.1...',
-                        ]
+                        ],
                     ],
                     'user_mentions' => [
                         [
                             'screen_name' => 'tweet',
-                        ]
+                        ],
                     ],
                     'hashtags' => [
                         [
                             'text' => 'awesome',
-                        ]
+                        ],
                     ],
                 ],
                 'quoted_status' => [
@@ -88,7 +88,7 @@ class TwitterTest extends \PHPUnit_Framework_TestCase
                         'user_mentions' => [],
                         'hashtags' => [],
                     ],
-                ]
+                ],
             )));
 
         $twitter = new Twitter($twitterOAuth);
