@@ -1,6 +1,6 @@
 <?php
 
-namespace tests\FeedBundle\Improver;
+namespace Tests\FeedBundle\Improver;
 
 use Api43\FeedBundle\Improver\ImproverCompilerPass;
 use Symfony\Component\DependencyInjection\ContainerBuilder;

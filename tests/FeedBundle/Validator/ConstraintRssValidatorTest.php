@@ -1,6 +1,6 @@
 <?php
 
-namespace tests\FeedBundle\Validator;
+namespace Tests\FeedBundle\Validator;
 
 use Api43\FeedBundle\Validator\Constraints\ConstraintRss;
 use Api43\FeedBundle\Validator\Constraints\ConstraintRssValidator;

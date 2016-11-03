@@ -1,6 +1,6 @@
 <?php
 
-namespace tests\FeedBundle\Command;
+namespace Tests\FeedBundle\Command;
 
 use Api43\FeedBundle\Command\FetchItemsCommand;
 use Monolog\Handler\TestHandler;

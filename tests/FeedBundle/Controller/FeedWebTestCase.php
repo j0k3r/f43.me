@@ -1,6 +1,6 @@
 <?php
 
-namespace tests\FeedBundle\Controller;
+namespace Tests\FeedBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace tests\FeedBundle\EventListener;
+namespace Tests\FeedBundle\EventListener;
 
 use Api43\FeedBundle\Event\FeedItemEvent;
 use Api43\FeedBundle\EventListener\FeedItemSubscriber;

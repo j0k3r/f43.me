@@ -1,6 +1,6 @@
 <?php
 
-namespace tests\FeedBundle\Xml;
+namespace Tests\FeedBundle\Xml;
 
 use Api43\FeedBundle\Xml\SimplePieProxy;
 

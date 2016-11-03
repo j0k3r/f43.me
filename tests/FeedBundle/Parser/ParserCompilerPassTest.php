@@ -1,6 +1,6 @@
 <?php
 
-namespace tests\FeedBundle\Parser;
+namespace Tests\FeedBundle\Parser;
 
 use Api43\FeedBundle\Parser\ParserCompilerPass;
 use Symfony\Component\DependencyInjection\ContainerBuilder;

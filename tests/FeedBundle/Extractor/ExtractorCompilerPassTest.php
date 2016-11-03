@@ -1,6 +1,6 @@
 <?php
 
-namespace tests\FeedBundle\Extractor;
+namespace Tests\FeedBundle\Extractor;
 
 use Api43\FeedBundle\Extractor\ExtractorCompilerPass;
 use Symfony\Component\DependencyInjection\ContainerBuilder;

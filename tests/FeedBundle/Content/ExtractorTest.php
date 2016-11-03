@@ -1,6 +1,6 @@
 <?php
 
-namespace tests\FeedBundle\Content;
+namespace Tests\FeedBundle\Content;
 
 use Api43\FeedBundle\Content\Extractor;
 use Api43\FeedBundle\Parser\Internal;
