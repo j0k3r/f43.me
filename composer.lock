@@ -1394,16 +1394,16 @@
         },
         {
             "name": "j0k3r/php-imgur-api-client",
-            "version": "2.0.0-beta.0",
+            "version": "2.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/j0k3r/php-imgur-api-client.git",
-                "reference": "e6bd4fe41084e32d7d29b7af51970737b17232cf"
+                "reference": "2027e89479cccd3e8b2a84856f47a9dc288d2d07"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/j0k3r/php-imgur-api-client/zipball/e6bd4fe41084e32d7d29b7af51970737b17232cf",
-                "reference": "e6bd4fe41084e32d7d29b7af51970737b17232cf",
+                "url": "https://api.github.com/repos/j0k3r/php-imgur-api-client/zipball/2027e89479cccd3e8b2a84856f47a9dc288d2d07",
+                "reference": "2027e89479cccd3e8b2a84856f47a9dc288d2d07",
                 "shasum": ""
             },
             "require": {
@@ -1450,7 +1450,7 @@
                 "api",
                 "imgur"
             ],
-            "time": "2016-10-18 20:43:22"
+            "time": "2016-11-04 13:13:16"
         },
         {
             "name": "j0k3r/php-readability",
