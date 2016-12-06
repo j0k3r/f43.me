@@ -145,7 +145,7 @@ class ExtractorTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException InvalidArgumentException
+     * @expectedException \InvalidArgumentException
      * @expectedExceptionMessage The given parser "oops" does not exists.
      */
     public function testInvalidParser()
