@@ -63,10 +63,8 @@ And finally, when we have the (most of the time, little) content from the feed, 
 
 This involve 2 kind of parser:
 
- * the **Internal** one, that uses a local PHP libray, called [graby](https://github.com/j0k3r/graby).
- * the **External** one, that uses the excellent [Parser API](https://www.readability.com/developers/api) from Readability.
-
-Since the use of the Parser API is *freely available for non-commercial use* I tend to use it less and less.
+ * the **Internal**, which uses a local PHP libray, called [graby](https://github.com/j0k3r/graby).
+ * the **External**, which uses the excellent [Mercury Web Parser API](https://mercury.postlight.com/web-parser/) from Postlight Labs.
 
 ## How to use it
 
@@ -80,7 +78,7 @@ For each external API that improvers / extractors / parsers use, you will need a
 
  * Tumblr: https://www.tumblr.com/oauth/apps
  * Imgur: https://api.imgur.com/oauth2/addclient
- * Readability: https://www.readability.com/settings/account#api
+ * Mercury: https://mercury.postlight.com/web-parser/
  * Twitch: https://www.twitch.tv/kraken/oauth2/clients/new
 
 ### Install
@@ -129,5 +127,4 @@ You should be able to access the interface using `http://localhost:8100/app_dev.
 
 ## License
 
-f43.me is released under the MIT License. See the bundled [LICENSE file](LICENSE)
-for details.
+f43.me is released under the MIT License. See the bundled [LICENSE file](LICENSE) for details.

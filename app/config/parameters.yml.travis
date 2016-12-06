@@ -1,29 +1,17 @@
 parameters:
-    database_server:   mongodb://localhost:27017
-    database_name:     f43me
-
-    locale:            en
-    secret:            414c2fb3d161b620
-
-    domain:            f43me.dev
-
-    # Get one here: https://www.readability.com/account/api
-    readability_token: ~
-
-    # sha1 encoded, in this case "adminpass"
-    adminpass:         74913f5cd5f61ec0bcfdb775414c2fb3d161b620
-
+    database_server: mongodb://localhost:27017
+    database_name: f43me
+    locale: en
+    secret: 414c2fb3d161b620
+    domain: f43me.dev
+    mercury_key: xxxxxxx
+    adminpass: 74913f5cd5f61ec0bcfdb775414c2fb3d161b620
     google_analytics_code: ~
-
     imgur.client_id: xxxxx
     imgur.client_secret: xxxxx
-
     tumblr.api_key: xxxx
-
     twitch.client_id: xxxx
-
     parser.regexps:
-        # class or id
         unlikelyCandidates: /noprint|hidden|avatar|ligatus|col_right|news-colonne-droite|combx|comment|community|disqus|extra|foot|header|menu|remark|rss|shoutbox|sidebar|sponsor|ad-break|agegate|pagination|pager|popup|addthis|response|slate_associated_bn|reseaux|sharing|auteur|tag|feedback|meta|kudo|sidebar|copyright|bio|moreInfo|legal|share|contributor/i
         okMaybeItsACandidate: /and|article|body|column|main|shadow/i
         positive: /article|body|content|entry|hentry|main|page|attachment|pagination|post|text|blog|story/i
@@ -38,11 +26,9 @@ parameters:
         attrToRemove: 'onclick|rel|class|target|fs:definition|alt|id|onload|name|onchange'
         tagToRemove: select|form|header|footer|aside
         media: '!//(?:[^\.\?/]+\.)?(?:youtu(?:be)?|soundcloud|dailymotion|vimeo|pornhub|xvideos|twitvid|rutube|viddler)\.(?:com|be|org|net)/!i'
-
     guzzle.options:
         request.options:
             timeout: 10
-
     twitter.consumer_key: xxx
     twitter.consumer_secret: xxx
     twitter.access_token: xxx
