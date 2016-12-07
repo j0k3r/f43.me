@@ -20,7 +20,7 @@ class ExternalTest extends \PHPUnit_Framework_TestCase
 
         $client->getEmitter()->attach($mock);
 
-        $external = new External($client, 'http//0.0.0.0/api', 'token');
+        $external = new External($client, 'http//0.0.0.0/api', 'key');
         $this->assertEmpty($external->parse('http://0.0.0.0/content'));
     }
 
@@ -34,7 +34,7 @@ class ExternalTest extends \PHPUnit_Framework_TestCase
 
         $client->getEmitter()->attach($mock);
 
-        $external = new External($client, 'http//0.0.0.0/api', 'token');
+        $external = new External($client, 'http//0.0.0.0/api', 'key');
         $this->assertEquals('<div></div>', $external->parse('http://0.0.0.0/content'));
     }
 
@@ -48,7 +48,7 @@ class ExternalTest extends \PHPUnit_Framework_TestCase
 
         $client->getEmitter()->attach($mock);
 
-        $external = new External($client, 'http//0.0.0.0/api', 'token');
+        $external = new External($client, 'http//0.0.0.0/api', 'key');
         $this->assertEmpty($external->parse('http://0.0.0.0/content'));
     }
 }

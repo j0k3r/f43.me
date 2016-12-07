@@ -7,8 +7,8 @@ services:
         class: Api43\FeedBundle\Parser\External
         arguments:
             - "@guzzle.client"
-            - 'https://readability.com/api/content/v1/parser'
-            - "%readability_token%"
+            - 'https://mercury.postlight.com/parser'
+            - "%mercury_key%"
         tags:
             -  { name: feed.parser, alias: external }
 

@@ -5,7 +5,7 @@ parameters:
     locale: en
     secret: uLq3XcJHHbLhq6GX
     domain: f43.me
-    readability_token: xxxxxxx
+    mercury_key: xxxxxxx
     adminpass: 74913f5cd5f61ec0bcfdb775414c2fb3d161b620
     google_analytics_code: UA-xxxxx-x
     imgur.client_id: xxxxx

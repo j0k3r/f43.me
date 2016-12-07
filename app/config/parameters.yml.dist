@@ -7,8 +7,8 @@ parameters:
 
     domain:            f43.me
 
-    # Get one here: https://www.readability.com/account/api
-    readability_token: xxxxxxx
+    # Get one here: https://mercury.postlight.com/web-parser/
+    mercury_key: xxxxxxx
 
     # sha1 encoded, in this case "adminpass"
     adminpass:         74913f5cd5f61ec0bcfdb775414c2fb3d161b620
