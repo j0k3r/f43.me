@@ -46,7 +46,7 @@ before_script:
 script:
     - ant prepare
     - mkdir -p build/logs
-    - php bin/phpunit -v $PHPUNIT_FLAGS
+    - php bin/simple-phpunit -v $PHPUNIT_FLAGS
     - if [ "$CS_FIXER" = "run" ]; then php bin/php-cs-fixer fix --verbose --dry-run ; fi;
 
 after_script:
