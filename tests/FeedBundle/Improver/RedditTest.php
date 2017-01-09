@@ -11,6 +11,7 @@ class RedditTest extends \PHPUnit_Framework_TestCase
     {
         return [
             ['reddit.com', true],
+            ['www.reddit.com', true],
             ['google.fr', false],
         ];
     }
