@@ -4,6 +4,7 @@ namespace Tests\FeedBundle\Content;
 
 use Api43\FeedBundle\Content\Extractor;
 use Api43\FeedBundle\Content\Import;
+use Api43\FeedBundle\Converter\ConverterChain;
 use Api43\FeedBundle\Document\Feed;
 use Api43\FeedBundle\Extractor\ExtractorChain;
 use Api43\FeedBundle\Extractor\Youtube;
@@ -106,7 +107,7 @@ class ImportTest extends \PHPUnit_Framework_TestCase
         $parserChain = new ParserChain();
         $parserChain->addParser(new Internal(new Graby()), 'internal');
 
-        $extractor = new Extractor($extractorChain, $improverChain, $parserChain);
+        $extractor = new Extractor($extractorChain, $improverChain, new ConverterChain(), $parserChain);
 
         $feedRepo = $this->getMockBuilder('Api43\FeedBundle\Repository\FeedRepository')
             ->disableOriginalConstructor()
@@ -225,7 +226,7 @@ class ImportTest extends \PHPUnit_Framework_TestCase
         $parserChain = new ParserChain();
         $parserChain->addParser(new Internal(new Graby()), 'internal');
 
-        $extractor = new Extractor($extractorChain, $improverChain, $parserChain);
+        $extractor = new Extractor($extractorChain, $improverChain, new ConverterChain(), $parserChain);
 
         $feedRepo = $this->getMockBuilder('Api43\FeedBundle\Repository\FeedRepository')
             ->disableOriginalConstructor()

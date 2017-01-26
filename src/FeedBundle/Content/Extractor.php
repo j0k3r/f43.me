@@ -2,6 +2,7 @@
 
 namespace Api43\FeedBundle\Content;
 
+use Api43\FeedBundle\Converter\ConverterChain;
 use Api43\FeedBundle\Document\Feed;
 use Api43\FeedBundle\Extractor\ExtractorChain;
 use Api43\FeedBundle\Improver\ImproverChain;
@@ -25,12 +26,14 @@ class Extractor
      *
      * @param ExtractorChain $extractorChain
      * @param ImproverChain  $improverChain
+     * @param ConverterChain $converterChain
      * @param ParserChain    $parserChain
      */
-    public function __construct(ExtractorChain $extractorChain, ImproverChain $improverChain, ParserChain $parserChain)
+    public function __construct(ExtractorChain $extractorChain, ImproverChain $improverChain, ConverterChain $converterChain, ParserChain $parserChain)
     {
         $this->extractorChain = $extractorChain;
         $this->improverChain = $improverChain;
+        $this->converterChain = $converterChain;
         $this->parserChain = $parserChain;
     }
 
@@ -110,6 +113,9 @@ class Extractor
             // update readable content with something ?
             $this->content = $improver->updateContent($this->content);
         }
+
+        // try to find a custom converter to convert some html
+        $this->content = $this->converterChain->convert($this->content);
 
         return $this;
     }
