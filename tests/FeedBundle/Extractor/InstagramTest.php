@@ -9,6 +9,7 @@ use GuzzleHttp\Stream\Stream;
 use GuzzleHttp\Subscriber\Mock;
 use Monolog\Handler\TestHandler;
 use Monolog\Logger;
+use Psr\Log\NullLogger;
 
 class InstagramTest extends \PHPUnit_Framework_TestCase
 {
@@ -66,5 +67,28 @@ class InstagramTest extends \PHPUnit_Framework_TestCase
         $this->assertEmpty($instagram->getContent());
 
         $this->assertTrue($logHandler->hasWarning('Instagram extract failed for: https://instagram.com/p/2N5UHfChAZ/'), 'Warning message matched');
+    }
+
+    public function testGetImageOnly()
+    {
+        $client = new Client();
+
+        $mock = new Mock([
+            new Response(200, [], Stream::factory(json_encode(['title' => 'my title', 'thumbnail_url' => 'http://0.0.0.0/img.jpg', 'html' => '<iframe/>']))),
+            new Response(400, [], Stream::factory(json_encode('oops'))),
+        ]);
+
+        $client->getEmitter()->attach($mock);
+
+        $instagram = new Instagram();
+        $instagram->setLogger(new NullLogger());
+        $instagram->setClient($client);
+        $instagram->match('https://instagram.com/p/2N5UHfChAZ/');
+
+        // first call got a real response
+        $this->assertEquals('http://0.0.0.0/img.jpg', $instagram->getImageOnly());
+
+        // second call got an error reponse
+        $this->assertEquals('', $instagram->getImageOnly());
     }
 }

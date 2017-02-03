@@ -13,6 +13,7 @@ class Extractor
     protected $feed = null;
     protected $extractorChain;
     protected $improverChain;
+    protected $converterChain;
     protected $parserChain;
     protected $parser;
     protected $allowAllParser = false;
@@ -114,7 +115,7 @@ class Extractor
             $this->content = $improver->updateContent($this->content);
         }
 
-        // try to find a custom converter to convert some html
+        // give content to each converter to convert some html into a better one
         $this->content = $this->converterChain->convert($this->content);
 
         return $this;

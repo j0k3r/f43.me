@@ -9,6 +9,5 @@ services:
             - "@feed.extractor.instagram"
         calls:
             - [ setLogger, [ "@logger" ]]
-            - [ setClient, [ "@guzzle.client" ]]
         tags:
             -  { name: feed.converter, alias: instagram }

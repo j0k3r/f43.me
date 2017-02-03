@@ -2,14 +2,12 @@
 
 namespace Api43\FeedBundle\Converter;
 
-use GuzzleHttp\Client;
 use Psr\Log\LoggerAwareInterface;
 use Psr\Log\LoggerInterface;
 
 abstract class AbstractConverter implements LoggerAwareInterface
 {
     protected $logger;
-    protected $client;
 
     /**
      * {@inheritdoc}
@@ -17,14 +15,6 @@ abstract class AbstractConverter implements LoggerAwareInterface
     public function setLogger(LoggerInterface $logger)
     {
         $this->logger = $logger;
-    }
-
-    /**
-     * @param Client $client
-     */
-    public function setClient(Client $client)
-    {
-        $this->client = $client;
     }
 
     /**
