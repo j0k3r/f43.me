@@ -15,7 +15,7 @@
                             <span class="prefix radius">{{ form_label(form.link) }}</span>
                         </div>
                         <div class="small-10 columns">
-                            {{ form_widget(form.link) }}
+                            {{ form_widget(form.link, { 'attr': {'autofocus': 'autofocus'} }) }}
                         </div>
                     </div>
                 </div>
