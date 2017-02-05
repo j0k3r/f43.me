@@ -74,7 +74,7 @@ class FlickrTest extends \PHPUnit_Framework_TestCase
 
         // consecutive calls
         $content = $flickr->getContent();
-        $this->assertContains('<img src="https://0.0.0.0/large.jpg" />', $content);
+        $this->assertContains('<a data-flickr-embed="true"></a>', $content);
         $this->assertContains('<h2>title</h2>', $content);
         $this->assertContains('data-flickr-embed', $content);
         // this one will got an empty array
@@ -118,7 +118,7 @@ class FlickrTest extends \PHPUnit_Framework_TestCase
 
         // consecutive calls
         $content = $flickr->getContent();
-        $this->assertContains('<img src="https://0.0.0.0/small.jpg" />', $content);
+        $this->assertContains('<a data-flickr-embed="true"></a>', $content);
         $this->assertContains('<h2>title</h2>', $content);
         $this->assertContains('data-flickr-embed', $content);
         // this one will got an empty array
