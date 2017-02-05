@@ -187,28 +187,29 @@
         },
         {
             "name": "doctrine/collections",
-            "version": "v1.3.0",
+            "version": "v1.4.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/collections.git",
-                "reference": "6c1e4eef75f310ea1b3e30945e9f06e652128b8a"
+                "reference": "1a4fb7e902202c33cce8c55989b945612943c2ba"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/collections/zipball/6c1e4eef75f310ea1b3e30945e9f06e652128b8a",
-                "reference": "6c1e4eef75f310ea1b3e30945e9f06e652128b8a",
+                "url": "https://api.github.com/repos/doctrine/collections/zipball/1a4fb7e902202c33cce8c55989b945612943c2ba",
+                "reference": "1a4fb7e902202c33cce8c55989b945612943c2ba",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.3.2"
+                "php": "^5.6 || ^7.0"
             },
             "require-dev": {
-                "phpunit/phpunit": "~4.0"
+                "doctrine/coding-standard": "~0.1@dev",
+                "phpunit/phpunit": "^5.7"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.2.x-dev"
+                    "dev-master": "1.3.x-dev"
                 }
             },
             "autoload": {
@@ -249,7 +250,7 @@
                 "collections",
                 "iterator"
             ],
-            "time": "2015-04-14 22:21:58"
+            "time": "2017-01-03 10:49:41"
         },
         {
             "name": "doctrine/common",
@@ -326,16 +327,16 @@
         },
         {
             "name": "doctrine/dbal",
-            "version": "v2.5.8",
+            "version": "v2.5.11",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/dbal.git",
-                "reference": "6314d55f60f85f0295c90688397b75c13faf9f0e"
+                "reference": "1b1effbddbdc0f40d1c8f849f44bcddac4f52a48"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/dbal/zipball/6314d55f60f85f0295c90688397b75c13faf9f0e",
-                "reference": "6314d55f60f85f0295c90688397b75c13faf9f0e",
+                "url": "https://api.github.com/repos/doctrine/dbal/zipball/1b1effbddbdc0f40d1c8f849f44bcddac4f52a48",
+                "reference": "1b1effbddbdc0f40d1c8f849f44bcddac4f52a48",
                 "shasum": ""
             },
             "require": {
@@ -393,20 +394,20 @@
                 "persistence",
                 "queryobject"
             ],
-            "time": "2017-01-17 17:48:38"
+            "time": "2017-02-04 21:20:13"
         },
         {
             "name": "doctrine/doctrine-bundle",
-            "version": "1.6.6",
+            "version": "1.6.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/DoctrineBundle.git",
-                "reference": "0f0c4df366bd1d36d38a27e2f5ff128e118ac969"
+                "reference": "a01d99bc6c9a6c8a8ace0012690099dd957ce9b9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/DoctrineBundle/zipball/0f0c4df366bd1d36d38a27e2f5ff128e118ac969",
-                "reference": "0f0c4df366bd1d36d38a27e2f5ff128e118ac969",
+                "url": "https://api.github.com/repos/doctrine/DoctrineBundle/zipball/a01d99bc6c9a6c8a8ace0012690099dd957ce9b9",
+                "reference": "a01d99bc6c9a6c8a8ace0012690099dd957ce9b9",
                 "shasum": ""
             },
             "require": {
@@ -474,7 +475,7 @@
                 "orm",
                 "persistence"
             ],
-            "time": "2017-01-07 21:47:22"
+            "time": "2017-01-16 12:01:26"
         },
         {
             "name": "doctrine/doctrine-cache-bundle",
@@ -1304,16 +1305,16 @@
         },
         {
             "name": "j0k3r/graby",
-            "version": "1.5.2",
+            "version": "1.5.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/j0k3r/graby.git",
-                "reference": "f22dc928738088abce5663c828e336e59a18f455"
+                "reference": "b747c461959e24a9f82d5aa3583fdce8036cd17e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/j0k3r/graby/zipball/f22dc928738088abce5663c828e336e59a18f455",
-                "reference": "f22dc928738088abce5663c828e336e59a18f455",
+                "url": "https://api.github.com/repos/j0k3r/graby/zipball/b747c461959e24a9f82d5aa3583fdce8036cd17e",
+                "reference": "b747c461959e24a9f82d5aa3583fdce8036cd17e",
                 "shasum": ""
             },
             "require": {
@@ -1356,20 +1357,20 @@
                 }
             ],
             "description": "Graby helps you extract article content from web pages",
-            "time": "2016-11-22 08:23:49"
+            "time": "2017-01-30 07:00:29"
         },
         {
             "name": "j0k3r/graby-site-config",
-            "version": "1.0.30",
+            "version": "1.0.31",
             "source": {
                 "type": "git",
                 "url": "https://github.com/j0k3r/graby-site-config.git",
-                "reference": "5fd1cfcb7acb9fed5a8b21b08b5ddf76fb494816"
+                "reference": "94ad57bd8b4bba2fabbf45b03816b6032cff7639"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/j0k3r/graby-site-config/zipball/5fd1cfcb7acb9fed5a8b21b08b5ddf76fb494816",
-                "reference": "5fd1cfcb7acb9fed5a8b21b08b5ddf76fb494816",
+                "url": "https://api.github.com/repos/j0k3r/graby-site-config/zipball/94ad57bd8b4bba2fabbf45b03816b6032cff7639",
+                "reference": "94ad57bd8b4bba2fabbf45b03816b6032cff7639",
                 "shasum": ""
             },
             "require": {
@@ -1392,20 +1393,20 @@
                 }
             ],
             "description": "Graby site config files",
-            "time": "2017-01-18 08:38:52"
+            "time": "2017-02-02 09:15:47"
         },
         {
             "name": "j0k3r/php-imgur-api-client",
-            "version": "2.0.0",
+            "version": "2.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/j0k3r/php-imgur-api-client.git",
-                "reference": "2027e89479cccd3e8b2a84856f47a9dc288d2d07"
+                "reference": "9c1dd8421c81e3ef083c688f72e592c9666a6bd1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/j0k3r/php-imgur-api-client/zipball/2027e89479cccd3e8b2a84856f47a9dc288d2d07",
-                "reference": "2027e89479cccd3e8b2a84856f47a9dc288d2d07",
+                "url": "https://api.github.com/repos/j0k3r/php-imgur-api-client/zipball/9c1dd8421c81e3ef083c688f72e592c9666a6bd1",
+                "reference": "9c1dd8421c81e3ef083c688f72e592c9666a6bd1",
                 "shasum": ""
             },
             "require": {
@@ -1452,20 +1453,20 @@
                 "api",
                 "imgur"
             ],
-            "time": "2016-11-04 13:13:16"
+            "time": "2017-02-05 20:36:27"
         },
         {
             "name": "j0k3r/php-readability",
-            "version": "1.1.5",
+            "version": "1.1.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/j0k3r/php-readability.git",
-                "reference": "a505a13d0ca972a115411504248fc4506ddaece9"
+                "reference": "445b889efb19139ce616dfea8559934a0c31088d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/j0k3r/php-readability/zipball/a505a13d0ca972a115411504248fc4506ddaece9",
-                "reference": "a505a13d0ca972a115411504248fc4506ddaece9",
+                "url": "https://api.github.com/repos/j0k3r/php-readability/zipball/445b889efb19139ce616dfea8559934a0c31088d",
+                "reference": "445b889efb19139ce616dfea8559934a0c31088d",
                 "shasum": ""
             },
             "require": {
@@ -1520,7 +1521,7 @@
                 "extraction",
                 "html"
             ],
-            "time": "2017-01-14 16:09:58"
+            "time": "2017-02-02 15:12:48"
         },
         {
             "name": "j0k3r/safecurl",
@@ -2037,16 +2038,16 @@
         },
         {
             "name": "sensio/framework-extra-bundle",
-            "version": "v3.0.19",
+            "version": "v3.0.21",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sensiolabs/SensioFrameworkExtraBundle.git",
-                "reference": "d57c2f297d17ee82baf8cae0b16dae34a9378784"
+                "reference": "ed86f6fb1753e76b39ff8b87f527045ca6b97169"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sensiolabs/SensioFrameworkExtraBundle/zipball/d57c2f297d17ee82baf8cae0b16dae34a9378784",
-                "reference": "d57c2f297d17ee82baf8cae0b16dae34a9378784",
+                "url": "https://api.github.com/repos/sensiolabs/SensioFrameworkExtraBundle/zipball/ed86f6fb1753e76b39ff8b87f527045ca6b97169",
+                "reference": "ed86f6fb1753e76b39ff8b87f527045ca6b97169",
                 "shasum": ""
             },
             "require": {
@@ -2101,7 +2102,7 @@
                 "annotations",
                 "controllers"
             ],
-            "time": "2017-01-10 19:42:56"
+            "time": "2017-02-02 15:31:23"
         },
         {
             "name": "sensiolabs/security-checker",
