@@ -22,11 +22,11 @@ Anyway, it's simple:
 
 ## Workflow
 
-When it grabs a new item, there are several steps before we can say the item *is* readable. Let me introduce **improvers**, **extractors** and **parsers**.
+When it grabs a new item, there are several steps before we can say the item *is* readable. Let me introduce **improvers**, **extractors**, **converters** and **parsers**.
 
 All of them works in a chain, we'll go thru all of them until we find one that match.
 
-> For curious people, this workflow happen in the [`Proxy->parseContent`](https://github.com/j0k3r/f43.me/blob/915b77a1a209e6ca64fcd30e5078f6c92eea9abe/src/j0k3r/FeedBundle/Readability/Proxy.php#L64-L117) method.
+> For curious people, this workflow happen in the [`Extractor->parseContent`](https://github.com/j0k3r/f43.me/blob/000dd43db9ab4429344918a2263bee3bf8aace24/src/FeedBundle/Content/Extractor.php#L68) method.
 
 ### Improvers
 
@@ -59,12 +59,20 @@ You can find some of them in the [extractor folder](https://github.com/j0k3r/f43
 
 ### Parsers
 
-And finally, when we have the (most of the time, little) content from the feed, we use parsers to grab the html from the url and make it readable.
+When we have the (most of the time, little) content from the feed, we use parsers to grab the html from the url and make it readable.
 
 This involve 2 kind of parser:
 
  * the **Internal**, which uses a local PHP libray, called [graby](https://github.com/j0k3r/graby).
  * the **External**, which uses the excellent [Mercury Web Parser API](https://mercury.postlight.com/web-parser/) from Postlight Labs.
+
+### Converters
+
+And finally, we can use some converters to transform HTML code to something different.
+
+For example, Instagram embed code doesn't include the image itself (this part is usually done in javascript). The Instagram converter use the Instagram extractor to retrieve the image of an embed code and put it back in the feed item content.
+
+You can find some of them in the [converter folder](https://github.com/j0k3r/f43.me/tree/master/src/FeedBundle/Converter) (only Instagram for the moment)
 
 ## How to use it
 
