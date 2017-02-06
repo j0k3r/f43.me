@@ -1,0 +1,13 @@
+services:
+    # feed converter
+    feed.converter.chain:
+        class: Api43\FeedBundle\Converter\ConverterChain
+
+    feed.converter.instagram:
+        class: Api43\FeedBundle\Converter\Instagram
+        arguments:
+            - "@feed.extractor.instagram"
+        calls:
+            - [ setLogger, [ "@logger" ]]
+        tags:
+            -  { name: feed.converter, alias: instagram }

@@ -12,7 +12,7 @@ class ExtractorChain
     }
 
     /**
-     * Add an extrator to the chain.
+     * Add an extractor to the chain.
      *
      * @param AbstractExtractor $extractor
      * @param string            $alias

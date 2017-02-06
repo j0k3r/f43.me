@@ -1,6 +1,7 @@
 imports:
     - { resource: extractors.yml }
     - { resource: improvers.yml }
+    - { resource: converters.yml }
     - { resource: parsers.yml }
 
 services:
@@ -68,6 +69,7 @@ services:
         arguments:
             extractor: "@feed.extractor.chain"
             improver: "@feed.improver.chain"
+            converter: "@feed.converter.chain"
             parser: "@feed.parser.chain"
 
     simple_pie_proxy:

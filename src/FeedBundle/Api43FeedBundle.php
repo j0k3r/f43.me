@@ -2,6 +2,7 @@
 
 namespace Api43\FeedBundle;
 
+use Api43\FeedBundle\Converter\ConverterCompilerPass;
 use Api43\FeedBundle\Extractor\ExtractorCompilerPass;
 use Api43\FeedBundle\Improver\ImproverCompilerPass;
 use Api43\FeedBundle\Parser\ParserCompilerPass;
@@ -15,6 +16,7 @@ class Api43FeedBundle extends Bundle
         parent::build($container);
 
         $container->addCompilerPass(new ExtractorCompilerPass());
+        $container->addCompilerPass(new ConverterCompilerPass());
         $container->addCompilerPass(new ImproverCompilerPass());
         $container->addCompilerPass(new ParserCompilerPass());
     }

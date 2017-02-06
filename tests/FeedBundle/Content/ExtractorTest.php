@@ -64,6 +64,14 @@ class ExtractorTest extends \PHPUnit_Framework_TestCase
             ->method('match')
             ->willReturn($defaultImprover);
 
+        $converterChain = $this->getMockBuilder('Api43\FeedBundle\Converter\ConverterChain')
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $converterChain->expects($this->any())
+            ->method('convert')
+            ->will($this->returnArgument(0));
+
         $this->graby = $this->getMockBuilder('Graby\Graby')
             ->setMethods(['fetchContent'])
             ->disableOriginalConstructor()
@@ -79,7 +87,7 @@ class ExtractorTest extends \PHPUnit_Framework_TestCase
             ->method('getParser')
             ->willReturn($internalParser);
 
-        $contentExtractor = new Extractor($extractorChain, $improverChain, $parserChain);
+        $contentExtractor = new Extractor($extractorChain, $improverChain, $converterChain, $parserChain);
         $contentExtractor->init('internal', $feed, true);
 
         if (true === $customParser) {
@@ -158,7 +166,11 @@ class ExtractorTest extends \PHPUnit_Framework_TestCase
             ->disableOriginalConstructor()
             ->getMock();
 
-        $contentExtractor = new Extractor($extractorChain, $improverChain, new \Api43\FeedBundle\Parser\ParserChain());
+        $converterChain = $this->getMockBuilder('Api43\FeedBundle\Converter\ConverterChain')
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $contentExtractor = new Extractor($extractorChain, $improverChain, $converterChain, new \Api43\FeedBundle\Parser\ParserChain());
         $contentExtractor->init('oops');
     }
 }
