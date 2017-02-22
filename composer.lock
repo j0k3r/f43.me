@@ -1360,16 +1360,16 @@
         },
         {
             "name": "j0k3r/graby-site-config",
-            "version": "1.0.31",
+            "version": "1.0.32",
             "source": {
                 "type": "git",
                 "url": "https://github.com/j0k3r/graby-site-config.git",
-                "reference": "94ad57bd8b4bba2fabbf45b03816b6032cff7639"
+                "reference": "00ca6236c442dff3e471268fbb6975c372e6353c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/j0k3r/graby-site-config/zipball/94ad57bd8b4bba2fabbf45b03816b6032cff7639",
-                "reference": "94ad57bd8b4bba2fabbf45b03816b6032cff7639",
+                "url": "https://api.github.com/repos/j0k3r/graby-site-config/zipball/00ca6236c442dff3e471268fbb6975c372e6353c",
+                "reference": "00ca6236c442dff3e471268fbb6975c372e6353c",
                 "shasum": ""
             },
             "require": {
@@ -1392,7 +1392,7 @@
                 }
             ],
             "description": "Graby site config files",
-            "time": "2017-02-02T09:15:47+00:00"
+            "time": "2017-02-22T08:54:03+00:00"
         },
         {
             "name": "j0k3r/php-imgur-api-client",
