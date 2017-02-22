@@ -43,7 +43,7 @@ parameters:
         media: '!//(?:[^\.\?/]+\.)?(?:youtu(?:be)?|soundcloud|dailymotion|vimeo|pornhub|xvideos|twitvid|rutube|viddler)\.(?:com|be|org|net)/!i'
 
     guzzle.options:
-        request.options:
+        defaults:
             timeout: 10
 
     # https://apps.twitter.com/
