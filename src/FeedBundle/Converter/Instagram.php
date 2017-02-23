@@ -29,15 +29,15 @@ class Instagram extends AbstractConverter
      */
     public function convert($html)
     {
-        $re = '/<a href\=\"https\:\/\/www.instagram.com\/p([0-9a-z-_:\/\.]+)\"/i';
+        $re = '/<a([0-9a-z-_:\.\=\"\; ,#]*)href\=\"https\:\/\/www.instagram.com\/p\/([0-9a-z-_:\/\.]+)\"/i';
         $res = preg_match_all($re, $html, $matches);
 
         if (false === $res || $res < 1) {
             return $html;
         }
 
-        foreach ($matches[1] as $key => $instagramId) {
-            $this->instagramExtractor->match('https://www.instagram.com/p' . $instagramId);
+        foreach ($matches[2] as $key => $instagramId) {
+            $this->instagramExtractor->match('https://www.instagram.com/p/'.$instagramId);
             $image = $this->instagramExtractor->getImageOnly();
 
             if (strlen($image) === 0) {
@@ -46,7 +46,7 @@ class Instagram extends AbstractConverter
 
             $newContent = str_replace('image_url', $image, self::IMAGE_CONTENT);
 
-            $html = str_replace($matches[0][$key], $newContent . $matches[0][$key], $html);
+            $html = str_replace($matches[0][$key], $newContent.$matches[0][$key], $html);
         }
 
         return $html;
