@@ -37,7 +37,7 @@ class Instagram extends AbstractConverter
         }
 
         foreach ($matches[2] as $key => $instagramId) {
-            $this->instagramExtractor->match('https://www.instagram.com/p/'.$instagramId);
+            $this->instagramExtractor->match('https://www.instagram.com/p/' . $instagramId);
             $image = $this->instagramExtractor->getImageOnly();
 
             if (strlen($image) === 0) {
@@ -46,7 +46,7 @@ class Instagram extends AbstractConverter
 
             $newContent = str_replace('image_url', $image, self::IMAGE_CONTENT);
 
-            $html = str_replace($matches[0][$key], $newContent.$matches[0][$key], $html);
+            $html = str_replace($matches[0][$key], $newContent . $matches[0][$key], $html);
         }
 
         return $html;

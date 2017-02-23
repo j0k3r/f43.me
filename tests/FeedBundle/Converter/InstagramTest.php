@@ -49,7 +49,7 @@ class InstagramTest extends \PHPUnit_Framework_TestCase
 
         $instaExtractor->expects($this->exactly($instaExtractorOccurence))
             ->method('match')
-            ->with('https://www.instagram.com/p/'.$instagramId.'/')
+            ->with('https://www.instagram.com/p/' . $instagramId . '/')
             ->will($this->returnValue(true));
 
         $instaExtractor->expects($this->exactly($instaExtractorOccurence))
