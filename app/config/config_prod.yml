@@ -16,15 +16,30 @@ monolog:
         main:
             type: fingers_crossed
             action_level: error
-            handler: nested
-        nested:
+            handler: grouped_main
+        grouped_main:
+            type: group
+            members: [streamed_main, sentry]
+        streamed_main:
             type: rotating_file
             max_files: 10
             path: "%kernel.logs_dir%/%kernel.environment%.log"
             level: debug
+        sentry:
+            type: raven
+            dsn: "%sentry_dsn%"
+            level: error
+        console:
+            type: console
 
 doctrine_mongodb:
     document_managers:
         default:
             metadata_cache_driver:
                 type: apc
+
+sentry:
+    dsn: "%sentry_dsn%"
+
+ekino_new_relic:
+    enabled: true
