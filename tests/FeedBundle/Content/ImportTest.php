@@ -145,7 +145,7 @@ class ImportTest extends \PHPUnit_Framework_TestCase
 
     public function testRedditFeedAndYoutube()
     {
-        $link = 'https://www.youtube.com/watch?time_continue=162&v=TeVLxcekEsw';
+        $link = 'https://www.youtube.com/watch?v=TeVLxcekEsw';
 
         $feed = new Feed();
         $feed->setParser('internal');
@@ -217,8 +217,11 @@ class ImportTest extends \PHPUnit_Framework_TestCase
 
         $client = new Client();
 
+        $youtube = new Youtube();
+        $youtube->setClient($client);
+
         $extractorChain = new ExtractorChain();
-        // $extractorChain->addExtractor($reddit, 'reddit');
+        $extractorChain->addExtractor($youtube, 'youtube');
 
         $improverChain = new ImproverChain();
         $improverChain->addImprover(new Reddit($client), 'reddit');
