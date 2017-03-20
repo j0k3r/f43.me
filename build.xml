@@ -62,7 +62,7 @@
   </target>
 
   <target name="phpunit" description="Run unit tests with PHPUnit">
-    <exec executable="./vendor/bin/phpunit" failonerror="true">
+    <exec executable="./bin/simple-phpunit" failonerror="true">
       <arg value="--coverage-html"/>
       <arg value="build/coverage"/>
     </exec>
