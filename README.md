@@ -88,6 +88,7 @@ For each external API that improvers / extractors / parsers use, you will need a
  * Imgur: https://api.imgur.com/oauth2/addclient
  * Mercury: https://mercury.postlight.com/web-parser/
  * Twitch: https://www.twitch.tv/kraken/oauth2/clients/new
+ * GitHub: https://github.com/settings/applications/new
 
 ### Install
 

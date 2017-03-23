@@ -33,7 +33,7 @@ class GithubTest extends \PHPUnit_Framework_TestCase
      */
     public function testMatch($url, $expected)
     {
-        $github = new Github();
+        $github = new Github('client_id', 'client_secret');
         $this->assertEquals($expected, $github->match($url));
     }
 
@@ -49,7 +49,7 @@ class GithubTest extends \PHPUnit_Framework_TestCase
 
         $client->getEmitter()->attach($mock);
 
-        $github = new Github();
+        $github = new Github('client_id', 'client_secret');
         $github->setClient($client);
 
         // first test fail because we didn't match an url, so GithubId isn't defined
@@ -83,7 +83,7 @@ class GithubTest extends \PHPUnit_Framework_TestCase
 
         $client->getEmitter()->attach($mock);
 
-        $github = new Github();
+        $github = new Github('client_id', 'client_secret');
         $github->setClient($client);
 
         $logHandler = new TestHandler();
@@ -120,7 +120,7 @@ class GithubTest extends \PHPUnit_Framework_TestCase
 
         $client->getEmitter()->attach($mock);
 
-        $github = new Github();
+        $github = new Github('client_id', 'client_secret');
         $github->setClient($client);
 
         $logHandler = new TestHandler();
