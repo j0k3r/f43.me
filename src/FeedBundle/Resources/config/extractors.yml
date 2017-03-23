@@ -75,6 +75,9 @@ services:
 
     feed.extractor.github:
         class: Api43\FeedBundle\Extractor\Github
+        arguments:
+            - "%github.client_id%"
+            - "%github.client_secret%"
         calls:
             - [ setLogger, [ "@logger" ]]
             - [ setClient, [ "@guzzle.client" ]]

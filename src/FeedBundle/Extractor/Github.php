@@ -6,9 +6,21 @@ use GuzzleHttp\Exception\RequestException;
 
 class Github extends AbstractExtractor
 {
+    protected $githubClientId;
+    protected $githubClientSecret;
     protected $githubRepo;
     protected $pullNumber;
     protected $issueNumber;
+
+    /**
+     * @param string $githubClientId
+     * @param string $githubClientSecret
+     */
+    public function __construct($githubClientId, $githubClientSecret)
+    {
+        $this->githubClientId = $githubClientId;
+        $this->githubClientSecret = $githubClientSecret;
+    }
 
     /**
      * {@inheritdoc}
@@ -72,6 +84,10 @@ class Github extends AbstractExtractor
                                 'Accept' => 'application/vnd.github.v3.html+json',
                                 'User-Agent' => 'f43.me / Github Extractor',
                             ],
+                            'query' => [
+                                'client_id' => $this->githubClientId,
+                                'client_secret' => $this->githubClientSecret,
+                            ],
                         ]
                     )
                     ->json();
@@ -86,7 +102,7 @@ class Github extends AbstractExtractor
                     '<li>' . $data['comments'] . ' comments</li></ul>' .
                     $data['body_html'] . '</div>';
             } catch (RequestException $e) {
-                $this->logger->warning('Github (pull) extract failed for: ' . $this->githubRepo . ' & pr: ' . $this->pullNumber, [
+                $this->logger->error('Github (pull) extract failed for: ' . $this->githubRepo . ' & pr: ' . $this->pullNumber, [
                     'exception' => $e,
                 ]);
 
@@ -104,6 +120,10 @@ class Github extends AbstractExtractor
                                 'Accept' => 'application/vnd.github.v3.html+json',
                                 'User-Agent' => 'f43.me / Github Extractor',
                             ],
+                            'query' => [
+                                'client_id' => $this->githubClientId,
+                                'client_secret' => $this->githubClientSecret,
+                            ],
                         ]
                     )
                     ->json();
@@ -115,7 +135,7 @@ class Github extends AbstractExtractor
                     '<li>' . $data['comments'] . ' comments</li></ul></ul>' .
                     $data['body_html'] . '</div>';
             } catch (RequestException $e) {
-                $this->logger->warning('Github (issue) extract failed for: ' . $this->githubRepo . ' & issue: ' . $this->issueNumber, [
+                $this->logger->error('Github (issue) extract failed for: ' . $this->githubRepo . ' & issue: ' . $this->issueNumber, [
                     'exception' => $e,
                 ]);
 
@@ -131,6 +151,10 @@ class Github extends AbstractExtractor
                         'headers' => [
                             'Accept' => 'application/vnd.github.v3.html',
                             'User-Agent' => 'f43.me / Github Extractor',
+                        ],
+                        'query' => [
+                            'client_id' => $this->githubClientId,
+                            'client_secret' => $this->githubClientSecret,
                         ],
                     ]
                 )
