@@ -11,3 +11,12 @@ services:
             - [ setLogger, [ "@logger" ]]
         tags:
             -  { name: feed.converter, alias: instagram }
+
+    feed.converter.youtube:
+        class: Api43\FeedBundle\Converter\Youtube
+        arguments:
+            - "@feed.extractor.youtube"
+        calls:
+            - [ setLogger, [ "@logger" ]]
+        tags:
+            -  { name: feed.converter, alias: youtube }
