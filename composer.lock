@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "b37f8f6228b6cfa379c3f5a2cb487036",
+    "content-hash": "96a05454b5b0540d7698281cc975e861",
     "packages": [
         {
             "name": "behat/transliterator",
@@ -1417,16 +1417,16 @@
         },
         {
             "name": "j0k3r/graby",
-            "version": "1.6.2",
+            "version": "1.7.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/j0k3r/graby.git",
-                "reference": "6e3e6081e1fb257a6b74415585c153677021a4e3"
+                "reference": "9148b9c0802bed2594f4a84c2f6a27e9c3db2c27"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/j0k3r/graby/zipball/6e3e6081e1fb257a6b74415585c153677021a4e3",
-                "reference": "6e3e6081e1fb257a6b74415585c153677021a4e3",
+                "url": "https://api.github.com/repos/j0k3r/graby/zipball/9148b9c0802bed2594f4a84c2f6a27e9c3db2c27",
+                "reference": "9148b9c0802bed2594f4a84c2f6a27e9c3db2c27",
                 "shasum": ""
             },
             "require": {
@@ -1445,6 +1445,7 @@
                 "wallabag/tcpdf": "^6.2"
             },
             "require-dev": {
+                "friendsofphp/php-cs-fixer": "~2.0",
                 "satooshi/php-coveralls": "~0.6",
                 "symfony/phpunit-bridge": "~2.6|~3.0"
             },
@@ -1471,20 +1472,20 @@
                 }
             ],
             "description": "Graby helps you extract article content from web pages",
-            "time": "2017-03-19T16:00:33+00:00"
+            "time": "2017-04-02T17:16:15+00:00"
         },
         {
             "name": "j0k3r/graby-site-config",
-            "version": "1.0.33",
+            "version": "1.0.34",
             "source": {
                 "type": "git",
                 "url": "https://github.com/j0k3r/graby-site-config.git",
-                "reference": "213461b45976f507ac0dedd5c7207c61d1cef573"
+                "reference": "c09a689c6314828da079aeceb8f19f08faa92353"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/j0k3r/graby-site-config/zipball/213461b45976f507ac0dedd5c7207c61d1cef573",
-                "reference": "213461b45976f507ac0dedd5c7207c61d1cef573",
+                "url": "https://api.github.com/repos/j0k3r/graby-site-config/zipball/c09a689c6314828da079aeceb8f19f08faa92353",
+                "reference": "c09a689c6314828da079aeceb8f19f08faa92353",
                 "shasum": ""
             },
             "require": {
@@ -1510,7 +1511,7 @@
                 }
             ],
             "description": "Graby site config files",
-            "time": "2017-03-20T12:43:02+00:00"
+            "time": "2017-04-02T17:18:16+00:00"
         },
         {
             "name": "j0k3r/php-imgur-api-client",
