@@ -21,8 +21,7 @@ monolog:
             type: group
             members: [streamed_main, sentry]
         streamed_main:
-            type: rotating_file
-            max_files: 10
+            type: stream
             path: "%kernel.logs_dir%/%kernel.environment%.log"
             level: debug
         sentry:
