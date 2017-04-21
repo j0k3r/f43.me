@@ -8,25 +8,29 @@
     "packages": [
         {
             "name": "behat/transliterator",
-            "version": "v1.1.0",
+            "version": "v1.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Behat/Transliterator.git",
-                "reference": "868e05be3a9f25ba6424c2dd4849567f50715003"
+                "reference": "826ce7e9c2a6664c0d1f381cbb38b1fb80a7ee2c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Behat/Transliterator/zipball/868e05be3a9f25ba6424c2dd4849567f50715003",
-                "reference": "868e05be3a9f25ba6424c2dd4849567f50715003",
+                "url": "https://api.github.com/repos/Behat/Transliterator/zipball/826ce7e9c2a6664c0d1f381cbb38b1fb80a7ee2c",
+                "reference": "826ce7e9c2a6664c0d1f381cbb38b1fb80a7ee2c",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.3.3"
             },
+            "require-dev": {
+                "chuyskywalker/rolling-curl": "^3.1",
+                "php-yaoi/php-yaoi": "^1.0"
+            },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.1-dev"
+                    "dev-master": "1.2-dev"
                 }
             },
             "autoload": {
@@ -44,7 +48,7 @@
                 "slug",
                 "transliterator"
             ],
-            "time": "2015-09-28T16:26:35+00:00"
+            "time": "2017-04-04T11:38:05+00:00"
         },
         {
             "name": "composer/ca-bundle",
@@ -1417,16 +1421,16 @@
         },
         {
             "name": "j0k3r/graby",
-            "version": "1.7.0",
+            "version": "1.7.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/j0k3r/graby.git",
-                "reference": "9148b9c0802bed2594f4a84c2f6a27e9c3db2c27"
+                "reference": "f1d8995213ff1dc889961f6595656ee304e6b33b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/j0k3r/graby/zipball/9148b9c0802bed2594f4a84c2f6a27e9c3db2c27",
-                "reference": "9148b9c0802bed2594f4a84c2f6a27e9c3db2c27",
+                "url": "https://api.github.com/repos/j0k3r/graby/zipball/f1d8995213ff1dc889961f6595656ee304e6b33b",
+                "reference": "f1d8995213ff1dc889961f6595656ee304e6b33b",
                 "shasum": ""
             },
             "require": {
@@ -1472,20 +1476,20 @@
                 }
             ],
             "description": "Graby helps you extract article content from web pages",
-            "time": "2017-04-02T17:16:15+00:00"
+            "time": "2017-04-10T15:14:01+00:00"
         },
         {
             "name": "j0k3r/graby-site-config",
-            "version": "1.0.34",
+            "version": "1.0.35",
             "source": {
                 "type": "git",
                 "url": "https://github.com/j0k3r/graby-site-config.git",
-                "reference": "c09a689c6314828da079aeceb8f19f08faa92353"
+                "reference": "ae2385fdafe8ca44fea6639c1f8d7baff03330c4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/j0k3r/graby-site-config/zipball/c09a689c6314828da079aeceb8f19f08faa92353",
-                "reference": "c09a689c6314828da079aeceb8f19f08faa92353",
+                "url": "https://api.github.com/repos/j0k3r/graby-site-config/zipball/ae2385fdafe8ca44fea6639c1f8d7baff03330c4",
+                "reference": "ae2385fdafe8ca44fea6639c1f8d7baff03330c4",
                 "shasum": ""
             },
             "require": {
@@ -1511,7 +1515,7 @@
                 }
             ],
             "description": "Graby site config files",
-            "time": "2017-04-02T17:18:16+00:00"
+            "time": "2017-04-18T10:22:07+00:00"
         },
         {
             "name": "j0k3r/php-imgur-api-client",
@@ -2394,16 +2398,16 @@
         },
         {
             "name": "simplepie/simplepie",
-            "version": "1.4.3",
+            "version": "1.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/simplepie/simplepie.git",
-                "reference": "2a24b6e74aa9bf33243020f52895fe77efe94ccf"
+                "reference": "5de5551953f95feef12cf355a7a26a70f94aa3ab"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/simplepie/simplepie/zipball/2a24b6e74aa9bf33243020f52895fe77efe94ccf",
-                "reference": "2a24b6e74aa9bf33243020f52895fe77efe94ccf",
+                "url": "https://api.github.com/repos/simplepie/simplepie/zipball/5de5551953f95feef12cf355a7a26a70f94aa3ab",
+                "reference": "5de5551953f95feef12cf355a7a26a70f94aa3ab",
                 "shasum": ""
             },
             "require": {
@@ -2450,7 +2454,7 @@
                 "feeds",
                 "rss"
             ],
-            "time": "2016-11-27T01:39:18+00:00"
+            "time": "2017-04-17T07:29:31+00:00"
         },
         {
             "name": "smalot/pdfparser",
@@ -2902,16 +2906,16 @@
         },
         {
             "name": "symfony/symfony",
-            "version": "v3.2.6",
+            "version": "v3.2.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/symfony.git",
-                "reference": "b0f8a7fa4b8baadf9db299cb6ac87c96a8977dbe"
+                "reference": "1631040ea8fc5e0e405c00d35cbf2c0b7b555f64"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/symfony/zipball/b0f8a7fa4b8baadf9db299cb6ac87c96a8977dbe",
-                "reference": "b0f8a7fa4b8baadf9db299cb6ac87c96a8977dbe",
+                "url": "https://api.github.com/repos/symfony/symfony/zipball/1631040ea8fc5e0e405c00d35cbf2c0b7b555f64",
+                "reference": "1631040ea8fc5e0e405c00d35cbf2c0b7b555f64",
                 "shasum": ""
             },
             "require": {
@@ -3042,7 +3046,7 @@
             "keywords": [
                 "framework"
             ],
-            "time": "2017-03-10T18:35:48+00:00"
+            "time": "2017-04-05T12:52:29+00:00"
         },
         {
             "name": "true/punycode",
@@ -3144,16 +3148,16 @@
         },
         {
             "name": "twig/twig",
-            "version": "v1.33.0",
+            "version": "v1.33.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/twigphp/Twig.git",
-                "reference": "05cf49921b13f6f01d3cfdf9018cfa7a8086fd5a"
+                "reference": "dd6ca96227917e1e85b41c7c3cc6507b411e0927"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/twigphp/Twig/zipball/05cf49921b13f6f01d3cfdf9018cfa7a8086fd5a",
-                "reference": "05cf49921b13f6f01d3cfdf9018cfa7a8086fd5a",
+                "url": "https://api.github.com/repos/twigphp/Twig/zipball/dd6ca96227917e1e85b41c7c3cc6507b411e0927",
+                "reference": "dd6ca96227917e1e85b41c7c3cc6507b411e0927",
                 "shasum": ""
             },
             "require": {
@@ -3202,7 +3206,7 @@
             "keywords": [
                 "templating"
             ],
-            "time": "2017-03-22T15:40:09+00:00"
+            "time": "2017-04-20T17:39:48+00:00"
         },
         {
             "name": "wallabag/tcpdf",
@@ -3722,7 +3726,7 @@
         },
         {
             "name": "symfony/phpunit-bridge",
-            "version": "v3.2.6",
+            "version": "v3.2.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/phpunit-bridge.git",
