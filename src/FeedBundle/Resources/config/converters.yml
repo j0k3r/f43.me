@@ -11,3 +11,12 @@ services:
             - [ setLogger, [ "@logger" ]]
         tags:
             -  { name: feed.converter, alias: instagram }
+
+    feed.converter.twitter:
+        class: Api43\FeedBundle\Converter\Twitter
+        arguments:
+            - "@feed.extractor.twitter"
+        calls:
+            - [ setLogger, [ "@logger" ]]
+        tags:
+            -  { name: feed.converter, alias: twitter }

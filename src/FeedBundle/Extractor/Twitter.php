@@ -44,21 +44,35 @@ class Twitter extends AbstractExtractor
      */
     public function getContent()
     {
-        if (!$this->tweetId) {
+        $data = $this->retrieveTwitterData();
+
+        if (false === $data) {
             return '';
         }
 
+        return $this->retrieveTweet($data);
+    }
+
+    /**
+     * Retrieve tweet information from twitter.
+     *
+     * @return array|false
+     */
+    public function retrieveTwitterData()
+    {
+        if (!$this->tweetId) {
+            return false;
+        }
+
         try {
-            $twitterData = $this->twitter->get('statuses/show', ['id' => $this->tweetId, 'tweet_mode' => 'extended']);
+            return $this->twitter->get('statuses/show', ['id' => $this->tweetId, 'tweet_mode' => 'extended']);
         } catch (TwitterException $e) {
             $this->logger->warning('Twitter extract failed for: ' . $this->tweetId, [
                 'exception' => $e,
             ]);
 
-            return '';
+            return false;
         }
-
-        return $this->retrieveTweet($twitterData);
     }
 
     /**
