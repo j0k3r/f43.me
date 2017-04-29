@@ -77,7 +77,7 @@ class TwitterTest extends \PHPUnit_Framework_TestCase
         $this->assertContains($expected, $twitterConverter->convert($html));
     }
 
-    public function testMatchButInstaExtractFail()
+    public function testMatchButTwitterExtractFail()
     {
         $html = '<blockquote class="twitter-tweet"><p lang="en" dir="ltr">Minecraft <a href="https://t.co/lU1YzJjLOZ">pic.twitter.com/lU1YzJjLOZ</a></p><p>— Elon Musk (@elonmusk) <a href="https://twitter.com/elonmusk/status/827720686911291392">February 4, 2017</a></p></blockquote>';
 
