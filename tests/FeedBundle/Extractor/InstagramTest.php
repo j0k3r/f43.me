@@ -60,7 +60,7 @@ class InstagramTest extends \PHPUnit_Framework_TestCase
         $instagram->match('https://instagram.com/p/2N5UHfChAZ/');
 
         // consecutive calls
-        $this->assertEquals('<div><h2>my title</h2><p><img src="http://0.0.0.0/img.jpg"></p><iframe/></div>', $instagram->getContent());
+        $this->assertEquals('<div class="f43me-instagram-extracted"><h2>my title</h2><p><img src="http://0.0.0.0/img.jpg"></p><iframe/></div>', $instagram->getContent());
         // this one will got an empty array
         $this->assertEmpty($instagram->getContent());
         // this one will catch an exception

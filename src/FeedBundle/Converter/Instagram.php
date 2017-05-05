@@ -29,6 +29,11 @@ class Instagram extends AbstractConverter
      */
     public function convert($html)
     {
+        // do not convert already converted instagram from the extractor
+        if (stripos($html, 'f43me-instagram-extracted')) {
+            return $html;
+        }
+
         $re = '/<a([0-9a-z-_:\.\=\"\; ,#]*)href\=\"https\:\/\/www.instagram.com\/p\/([0-9a-z-_:\/\.]+)\"/i';
         $res = preg_match_all($re, $html, $matches);
 

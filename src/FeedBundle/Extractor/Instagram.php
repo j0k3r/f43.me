@@ -69,7 +69,7 @@ class Instagram extends AbstractExtractor
             return '';
         }
 
-        return '<div><h2>' . $data['title'] . '</h2><p><img src="' . $data['thumbnail_url'] . '"></p>' . $data['html'] . '</div>';
+        return '<div class="f43me-instagram-extracted"><h2>' . $data['title'] . '</h2><p><img src="' . $data['thumbnail_url'] . '"></p>' . $data['html'] . '</div>';
     }
 
     /**
