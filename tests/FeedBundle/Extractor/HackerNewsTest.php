@@ -80,4 +80,24 @@ class HackerNewsTest extends \PHPUnit_Framework_TestCase
         $hn->match('http://news.ycombinator.com/item?id=10074364');
         $this->assertEquals('<p>toto</p>', $hn->getContent());
     }
+
+    public function testContentWithoutText()
+    {
+        $client = new Client();
+
+        $mock = new Mock([
+            new Response(200, [], Stream::factory(json_encode(['type' => 'story']))),
+        ]);
+
+        $client->getEmitter()->attach($mock);
+
+        $hn = new HackerNews();
+        $hn->setClient($client);
+
+        // first test fail because we didn't match an url, so HackerNewsId isn't defined
+        $this->assertEmpty($hn->getContent());
+
+        $hn->match('http://news.ycombinator.com/item?id=10074364');
+        $this->assertEmpty($hn->getContent());
+    }
 }
