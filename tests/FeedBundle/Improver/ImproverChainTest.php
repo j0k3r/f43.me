@@ -37,4 +37,19 @@ class ImproverChainTest extends \PHPUnit_Framework_TestCase
 
         $this->assertFalse($improverChain->match('host'));
     }
+
+    public function testMatchWithEmptyHost()
+    {
+        $improver = $this->getMockBuilder('Api43\FeedBundle\Improver\DefaultImprover')
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $improver->expects($this->never())
+            ->method('match');
+
+        $improverChain = new ImproverChain();
+        $improverChain->addImprover($improver, 'alias');
+
+        $this->assertFalse($improverChain->match(''));
+    }
 }

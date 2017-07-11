@@ -31,6 +31,10 @@ class ImproverChain
      */
     public function match($host)
     {
+        if (empty($host)) {
+            return false;
+        }
+
         foreach ($this->improvers as $alias => $improver) {
             if (true === $improver->match($host)) {
                 return $improver;
