@@ -5,10 +5,11 @@ RUN apt-get update && apt-get install -y -q nginx \
     && apt-get install -y -q libssl-dev build-essential vim git curl ruby2.1-dev rubygems
 
 RUN apt-get update \
+    && pecl install xdebug \
+    && docker-php-ext-enable xdebug \
+    && docker-php-ext-install zip \
     && pecl install mongodb \
-    && docker-php-ext-enable mongodb \
-    && pecl install zip \
-    && docker-php-ext-enable zip
+    && docker-php-ext-enable mongodb
 
 ADD ./fastcgi-php.conf /etc/nginx/snippets/fastcgi-php.conf
 ADD ./upstream-php.conf /etc/nginx/conf.d/php7.0-fpm.conf
