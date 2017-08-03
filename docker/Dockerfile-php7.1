@@ -1,4 +1,4 @@
-FROM php:7.1-rc-fpm
+FROM php:7.1-fpm
 
 # Install nginx & ruby stuff (for sass)
 RUN apt-get update && apt-get install -y -q nginx \
@@ -25,7 +25,8 @@ RUN . $HOME/.nvm/nvm.sh \
     && nvm alias default $NODE_VERSION \
     && nvm use default
 
-RUN gem install sass compass --no-ri --no-rdoc
+RUN gem update --system \
+    && gem install sass compass --no-ri --no-rdoc
 
 RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" \
     && php composer-setup.php \

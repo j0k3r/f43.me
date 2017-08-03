@@ -25,7 +25,8 @@ RUN . $HOME/.nvm/nvm.sh \
     && nvm alias default $NODE_VERSION \
     && nvm use default
 
-RUN gem install sass compass --no-ri --no-rdoc
+RUN gem update --system \
+    && gem install sass compass --no-ri --no-rdoc
 
 RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" \
     && php composer-setup.php \
