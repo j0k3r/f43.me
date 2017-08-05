@@ -52,6 +52,17 @@
     <div class="large-12 columns">
         {{ include('Api43FeedBundle:FeedItem:content.html.twig', {'title': '', 'content': content.content, 'url': content.url, 'modal': false}) }}
     </div>
+
+    <hr/>
+
+    <div class="large-12 columns">
+        <p><a href="#" class="view-debug">Want to see the output log?</a></p>
+        <div class="output-log">
+        {% for log in logs %}
+            {{ log.formatted|raw }}
+        {% endfor %}
+        </div>
+    </div>
     {% endif %}
 </div>
 

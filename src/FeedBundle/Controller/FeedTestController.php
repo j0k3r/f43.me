@@ -61,6 +61,7 @@ class FeedTestController extends Controller
             'menu' => 'test',
             'content' => $content,
             'form' => $form->createView(),
+            'logs' => $this->get('monolog.handler.graby')->getRecords(),
         ]);
     }
 }

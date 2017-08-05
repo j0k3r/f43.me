@@ -39,6 +39,9 @@ services:
         tags:
             - { name: monolog.logger, channel: graby }
 
+    graby.log_handler:
+        class: Graby\Monolog\Handler\GrabyHandler
+
     twitter.client:
         class: TwitterOAuth\TwitterOAuth
         arguments:

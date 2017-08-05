@@ -75,4 +75,14 @@ $(function(){
         siteconfigTextarea.toggle();
         return false;
     })
+
+    var outputLog = $('div.output-log');
+    outputLog.hide();
+
+    // display textarea siteconfig on label click, but don't toggle when it's not empty
+    $(document).on('click', $('.view-debug'), function (e) {
+        outputLog.toggle();
+
+        return false;
+    })
 });

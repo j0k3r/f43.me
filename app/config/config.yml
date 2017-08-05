@@ -62,6 +62,11 @@ monolog:
                 VERBOSITY_NORMAL: DEBUG
             channels: import
             formatter: monolog.import.formatter
+        graby:
+            type: service
+            id: graby.log_handler
+            level: debug
+            channels: ['graby']
 
 ekino_new_relic:
     enabled: false

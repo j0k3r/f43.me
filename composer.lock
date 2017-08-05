@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "96a05454b5b0540d7698281cc975e861",
+    "content-hash": "590ffe25d0a0e38fe22ff3734ecf9102",
     "packages": [
         {
             "name": "behat/transliterator",
@@ -1474,16 +1474,16 @@
         },
         {
             "name": "j0k3r/graby",
-            "version": "1.9.3",
+            "version": "dev-monolog-handler-formatter",
             "source": {
                 "type": "git",
                 "url": "https://github.com/j0k3r/graby.git",
-                "reference": "8afd4ad489dc6a0ba733c38da92424caa8b79644"
+                "reference": "95f44e2e8773433f8965946fbfb23a0c2dbfe4a7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/j0k3r/graby/zipball/8afd4ad489dc6a0ba733c38da92424caa8b79644",
-                "reference": "8afd4ad489dc6a0ba733c38da92424caa8b79644",
+                "url": "https://api.github.com/repos/j0k3r/graby/zipball/95f44e2e8773433f8965946fbfb23a0c2dbfe4a7",
+                "reference": "95f44e2e8773433f8965946fbfb23a0c2dbfe4a7",
                 "shasum": ""
             },
             "require": {
@@ -1529,20 +1529,20 @@
                 }
             ],
             "description": "Graby helps you extract article content from web pages",
-            "time": "2017-07-29T07:26:33+00:00"
+            "time": "2017-08-05 17:23:14"
         },
         {
             "name": "j0k3r/graby-site-config",
-            "version": "1.0.37",
+            "version": "1.0.38",
             "source": {
                 "type": "git",
                 "url": "https://github.com/j0k3r/graby-site-config.git",
-                "reference": "5055344e930b48ba1fbffef41d9b2dcc6a6e89cd"
+                "reference": "3f036e913a664ca61dbd0c43c7666cd529cd8525"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/j0k3r/graby-site-config/zipball/5055344e930b48ba1fbffef41d9b2dcc6a6e89cd",
-                "reference": "5055344e930b48ba1fbffef41d9b2dcc6a6e89cd",
+                "url": "https://api.github.com/repos/j0k3r/graby-site-config/zipball/3f036e913a664ca61dbd0c43c7666cd529cd8525",
+                "reference": "3f036e913a664ca61dbd0c43c7666cd529cd8525",
                 "shasum": ""
             },
             "require": {
@@ -1568,7 +1568,7 @@
                 }
             ],
             "description": "Graby site config files",
-            "time": "2017-06-21T15:14:05+00:00"
+            "time": "2017-07-26T15:59:21+00:00"
         },
         {
             "name": "j0k3r/php-imgur-api-client",
@@ -2292,16 +2292,16 @@
         },
         {
             "name": "sensiolabs/security-checker",
-            "version": "v4.1.2",
+            "version": "v4.1.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sensiolabs/security-checker.git",
-                "reference": "9c7bfbc7be32781d39f8e262744f7fb0c410df67"
+                "reference": "7d60f01b9a56dfd152796877d009b1a0578d6ef4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sensiolabs/security-checker/zipball/9c7bfbc7be32781d39f8e262744f7fb0c410df67",
-                "reference": "9c7bfbc7be32781d39f8e262744f7fb0c410df67",
+                "url": "https://api.github.com/repos/sensiolabs/security-checker/zipball/7d60f01b9a56dfd152796877d009b1a0578d6ef4",
+                "reference": "7d60f01b9a56dfd152796877d009b1a0578d6ef4",
                 "shasum": ""
             },
             "require": {
@@ -2333,7 +2333,7 @@
                 }
             ],
             "description": "A security checker for your composer.lock",
-            "time": "2017-08-02T07:52:06+00:00"
+            "time": "2017-08-03T12:24:05+00:00"
         },
         {
             "name": "sentry/sentry",
@@ -3854,7 +3854,9 @@
     ],
     "aliases": [],
     "minimum-stability": "dev",
-    "stability-flags": [],
+    "stability-flags": {
+        "j0k3r/graby": 20
+    },
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
