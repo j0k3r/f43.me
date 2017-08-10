@@ -24,6 +24,9 @@ class Gfycat extends AbstractExtractor
             return false;
         }
 
+        // remove unecessary stuff from url
+        $path = str_replace('gifs/detail/', '', $path);
+
         // match gfycat id
         preg_match('/([a-zA-Z]+)/i', $path, $matches);
 
