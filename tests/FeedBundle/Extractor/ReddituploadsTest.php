@@ -30,7 +30,7 @@ class ReddituploadsTest extends \PHPUnit_Framework_TestCase
     public function testMatch($url, $expected)
     {
         $reddituploads = new Reddituploads();
-        $this->assertEquals($expected, $reddituploads->match($url));
+        $this->assertSame($expected, $reddituploads->match($url));
     }
 
     public function testContent()
@@ -46,6 +46,6 @@ class ReddituploadsTest extends \PHPUnit_Framework_TestCase
 
         $reddituploads->match('https://i.reddituploads.com/21fc8e0b2984423e84fd59fbc58024c8?fit=max&h=1536&w=1536&s=9e3c0fa6d46a642c42eace91833cad93');
 
-        $this->assertEquals('<div><p><img src="https://i.reddituploads.com/21fc8e0b2984423e84fd59fbc58024c8?fit=max&h=1536&w=1536&s=9e3c0fa6d46a642c42eace91833cad93"></p></div>', $reddituploads->getContent());
+        $this->assertSame('<div><p><img src="https://i.reddituploads.com/21fc8e0b2984423e84fd59fbc58024c8?fit=max&h=1536&w=1536&s=9e3c0fa6d46a642c42eace91833cad93"></p></div>', $reddituploads->getContent());
     }
 }

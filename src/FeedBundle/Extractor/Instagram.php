@@ -35,26 +35,6 @@ class Instagram extends AbstractExtractor
     }
 
     /**
-     * Fetch content from Instagram about an url.
-     *
-     * @return array|false
-     */
-    private function retrieveData()
-    {
-        try {
-            return $this->client
-                ->get('https://api.instagram.com/oembed?url=' . $this->instagramUrl)
-                ->json();
-        } catch (RequestException $e) {
-            $this->logger->warning('Instagram extract failed for: ' . $this->instagramUrl, [
-                'exception' => $e,
-            ]);
-
-            return false;
-        }
-    }
-
-    /**
      * {@inheritdoc}
      */
     public function getContent()
@@ -87,5 +67,25 @@ class Instagram extends AbstractExtractor
         }
 
         return $data['thumbnail_url'];
+    }
+
+    /**
+     * Fetch content from Instagram about an url.
+     *
+     * @return array|false
+     */
+    private function retrieveData()
+    {
+        try {
+            return $this->client
+                ->get('https://api.instagram.com/oembed?url=' . $this->instagramUrl)
+                ->json();
+        } catch (RequestException $e) {
+            $this->logger->warning('Instagram extract failed for: ' . $this->instagramUrl, [
+                'exception' => $e,
+            ]);
+
+            return false;
+        }
     }
 }

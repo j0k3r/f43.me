@@ -19,8 +19,8 @@ class ParserChainTest extends \PHPUnit_Framework_TestCase
         $parserChain = new ParserChain();
         $parserChain->addParser($parser, 'alias');
 
-        $this->assertEquals('content', $parserChain->parseAll('url'));
-        $this->assertEquals($parser, $parserChain->getParser('alias'));
+        $this->assertSame('content', $parserChain->parseAll('url'));
+        $this->assertSame($parser, $parserChain->getParser('alias'));
     }
 
     public function testParseFalse()

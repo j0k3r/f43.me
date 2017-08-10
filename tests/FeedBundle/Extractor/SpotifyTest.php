@@ -31,7 +31,7 @@ class SpotifyTest extends \PHPUnit_Framework_TestCase
     public function testMatch($url, $expected)
     {
         $spotify = new Spotify();
-        $this->assertEquals($expected, $spotify->match($url));
+        $this->assertSame($expected, $spotify->match($url));
     }
 
     public function testContent()
@@ -59,7 +59,7 @@ class SpotifyTest extends \PHPUnit_Framework_TestCase
         $spotify->match('https://play.spotify.com/artist/4njdEjTnLfcGImKZu1iSrz');
 
         // consecutive calls
-        $this->assertEquals('<div><h2>my title</h2><p><img src="http://0.0.0.0/img.jpg"></p><iframe/></div>', $spotify->getContent());
+        $this->assertSame('<div><h2>my title</h2><p><img src="http://0.0.0.0/img.jpg"></p><iframe/></div>', $spotify->getContent());
         // this one will got an empty array
         $this->assertEmpty($spotify->getContent());
         // this one will catch an exception

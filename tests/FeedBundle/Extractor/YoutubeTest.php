@@ -30,7 +30,7 @@ class YoutubeTest extends \PHPUnit_Framework_TestCase
     public function testMatch($url, $expected)
     {
         $youtube = new Youtube();
-        $this->assertEquals($expected, $youtube->match($url));
+        $this->assertSame($expected, $youtube->match($url));
     }
 
     public function testContent()
@@ -58,7 +58,7 @@ class YoutubeTest extends \PHPUnit_Framework_TestCase
         $youtube->match('https://www.youtube.com/watch?v=UacN1xwVK2Y');
 
         // consecutive calls
-        $this->assertEquals('<div><h2>my title</h2><p><img src="http://0.0.0.0/img.jpg"></p><iframe/></div>', $youtube->getContent());
+        $this->assertSame('<div><h2>my title</h2><p><img src="http://0.0.0.0/img.jpg"></p><iframe/></div>', $youtube->getContent());
         // this one will got an empty array
         $this->assertEmpty($youtube->getContent());
         // this one will catch an exception

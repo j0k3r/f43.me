@@ -29,7 +29,7 @@ class StreamableTest extends \PHPUnit_Framework_TestCase
     public function testMatch($url, $expected)
     {
         $streamable = new Streamable();
-        $this->assertEquals($expected, $streamable->match($url));
+        $this->assertSame($expected, $streamable->match($url));
     }
 
     public function testContent()
@@ -57,7 +57,7 @@ class StreamableTest extends \PHPUnit_Framework_TestCase
         $streamable->match('https://www.streamable.com/7pfe');
 
         // consecutive calls
-        $this->assertEquals('<div><h2>my title</h2><p><img src="http://0.0.0.0/img.jpg"></p><iframe/></div>', $streamable->getContent());
+        $this->assertSame('<div><h2>my title</h2><p><img src="http://0.0.0.0/img.jpg"></p><iframe/></div>', $streamable->getContent());
         // this one will got an empty array
         $this->assertEmpty($streamable->getContent());
         // this one will catch an exception

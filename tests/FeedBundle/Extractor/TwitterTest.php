@@ -31,7 +31,7 @@ class TwitterTest extends \PHPUnit_Framework_TestCase
             ->getMock();
 
         $twitter = new Twitter($twitterOAuth);
-        $this->assertEquals($expected, $twitter->match($url));
+        $this->assertSame($expected, $twitter->match($url));
     }
 
     public function testContent()

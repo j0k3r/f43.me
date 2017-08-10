@@ -32,7 +32,7 @@ class InstagramTest extends \PHPUnit_Framework_TestCase
     public function testMatch($url, $expected)
     {
         $instagram = new Instagram();
-        $this->assertEquals($expected, $instagram->match($url));
+        $this->assertSame($expected, $instagram->match($url));
     }
 
     public function testContent()
@@ -60,7 +60,7 @@ class InstagramTest extends \PHPUnit_Framework_TestCase
         $instagram->match('https://instagram.com/p/2N5UHfChAZ/');
 
         // consecutive calls
-        $this->assertEquals('<div class="f43me-instagram-extracted"><h2>my title</h2><p><img src="http://0.0.0.0/img.jpg"></p><iframe/></div>', $instagram->getContent());
+        $this->assertSame('<div class="f43me-instagram-extracted"><h2>my title</h2><p><img src="http://0.0.0.0/img.jpg"></p><iframe/></div>', $instagram->getContent());
         // this one will got an empty array
         $this->assertEmpty($instagram->getContent());
         // this one will catch an exception
@@ -86,9 +86,9 @@ class InstagramTest extends \PHPUnit_Framework_TestCase
         $instagram->match('https://instagram.com/p/2N5UHfChAZ/');
 
         // first call got a real response
-        $this->assertEquals('http://0.0.0.0/img.jpg', $instagram->getImageOnly());
+        $this->assertSame('http://0.0.0.0/img.jpg', $instagram->getImageOnly());
 
         // second call got an error reponse
-        $this->assertEquals('', $instagram->getImageOnly());
+        $this->assertSame('', $instagram->getImageOnly());
     }
 }

@@ -29,7 +29,7 @@ class VidmeTest extends \PHPUnit_Framework_TestCase
     public function testMatch($url, $expected)
     {
         $vidme = new Vidme();
-        $this->assertEquals($expected, $vidme->match($url));
+        $this->assertSame($expected, $vidme->match($url));
     }
 
     public function testContent()
@@ -57,7 +57,7 @@ class VidmeTest extends \PHPUnit_Framework_TestCase
         $vidme->match('https://vid.me/WaJr');
 
         // consecutive calls
-        $this->assertEquals('<div><h2>my title</h2><p><img src="http://0.0.0.0/img.jpg"></p><iframe src="http://0.0.0.0/embed"></iframe></div>', $vidme->getContent());
+        $this->assertSame('<div><h2>my title</h2><p><img src="http://0.0.0.0/img.jpg"></p><iframe src="http://0.0.0.0/embed"></iframe></div>', $vidme->getContent());
         // this one will got an empty array
         $this->assertEmpty($vidme->getContent());
         // this one will catch an exception

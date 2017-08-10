@@ -36,7 +36,7 @@ class ExtractorCompilerPassTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($definition->hasMethodCall('addExtractor'));
 
         $calls = $definition->getMethodCalls();
-        $this->assertEquals('imgur', $calls[0][1][1]);
+        $this->assertSame('imgur', $calls[0][1][1]);
     }
 
     protected function process(ContainerBuilder $container)

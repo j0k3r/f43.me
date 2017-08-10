@@ -10,11 +10,11 @@ class SecurityControllerTest extends FeedWebTestCase
 
         $crawler = $client->request('GET', '/login');
 
-        $this->assertEquals(200, $client->getResponse()->getStatusCode());
+        $this->assertSame(200, $client->getResponse()->getStatusCode());
         $this->assertCount(1, $crawler->filter('h1'));
         $this->assertCount(0, $crawler->filter('h2'));
         $this->assertCount(1, $legend = $crawler->filter('fieldset legend')->extract(['_text']));
-        $this->assertEquals('Secured area', $legend[0]);
+        $this->assertSame('Secured area', $legend[0]);
         $this->assertCount(1, $crawler->filter('input[type=text]'));
         $this->assertCount(1, $crawler->filter('input[type=password]'));
         $this->assertCount(1, $crawler->filter('button[type=submit]'));
@@ -36,7 +36,7 @@ class SecurityControllerTest extends FeedWebTestCase
 
         $client->submit($form, $data);
 
-        $this->assertEquals(302, $client->getResponse()->getStatusCode());
+        $this->assertSame(302, $client->getResponse()->getStatusCode());
         $this->assertTrue($client->getResponse()->isRedirect('http://localhost/login'));
     }
 }

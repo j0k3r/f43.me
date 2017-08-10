@@ -19,6 +19,6 @@ class ConverterChainTest extends \PHPUnit_Framework_TestCase
         $converterChain = new ConverterChain();
         $converterChain->addConverter($converter, 'alias');
 
-        $this->assertEquals('changed', $converterChain->convert('url'));
+        $this->assertSame('changed', $converterChain->convert('url'));
     }
 }

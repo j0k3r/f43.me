@@ -13,36 +13,6 @@ use Doctrine\ODM\MongoDB\DocumentRepository;
 class FeedItemRepository extends DocumentRepository
 {
     /**
-     * Get the base query to fetch items.
-     *
-     * @param string $feedId  Feed id
-     * @param array  $options limit, sort_by, skip
-     *
-     * @return \Doctrine\ODM\MongoDB\Query\Query
-     */
-    private function getItemsByFeedIdQuery($feedId, $options = [])
-    {
-        $q = $this->createQueryBuilder()
-            ->field('feed.id')->equals($feedId);
-
-        if (isset($options['sort_by']) && $options['sort_by']) {
-            $q->sort($options['sort_by'], 'DESC');
-        } else {
-            $q->sort('published_at', 'DESC');
-        }
-
-        if (isset($options['limit']) && $options['limit']) {
-            $q->limit($options['limit']);
-        }
-
-        if (isset($options['skip']) && $options['skip']) {
-            $q->skip($options['skip']);
-        }
-
-        return $q->getQuery();
-    }
-
-    /**
      * Find all items for a given Feed id.
      *
      * @param int    $feedId Feed id
@@ -67,28 +37,6 @@ class FeedItemRepository extends DocumentRepository
     {
         return $this->getItemsByFeedIdQuery($feedId, ['limit' => 1])
             ->getSingleResult();
-    }
-
-    /**
-     * Return the raw results of feeds which HAVE items.
-     *
-     * @return \MongoCursor
-     */
-    private function resultsForAllFeedsWithNbItems()
-    {
-        $q = $this->createQueryBuilder()
-            ->map('function () { emit(this.feed.$id, 1); }')
-            ->reduce('function (k, vals) {
-                var sum = 0;
-                for (var i in vals) {
-                    sum += vals[i];
-                }
-
-                return sum;
-            }')
-            ->getQuery();
-
-        return $q->execute();
     }
 
     /**
@@ -188,5 +136,57 @@ class FeedItemRepository extends DocumentRepository
             ->field('feed.id')->equals($feedId)
             ->getQuery()
             ->execute();
+    }
+
+    /**
+     * Get the base query to fetch items.
+     *
+     * @param string $feedId  Feed id
+     * @param array  $options limit, sort_by, skip
+     *
+     * @return \Doctrine\ODM\MongoDB\Query\Query
+     */
+    private function getItemsByFeedIdQuery($feedId, $options = [])
+    {
+        $q = $this->createQueryBuilder()
+            ->field('feed.id')->equals($feedId);
+
+        if (isset($options['sort_by']) && $options['sort_by']) {
+            $q->sort($options['sort_by'], 'DESC');
+        } else {
+            $q->sort('published_at', 'DESC');
+        }
+
+        if (isset($options['limit']) && $options['limit']) {
+            $q->limit($options['limit']);
+        }
+
+        if (isset($options['skip']) && $options['skip']) {
+            $q->skip($options['skip']);
+        }
+
+        return $q->getQuery();
+    }
+
+    /**
+     * Return the raw results of feeds which HAVE items.
+     *
+     * @return \MongoCursor
+     */
+    private function resultsForAllFeedsWithNbItems()
+    {
+        $q = $this->createQueryBuilder()
+            ->map('function () { emit(this.feed.$id, 1); }')
+            ->reduce('function (k, vals) {
+                var sum = 0;
+                for (var i in vals) {
+                    sum += vals[i];
+                }
+
+                return sum;
+            }')
+            ->getQuery();
+
+        return $q->execute();
     }
 }

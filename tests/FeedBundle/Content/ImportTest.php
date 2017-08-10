@@ -137,10 +137,10 @@ class ImportTest extends \PHPUnit_Framework_TestCase
         $import = new Import($simplePie, $extractor, $eventDispatcher, $dm, new NullLogger());
         $res = $import->process([$feed]);
 
-        $this->assertEquals(1, $res);
+        $this->assertSame(1, $res);
         $this->assertCount(1, $feed->getFeeditems());
-        $this->assertEquals($link, $feed->getFeeditems()[0]->getPermalink());
-        $this->assertEquals($link, $feed->getFeeditems()[0]->getLink());
+        $this->assertSame($link, $feed->getFeeditems()[0]->getPermalink());
+        $this->assertSame($link, $feed->getFeeditems()[0]->getLink());
     }
 
     public function testRedditFeedAndYoutube()
@@ -259,10 +259,10 @@ class ImportTest extends \PHPUnit_Framework_TestCase
         $import = new Import($simplePie, $extractor, $eventDispatcher, $dm, new NullLogger());
         $res = $import->process([$feed]);
 
-        $this->assertEquals(1, $res);
+        $this->assertSame(1, $res);
         $this->assertCount(1, $feed->getFeeditems());
-        $this->assertEquals($link, $feed->getFeeditems()[0]->getPermalink());
-        $this->assertEquals($link, $feed->getFeeditems()[0]->getLink());
+        $this->assertSame($link, $feed->getFeeditems()[0]->getPermalink());
+        $this->assertSame($link, $feed->getFeeditems()[0]->getLink());
         $this->assertContains('iframe', $feed->getFeeditems()[0]->getContent());
     }
 }

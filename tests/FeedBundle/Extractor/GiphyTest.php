@@ -31,7 +31,7 @@ class GiphyTest extends \PHPUnit_Framework_TestCase
     public function testMatch($url, $expected)
     {
         $giphy = new Giphy();
-        $this->assertEquals($expected, $giphy->match($url));
+        $this->assertSame($expected, $giphy->match($url));
     }
 
     public function testContent()
@@ -59,7 +59,7 @@ class GiphyTest extends \PHPUnit_Framework_TestCase
         $giphy->match('https://giphy.com/gifs/linarf-l2SpOiTglzlu7yI3S');
 
         // consecutive calls
-        $this->assertEquals('<div><h2>my title</h2><p><img src="http://0.0.0.0/img.jpg"></p></div>', $giphy->getContent());
+        $this->assertSame('<div><h2>my title</h2><p><img src="http://0.0.0.0/img.jpg"></p></div>', $giphy->getContent());
         // this one will got an empty array
         $this->assertEmpty($giphy->getContent());
         // this one will catch an exception

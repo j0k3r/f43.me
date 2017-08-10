@@ -32,7 +32,7 @@ class Rue89Test extends \PHPUnit_Framework_TestCase
     public function testMatch($url, $expected)
     {
         $rue89 = new Rue89();
-        $this->assertEquals($expected, $rue89->match($url));
+        $this->assertSame($expected, $rue89->match($url));
     }
 
     public function testContent()
@@ -60,7 +60,7 @@ class Rue89Test extends \PHPUnit_Framework_TestCase
         $rue89->match('http://rue89.nouvelobs.com/2015/10/26/algorithmes-antimensonge-fin-bobards-politique-261827');
 
         // consecutive calls
-        $this->assertEquals('<div><p>my description</p><p><img src="http://0.0.0.0/img.jpg"></p><iframe/></div>', $rue89->getContent());
+        $this->assertSame('<div><p>my description</p><p><img src="http://0.0.0.0/img.jpg"></p><iframe/></div>', $rue89->getContent());
         // this one will got an empty array
         $this->assertEmpty($rue89->getContent());
         // this one will catch an exception
@@ -91,6 +91,6 @@ class Rue89Test extends \PHPUnit_Framework_TestCase
 
         $rue89->match('http://rue89.nouvelobs.com/blog/extension-du-domaine-du-jeu/2016/07/22/pokemon-go-puise-dans-nos-instincts-les-plus-profonds-235356');
 
-        $this->assertEquals('<div><p>my description</p><p><img src="http://0.0.0.0/img.jpg"></p><iframe/></div>', $rue89->getContent());
+        $this->assertSame('<div><p>my description</p><p><img src="http://0.0.0.0/img.jpg"></p><iframe/></div>', $rue89->getContent());
     }
 }

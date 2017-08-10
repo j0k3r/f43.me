@@ -9,15 +9,15 @@ class FeedItemControllerTest extends FeedWebTestCase
         $client = static::createClient();
 
         $client->request('GET', '/feed/reddit/items');
-        $this->assertEquals(302, $client->getResponse()->getStatusCode());
+        $this->assertSame(302, $client->getResponse()->getStatusCode());
         $this->assertTrue($client->getResponse()->isRedirect('http://localhost/login'));
 
         $client->request('GET', '/feed/reddit/previewItem');
-        $this->assertEquals(302, $client->getResponse()->getStatusCode());
+        $this->assertSame(302, $client->getResponse()->getStatusCode());
         $this->assertTrue($client->getResponse()->isRedirect('http://localhost/login'));
 
         $client->request('GET', '/feed/reddit/testItem');
-        $this->assertEquals(302, $client->getResponse()->getStatusCode());
+        $this->assertSame(302, $client->getResponse()->getStatusCode());
         $this->assertTrue($client->getResponse()->isRedirect('http://localhost/login'));
     }
 
@@ -27,7 +27,7 @@ class FeedItemControllerTest extends FeedWebTestCase
 
         $client->request('GET', '/feed/nawak/items');
 
-        $this->assertEquals(404, $client->getResponse()->getStatusCode());
+        $this->assertSame(404, $client->getResponse()->getStatusCode());
         $this->assertContains('Feed object not found', $client->getResponse()->getContent());
     }
 
@@ -37,7 +37,7 @@ class FeedItemControllerTest extends FeedWebTestCase
 
         $crawler = $client->request('GET', '/feed/hackernews/items');
 
-        $this->assertEquals(200, $client->getResponse()->getStatusCode());
+        $this->assertSame(200, $client->getResponse()->getStatusCode());
         $this->assertCount(1, $crawler->filter('h1'));
         $this->assertCount(1, $crawler->filter('h2.title'));
         $this->assertCount(1, $crawler->filter('div.reveal-modal'));
@@ -61,7 +61,7 @@ class FeedItemControllerTest extends FeedWebTestCase
 
         $crawler = $client->request('GET', $previewLink);
 
-        $this->assertEquals(200, $client->getResponse()->getStatusCode(), $previewLink);
+        $this->assertSame(200, $client->getResponse()->getStatusCode(), $previewLink);
         $this->assertCount(1, $crawler->filter('a.close-reveal-modal'));
         $this->assertCount(1, $crawler->filter('p span.label'));
         $this->assertCount(1, $crawler->filter('ul.no-bullet'));
@@ -73,7 +73,7 @@ class FeedItemControllerTest extends FeedWebTestCase
 
         $client->request('GET', '/item/3456789/preview');
 
-        $this->assertEquals(404, $client->getResponse()->getStatusCode());
+        $this->assertSame(404, $client->getResponse()->getStatusCode());
         $this->assertContains('FeedItem object not found', $client->getResponse()->getContent());
     }
 
@@ -83,7 +83,7 @@ class FeedItemControllerTest extends FeedWebTestCase
 
         $crawler = $client->request('GET', '/feed/hackernews/testItem');
 
-        $this->assertEquals(200, $client->getResponse()->getStatusCode());
+        $this->assertSame(200, $client->getResponse()->getStatusCode());
         $this->assertCount(1, $crawler->filter('a.close-reveal-modal'));
         $this->assertCount(1, $crawler->filter('div.section-container.tabs'));
         $this->assertCount(1, $crawler->filter('div.content[id=modal-content-internal]'));
@@ -96,7 +96,7 @@ class FeedItemControllerTest extends FeedWebTestCase
 
         $client->request('GET', '/feed/nawak/testItem');
 
-        $this->assertEquals(404, $client->getResponse()->getStatusCode());
+        $this->assertSame(404, $client->getResponse()->getStatusCode());
         $this->assertContains('Feed object not found', $client->getResponse()->getContent());
     }
 
@@ -106,7 +106,7 @@ class FeedItemControllerTest extends FeedWebTestCase
 
         $crawler = $client->request('GET', '/feed/blog-wildtrip/previewItem?parser=internal');
 
-        $this->assertEquals(200, $client->getResponse()->getStatusCode());
+        $this->assertSame(200, $client->getResponse()->getStatusCode());
         $this->assertCount(1, $crawler->filter('ul.no-bullet'));
         $this->assertGreaterThanOrEqual(2, $crawler->filter('li strong')->count());
     }
@@ -117,7 +117,7 @@ class FeedItemControllerTest extends FeedWebTestCase
 
         $crawler = $client->request('GET', '/feed/blog-wildtrip/previewItem?parser=external');
 
-        $this->assertEquals(200, $client->getResponse()->getStatusCode());
+        $this->assertSame(200, $client->getResponse()->getStatusCode());
         $this->assertCount(1, $crawler->filter('ul.no-bullet'));
         $this->assertGreaterThanOrEqual(2, $crawler->filter('li strong')->count());
     }
@@ -128,7 +128,7 @@ class FeedItemControllerTest extends FeedWebTestCase
 
         $crawler = $client->request('GET', '/feed/hackernews/previewItem?parser=nawak');
 
-        $this->assertEquals(404, $client->getResponse()->getStatusCode());
+        $this->assertSame(404, $client->getResponse()->getStatusCode());
     }
 
     public function testPreviewItemBadSlug()
@@ -137,7 +137,7 @@ class FeedItemControllerTest extends FeedWebTestCase
 
         $client->request('GET', '/feed/nawak/previewItem');
 
-        $this->assertEquals(404, $client->getResponse()->getStatusCode());
+        $this->assertSame(404, $client->getResponse()->getStatusCode());
         $this->assertContains('Feed object not found', $client->getResponse()->getContent());
     }
 
@@ -151,7 +151,7 @@ class FeedItemControllerTest extends FeedWebTestCase
 
         $client->submit($form);
 
-        $this->assertEquals(302, $client->getResponse()->getStatusCode());
+        $this->assertSame(302, $client->getResponse()->getStatusCode());
         $this->assertContains('hackernews', $client->getResponse()->headers->get('location'));
 
         $crawler = $client->followRedirect();
@@ -165,7 +165,7 @@ class FeedItemControllerTest extends FeedWebTestCase
 
         $client->request('POST', '/feed/hackernews/items/deleteAll');
 
-        $this->assertEquals(302, $client->getResponse()->getStatusCode());
+        $this->assertSame(302, $client->getResponse()->getStatusCode());
         $this->assertContains('hackernews', $client->getResponse()->headers->get('location'));
     }
 
@@ -175,7 +175,7 @@ class FeedItemControllerTest extends FeedWebTestCase
 
         $client->request('POST', '/feed/nawak/items/deleteAll');
 
-        $this->assertEquals(404, $client->getResponse()->getStatusCode());
+        $this->assertSame(404, $client->getResponse()->getStatusCode());
         $this->assertContains('Feed object not found', $client->getResponse()->getContent());
     }
 }

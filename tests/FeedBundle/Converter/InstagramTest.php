@@ -86,6 +86,6 @@ class InstagramTest extends \PHPUnit_Framework_TestCase
         $instaConverter = new Instagram($instaExtractor);
         $instaConverter->setLogger(new NullLogger());
 
-        $this->assertEquals($html, $instaConverter->convert($html));
+        $this->assertSame($html, $instaConverter->convert($html));
     }
 }

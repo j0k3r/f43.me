@@ -34,7 +34,7 @@ class GithubTest extends \PHPUnit_Framework_TestCase
     public function testMatch($url, $expected)
     {
         $github = new Github('client_id', 'client_secret');
-        $this->assertEquals($expected, $github->match($url));
+        $this->assertSame($expected, $github->match($url));
     }
 
     public function testContent()
@@ -58,7 +58,7 @@ class GithubTest extends \PHPUnit_Framework_TestCase
         $github->match('http://www.github.com/photos/palnick');
 
         // consecutive calls
-        $this->assertEquals('<div>README</div>', $github->getContent());
+        $this->assertSame('<div>README</div>', $github->getContent());
         // this one will got an empty array
         $this->assertEmpty($github->getContent());
         // this one will catch an exception
@@ -96,7 +96,7 @@ class GithubTest extends \PHPUnit_Framework_TestCase
         $github->match('https://github.com/octocat/Hello-World/issues/212');
 
         // consecutive calls
-        $this->assertEquals('<div><em>Issue on Github</em><h2><a href="http://1.1.1.1">test</a></h2><ul><li>by <a href="http://2.2.2.2">login</a></li><li>on 04/08/2015</li><li>0 comments</li></ul></ul>body</div>', $github->getContent());
+        $this->assertSame('<div><em>Issue on Github</em><h2><a href="http://1.1.1.1">test</a></h2><ul><li>by <a href="http://2.2.2.2">login</a></li><li>on 04/08/2015</li><li>0 comments</li></ul></ul>body</div>', $github->getContent());
         // this one will catch an exception
         $this->assertEmpty($github->getContent());
     }
@@ -133,7 +133,7 @@ class GithubTest extends \PHPUnit_Framework_TestCase
         $github->match('https://github.com/msporny/dna/pull/1');
 
         // consecutive calls
-        $this->assertEquals('<div><em>Pull request on Github</em><h2><a href="http://0.0.0.0">name</a></h2><p>desc</p><h3>PR: <a href="http://1.1.1.1">test</a></h3><ul><li>by <a href="http://2.2.2.2">login</a></li><li>on 04/08/2015</li><li>0 commits</li><li>0 comments</li></ul>body</div>', $github->getContent());
+        $this->assertSame('<div><em>Pull request on Github</em><h2><a href="http://0.0.0.0">name</a></h2><p>desc</p><h3>PR: <a href="http://1.1.1.1">test</a></h3><ul><li>by <a href="http://2.2.2.2">login</a></li><li>on 04/08/2015</li><li>0 commits</li><li>0 comments</li></ul>body</div>', $github->getContent());
         // this one will catch an exception
         $this->assertEmpty($github->getContent());
     }

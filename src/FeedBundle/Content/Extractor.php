@@ -10,6 +10,9 @@ use Api43\FeedBundle\Parser\ParserChain;
 
 class Extractor
 {
+    public $url = '';
+    public $content = '';
+    public $useDefault = false;
     protected $feed = null;
     protected $extractorChain;
     protected $improverChain;
@@ -17,10 +20,6 @@ class Extractor
     protected $parserChain;
     protected $parser;
     protected $allowAllParser = false;
-
-    public $url = '';
-    public $content = '';
-    public $useDefault = false;
 
     /**
      * Content Extractor will use Extractor, Improver & Parser to get the readable content.

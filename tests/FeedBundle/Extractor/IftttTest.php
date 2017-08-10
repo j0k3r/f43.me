@@ -30,7 +30,7 @@ class IftttTest extends \PHPUnit_Framework_TestCase
     public function testMatch($url, $expected)
     {
         $ifttt = new Ifttt();
-        $this->assertEquals($expected, $ifttt->match($url));
+        $this->assertSame($expected, $ifttt->match($url));
     }
 
     public function testContent()
@@ -58,7 +58,7 @@ class IftttTest extends \PHPUnit_Framework_TestCase
         $ifttt->match('https://ifttt.com/recipes/385105-receive-notifications-for-a-jailbreak');
 
         // consecutive calls
-        $this->assertEquals('<div><h2>my title</h2><p>Cool stuff bro</p><p><a href="https://ifttt.com/recipes/385105"><img src="https://ifttt.com/recipe_embed_img/385105"></a></p></div>', $ifttt->getContent());
+        $this->assertSame('<div><h2>my title</h2><p>Cool stuff bro</p><p><a href="https://ifttt.com/recipes/385105"><img src="https://ifttt.com/recipe_embed_img/385105"></a></p></div>', $ifttt->getContent());
         // this one will got an empty array
         $this->assertEmpty($ifttt->getContent());
         // this one will catch an exception

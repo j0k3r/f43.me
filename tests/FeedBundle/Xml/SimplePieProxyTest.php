@@ -25,7 +25,7 @@ class SimplePieProxyTest extends \PHPUnit_Framework_TestCase
         $res = $proxy->setUrl('http://test.com');
         $feed = $proxy->init();
 
-        $this->assertEquals('Api43\FeedBundle\Xml\SimplePieProxy', get_class($res));
-        $this->assertEquals('SimplePie', get_class($feed));
+        $this->assertSame('Api43\FeedBundle\Xml\SimplePieProxy', get_class($res));
+        $this->assertSame('SimplePie', get_class($feed));
     }
 }
