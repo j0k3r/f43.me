@@ -19,6 +19,7 @@ class GfycatTest extends \PHPUnit_Framework_TestCase
             ['https://gfycat.com/RichPepperyFerret', true],
             ['http://gfycat.com/NeatSpitefulCapeghostfrog', true],
             ['http://www.gfycat.com/NeatSpitefulCapeghostfrog', true],
+            ['https://gfycat.com/gifs/detail/ConcernedBlackDipper', true],
             ['http://gfycat.com/', false],
             ['https://goog.co', false],
             ['http://user@:80', false],
