@@ -45,14 +45,36 @@
             </div>
             {{ form_rest(form) }}
         </form>
-    </div>
 
-    {% if content.url is defined %}
-    <hr/>
-    <div class="large-12 columns">
-        {{ include('Api43FeedBundle:FeedItem:content.html.twig', {'title': '', 'content': content.content, 'url': content.url, 'modal': false}) }}
+        {% if content.url is defined %}
+        <div class="section-container tabs" data-section="tabs">
+            <section class="active">
+                <p class="title" data-section-title>
+                    <a href="#">Results</a>
+                </p>
+                <div class="content" data-section-content>
+                    {{ include('Api43FeedBundle:FeedItem:content.html.twig', {'title': '', 'content': content.content, 'url': content.url, 'modal': false}) }}
+                </div>
+            </section>
+            <section>
+                <p class="title" data-section-title>
+                    <a href="#">
+                        Debug log
+
+                        {% if logsHasWarning %}
+                            <span class="round alert label">1</span>
+                        {% endif %}
+                    </a>
+                </p>
+                <div class="content" data-section-content>
+                    {% for log in logs %}
+                        {{ log.formatted|raw }}
+                    {% endfor %}
+                </div>
+            </section>
+        </div>
+        {% endif %}
     </div>
-    {% endif %}
 </div>
 
 {% endblock %}

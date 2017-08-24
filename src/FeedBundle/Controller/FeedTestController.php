@@ -3,6 +3,7 @@
 namespace Api43\FeedBundle\Controller;
 
 use Api43\FeedBundle\Form\Type\ItemTestType;
+use Monolog\Logger;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -61,6 +62,8 @@ class FeedTestController extends Controller
             'menu' => 'test',
             'content' => $content,
             'form' => $form->createView(),
+            'logs' => $this->get('monolog.handler.graby')->getRecords(),
+            'logsHasWarning' => $this->get('monolog.handler.graby')->hasRecords(Logger::WARNING),
         ]);
     }
 }
