@@ -29,7 +29,7 @@
         "incenteev/composer-parameter-handler": "^2.0",
         "doctrine/mongodb-odm-bundle": "^3.2",
         "stof/doctrine-extensions-bundle": "~1.1",
-        "j0k3r/graby": "dev-monolog-handler-formatter",
+        "j0k3r/graby": "^1.10",
         "simplepie/simplepie": "~1.4",
         "zurb/foundation": "4.3.2",
         "j0k3r/php-imgur-api-client": "~2.0",
