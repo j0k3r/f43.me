@@ -196,3 +196,11 @@ services:
             - [ setClient, [ "@guzzle.client" ]]
         tags:
             -  { name: feed.extractor, alias: twitch }
+
+    feed.extractor.periscope:
+        class: Api43\FeedBundle\Extractor\Periscope
+        calls:
+            - [ setLogger, [ "@logger" ]]
+            - [ setClient, [ "@guzzle.client" ]]
+        tags:
+            -  { name: feed.extractor, alias: periscope }
