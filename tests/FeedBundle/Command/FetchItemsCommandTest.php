@@ -10,6 +10,12 @@ use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Tester\CommandTester;
 
+/**
+ * @group legacy
+ *
+ * Because there is no right way to override existing service in the upcoming Symfony 4.0
+ * without modifiy them globally (using config_test.yml)
+ */
 class FetchItemsCommandTest extends WebTestCase
 {
     private $command;
