@@ -29,7 +29,7 @@ class SoundcloudTest extends \PHPUnit_Framework_TestCase
     public function testMatch($url, $expected)
     {
         $soundCloud = new Soundcloud();
-        $this->assertEquals($expected, $soundCloud->match($url));
+        $this->assertSame($expected, $soundCloud->match($url));
     }
 
     public function testContent()
@@ -57,7 +57,7 @@ class SoundcloudTest extends \PHPUnit_Framework_TestCase
         $soundCloud->match('https://soundcloud.com/birdfeeder/jurassic-park-theme-1000-slower');
 
         // consecutive calls
-        $this->assertEquals('<div><h2>my title</h2><p>my description</p><p><img src="http://0.0.0.0/img.jpg"></p><iframe/></div>', $soundCloud->getContent());
+        $this->assertSame('<div><h2>my title</h2><p>my description</p><p><img src="http://0.0.0.0/img.jpg"></p><iframe/></div>', $soundCloud->getContent());
         // this one will got an empty array
         $this->assertEmpty($soundCloud->getContent());
         // this one will catch an exception

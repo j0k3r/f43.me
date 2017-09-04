@@ -33,32 +33,6 @@ class FeedLogRepository extends DocumentRepository
     }
 
     /**
-     * Get the base query to fetch items.
-     *
-     * @param string   $feedId Feed id
-     * @param int|null $limit  Number of items to return
-     * @param int|null $skip   Item to skip before applying the limit
-     *
-     * @return \Doctrine\ODM\MongoDB\Query\Query
-     */
-    private function getItemsByFeedIdQuery($feedId, $limit = null, $skip = null)
-    {
-        $q = $this->createQueryBuilder()
-            ->field('feed.id')->equals($feedId)
-            ->sort('id', 'DESC');
-
-        if (null !== $limit) {
-            $q->limit(0);
-        }
-
-        if (null !== $skip) {
-            $q->skip(0);
-        }
-
-        return $q->getQuery();
-    }
-
-    /**
      * Find all logs for a given Feed id.
      *
      * @param int $feedId Feed id
@@ -203,5 +177,31 @@ class FeedLogRepository extends DocumentRepository
         rsort($results);
 
         return $results;
+    }
+
+    /**
+     * Get the base query to fetch items.
+     *
+     * @param string   $feedId Feed id
+     * @param int|null $limit  Number of items to return
+     * @param int|null $skip   Item to skip before applying the limit
+     *
+     * @return \Doctrine\ODM\MongoDB\Query\Query
+     */
+    private function getItemsByFeedIdQuery($feedId, $limit = null, $skip = null)
+    {
+        $q = $this->createQueryBuilder()
+            ->field('feed.id')->equals($feedId)
+            ->sort('id', 'DESC');
+
+        if (null !== $limit) {
+            $q->limit(0);
+        }
+
+        if (null !== $skip) {
+            $q->skip(0);
+        }
+
+        return $q->getQuery();
     }
 }

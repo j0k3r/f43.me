@@ -32,7 +32,7 @@ class GfycatTest extends \PHPUnit_Framework_TestCase
     public function testMatch($url, $expected)
     {
         $gfycat = new Gfycat();
-        $this->assertEquals($expected, $gfycat->match($url));
+        $this->assertSame($expected, $gfycat->match($url));
     }
 
     public function testContent()
@@ -60,7 +60,7 @@ class GfycatTest extends \PHPUnit_Framework_TestCase
         $gfycat->match('http://gfycat.com/RichPepperyFerret');
 
         // consecutive calls
-        $this->assertEquals('<div><h2>my title</h2><p><img src="http://0.0.0.0/img.gif"></p></div><div style="position:relative;padding-bottom:calc(100% / 1.85)"><iframe src="https://gfycat.com/ifr/RichPepperyFerret" frameborder="0" scrolling="no" width="100%" height="100%" style="position:absolute;top:0;left:0;" allowfullscreen></iframe></div>', $gfycat->getContent());
+        $this->assertSame('<div><h2>my title</h2><p><img src="http://0.0.0.0/img.gif"></p></div><div style="position:relative;padding-bottom:calc(100% / 1.85)"><iframe src="https://gfycat.com/ifr/RichPepperyFerret" frameborder="0" scrolling="no" width="100%" height="100%" style="position:absolute;top:0;left:0;" allowfullscreen></iframe></div>', $gfycat->getContent());
         // this one will got an empty array
         $this->assertEmpty($gfycat->getContent());
         // this one will catch an exception

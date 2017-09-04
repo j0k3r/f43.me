@@ -36,7 +36,7 @@ class ConverterCompilerPassTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($definition->hasMethodCall('addConverter'));
 
         $calls = $definition->getMethodCalls();
-        $this->assertEquals('instagram', $calls[0][1][1]);
+        $this->assertSame('instagram', $calls[0][1][1]);
     }
 
     protected function process(ContainerBuilder $container)

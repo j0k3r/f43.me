@@ -37,7 +37,7 @@ class TumblrTest extends \PHPUnit_Framework_TestCase
 
         $tumblr = new Tumblr('apikey');
         $tumblr->setClient($client);
-        $this->assertEquals($expected, $tumblr->match($url));
+        $this->assertSame($expected, $tumblr->match($url));
     }
 
     public function testMatchFailRequest()
@@ -104,7 +104,7 @@ class TumblrTest extends \PHPUnit_Framework_TestCase
         $tumblr->match('http://thecodinglove.com/post/96365413702/client-giving-us-his-feedback-on-his-new-project');
 
         // consecutive calls
-        $this->assertEquals('<div>content</div>', $tumblr->getContent());
+        $this->assertSame('<div>content</div>', $tumblr->getContent());
         // this one will got an empty array
         $this->assertEmpty($tumblr->getContent());
         // this one will catch an exception

@@ -96,6 +96,6 @@ class TwitterTest extends \PHPUnit_Framework_TestCase
         $twitterConverter = new Twitter($twitterExtractor);
         $twitterConverter->setLogger(new NullLogger());
 
-        $this->assertEquals($html, $twitterConverter->convert($html));
+        $this->assertSame($html, $twitterConverter->convert($html));
     }
 }

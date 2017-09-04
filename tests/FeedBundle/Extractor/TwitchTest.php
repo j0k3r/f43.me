@@ -30,7 +30,7 @@ class TwitchTest extends \PHPUnit_Framework_TestCase
     public function testMatch($url, $expected)
     {
         $twitch = new Twitch('apikey');
-        $this->assertEquals($expected, $twitch->match($url));
+        $this->assertSame($expected, $twitch->match($url));
     }
 
     public function testContent()
@@ -58,7 +58,7 @@ class TwitchTest extends \PHPUnit_Framework_TestCase
         $twitch->match('https://www.twitch.tv/tomfawkes/v/91819468');
 
         // consecutive calls
-        $this->assertEquals('<div><h2>hihi</h2><p>hoho</p><p><img src="http://0.0.0.0/image.jpg"></p><iframe src="https://player.twitch.tv/?video=v91819468" frameborder="0" scrolling="no" height="378" width="620"></iframe></div>', $twitch->getContent());
+        $this->assertSame('<div><h2>hihi</h2><p>hoho</p><p><img src="http://0.0.0.0/image.jpg"></p><iframe src="https://player.twitch.tv/?video=v91819468" frameborder="0" scrolling="no" height="378" width="620"></iframe></div>', $twitch->getContent());
         // this one will got an empty array
         $this->assertEmpty($twitch->getContent());
         // this one will catch an exception

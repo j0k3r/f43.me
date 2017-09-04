@@ -19,7 +19,7 @@ class ExtractorChainTest extends \PHPUnit_Framework_TestCase
         $extractorChain = new ExtractorChain();
         $extractorChain->addExtractor($extractor, 'alias');
 
-        $this->assertEquals($extractor, $extractorChain->match('url'));
+        $this->assertSame($extractor, $extractorChain->match('url'));
     }
 
     public function testMatchFalse()

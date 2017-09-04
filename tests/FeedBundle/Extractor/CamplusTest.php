@@ -32,7 +32,7 @@ class CamplusTest extends \PHPUnit_Framework_TestCase
     public function testMatch($url, $expected)
     {
         $camplus = new Camplus();
-        $this->assertEquals($expected, $camplus->match($url));
+        $this->assertSame($expected, $camplus->match($url));
     }
 
     public function testContent()

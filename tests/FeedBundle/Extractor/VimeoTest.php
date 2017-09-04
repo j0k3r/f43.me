@@ -30,7 +30,7 @@ class VimeoTest extends \PHPUnit_Framework_TestCase
     public function testMatch($url, $expected)
     {
         $vimeo = new Vimeo();
-        $this->assertEquals($expected, $vimeo->match($url));
+        $this->assertSame($expected, $vimeo->match($url));
     }
 
     public function testContent()
@@ -58,7 +58,7 @@ class VimeoTest extends \PHPUnit_Framework_TestCase
         $vimeo->match('https://vimeo.com/groups/motion/videos/131034832');
 
         // consecutive calls
-        $this->assertEquals('<div><h2>my title</h2><p>my description</p><p><img src="http://0.0.0.0/img.jpg"></p><iframe/></div>', $vimeo->getContent());
+        $this->assertSame('<div><h2>my title</h2><p>my description</p><p><img src="http://0.0.0.0/img.jpg"></p><iframe/></div>', $vimeo->getContent());
         // this one will got an empty array
         $this->assertEmpty($vimeo->getContent());
         // this one will catch an exception

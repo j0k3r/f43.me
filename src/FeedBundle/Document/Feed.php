@@ -115,6 +115,11 @@ class Feed
      */
     protected $feedlogs;
 
+    public function __construct()
+    {
+        $this->feeditems = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
     /**
      * Get id.
      *
@@ -267,11 +272,6 @@ class Feed
     public function getSlug()
     {
         return $this->slug;
-    }
-
-    public function __construct()
-    {
-        $this->feeditems = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**

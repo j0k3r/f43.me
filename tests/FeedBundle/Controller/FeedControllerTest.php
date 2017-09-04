@@ -10,7 +10,7 @@ class FeedControllerTest extends FeedWebTestCase
 
         $crawler = $client->request('GET', '/');
 
-        $this->assertEquals(200, $client->getResponse()->getStatusCode());
+        $this->assertSame(200, $client->getResponse()->getStatusCode());
         $this->assertGreaterThan(0, $crawler->filter('html:contains("f43.me")')->count());
 
         $this->assertCount(1, $crawler->filter('h1'));
@@ -27,19 +27,19 @@ class FeedControllerTest extends FeedWebTestCase
         $client = static::createClient();
 
         $client->request('GET', '/dashboard');
-        $this->assertEquals(302, $client->getResponse()->getStatusCode());
+        $this->assertSame(302, $client->getResponse()->getStatusCode());
         $this->assertTrue($client->getResponse()->isRedirect('http://localhost/login'));
 
         $client->request('GET', '/feeds');
-        $this->assertEquals(302, $client->getResponse()->getStatusCode());
+        $this->assertSame(302, $client->getResponse()->getStatusCode());
         $this->assertTrue($client->getResponse()->isRedirect('http://localhost/login'));
 
         $client->request('GET', '/feed/new');
-        $this->assertEquals(302, $client->getResponse()->getStatusCode());
+        $this->assertSame(302, $client->getResponse()->getStatusCode());
         $this->assertTrue($client->getResponse()->isRedirect('http://localhost/login'));
 
         $client->request('GET', '/feed/reddit/edit');
-        $this->assertEquals(302, $client->getResponse()->getStatusCode());
+        $this->assertSame(302, $client->getResponse()->getStatusCode());
         $this->assertTrue($client->getResponse()->isRedirect('http://localhost/login'));
     }
 
@@ -49,7 +49,7 @@ class FeedControllerTest extends FeedWebTestCase
 
         $crawler = $client->request('GET', '/dashboard');
 
-        $this->assertEquals(200, $client->getResponse()->getStatusCode());
+        $this->assertSame(200, $client->getResponse()->getStatusCode());
         $this->assertCount(1, $crawler->filter('h1'));
         $this->assertCount(1, $crawler->filter('h2.title'));
         $this->assertCount(2, $crawler->filter('h3.subheader'));
@@ -57,7 +57,7 @@ class FeedControllerTest extends FeedWebTestCase
         $this->assertCount(9, $crawler->filter('ul.left li'));
         $this->assertCount(1, $crawler->filter('ul.left li.active'));
         $this->assertCount(1, $logout = $crawler->filter('ul.right li.has-form a.alert')->extract(['_text']));
-        $this->assertEquals('Logout', $logout[0]);
+        $this->assertSame('Logout', $logout[0]);
         $this->assertGreaterThan(0, $crawler->filter('table.table-dashboard-feeds tbody tr td img.favicon')->count());
         $this->assertGreaterThan(0, $items = $crawler->filter('table.table-dashboard-feeds tr td.items-count')->extract(['_text']));
 
@@ -78,7 +78,7 @@ class FeedControllerTest extends FeedWebTestCase
 
         $crawler = $client->request('GET', '/feeds');
 
-        $this->assertEquals(200, $client->getResponse()->getStatusCode());
+        $this->assertSame(200, $client->getResponse()->getStatusCode());
         $this->assertCount(1, $crawler->filter('h1'));
         $this->assertCount(1, $crawler->filter('h2.title'));
         $this->assertGreaterThan(0, $crawler->filter('table.table-feeds tbody tr td img.favicon')->count());
@@ -95,7 +95,7 @@ class FeedControllerTest extends FeedWebTestCase
 
         $crawler = $client->request('GET', '/feed/new');
 
-        $this->assertEquals(200, $client->getResponse()->getStatusCode());
+        $this->assertSame(200, $client->getResponse()->getStatusCode());
         $this->assertCount(1, $crawler->filter('h1'));
         $this->assertCount(1, $crawler->filter('h2.title'));
         $this->assertCount(1, $crawler->filter('form.custom'));
@@ -118,9 +118,9 @@ class FeedControllerTest extends FeedWebTestCase
 
         $crawler = $client->submit($form);
 
-        $this->assertEquals(200, $client->getResponse()->getStatusCode());
+        $this->assertSame(200, $client->getResponse()->getStatusCode());
         $this->assertCount(1, $alert = $crawler->filter('div.alert-box')->extract(['_text']));
-        $this->assertEquals('Form is invalid.', $alert[0]);
+        $this->assertSame('Form is invalid.', $alert[0]);
         $this->assertGreaterThanOrEqual(1, count($crawler->filter('small.error')));
     }
 
@@ -157,9 +157,9 @@ class FeedControllerTest extends FeedWebTestCase
 
         $crawler = $client->submit($form, $data);
 
-        $this->assertEquals(200, $client->getResponse()->getStatusCode());
+        $this->assertSame(200, $client->getResponse()->getStatusCode());
         $this->assertCount(1, $alert = $crawler->filter('div.alert-box')->extract(['_text']));
-        $this->assertEquals('Form is invalid.', $alert[0]);
+        $this->assertSame('Form is invalid.', $alert[0]);
         $this->assertGreaterThanOrEqual(1, count($crawler->filter('small.error')));
     }
 
@@ -177,12 +177,12 @@ class FeedControllerTest extends FeedWebTestCase
         $client->submit($form, $data);
         $location = $client->getResponse()->headers->get('location');
 
-        $this->assertEquals(302, $client->getResponse()->getStatusCode());
+        $this->assertSame(302, $client->getResponse()->getStatusCode());
         $this->assertContains('google-news', $location);
 
         $crawler = $client->followRedirect();
         $this->assertCount(1, $alert = $crawler->filter('div.alert-box')->extract(['_text']));
-        $this->assertEquals('Document created!', $alert[0]);
+        $this->assertSame('Document created!', $alert[0]);
     }
 
     public function testFeedEditBadSlug()
@@ -191,7 +191,7 @@ class FeedControllerTest extends FeedWebTestCase
 
         $client->request('GET', '/feed/nawak/edit');
 
-        $this->assertEquals(404, $client->getResponse()->getStatusCode());
+        $this->assertSame(404, $client->getResponse()->getStatusCode());
         $this->assertContains('Feed object not found', $client->getResponse()->getContent());
     }
 
@@ -201,7 +201,7 @@ class FeedControllerTest extends FeedWebTestCase
 
         $crawler = $client->request('GET', '/feed/hackernews/edit');
 
-        $this->assertEquals(200, $client->getResponse()->getStatusCode());
+        $this->assertSame(200, $client->getResponse()->getStatusCode());
         $this->assertCount(1, $crawler->filter('h1'));
         $this->assertCount(1, $crawler->filter('h2.title'));
         $this->assertCount(2, $crawler->filter('h3.subheader'));
@@ -251,9 +251,9 @@ class FeedControllerTest extends FeedWebTestCase
 
         $crawler = $client->submit($form, $data);
 
-        $this->assertEquals(200, $client->getResponse()->getStatusCode());
+        $this->assertSame(200, $client->getResponse()->getStatusCode());
         $this->assertCount(1, $alert = $crawler->filter('div.alert-box')->extract(['_text']));
-        $this->assertEquals('Form is invalid.', $alert[0]);
+        $this->assertSame('Form is invalid.', $alert[0]);
         // url invalid + feed invalid
         $this->assertGreaterThanOrEqual(1, $crawler->filter('small.error')->count());
         $this->assertContains('This value is not a valid URL.', $client->getResponse()->getContent());
@@ -272,12 +272,12 @@ class FeedControllerTest extends FeedWebTestCase
 
         $client->submit($form, $data);
 
-        $this->assertEquals(302, $client->getResponse()->getStatusCode());
+        $this->assertSame(302, $client->getResponse()->getStatusCode());
         $this->assertContains('bonjour-madame', $client->getResponse()->headers->get('location'));
 
         $crawler = $client->followRedirect();
         $this->assertCount(1, $alert = $crawler->filter('div.alert-box')->extract(['_text']));
-        $this->assertEquals('Document updated!', $alert[0]);
+        $this->assertSame('Document updated!', $alert[0]);
     }
 
     public function testFeedUpdateBadSlug()
@@ -286,7 +286,7 @@ class FeedControllerTest extends FeedWebTestCase
 
         $client->request('POST', '/feed/nawak/edit');
 
-        $this->assertEquals(404, $client->getResponse()->getStatusCode());
+        $this->assertSame(404, $client->getResponse()->getStatusCode());
         $this->assertContains('Feed object not found', $client->getResponse()->getContent());
     }
 
@@ -296,7 +296,7 @@ class FeedControllerTest extends FeedWebTestCase
 
         $client->request('POST', '/feed/nawak/delete');
 
-        $this->assertEquals(404, $client->getResponse()->getStatusCode());
+        $this->assertSame(404, $client->getResponse()->getStatusCode());
     }
 
     public function testDeleteBadSlug()
@@ -309,7 +309,7 @@ class FeedControllerTest extends FeedWebTestCase
 
         $client->request('POST', '/feed/nawak/delete', $form->getPhpValues());
 
-        $this->assertEquals(404, $client->getResponse()->getStatusCode());
+        $this->assertSame(404, $client->getResponse()->getStatusCode());
         $this->assertContains('Feed object not found', $client->getResponse()->getContent());
     }
 
@@ -328,11 +328,11 @@ class FeedControllerTest extends FeedWebTestCase
 
         $client->submit($form);
 
-        $this->assertEquals(302, $client->getResponse()->getStatusCode());
+        $this->assertSame(302, $client->getResponse()->getStatusCode());
 
         $crawler = $client->followRedirect();
         $this->assertCount(1, $alert = $crawler->filter('div.alert-box')->extract(['_text']));
-        $this->assertEquals('Document deleted!', $alert[0]);
+        $this->assertSame('Document deleted!', $alert[0]);
     }
 
     public function testInvalidFeed()
@@ -341,7 +341,7 @@ class FeedControllerTest extends FeedWebTestCase
 
         $client->request('GET', '/nawak.xml');
 
-        $this->assertEquals(404, $client->getResponse()->getStatusCode());
+        $this->assertSame(404, $client->getResponse()->getStatusCode());
         $this->assertContains('Not Found', $client->getResponse()->getContent());
     }
 
@@ -351,7 +351,7 @@ class FeedControllerTest extends FeedWebTestCase
 
         $crawler = $client->request('GET', '/reddit.xml');
 
-        $this->assertEquals(200, $client->getResponse()->getStatusCode());
+        $this->assertSame(200, $client->getResponse()->getStatusCode());
 
         libxml_use_internal_errors(true);
 
@@ -389,7 +389,7 @@ class FeedControllerTest extends FeedWebTestCase
 
         $crawler = $client->request('GET', '/hackernews.xml');
 
-        $this->assertEquals(200, $client->getResponse()->getStatusCode());
+        $this->assertSame(200, $client->getResponse()->getStatusCode());
 
         libxml_use_internal_errors(true);
 

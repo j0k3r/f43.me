@@ -33,7 +33,7 @@ class DeviantartTest extends \PHPUnit_Framework_TestCase
     public function testMatch($url, $expected)
     {
         $deviantart = new Deviantart();
-        $this->assertEquals($expected, $deviantart->match($url));
+        $this->assertSame($expected, $deviantart->match($url));
     }
 
     public function testContent()

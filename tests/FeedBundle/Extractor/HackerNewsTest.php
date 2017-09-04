@@ -43,7 +43,7 @@ class HackerNewsTest extends \PHPUnit_Framework_TestCase
 
         $hn = new HackerNews();
         $hn->setClient($client);
-        $this->assertEquals($expected, $hn->match($url));
+        $this->assertSame($expected, $hn->match($url));
     }
 
     public function testMatchGuzzleFail()
@@ -58,7 +58,7 @@ class HackerNewsTest extends \PHPUnit_Framework_TestCase
 
         $hn = new HackerNews();
         $hn->setClient($client);
-        $this->assertEquals(false, $hn->match('http://news.ycombinator.com/item?id=10074364'));
+        $this->assertSame(false, $hn->match('http://news.ycombinator.com/item?id=10074364'));
     }
 
     public function testContent()
@@ -78,7 +78,7 @@ class HackerNewsTest extends \PHPUnit_Framework_TestCase
         $this->assertEmpty($hn->getContent());
 
         $hn->match('http://news.ycombinator.com/item?id=10074364');
-        $this->assertEquals('<p>toto</p>', $hn->getContent());
+        $this->assertSame('<p>toto</p>', $hn->getContent());
     }
 
     public function testContentWithoutText()

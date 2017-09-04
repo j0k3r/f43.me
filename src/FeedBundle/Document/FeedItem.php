@@ -70,6 +70,11 @@ class FeedItem
      */
     protected $feedlogs;
 
+    public function __construct()
+    {
+        $this->feedlogs = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
     /**
      * Get id.
      *
@@ -270,11 +275,6 @@ class FeedItem
     public function getPublishedAt()
     {
         return $this->published_at;
-    }
-
-    public function __construct()
-    {
-        $this->feedlogs = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**

@@ -23,20 +23,6 @@ class RemoveItemsCommandTest extends WebTestCase
         $this->commandTester = new CommandTester($this->command);
     }
 
-    /**
-     * @see http://symfony.com/doc/current/components/console/helpers/dialoghelper.html#testing-a-command-which-expects-input
-     *
-     * @param string $input
-     */
-    protected function getInputStream($input)
-    {
-        $stream = fopen('php://memory', 'r+', false);
-        fputs($stream, $input);
-        rewind($stream);
-
-        return $stream;
-    }
-
     public function testRemoveAllAvailable()
     {
         $this->commandTester->execute(['command' => $this->command->getName()]);
@@ -102,5 +88,19 @@ class RemoveItemsCommandTest extends WebTestCase
         ]);
 
         $this->assertRegExp('`items removed.`', $this->commandTester->getDisplay());
+    }
+
+    /**
+     * @see http://symfony.com/doc/current/components/console/helpers/dialoghelper.html#testing-a-command-which-expects-input
+     *
+     * @param string $input
+     */
+    protected function getInputStream($input)
+    {
+        $stream = fopen('php://memory', 'r+', false);
+        fwrite($stream, $input);
+        rewind($stream);
+
+        return $stream;
     }
 }

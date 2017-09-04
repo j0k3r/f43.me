@@ -38,7 +38,7 @@ class FlickrTest extends \PHPUnit_Framework_TestCase
     public function testMatch($url, $expected)
     {
         $flickr = new Flickr('apikey');
-        $this->assertEquals($expected, $flickr->match($url));
+        $this->assertSame($expected, $flickr->match($url));
     }
 
     public function testSinglePhoto()

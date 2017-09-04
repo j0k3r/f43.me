@@ -30,7 +30,7 @@ class DailymotionTest extends \PHPUnit_Framework_TestCase
     public function testMatch($url, $expected)
     {
         $dailymotion = new Dailymotion();
-        $this->assertEquals($expected, $dailymotion->match($url));
+        $this->assertSame($expected, $dailymotion->match($url));
     }
 
     public function testContent()
@@ -58,7 +58,7 @@ class DailymotionTest extends \PHPUnit_Framework_TestCase
         $dailymotion->match('https://www.dailymotion.com/video/xockol_planete-des-hommes-partie-1-2_travel');
 
         // consecutive calls
-        $this->assertEquals('<div><h2>my title</h2><p><img src="http://0.0.0.0/img.jpg"></p><iframe/></div>', $dailymotion->getContent());
+        $this->assertSame('<div><h2>my title</h2><p><img src="http://0.0.0.0/img.jpg"></p><iframe/></div>', $dailymotion->getContent());
         // this one will got an empty array
         $this->assertEmpty($dailymotion->getContent());
         // this one will catch an exception

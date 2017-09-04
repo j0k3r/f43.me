@@ -1,21 +1,48 @@
 <?php
 
-return Symfony\CS\Config\Config::create()
-    ->level(Symfony\CS\FixerInterface::SYMFONY_LEVEL)
-    // use default SYMFONY_LEVEL and extra fixers:
-    ->fixers([
-        '-psr0',
-        'concat_with_spaces',
-        'ordered_use',
-        'phpdoc_order',
-        'strict',
-        'strict_param',
-        'short_array_syntax',
+return PhpCsFixer\Config::create()
+    ->setRiskyAllowed(true)
+    ->setRules([
+        '@Symfony' => true,
+        '@Symfony:risky' => true,
+        'array_syntax' => [
+            'syntax' => 'short'
+        ],
+        'combine_consecutive_unsets' => true,
+        'heredoc_to_nowdoc' => true,
+        'no_extra_consecutive_blank_lines' => [
+        'break',
+            'continue',
+            'extra',
+            'return',
+            'throw',
+            'use',
+            'parenthesis_brace_block',
+            'square_brace_block',
+            'curly_brace_block'
+        ],
+        'no_unreachable_default_argument_value' => true,
+        'no_useless_else' => true,
+        'no_useless_return' => true,
+        'ordered_class_elements' => true,
+        'ordered_imports' => true,
+        'php_unit_strict' => true,
+        'phpdoc_order' => true,
+        // 'psr4' => true,
+        'strict_comparison' => true,
+        'strict_param' => true,
+        'concat_space' => [
+            'spacing' => 'one'
+        ],
     ])
-    ->finder(
-        Symfony\CS\Finder\DefaultFinder::create()
-            ->exclude(['web', 'var', 'bin', 'node_modules'])
+    ->setFinder(
+        PhpCsFixer\Finder::create()
+            ->exclude([
+                'vendor',
+                'var',
+                'web',
+                'node_modules',
+            ])
             ->in(__DIR__)
     )
-    ->setUsingCache(true)
 ;

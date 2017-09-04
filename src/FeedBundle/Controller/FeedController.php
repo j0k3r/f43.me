@@ -105,9 +105,8 @@ class FeedController extends Controller
             $this->get('session')->getFlashBag()->add('notice', 'Document created!');
 
             return $this->redirect($this->generateUrl('feed_edit', ['slug' => $feed->getSlug()]));
-        } else {
-            $this->get('session')->getFlashBag()->add('error', 'Form is invalid.');
         }
+        $this->get('session')->getFlashBag()->add('error', 'Form is invalid.');
 
         return $this->render('Api43FeedBundle:Feed:new.html.twig', [
             'menu' => 'feed',
@@ -140,9 +139,8 @@ class FeedController extends Controller
                 $this->get('session')->getFlashBag()->add('notice', 'Document updated!');
 
                 return $this->redirect($this->generateUrl('feed_edit', ['slug' => $feed->getSlug()]));
-            } else {
-                $this->get('session')->getFlashBag()->add('error', 'Form is invalid.');
             }
+            $this->get('session')->getFlashBag()->add('error', 'Form is invalid.');
         }
 
         $lastItem = $dm->getRepository('Api43FeedBundle:FeedItem')->findLastItemByFeedId($feed->getId());
@@ -190,11 +188,6 @@ class FeedController extends Controller
         return $this->redirect($this->generateUrl('feed_homepage'));
     }
 
-    private function createDeleteForm()
-    {
-        return $this->createFormBuilder()->getForm();
-    }
-
     /**
      * Display some information about feeds, items, logs, etc ...
      *
@@ -209,6 +202,11 @@ class FeedController extends Controller
             200,
             ['Content-Type' => 'text/xml']
         );
+    }
+
+    private function createDeleteForm()
+    {
+        return $this->createFormBuilder()->getForm();
     }
 
     /**

@@ -36,7 +36,7 @@ class ParserCompilerPassTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($definition->hasMethodCall('addParser'));
 
         $calls = $definition->getMethodCalls();
-        $this->assertEquals('internal', $calls[0][1][1]);
+        $this->assertSame('internal', $calls[0][1][1]);
     }
 
     protected function process(ContainerBuilder $container)

@@ -32,7 +32,7 @@ class PeriscopeTest extends \PHPUnit_Framework_TestCase
     public function testMatch($url, $expected)
     {
         $vimeo = new Periscope();
-        $this->assertEquals($expected, $vimeo->match($url));
+        $this->assertSame($expected, $vimeo->match($url));
     }
 
     public function testContent()
@@ -60,7 +60,7 @@ class PeriscopeTest extends \PHPUnit_Framework_TestCase
         $vimeo->match('https://www.pscp.tv/w/1ynJOVNmoVkGR');
 
         // consecutive calls
-        $this->assertEquals('<div><h2>my title</h2><p>Broadcast available on <a href="http://broadcast.url">Periscope</a>.</p><p><img src="http://0.0.0.0/img.jpg"></p></div>', $vimeo->getContent());
+        $this->assertSame('<div><h2>my title</h2><p>Broadcast available on <a href="http://broadcast.url">Periscope</a>.</p><p><img src="http://0.0.0.0/img.jpg"></p></div>', $vimeo->getContent());
         // this one will got an empty array
         $this->assertEmpty($vimeo->getContent());
         // this one will catch an exception

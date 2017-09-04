@@ -36,7 +36,7 @@ class ImproverCompilerPassTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($definition->hasMethodCall('addImprover'));
 
         $calls = $definition->getMethodCalls();
-        $this->assertEquals('hackernews', $calls[0][1][1]);
+        $this->assertSame('hackernews', $calls[0][1][1]);
     }
 
     protected function process(ContainerBuilder $container)

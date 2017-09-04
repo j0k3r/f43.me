@@ -40,8 +40,8 @@ class DefaultImproverTest extends \PHPUnit_Framework_TestCase
         $client->getEmitter()->attach($mock);
 
         $default = new DefaultImprover($client);
-        $this->assertEquals($expected, $default->updateUrl($url));
-        $this->assertEquals('', $default->updateContent(''));
+        $this->assertSame($expected, $default->updateUrl($url));
+        $this->assertSame('', $default->updateContent(''));
     }
 
     public function testUpdateUrlFail()
@@ -55,6 +55,6 @@ class DefaultImproverTest extends \PHPUnit_Framework_TestCase
         $client->getEmitter()->attach($mock);
 
         $default = new DefaultImprover($client);
-        $this->assertEquals('http://0.0.0.0/content?not-changed', $default->updateUrl('http://0.0.0.0/content'));
+        $this->assertSame('http://0.0.0.0/content?not-changed', $default->updateUrl('http://0.0.0.0/content'));
     }
 }

@@ -39,7 +39,7 @@ class ImgurTest extends \PHPUnit_Framework_TestCase
             ->getMock();
 
         $imgur = new Imgur($imgurClient);
-        $this->assertEquals($expected, $imgur->match($url));
+        $this->assertSame($expected, $imgur->match($url));
     }
 
     public function testContentImage()
@@ -88,7 +88,7 @@ class ImgurTest extends \PHPUnit_Framework_TestCase
         $imgur = new Imgur($imgurClient);
         $imgur->match('http://imgur.com/zNUC9TA');
 
-        $this->assertEquals('<div><img src="http://i.imgur.com/zNUC9TA.gif" /></div>', $imgur->getContent());
+        $this->assertSame('<div><img src="http://i.imgur.com/zNUC9TA.gif" /></div>', $imgur->getContent());
     }
 
     public function testContentAlbum()
@@ -178,7 +178,7 @@ class ImgurTest extends \PHPUnit_Framework_TestCase
         $imgur = new Imgur($imgurClient);
         $imgur->match('http://imgur.com/a/dLaMy');
 
-        $this->assertEquals('<h2>Building the Spruce Moose</h2><p></p><div><p> – Here\'s the finished product in Utah- State no. 3</p><img src="http://i.imgur.com/nrKAg6T.jpg" /></div><div><p> – Here she is. A 1986 Chevy Bluebird school bus...was an exciting day picking her up!</p><img src="http://i.imgur.com/HdcEO2X.jpg" /></div>', $imgur->getContent());
+        $this->assertSame('<h2>Building the Spruce Moose</h2><p></p><div><p> – Here\'s the finished product in Utah- State no. 3</p><img src="http://i.imgur.com/nrKAg6T.jpg" /></div><div><p> – Here she is. A 1986 Chevy Bluebird school bus...was an exciting day picking her up!</p><img src="http://i.imgur.com/HdcEO2X.jpg" /></div>', $imgur->getContent());
     }
 
     public function testNoHashNoType()

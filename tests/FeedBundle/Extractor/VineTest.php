@@ -29,7 +29,7 @@ class VineTest extends \PHPUnit_Framework_TestCase
     public function testMatch($url, $expected)
     {
         $vine = new Vine();
-        $this->assertEquals($expected, $vine->match($url));
+        $this->assertSame($expected, $vine->match($url));
     }
 
     public function testContent()
@@ -57,7 +57,7 @@ class VineTest extends \PHPUnit_Framework_TestCase
         $vine->match('https://vine.co/v/e7V1hLdF1bP');
 
         // consecutive calls
-        $this->assertEquals('<div><h2>my title</h2><p><img src="http://0.0.0.0/img.jpg"></p><iframe/></div>', $vine->getContent());
+        $this->assertSame('<div><h2>my title</h2><p><img src="http://0.0.0.0/img.jpg"></p><iframe/></div>', $vine->getContent());
         // this one will got an empty array
         $this->assertEmpty($vine->getContent());
         // this one will catch an exception

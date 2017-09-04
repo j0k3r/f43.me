@@ -7,6 +7,81 @@ use Api43\FeedBundle\Parser\Internal;
 
 class ExtractorTest extends \PHPUnit_Framework_TestCase
 {
+    public function testWithEmptyContent()
+    {
+        $contentExtractor = $this->getContentExtrator();
+
+        $this->graby->expects($this->any())
+            ->method('fetchContent')
+            ->willReturn(['html' => false]);
+
+        $contentExtractor->parseContent('http://0.0.0.0', 'default content');
+
+        $this->assertSame('default content', $contentExtractor->content);
+    }
+
+    public function testWithException()
+    {
+        $contentExtractor = $this->getContentExtrator();
+
+        $this->graby->expects($this->any())
+            ->method('fetchContent')
+            ->will($this->throwException(new \Exception()));
+
+        $contentExtractor->parseContent('http://foo.bar.nowhere/test.html', 'default content');
+
+        $this->assertSame('http://foo.bar.nowhere/test.html', $contentExtractor->url);
+        $this->assertSame('default content', $contentExtractor->content);
+    }
+
+    public function testWithCustomParser()
+    {
+        $contentExtractor = $this->getContentExtrator(true);
+
+        $this->graby->expects($this->any())
+            ->method('fetchContent')
+            ->willReturn(['html' => false]);
+
+        $contentExtractor->parseContent('http://0.0.0.0', 'default content');
+
+        $this->assertSame('default content', $contentExtractor->content);
+    }
+
+    public function testWithCustomExtractor()
+    {
+        $contentExtractor = $this->getContentExtrator(false, true);
+
+        $this->graby->expects($this->any())
+            ->method('fetchContent')
+            ->willReturn(['html' => false]);
+
+        $contentExtractor->parseContent('http://0.0.0.0', 'default content');
+
+        $this->assertSame('<html/>', $contentExtractor->content);
+    }
+
+    /**
+     * @expectedException \InvalidArgumentException
+     * @expectedExceptionMessage The given parser "oops" does not exists.
+     */
+    public function testInvalidParser()
+    {
+        $extractorChain = $this->getMockBuilder('Api43\FeedBundle\Extractor\ExtractorChain')
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $improverChain = $this->getMockBuilder('Api43\FeedBundle\Improver\ImproverChain')
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $converterChain = $this->getMockBuilder('Api43\FeedBundle\Converter\ConverterChain')
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $contentExtractor = new Extractor($extractorChain, $improverChain, $converterChain, new \Api43\FeedBundle\Parser\ParserChain());
+        $contentExtractor->init('oops');
+    }
+
     protected function getContentExtrator($customParser = false, $customExtractor = false)
     {
         $feed = $this->getMockBuilder('Api43\FeedBundle\Document\Feed')
@@ -97,80 +172,5 @@ class ExtractorTest extends \PHPUnit_Framework_TestCase
         }
 
         return $contentExtractor;
-    }
-
-    public function testWithEmptyContent()
-    {
-        $contentExtractor = $this->getContentExtrator();
-
-        $this->graby->expects($this->any())
-            ->method('fetchContent')
-            ->willReturn(['html' => false]);
-
-        $contentExtractor->parseContent('http://0.0.0.0', 'default content');
-
-        $this->assertEquals('default content', $contentExtractor->content);
-    }
-
-    public function testWithException()
-    {
-        $contentExtractor = $this->getContentExtrator();
-
-        $this->graby->expects($this->any())
-            ->method('fetchContent')
-            ->will($this->throwException(new \Exception()));
-
-        $contentExtractor->parseContent('http://foo.bar.nowhere/test.html', 'default content');
-
-        $this->assertEquals('http://foo.bar.nowhere/test.html', $contentExtractor->url);
-        $this->assertEquals('default content', $contentExtractor->content);
-    }
-
-    public function testWithCustomParser()
-    {
-        $contentExtractor = $this->getContentExtrator(true);
-
-        $this->graby->expects($this->any())
-            ->method('fetchContent')
-            ->willReturn(['html' => false]);
-
-        $contentExtractor->parseContent('http://0.0.0.0', 'default content');
-
-        $this->assertEquals('default content', $contentExtractor->content);
-    }
-
-    public function testWithCustomExtractor()
-    {
-        $contentExtractor = $this->getContentExtrator(false, true);
-
-        $this->graby->expects($this->any())
-            ->method('fetchContent')
-            ->willReturn(['html' => false]);
-
-        $contentExtractor->parseContent('http://0.0.0.0', 'default content');
-
-        $this->assertEquals('<html/>', $contentExtractor->content);
-    }
-
-    /**
-     * @expectedException \InvalidArgumentException
-     * @expectedExceptionMessage The given parser "oops" does not exists.
-     */
-    public function testInvalidParser()
-    {
-        $extractorChain = $this->getMockBuilder('Api43\FeedBundle\Extractor\ExtractorChain')
-            ->disableOriginalConstructor()
-            ->getMock();
-
-        $improverChain = $this->getMockBuilder('Api43\FeedBundle\Improver\ImproverChain')
-            ->disableOriginalConstructor()
-            ->getMock();
-
-        $converterChain = $this->getMockBuilder('Api43\FeedBundle\Converter\ConverterChain')
-            ->disableOriginalConstructor()
-            ->getMock();
-
-        $contentExtractor = new Extractor($extractorChain, $improverChain, $converterChain, new \Api43\FeedBundle\Parser\ParserChain());
-        $contentExtractor->init('oops');
     }
 }

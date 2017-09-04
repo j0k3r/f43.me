@@ -9,15 +9,15 @@ class FeedLogControllerTest extends FeedWebTestCase
         $client = static::createClient();
 
         $client->request('GET', '/feed/reddit/logs');
-        $this->assertEquals(302, $client->getResponse()->getStatusCode());
+        $this->assertSame(302, $client->getResponse()->getStatusCode());
         $this->assertTrue($client->getResponse()->isRedirect('http://localhost/login'));
 
         $client->request('POST', '/feed/reddit/logs/deleteAll');
-        $this->assertEquals(302, $client->getResponse()->getStatusCode());
+        $this->assertSame(302, $client->getResponse()->getStatusCode());
         $this->assertTrue($client->getResponse()->isRedirect('http://localhost/login'));
 
         $client->request('GET', '/logs');
-        $this->assertEquals(302, $client->getResponse()->getStatusCode());
+        $this->assertSame(302, $client->getResponse()->getStatusCode());
         $this->assertTrue($client->getResponse()->isRedirect('http://localhost/login'));
     }
 
@@ -27,9 +27,9 @@ class FeedLogControllerTest extends FeedWebTestCase
 
         $crawler = $client->request('GET', '/logs');
 
-        $this->assertEquals(200, $client->getResponse()->getStatusCode());
-        $this->assertEquals(1, $crawler->filter('h1')->count());
-        $this->assertEquals(1, $crawler->filter('h2.title')->count());
+        $this->assertSame(200, $client->getResponse()->getStatusCode());
+        $this->assertSame(1, $crawler->filter('h1')->count());
+        $this->assertSame(1, $crawler->filter('h2.title')->count());
         $this->assertGreaterThan(0, $crawler->filter('table.table-feedlogs tbody tr td img.favicon')->count());
         $this->assertGreaterThan(0, $items = $crawler->filter('table.table-feedlogs tr td.items-count')->extract(['_text']));
 
@@ -43,7 +43,7 @@ class FeedLogControllerTest extends FeedWebTestCase
         $client = static::getAuthorizedClient();
 
         $client->request('GET', '/feed/toto/logs');
-        $this->assertEquals(404, $client->getResponse()->getStatusCode());
+        $this->assertSame(404, $client->getResponse()->getStatusCode());
         $this->assertContains('Feed object not found', $client->getResponse()->getContent());
     }
 
@@ -53,7 +53,7 @@ class FeedLogControllerTest extends FeedWebTestCase
 
         $crawler = $client->request('GET', '/feed/reddit/logs');
 
-        $this->assertEquals(200, $client->getResponse()->getStatusCode());
+        $this->assertSame(200, $client->getResponse()->getStatusCode());
         $this->assertCount(1, $crawler->filter('h2.title'));
         $this->assertCount(2, $crawler->filter('a.secondary.button.radius.small'));
         $this->assertCount(1, $crawler->filter('button.alert.button.radius.small'));
@@ -70,7 +70,7 @@ class FeedLogControllerTest extends FeedWebTestCase
 
         $client->submit($form);
 
-        $this->assertEquals(302, $client->getResponse()->getStatusCode());
+        $this->assertSame(302, $client->getResponse()->getStatusCode());
         $this->assertContains('reddit', $client->getResponse()->headers->get('location'));
 
         $crawler = $client->followRedirect();
@@ -84,7 +84,7 @@ class FeedLogControllerTest extends FeedWebTestCase
 
         $client->request('POST', '/feed/reddit/logs/deleteAll');
 
-        $this->assertEquals(302, $client->getResponse()->getStatusCode());
+        $this->assertSame(302, $client->getResponse()->getStatusCode());
         $this->assertContains('reddit', $client->getResponse()->headers->get('location'));
     }
 
@@ -94,7 +94,7 @@ class FeedLogControllerTest extends FeedWebTestCase
 
         $client->request('POST', '/feed/nawak/logs/deleteAll');
 
-        $this->assertEquals(404, $client->getResponse()->getStatusCode());
+        $this->assertSame(404, $client->getResponse()->getStatusCode());
         $this->assertContains('Feed object not found', $client->getResponse()->getContent());
     }
 }

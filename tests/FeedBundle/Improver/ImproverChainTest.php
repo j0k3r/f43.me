@@ -19,7 +19,7 @@ class ImproverChainTest extends \PHPUnit_Framework_TestCase
         $improverChain = new ImproverChain();
         $improverChain->addImprover($improver, 'alias');
 
-        $this->assertEquals($improver, $improverChain->match('host'));
+        $this->assertSame($improver, $improverChain->match('host'));
     }
 
     public function testMatchFalse()

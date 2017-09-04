@@ -70,31 +70,31 @@ services:
     content_extractor:
         class: Api43\FeedBundle\Content\Extractor
         arguments:
-            extractor: "@feed.extractor.chain"
-            improver: "@feed.improver.chain"
-            converter: "@feed.converter.chain"
-            parser: "@feed.parser.chain"
+            - "@feed.extractor.chain"
+            - "@feed.improver.chain"
+            - "@feed.converter.chain"
+            - "@feed.parser.chain"
 
     simple_pie_proxy:
         class: Api43\FeedBundle\Xml\SimplePieProxy
         arguments:
-            cache: "%kernel.root_dir%/cache/simplepie/"
-            item_limit: 20
-            enable_cache: false
+            - "%kernel.root_dir%/cache/simplepie/"
+            - 20
+            - false
 
     xml_render:
         class: Api43\FeedBundle\Xml\Render
         arguments:
-            generator: "%domain%"
-            doctrine: "@doctrine.odm.mongodb.document_manager"
-            router: "@router"
+            - "%domain%"
+            - "@doctrine.odm.mongodb.document_manager"
+            - "@router"
 
     feeditem.ping_hub:
         class: Api43\FeedBundle\EventListener\FeedItemSubscriber
         arguments:
-            hub: "http://pubsubhubbub.appspot.com"
-            router: "@router"
-            client: "@guzzle.client"
+            - "http://pubsubhubbub.appspot.com"
+            - "@router"
+            - "@guzzle.client"
         tags:
             - { name: kernel.event_listener, event: api43_feed.after_item_cached, method: pingHub }
 

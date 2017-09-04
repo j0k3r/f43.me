@@ -19,7 +19,6 @@ framework:
         version_format: '%%s?version=%%s'
         base_path: ~
     default_locale:  "%locale%"
-    trusted_proxies: ~
     session:
         name: f43me
         save_path: "%kernel.root_dir%/../var/sessions/%kernel.environment%"

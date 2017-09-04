@@ -78,6 +78,36 @@ abstract class Formatter
     abstract public function initialize();
 
     /**
+     * This method render the given feed transforming the DOMDocument to XML.
+     *
+     * @return string
+     */
+    public function render()
+    {
+        $this->dom->formatOutput = true;
+
+        return $this->dom->saveXml();
+    }
+
+    /**
+     * Add an entity item to the feed.
+     *
+     * @param XDOMElement $root The root (feed) DOM element
+     * @param FeedItem    $item An entity object
+     * @param string      $name Could be "entry", for atom or "item" for rss
+     */
+    public function addItem(XDOMElement $root, FeedItem $item, $name)
+    {
+        $node = $this->dom->createElement($name);
+        $node = $root->appendChild($node);
+
+        foreach ($this->fields as $field) {
+            $element = $this->format($field, $item);
+            $node->appendChild($element);
+        }
+    }
+
+    /**
      * Format field.
      *
      * @param array    $field A field instance
@@ -113,35 +143,5 @@ abstract class Formatter
         }
 
         return $element;
-    }
-
-    /**
-     * This method render the given feed transforming the DOMDocument to XML.
-     *
-     * @return string
-     */
-    public function render()
-    {
-        $this->dom->formatOutput = true;
-
-        return $this->dom->saveXml();
-    }
-
-    /**
-     * Add an entity item to the feed.
-     *
-     * @param XDOMElement $root The root (feed) DOM element
-     * @param FeedItem    $item An entity object
-     * @param string      $name Could be "entry", for atom or "item" for rss
-     */
-    public function addItem(XDOMElement $root, FeedItem $item, $name)
-    {
-        $node = $this->dom->createElement($name);
-        $node = $root->appendChild($node);
-
-        foreach ($this->fields as $field) {
-            $element = $this->format($field, $item);
-            $node->appendChild($element);
-        }
     }
 }
