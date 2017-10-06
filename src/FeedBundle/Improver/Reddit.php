@@ -27,7 +27,7 @@ class Reddit extends DefaultImprover
     {
         // we extract the source of the reddit post
         preg_match('/(.*)\<a href\=\"(.*)\"\>\[link\]\<\/a\>/i', $this->itemContent, $matches);
-        if (count($matches) !== 3) {
+        if (3 !== count($matches)) {
             return $url;
         }
 

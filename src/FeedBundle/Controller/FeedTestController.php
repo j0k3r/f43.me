@@ -39,7 +39,7 @@ class FeedTestController extends Controller
                 if ($host) {
                     // remove www. from host because graby check for domain (without www.) first
                     $host = strtolower($host);
-                    if (stripos($host, 'www.') === 0) {
+                    if (0 === stripos($host, 'www.')) {
                         $host = substr($host, 4);
                     }
 
