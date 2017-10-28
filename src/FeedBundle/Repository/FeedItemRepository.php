@@ -98,7 +98,6 @@ class FeedItemRepository extends DocumentRepository
     {
         return $this->createQueryBuilder()
             ->find()
-            ->eagerCursor(true)
             ->field('feed.id')->equals($feedId)
             ->sort('published_at', 'desc')
             ->skip((int) $skip)

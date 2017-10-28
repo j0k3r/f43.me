@@ -22,7 +22,6 @@ class FeedLogRepository extends DocumentRepository
     public function findAllOrderedById($limit = null)
     {
         $q = $this->createQueryBuilder()
-            ->eagerCursor(true)
             ->sort('id', 'DESC');
 
         if (null !== $limit) {
