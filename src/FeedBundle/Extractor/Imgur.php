@@ -87,7 +87,12 @@ class Imgur extends AbstractExtractor
                 $info = '';
             }
 
-            $content .= '<div>' . $info . '<img src="' . $image['link'] . '" /></div>';
+            // some gifv hasn't a gif alternative
+            if (strpos($image['link'], '.mp4')) {
+                $content .= '<video width="' . $image['width'] . '" height="' . $image['height'] . '" controls="controls"><source src="' . $image['link'] . '" type="video/mp4" /></video>';
+            } else {
+                $content .= '<div>' . $info . '<img src="' . $image['link'] . '" /></div>';
+            }
         }
 
         return $content;
