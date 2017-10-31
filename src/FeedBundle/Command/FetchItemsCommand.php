@@ -43,7 +43,7 @@ class FetchItemsCommand extends ContainerAwareCommand
 
         // retrieve feed to work on
         if ($slug = $input->getOption('slug')) {
-            $feed = $feedRepo->findOneBySlug($slug);
+            $feed = $feedRepo->findOneBy(['slug' => $slug]);
             if (!$feed) {
                 return $output->writeLn('<error>Unable to find Feed document:</error> <comment>' . $slug . '</comment>');
             }

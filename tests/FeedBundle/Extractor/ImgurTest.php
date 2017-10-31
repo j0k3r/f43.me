@@ -91,6 +91,54 @@ class ImgurTest extends \PHPUnit_Framework_TestCase
         $this->assertSame('<div><img src="http://i.imgur.com/zNUC9TA.gif" /></div>', $imgur->getContent());
     }
 
+    public function testContentMp4()
+    {
+        $imgurClient = $this->getMockBuilder('Imgur\Client')
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $apiAlbumOrImage = $this->getMockBuilder('Imgur\Api\AlbumOrImage')
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $apiAlbumOrImage->expects($this->any())
+            ->method('find')
+            ->will($this->returnValue([
+                'id' => '1S10bkI',
+                'title' => null,
+                'description' => null,
+                'datetime' => 1509133400,
+                'type' => 'video/mp4',
+                'animated' => true,
+                'width' => 720,
+                'height' => 898,
+                'size' => 2131051,
+                'views' => 4413346,
+                'bandwidth' => 9405065406646,
+                'vote' => null,
+                'favorite' => false,
+                'nsfw' => false,
+                'section' => 'gifs',
+                'account_url' => null,
+                'account_id' => null,
+                'is_ad' => false,
+                'in_gallery' => true,
+                'gifv' => 'https://i.imgur.com/1S10bkI.gifv',
+                'mp4' => 'https://i.imgur.com/1S10bkI.mp4',
+                'mp4_size' => 2131051,
+                'link' => 'https://i.imgur.com/1S10bkI.mp4',
+            ]));
+
+        $imgurClient->expects($this->any())
+            ->method('api')
+            ->will($this->returnValue($apiAlbumOrImage));
+
+        $imgur = new Imgur($imgurClient);
+        $imgur->match('http://imgur.com/1S10bkI');
+
+        $this->assertSame('<video width="720" height="898" controls="controls"><source src="https://i.imgur.com/1S10bkI.mp4" type="video/mp4" /></video>', $imgur->getContent());
+    }
+
     public function testContentAlbum()
     {
         $imgurClient = $this->getMockBuilder('Imgur\Client')

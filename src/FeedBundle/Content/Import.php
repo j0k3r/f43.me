@@ -147,7 +147,7 @@ class Import
 
         // update nb items for each udpated feed
         foreach ($feedUpdated as $slug) {
-            $feed = $feedRepo->findOneByslug($slug);
+            $feed = $feedRepo->findOneBy(['slug' => $slug]);
 
             $nbItems = $feedItemRepo->countByFeedId($feed->getId());
 

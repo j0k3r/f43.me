@@ -114,8 +114,7 @@ class ImportTest extends \PHPUnit_Framework_TestCase
             ->getMock();
 
         $feedRepo->expects($this->once())
-            // simulate "findOneByslug"
-            ->method('__call')
+            ->method('findOneBy')
             ->willReturn($feed);
 
         $feedItemRepo = $this->getMockBuilder('Api43\FeedBundle\Repository\FeedItemRepository')
@@ -236,8 +235,7 @@ class ImportTest extends \PHPUnit_Framework_TestCase
             ->getMock();
 
         $feedRepo->expects($this->once())
-            // simulate "findOneByslug"
-            ->method('__call')
+            ->method('findOneBy')
             ->willReturn($feed);
 
         $feedItemRepo = $this->getMockBuilder('Api43\FeedBundle\Repository\FeedItemRepository')

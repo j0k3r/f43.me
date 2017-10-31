@@ -22,7 +22,6 @@ class FeedRepository extends DocumentRepository
     public function findAllOrderedByDate($limit = null)
     {
         $q = $this->createQueryBuilder()
-            ->eagerCursor(true)
             ->sort('updated_at', 'DESC');
 
         if (null !== $limit) {
@@ -40,7 +39,6 @@ class FeedRepository extends DocumentRepository
     public function findForPublic()
     {
         $q = $this->createQueryBuilder()
-            ->eagerCursor(true)
             ->field('is_private')->equals(false)
             ->sort('last_item_cached_at', 'DESC');
 
@@ -67,8 +65,7 @@ class FeedRepository extends DocumentRepository
             $q->notIn($ids);
         }
 
-        return $q->eagerCursor(true)
-            ->getQuery()
+        return $q->getQuery()
             ->execute();
     }
 }
