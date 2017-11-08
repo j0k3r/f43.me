@@ -17,6 +17,8 @@ monolog:
             type: fingers_crossed
             action_level: error
             handler: grouped_main
+            excluded_404s:
+                - ^/
         grouped_main:
             type: group
             members: [streamed_main, sentry]
