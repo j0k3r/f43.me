@@ -187,6 +187,14 @@ services:
         tags:
             -  { name: feed.extractor, alias: redditvideo }
 
+    feed.extractor.redditpost:
+        class: Api43\FeedBundle\Extractor\RedditPost
+        calls:
+            - [ setLogger, [ "@logger" ]]
+            - [ setClient, [ "@guzzle.client" ]]
+        tags:
+            -  { name: feed.extractor, alias: redditpost }
+
     feed.extractor.giphy:
         class: Api43\FeedBundle\Extractor\Giphy
         calls:
