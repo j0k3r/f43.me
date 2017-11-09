@@ -2,11 +2,11 @@
 
 namespace Tests\FeedBundle\Extractor;
 
-use Api43\FeedBundle\Extractor\Reddituploads;
+use Api43\FeedBundle\Extractor\RedditImage;
 use Monolog\Handler\TestHandler;
 use Monolog\Logger;
 
-class ReddituploadsTest extends \PHPUnit_Framework_TestCase
+class RedditImageTest extends \PHPUnit_Framework_TestCase
 {
     public function dataMatch()
     {
@@ -29,23 +29,23 @@ class ReddituploadsTest extends \PHPUnit_Framework_TestCase
      */
     public function testMatch($url, $expected)
     {
-        $reddituploads = new Reddituploads();
-        $this->assertSame($expected, $reddituploads->match($url));
+        $redditImage = new RedditImage();
+        $this->assertSame($expected, $redditImage->match($url));
     }
 
     public function testContent()
     {
-        $reddituploads = new Reddituploads();
+        $redditImage = new RedditImage();
 
         $logHandler = new TestHandler();
         $logger = new Logger('test', [$logHandler]);
-        $reddituploads->setLogger($logger);
+        $redditImage->setLogger($logger);
 
         // first test fail because we didn't match an url, so reddituploadsUrl isn't defined
-        $this->assertEmpty($reddituploads->getContent());
+        $this->assertEmpty($redditImage->getContent());
 
-        $reddituploads->match('https://i.reddituploads.com/21fc8e0b2984423e84fd59fbc58024c8?fit=max&h=1536&w=1536&s=9e3c0fa6d46a642c42eace91833cad93');
+        $redditImage->match('https://i.reddituploads.com/21fc8e0b2984423e84fd59fbc58024c8?fit=max&h=1536&w=1536&s=9e3c0fa6d46a642c42eace91833cad93');
 
-        $this->assertSame('<div><p><img src="https://i.reddituploads.com/21fc8e0b2984423e84fd59fbc58024c8?fit=max&h=1536&w=1536&s=9e3c0fa6d46a642c42eace91833cad93"></p></div>', $reddituploads->getContent());
+        $this->assertSame('<div><p><img src="https://i.reddituploads.com/21fc8e0b2984423e84fd59fbc58024c8?fit=max&h=1536&w=1536&s=9e3c0fa6d46a642c42eace91833cad93"></p></div>', $redditImage->getContent());
     }
 }

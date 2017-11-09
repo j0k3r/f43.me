@@ -2,9 +2,9 @@
 
 namespace Api43\FeedBundle\Extractor;
 
-class Reddituploads extends AbstractExtractor
+class RedditImage extends AbstractExtractor
 {
-    protected $reddituploadsUrl = null;
+    protected $redditImageUrl = null;
 
     /**
      * {@inheritdoc}
@@ -22,14 +22,14 @@ class Reddituploads extends AbstractExtractor
             return false;
         }
 
-        // match reddituploads id & redd.it id
+        // match i.reddituploads id & i.redd.it id
         preg_match('/\/([a-z0-9]{32})|([a-z0-9]{12}\.)/', $path, $matches);
 
         if (!isset($matches[1])) {
             return false;
         }
 
-        $this->reddituploadsUrl = $url;
+        $this->redditImageUrl = $url;
 
         return true;
     }
@@ -39,10 +39,10 @@ class Reddituploads extends AbstractExtractor
      */
     public function getContent()
     {
-        if (!$this->reddituploadsUrl) {
+        if (!$this->redditImageUrl) {
             return '';
         }
 
-        return '<div><p><img src="' . $this->reddituploadsUrl . '"></p></div>';
+        return '<div><p><img src="' . $this->redditImageUrl . '"></p></div>';
     }
 }
