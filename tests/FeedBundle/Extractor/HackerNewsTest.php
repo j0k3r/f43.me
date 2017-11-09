@@ -58,7 +58,7 @@ class HackerNewsTest extends \PHPUnit_Framework_TestCase
 
         $hn = new HackerNews();
         $hn->setClient($client);
-        $this->assertSame(false, $hn->match('http://news.ycombinator.com/item?id=10074364'));
+        $this->assertFalse($hn->match('http://news.ycombinator.com/item?id=10074364'));
     }
 
     public function testContent()

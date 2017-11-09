@@ -21,6 +21,7 @@ class PeriscopeTest extends \PHPUnit_Framework_TestCase
             ['https://www.periscope.tv/NASA/1ynJOVNmoVkGR', true],
             ['http://www.periscope.tv/NASA/1ynJOVNmoVkGR', true],
             ['http://periscope.tv/NASA/1ynJOVNmoVkGR', true],
+            ['http://periscope.tv/NASA/dsq', false],
             ['https://goog.co', false],
             ['http://user@:80', false],
         ];
