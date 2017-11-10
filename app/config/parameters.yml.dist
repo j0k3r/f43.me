@@ -45,6 +45,8 @@ parameters:
     guzzle.options:
         defaults:
             timeout: 10
+            headers:
+                User-Agent: f43.me/1.0
 
     # https://apps.twitter.com/
     twitter.consumer_key: xxx
