@@ -172,12 +172,28 @@ services:
         tags:
             -  { name: feed.extractor, alias: ifttt }
 
-    feed.extractor.reddituploads:
-        class: Api43\FeedBundle\Extractor\Reddituploads
+    feed.extractor.redditimage:
+        class: Api43\FeedBundle\Extractor\RedditImage
         calls:
             - [ setLogger, [ "@logger" ]]
         tags:
-            -  { name: feed.extractor, alias: reddituploads }
+            -  { name: feed.extractor, alias: redditimage }
+
+    feed.extractor.redditvideo:
+        class: Api43\FeedBundle\Extractor\RedditVideo
+        calls:
+            - [ setLogger, [ "@logger" ]]
+            - [ setClient, [ "@guzzle.client" ]]
+        tags:
+            -  { name: feed.extractor, alias: redditvideo }
+
+    feed.extractor.redditpost:
+        class: Api43\FeedBundle\Extractor\RedditPost
+        calls:
+            - [ setLogger, [ "@logger" ]]
+            - [ setClient, [ "@guzzle.client" ]]
+        tags:
+            -  { name: feed.extractor, alias: redditpost }
 
     feed.extractor.giphy:
         class: Api43\FeedBundle\Extractor\Giphy
