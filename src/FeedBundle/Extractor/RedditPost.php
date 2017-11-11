@@ -24,8 +24,10 @@ class RedditPost extends AbstractExtractor
             return false;
         }
 
+        $url = 'https://' . $host . $path . '/.json';
+        $url = str_replace('//.json', '/.json', $url);
+
         try {
-            $url = str_replace('//.json', '/.json', $url . '/.json');
             $data = $this->client->get($url)->json();
         } catch (RequestException $e) {
             return false;
@@ -53,6 +55,6 @@ class RedditPost extends AbstractExtractor
 
         return '<div><h2>' . $this->redditPostData['title'] . '</h2>' .
             '<ul><li>Score: ' . $this->redditPostData['score'] . '</li><li>Comments: ' . $this->redditPostData['num_comments'] . '</li><li>Flair: ' . $this->redditPostData['link_flair_text'] . '</li><li>Author: ' . $this->redditPostData['author'] . '</li></ul>' .
-            '<p>' . $this->redditPostData['selftext'] . '</p></div>';
+            '</div>' . htmlspecialchars_decode($this->redditPostData['selftext_html']);
     }
 }

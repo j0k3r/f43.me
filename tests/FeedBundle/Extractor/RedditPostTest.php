@@ -88,7 +88,7 @@ class RedditPostTest extends \PHPUnit_Framework_TestCase
                 'domain' => 'self.jailbreak',
                 'is_self' => true,
                 'title' => 'the title',
-                'selftext' => 'this is the text',
+                'selftext_html' => '&lt;div class="md"&gt;&lt;p&gt;test&lt;/p&gt;&lt;/div&gt;',
                 'score' => 100,
                 'author' => 'bob',
                 'num_comments' => 100,
@@ -117,6 +117,6 @@ class RedditPostTest extends \PHPUnit_Framework_TestCase
 
         $redditPost->match('https://www.reddit.com/r/jailbreak/comments/7bnvuq/request_tweak_that_allows_more_than_140/');
 
-        $this->assertSame('<div><h2>the title</h2><ul><li>Score: 100</li><li>Comments: 100</li><li>Flair: GIFS</li><li>Author: bob</li></ul><p>this is the text</p></div>', $redditPost->getContent());
+        $this->assertSame('<div><h2>the title</h2><ul><li>Score: 100</li><li>Comments: 100</li><li>Flair: GIFS</li><li>Author: bob</li></ul></div><div class="md"><p>test</p></div>', $redditPost->getContent());
     }
 }

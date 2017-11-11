@@ -24,8 +24,10 @@ class RedditVideo extends AbstractExtractor
             return false;
         }
 
+        $url = 'https://' . $host . $path . '/.json';
+        $url = str_replace('//.json', '/.json', $url);
+
         try {
-            $url = str_replace('//.json', '/.json', $url . '/.json');
             $data = $this->client->get($url)->json();
         } catch (RequestException $e) {
             return false;
