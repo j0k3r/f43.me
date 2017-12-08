@@ -40,7 +40,7 @@ install:
 before_script:
     - if [ -n "$GH_TOKEN" ]; then composer config github-oauth.github.com ${GH_TOKEN}; fi;
     - yes '' | pecl -q install -f $MONGO_DRIVER
-    - if [[ ${TRAVIS_PHP_VERSION:0:2} == "7." || "$TRAVIS_PHP_VERSION" = "nightly" ]]; then composer require "alcaeus/mongo-php-adapter=^1.0.0" --ignore-platform-reqs; fi
+    - if [[ ${TRAVIS_PHP_VERSION:0:2} == "7." || "$TRAVIS_PHP_VERSION" = "nightly" ]]; then composer config "platform.ext-mongo" "1.6.16" && composer require alcaeus/mongo-php-adapter; fi
     - if [ $COVERAGE = run ]; then PHPUNIT_FLAGS="--coverage-clover build/logs/clover.xml"; fi;
 
 script:
