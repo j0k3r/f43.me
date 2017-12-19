@@ -35,7 +35,7 @@
         "j0k3r/php-imgur-api-client": "~2.0",
         "guzzlehttp/guzzle": "~5.0",
         "mnsami/composer-custom-directory-installer": "~1.0",
-        "ricardoper/twitteroauth": "~1.0",
+        "ricardoper/twitteroauth": "~2.1",
         "sentry/sentry-symfony": "^0.7",
         "ekino/newrelic-bundle": "^1.3"
     },
