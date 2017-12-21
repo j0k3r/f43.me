@@ -1,0 +1,102 @@
+version: "3.1"
+services:
+    # Mongo
+    db:
+      image: mvertes/alpine-mongo
+      container_name: f43-me-db
+      ports:
+        - "27017:27017"
+
+    # This container is responsible of building the frontend
+    frontend-build:
+      build: docker/frontend-build
+      container_name: f43-me-frontend-build
+      working_dir: /application
+      volumes:
+          - .:/application
+      command: ["docker/frontend-build/start.sh"]
+
+    # This container is responsible of initialising the backend code - dies after it's finished doing its thing
+    backend-build:
+      build: docker/php-fpm/71
+      depends_on: [db]
+      container_name: f43-me-backend-build
+      working_dir: /application
+      volumes:
+          - .:/application
+      command: ["docker/backend-build/build.sh"]
+
+    # PHP 7.2 setup - NOTE: no xdebug at this time available for 7.2
+    webserver-72:
+      image: nginx:alpine
+      depends_on: [frontend-build, php-fpm-72]
+      container_name: f43-me-webserver-72
+      working_dir: /application
+      volumes:
+          - .:/application
+          - ./docker/nginx/nginx.conf:/etc/nginx/conf.d/default.conf
+      ports:
+       - "8102:80"
+      links:
+       - php-fpm-72:php-fpm
+
+    php-fpm-72:
+      build: docker/php-fpm/72
+      depends_on: [backend-build]
+      container_name: f43-me-php-fpm-72
+      working_dir: /application
+      environment:
+        - SYMFONY_ENV=dev
+      volumes:
+        - .:/application
+        - ./docker/php-fpm/php-ini-overrides.ini:/etc/php/7.2/fpm/conf.d/99-overrides.ini
+
+    # PHP 7.1 setup
+    webserver-71:
+      image: nginx:alpine
+      depends_on: [frontend-build, php-fpm-71]
+      container_name: f43-me-webserver-71
+      working_dir: /application
+      volumes:
+          - .:/application
+          - ./docker/nginx/nginx.conf:/etc/nginx/conf.d/default.conf
+      ports:
+       - "8101:80"
+      links:
+       - php-fpm-71:php-fpm
+
+    php-fpm-71:
+      build: docker/php-fpm/71
+      depends_on: [backend-build]
+      container_name: f43-me-php-fpm-71
+      working_dir: /application
+      environment:
+        - SYMFONY_ENV=dev
+      volumes:
+        - .:/application
+        - ./docker/php-fpm/php-ini-overrides.ini:/etc/php/7.1/fpm/conf.d/99-overrides.ini
+
+    # PHP 7.0 setup
+    webserver-70:
+      image: nginx:alpine
+      depends_on: [frontend-build, php-fpm-70]
+      container_name: f43-me-webserver-70
+      working_dir: /application
+      volumes:
+          - .:/application
+          - ./docker/nginx/nginx.conf:/etc/nginx/conf.d/default.conf
+      ports:
+       - "8100:80"
+      links:
+       - php-fpm-70:php-fpm
+
+    php-fpm-70:
+      build: docker/php-fpm/70
+      depends_on: [backend-build]
+      container_name: f43-me-php-fpm-70
+      working_dir: /application
+      environment:
+        - SYMFONY_ENV=dev
+      volumes:
+        - .:/application
+        - ./docker/php-fpm/php-ini-overrides.ini:/etc/php/7.0/fpm/conf.d/99-overrides.ini
