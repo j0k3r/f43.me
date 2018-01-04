@@ -4,8 +4,9 @@ namespace Tests\FeedBundle\Improver;
 
 use Api43\FeedBundle\Improver\HackerNews;
 use GuzzleHttp\Client;
+use PHPUnit\Framework\TestCase;
 
-class HackerNewsTest extends \PHPUnit_Framework_TestCase
+class HackerNewsTest extends TestCase
 {
     public function dataMatch()
     {

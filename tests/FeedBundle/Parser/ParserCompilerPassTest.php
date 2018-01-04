@@ -3,9 +3,10 @@
 namespace Tests\FeedBundle\Parser;
 
 use Api43\FeedBundle\Parser\ParserCompilerPass;
+use PHPUnit\Framework\TestCase;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
-class ParserCompilerPassTest extends \PHPUnit_Framework_TestCase
+class ParserCompilerPassTest extends TestCase
 {
     public function testProcessNoDefinition()
     {

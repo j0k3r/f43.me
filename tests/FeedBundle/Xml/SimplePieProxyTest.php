@@ -3,8 +3,9 @@
 namespace Tests\FeedBundle\Xml;
 
 use Api43\FeedBundle\Xml\SimplePieProxy;
+use PHPUnit\Framework\TestCase;
 
-class SimplePieProxyTest extends \PHPUnit_Framework_TestCase
+class SimplePieProxyTest extends TestCase
 {
     protected $cacheDir;
 

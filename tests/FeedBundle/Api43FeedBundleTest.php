@@ -3,9 +3,10 @@
 namespace Tests\FeedBundle;
 
 use Api43\FeedBundle\Api43FeedBundle;
+use PHPUnit\Framework\TestCase;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
-class Api43FeedBundleTest extends \PHPUnit_Framework_TestCase
+class Api43FeedBundleTest extends TestCase
 {
     public function testInitBundle()
     {

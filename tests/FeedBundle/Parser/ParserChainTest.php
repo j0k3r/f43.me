@@ -3,8 +3,9 @@
 namespace Tests\FeedBundle\Parser;
 
 use Api43\FeedBundle\Parser\ParserChain;
+use PHPUnit\Framework\TestCase;
 
-class ParserChainTest extends \PHPUnit_Framework_TestCase
+class ParserChainTest extends TestCase
 {
     public function testParseTrue()
     {

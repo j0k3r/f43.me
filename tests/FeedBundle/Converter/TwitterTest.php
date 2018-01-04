@@ -3,9 +3,10 @@
 namespace Tests\FeedBundle\Converter;
 
 use Api43\FeedBundle\Converter\Twitter;
+use PHPUnit\Framework\TestCase;
 use Psr\Log\NullLogger;
 
-class TwitterTest extends \PHPUnit_Framework_TestCase
+class TwitterTest extends TestCase
 {
     public function dataMatch()
     {

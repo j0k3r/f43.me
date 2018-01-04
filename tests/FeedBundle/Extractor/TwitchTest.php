@@ -9,8 +9,9 @@ use GuzzleHttp\Stream\Stream;
 use GuzzleHttp\Subscriber\Mock;
 use Monolog\Handler\TestHandler;
 use Monolog\Logger;
+use PHPUnit\Framework\TestCase;
 
-class TwitchTest extends \PHPUnit_Framework_TestCase
+class TwitchTest extends TestCase
 {
     public function dataMatch()
     {

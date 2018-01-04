@@ -8,8 +8,9 @@ use GuzzleHttp\Client;
 use GuzzleHttp\Message\Response;
 use GuzzleHttp\Stream\Stream;
 use GuzzleHttp\Subscriber\Mock;
+use PHPUnit\Framework\TestCase;
 
-class ConstraintRssValidatorTest extends \PHPUnit_Framework_TestCase
+class ConstraintRssValidatorTest extends TestCase
 {
     public function testValidatorValid()
     {

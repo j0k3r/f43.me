@@ -3,9 +3,10 @@
 namespace Tests\FeedBundle\Converter;
 
 use Api43\FeedBundle\Converter\ConverterCompilerPass;
+use PHPUnit\Framework\TestCase;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
-class ConverterCompilerPassTest extends \PHPUnit_Framework_TestCase
+class ConverterCompilerPassTest extends TestCase
 {
     public function testProcessNoDefinition()
     {

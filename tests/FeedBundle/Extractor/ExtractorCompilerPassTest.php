@@ -3,9 +3,10 @@
 namespace Tests\FeedBundle\Extractor;
 
 use Api43\FeedBundle\Extractor\ExtractorCompilerPass;
+use PHPUnit\Framework\TestCase;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
-class ExtractorCompilerPassTest extends \PHPUnit_Framework_TestCase
+class ExtractorCompilerPassTest extends TestCase
 {
     public function testProcessNoDefinition()
     {
