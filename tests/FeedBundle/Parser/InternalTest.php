@@ -3,8 +3,9 @@
 namespace Tests\FeedBundle\Parser;
 
 use Api43\FeedBundle\Parser\Internal;
+use PHPUnit\Framework\TestCase;
 
-class InternalTest extends \PHPUnit_Framework_TestCase
+class InternalTest extends TestCase
 {
     public function testParseEmpty()
     {

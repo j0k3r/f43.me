@@ -7,9 +7,10 @@ use Api43\FeedBundle\EventListener\FeedItemSubscriber;
 use GuzzleHttp\Client;
 use GuzzleHttp\Message\Response;
 use GuzzleHttp\Subscriber\Mock;
+use PHPUnit\Framework\TestCase;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
-class FeedItemSubscriberTest extends \PHPUnit_Framework_TestCase
+class FeedItemSubscriberTest extends TestCase
 {
     public function testOnItemCachedNoHubDefined()
     {

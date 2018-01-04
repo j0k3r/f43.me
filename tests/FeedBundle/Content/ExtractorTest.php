@@ -4,8 +4,9 @@ namespace Tests\FeedBundle\Content;
 
 use Api43\FeedBundle\Content\Extractor;
 use Api43\FeedBundle\Parser\Internal;
+use PHPUnit\Framework\TestCase;
 
-class ExtractorTest extends \PHPUnit_Framework_TestCase
+class ExtractorTest extends TestCase
 {
     public function testWithEmptyContent()
     {

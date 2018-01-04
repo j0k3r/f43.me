@@ -3,8 +3,9 @@
 namespace Tests\FeedBundle\Converter;
 
 use Api43\FeedBundle\Converter\ConverterChain;
+use PHPUnit\Framework\TestCase;
 
-class ConverterChainTest extends \PHPUnit_Framework_TestCase
+class ConverterChainTest extends TestCase
 {
     public function testConvert()
     {

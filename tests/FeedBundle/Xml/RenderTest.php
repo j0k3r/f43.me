@@ -3,8 +3,9 @@
 namespace Tests\FeedBundle\Xml;
 
 use Api43\FeedBundle\Xml\Render;
+use PHPUnit\Framework\TestCase;
 
-class RenderTest extends \PHPUnit_Framework_TestCase
+class RenderTest extends TestCase
 {
     private $dm;
     private $router;

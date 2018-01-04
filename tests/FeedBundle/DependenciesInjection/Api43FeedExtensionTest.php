@@ -2,9 +2,10 @@
 
 namespace Api43\FeedBundle\DependencyInjection;
 
+use PHPUnit\Framework\TestCase;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
-class Api43FeedExtensionTest extends \PHPUnit_Framework_TestCase
+class Api43FeedExtensionTest extends TestCase
 {
     public function testGetConfigWithDefaultValues()
     {

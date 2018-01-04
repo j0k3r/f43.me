@@ -3,9 +3,10 @@
 namespace Tests\FeedBundle\Converter;
 
 use Api43\FeedBundle\Converter\Instagram;
+use PHPUnit\Framework\TestCase;
 use Psr\Log\NullLogger;
 
-class InstagramTest extends \PHPUnit_Framework_TestCase
+class InstagramTest extends TestCase
 {
     public function dataMatch()
     {

@@ -5,8 +5,9 @@ namespace Tests\FeedBundle\Extractor;
 use Api43\FeedBundle\Extractor\Imgur;
 use Monolog\Handler\TestHandler;
 use Monolog\Logger;
+use PHPUnit\Framework\TestCase;
 
-class ImgurTest extends \PHPUnit_Framework_TestCase
+class ImgurTest extends TestCase
 {
     public function dataMatch()
     {

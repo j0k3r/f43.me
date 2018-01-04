@@ -3,8 +3,9 @@
 namespace Tests\FeedBundle\Extractor;
 
 use Api43\FeedBundle\Extractor\ExtractorChain;
+use PHPUnit\Framework\TestCase;
 
-class ExtractorChainTest extends \PHPUnit_Framework_TestCase
+class ExtractorChainTest extends TestCase
 {
     public function testMatchTrue()
     {

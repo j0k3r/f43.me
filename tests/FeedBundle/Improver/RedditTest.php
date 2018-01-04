@@ -4,8 +4,9 @@ namespace Tests\FeedBundle\Improver;
 
 use Api43\FeedBundle\Improver\Reddit;
 use GuzzleHttp\Client;
+use PHPUnit\Framework\TestCase;
 
-class RedditTest extends \PHPUnit_Framework_TestCase
+class RedditTest extends TestCase
 {
     public function dataMatch()
     {

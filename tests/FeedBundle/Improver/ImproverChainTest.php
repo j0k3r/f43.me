@@ -3,8 +3,9 @@
 namespace Tests\FeedBundle\Improver;
 
 use Api43\FeedBundle\Improver\ImproverChain;
+use PHPUnit\Framework\TestCase;
 
-class ImproverChainTest extends \PHPUnit_Framework_TestCase
+class ImproverChainTest extends TestCase
 {
     public function testMatchTrue()
     {

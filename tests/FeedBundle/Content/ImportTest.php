@@ -14,12 +14,13 @@ use Api43\FeedBundle\Parser\Internal;
 use Api43\FeedBundle\Parser\ParserChain;
 use Graby\Graby;
 use GuzzleHttp\Client;
+use PHPUnit\Framework\TestCase;
 use Psr\Log\NullLogger;
 
 /**
  * Crazy complicated tests with too much mocks to replicate a bug where url with & in reddit feed are converted to &amp; and breaks the link.
  */
-class ImportTest extends \PHPUnit_Framework_TestCase
+class ImportTest extends TestCase
 {
     public function testRedditFeed()
     {

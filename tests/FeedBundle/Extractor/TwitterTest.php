@@ -5,9 +5,10 @@ namespace Tests\FeedBundle\Extractor;
 use Api43\FeedBundle\Extractor\Twitter;
 use Monolog\Handler\TestHandler;
 use Monolog\Logger;
+use PHPUnit\Framework\TestCase;
 use TwitterOAuth\Exception\TwitterException;
 
-class TwitterTest extends \PHPUnit_Framework_TestCase
+class TwitterTest extends TestCase
 {
     public function dataMatch()
     {

@@ -7,8 +7,9 @@ use GuzzleHttp\Client;
 use GuzzleHttp\Message\Response;
 use GuzzleHttp\Stream\Stream;
 use GuzzleHttp\Subscriber\Mock;
+use PHPUnit\Framework\TestCase;
 
-class ExternalTest extends \PHPUnit_Framework_TestCase
+class ExternalTest extends TestCase
 {
     public function testParseEmpty()
     {

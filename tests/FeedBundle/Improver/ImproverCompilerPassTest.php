@@ -3,9 +3,10 @@
 namespace Tests\FeedBundle\Improver;
 
 use Api43\FeedBundle\Improver\ImproverCompilerPass;
+use PHPUnit\Framework\TestCase;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
-class ImproverCompilerPassTest extends \PHPUnit_Framework_TestCase
+class ImproverCompilerPassTest extends TestCase
 {
     public function testProcessNoDefinition()
     {
