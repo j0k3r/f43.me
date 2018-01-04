@@ -15,6 +15,14 @@ class ConstraintRssValidatorTest extends TestCase
     public function testValidatorValid()
     {
         $constraint = new ConstraintRss();
+
+        $context = $this->getMockBuilder('Symfony\Component\Validator\Context\ExecutionContextInterface')
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $context->expects($this->never())
+            ->method('addViolation');
+
         $client = new Client();
 
         $mock = new Mock([
@@ -24,6 +32,7 @@ class ConstraintRssValidatorTest extends TestCase
         $client->getEmitter()->attach($mock);
 
         $validator = new ConstraintRssValidator($client);
+        $validator->initialize($context);
         $validator->validate('http://0.0.0.0', $constraint);
     }
 
@@ -86,11 +95,14 @@ class ConstraintRssValidatorTest extends TestCase
 
     public function testValidatorFailTwice()
     {
+        $constraint = new ConstraintRss();
+
         $context = $this->getMockBuilder('Symfony\Component\Validator\Context\ExecutionContextInterface')
             ->disableOriginalConstructor()
             ->getMock();
 
-        $constraint = new ConstraintRss();
+        $context->expects($this->never())
+            ->method('addViolation');
 
         $client = new Client();
 
