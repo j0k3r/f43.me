@@ -79,8 +79,14 @@ You can find some of them in the [converter folder](https://github.com/j0k3r/f43
 ### Requirements
 
  * PHP >= 5.6.0
- * MongoDB & the `php-mongo` extension (or `php-mongodb` for PHP 7.0 with `alcaeus/mongo-php-adapter=^1.0.0`)
+ * MongoDB & the `php-mongo` extension (or `php-mongodb` for PHP 7)
  * [apcu](http://pecl.php.net/package/APCu) >= 4.0
+
+If you are using PHP >= 7, you should also run this command:
+
+```
+composer require "alcaeus/mongo-php-adapter=^1.0.0" --ignore-platform-reqs
+```
 
 For each external API that improvers / extractors / parsers use, you will need an api key:
 
