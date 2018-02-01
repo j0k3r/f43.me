@@ -47,6 +47,15 @@ class Imgur extends AbstractExtractor
         $this->hash = $matches[2];
         $this->type = $matches[1];
 
+        // remove non-media
+        if (in_array($this->hash, ['imgur', 'forum', 'stats', 'signin', 'upgrade'], true)) {
+            return false;
+        }
+
+        if ('signin' === $this->type) {
+            return false;
+        }
+
         return true;
     }
 
@@ -61,14 +70,29 @@ class Imgur extends AbstractExtractor
 
         $images = [];
         $content = '';
+        $albumOrImage = null;
 
-        try {
-            $albumOrImage = $this->imgurClient->api('albumOrImage')->find($this->hash);
-        } catch (\Exception $e) {
-            $this->logger->warning('Imgur extract failed for: ' . $this->hash, [
-                'exception' => $e,
-            ]);
+        if (in_array($this->type, ['a', 'gallery'], true)) {
+            try {
+                $albumOrImage = $this->imgurClient->api('album')->album($this->hash);
+            } catch (\Exception $e) {
+                $this->logger->warning('Imgur extract failed with "album" for: ' . $this->hash, [
+                    'exception' => $e,
+                ]);
+            }
+        }
 
+        if (null === $albumOrImage) {
+            try {
+                $albumOrImage = $this->imgurClient->api('image')->image($this->hash);
+            } catch (\Exception $e) {
+                $this->logger->warning('Imgur extract failed with "image" for: ' . $this->hash, [
+                    'exception' => $e,
+                ]);
+            }
+        }
+
+        if (null === $albumOrImage) {
             return '';
         }
 

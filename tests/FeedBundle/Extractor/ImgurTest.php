@@ -24,6 +24,8 @@ class ImgurTest extends TestCase
             ['http://imgur.com/gallery/IDuXHMJ', true],
             ['https://imgur.com/duziauziaozaoLaMy', false],
             ['https://imgur.com/Ay', false],
+            ['https://imgur.com/signin', false],
+            ['https://imgur.com/signin/456q4z', false],
             ['http://imgur.com/UMOCfIk.gifv', true],
             ['https://imgur.com/gallery/GItbbVZ/new', true],
             ['http://user@:80', false],
@@ -49,12 +51,12 @@ class ImgurTest extends TestCase
             ->disableOriginalConstructor()
             ->getMock();
 
-        $apiAlbumOrImage = $this->getMockBuilder('Imgur\Api\AlbumOrImage')
+        $apiAlbum = $this->getMockBuilder('Imgur\Api\Album')
             ->disableOriginalConstructor()
             ->getMock();
 
-        $apiAlbumOrImage->expects($this->any())
-            ->method('find')
+        $apiAlbum->expects($this->any())
+            ->method('album')
             ->will($this->returnValue([
                 'id' => 'zNUC9TA',
                 'title' => null,
@@ -84,10 +86,10 @@ class ImgurTest extends TestCase
 
         $imgurClient->expects($this->any())
             ->method('api')
-            ->will($this->returnValue($apiAlbumOrImage));
+            ->will($this->returnValue($apiAlbum));
 
         $imgur = new Imgur($imgurClient);
-        $imgur->match('http://imgur.com/zNUC9TA');
+        $imgur->match('http://imgur.com/a/zNUC9TA');
 
         $this->assertSame('<div><img src="http://i.imgur.com/zNUC9TA.gif" /></div>', $imgur->getContent());
     }
@@ -98,12 +100,12 @@ class ImgurTest extends TestCase
             ->disableOriginalConstructor()
             ->getMock();
 
-        $apiAlbumOrImage = $this->getMockBuilder('Imgur\Api\AlbumOrImage')
+        $apiImage = $this->getMockBuilder('Imgur\Api\Image')
             ->disableOriginalConstructor()
             ->getMock();
 
-        $apiAlbumOrImage->expects($this->any())
-            ->method('find')
+        $apiImage->expects($this->any())
+            ->method('image')
             ->will($this->returnValue([
                 'id' => '1S10bkI',
                 'title' => null,
@@ -132,7 +134,7 @@ class ImgurTest extends TestCase
 
         $imgurClient->expects($this->any())
             ->method('api')
-            ->will($this->returnValue($apiAlbumOrImage));
+            ->will($this->returnValue($apiImage));
 
         $imgur = new Imgur($imgurClient);
         $imgur->match('http://imgur.com/1S10bkI');
@@ -146,12 +148,12 @@ class ImgurTest extends TestCase
             ->disableOriginalConstructor()
             ->getMock();
 
-        $apiAlbumOrImage = $this->getMockBuilder('Imgur\Api\AlbumOrImage')
+        $apiAlbum = $this->getMockBuilder('Imgur\Api\Album')
             ->disableOriginalConstructor()
             ->getMock();
 
-        $apiAlbumOrImage->expects($this->any())
-            ->method('find')
+        $apiAlbum->expects($this->any())
+            ->method('album')
             ->will($this->returnValue([
                 'id' => 'dLaMy',
                 'title' => 'Building the Spruce Moose',
@@ -222,7 +224,7 @@ class ImgurTest extends TestCase
 
         $imgurClient->expects($this->any())
             ->method('api')
-            ->will($this->returnValue($apiAlbumOrImage));
+            ->will($this->returnValue($apiAlbum));
 
         $imgur = new Imgur($imgurClient);
         $imgur->match('http://imgur.com/a/dLaMy');
@@ -262,6 +264,7 @@ class ImgurTest extends TestCase
 
         $this->assertEmpty($imgur->getContent());
 
-        $this->assertTrue($logHandler->hasWarning('Imgur extract failed for: xxxxxx'), 'Warning message matched');
+        $this->assertTrue($logHandler->hasWarning('Imgur extract failed with "album" for: xxxxxx'), 'Warning message matched (for album)');
+        $this->assertTrue($logHandler->hasWarning('Imgur extract failed with "image" for: xxxxxx'), 'Warning message matched (for image)');
     }
 }
