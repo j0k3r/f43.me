@@ -98,6 +98,7 @@ class ImportTest extends TestCase
 
         $youtube = new Youtube();
         $youtube->setClient($client);
+        $youtube->setLogger(new NullLogger());
 
         $extractorChain = new ExtractorChain();
         $extractorChain->addExtractor($youtube, 'youtube');
@@ -145,7 +146,7 @@ class ImportTest extends TestCase
 
     public function testRedditFeedAndYoutube()
     {
-        $link = 'https://www.youtube.com/watch?v=TeVLxcekEsw';
+        $link = 'https://www.youtube.com/watch?v=iwGFalTRHDA';
 
         $feed = new Feed();
         $feed->setParser('internal');
@@ -219,6 +220,7 @@ class ImportTest extends TestCase
 
         $youtube = new Youtube();
         $youtube->setClient($client);
+        $youtube->setLogger(new NullLogger());
 
         $extractorChain = new ExtractorChain();
         $extractorChain->addExtractor($youtube, 'youtube');
