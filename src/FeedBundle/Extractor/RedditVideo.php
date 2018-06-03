@@ -35,7 +35,7 @@ class RedditVideo extends AbstractExtractor
 
         // we only match reddit video
         if (!isset($data[0]['data']['children'][0]['data'])
-            || $data[0]['data']['children'][0]['data']['domain'] !== 'v.redd.it') {
+            || 'v.redd.it' !== $data[0]['data']['children'][0]['data']['domain']) {
             return false;
         }
 
