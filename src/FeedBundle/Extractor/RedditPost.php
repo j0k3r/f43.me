@@ -35,7 +35,7 @@ class RedditPost extends AbstractExtractor
 
         // we only match reddit post
         if (!isset($data[0]['data']['children'][0]['data'])
-            || $data[0]['data']['children'][0]['data']['is_self'] !== true) {
+            || true !== $data[0]['data']['children'][0]['data']['is_self']) {
             return false;
         }
 
