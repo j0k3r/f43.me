@@ -1775,16 +1775,16 @@
         },
         {
             "name": "j0k3r/safecurl",
-            "version": "2.0.2",
+            "version": "2.0.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/j0k3r/safecurl.git",
-                "reference": "d5b7a0dcda23f8fd6a3f0ca3dac080e38388ba4b"
+                "reference": "569ec1b1c237fe08f3a30ac64f2ff77e368fcafc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/j0k3r/safecurl/zipball/d5b7a0dcda23f8fd6a3f0ca3dac080e38388ba4b",
-                "reference": "d5b7a0dcda23f8fd6a3f0ca3dac080e38388ba4b",
+                "url": "https://api.github.com/repos/j0k3r/safecurl/zipball/569ec1b1c237fe08f3a30ac64f2ff77e368fcafc",
+                "reference": "569ec1b1c237fe08f3a30ac64f2ff77e368fcafc",
                 "shasum": ""
             },
             "require": {
@@ -1823,7 +1823,7 @@
                 "ssrf",
                 "websec"
             ],
-            "time": "2015-11-23T08:16:01+00:00"
+            "time": "2018-06-28T07:41:22+00:00"
         },
         {
             "name": "jdorn/sql-formatter",
@@ -2553,16 +2553,16 @@
         },
         {
             "name": "sentry/sentry",
-            "version": "1.9.0",
+            "version": "1.9.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/getsentry/sentry-php.git",
-                "reference": "c90567d78382b803e563939654d1563ddee61707"
+                "reference": "7ebc06dcab248bdf12e807bed3b308ef9c8a6ebf"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/getsentry/sentry-php/zipball/c90567d78382b803e563939654d1563ddee61707",
-                "reference": "c90567d78382b803e563939654d1563ddee61707",
+                "url": "https://api.github.com/repos/getsentry/sentry-php/zipball/7ebc06dcab248bdf12e807bed3b308ef9c8a6ebf",
+                "reference": "7ebc06dcab248bdf12e807bed3b308ef9c8a6ebf",
                 "shasum": ""
             },
             "require": {
@@ -2589,7 +2589,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.9.x-dev"
+                    "dev-master": "1.10.x-dev"
                 }
             },
             "autoload": {
@@ -2613,7 +2613,7 @@
                 "log",
                 "logging"
             ],
-            "time": "2018-05-03T12:06:52+00:00"
+            "time": "2018-06-19T15:02:57+00:00"
         },
         {
             "name": "sentry/sentry-symfony",
@@ -2731,16 +2731,16 @@
         },
         {
             "name": "smalot/pdfparser",
-            "version": "v0.12.0",
+            "version": "v0.13.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/smalot/pdfparser.git",
-                "reference": "7ef7ee5f0eccd494109f072a0ae3b10d5f8f27fd"
+                "reference": "f5e85c023491aecc88e8f6227536d60e1bb4a241"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/smalot/pdfparser/zipball/7ef7ee5f0eccd494109f072a0ae3b10d5f8f27fd",
-                "reference": "7ef7ee5f0eccd494109f072a0ae3b10d5f8f27fd",
+                "url": "https://api.github.com/repos/smalot/pdfparser/zipball/f5e85c023491aecc88e8f6227536d60e1bb4a241",
+                "reference": "f5e85c023491aecc88e8f6227536d60e1bb4a241",
                 "shasum": ""
             },
             "require": {
@@ -2759,7 +2759,7 @@
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
-                "LGPLv3"
+                "LGPL-3.0"
             ],
             "authors": [
                 {
@@ -2776,7 +2776,7 @@
                 "pdf",
                 "text"
             ],
-            "time": "2018-03-16T17:38:34+00:00"
+            "time": "2018-06-23T08:43:13+00:00"
         },
         {
             "name": "stof/doctrine-extensions-bundle",
@@ -4226,16 +4226,16 @@
         },
         {
             "name": "symfony/phpunit-bridge",
-            "version": "v3.4.11",
+            "version": "v3.4.12",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/phpunit-bridge.git",
-                "reference": "63cdae00a75862fa543b765ba63d55f6b6397d0c"
+                "reference": "8a21eb6bedad38bf1f15d529c65eb9e17d0242fd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/phpunit-bridge/zipball/63cdae00a75862fa543b765ba63d55f6b6397d0c",
-                "reference": "63cdae00a75862fa543b765ba63d55f6b6397d0c",
+                "url": "https://api.github.com/repos/symfony/phpunit-bridge/zipball/8a21eb6bedad38bf1f15d529c65eb9e17d0242fd",
+                "reference": "8a21eb6bedad38bf1f15d529c65eb9e17d0242fd",
                 "shasum": ""
             },
             "require": {
@@ -4288,7 +4288,7 @@
             ],
             "description": "Symfony PHPUnit Bridge",
             "homepage": "https://symfony.com",
-            "time": "2018-05-16T12:49:49+00:00"
+            "time": "2018-06-10T07:25:02+00:00"
         },
         {
             "name": "symfony/polyfill-php72",
