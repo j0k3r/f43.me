@@ -43,7 +43,7 @@ before_script:
     - if [ -n "$GH_TOKEN" ]; then composer config github-oauth.github.com ${GH_TOKEN}; fi;
     - pecl channel-update pecl.php.net
     - yes '' | pecl -q install -f $MONGO_DRIVER
-    - if [[ ${TRAVIS_PHP_VERSION:0:2} == "7." || "$TRAVIS_PHP_VERSION" = "nightly" ]]; then composer config "platform.ext-mongo" "1.6.16" && composer require alcaeus/mongo-php-adapter; fi
+    - if [[ ${TRAVIS_PHP_VERSION:0:2} == "7." || "$TRAVIS_PHP_VERSION" = "nightly" ]]; then composer config "platform.ext-mongo" "1.6.16" && COMPOSER_MEMORY_LIMIT=-1 composer require alcaeus/mongo-php-adapter; fi
     - if [ $COVERAGE = run ]; then PHPUNIT_FLAGS="--coverage-clover build/logs/clover.xml"; fi;
 
 script:
