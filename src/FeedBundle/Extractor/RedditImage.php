@@ -18,7 +18,7 @@ class RedditImage extends AbstractExtractor
             return false;
         }
 
-        if (!in_array($host, ['i.reddituploads.com', 'i.redd.it'], true)) {
+        if (!\in_array($host, ['i.reddituploads.com', 'i.redd.it'], true)) {
             return false;
         }
 

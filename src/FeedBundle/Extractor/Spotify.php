@@ -20,7 +20,7 @@ class Spotify extends AbstractExtractor
             return false;
         }
 
-        if (!in_array($host, ['open.spotify.com', 'play.spotify.com'], true)) {
+        if (!\in_array($host, ['open.spotify.com', 'play.spotify.com'], true)) {
             return false;
         }
 
@@ -50,7 +50,7 @@ class Spotify extends AbstractExtractor
             return '';
         }
 
-        if (!is_array($data) || empty($data)) {
+        if (!\is_array($data) || empty($data)) {
             return '';
         }
 

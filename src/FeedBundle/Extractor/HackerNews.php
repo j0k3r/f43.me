@@ -39,7 +39,7 @@ class HackerNews extends AbstractExtractor
             return false;
         }
 
-        if (in_array($data['type'], ['comment', 'pollopt'], true)
+        if (\in_array($data['type'], ['comment', 'pollopt'], true)
             || !isset($data['text'])
             || '' === trim($data['text'])) {
             return false;

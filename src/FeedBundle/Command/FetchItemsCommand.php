@@ -48,7 +48,7 @@ class FetchItemsCommand extends ContainerAwareCommand
                 return $output->writeLn('<error>Unable to find Feed document:</error> <comment>' . $slug . '</comment>');
             }
             $feeds = [$feed];
-        } elseif (in_array($input->getOption('age'), ['new', 'old'], true)) {
+        } elseif (\in_array($input->getOption('age'), ['new', 'old'], true)) {
             $feedsWithItems = $feedItemRepo->findAllFeedWithItems();
 
             // retrieve feed that HAVE items
@@ -65,7 +65,7 @@ class FetchItemsCommand extends ContainerAwareCommand
         }
 
         if ($output->isVerbose()) {
-            $output->writeln('<info>Feeds to check</info>: ' . count($feeds));
+            $output->writeln('<info>Feeds to check</info>: ' . \count($feeds));
         }
 
         // let's import some stuff !

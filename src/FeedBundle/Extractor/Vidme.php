@@ -57,7 +57,7 @@ class Vidme extends AbstractExtractor
             return '';
         }
 
-        if (!is_array($data) || empty($data) || !isset($data['video'])) {
+        if (!\is_array($data) || empty($data) || !isset($data['video'])) {
             return '';
         }
 

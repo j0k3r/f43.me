@@ -29,7 +29,7 @@ class Twitch extends AbstractExtractor
             return false;
         }
 
-        if (!in_array($host, ['www.twitch.tv', 'twitch.tv'], true)) {
+        if (!\in_array($host, ['www.twitch.tv', 'twitch.tv'], true)) {
             return false;
         }
 
@@ -66,7 +66,7 @@ class Twitch extends AbstractExtractor
             return '';
         }
 
-        if (!is_array($data) || empty($data)) {
+        if (!\is_array($data) || empty($data)) {
             return '';
         }
 

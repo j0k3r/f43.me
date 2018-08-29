@@ -20,7 +20,7 @@ class Periscope extends AbstractExtractor
             return false;
         }
 
-        if (!in_array($host, ['www.pscp.tv', 'pscp.tv', 'www.periscope.tv', 'periscope.tv'], true)) {
+        if (!\in_array($host, ['www.pscp.tv', 'pscp.tv', 'www.periscope.tv', 'periscope.tv'], true)) {
             return false;
         }
 
@@ -56,7 +56,7 @@ class Periscope extends AbstractExtractor
             return '';
         }
 
-        if (!is_array($data) || empty($data)) {
+        if (!\is_array($data) || empty($data)) {
             return '';
         }
 

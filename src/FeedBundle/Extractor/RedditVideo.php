@@ -20,7 +20,7 @@ class RedditVideo extends AbstractExtractor
             return false;
         }
 
-        if (!in_array($host, ['reddit.com', 'www.reddit.com'], true)) {
+        if (!\in_array($host, ['reddit.com', 'www.reddit.com'], true)) {
             return false;
         }
 

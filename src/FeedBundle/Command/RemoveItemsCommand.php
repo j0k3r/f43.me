@@ -59,7 +59,7 @@ class RemoveItemsCommand extends ContainerAwareCommand
         }
 
         if ($input->getOption('with-trace')) {
-            $output->writeLn('<info>Feeds</info>: <comment>' . count($feeds) . '</comment>');
+            $output->writeLn('<info>Feeds</info>: <comment>' . \count($feeds) . '</comment>');
         }
 
         $totalRemoved = 0;

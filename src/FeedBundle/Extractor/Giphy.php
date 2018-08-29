@@ -20,7 +20,7 @@ class Giphy extends AbstractExtractor
             return false;
         }
 
-        if (!in_array($host, ['www.giphy.com', 'giphy.com'], true)) {
+        if (!\in_array($host, ['www.giphy.com', 'giphy.com'], true)) {
             return false;
         }
 
@@ -56,7 +56,7 @@ class Giphy extends AbstractExtractor
             return '';
         }
 
-        if (!is_array($data) || empty($data)) {
+        if (!\is_array($data) || empty($data)) {
             return '';
         }
 
