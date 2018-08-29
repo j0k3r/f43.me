@@ -50,7 +50,7 @@ class Soundcloud extends AbstractExtractor
             return '';
         }
 
-        if (!is_array($data) || empty($data)) {
+        if (!\is_array($data) || empty($data)) {
             return '';
         }
 

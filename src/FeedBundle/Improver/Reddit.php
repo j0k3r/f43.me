@@ -14,7 +14,7 @@ class Reddit extends DefaultImprover
      */
     public function match($host)
     {
-        return in_array($host, ['reddit.com', 'www.reddit.com'], true);
+        return \in_array($host, ['reddit.com', 'www.reddit.com'], true);
     }
 
     /**
@@ -27,7 +27,7 @@ class Reddit extends DefaultImprover
     {
         // we extract the source of the reddit post
         preg_match('/(.*)\<a href\=\"(.*)\"\>\[link\]\<\/a\>/i', $this->itemContent, $matches);
-        if (3 !== count($matches)) {
+        if (3 !== \count($matches)) {
             return $url;
         }
 

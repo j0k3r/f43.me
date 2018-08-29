@@ -27,7 +27,7 @@ class Camplus extends AbstractExtractor
         // find camplus photo id
         preg_match('/^\/([a-z0-9]+)$/i', $path, $matches);
 
-        if (2 !== count($matches)) {
+        if (2 !== \count($matches)) {
             return false;
         }
 

@@ -121,7 +121,7 @@ class FeedControllerTest extends FeedWebTestCase
         $this->assertSame(200, $client->getResponse()->getStatusCode());
         $this->assertCount(1, $alert = $crawler->filter('div.alert-box')->extract(['_text']));
         $this->assertSame('Form is invalid.', $alert[0]);
-        $this->assertGreaterThanOrEqual(1, count($crawler->filter('small.error')));
+        $this->assertGreaterThanOrEqual(1, \count($crawler->filter('small.error')));
     }
 
     public function dataNewFeedOk()
@@ -160,7 +160,7 @@ class FeedControllerTest extends FeedWebTestCase
         $this->assertSame(200, $client->getResponse()->getStatusCode());
         $this->assertCount(1, $alert = $crawler->filter('div.alert-box')->extract(['_text']));
         $this->assertSame('Form is invalid.', $alert[0]);
-        $this->assertGreaterThanOrEqual(1, count($crawler->filter('small.error')));
+        $this->assertGreaterThanOrEqual(1, \count($crawler->filter('small.error')));
     }
 
     /**

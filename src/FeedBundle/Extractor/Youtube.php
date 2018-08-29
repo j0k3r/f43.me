@@ -20,7 +20,7 @@ class Youtube extends AbstractExtractor
             return false;
         }
 
-        if (!in_array($host, ['www.youtube.com', 'youtube.com', 'youtu.be'], true)) {
+        if (!\in_array($host, ['www.youtube.com', 'youtube.com', 'youtu.be'], true)) {
             return false;
         }
 
@@ -50,7 +50,7 @@ class Youtube extends AbstractExtractor
             return '';
         }
 
-        if (!is_array($data) || empty($data)) {
+        if (!\is_array($data) || empty($data)) {
             return '';
         }
 

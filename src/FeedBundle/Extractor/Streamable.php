@@ -20,7 +20,7 @@ class Streamable extends AbstractExtractor
             return false;
         }
 
-        if (!in_array($host, ['www.streamable.com', 'streamable.com'], true)) {
+        if (!\in_array($host, ['www.streamable.com', 'streamable.com'], true)) {
             return false;
         }
 
@@ -50,7 +50,7 @@ class Streamable extends AbstractExtractor
             return '';
         }
 
-        if (!is_array($data) || empty($data)) {
+        if (!\is_array($data) || empty($data)) {
             return '';
         }
 

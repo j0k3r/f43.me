@@ -48,7 +48,7 @@ class Imgur extends AbstractExtractor
         $this->type = $matches[1];
 
         // remove non-media
-        if (in_array($this->hash, ['imgur', 'forum', 'stats', 'signin', 'upgrade'], true)) {
+        if (\in_array($this->hash, ['imgur', 'forum', 'stats', 'signin', 'upgrade'], true)) {
             return false;
         }
 
@@ -72,7 +72,7 @@ class Imgur extends AbstractExtractor
         $content = '';
         $albumOrImage = null;
 
-        if (in_array($this->type, ['a', 'gallery'], true)) {
+        if (\in_array($this->type, ['a', 'gallery'], true)) {
             try {
                 $albumOrImage = $this->imgurClient->api('album')->album($this->hash);
             } catch (\Exception $e) {

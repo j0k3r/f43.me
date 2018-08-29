@@ -20,7 +20,7 @@ class Instagram extends AbstractExtractor
             return false;
         }
 
-        if (!in_array($host, ['instagr.am', 'instagram.com', 'www.instagram.com'], true)) {
+        if (!\in_array($host, ['instagr.am', 'instagram.com', 'www.instagram.com'], true)) {
             return false;
         }
 
@@ -45,7 +45,7 @@ class Instagram extends AbstractExtractor
 
         $data = $this->retrieveData();
 
-        if (!is_array($data) || empty($data)) {
+        if (!\is_array($data) || empty($data)) {
             return '';
         }
 
@@ -62,7 +62,7 @@ class Instagram extends AbstractExtractor
     {
         $data = $this->retrieveData();
 
-        if (!is_array($data) || empty($data)) {
+        if (!\is_array($data) || empty($data)) {
             return '';
         }
 

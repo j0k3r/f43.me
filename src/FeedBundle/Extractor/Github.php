@@ -41,7 +41,7 @@ class Github extends AbstractExtractor
         // find github user and project only
         preg_match('/^\/([\w\d\.-]+)\/([\w\d\.-]+)\/?$/i', $path, $matches);
 
-        if (3 === count($matches)) {
+        if (3 === \count($matches)) {
             $this->githubRepo = $matches[1] . '/' . $matches[2];
 
             return true;
@@ -50,7 +50,7 @@ class Github extends AbstractExtractor
         // find pull request or issue
         preg_match('/^\/([\w\d\.-]+)\/([\w\d\.-]+)\/(pull|issues)\/([0-9]+)/i', $path, $matches);
 
-        if (5 === count($matches)) {
+        if (5 === \count($matches)) {
             $this->githubRepo = $matches[1] . '/' . $matches[2];
 
             if ('pull' === $matches[3]) {

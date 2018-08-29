@@ -20,7 +20,7 @@ class Dailymotion extends AbstractExtractor
             return false;
         }
 
-        if (!in_array($host, ['www.dailymotion.com', 'dailymotion.com', 'dai.ly'], true)) {
+        if (!\in_array($host, ['www.dailymotion.com', 'dailymotion.com', 'dai.ly'], true)) {
             return false;
         }
 
@@ -50,7 +50,7 @@ class Dailymotion extends AbstractExtractor
             return '';
         }
 
-        if (!is_array($data) || empty($data)) {
+        if (!\is_array($data) || empty($data)) {
             return '';
         }
 

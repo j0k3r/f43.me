@@ -45,7 +45,7 @@ class Instagram extends AbstractConverter
             $this->instagramExtractor->match('https://www.instagram.com/p/' . $instagramId);
             $image = $this->instagramExtractor->getImageOnly();
 
-            if (0 === strlen($image)) {
+            if (0 === \strlen($image)) {
                 continue;
             }
 

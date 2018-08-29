@@ -56,7 +56,7 @@ class Import
                 ->init();
 
             // update feed description, in case it was empty
-            if (0 === strlen($feed->getDescription()) && 0 !== strlen($rssFeed->get_description())) {
+            if (0 === \strlen($feed->getDescription()) && 0 !== \strlen($rssFeed->get_description())) {
                 $feed->setDescription(html_entity_decode($rssFeed->get_description(), ENT_COMPAT, 'UTF-8'));
                 $this->dm->persist($feed);
                 $this->dm->flush($feed);
