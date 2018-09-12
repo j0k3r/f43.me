@@ -1542,16 +1542,16 @@
         },
         {
             "name": "j0k3r/graby",
-            "version": "1.13.5",
+            "version": "1.13.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/j0k3r/graby.git",
-                "reference": "610dce121faf627a2e7b95ca47c715b8c27bfb06"
+                "reference": "ffde3c7106928704f30836f7d58df19aeaac0b5d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/j0k3r/graby/zipball/610dce121faf627a2e7b95ca47c715b8c27bfb06",
-                "reference": "610dce121faf627a2e7b95ca47c715b8c27bfb06",
+                "url": "https://api.github.com/repos/j0k3r/graby/zipball/ffde3c7106928704f30836f7d58df19aeaac0b5d",
+                "reference": "ffde3c7106928704f30836f7d58df19aeaac0b5d",
                 "shasum": ""
             },
             "require": {
@@ -1571,7 +1571,7 @@
             },
             "require-dev": {
                 "friendsofphp/php-cs-fixer": "~2.0",
-                "satooshi/php-coveralls": "~0.6",
+                "php-coveralls/php-coveralls": "~0.6",
                 "symfony/phpunit-bridge": "~2.6|~3.0"
             },
             "type": "library",
@@ -1597,7 +1597,7 @@
                 }
             ],
             "description": "Graby helps you extract article content from web pages",
-            "time": "2018-07-28T21:12:16+00:00"
+            "time": "2018-08-31T19:43:40+00:00"
         },
         {
             "name": "j0k3r/graby-site-config",
@@ -3780,16 +3780,16 @@
         },
         {
             "name": "composer/xdebug-handler",
-            "version": "1.2.1",
+            "version": "1.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/composer/xdebug-handler.git",
-                "reference": "e37cbd80da64afe314c72de8d2d2fec0e40d9373"
+                "reference": "b8e9745fb9b06ea6664d8872c4505fb16df4611c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/composer/xdebug-handler/zipball/e37cbd80da64afe314c72de8d2d2fec0e40d9373",
-                "reference": "e37cbd80da64afe314c72de8d2d2fec0e40d9373",
+                "url": "https://api.github.com/repos/composer/xdebug-handler/zipball/b8e9745fb9b06ea6664d8872c4505fb16df4611c",
+                "reference": "b8e9745fb9b06ea6664d8872c4505fb16df4611c",
                 "shasum": ""
             },
             "require": {
@@ -3820,7 +3820,7 @@
                 "Xdebug",
                 "performance"
             ],
-            "time": "2018-08-23T12:00:19+00:00"
+            "time": "2018-08-31T19:07:57+00:00"
         },
         {
             "name": "doctrine/data-fixtures",
