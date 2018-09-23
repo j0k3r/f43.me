@@ -16,8 +16,6 @@ class RedditVideoTest extends TestCase
     public function dataMatch()
     {
         return [
-            ['https://v.redd.it/funfg141o3hz', false],
-            ['http://v.redd.it/', false],
             ['https://goog.co', false],
             ['http://user@:80', false],
         ];
@@ -45,7 +43,7 @@ class RedditVideoTest extends TestCase
         $redditVideo = new RedditVideo();
         $redditVideo->setClient($client);
 
-        $this->assertFalse($redditVideo->match('https://www.reddit.com/r/videos/comments/6rrwyj/that_small_heart_attack/'));
+        $this->assertFalse($redditVideo->match('https://v.redd.it/funfg141o3hz'));
     }
 
     public function testMatchRedditNotAVideo()
