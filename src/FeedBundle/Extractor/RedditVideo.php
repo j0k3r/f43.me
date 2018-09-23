@@ -20,15 +20,24 @@ class RedditVideo extends AbstractExtractor
             return false;
         }
 
-        if (!\in_array($host, ['reddit.com', 'www.reddit.com'], true)) {
+        // usually happen when fetching from the debug page
+        if (\in_array($host, ['reddit.com', 'www.reddit.com'], true)) {
+            $jsonUrl = 'https://' . $host . $path . '/.json';
+        }
+
+        // usually happen when fetching from the RSS feed
+        if (\in_array($host, ['v.redd.it'], true)) {
+            $jsonUrl = 'https://www.reddit.com/video/' . $path . '/.json';
+        }
+
+        if (!isset($jsonUrl)) {
             return false;
         }
 
-        $url = 'https://' . $host . $path . '/.json';
-        $url = str_replace('//.json', '/.json', $url);
+        $jsonUrl = str_replace('//', '/', $jsonUrl);
 
         try {
-            $data = $this->client->get($url)->json();
+            $data = $this->client->get($jsonUrl)->json();
         } catch (RequestException $e) {
             return false;
         }
