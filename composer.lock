@@ -1601,16 +1601,16 @@
         },
         {
             "name": "j0k3r/graby-site-config",
-            "version": "1.0.59",
+            "version": "1.0.60",
             "source": {
                 "type": "git",
                 "url": "https://github.com/j0k3r/graby-site-config.git",
-                "reference": "b4ef7be48623526192eddfdf26ceba3ad9b6d62f"
+                "reference": "932c24e6d528012ed35d362faff29d4fdf56dbb7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/j0k3r/graby-site-config/zipball/b4ef7be48623526192eddfdf26ceba3ad9b6d62f",
-                "reference": "b4ef7be48623526192eddfdf26ceba3ad9b6d62f",
+                "url": "https://api.github.com/repos/j0k3r/graby-site-config/zipball/932c24e6d528012ed35d362faff29d4fdf56dbb7",
+                "reference": "932c24e6d528012ed35d362faff29d4fdf56dbb7",
                 "shasum": ""
             },
             "require": {
@@ -1637,7 +1637,7 @@
                 }
             ],
             "description": "Graby site config files",
-            "time": "2018-08-29T06:37:56+00:00"
+            "time": "2018-10-01T07:52:50+00:00"
         },
         {
             "name": "j0k3r/php-imgur-api-client",
@@ -2770,7 +2770,7 @@
             ],
             "authors": [
                 {
-                    "name": "Sebastien MALOT",
+                    "name": "Sebastien Malot",
                     "email": "sebastien@malot.fr"
                 }
             ],
@@ -4295,16 +4295,16 @@
         },
         {
             "name": "symfony/phpunit-bridge",
-            "version": "v3.4.15",
+            "version": "v3.4.16",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/phpunit-bridge.git",
-                "reference": "f4fde1ede82c7ca2a4f06cf48521a185b26c0fed"
+                "reference": "4f2bbc1a84681e0dc59ee69d57d8dd32163f4eb0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/phpunit-bridge/zipball/f4fde1ede82c7ca2a4f06cf48521a185b26c0fed",
-                "reference": "f4fde1ede82c7ca2a4f06cf48521a185b26c0fed",
+                "url": "https://api.github.com/repos/symfony/phpunit-bridge/zipball/4f2bbc1a84681e0dc59ee69d57d8dd32163f4eb0",
+                "reference": "4f2bbc1a84681e0dc59ee69d57d8dd32163f4eb0",
                 "shasum": ""
             },
             "require": {
@@ -4357,7 +4357,7 @@
             ],
             "description": "Symfony PHPUnit Bridge",
             "homepage": "https://symfony.com",
-            "time": "2018-08-27T15:17:06+00:00"
+            "time": "2018-09-21T12:47:54+00:00"
         },
         {
             "name": "symfony/polyfill-php72",
