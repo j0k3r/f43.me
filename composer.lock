@@ -1542,16 +1542,16 @@
         },
         {
             "name": "j0k3r/graby",
-            "version": "1.13.6",
+            "version": "1.14.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/j0k3r/graby.git",
-                "reference": "ffde3c7106928704f30836f7d58df19aeaac0b5d"
+                "reference": "c31cb6710e716a42f3e3b88be3d118b4f5c001c1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/j0k3r/graby/zipball/ffde3c7106928704f30836f7d58df19aeaac0b5d",
-                "reference": "ffde3c7106928704f30836f7d58df19aeaac0b5d",
+                "url": "https://api.github.com/repos/j0k3r/graby/zipball/c31cb6710e716a42f3e3b88be3d118b4f5c001c1",
+                "reference": "c31cb6710e716a42f3e3b88be3d118b4f5c001c1",
                 "shasum": ""
             },
             "require": {
@@ -1597,20 +1597,20 @@
                 }
             ],
             "description": "Graby helps you extract article content from web pages",
-            "time": "2018-08-31T19:43:40+00:00"
+            "time": "2018-10-01T12:38:30+00:00"
         },
         {
             "name": "j0k3r/graby-site-config",
-            "version": "1.0.60",
+            "version": "1.0.61",
             "source": {
                 "type": "git",
                 "url": "https://github.com/j0k3r/graby-site-config.git",
-                "reference": "932c24e6d528012ed35d362faff29d4fdf56dbb7"
+                "reference": "6eef73a26d8139da2b06581b78686ae4b1b0b890"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/j0k3r/graby-site-config/zipball/932c24e6d528012ed35d362faff29d4fdf56dbb7",
-                "reference": "932c24e6d528012ed35d362faff29d4fdf56dbb7",
+                "url": "https://api.github.com/repos/j0k3r/graby-site-config/zipball/6eef73a26d8139da2b06581b78686ae4b1b0b890",
+                "reference": "6eef73a26d8139da2b06581b78686ae4b1b0b890",
                 "shasum": ""
             },
             "require": {
@@ -1637,7 +1637,7 @@
                 }
             ],
             "description": "Graby site config files",
-            "time": "2018-10-01T07:52:50+00:00"
+            "time": "2018-10-03T14:25:10+00:00"
         },
         {
             "name": "j0k3r/php-imgur-api-client",
@@ -4295,16 +4295,16 @@
         },
         {
             "name": "symfony/phpunit-bridge",
-            "version": "v3.4.16",
+            "version": "v3.4.17",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/phpunit-bridge.git",
-                "reference": "4f2bbc1a84681e0dc59ee69d57d8dd32163f4eb0"
+                "reference": "76e013a98031356604e5a730c9eb22713dc4dda4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/phpunit-bridge/zipball/4f2bbc1a84681e0dc59ee69d57d8dd32163f4eb0",
-                "reference": "4f2bbc1a84681e0dc59ee69d57d8dd32163f4eb0",
+                "url": "https://api.github.com/repos/symfony/phpunit-bridge/zipball/76e013a98031356604e5a730c9eb22713dc4dda4",
+                "reference": "76e013a98031356604e5a730c9eb22713dc4dda4",
                 "shasum": ""
             },
             "require": {
@@ -4357,7 +4357,7 @@
             ],
             "description": "Symfony PHPUnit Bridge",
             "homepage": "https://symfony.com",
-            "time": "2018-09-21T12:47:54+00:00"
+            "time": "2018-10-02T12:28:39+00:00"
         },
         {
             "name": "symfony/polyfill-php72",
