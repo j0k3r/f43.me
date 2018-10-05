@@ -6,6 +6,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 /**
  * Security controller.
@@ -17,7 +18,7 @@ class SecurityController extends Controller
      *
      * @Template()
      *
-     * @return array|RedirectResponse
+     * @return Response|RedirectResponse
      */
     public function loginAction(Request $request)
     {
