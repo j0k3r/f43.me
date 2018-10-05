@@ -38,5 +38,3 @@ parameters:
     twitter.access_token_secret: xxx
 
     sentry_dsn: "https://xxx:xxx@sentry.io/666"
-
-    newrelic_api_key: xxx
