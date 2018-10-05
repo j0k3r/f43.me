@@ -26,6 +26,7 @@ security:
         secured:
             pattern: ^/
             anonymous:  ~
+            logout_on_user_change: true
             form_login:
                 login_path: login
                 check_path: login_check

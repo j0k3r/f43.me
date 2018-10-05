@@ -44,7 +44,7 @@
         "php-coveralls/php-coveralls": "~1.0",
         "sensio/generator-bundle": "~3.0",
         "doctrine/doctrine-fixtures-bundle": "~3.0",
-        "symfony/phpunit-bridge": "^3.0"
+        "symfony/phpunit-bridge": "^4.0"
     },
     "scripts": {
         "post-cmd": [

@@ -105,3 +105,12 @@ services:
             - "@guzzle.client"
         tags:
             - { name: validator.constraint_validator, alias: valid_rss }
+
+    # commands
+    command.fetch_items:
+        class: Api43\FeedBundle\Command\FetchItemsCommand
+        tags: ['console.command']
+
+    command.remove_items:
+        class: Api43\FeedBundle\Command\RemoveItemsCommand
+        tags: ['console.command']
