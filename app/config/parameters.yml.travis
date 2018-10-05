@@ -38,4 +38,3 @@ parameters:
     github.client_id: xxx
     github.client_secret: xxx
     sentry_dsn:
-    newrelic_api_key: xxx

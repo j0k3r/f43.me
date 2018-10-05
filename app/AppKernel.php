@@ -17,7 +17,6 @@ class AppKernel extends Kernel
             new Doctrine\Bundle\MongoDBBundle\DoctrineMongoDBBundle(),
             new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
             new Sentry\SentryBundle\SentryBundle(),
-            new Ekino\Bundle\NewRelicBundle\EkinoNewRelicBundle(),
             new Api43\FeedBundle\Api43FeedBundle(),
         ];
 

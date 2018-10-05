@@ -67,17 +67,6 @@ monolog:
             level: debug
             channels: ['graby']
 
-ekino_new_relic:
-    enabled: false
-    application_name: f43.me
-    api_key: "%newrelic_api_key%"
-    logging: true
-    log_commands: true
-    using_symfony_cache: false
-    transaction_naming: route
-    ignored_commands:
-        - "cache:clear"
-
 # see https://github.com/symfony/symfony-standard/pull/1133
 sensio_framework_extra:
    router:
