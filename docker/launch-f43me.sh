@@ -12,9 +12,6 @@ chown www-data ./var/logs
 chown www-data ./var/sessions
 chmod -R 777 var/cache/ var/logs/ var/sessions/
 
-# install mongodb adaptater for PHP7
-php -d memory_limit=-1 /usr/sbin/composer require "alcaeus/mongo-php-adapter=^1.0.0" --ignore-platform-reqs
-
 # re-source the bashrc, so nvm will be loaded
 . /root/.bashrc
 

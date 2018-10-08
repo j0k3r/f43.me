@@ -1,0 +1,53 @@
+{% extends "AppBundle::layout.html.twig" %}
+
+{% block h2_title %}
+    {{ include('AppBundle:Feed:_favicon.html.twig', {'host': feed.host}) }}
+    {{ feed.name }}'s logs
+    <small>- {{ feedlogs|length }} logs</small>
+{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="large-12 columns">
+        <ul class="inline-list list-buttons">
+            <li><a class="secondary button radius small" href="{{ path('feed_edit', { 'slug': feed.slug }) }}">&lArr; Back to the feed</a></li>
+
+            {% if feedlogs|length > 0 %}
+            <li>
+                <form action="{{ path('feedlog_delete_all', { 'slug': feed.slug }) }}" method="post" class="delete_form">
+                    {{ form_widget(delete_all_form) }}
+                    <button class="alert button radius small" type="submit">Cleanup logs</button>
+                </form>
+            </li>
+            {% endif %}
+        </ul>
+
+        {% if feedlogs|length > 0 %}
+            <table class="table-feedlogs">
+                <thead>
+                    <tr>
+                        <th>Feed</th>
+                        <th>Items</th>
+                        <th>Created at</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for feedlog in feedlogs %}
+                    <tr>
+                        <td>
+                            {{ include('AppBundle:Feed:_favicon.html.twig', {'host': feedlog.feed.host}) }}
+                            <a href="{{ path('feed_edit', { 'slug': feedlog.feed.slug }) }}">{{ feedlog.feed.name }}</a>
+                        </td>
+                        <td>{{ feedlog.itemsnumber }}</td>
+                        <td class="time-ago" title="{{ feedlog.createdat|date('r') }}">{{ feedlog.createdat|date('d/m/y - H:i:s') }}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+
+            <a class="secondary button radius small" href="{{ path('feed_edit', { 'slug': feed.slug }) }}">&lArr; Back to the feed</a>
+        {% endif %}
+    </div>
+</div>
+
+{% endblock %}

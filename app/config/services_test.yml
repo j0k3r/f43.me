@@ -1,0 +1,4 @@
+services:
+    # simple_pie_proxy.test:
+    #     alias: simple_pie_proxy
+    #     public: true

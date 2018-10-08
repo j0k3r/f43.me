@@ -1,6 +1,7 @@
 imports:
     - { resource: parameters.yml }
     - { resource: security.yml }
+    - { resource: services.yml }
 
 framework:
     #esi: ~
@@ -53,7 +54,7 @@ stof_doctrine_extensions:
             sluggable: true
 
 monolog:
-    channels: ['import']
+    channels: ['import', 'graby']
     handlers:
         console:
             type: console

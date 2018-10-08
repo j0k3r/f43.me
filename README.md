@@ -26,7 +26,7 @@ When it grabs a new item, there are several steps before we can say the item *is
 
 All of them works in a chain, we'll go thru all of them until we find one that match.
 
-> For curious people, this workflow happen in the [`Extractor->parseContent`](https://github.com/j0k3r/f43.me/blob/000dd43db9ab4429344918a2263bee3bf8aace24/src/FeedBundle/Content/Extractor.php#L68) method.
+> For curious people, this workflow happen in the [`Extractor->parseContent`](https://github.com/j0k3r/f43.me/blob/000dd43db9ab4429344918a2263bee3bf8aace24/src/AppBundle/Content/Extractor.php#L68) method.
 
 ### Improvers
 
@@ -42,7 +42,7 @@ An improver use 3 methods:
  * `updateUrl`: can do whatever it wants to update the url of an item (for Reddit, we extract the url from the `[link]`)
  * `updateContent`: add interesting information previous (or after) the readable content (for  Reddit we just put the readable content **after** the item content. *This method will be called AFTER the parser described below.*
 
-You can find some examples in the [improver folder](https://github.com/j0k3r/f43.me/tree/master/src/FeedBundle/Improver) (atm Reddit & HackerNews).
+You can find some examples in the [improver folder](https://github.com/j0k3r/f43.me/tree/master/src/AppBundle/Improver) (atm Reddit & HackerNews).
 
 ### Extractors
 
@@ -55,7 +55,7 @@ An extractor uses 2 methods:
  * `match`: tells if this extractor needs to work on that item (usually a bunch of regex & host matching)
  * `getContent`: it will call the related API or url to fetch the content from the match parameters found in the `match` method (like Twitter ID, Flickr ID, etc...) and return a clean html
 
-You can find some of them in the [extractor folder](https://github.com/j0k3r/f43.me/tree/master/src/FeedBundle/Extractor) (Flickr, Twitter, Github, etc...)
+You can find some of them in the [extractor folder](https://github.com/j0k3r/f43.me/tree/master/src/AppBundle/Extractor) (Flickr, Twitter, Github, etc...)
 
 ### Parsers
 
@@ -72,21 +72,14 @@ And finally, we can use some converters to transform HTML code to something diff
 
 For example, Instagram embed code doesn't include the image itself (this part is usually done in javascript). The Instagram converter use the Instagram extractor to retrieve the image of an embed code and put it back in the feed item content.
 
-You can find some of them in the [converter folder](https://github.com/j0k3r/f43.me/tree/master/src/FeedBundle/Converter) (only Instagram for the moment)
+You can find some of them in the [converter folder](https://github.com/j0k3r/f43.me/tree/master/src/AppBundle/Converter) (only Instagram for the moment)
 
 ## How to use it
 
 ### Requirements
 
- * PHP >= 5.6.0
- * MongoDB & the `php-mongo` extension (or `php-mongodb` for PHP 7)
- * [apcu](http://pecl.php.net/package/APCu) >= 4.0
-
-If you are using PHP >= 7, you should also run this command:
-
-```
-composer require "alcaeus/mongo-php-adapter=^1.0.0" --ignore-platform-reqs
-```
+ * PHP >= 7.1
+ * MongoDB >=3.2, <4 & the `php-mongodb` extension
 
 For each external API that improvers / extractors / parsers use, you will need an api key:
 
@@ -105,9 +98,9 @@ Follow these steps:
 ```
 git clone git@github.com:j0k3r/f43.me.git
 cd f43.me
-composer install
+SYMFONY_ENV=prod composer install -o --no-dev
 npm install
-php bin/console doctrine:mongodb:schema:create
+php bin/console doctrine:mongodb:schema:create -e=prod
 ./node_modules/gulp/bin/gulp.js
 ```
 
@@ -132,10 +125,10 @@ php /path/to/f43.me/bin/console feed:fetch-items --env=prod --slug=reddit -t
 
 ### Try it
 
-You can use the built-in Docker image using `docker-compose` (which will use PHP 7):
+You can use the built-in Docker image using `docker-compose`:
 
 ```
-docker-composer up --build
+docker-compose up --build
 ```
 
 You should be able to access the interface using `http://localhost:8100/app_dev.php`

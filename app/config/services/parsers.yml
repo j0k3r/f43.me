@@ -1,0 +1,20 @@
+services:
+    # parser
+    AppBundle\Parser\ParserChain:
+        class: AppBundle\Parser\ParserChain
+
+    feed.parser.external:
+        class: AppBundle\Parser\External
+        arguments:
+            - "@guzzle.client"
+            - 'https://mercury.postlight.com/parser'
+            - "%mercury_key%"
+        tags:
+            -  { name: feed.parser, alias: external }
+
+    feed.parser.internal:
+        class: AppBundle\Parser\Internal
+        arguments:
+            - "@graby"
+        tags:
+            -  { name: feed.parser, alias: internal }
