@@ -58,4 +58,18 @@ class DefaultImproverTest extends TestCase
         $default = new DefaultImprover($client);
         $this->assertSame('http://0.0.0.0/content?not-changed', $default->updateUrl('http://0.0.0.0/content'));
     }
+
+    public function testUpdateUrlFailHard()
+    {
+        $client = new Client();
+
+        $mock = new Mock([
+            new Response(400, [], Stream::factory('oops')),
+        ]);
+
+        $client->getEmitter()->attach($mock);
+
+        $default = new DefaultImprover($client);
+        $this->assertSame('http:///floooh.github.io/2018/10/06/bombjack.html?oups', $default->updateUrl('http:///floooh.github.io/2018/10/06/bombjack.html'));
+    }
 }

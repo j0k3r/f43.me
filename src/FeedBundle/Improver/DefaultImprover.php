@@ -79,6 +79,9 @@ class DefaultImprover
         } catch (RequestException $e) {
             // catch timeout, ssl verification that failed, etc ...
             return $url . (strpos($url, '?') ? '&' : '?') . 'not-changed';
+        } catch (\Exception $e) {
+            // in case anything else happend
+            return $url . (strpos($url, '?') ? '&' : '?') . 'oups';
         }
 
         $url = $response->getEffectiveUrl();
