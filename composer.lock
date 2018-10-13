@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "9be4794aec9ce66aa635f9532ab4c508",
+    "content-hash": "ee0bed61c95f5815722314a1973a9af3",
     "packages": [
         {
             "name": "alcaeus/mongo-php-adapter",
@@ -1856,16 +1856,16 @@
         },
         {
             "name": "j0k3r/graby-site-config",
-            "version": "1.0.61",
+            "version": "1.0.62",
             "source": {
                 "type": "git",
                 "url": "https://github.com/j0k3r/graby-site-config.git",
-                "reference": "6eef73a26d8139da2b06581b78686ae4b1b0b890"
+                "reference": "7a2c46abbac67f73f36f00de23fd8229f586ad25"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/j0k3r/graby-site-config/zipball/6eef73a26d8139da2b06581b78686ae4b1b0b890",
-                "reference": "6eef73a26d8139da2b06581b78686ae4b1b0b890",
+                "url": "https://api.github.com/repos/j0k3r/graby-site-config/zipball/7a2c46abbac67f73f36f00de23fd8229f586ad25",
+                "reference": "7a2c46abbac67f73f36f00de23fd8229f586ad25",
                 "shasum": ""
             },
             "require": {
@@ -1892,7 +1892,7 @@
                 }
             ],
             "description": "Graby site config files",
-            "time": "2018-10-03T14:25:10+00:00"
+            "time": "2018-10-08T14:32:07+00:00"
         },
         {
             "name": "j0k3r/php-imgur-api-client",
@@ -3204,7 +3204,7 @@
             ],
             "authors": [
                 {
-                    "name": "Sebastien Malot",
+                    "name": "Sebastien MALOT",
                     "email": "sebastien@malot.fr"
                 }
             ],

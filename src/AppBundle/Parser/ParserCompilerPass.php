@@ -21,6 +21,7 @@ class ParserCompilerPass implements CompilerPassInterface
         $taggedServices = $container->findTaggedServiceIds(
             'feed.parser'
         );
+
         foreach ($taggedServices as $id => $tagAttributes) {
             foreach ($tagAttributes as $attributes) {
                 $definition->addMethodCall(

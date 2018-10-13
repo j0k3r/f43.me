@@ -2,15 +2,28 @@
 
 namespace AppBundle\Command;
 
-use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
+use AppBundle\Repository\FeedItemRepository;
+use AppBundle\Repository\FeedRepository;
+use Doctrine\ODM\MongoDB\DocumentManager;
+use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Question\ConfirmationQuestion;
-use Symfony\Component\Filesystem\LockHandler;
+use Symfony\Component\Lock\Factory;
+use Symfony\Component\Lock\Store\FlockStore;
 
-class RemoveItemsCommand extends ContainerAwareCommand
+class RemoveItemsCommand extends Command
 {
+    public function __construct(FeedRepository $feedRepository, FeedItemRepository $feedItemRepository, DocumentManager $dm)
+    {
+        $this->feedRepository = $feedRepository;
+        $this->feedItemRepository = $feedItemRepository;
+        $this->dm = $dm;
+
+        parent::__construct();
+    }
+
     protected function configure()
     {
         $this
@@ -24,9 +37,12 @@ class RemoveItemsCommand extends ContainerAwareCommand
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $lock = new LockHandler($this->getName());
+        $store = new FlockStore(sys_get_temp_dir());
+        $factory = new Factory($store);
 
-        if (!$lock->lock()) {
+        $lock = $factory->createLock($this->getName());
+
+        if (!$lock->acquire()) {
             $output->writeLn('<error>The command is already running in another process.</error>');
 
             return 0;
@@ -42,20 +58,15 @@ class RemoveItemsCommand extends ContainerAwareCommand
             }
         }
 
-        $container = $this->getContainer();
-        $dm = $container->get('doctrine.odm.mongodb.document_manager');
-        $feedRepo = $dm->getRepository('AppBundle:Feed');
-        $feedItemRepo = $dm->getRepository('AppBundle:FeedItem');
-
         // retrieve feed to work on
         if ($slug = $input->getOption('slug')) {
-            $feed = $feedRepo->findOneBy(['slug' => $slug]);
+            $feed = $this->feedRepository->findOneBy(['slug' => $slug]);
             if (!$feed) {
                 return $output->writeLn('<error>Unable to find Feed document:</error> <comment>' . $slug . '</comment>');
             }
             $feeds = [$feed];
         } else {
-            $feeds = $feedRepo->findAll();
+            $feeds = $this->feedRepository->findAll();
         }
 
         if ($input->getOption('with-trace')) {
@@ -64,7 +75,7 @@ class RemoveItemsCommand extends ContainerAwareCommand
 
         $totalRemoved = 0;
         foreach ($feeds as $feed) {
-            $items = $feedItemRepo->findOldItemsByFeedId(
+            $items = $this->feedItemRepository->findOldItemsByFeedId(
                 $feed->getId(),
                 $input->getOption('max')
             );
@@ -72,7 +83,7 @@ class RemoveItemsCommand extends ContainerAwareCommand
             // manual remove. I can't find a way to perform a remove + skip in one query, it doesn't work :-/
             $removed = 0;
             foreach ($items as $item) {
-                $dm->remove($item);
+                $this->dm->remove($item);
                 ++$removed;
             }
 
@@ -83,9 +94,11 @@ class RemoveItemsCommand extends ContainerAwareCommand
             }
         }
 
-        $dm->flush();
-        $dm->clear();
+        $this->dm->flush();
+        $this->dm->clear();
 
         $output->writeLn('<comment>' . $totalRemoved . '</comment> items removed.');
+
+        $lock->release();
     }
 }

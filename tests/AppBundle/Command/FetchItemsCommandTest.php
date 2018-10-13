@@ -3,6 +3,7 @@
 namespace Tests\AppBundle\Command;
 
 use AppBundle\Command\FetchItemsCommand;
+use AppBundle\Content\Import;
 use Monolog\Handler\TestHandler;
 use Monolog\Logger;
 use Symfony\Bundle\FrameworkBundle\Console\Application;
@@ -24,12 +25,6 @@ class FetchItemsCommandTest extends WebTestCase
     public function setUp()
     {
         $client = static::createClient();
-
-        $application = new Application(static::$kernel);
-        $application->add(new FetchItemsCommand());
-
-        $this->command = $application->find('feed:fetch-items');
-        $this->commandTester = new CommandTester($this->command);
 
         $simplePieItem = $this->getMockBuilder('SimplePie_Item')
             ->disableOriginalConstructor()
@@ -67,13 +62,50 @@ class FetchItemsCommandTest extends WebTestCase
             ->method('init')
             ->will($this->returnValue($simplePie));
 
-        $client->getContainer()->set('AppBundle\Xml\SimplePieProxy', $simplePieProxy);
-
         $logger = new Logger('import');
         $this->handler = new TestHandler();
         $logger->pushHandler($this->handler);
 
-        $client->getContainer()->set('monolog.logger.import', $logger);
+        self::$kernel->getContainer()->get('app.parser.chain.test')->addParser(
+            self::$kernel->getContainer()->get('app.parser.internal.test'),
+            'internal'
+        );
+
+        self::$kernel->getContainer()->get('app.parser.chain.test')->addParser(
+            self::$kernel->getContainer()->get('app.parser.external.test'),
+            'external'
+        );
+
+        self::$kernel->getContainer()->get('app.improver.chain.test')->addImprover(
+            self::$kernel->getContainer()->get('app.improver.default_improver.test'),
+            'default_improver'
+        );
+
+        self::$kernel->getContainer()->get('app.improver.chain.test')->addImprover(
+            self::$kernel->getContainer()->get('app.improver.hackernews.test'),
+            'hackernews'
+        );
+
+        $import = new Import(
+            $simplePieProxy,
+            self::$kernel->getContainer()->get('app.content.extractor.test'),
+            self::$kernel->getContainer()->get('event_dispatcher.test'),
+            self::$kernel->getContainer()->get('dm.test'),
+            $logger
+        );
+
+        $application = new Application(static::$kernel);
+        $application->add(new FetchItemsCommand(
+            self::$kernel->getContainer()->get('app.repository.feed.test'),
+            self::$kernel->getContainer()->get('app.repository.feed_item.test'),
+            // self::$kernel->getContainer()->get('app.content.import.test'),
+            $import,
+            self::$kernel->getContainer()->get('router.test'),
+            'f43.me'
+        ));
+
+        $this->command = $application->find('feed:fetch-items');
+        $this->commandTester = new CommandTester($this->command);
     }
 
     public function testNoParams()

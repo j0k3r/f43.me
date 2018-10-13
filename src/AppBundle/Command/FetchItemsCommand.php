@@ -10,14 +10,17 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Filesystem\LockHandler;
+use Symfony\Component\Routing\RouterInterface;
 
 class FetchItemsCommand extends Command
 {
-    public function __construct(FeedRepository $feedRepository, FeedItemRepository $feedItemRepository, Import $contentImport)
+    public function __construct(FeedRepository $feedRepository, FeedItemRepository $feedItemRepository, Import $contentImport, RouterInterface $router, $domain)
     {
         $this->feedRepository = $feedRepository;
         $this->feedItemRepository = $feedItemRepository;
         $this->contentImport = $contentImport;
+        $this->router = $router;
+        $this->domain = $domain;
 
         parent::__construct();
     }
@@ -43,11 +46,10 @@ class FetchItemsCommand extends Command
         }
 
         $feeds = [];
-        $container = $this->getContainer();
 
         // define host for generating route
-        $context = $container->get('router')->getContext();
-        $context->setHost($container->getParameter('domain'));
+        $context = $this->router->getContext();
+        $context->setHost($this->domain);
 
         // retrieve feed to work on
         if ($slug = $input->getOption('slug')) {

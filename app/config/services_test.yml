@@ -2,3 +2,50 @@ services:
     # simple_pie_proxy.test:
     #     alias: simple_pie_proxy
     #     public: true
+    app.repository.feed.test:
+        alias: AppBundle\Repository\FeedRepository
+        public: true
+
+    app.repository.feed_item.test:
+        alias: AppBundle\Repository\FeedItemRepository
+        public: true
+
+    app.content.extractor.test:
+        alias: AppBundle\Content\Extractor
+        public: true
+
+    app.parser.chain.test:
+        alias: AppBundle\Parser\ParserChain
+        public: true
+
+    app.parser.internal.test:
+        alias: feed.parser.internal
+        public: true
+
+    app.parser.external.test:
+        alias: feed.parser.external
+        public: true
+
+    app.improver.chain.test:
+        alias: AppBundle\Improver\ImproverChain
+        public: true
+
+    app.improver.default_improver.test:
+        alias: feed.improver.default_improver
+        public: true
+
+    app.improver.hackernews.test:
+        alias: feed.improver.hackernews
+        public: true
+
+    router.test:
+        alias: Symfony\Component\Routing\RouterInterface
+        public: true
+
+    event_dispatcher.test:
+        alias: Symfony\Component\EventDispatcher\EventDispatcherInterface
+        public: true
+
+    dm.test:
+        alias: Doctrine\ODM\MongoDB\DocumentManager
+        public: true

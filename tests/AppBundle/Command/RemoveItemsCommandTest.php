@@ -17,7 +17,11 @@ class RemoveItemsCommandTest extends WebTestCase
         static::createClient();
 
         $application = new Application(static::$kernel);
-        $application->add(new RemoveItemsCommand());
+        $application->add(new RemoveItemsCommand(
+            self::$kernel->getContainer()->get('app.repository.feed.test'),
+            self::$kernel->getContainer()->get('app.repository.feed_item.test'),
+            self::$kernel->getContainer()->get('dm.test')
+        ));
 
         $this->command = $application->find('feed:remove-items');
         $this->commandTester = new CommandTester($this->command);
