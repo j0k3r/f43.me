@@ -1,10 +1,10 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "1c391e5765d89187599c3d32d1ebfa59",
+    "content-hash": "ee0bed61c95f5815722314a1973a9af3",
     "packages": [
         {
             "name": "alcaeus/mongo-php-adapter",
@@ -1856,20 +1856,20 @@
         },
         {
             "name": "j0k3r/graby-site-config",
-            "version": "1.0.61",
+            "version": "1.0.63",
             "source": {
                 "type": "git",
                 "url": "https://github.com/j0k3r/graby-site-config.git",
-                "reference": "6eef73a26d8139da2b06581b78686ae4b1b0b890"
+                "reference": "e22813010a2f315d81e1312e7515a48f2fe32311"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/j0k3r/graby-site-config/zipball/6eef73a26d8139da2b06581b78686ae4b1b0b890",
-                "reference": "6eef73a26d8139da2b06581b78686ae4b1b0b890",
+                "url": "https://api.github.com/repos/j0k3r/graby-site-config/zipball/e22813010a2f315d81e1312e7515a48f2fe32311",
+                "reference": "e22813010a2f315d81e1312e7515a48f2fe32311",
                 "shasum": ""
             },
             "require": {
-                "symfony/finder": "~2.6|~3.0"
+                "symfony/finder": "~2.6|~3.0|~4.0"
             },
             "require-dev": {
                 "liip/rmt": "1.2.*",
@@ -1892,7 +1892,7 @@
                 }
             ],
             "description": "Graby site config files",
-            "time": "2018-10-03T14:25:10+00:00"
+            "time": "2018-10-17T12:11:36+00:00"
         },
         {
             "name": "j0k3r/php-imgur-api-client",
@@ -2030,16 +2030,16 @@
         },
         {
             "name": "j0k3r/safecurl",
-            "version": "2.0.3",
+            "version": "2.0.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/j0k3r/safecurl.git",
-                "reference": "569ec1b1c237fe08f3a30ac64f2ff77e368fcafc"
+                "reference": "71bdb1a87502fa72b777e1106725d255d34478ab"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/j0k3r/safecurl/zipball/569ec1b1c237fe08f3a30ac64f2ff77e368fcafc",
-                "reference": "569ec1b1c237fe08f3a30ac64f2ff77e368fcafc",
+                "url": "https://api.github.com/repos/j0k3r/safecurl/zipball/71bdb1a87502fa72b777e1106725d255d34478ab",
+                "reference": "71bdb1a87502fa72b777e1106725d255d34478ab",
                 "shasum": ""
             },
             "require": {
@@ -2078,7 +2078,7 @@
                 "ssrf",
                 "websec"
             ],
-            "time": "2018-06-28T07:41:22+00:00"
+            "time": "2018-10-17T12:07:16+00:00"
         },
         {
             "name": "jdorn/sql-formatter",
@@ -3204,7 +3204,7 @@
             ],
             "authors": [
                 {
-                    "name": "Sebastien Malot",
+                    "name": "Sebastien MALOT",
                     "email": "sebastien@malot.fr"
                 }
             ],
@@ -4858,9 +4858,9 @@
         }
     ],
     "aliases": [],
-    "minimum-stability": "dev",
+    "minimum-stability": "stable",
     "stability-flags": [],
-    "prefer-stable": true,
+    "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
         "php": "^7.1"

@@ -1,0 +1,100 @@
+imports:
+    - { resource: services/extractors.yml }
+    - { resource: services/improvers.yml }
+    - { resource: services/converters.yml }
+    - { resource: services/parsers.yml }
+
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+        public: false
+
+    # autowire
+    AppBundle\:
+        resource: '../../src/AppBundle/*'
+        exclude: '../../src/AppBundle/{Document,DataFixtures,Converter,DomDocument,Extractor,Improver,Parser}'
+
+    AppBundle\Xml\Render:
+        arguments:
+            $generator: "%domain%"
+
+    AppBundle\Command\FetchItemsCommand:
+        arguments:
+            $domain: "%domain%"
+
+    AppBundle\EventListener\FeedItemSubscriber:
+        arguments:
+            $hub: "http://pubsubhubbub.appspot.com"
+        tags:
+            - { name: kernel.event_listener, event: app.after_item_cached, method: pingHub }
+
+    AppBundle\Xml\SimplePieProxy:
+        arguments:
+            $cache: "%kernel.root_dir%/cache/simplepie/"
+            $itemLimit: 20
+            $enableCache: false
+
+    AppBundle\Validator\Constraints\ConstraintRssValidator:
+        tags:
+            - { name: validator.constraint_validator, alias: valid_rss }
+
+    # https://coderwall.com/p/4gamjq
+    feed.converter.doctrine.mongodb:
+        class: Sensio\Bundle\FrameworkExtraBundle\Request\ParamConverter\DoctrineParamConverter
+        arguments:
+            - "@doctrine_mongodb"
+        tags:
+            - { name: request.param_converter }
+
+    # external service
+    imgur.client:
+        class: Imgur\Client
+        calls:
+            - [ setOption, [ 'client_id', "%imgur.client_id%" ] ]
+            - [ setOption, [ 'client_secret', "%imgur.client_secret%" ] ]
+
+    guzzle.client:
+        class: GuzzleHttp\Client
+        arguments:
+            - "%guzzle.options%"
+
+    graby:
+        class: Graby\Graby
+        arguments:
+            -
+                error_message: false
+                extractor:
+                    config_builder:
+                        site_config:
+                            - "%kernel.root_dir%/site_config"
+        calls:
+            - [ setLogger, [ "@logger" ] ]
+        tags:
+            - { name: monolog.logger, channel: graby }
+
+    graby.log_handler:
+        class: Graby\Monolog\Handler\GrabyHandler
+
+    Graby\Monolog\Handler\GrabyHandler:
+        alias: graby.log_handler
+
+    twitter.client:
+        class: TwitterOAuth\TwitterOAuth
+        arguments:
+            -
+                consumer_key: "%twitter.consumer_key%"
+                consumer_secret: "%twitter.consumer_secret%"
+                oauth_token: "%twitter.access_token%"
+                oauth_token_secret: "%twitter.access_token_secret%"
+                output_format: 'array'
+
+    # custom formatter for import commande (below)
+    monolog.import.formatter:
+        class: Symfony\Bridge\Monolog\Formatter\ConsoleFormatter
+        arguments:
+            - "[%%datetime%%] %%start_tag%%%%message%%%%end_tag%% %%context%% %%extra%%\n"
+
+    # alias to external service
+    GuzzleHttp\Client:
+        alias: guzzle.client

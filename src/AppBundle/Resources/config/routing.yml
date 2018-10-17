@@ -1,0 +1,102 @@
+# auth
+login:
+    path:  /login
+    defaults: { _controller: AppBundle:Security:login }
+    methods:  [GET]
+
+login_check:
+    path:  /login_check
+    methods:  [POST]
+
+logout:
+    path:     /logout
+    methods:  [GET]
+
+# test
+feed_test:
+    path:  /feed/test
+    defaults: { _controller: AppBundle:FeedTest:index }
+    methods:  [GET, POST]
+
+# feed
+feed_dashboard:
+    path:  /dashboard
+    defaults: { _controller: AppBundle:Feed:dashboard }
+    methods:  [GET]
+
+feed_publicview:
+    path:  /
+    defaults: { _controller: AppBundle:Feed:public }
+    methods:  [GET]
+
+feed_homepage:
+    path:  /feeds
+    defaults: { _controller: AppBundle:Feed:index }
+    methods:  [GET]
+
+feed_new:
+    path:  /feed/new
+    defaults: { _controller: AppBundle:Feed:new }
+    methods:  [GET]
+
+feed_create:
+    path:  /feed/create
+    defaults: { _controller: AppBundle:Feed:create }
+    methods:  [POST]
+
+feed_edit:
+    path:  /feed/{slug}/edit
+    defaults: { _controller: AppBundle:Feed:edit }
+    methods:  [GET, POST]
+
+feed_delete:
+    path:  /feed/{slug}/delete
+    defaults: { _controller: AppBundle:Feed:delete }
+    methods:  [POST]
+
+feed_xml:
+    path:     /{slug}.xml
+    defaults: { _controller: AppBundle:Feed:xml, _format: xml }
+    methods:  [HEAD, GET]
+
+# feed item
+feeditem_homepage:
+    path:  /feed/{slug}/items
+    defaults: { _controller: AppBundle:FeedItem:index }
+    methods:  [GET]
+
+feeditem_preview_new:
+    path:  /feed/{slug}/previewItem
+    defaults: { _controller: AppBundle:FeedItem:previewNew }
+    methods:  [GET]
+
+feeditem_test:
+    path:  /feed/{slug}/testItem
+    defaults: { _controller: AppBundle:FeedItem:testItem }
+    methods:  [GET]
+
+feeditem_preview_cached:
+    path:  /item/{id}/preview
+    defaults: { _controller: AppBundle:FeedItem:previewCached }
+    methods:  [GET]
+
+feeditem_delete_all:
+    path:  /feed/{slug}/items/deleteAll
+    defaults: { _controller: AppBundle:FeedItem:deleteAll }
+    methods:  [POST]
+
+# feed log
+feedlog_homepage:
+    path:  /logs
+    defaults: { _controller: AppBundle:FeedLog:index }
+    methods:  [GET]
+
+feedlog_feed:
+    path:  /feed/{slug}/logs
+    defaults: { _controller: AppBundle:FeedLog:feed }
+    methods:  [GET]
+
+feedlog_delete_all:
+    path:  /feed/{slug}/logs/deleteAll
+    defaults: { _controller: AppBundle:FeedLog:deleteAll }
+    methods:  [POST]

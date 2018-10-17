@@ -5,7 +5,7 @@ filter:
         - 'var/*'
         - 'bin/*'
         - 'web/*'
-        - 'src/Api43/FeedBundle/Tests/*'
+        - 'src/AppBundle/Tests/*'
         - '*Test.php'
 
 tools:

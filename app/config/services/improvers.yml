@@ -1,0 +1,26 @@
+services:
+    # improver
+    AppBundle\Improver\ImproverChain:
+        class: AppBundle\Improver\ImproverChain
+
+    feed.improver.hackernews:
+        class: AppBundle\Improver\HackerNews
+        arguments:
+            - "@guzzle.client"
+        tags:
+            -  { name: feed.improver, alias: hackernews }
+
+    feed.improver.reddit:
+        class: AppBundle\Improver\Reddit
+        arguments:
+            - "@guzzle.client"
+        tags:
+            -  { name: feed.improver, alias: reddit }
+
+    # this one should be the last one (because this is the default one :)
+    feed.improver.default_improver:
+        class: AppBundle\Improver\DefaultImprover
+        arguments:
+            - "@guzzle.client"
+        tags:
+            -  { name: feed.improver, alias: default_improver }

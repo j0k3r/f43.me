@@ -1,0 +1,22 @@
+services:
+    # feed converter
+    AppBundle\Converter\ConverterChain:
+        class: AppBundle\Converter\ConverterChain
+
+    feed.converter.instagram:
+        class: AppBundle\Converter\Instagram
+        arguments:
+            - "@feed.extractor.instagram"
+        calls:
+            - [ setLogger, [ "@logger" ]]
+        tags:
+            -  { name: feed.converter, alias: instagram }
+
+    feed.converter.twitter:
+        class: AppBundle\Converter\Twitter
+        arguments:
+            - "@feed.extractor.twitter"
+        calls:
+            - [ setLogger, [ "@logger" ]]
+        tags:
+            -  { name: feed.converter, alias: twitter }

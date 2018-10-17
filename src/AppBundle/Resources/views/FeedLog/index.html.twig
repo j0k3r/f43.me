@@ -1,0 +1,39 @@
+{% extends "AppBundle::layout.html.twig" %}
+
+{% block h2_title %}
+    Feed logs
+    <small>{{ feedlogs|length }} last items</small>
+{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="large-12 columns">
+        {% if feedlogs|length > 0 %}
+            <table class="table-feedlogs">
+                <thead>
+                    <tr>
+                        <th>Feed</th>
+                        <th>Items</th>
+                        <th>Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for feedlog in feedlogs %}
+                    <tr>
+                        <td>
+                            {{ include('AppBundle:Feed:_favicon.html.twig', {'host': feedlog.feed.host}) }}
+                            <a href="{{ path('feed_edit', { 'slug': feedlog.feed.slug }) }}">{{ feedlog.feed.name }}</a>
+                        </td>
+                        <td class="items-count">{{ feedlog.itemsnumber }}</td>
+                        <td class="time-ago" title="{{ feedlog.createdat|date('r') }}">{{ feedlog.createdat|date('d/m/y - H:i:s') }}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <p>No feed logs yet..</p>
+        {% endif %}
+    </div>
+</div>
+
+{% endblock %}

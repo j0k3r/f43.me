@@ -4,11 +4,19 @@
     "license": "MIT",
     "type": "project",
     "autoload": {
-        "psr-4": { "Api43\\": "src" },
-        "classmap": [ "app/AppKernel.php", "app/AppCache.php" ]
+        "psr-4": {
+            "AppBundle\\": "src/AppBundle"
+        },
+        "classmap": [
+            "app/AppKernel.php",
+            "app/AppCache.php"
+        ]
     },
     "autoload-dev": {
-        "psr-4": { "Tests\\": "tests/" }
+        "psr-4": {
+            "Tests\\": "tests/"
+        },
+        "files": [ "vendor/symfony/symfony/src/Symfony/Component/VarDumper/Resources/functions/dump.php" ]
     },
     "authors": [
         {
@@ -27,7 +35,7 @@
         "sensio/distribution-bundle": "^5.0.19",
         "sensio/framework-extra-bundle": "^5.2.1",
         "incenteev/composer-parameter-handler": "^2.0",
-        "doctrine/mongodb-odm-bundle": "^3.2",
+        "doctrine/mongodb-odm-bundle": "^3.5",
         "stof/doctrine-extensions-bundle": "~1.1",
         "j0k3r/graby": "^1.10",
         "simplepie/simplepie": "~1.4",
@@ -61,8 +69,6 @@
             "@post-cmd"
         ]
     },
-    "minimum-stability": "dev",
-    "prefer-stable": true,
     "config": {
         "platform": {
             "php": "7.1",

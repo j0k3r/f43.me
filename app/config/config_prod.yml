@@ -32,6 +32,7 @@ monolog:
             level: error
         console:
             type: console
+            process_psr_3_messages: false
 
 doctrine_mongodb:
     document_managers:
