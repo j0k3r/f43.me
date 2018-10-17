@@ -1,6 +1,14 @@
-FROM node:9
+FROM node:8-alpine
 
 # Install ruby-sass and ruby-compass
-RUN apt-get update \
-    && apt-get -y install --no-install-recommends ruby-sass ruby-compass \
-    && apt-get clean; rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /usr/share/doc/*
+RUN apk add --update \
+    ruby \
+    ruby-dev \
+    libffi-dev \
+    build-base
+
+RUN gem install listen sass compass --no-document
+
+RUN apk del build-base libffi-dev ruby-dev
+
+RUN rm -rf /var/cache/apk/*
