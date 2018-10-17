@@ -20,7 +20,7 @@ class ParserCompilerPassTest extends TestCase
     {
         $container = new ContainerBuilder();
         $container
-            ->register('feed.parser.chain')
+            ->register('AppBundle\Parser\ParserChain')
             ->setPublic(false)
         ;
 
@@ -31,9 +31,9 @@ class ParserCompilerPassTest extends TestCase
 
         $this->process($container);
 
-        $this->assertTrue($container->hasDefinition('feed.parser.chain'));
+        $this->assertTrue($container->hasDefinition('AppBundle\Parser\ParserChain'));
 
-        $definition = $container->getDefinition('feed.parser.chain');
+        $definition = $container->getDefinition('AppBundle\Parser\ParserChain');
         $this->assertTrue($definition->hasMethodCall('addParser'));
 
         $calls = $definition->getMethodCalls();

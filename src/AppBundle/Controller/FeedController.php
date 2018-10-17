@@ -28,7 +28,7 @@ class FeedController extends Controller
     public function dashboardAction(FeedRepository $feedRepository, FeedLogRepository $feedLogRepository, FeedItemRepository $feedItemRepository)
     {
         $feeds = $feedRepository->findAllOrderedByDate(20);
-        $feedlogs = $feedItemRepository->findAllOrderedById(10);
+        $feedlogs = $feedLogRepository->findAllOrderedById(10);
         $historylogs = $feedLogRepository->findStatsForLastDays();
 
         return $this->render('AppBundle:Feed:dashboard.html.twig', [
@@ -131,11 +131,11 @@ class FeedController extends Controller
                 $dm->persist($feed);
                 $dm->flush();
 
-                $sesion->getFlashBag()->add('notice', 'Document updated!');
+                $session->getFlashBag()->add('notice', 'Document updated!');
 
                 return $this->redirect($this->generateUrl('feed_edit', ['slug' => $feed->getSlug()]));
             }
-            $sesion->getFlashBag()->add('error', 'Form is invalid.');
+            $session->getFlashBag()->add('error', 'Form is invalid.');
         }
 
         $lastItem = $feedItemRepository->findLastItemByFeedId($feed->getId());

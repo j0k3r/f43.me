@@ -20,7 +20,7 @@ class ImproverCompilerPassTest extends TestCase
     {
         $container = new ContainerBuilder();
         $container
-            ->register('feed.improver.chain')
+            ->register('AppBundle\Improver\ImproverChain')
             ->setPublic(false)
         ;
 
@@ -31,9 +31,9 @@ class ImproverCompilerPassTest extends TestCase
 
         $this->process($container);
 
-        $this->assertTrue($container->hasDefinition('feed.improver.chain'));
+        $this->assertTrue($container->hasDefinition('AppBundle\Improver\ImproverChain'));
 
-        $definition = $container->getDefinition('feed.improver.chain');
+        $definition = $container->getDefinition('AppBundle\Improver\ImproverChain');
         $this->assertTrue($definition->hasMethodCall('addImprover'));
 
         $calls = $definition->getMethodCalls();

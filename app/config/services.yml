@@ -76,6 +76,9 @@ services:
     graby.log_handler:
         class: Graby\Monolog\Handler\GrabyHandler
 
+    Graby\Monolog\Handler\GrabyHandler:
+        alias: graby.log_handler
+
     twitter.client:
         class: TwitterOAuth\TwitterOAuth
         arguments:

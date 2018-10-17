@@ -1856,20 +1856,20 @@
         },
         {
             "name": "j0k3r/graby-site-config",
-            "version": "1.0.62",
+            "version": "1.0.63",
             "source": {
                 "type": "git",
                 "url": "https://github.com/j0k3r/graby-site-config.git",
-                "reference": "7a2c46abbac67f73f36f00de23fd8229f586ad25"
+                "reference": "e22813010a2f315d81e1312e7515a48f2fe32311"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/j0k3r/graby-site-config/zipball/7a2c46abbac67f73f36f00de23fd8229f586ad25",
-                "reference": "7a2c46abbac67f73f36f00de23fd8229f586ad25",
+                "url": "https://api.github.com/repos/j0k3r/graby-site-config/zipball/e22813010a2f315d81e1312e7515a48f2fe32311",
+                "reference": "e22813010a2f315d81e1312e7515a48f2fe32311",
                 "shasum": ""
             },
             "require": {
-                "symfony/finder": "~2.6|~3.0"
+                "symfony/finder": "~2.6|~3.0|~4.0"
             },
             "require-dev": {
                 "liip/rmt": "1.2.*",
@@ -1892,7 +1892,7 @@
                 }
             ],
             "description": "Graby site config files",
-            "time": "2018-10-08T14:32:07+00:00"
+            "time": "2018-10-17T12:11:36+00:00"
         },
         {
             "name": "j0k3r/php-imgur-api-client",
@@ -2030,16 +2030,16 @@
         },
         {
             "name": "j0k3r/safecurl",
-            "version": "2.0.3",
+            "version": "2.0.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/j0k3r/safecurl.git",
-                "reference": "569ec1b1c237fe08f3a30ac64f2ff77e368fcafc"
+                "reference": "71bdb1a87502fa72b777e1106725d255d34478ab"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/j0k3r/safecurl/zipball/569ec1b1c237fe08f3a30ac64f2ff77e368fcafc",
-                "reference": "569ec1b1c237fe08f3a30ac64f2ff77e368fcafc",
+                "url": "https://api.github.com/repos/j0k3r/safecurl/zipball/71bdb1a87502fa72b777e1106725d255d34478ab",
+                "reference": "71bdb1a87502fa72b777e1106725d255d34478ab",
                 "shasum": ""
             },
             "require": {
@@ -2078,7 +2078,7 @@
                 "ssrf",
                 "websec"
             ],
-            "time": "2018-06-28T07:41:22+00:00"
+            "time": "2018-10-17T12:07:16+00:00"
         },
         {
             "name": "jdorn/sql-formatter",

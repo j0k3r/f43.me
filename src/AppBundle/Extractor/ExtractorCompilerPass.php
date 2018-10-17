@@ -10,12 +10,12 @@ class ExtractorCompilerPass implements CompilerPassInterface
 {
     public function process(ContainerBuilder $container)
     {
-        if (!$container->hasDefinition('feed.extractor.chain')) {
+        if (!$container->hasDefinition('AppBundle\Extractor\ExtractorChain')) {
             return;
         }
 
         $definition = $container->getDefinition(
-            'feed.extractor.chain'
+            'AppBundle\Extractor\ExtractorChain'
         );
 
         $taggedServices = $container->findTaggedServiceIds(

@@ -20,7 +20,7 @@ class ExtractorCompilerPassTest extends TestCase
     {
         $container = new ContainerBuilder();
         $container
-            ->register('feed.extractor.chain')
+            ->register('AppBundle\Extractor\ExtractorChain')
             ->setPublic(false)
         ;
 
@@ -31,9 +31,9 @@ class ExtractorCompilerPassTest extends TestCase
 
         $this->process($container);
 
-        $this->assertTrue($container->hasDefinition('feed.extractor.chain'));
+        $this->assertTrue($container->hasDefinition('AppBundle\Extractor\ExtractorChain'));
 
-        $definition = $container->getDefinition('feed.extractor.chain');
+        $definition = $container->getDefinition('AppBundle\Extractor\ExtractorChain');
         $this->assertTrue($definition->hasMethodCall('addExtractor'));
 
         $calls = $definition->getMethodCalls();

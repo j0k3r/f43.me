@@ -7,7 +7,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Security\Core\Authorization\AuthorizationChecker;
+use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 /**
@@ -22,7 +22,7 @@ class SecurityController extends Controller
      *
      * @return Response|RedirectResponse
      */
-    public function loginAction(Request $request, AuthorizationChecker $authorizationChecker, AuthenticationUtils $authenticationUtils)
+    public function loginAction(Request $request, AuthorizationCheckerInterface $authorizationChecker, AuthenticationUtils $authenticationUtils)
     {
         if (true === $authorizationChecker->isGranted('ROLE_ADMIN')) {
             return $this->redirect($this->generateUrl('feed_dashboard'));

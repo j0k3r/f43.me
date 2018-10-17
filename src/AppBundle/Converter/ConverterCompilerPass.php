@@ -10,12 +10,12 @@ class ConverterCompilerPass implements CompilerPassInterface
 {
     public function process(ContainerBuilder $container)
     {
-        if (!$container->hasDefinition('feed.converter.chain')) {
+        if (!$container->hasDefinition('AppBundle\Converter\ConverterChain')) {
             return;
         }
 
         $definition = $container->getDefinition(
-            'feed.converter.chain'
+            'AppBundle\Converter\ConverterChain'
         );
 
         $taggedServices = $container->findTaggedServiceIds(

@@ -20,7 +20,7 @@ class ConverterCompilerPassTest extends TestCase
     {
         $container = new ContainerBuilder();
         $container
-            ->register('feed.converter.chain')
+            ->register('AppBundle\Converter\ConverterChain')
             ->setPublic(false)
         ;
 
@@ -31,9 +31,9 @@ class ConverterCompilerPassTest extends TestCase
 
         $this->process($container);
 
-        $this->assertTrue($container->hasDefinition('feed.converter.chain'));
+        $this->assertTrue($container->hasDefinition('AppBundle\Converter\ConverterChain'));
 
-        $definition = $container->getDefinition('feed.converter.chain');
+        $definition = $container->getDefinition('AppBundle\Converter\ConverterChain');
         $this->assertTrue($definition->hasMethodCall('addConverter'));
 
         $calls = $definition->getMethodCalls();
