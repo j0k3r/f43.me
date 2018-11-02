@@ -3,7 +3,6 @@
 namespace AppBundle\Improver;
 
 use GuzzleHttp\Client;
-use GuzzleHttp\Exception\RequestException;
 
 /**
  * Default Improver.
@@ -67,24 +66,6 @@ class DefaultImprover
      */
     public function updateUrl($url)
     {
-        try {
-            $response = $this->client
-                ->get(
-                    $url,
-                    // force user agent for some provider (to avoid bad browser detection)
-                    ['headers' => [
-                        'User-Agent' => 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/535.2 (KHTML, like Gecko) Chrome/15.0.874.92 Safari/535.2',
-                    ]]
-                );
-        } catch (RequestException $e) {
-            // catch timeout, ssl verification that failed, etc ...
-            return $url . (strpos($url, '?') ? '&' : '?') . 'not-changed';
-        } catch (\Exception $e) {
-            // in case anything else happend
-            return $url . (strpos($url, '?') ? '&' : '?') . 'oups';
-        }
-
-        $url = $response->getEffectiveUrl();
         // convert bad encoded character
         $url = str_replace('&amp%3B', '&', $url);
 

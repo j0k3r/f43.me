@@ -5,7 +5,6 @@ namespace Tests\AppBundle\Improver;
 use AppBundle\Improver\DefaultImprover;
 use GuzzleHttp\Client;
 use GuzzleHttp\Message\Response;
-use GuzzleHttp\Stream\Stream;
 use GuzzleHttp\Subscriber\Mock;
 use PHPUnit\Framework\TestCase;
 
@@ -43,33 +42,5 @@ class DefaultImproverTest extends TestCase
         $default = new DefaultImprover($client);
         $this->assertSame($expected, $default->updateUrl($url));
         $this->assertSame('', $default->updateContent(''));
-    }
-
-    public function testUpdateUrlFail()
-    {
-        $client = new Client();
-
-        $mock = new Mock([
-            new Response(400, [], Stream::factory('oops')),
-        ]);
-
-        $client->getEmitter()->attach($mock);
-
-        $default = new DefaultImprover($client);
-        $this->assertSame('http://0.0.0.0/content?not-changed', $default->updateUrl('http://0.0.0.0/content'));
-    }
-
-    public function testUpdateUrlFailHard()
-    {
-        $client = new Client();
-
-        $mock = new Mock([
-            new Response(400, [], Stream::factory('oops')),
-        ]);
-
-        $client->getEmitter()->attach($mock);
-
-        $default = new DefaultImprover($client);
-        $this->assertSame('http:///floooh.github.io/2018/10/06/bombjack.html?oups', $default->updateUrl('http:///floooh.github.io/2018/10/06/bombjack.html'));
     }
 }
