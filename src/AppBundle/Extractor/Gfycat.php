@@ -50,7 +50,7 @@ class Gfycat extends AbstractExtractor
 
         try {
             $data = $this->client
-                ->get('http://gfycat.com/cajax/get/' . $this->gfycatId)
+                ->get('https://api.gfycat.com/v1/gfycats/' . $this->gfycatId)
                 ->json();
         } catch (RequestException $e) {
             $this->logger->warning('Gfycat extract failed for: ' . $this->gfycatId, [
