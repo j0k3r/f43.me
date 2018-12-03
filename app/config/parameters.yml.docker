@@ -1,4 +1,3 @@
-# This file is auto-generated during the composer install
 parameters:
     database_server: 'mongodb://db:27017'
     database_name: f43me
@@ -36,5 +35,6 @@ parameters:
     twitter.consumer_secret: xxx
     twitter.access_token: xxx
     twitter.access_token_secret: xxx
-
+    github.client_id: xxx
+    github.client_secret: xxx
     sentry_dsn: "https://xxx:xxx@sentry.io/666"
