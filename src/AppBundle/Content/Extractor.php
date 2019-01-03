@@ -20,6 +20,7 @@ class Extractor
     protected $parserChain;
     protected $parser;
     protected $allowAllParser = false;
+    protected $reloadConfigFiles = false;
 
     /**
      * Content Extractor will use Extractor, Improver & Parser to get the readable content.
@@ -61,6 +62,19 @@ class Extractor
     }
 
     /**
+     * Force parser to reload config files to use freshly created files.
+     * Only used for the Internal parser.
+     *
+     * @return Extractor Current object
+     */
+    public function enableReloadConfigFiles()
+    {
+        $this->reloadConfigFiles = true;
+
+        return $this;
+    }
+
+    /**
      * Try to retrieve content from a given url.
      *
      * @param string      $url         RSS item url
@@ -97,7 +111,7 @@ class Extractor
         // this means the selected extractor wasn't able to extract content OR
         // no extractor were able to match the url
         if (!$this->content) {
-            $this->content = $this->parser->parse($this->url);
+            $this->content = $this->parser->parse($this->url, $this->reloadConfigFiles);
         }
 
         // if we allow all parser to be tested to get content, loop through all of them

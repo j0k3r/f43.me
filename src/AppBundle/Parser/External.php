@@ -30,7 +30,7 @@ class External extends AbstractParser
     /**
      * {@inheritdoc}
      */
-    public function parse($url)
+    public function parse($url, $reloadConfigFiles = false)
     {
         try {
             $data = $this->client

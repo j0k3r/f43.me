@@ -51,6 +51,7 @@ class FeedTestController extends Controller
             }
 
             $content = $contentExtractor
+                ->enableReloadConfigFiles()
                 ->init($form->get('parser')->getData())
                 ->parseContent($form->get('link')->getData());
 
