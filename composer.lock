@@ -1805,16 +1805,16 @@
         },
         {
             "name": "j0k3r/graby",
-            "version": "1.15.5",
+            "version": "1.16.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/j0k3r/graby.git",
-                "reference": "b3dfd7b2eb08686182885b49dabc41795ca07346"
+                "reference": "5c9b33d9f63d133ad249fdc8baebc1fddf1e0f3c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/j0k3r/graby/zipball/b3dfd7b2eb08686182885b49dabc41795ca07346",
-                "reference": "b3dfd7b2eb08686182885b49dabc41795ca07346",
+                "url": "https://api.github.com/repos/j0k3r/graby/zipball/5c9b33d9f63d133ad249fdc8baebc1fddf1e0f3c",
+                "reference": "5c9b33d9f63d133ad249fdc8baebc1fddf1e0f3c",
                 "shasum": ""
             },
             "require": {
@@ -1860,7 +1860,7 @@
                 }
             ],
             "description": "Graby helps you extract article content from web pages",
-            "time": "2018-12-04T15:05:28+00:00"
+            "time": "2019-01-04T06:12:03+00:00"
         },
         {
             "name": "j0k3r/graby-site-config",
