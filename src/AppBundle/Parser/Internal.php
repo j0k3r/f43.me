@@ -23,8 +23,12 @@ class Internal extends AbstractParser
     /**
      * {@inheritdoc}
      */
-    public function parse($url)
+    public function parse($url, $reloadConfigFiles = false)
     {
+        if (true === $reloadConfigFiles) {
+            $this->graby->reloadConfigFiles();
+        }
+
         try {
             $result = $this->graby->fetchContent($url);
         } catch (\Exception $e) {

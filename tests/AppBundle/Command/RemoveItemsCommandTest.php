@@ -101,7 +101,7 @@ class RemoveItemsCommandTest extends WebTestCase
      */
     protected function getInputStream($input)
     {
-        $stream = fopen('php://memory', 'r+b', false);
+        $stream = fopen('php://memory', 'r+', false);
         fwrite($stream, $input);
         rewind($stream);
 
