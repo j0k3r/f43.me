@@ -42,7 +42,7 @@ class Extractor
      * Initialize some common variable.
      *
      * @param string    $chosenParser   Could be "internal" or "external"
-     * @param null|Feed $feed           Define the Feed object to work on
+     * @param Feed|null $feed           Define the Feed object to work on
      * @param bool      $allowAllParser Define if we have to use all *known* parser to get the content if the defined one failed.
      *                                  For example, Internal parser can't make content readable, it will use the External one, etc ..
      *
