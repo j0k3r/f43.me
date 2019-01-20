@@ -1048,16 +1048,16 @@
         },
         {
             "name": "doctrine/mongodb-odm",
-            "version": "1.2.5",
+            "version": "1.2.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/mongodb-odm.git",
-                "reference": "e7c926b8a0cae830c0b7f48005afde83fd3921a2"
+                "reference": "496ab5368afea176a1e368769a8eb643656cb7fb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/mongodb-odm/zipball/e7c926b8a0cae830c0b7f48005afde83fd3921a2",
-                "reference": "e7c926b8a0cae830c0b7f48005afde83fd3921a2",
+                "url": "https://api.github.com/repos/doctrine/mongodb-odm/zipball/496ab5368afea176a1e368769a8eb643656cb7fb",
+                "reference": "496ab5368afea176a1e368769a8eb643656cb7fb",
                 "shasum": ""
             },
             "require": {
@@ -1067,7 +1067,7 @@
                 "doctrine/common": "~2.4",
                 "doctrine/inflector": "~1.0",
                 "doctrine/instantiator": "^1.0.1",
-                "doctrine/mongodb": "^1.6.1",
+                "doctrine/mongodb": "^1.6.3",
                 "php": "^5.6 || ^7.0",
                 "symfony/console": "~2.3|~3.0|^4.0"
             },
@@ -1128,7 +1128,7 @@
                 "odm",
                 "persistence"
             ],
-            "time": "2018-07-20T05:40:16+00:00"
+            "time": "2019-01-15T10:22:40+00:00"
         },
         {
             "name": "doctrine/mongodb-odm-bundle",
@@ -1864,16 +1864,16 @@
         },
         {
             "name": "j0k3r/graby-site-config",
-            "version": "1.0.71",
+            "version": "1.0.72",
             "source": {
                 "type": "git",
                 "url": "https://github.com/j0k3r/graby-site-config.git",
-                "reference": "ed50d5087b14e2dc830a922bf6c2c4f2e6acd496"
+                "reference": "b76b230cf044e134574de7cd7af09d6b01ab0f15"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/j0k3r/graby-site-config/zipball/ed50d5087b14e2dc830a922bf6c2c4f2e6acd496",
-                "reference": "ed50d5087b14e2dc830a922bf6c2c4f2e6acd496",
+                "url": "https://api.github.com/repos/j0k3r/graby-site-config/zipball/b76b230cf044e134574de7cd7af09d6b01ab0f15",
+                "reference": "b76b230cf044e134574de7cd7af09d6b01ab0f15",
                 "shasum": ""
             },
             "require": {
@@ -1900,7 +1900,7 @@
                 }
             ],
             "description": "Graby site config files",
-            "time": "2019-01-07T09:15:17+00:00"
+            "time": "2019-01-11T12:55:48+00:00"
         },
         {
             "name": "j0k3r/php-imgur-api-client",
@@ -3179,20 +3179,21 @@
         },
         {
             "name": "smalot/pdfparser",
-            "version": "v0.13.2",
+            "version": "v0.13.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/smalot/pdfparser.git",
-                "reference": "f5e85c023491aecc88e8f6227536d60e1bb4a241"
+                "reference": "c3a050fb9b47ec3a0ce1b6f1b6f48ec822ba04d6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/smalot/pdfparser/zipball/f5e85c023491aecc88e8f6227536d60e1bb4a241",
-                "reference": "f5e85c023491aecc88e8f6227536d60e1bb4a241",
+                "url": "https://api.github.com/repos/smalot/pdfparser/zipball/c3a050fb9b47ec3a0ce1b6f1b6f48ec822ba04d6",
+                "reference": "c3a050fb9b47ec3a0ce1b6f1b6f48ec822ba04d6",
                 "shasum": ""
             },
             "require": {
-                "ext-iconv": "*",
+                "ext-mbstring": "*",
+                "ext-zlib": "*",
                 "php": ">=5.3.0",
                 "tecnickcom/tcpdf": "~6.0"
             },
@@ -3224,7 +3225,7 @@
                 "pdf",
                 "text"
             ],
-            "time": "2018-06-23T08:43:13+00:00"
+            "time": "2019-01-11T08:49:57+00:00"
         },
         {
             "name": "stof/doctrine-extensions-bundle",
@@ -4010,16 +4011,16 @@
         },
         {
             "name": "twig/twig",
-            "version": "v2.6.0",
+            "version": "v2.6.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/twigphp/Twig.git",
-                "reference": "a11dd39f5b6589e14f0ff3b36675d06047c589b1"
+                "reference": "7d7342c8a4059fefb9b8d07db0cc14007021f9b7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/twigphp/Twig/zipball/a11dd39f5b6589e14f0ff3b36675d06047c589b1",
-                "reference": "a11dd39f5b6589e14f0ff3b36675d06047c589b1",
+                "url": "https://api.github.com/repos/twigphp/Twig/zipball/7d7342c8a4059fefb9b8d07db0cc14007021f9b7",
+                "reference": "7d7342c8a4059fefb9b8d07db0cc14007021f9b7",
                 "shasum": ""
             },
             "require": {
@@ -4073,7 +4074,7 @@
             "keywords": [
                 "templating"
             ],
-            "time": "2018-12-16T10:36:48+00:00"
+            "time": "2019-01-14T15:00:48+00:00"
         },
         {
             "name": "wallabag/tcpdf",
