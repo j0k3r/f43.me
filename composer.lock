@@ -1805,16 +1805,16 @@
         },
         {
             "name": "j0k3r/graby",
-            "version": "1.18.0",
+            "version": "1.18.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/j0k3r/graby.git",
-                "reference": "7ac1e2d696744c1f7c9c76658677efda33df020a"
+                "reference": "802d22d2d1f5de19feeaab5dcf70142bb1ebc12b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/j0k3r/graby/zipball/7ac1e2d696744c1f7c9c76658677efda33df020a",
-                "reference": "7ac1e2d696744c1f7c9c76658677efda33df020a",
+                "url": "https://api.github.com/repos/j0k3r/graby/zipball/802d22d2d1f5de19feeaab5dcf70142bb1ebc12b",
+                "reference": "802d22d2d1f5de19feeaab5dcf70142bb1ebc12b",
                 "shasum": ""
             },
             "require": {
@@ -1860,20 +1860,20 @@
                 }
             ],
             "description": "Graby helps you extract article content from web pages",
-            "time": "2019-01-08T09:12:43+00:00"
+            "time": "2019-01-21T15:36:19+00:00"
         },
         {
             "name": "j0k3r/graby-site-config",
-            "version": "1.0.72",
+            "version": "1.0.73",
             "source": {
                 "type": "git",
                 "url": "https://github.com/j0k3r/graby-site-config.git",
-                "reference": "b76b230cf044e134574de7cd7af09d6b01ab0f15"
+                "reference": "350d0c3f1333203af0985d9243d457cf9e4479cd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/j0k3r/graby-site-config/zipball/b76b230cf044e134574de7cd7af09d6b01ab0f15",
-                "reference": "b76b230cf044e134574de7cd7af09d6b01ab0f15",
+                "url": "https://api.github.com/repos/j0k3r/graby-site-config/zipball/350d0c3f1333203af0985d9243d457cf9e4479cd",
+                "reference": "350d0c3f1333203af0985d9243d457cf9e4479cd",
                 "shasum": ""
             },
             "require": {
@@ -1900,7 +1900,7 @@
                 }
             ],
             "description": "Graby site config files",
-            "time": "2019-01-11T12:55:48+00:00"
+            "time": "2019-01-21T15:50:12+00:00"
         },
         {
             "name": "j0k3r/php-imgur-api-client",
