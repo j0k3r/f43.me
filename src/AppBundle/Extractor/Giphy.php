@@ -60,6 +60,6 @@ class Giphy extends AbstractExtractor
             return '';
         }
 
-        return '<div><h2>' . $data['title'] . '</h2><p><img src="' . $data['image'] . '"></p></div>';
+        return '<div><h2>' . $data['title'] . '</h2><p><img src="' . $data['url'] . '"></p></div>';
     }
 }
