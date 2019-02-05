@@ -40,7 +40,7 @@ class GiphyTest extends TestCase
         $client = new Client();
 
         $mock = new Mock([
-            new Response(200, [], Stream::factory(json_encode(['title' => 'my title', 'image' => 'http://0.0.0.0/img.jpg']))),
+            new Response(200, [], Stream::factory(json_encode(['title' => 'my title', 'url' => 'http://0.0.0.0/img.jpg']))),
             new Response(200, [], Stream::factory(json_encode(''))),
             new Response(400, [], Stream::factory(json_encode('oops'))),
         ]);

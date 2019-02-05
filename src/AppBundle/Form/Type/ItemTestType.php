@@ -15,9 +15,12 @@ class ItemTestType extends AbstractType
     {
         $builder
             ->add('link', UrlType::class, [
+                'default_protocol' => null,
                 'constraints' => new Url(),
             ])
-            ->add('siteconfig', TextareaType::class, ['required' => false])
+            ->add('siteconfig', TextareaType::class, [
+                'required' => false,
+            ])
             ->add('parser', ChoiceType::class, [
                 'choices' => array_flip([
                     'internal' => 'Internal',

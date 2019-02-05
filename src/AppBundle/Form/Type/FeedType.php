@@ -17,11 +17,27 @@ class FeedType extends AbstractType
     {
         $builder
             ->add('name', TextType::class)
-            ->add('description', TextareaType::class, ['required' => false])
-            ->add('host', TextType::class, ['attr' => ['placeholder' => 'www.website.com']])
-            ->add('link', UrlType::class, ['attr' => ['placeholder' => 'http://www.website.com/rss']])
-            ->add('logo', UrlType::class, ['required' => false])
-            ->add('color', TextType::class, ['required' => false])
+            ->add('description', TextareaType::class, [
+                'required' => false,
+            ])
+            ->add('host', TextType::class, [
+                'attr' => [
+                    'placeholder' => 'www.website.com',
+                ],
+            ])
+            ->add('link', UrlType::class, [
+                'default_protocol' => null,
+                'attr' => [
+                    'placeholder' => 'http://www.website.com/rss',
+                ],
+            ])
+            ->add('logo', UrlType::class, [
+                'default_protocol' => null,
+                'required' => false,
+            ])
+            ->add('color', TextType::class, [
+                'required' => false,
+            ])
             ->add('parser', ChoiceType::class, [
                 'choices' => [
                     'Internal' => 'internal',
