@@ -27,8 +27,8 @@ class Gfycat extends AbstractExtractor
         // remove unecessary stuff from url
         $path = str_replace('gifs/detail/', '', $path);
 
-        // match gfycat id
-        preg_match('/([a-zA-Z]+)/i', $path, $matches);
+        // match gfycat id with a minimum length or 4 to avoid i18n
+        preg_match('/([a-zA-Z]{4,})/i', $path, $matches);
 
         if (!isset($matches[1])) {
             return false;
