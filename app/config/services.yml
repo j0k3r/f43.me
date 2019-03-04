@@ -54,11 +54,6 @@ services:
             - [ setOption, [ 'client_id', "%imgur.client_id%" ] ]
             - [ setOption, [ 'client_secret', "%imgur.client_secret%" ] ]
 
-    guzzle.client:
-        class: GuzzleHttp\Client
-        arguments:
-            - "%guzzle.options%"
-
     graby:
         class: Graby\Graby
         arguments:
@@ -95,6 +90,5 @@ services:
         arguments:
             - "[%%datetime%%] %%start_tag%%%%message%%%%end_tag%% %%context%% %%extra%%\n"
 
-    # alias to external service
-    GuzzleHttp\Client:
-        alias: guzzle.client
+
+    Http\Client\Common\HttpMethodsClientInterface: '@httplug.client.default.http_methods'

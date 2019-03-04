@@ -2,8 +2,7 @@
 
 namespace AppBundle\Parser;
 
-use GuzzleHttp\Client;
-use GuzzleHttp\Exception\RequestException;
+use Http\Client\Common\HttpMethodsClientInterface;
 
 /**
  * Retrieve content from an external webservice.
@@ -15,10 +14,10 @@ class External extends AbstractParser
     protected $urlApi;
 
     /**
-     * @param Client $client
-     * @param string $urlApi Mercury API url
+     * @param HttpMethodsClientInterface $client
+     * @param string                     $urlApi Mercury API url
      */
-    public function __construct(Client $client, $urlApi)
+    public function __construct(HttpMethodsClientInterface $client, $urlApi)
     {
         $this->client = $client;
         $this->urlApi = $urlApi;

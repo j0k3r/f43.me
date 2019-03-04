@@ -3,7 +3,7 @@
 namespace AppBundle\EventListener;
 
 use AppBundle\Event\FeedItemEvent;
-use GuzzleHttp\Client;
+use Http\Client\Common\HttpMethodsClientInterface;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Routing\RouterInterface;
 
@@ -16,11 +16,11 @@ class FeedItemSubscriber
     /**
      * Create a new subscriber.
      *
-     * @param string          $hub    A hub (url) to ping
-     * @param RouterInterface $router Symfony Router to generate the feed xml
-     * @param Client          $client Guzzle client to send the request
+     * @param string                     $hub    A hub (url) to ping
+     * @param RouterInterface            $router Symfony Router to generate the feed xml
+     * @param HttpMethodsClientInterface $client Guzzle client to send the request
      */
-    public function __construct($hub, RouterInterface $router, Client $client)
+    public function __construct($hub, RouterInterface $router, HttpMethodsClientInterface $client)
     {
         $this->hub = $hub;
         $this->router = $router;

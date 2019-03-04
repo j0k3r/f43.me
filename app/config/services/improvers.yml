@@ -6,14 +6,14 @@ services:
     feed.improver.hackernews:
         class: AppBundle\Improver\HackerNews
         arguments:
-            - "@guzzle.client"
+            - "@httplug.client.default.http_methods"
         tags:
             -  { name: feed.improver, alias: hackernews }
 
     feed.improver.reddit:
         class: AppBundle\Improver\Reddit
         arguments:
-            - "@guzzle.client"
+            - "@httplug.client.default.http_methods"
         tags:
             -  { name: feed.improver, alias: reddit }
 
@@ -21,6 +21,6 @@ services:
     feed.improver.default_improver:
         class: AppBundle\Improver\DefaultImprover
         arguments:
-            - "@guzzle.client"
+            - "@httplug.client.default.http_methods"
         tags:
             -  { name: feed.improver, alias: default_improver }

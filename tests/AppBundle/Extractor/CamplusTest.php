@@ -3,10 +3,10 @@
 namespace Tests\AppBundle\Extractor;
 
 use AppBundle\Extractor\Camplus;
-use GuzzleHttp\Client;
-use GuzzleHttp\Message\Response;
-use GuzzleHttp\Stream\Stream;
-use GuzzleHttp\Subscriber\Mock;
+use GuzzleHttp\Psr7\Response;
+use Http\Client\Common\HttpMethodsClient;
+use Http\Discovery\MessageFactoryDiscovery;
+use Http\Mock\Client as HttpMockClient;
 use Monolog\Handler\TestHandler;
 use Monolog\Logger;
 use PHPUnit\Framework\TestCase;
@@ -38,22 +38,18 @@ class CamplusTest extends TestCase
 
     public function testContent()
     {
-        $client = new Client();
-
-        $mock = new Mock([
-            new Response(200, [], Stream::factory(json_encode([
-                'page' => ['tweet' => [
-                    'id' => '123',
-                    'username' => 'j0k',
-                    'realname' => 'j0k',
-                    'text' => 'yay',
-                ]], 'pictures' => [[
-                    '480px' => 'http://0.0.0.0/youpi.jpg',
-                ]],
-            ]))),
-        ]);
-
-        $client->getEmitter()->attach($mock);
+        $httpMockClient = new HttpMockClient();
+        $httpMockClient->addResponse(new Response(200, ['content-type' => 'application/json'], json_encode([
+            'page' => ['tweet' => [
+                'id' => '123',
+                'username' => 'j0k',
+                'realname' => 'j0k',
+                'text' => 'yay',
+            ]], 'pictures' => [[
+                '480px' => 'http://0.0.0.0/youpi.jpg',
+            ]],
+        ])));
+        $client = new HttpMethodsClient($httpMockClient, MessageFactoryDiscovery::find());
 
         $camplus = new Camplus();
         $camplus->setClient($client);
@@ -71,13 +67,12 @@ class CamplusTest extends TestCase
 
     public function testContentWithException()
     {
-        $client = new Client();
+        $httpMockClient = new HttpMockClient();
+        $exception = new \Exception('Whoops!');
+        $httpMockClient->addException($exception);
+        // $httpMockClient->addResponse(new Response(400, ['content-type' => 'application/json'], json_encode('oops')));
 
-        $mock = new Mock([
-            new Response(400, [], Stream::factory(json_encode('oops'))),
-        ]);
-
-        $client->getEmitter()->attach($mock);
+        $client = new HttpMethodsClient($httpMockClient, MessageFactoryDiscovery::find());
 
         $camplus = new Camplus();
         $camplus->setClient($client);

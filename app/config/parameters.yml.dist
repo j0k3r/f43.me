@@ -42,12 +42,6 @@ parameters:
         tagToRemove: select|form|header|footer|aside
         media: '!//(?:[^\.\?/]+\.)?(?:youtu(?:be)?|soundcloud|dailymotion|vimeo|pornhub|xvideos|twitvid|rutube|viddler)\.(?:com|be|org|net)/!i'
 
-    guzzle.options:
-        defaults:
-            timeout: 10
-            headers:
-                User-Agent: f43.me/1.0
-
     # https://apps.twitter.com/
     twitter.consumer_key: xxx
     twitter.consumer_secret: xxx

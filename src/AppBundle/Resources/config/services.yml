@@ -20,11 +20,6 @@ services:
             - [ setOption, [ 'client_id', "%imgur.client_id%" ] ]
             - [ setOption, [ 'client_secret', "%imgur.client_secret%" ] ]
 
-    guzzle.client:
-        class: GuzzleHttp\Client
-        arguments:
-            - "%guzzle.options%"
-
     graby:
         class: Graby\Graby
         arguments:
@@ -94,7 +89,7 @@ services:
         arguments:
             - "http://pubsubhubbub.appspot.com"
             - "@router"
-            - "@guzzle.client"
+            - "@httplug.client.default.http_methods"
         tags:
             - { name: kernel.event_listener, event: api43_feed.after_item_cached, method: pingHub }
 
@@ -102,7 +97,7 @@ services:
     validator.rss.valid_rss:
         class: AppBundle\Validator\Constraints\ConstraintRssValidator
         arguments:
-            - "@guzzle.client"
+            - "@httplug.client.default.http_methods"
         tags:
             - { name: validator.constraint_validator, alias: valid_rss }
 

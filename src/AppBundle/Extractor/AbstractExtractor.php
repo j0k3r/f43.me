@@ -2,7 +2,7 @@
 
 namespace AppBundle\Extractor;
 
-use GuzzleHttp\Client;
+use Http\Client\Common\HttpMethodsClientInterface;
 use Psr\Log\LoggerAwareInterface;
 use Psr\Log\LoggerInterface;
 
@@ -20,9 +20,9 @@ abstract class AbstractExtractor implements LoggerAwareInterface
     }
 
     /**
-     * @param Client $client
+     * @param HttpMethodsClientInterface $client
      */
-    public function setClient(Client $client)
+    public function setClient(HttpMethodsClientInterface $client)
     {
         $this->client = $client;
     }

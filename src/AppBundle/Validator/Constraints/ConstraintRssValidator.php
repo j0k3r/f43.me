@@ -2,8 +2,8 @@
 
 namespace AppBundle\Validator\Constraints;
 
-use GuzzleHttp\Client;
 use GuzzleHttp\Exception\RequestException;
+use Http\Client\Common\HttpMethodsClientInterface;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 
@@ -15,7 +15,7 @@ class ConstraintRssValidator extends ConstraintValidator
 {
     private $client;
 
-    public function __construct(Client $client)
+    public function __construct(HttpMethodsClientInterface $client)
     {
         $this->client = $client;
     }
