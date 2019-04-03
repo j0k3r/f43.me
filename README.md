@@ -64,7 +64,7 @@ When we have the (most of the time, little) content from the feed, we use parser
 This involve 2 kind of parser:
 
  * the **Internal**, which uses a local PHP libray, called [graby](https://github.com/j0k3r/graby).
- * the **External**, which uses the excellent [Mercury Web Parser API](https://mercury.postlight.com/web-parser/) from Postlight Labs.
+ * the **External**, which uses the excellent [Mercury Parser API](https://github.com/postlight/mercury-parser) from Postlight Labs.
 
 ### Converters
 

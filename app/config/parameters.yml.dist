@@ -1,17 +1,17 @@
 parameters:
-    database_server:   mongodb://localhost:27017
-    database_name:     f43me
+    database_server: mongodb://localhost:27017
+    database_name: f43me
 
-    locale:            en
-    secret:            uLq3XcJHHbLhq6GX
+    locale: en
+    secret: uLq3XcJHHbLhq6GX
 
-    domain:            f43.me
+    domain: f43.me
 
-    # Get one here: https://mercury.postlight.com/web-parser/
-    mercury_key: xxxxxxx
+    # You can deploy your own on AWS using https://github.com/postlight/mercury-parser-api
+    mercury_url: https://mercury.f43.me
 
     # sha1 encoded, in this case "adminpass"
-    adminpass:         74913f5cd5f61ec0bcfdb775414c2fb3d161b620
+    adminpass: 74913f5cd5f61ec0bcfdb775414c2fb3d161b620
 
     google_analytics_code: UA-xxxxx-x
 

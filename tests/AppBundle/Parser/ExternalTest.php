@@ -21,7 +21,7 @@ class ExternalTest extends TestCase
 
         $client->getEmitter()->attach($mock);
 
-        $external = new External($client, 'http//0.0.0.0/api', 'key');
+        $external = new External($client, 'http//0.0.0.0/api');
         $this->assertEmpty($external->parse('http://0.0.0.0/content'));
     }
 
@@ -35,7 +35,7 @@ class ExternalTest extends TestCase
 
         $client->getEmitter()->attach($mock);
 
-        $external = new External($client, 'http//0.0.0.0/api', 'key');
+        $external = new External($client, 'http//0.0.0.0/api');
         $this->assertSame('<div></div>', $external->parse('http://0.0.0.0/content'));
     }
 
@@ -49,7 +49,7 @@ class ExternalTest extends TestCase
 
         $client->getEmitter()->attach($mock);
 
-        $external = new External($client, 'http//0.0.0.0/api', 'key');
+        $external = new External($client, 'http//0.0.0.0/api');
         $this->assertEmpty($external->parse('http://0.0.0.0/content'));
     }
 }
