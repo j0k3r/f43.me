@@ -7,8 +7,7 @@ services:
         class: AppBundle\Parser\External
         arguments:
             - "@guzzle.client"
-            - 'https://mercury.postlight.com/parser'
-            - "%mercury_key%"
+            - "%mercury_url%"
         tags:
             -  { name: feed.parser, alias: external }
 
