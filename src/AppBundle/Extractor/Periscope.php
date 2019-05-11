@@ -2,7 +2,7 @@
 
 namespace AppBundle\Extractor;
 
-use GuzzleHttp\Exception\RequestException;
+use Http\Client\Exception\RequestException;
 
 class Periscope extends AbstractExtractor
 {
@@ -45,9 +45,8 @@ class Periscope extends AbstractExtractor
         }
 
         try {
-            $data = $this->client
-                ->get('https://api.periscope.tv/api/v2/accessVideoPublic?broadcast_id=' . $this->periscopeId)
-                ->json();
+            $response = $this->client->get('https://api.periscope.tv/api/v2/accessVideoPublic?broadcast_id=' . $this->periscopeId);
+            $data = $this->jsonDecode($response);
         } catch (RequestException $e) {
             $this->logger->warning('Periscope extract failed for: ' . $this->periscopeId, [
                 'exception' => $e,

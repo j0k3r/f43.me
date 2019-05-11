@@ -2,7 +2,7 @@
 
 namespace AppBundle\Extractor;
 
-use GuzzleHttp\Exception\RequestException;
+use Http\Client\Exception\RequestException;
 
 class Streamable extends AbstractExtractor
 {
@@ -39,9 +39,8 @@ class Streamable extends AbstractExtractor
         }
 
         try {
-            $data = $this->client
-                ->get('http://api.streamable.com/oembed.json?url=' . $this->streamableUrl)
-                ->json();
+            $response = $this->client->get('http://api.streamable.com/oembed.json?url=' . $this->streamableUrl);
+            $data = $this->jsonDecode($response);
         } catch (RequestException $e) {
             $this->logger->warning('Streamable extract failed for: ' . $this->streamableUrl, [
                 'exception' => $e,

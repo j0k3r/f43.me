@@ -4,14 +4,11 @@ namespace Tests\AppBundle\Extractor;
 
 use AppBundle\Extractor\Camplus;
 use GuzzleHttp\Psr7\Response;
-use Http\Client\Common\HttpMethodsClient;
-use Http\Discovery\MessageFactoryDiscovery;
-use Http\Mock\Client as HttpMockClient;
 use Monolog\Handler\TestHandler;
 use Monolog\Logger;
-use PHPUnit\Framework\TestCase;
+use Tests\AppBundle\AppTestCase;
 
-class CamplusTest extends TestCase
+class CamplusTest extends AppTestCase
 {
     public function dataMatch()
     {
@@ -38,8 +35,7 @@ class CamplusTest extends TestCase
 
     public function testContent()
     {
-        $httpMockClient = new HttpMockClient();
-        $httpMockClient->addResponse(new Response(200, ['content-type' => 'application/json'], json_encode([
+        $client = self::getMockClient([(new Response(200, ['content-type' => 'application/json'], json_encode([
             'page' => ['tweet' => [
                 'id' => '123',
                 'username' => 'j0k',
@@ -48,8 +44,7 @@ class CamplusTest extends TestCase
             ]], 'pictures' => [[
                 '480px' => 'http://0.0.0.0/youpi.jpg',
             ]],
-        ])));
-        $client = new HttpMethodsClient($httpMockClient, MessageFactoryDiscovery::find());
+        ])))]);
 
         $camplus = new Camplus();
         $camplus->setClient($client);
@@ -67,12 +62,7 @@ class CamplusTest extends TestCase
 
     public function testContentWithException()
     {
-        $httpMockClient = new HttpMockClient();
-        $exception = new \Exception('Whoops!');
-        $httpMockClient->addException($exception);
-        // $httpMockClient->addResponse(new Response(400, ['content-type' => 'application/json'], json_encode('oops')));
-
-        $client = new HttpMethodsClient($httpMockClient, MessageFactoryDiscovery::find());
+        $client = self::getMockClient([(new Response(400, ['content-type' => 'application/json'], json_encode('oops')))]);
 
         $camplus = new Camplus();
         $camplus->setClient($client);

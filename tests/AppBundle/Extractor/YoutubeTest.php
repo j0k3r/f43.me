@@ -3,15 +3,12 @@
 namespace Tests\AppBundle\Extractor;
 
 use AppBundle\Extractor\Youtube;
-use GuzzleHttp\Client;
-use GuzzleHttp\Message\Response;
-use GuzzleHttp\Stream\Stream;
-use GuzzleHttp\Subscriber\Mock;
+use GuzzleHttp\Psr7\Response;
 use Monolog\Handler\TestHandler;
 use Monolog\Logger;
-use PHPUnit\Framework\TestCase;
+use Tests\AppBundle\AppTestCase;
 
-class YoutubeTest extends TestCase
+class YoutubeTest extends AppTestCase
 {
     public function dataMatch()
     {
@@ -36,15 +33,11 @@ class YoutubeTest extends TestCase
 
     public function testContent()
     {
-        $client = new Client();
-
-        $mock = new Mock([
-            new Response(200, [], Stream::factory(json_encode(['title' => 'my title', 'thumbnail_url' => 'http://0.0.0.0/img.jpg', 'html' => '<iframe/>']))),
-            new Response(200, [], Stream::factory(json_encode(''))),
-            new Response(400, [], Stream::factory(json_encode('oops'))),
+        $client = self::getMockClient([
+            (new Response(200, [], json_encode(['title' => 'my title', 'thumbnail_url' => 'http://0.0.0.0/img.jpg', 'html' => '<iframe/>']))),
+            (new Response(200, [], json_encode(''))),
+            (new Response(400, [], json_encode('oops'))),
         ]);
-
-        $client->getEmitter()->attach($mock);
 
         $youtube = new Youtube();
         $youtube->setClient($client);

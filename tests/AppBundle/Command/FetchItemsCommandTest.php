@@ -24,7 +24,7 @@ class FetchItemsCommandTest extends WebTestCase
 
     public function setUp()
     {
-        $client = static::createClient();
+        static::createClient();
 
         $simplePieItem = $this->getMockBuilder('SimplePie_Item')
             ->disableOriginalConstructor()
@@ -36,7 +36,7 @@ class FetchItemsCommandTest extends WebTestCase
 
         $simplePieItem->expects($this->any())
             ->method('get_permalink')
-            ->willReturn('http://localhost');
+            ->willReturn('https://wildtrip.blog/sri-lanka-3-semaines-quoi-voir.html');
 
         $simplePie = $this->getMockBuilder('SimplePie')
             ->disableOriginalConstructor()

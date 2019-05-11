@@ -61,19 +61,20 @@ class FeedItemSubscriber
             $params .= '&hub.url=' . $url;
         }
 
-        $response = $this->client->post(
-            $this->hub,
-            [
-                'exceptions' => false,
-                'body' => $params,
-                'headers' => [
+        try {
+            $response = $this->client->post(
+                $this->hub,
+                [
                     'Content-Type' => 'application/x-www-form-urlencoded',
                     'User-Agent' => 'PubSubHubbub-Publisher-PHP/1.0',
                 ],
-            ]
-        );
+                $params
+            );
 
-        // hub should response 204 if everything went fine
-        return !(204 !== $response->getStatusCode());
+            // hub should response 204 if everything went fine
+            return !(204 !== $response->getStatusCode());
+        } catch (\Exception $e) {
+            return false;
+        }
     }
 }

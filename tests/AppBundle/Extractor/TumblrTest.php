@@ -3,15 +3,12 @@
 namespace Tests\AppBundle\Extractor;
 
 use AppBundle\Extractor\Tumblr;
-use GuzzleHttp\Client;
-use GuzzleHttp\Message\Response;
-use GuzzleHttp\Stream\Stream;
-use GuzzleHttp\Subscriber\Mock;
+use GuzzleHttp\Psr7\Response;
 use Monolog\Handler\TestHandler;
 use Monolog\Logger;
-use PHPUnit\Framework\TestCase;
+use Tests\AppBundle\AppTestCase;
 
-class TumblrTest extends TestCase
+class TumblrTest extends AppTestCase
 {
     public function dataMatch()
     {
@@ -28,13 +25,7 @@ class TumblrTest extends TestCase
      */
     public function testMatch($url, $expected)
     {
-        $client = new Client();
-
-        $mock = new Mock([
-            new Response(200, ['X-Tumblr-User' => 'test']),
-        ]);
-
-        $client->getEmitter()->attach($mock);
+        $client = self::getMockClient([(new Response(200, ['X-Tumblr-User' => 'test']))]);
 
         $tumblr = new Tumblr('apikey');
         $tumblr->setClient($client);
@@ -43,13 +34,7 @@ class TumblrTest extends TestCase
 
     public function testMatchFailRequest()
     {
-        $client = new Client();
-
-        $mock = new Mock([
-            new Response(400, ['X-Tumblr-User' => 'test']),
-        ]);
-
-        $client->getEmitter()->attach($mock);
+        $client = self::getMockClient([(new Response(400, ['X-Tumblr-User' => 'test']))]);
 
         $tumblr = new Tumblr('apikey');
         $tumblr->setClient($client);
@@ -65,13 +50,7 @@ class TumblrTest extends TestCase
 
     public function testMatchNotTumblrUser()
     {
-        $client = new Client();
-
-        $mock = new Mock([
-            new Response(200, ['X-Tumblr-User' => null]),
-        ]);
-
-        $client->getEmitter()->attach($mock);
+        $client = self::getMockClient([(new Response(200, ['X-Tumblr-User' => null]))]);
 
         $tumblr = new Tumblr('apikey');
         $tumblr->setClient($client);
@@ -80,17 +59,13 @@ class TumblrTest extends TestCase
 
     public function testContent()
     {
-        $client = new Client();
-
-        $mock = new Mock([
+        $client = self::getMockClient([
             // match()
-            new Response(200, ['X-Tumblr-User' => 'test']),
-            new Response(200, ['X-Tumblr-User' => 'test'], Stream::factory(json_encode(['response' => ['posts' => [['body' => '<div>content</div>']]]]))),
-            new Response(200, ['X-Tumblr-User' => 'test'], Stream::factory(json_encode([]))),
-            new Response(400, ['X-Tumblr-User' => 'test'], Stream::factory(json_encode('oops'))),
+            (new Response(200, ['X-Tumblr-User' => 'test'])),
+            (new Response(200, ['X-Tumblr-User' => 'test'], json_encode(['response' => ['posts' => [['body' => '<div>content</div>']]]]))),
+            (new Response(200, ['X-Tumblr-User' => 'test'], json_encode([]))),
+            (new Response(400, ['X-Tumblr-User' => 'test'], json_encode('oops'))),
         ]);
-
-        $client->getEmitter()->attach($mock);
 
         $tumblr = new Tumblr('apikey');
         $tumblr->setClient($client);

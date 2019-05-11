@@ -3,15 +3,12 @@
 namespace Tests\AppBundle\Extractor;
 
 use AppBundle\Extractor\Github;
-use GuzzleHttp\Client;
-use GuzzleHttp\Message\Response;
-use GuzzleHttp\Stream\Stream;
-use GuzzleHttp\Subscriber\Mock;
+use GuzzleHttp\Psr7\Response;
 use Monolog\Handler\TestHandler;
 use Monolog\Logger;
-use PHPUnit\Framework\TestCase;
+use Tests\AppBundle\AppTestCase;
 
-class GithubTest extends TestCase
+class GithubTest extends AppTestCase
 {
     public function dataMatch()
     {
@@ -40,15 +37,11 @@ class GithubTest extends TestCase
 
     public function testContent()
     {
-        $client = new Client();
-
-        $mock = new Mock([
-            new Response(200, [], Stream::factory('<div>README</div>')),
-            new Response(200, []),
-            new Response(400, [], Stream::factory('oops')),
+        $client = self::getMockClient([
+            (new Response(200, [], '<div>README</div>')),
+            (new Response(200, [])),
+            (new Response(400, [], 'oops')),
         ]);
-
-        $client->getEmitter()->attach($mock);
 
         $github = new Github('client_id', 'client_secret');
         $github->setClient($client);
@@ -68,10 +61,8 @@ class GithubTest extends TestCase
 
     public function testIssue()
     {
-        $client = new Client();
-
-        $mock = new Mock([
-            new Response(200, [], Stream::factory(json_encode([
+        $client = self::getMockClient([
+            (new Response(200, [], json_encode([
                 'html_url' => 'http://1.1.1.1',
                 'title' => 'test',
                 'comments' => 0,
@@ -79,10 +70,8 @@ class GithubTest extends TestCase
                 'body_html' => 'body',
                 'user' => ['html_url' => 'http://2.2.2.2', 'login' => 'login'],
             ]))),
-            new Response(400, [], Stream::factory(json_encode('oops'))),
+            (new Response(400, [], 'oops')),
         ]);
-
-        $client->getEmitter()->attach($mock);
 
         $github = new Github('client_id', 'client_secret');
         $github->setClient($client);
@@ -104,10 +93,8 @@ class GithubTest extends TestCase
 
     public function testPR()
     {
-        $client = new Client();
-
-        $mock = new Mock([
-            new Response(200, [], Stream::factory(json_encode([
+        $client = self::getMockClient([
+            (new Response(200, [], json_encode([
                 'base' => ['description' => 'test', 'repo' => ['html_url' => 'http://0.0.0.0', 'full_name' => 'name', 'description' => 'desc']],
                 'html_url' => 'http://1.1.1.1',
                 'title' => 'test',
@@ -115,11 +102,10 @@ class GithubTest extends TestCase
                 'comments' => 0,
                 'created_at' => '2015-08-04T13:49:04Z',
                 'body_html' => 'body',
-                'user' => ['html_url' => 'http://2.2.2.2', 'login' => 'login'], ]))),
-            new Response(400, [], Stream::factory(json_encode('oops'))),
+                'user' => ['html_url' => 'http://2.2.2.2', 'login' => 'login'],
+            ]))),
+            (new Response(400, [], 'oops')),
         ]);
-
-        $client->getEmitter()->attach($mock);
 
         $github = new Github('client_id', 'client_secret');
         $github->setClient($client);

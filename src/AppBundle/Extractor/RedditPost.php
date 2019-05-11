@@ -2,7 +2,7 @@
 
 namespace AppBundle\Extractor;
 
-use GuzzleHttp\Exception\RequestException;
+use Http\Client\Exception\RequestException;
 
 class RedditPost extends AbstractExtractor
 {
@@ -28,7 +28,8 @@ class RedditPost extends AbstractExtractor
         $url = str_replace('//.json', '/.json', $url);
 
         try {
-            $data = $this->client->get($url)->json();
+            $response = $this->client->get($url);
+            $data = $this->jsonDecode($response);
         } catch (RequestException $e) {
             return false;
         }

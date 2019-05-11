@@ -2,7 +2,7 @@
 
 namespace AppBundle\Extractor;
 
-use GuzzleHttp\Exception\RequestException;
+use Http\Client\Exception\RequestException;
 
 class Vidme extends AbstractExtractor
 {
@@ -46,9 +46,8 @@ class Vidme extends AbstractExtractor
         }
 
         try {
-            $data = $this->client
-                ->get('https://api.vid.me/videoByUrl?url=' . $this->vidmeUrl)
-                ->json();
+            $response = $this->client->get('https://api.vid.me/videoByUrl?url=' . $this->vidmeUrl);
+            $data = $this->jsonDecode($response);
         } catch (RequestException $e) {
             $this->logger->warning('Vidme extract failed for: ' . $this->vidmeUrl, [
                 'exception' => $e,

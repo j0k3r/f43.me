@@ -3,6 +3,7 @@
 namespace AppBundle\Parser;
 
 use Http\Client\Common\HttpMethodsClientInterface;
+use Http\Client\Exception\RequestException;
 
 /**
  * Retrieve content from an external webservice.
@@ -29,9 +30,9 @@ class External extends AbstractParser
     public function parse($url, $reloadConfigFiles = false)
     {
         try {
-            $data = $this->client
-                ->get($this->urlApi . '?url=' . urlencode($url))
-                ->json();
+            $response = $this->client->get($this->urlApi . '?url=' . urlencode($url));
+
+            $data = json_decode((string) $response->getBody(), true);
         } catch (RequestException $e) {
             return '';
         }

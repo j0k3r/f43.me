@@ -2,8 +2,8 @@
 
 namespace AppBundle\Validator\Constraints;
 
-use GuzzleHttp\Exception\RequestException;
 use Http\Client\Common\HttpMethodsClientInterface;
+use Http\Client\Exception\RequestException;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 

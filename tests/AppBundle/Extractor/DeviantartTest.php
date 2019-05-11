@@ -3,15 +3,12 @@
 namespace Tests\AppBundle\Extractor;
 
 use AppBundle\Extractor\Deviantart;
-use GuzzleHttp\Client;
-use GuzzleHttp\Message\Response;
-use GuzzleHttp\Stream\Stream;
-use GuzzleHttp\Subscriber\Mock;
+use GuzzleHttp\Psr7\Response;
 use Monolog\Handler\TestHandler;
 use Monolog\Logger;
-use PHPUnit\Framework\TestCase;
+use Tests\AppBundle\AppTestCase;
 
-class DeviantartTest extends TestCase
+class DeviantartTest extends AppTestCase
 {
     public function dataMatch()
     {
@@ -39,20 +36,14 @@ class DeviantartTest extends TestCase
 
     public function testContent()
     {
-        $client = new Client();
-
-        $mock = new Mock([
-            new Response(200, [], Stream::factory(json_encode([
-                'url' => 'http://0.0.0.0/youpi.jpg',
-                'title' => 'youpi',
-                'author_url' => 'http://youpi.0.0.0.0',
-                'author_name' => 'youpi',
-                'category' => 'Pic > Landscape',
-                'html' => '<iframe></iframe>',
-            ]))),
-        ]);
-
-        $client->getEmitter()->attach($mock);
+        $client = self::getMockClient([(new Response(200, [], json_encode([
+            'url' => 'http://0.0.0.0/youpi.jpg',
+            'title' => 'youpi',
+            'author_url' => 'http://youpi.0.0.0.0',
+            'author_name' => 'youpi',
+            'category' => 'Pic > Landscape',
+            'html' => '<iframe></iframe>',
+        ])))]);
 
         $deviantart = new Deviantart();
         $deviantart->setClient($client);
@@ -71,13 +62,7 @@ class DeviantartTest extends TestCase
 
     public function testContentWithException()
     {
-        $client = new Client();
-
-        $mock = new Mock([
-            new Response(400, [], Stream::factory(json_encode('oops'))),
-        ]);
-
-        $client->getEmitter()->attach($mock);
+        $client = self::getMockClient([(new Response(400, [], json_encode('oops')))]);
 
         $deviantart = new Deviantart();
         $deviantart->setClient($client);

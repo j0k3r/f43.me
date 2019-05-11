@@ -44,7 +44,8 @@ class Camplus extends AbstractExtractor
         }
 
         try {
-            $data = json_decode($this->client->get('http://campl.us/' . $this->camplusId . ':info')->getBody(), true);
+            $response = $this->client->get('http://campl.us/' . $this->camplusId . ':info');
+            $data = $this->jsonDecode($response);
         } catch (\Exception $e) {
             $this->logger->warning('Camplus extract failed for: ' . $this->camplusId, [
                 'exception' => $e,

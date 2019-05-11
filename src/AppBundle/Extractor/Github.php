@@ -2,7 +2,7 @@
 
 namespace AppBundle\Extractor;
 
-use GuzzleHttp\Exception\RequestException;
+use Http\Client\Exception\RequestException;
 
 class Github extends AbstractExtractor
 {
@@ -76,7 +76,7 @@ class Github extends AbstractExtractor
 
         if (null !== $this->pullNumber) {
             try {
-                $data = $this->client
+                $response = $this->client
                     ->get(
                         'https://api.github.com/repos/' . $this->githubRepo . '/pulls/' . $this->pullNumber,
                         [
@@ -89,8 +89,8 @@ class Github extends AbstractExtractor
                                 'client_secret' => $this->githubClientSecret,
                             ],
                         ]
-                    )
-                    ->json();
+                    );
+                $data = $this->jsonDecode($response);
 
                 return '<div><em>Pull request on Github</em>' .
                     '<h2><a href="' . $data['base']['repo']['html_url'] . '">' . $data['base']['repo']['full_name'] . '</a></h2>' .
@@ -112,7 +112,7 @@ class Github extends AbstractExtractor
 
         if (null !== $this->issueNumber) {
             try {
-                $data = $this->client
+                $response = $this->client
                     ->get(
                         'https://api.github.com/repos/' . $this->githubRepo . '/issues/' . $this->issueNumber,
                         [
@@ -125,8 +125,8 @@ class Github extends AbstractExtractor
                                 'client_secret' => $this->githubClientSecret,
                             ],
                         ]
-                    )
-                    ->json();
+                    );
+                $data = $this->jsonDecode($response);
 
                 return '<div><em>Issue on Github</em>' .
                     '<h2><a href="' . $data['html_url'] . '">' . $data['title'] . '</a></h2>' .
@@ -144,7 +144,7 @@ class Github extends AbstractExtractor
         }
 
         try {
-            return $this->client
+            return (string) $this->client
                 ->get(
                     'https://api.github.com/repos/' . $this->githubRepo . '/readme',
                     [

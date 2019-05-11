@@ -3,12 +3,10 @@
 namespace Tests\AppBundle\Improver;
 
 use AppBundle\Improver\DefaultImprover;
-use GuzzleHttp\Client;
-use GuzzleHttp\Message\Response;
-use GuzzleHttp\Subscriber\Mock;
-use PHPUnit\Framework\TestCase;
+use GuzzleHttp\Psr7\Response;
+use Tests\AppBundle\AppTestCase;
 
-class DefaultImproverTest extends TestCase
+class DefaultImproverTest extends AppTestCase
 {
     public function dataUpdateUrl()
     {
@@ -28,16 +26,7 @@ class DefaultImproverTest extends TestCase
      */
     public function testUpdateUrl($url, $expected)
     {
-        $client = new Client();
-
-        $response = new Response(200, []);
-        $response->setEffectiveUrl($expected);
-
-        $mock = new Mock([
-            new Response(200, []),
-        ]);
-
-        $client->getEmitter()->attach($mock);
+        $client = self::getMockClient([(new Response(200, ['content-type' => 'application/json']))]);
 
         $default = new DefaultImprover($client);
         $this->assertSame($expected, $default->updateUrl($url));

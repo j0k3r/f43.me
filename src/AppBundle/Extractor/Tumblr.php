@@ -2,7 +2,7 @@
 
 namespace AppBundle\Extractor;
 
-use GuzzleHttp\Exception\RequestException;
+use Http\Client\Exception\RequestException;
 
 class Tumblr extends AbstractExtractor
 {
@@ -41,7 +41,7 @@ class Tumblr extends AbstractExtractor
             // retrieve the tumblr user to validate that's a tumblr post
             $tumblrUser = $this->client
                 ->get($url)
-                ->getHeader('X-Tumblr-User');
+                ->getHeaderLine('X-Tumblr-User');
         } catch (RequestException $e) {
             $this->logger->warning('Tumblr extract failed for: ' . $url, [
                 'exception' => $e,
@@ -70,9 +70,8 @@ class Tumblr extends AbstractExtractor
         }
 
         try {
-            $data = $this->client
-                ->get('http://api.tumblr.com/v2/blog/' . $this->tumblrHost . '/posts/text?api_key=' . $this->tumblrApiKey . '&id=' . $this->tumblrId)
-                ->json();
+            $response = $this->client->get('http://api.tumblr.com/v2/blog/' . $this->tumblrHost . '/posts/text?api_key=' . $this->tumblrApiKey . '&id=' . $this->tumblrId);
+            $data = $this->jsonDecode($response);
         } catch (RequestException $e) {
             $this->logger->warning('Tumblr extract failed for: ' . $this->tumblrId . ' & ' . $this->tumblrHost, [
                 'exception' => $e,

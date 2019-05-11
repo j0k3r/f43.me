@@ -3,6 +3,7 @@
 namespace AppBundle\Extractor;
 
 use Http\Client\Common\HttpMethodsClientInterface;
+use Psr\Http\Message\ResponseInterface;
 use Psr\Log\LoggerAwareInterface;
 use Psr\Log\LoggerInterface;
 
@@ -42,4 +43,26 @@ abstract class AbstractExtractor implements LoggerAwareInterface
      * @return string|false Content expanded
      */
     abstract public function getContent();
+
+    /**
+     * Generic method to retrive the json data from a response.
+     *
+     * @param ResponseInterface $response
+     *
+     * @return string
+     */
+    protected function jsonDecode(ResponseInterface $response)
+    {
+        $data = json_decode((string) $response->getBody(), true);
+
+        if (null === $data) {
+            return '';
+        }
+
+        if (JSON_ERROR_NONE !== json_last_error()) {
+            throw new \InvalidArgumentException('Unable to parse JSON data: ' . json_last_error_msg());
+        }
+
+        return $data;
+    }
 }

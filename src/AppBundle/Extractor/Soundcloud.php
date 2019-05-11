@@ -2,7 +2,7 @@
 
 namespace AppBundle\Extractor;
 
-use GuzzleHttp\Exception\RequestException;
+use Http\Client\Exception\RequestException;
 
 class Soundcloud extends AbstractExtractor
 {
@@ -39,9 +39,8 @@ class Soundcloud extends AbstractExtractor
         }
 
         try {
-            $data = $this->client
-                ->get('http://soundcloud.com/oembed?format=json&url=' . $this->soundCloundUrl)
-                ->json();
+            $response = $this->client->get('http://soundcloud.com/oembed?format=json&url=' . $this->soundCloundUrl);
+            $data = $this->jsonDecode($response);
         } catch (RequestException $e) {
             $this->logger->warning('Soundcloud extract failed for: ' . $this->soundCloundUrl, [
                 'exception' => $e,

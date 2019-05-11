@@ -3,15 +3,12 @@
 namespace Tests\AppBundle\Extractor;
 
 use AppBundle\Extractor\RedditVideo;
-use GuzzleHttp\Client;
-use GuzzleHttp\Message\Response;
-use GuzzleHttp\Stream\Stream;
-use GuzzleHttp\Subscriber\Mock;
+use GuzzleHttp\Psr7\Response;
 use Monolog\Handler\TestHandler;
 use Monolog\Logger;
-use PHPUnit\Framework\TestCase;
+use Tests\AppBundle\AppTestCase;
 
-class RedditVideoTest extends TestCase
+class RedditVideoTest extends AppTestCase
 {
     public function dataMatch()
     {
@@ -32,13 +29,7 @@ class RedditVideoTest extends TestCase
 
     public function testMatchRedditBadRequest()
     {
-        $client = new Client();
-
-        $mock = new Mock([
-            new Response(400, [], Stream::factory(json_encode('oops'))),
-        ]);
-
-        $client->getEmitter()->attach($mock);
+        $client = self::getMockClient([(new Response(400, [], json_encode('oops')))]);
 
         $redditVideo = new RedditVideo();
         $redditVideo->setClient($client);
@@ -48,13 +39,7 @@ class RedditVideoTest extends TestCase
 
     public function testMatchRedditNotAVideo()
     {
-        $client = new Client();
-
-        $mock = new Mock([
-            new Response(200, [], Stream::factory(json_encode([['data' => ['children' => [['data' => ['domain' => 'self.gifs']]]]]]))),
-        ]);
-
-        $client->getEmitter()->attach($mock);
+        $client = self::getMockClient([(new Response(200, [], json_encode([['data' => ['children' => [['data' => ['domain' => 'self.gifs']]]]]])))]);
 
         $redditVideo = new RedditVideo();
         $redditVideo->setClient($client);
@@ -64,13 +49,7 @@ class RedditVideoTest extends TestCase
 
     public function testMatchReddit()
     {
-        $client = new Client();
-
-        $mock = new Mock([
-            new Response(200, [], Stream::factory(json_encode([['data' => ['children' => [['data' => ['domain' => 'v.redd.it']]]]]]))),
-        ]);
-
-        $client->getEmitter()->attach($mock);
+        $client = self::getMockClient([(new Response(200, [], json_encode([['data' => ['children' => [['data' => ['domain' => 'v.redd.it']]]]]])))]);
 
         $redditVideo = new RedditVideo();
         $redditVideo->setClient($client);
@@ -80,36 +59,30 @@ class RedditVideoTest extends TestCase
 
     public function testContent()
     {
-        $client = new Client();
-
-        $mock = new Mock([
-            new Response(200, [], Stream::factory(json_encode([['data' => ['children' => [['data' => [
-                'domain' => 'v.redd.it',
-                'thumbnail' => 'http://image.reddit',
-                'preview' => [
-                    'images' => [
-                        [
-                            'source' => [
-                                'url' => 'http://image.reddit.preview',
-                            ],
+        $client = self::getMockClient([(new Response(200, [], json_encode([['data' => ['children' => [['data' => [
+            'domain' => 'v.redd.it',
+            'thumbnail' => 'http://image.reddit',
+            'preview' => [
+                'images' => [
+                    [
+                        'source' => [
+                            'url' => 'http://image.reddit.preview',
                         ],
                     ],
                 ],
-                'title' => 'the title',
-                'score' => 100,
-                'num_comments' => 100,
-                'link_flair_text' => 'GIFS',
-                'media' => [
-                    'reddit_video' => [
-                        'fallback_url' => 'https://v.redd.it/funfg141o3hz/DASH_2_4_M',
-                        'width' => 250,
-                        'height' => 120,
-                    ],
+            ],
+            'title' => 'the title',
+            'score' => 100,
+            'num_comments' => 100,
+            'link_flair_text' => 'GIFS',
+            'media' => [
+                'reddit_video' => [
+                    'fallback_url' => 'https://v.redd.it/funfg141o3hz/DASH_2_4_M',
+                    'width' => 250,
+                    'height' => 120,
                 ],
-            ]]]]]]))),
-        ]);
-
-        $client->getEmitter()->attach($mock);
+            ],
+        ]]]]]])))]);
 
         $redditVideo = new RedditVideo();
         $redditVideo->setClient($client);

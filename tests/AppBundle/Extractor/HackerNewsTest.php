@@ -3,13 +3,10 @@
 namespace Tests\AppBundle\Extractor;
 
 use AppBundle\Extractor\HackerNews;
-use GuzzleHttp\Client;
-use GuzzleHttp\Message\Response;
-use GuzzleHttp\Stream\Stream;
-use GuzzleHttp\Subscriber\Mock;
-use PHPUnit\Framework\TestCase;
+use GuzzleHttp\Psr7\Response;
+use Tests\AppBundle\AppTestCase;
 
-class HackerNewsTest extends TestCase
+class HackerNewsTest extends AppTestCase
 {
     public function dataMatch()
     {
@@ -31,16 +28,12 @@ class HackerNewsTest extends TestCase
      */
     public function testMatch($url, $expected, $valueReturned = null)
     {
-        $client = new Client();
-
         $response = new Response(200, []);
         if (null !== $valueReturned) {
-            $response = new Response(200, [], Stream::factory(json_encode($valueReturned)));
+            $response = new Response(200, [], json_encode($valueReturned));
         }
 
-        $mock = new Mock([$response]);
-
-        $client->getEmitter()->attach($mock);
+        $client = self::getMockClient([$response]);
 
         $hn = new HackerNews();
         $hn->setClient($client);
@@ -49,13 +42,7 @@ class HackerNewsTest extends TestCase
 
     public function testMatchGuzzleFail()
     {
-        $client = new Client();
-
-        $mock = new Mock([
-            new Response(400, [], Stream::factory(json_encode('oops'))),
-        ]);
-
-        $client->getEmitter()->attach($mock);
+        $client = self::getMockClient([(new Response(400, [], json_encode('oops')))]);
 
         $hn = new HackerNews();
         $hn->setClient($client);
@@ -64,13 +51,7 @@ class HackerNewsTest extends TestCase
 
     public function testContent()
     {
-        $client = new Client();
-
-        $mock = new Mock([
-            new Response(200, [], Stream::factory(json_encode(['text' => 'toto', 'type' => 'story']))),
-        ]);
-
-        $client->getEmitter()->attach($mock);
+        $client = self::getMockClient([(new Response(200, [], json_encode(['text' => 'toto', 'type' => 'story'])))]);
 
         $hn = new HackerNews();
         $hn->setClient($client);
@@ -84,13 +65,7 @@ class HackerNewsTest extends TestCase
 
     public function testContentWithoutText()
     {
-        $client = new Client();
-
-        $mock = new Mock([
-            new Response(200, [], Stream::factory(json_encode(['type' => 'story']))),
-        ]);
-
-        $client->getEmitter()->attach($mock);
+        $client = self::getMockClient([(new Response(200, [], json_encode(['type' => 'story'])))]);
 
         $hn = new HackerNews();
         $hn->setClient($client);
