@@ -1897,12 +1897,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/j0k3r/graby.git",
-                "reference": "f00502a4ba0b492f96a431f4da99a0d73fc7f677"
+                "reference": "40f9da9138834a18618cec0b672547fe8fc7dc06"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/j0k3r/graby/zipball/f00502a4ba0b492f96a431f4da99a0d73fc7f677",
-                "reference": "f00502a4ba0b492f96a431f4da99a0d73fc7f677",
+                "url": "https://api.github.com/repos/j0k3r/graby/zipball/40f9da9138834a18618cec0b672547fe8fc7dc06",
+                "reference": "40f9da9138834a18618cec0b672547fe8fc7dc06",
                 "shasum": ""
             },
             "require": {
@@ -1963,7 +1963,7 @@
                 }
             ],
             "description": "Graby helps you extract article content from web pages",
-            "time": "2019-02-13T13:17:27+00:00"
+            "time": "2019-05-11T20:45:19+00:00"
         },
         {
             "name": "j0k3r/graby-site-config",
@@ -2139,16 +2139,16 @@
         },
         {
             "name": "j0k3r/php-readability",
-            "version": "1.2.2",
+            "version": "1.2.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/j0k3r/php-readability.git",
-                "reference": "de1b1d97754af039ffb92781da0677ce9af66a1a"
+                "reference": "f808c1b0a21ae98ae6fd5bd623671c406efd74d0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/j0k3r/php-readability/zipball/de1b1d97754af039ffb92781da0677ce9af66a1a",
-                "reference": "de1b1d97754af039ffb92781da0677ce9af66a1a",
+                "url": "https://api.github.com/repos/j0k3r/php-readability/zipball/f808c1b0a21ae98ae6fd5bd623671c406efd74d0",
+                "reference": "f808c1b0a21ae98ae6fd5bd623671c406efd74d0",
                 "shasum": ""
             },
             "require": {
@@ -2209,7 +2209,7 @@
                 "extraction",
                 "html"
             ],
-            "time": "2019-04-23T08:45:13+00:00"
+            "time": "2019-05-11T20:07:19+00:00"
         },
         {
             "name": "jdorn/sql-formatter",
