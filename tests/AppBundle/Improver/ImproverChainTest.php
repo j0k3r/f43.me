@@ -15,7 +15,7 @@ class ImproverChainTest extends TestCase
 
         $improver->expects($this->once())
             ->method('match')
-            ->will($this->returnValue(true));
+            ->willReturn(true);
 
         $improverChain = new ImproverChain();
         $improverChain->addImprover($improver, 'alias');
@@ -31,7 +31,7 @@ class ImproverChainTest extends TestCase
 
         $improver->expects($this->once())
             ->method('match')
-            ->will($this->returnValue(false));
+            ->willReturn(false);
 
         $improverChain = new ImproverChain();
         $improverChain->addImprover($improver, 'alias');

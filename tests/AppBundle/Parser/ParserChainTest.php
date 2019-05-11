@@ -15,7 +15,7 @@ class ParserChainTest extends TestCase
 
         $parser->expects($this->once())
             ->method('parse')
-            ->will($this->returnValue('content'));
+            ->willReturn('content');
 
         $parserChain = new ParserChain();
         $parserChain->addParser($parser, 'alias');
@@ -32,7 +32,7 @@ class ParserChainTest extends TestCase
 
         $parser->expects($this->once())
             ->method('parse')
-            ->will($this->returnValue(false));
+            ->willReturn(false);
 
         $parserChain = new ParserChain();
         $parserChain->addParser($parser, 'alias');

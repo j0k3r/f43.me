@@ -15,7 +15,7 @@ class ConverterChainTest extends TestCase
 
         $converter->expects($this->once())
             ->method('convert')
-            ->will($this->returnValue('changed'));
+            ->willReturn('changed');
 
         $converterChain = new ConverterChain();
         $converterChain->addConverter($converter, 'alias');

@@ -57,7 +57,7 @@ class ImgurTest extends TestCase
 
         $apiAlbum->expects($this->any())
             ->method('album')
-            ->will($this->returnValue([
+            ->willReturn([
                 'id' => 'zNUC9TA',
                 'title' => null,
                 'description' => null,
@@ -82,11 +82,11 @@ class ImgurTest extends TestCase
                 'mp4_size' => 888929,
                 'link' => 'http://i.imgur.com/zNUC9TA.gif',
                 'looping' => true,
-            ]));
+            ]);
 
         $imgurClient->expects($this->any())
             ->method('api')
-            ->will($this->returnValue($apiAlbum));
+            ->willReturn($apiAlbum);
 
         $imgur = new Imgur($imgurClient);
         $imgur->match('http://imgur.com/a/zNUC9TA');
@@ -106,7 +106,7 @@ class ImgurTest extends TestCase
 
         $apiImage->expects($this->any())
             ->method('image')
-            ->will($this->returnValue([
+            ->willReturn([
                 'id' => '1S10bkI',
                 'title' => null,
                 'description' => null,
@@ -130,11 +130,11 @@ class ImgurTest extends TestCase
                 'mp4' => 'https://i.imgur.com/1S10bkI.mp4',
                 'mp4_size' => 2131051,
                 'link' => 'https://i.imgur.com/1S10bkI.mp4',
-            ]));
+            ]);
 
         $imgurClient->expects($this->any())
             ->method('api')
-            ->will($this->returnValue($apiImage));
+            ->willReturn($apiImage);
 
         $imgur = new Imgur($imgurClient);
         $imgur->match('http://imgur.com/1S10bkI');
@@ -154,7 +154,7 @@ class ImgurTest extends TestCase
 
         $apiAlbum->expects($this->any())
             ->method('album')
-            ->will($this->returnValue([
+            ->willReturn([
                 'id' => 'dLaMy',
                 'title' => 'Building the Spruce Moose',
                 'description' => null,
@@ -220,11 +220,11 @@ class ImgurTest extends TestCase
                         'link' => 'http://i.imgur.com/HdcEO2X.jpg',
                     ],
                 ],
-            ]));
+            ]);
 
         $imgurClient->expects($this->any())
             ->method('api')
-            ->will($this->returnValue($apiAlbum));
+            ->willReturn($apiAlbum);
 
         $imgur = new Imgur($imgurClient);
         $imgur->match('http://imgur.com/a/dLaMy');

@@ -38,7 +38,7 @@ class FeedItemSubscriberTest extends TestCase
         $router->expects($this->once())
             ->method('generate')
             ->with('feed_xml', ['slug' => 'bar.unknown'], UrlGeneratorInterface::ABSOLUTE_URL)
-            ->will($this->returnValue('http://f43.me/rss.xml'));
+            ->willReturn('http://f43.me/rss.xml');
 
         $client = new Client();
 
@@ -66,7 +66,7 @@ class FeedItemSubscriberTest extends TestCase
         $router->expects($this->once())
             ->method('generate')
             ->with('feed_xml', ['slug' => 'bar.unknown'], UrlGeneratorInterface::ABSOLUTE_URL)
-            ->will($this->returnValue('http://f43.me/rss.xml'));
+            ->willReturn('http://f43.me/rss.xml');
 
         $client = new Client();
 
