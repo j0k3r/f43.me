@@ -2,8 +2,6 @@
 
 namespace AppBundle\Extractor;
 
-use Http\Client\Exception\RequestException;
-
 class Youtube extends AbstractExtractor
 {
     protected $youtubeUrl = null;
@@ -41,7 +39,7 @@ class Youtube extends AbstractExtractor
         try {
             $response = $this->client->get('http://www.youtube.com/oembed?format=json&url=' . $this->youtubeUrl);
             $data = $this->jsonDecode($response);
-        } catch (RequestException $e) {
+        } catch (\Exception $e) {
             $this->logger->warning('Youtube extract failed for: ' . $this->youtubeUrl, [
                 'exception' => $e,
             ]);

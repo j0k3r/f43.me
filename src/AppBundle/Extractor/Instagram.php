@@ -2,8 +2,6 @@
 
 namespace AppBundle\Extractor;
 
-use Http\Client\Exception\RequestException;
-
 class Instagram extends AbstractExtractor
 {
     protected $instagramUrl = null;
@@ -80,7 +78,7 @@ class Instagram extends AbstractExtractor
             $response = $this->client->get('https://api.instagram.com/oembed?url=' . $this->instagramUrl);
 
             return $this->jsonDecode($response);
-        } catch (RequestException $e) {
+        } catch (\Exception $e) {
             $this->logger->warning('Instagram extract failed for: ' . $this->instagramUrl, [
                 'exception' => $e,
             ]);

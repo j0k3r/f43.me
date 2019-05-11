@@ -2,8 +2,6 @@
 
 namespace AppBundle\Extractor;
 
-use Http\Client\Exception\RequestException;
-
 class Vine extends AbstractExtractor
 {
     protected $vineId = null;
@@ -48,7 +46,7 @@ class Vine extends AbstractExtractor
         try {
             $response = $this->client->get('https://vine.co/oembed.json?id=' . $this->vineId);
             $data = $this->jsonDecode($response);
-        } catch (RequestException $e) {
+        } catch (\Exception $e) {
             $this->logger->warning('Vine extract failed for: ' . $this->vineId, [
                 'exception' => $e,
             ]);

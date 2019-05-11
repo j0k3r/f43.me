@@ -2,8 +2,6 @@
 
 namespace AppBundle\Extractor;
 
-use Http\Client\Exception\RequestException;
-
 class Vimeo extends AbstractExtractor
 {
     protected $vimeoUrl = null;
@@ -41,7 +39,7 @@ class Vimeo extends AbstractExtractor
         try {
             $response = $this->client->get('https://vimeo.com/api/oembed.xml?format=json&url=' . $this->vimeoUrl);
             $data = $this->jsonDecode($response);
-        } catch (RequestException $e) {
+        } catch (\Exception $e) {
             $this->logger->warning('Vimeo extract failed for: ' . $this->vimeoUrl, [
                 'exception' => $e,
             ]);

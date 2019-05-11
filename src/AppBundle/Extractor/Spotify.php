@@ -2,8 +2,6 @@
 
 namespace AppBundle\Extractor;
 
-use Http\Client\Exception\RequestException;
-
 class Spotify extends AbstractExtractor
 {
     protected $spotifyUrl = null;
@@ -41,7 +39,7 @@ class Spotify extends AbstractExtractor
         try {
             $response = $this->client->get('https://embed.spotify.com/oembed/?format=json&url=' . $this->spotifyUrl);
             $data = $this->jsonDecode($response);
-        } catch (RequestException $e) {
+        } catch (\Exception $e) {
             $this->logger->warning('Spotify extract failed for: ' . $this->spotifyUrl, [
                 'exception' => $e,
             ]);

@@ -2,8 +2,6 @@
 
 namespace AppBundle\Extractor;
 
-use Http\Client\Exception\RequestException;
-
 class RedditVideo extends AbstractExtractor
 {
     protected $redditVideoData = null;
@@ -39,7 +37,7 @@ class RedditVideo extends AbstractExtractor
         try {
             $response = $this->client->get($jsonUrl);
             $data = $this->jsonDecode($response);
-        } catch (RequestException $e) {
+        } catch (\Exception $e) {
             return false;
         }
 

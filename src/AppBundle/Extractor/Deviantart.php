@@ -2,8 +2,6 @@
 
 namespace AppBundle\Extractor;
 
-use Http\Client\Exception\RequestException;
-
 class Deviantart extends AbstractExtractor
 {
     protected $deviantartUrl = null;
@@ -47,7 +45,7 @@ class Deviantart extends AbstractExtractor
         try {
             $response = $this->client->get('http://backend.deviantart.com/oembed?url=' . $this->deviantartUrl);
             $data = $this->jsonDecode($response);
-        } catch (RequestException $e) {
+        } catch (\Exception $e) {
             $this->logger->warning('Deviantart extract failed for: ' . $this->deviantartUrl, [
                 'exception' => $e,
             ]);

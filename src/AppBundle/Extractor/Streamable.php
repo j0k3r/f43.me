@@ -2,8 +2,6 @@
 
 namespace AppBundle\Extractor;
 
-use Http\Client\Exception\RequestException;
-
 class Streamable extends AbstractExtractor
 {
     protected $streamableUrl = null;
@@ -41,7 +39,7 @@ class Streamable extends AbstractExtractor
         try {
             $response = $this->client->get('http://api.streamable.com/oembed.json?url=' . $this->streamableUrl);
             $data = $this->jsonDecode($response);
-        } catch (RequestException $e) {
+        } catch (\Exception $e) {
             $this->logger->warning('Streamable extract failed for: ' . $this->streamableUrl, [
                 'exception' => $e,
             ]);

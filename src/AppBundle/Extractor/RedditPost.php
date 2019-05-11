@@ -2,8 +2,6 @@
 
 namespace AppBundle\Extractor;
 
-use Http\Client\Exception\RequestException;
-
 class RedditPost extends AbstractExtractor
 {
     protected $redditPostData = null;
@@ -30,7 +28,7 @@ class RedditPost extends AbstractExtractor
         try {
             $response = $this->client->get($url);
             $data = $this->jsonDecode($response);
-        } catch (RequestException $e) {
+        } catch (\Exception $e) {
             return false;
         }
 

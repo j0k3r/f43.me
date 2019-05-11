@@ -2,8 +2,6 @@
 
 namespace AppBundle\Extractor;
 
-use Http\Client\Exception\RequestException;
-
 class HackerNews extends AbstractExtractor
 {
     protected $text = null;
@@ -34,7 +32,7 @@ class HackerNews extends AbstractExtractor
         try {
             $response = $this->client->get('https://hacker-news.firebaseio.com/v0/item/' . $matches[1] . '.json');
             $data = $this->jsonDecode($response);
-        } catch (RequestException $e) {
+        } catch (\Exception $e) {
             return false;
         }
 

@@ -101,7 +101,7 @@ class Github extends AbstractExtractor
                     '<li>' . $data['commits'] . ' commits</li>' .
                     '<li>' . $data['comments'] . ' comments</li></ul>' .
                     $data['body_html'] . '</div>';
-            } catch (RequestException $e) {
+            } catch (\Exception $e) {
                 $this->logger->error('Github (pull) extract failed for: ' . $this->githubRepo . ' & pr: ' . $this->pullNumber, [
                     'exception' => $e,
                 ]);
@@ -134,7 +134,7 @@ class Github extends AbstractExtractor
                     '<li>on ' . date('d/m/Y', strtotime($data['created_at'])) . '</li>' .
                     '<li>' . $data['comments'] . ' comments</li></ul></ul>' .
                     $data['body_html'] . '</div>';
-            } catch (RequestException $e) {
+            } catch (\Exception $e) {
                 $this->logger->error('Github (issue) extract failed for: ' . $this->githubRepo . ' & issue: ' . $this->issueNumber, [
                     'exception' => $e,
                 ]);
