@@ -2,8 +2,6 @@
 
 namespace AppBundle\Extractor;
 
-use GuzzleHttp\Exception\RequestException;
-
 class Camplus extends AbstractExtractor
 {
     protected $camplusId = null;
@@ -46,10 +44,9 @@ class Camplus extends AbstractExtractor
         }
 
         try {
-            $data = $this->client
-                ->get('http://campl.us/' . $this->camplusId . ':info')
-                ->json();
-        } catch (RequestException $e) {
+            $response = $this->client->get('http://campl.us/' . $this->camplusId . ':info');
+            $data = $this->jsonDecode($response);
+        } catch (\Exception $e) {
             $this->logger->warning('Camplus extract failed for: ' . $this->camplusId, [
                 'exception' => $e,
             ]);

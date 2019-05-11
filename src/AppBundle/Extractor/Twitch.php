@@ -2,8 +2,6 @@
 
 namespace AppBundle\Extractor;
 
-use GuzzleHttp\Exception\RequestException;
-
 class Twitch extends AbstractExtractor
 {
     protected $twitchCliendId;
@@ -55,10 +53,9 @@ class Twitch extends AbstractExtractor
         }
 
         try {
-            $data = $this->client
-                ->get('https://api.twitch.tv/kraken/videos/v' . $this->twitchId, ['headers' => ['Client-ID' => $this->twitchCliendId]])
-                ->json();
-        } catch (RequestException $e) {
+            $response = $this->client->get('https://api.twitch.tv/kraken/videos/v' . $this->twitchId, ['headers' => ['Client-ID' => $this->twitchCliendId]]);
+            $data = $this->jsonDecode($response);
+        } catch (\Exception $e) {
             $this->logger->warning('Twitch extract failed for: ' . $this->twitchId, [
                 'exception' => $e,
             ]);

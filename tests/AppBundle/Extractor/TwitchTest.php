@@ -3,15 +3,12 @@
 namespace Tests\AppBundle\Extractor;
 
 use AppBundle\Extractor\Twitch;
-use GuzzleHttp\Client;
-use GuzzleHttp\Message\Response;
-use GuzzleHttp\Stream\Stream;
-use GuzzleHttp\Subscriber\Mock;
+use GuzzleHttp\Psr7\Response;
 use Monolog\Handler\TestHandler;
 use Monolog\Logger;
-use PHPUnit\Framework\TestCase;
+use Tests\AppBundle\AppTestCase;
 
-class TwitchTest extends TestCase
+class TwitchTest extends AppTestCase
 {
     public function dataMatch()
     {
@@ -36,15 +33,11 @@ class TwitchTest extends TestCase
 
     public function testContent()
     {
-        $client = new Client();
-
-        $mock = new Mock([
-            new Response(200, [], Stream::factory(json_encode(['title' => 'hihi', 'description' => 'hoho', 'preview' => 'http://0.0.0.0/image.jpg']))),
-            new Response(200, [], Stream::factory(json_encode([]))),
-            new Response(400, [], Stream::factory(json_encode('oops'))),
+        $client = self::getMockClient([
+            (new Response(200, [], json_encode(['title' => 'hihi', 'description' => 'hoho', 'preview' => 'http://0.0.0.0/image.jpg']))),
+            (new Response(200, [], json_encode([]))),
+            (new Response(400, [], json_encode('oops'))),
         ]);
-
-        $client->getEmitter()->attach($mock);
 
         $twitch = new Twitch('apikey');
         $twitch->setClient($client);

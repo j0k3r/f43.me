@@ -2,8 +2,6 @@
 
 namespace AppBundle\Extractor;
 
-use GuzzleHttp\Exception\RequestException;
-
 class Gfycat extends AbstractExtractor
 {
     protected $gfycatId = null;
@@ -49,10 +47,9 @@ class Gfycat extends AbstractExtractor
         }
 
         try {
-            $data = $this->client
-                ->get('https://api.gfycat.com/v1/gfycats/' . $this->gfycatId)
-                ->json();
-        } catch (RequestException $e) {
+            $response = $this->client->get('https://api.gfycat.com/v1/gfycats/' . $this->gfycatId);
+            $data = $this->jsonDecode($response);
+        } catch (\Exception $e) {
             $this->logger->warning('Gfycat extract failed for: ' . $this->gfycatId, [
                 'exception' => $e,
             ]);

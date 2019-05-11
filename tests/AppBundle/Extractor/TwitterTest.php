@@ -43,7 +43,7 @@ class TwitterTest extends TestCase
 
         $twitterOAuth->expects($this->once())
             ->method('get')
-            ->will($this->returnValue([
+            ->willReturn([
                 'user' => [
                     'name' => 'the name',
                     'screen_name' => 'the_name',
@@ -90,7 +90,7 @@ class TwitterTest extends TestCase
                         'hashtags' => [],
                     ],
                 ],
-            ]));
+            ]);
 
         $twitter = new Twitter($twitterOAuth);
         $twitter->match('https://twitter.com/DoerteDev/statuses/506522223860277248');
@@ -115,7 +115,7 @@ class TwitterTest extends TestCase
 
         $twitterOAuth->expects($this->once())
             ->method('get')
-            ->will($this->returnValue([
+            ->willReturn([
                 'user' => [
                     'name' => 'the name',
                     'screen_name' => 'the_name',
@@ -127,7 +127,7 @@ class TwitterTest extends TestCase
                     'user_mentions' => [],
                     'hashtags' => [],
                 ],
-            ]));
+            ]);
 
         $twitter = new Twitter($twitterOAuth);
         $twitter->match('https://twitter.com/DoerteDev/statuses/506522223860277248');

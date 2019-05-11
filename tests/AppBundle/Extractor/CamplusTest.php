@@ -3,15 +3,12 @@
 namespace Tests\AppBundle\Extractor;
 
 use AppBundle\Extractor\Camplus;
-use GuzzleHttp\Client;
-use GuzzleHttp\Message\Response;
-use GuzzleHttp\Stream\Stream;
-use GuzzleHttp\Subscriber\Mock;
+use GuzzleHttp\Psr7\Response;
 use Monolog\Handler\TestHandler;
 use Monolog\Logger;
-use PHPUnit\Framework\TestCase;
+use Tests\AppBundle\AppTestCase;
 
-class CamplusTest extends TestCase
+class CamplusTest extends AppTestCase
 {
     public function dataMatch()
     {
@@ -38,22 +35,16 @@ class CamplusTest extends TestCase
 
     public function testContent()
     {
-        $client = new Client();
-
-        $mock = new Mock([
-            new Response(200, [], Stream::factory(json_encode([
-                'page' => ['tweet' => [
-                    'id' => '123',
-                    'username' => 'j0k',
-                    'realname' => 'j0k',
-                    'text' => 'yay',
-                ]], 'pictures' => [[
-                    '480px' => 'http://0.0.0.0/youpi.jpg',
-                ]],
-            ]))),
-        ]);
-
-        $client->getEmitter()->attach($mock);
+        $client = self::getMockClient([(new Response(200, ['content-type' => 'application/json'], json_encode([
+            'page' => ['tweet' => [
+                'id' => '123',
+                'username' => 'j0k',
+                'realname' => 'j0k',
+                'text' => 'yay',
+            ]], 'pictures' => [[
+                '480px' => 'http://0.0.0.0/youpi.jpg',
+            ]],
+        ])))]);
 
         $camplus = new Camplus();
         $camplus->setClient($client);
@@ -71,13 +62,7 @@ class CamplusTest extends TestCase
 
     public function testContentWithException()
     {
-        $client = new Client();
-
-        $mock = new Mock([
-            new Response(400, [], Stream::factory(json_encode('oops'))),
-        ]);
-
-        $client->getEmitter()->attach($mock);
+        $client = self::getMockClient([(new Response(400, ['content-type' => 'application/json'], json_encode('oops')))]);
 
         $camplus = new Camplus();
         $camplus->setClient($client);

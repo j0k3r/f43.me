@@ -2,8 +2,6 @@
 
 namespace AppBundle\Extractor;
 
-use GuzzleHttp\Exception\RequestException;
-
 class Instagram extends AbstractExtractor
 {
     protected $instagramUrl = null;
@@ -77,10 +75,10 @@ class Instagram extends AbstractExtractor
     private function retrieveData()
     {
         try {
-            return $this->client
-                ->get('https://api.instagram.com/oembed?url=' . $this->instagramUrl)
-                ->json();
-        } catch (RequestException $e) {
+            $response = $this->client->get('https://api.instagram.com/oembed?url=' . $this->instagramUrl);
+
+            return $this->jsonDecode($response);
+        } catch (\Exception $e) {
             $this->logger->warning('Instagram extract failed for: ' . $this->instagramUrl, [
                 'exception' => $e,
             ]);

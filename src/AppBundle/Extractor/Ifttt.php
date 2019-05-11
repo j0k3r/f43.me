@@ -2,8 +2,6 @@
 
 namespace AppBundle\Extractor;
 
-use GuzzleHttp\Exception\RequestException;
-
 class Ifttt extends AbstractExtractor
 {
     protected $recipeId = null;
@@ -46,10 +44,9 @@ class Ifttt extends AbstractExtractor
         }
 
         try {
-            $data = $this->client
-                ->get('https://ifttt.com/oembed/?url=https://ifttt.com/recipes/' . $this->recipeId . '&format=json')
-                ->json();
-        } catch (RequestException $e) {
+            $response = $this->client->get('https://ifttt.com/oembed/?url=https://ifttt.com/recipes/' . $this->recipeId . '&format=json');
+            $data = $this->jsonDecode($response);
+        } catch (\Exception $e) {
             $this->logger->warning('Ifttt extract failed for: ' . $this->recipeId, [
                 'exception' => $e,
             ]);

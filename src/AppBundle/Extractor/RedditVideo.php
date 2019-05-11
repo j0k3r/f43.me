@@ -2,8 +2,6 @@
 
 namespace AppBundle\Extractor;
 
-use GuzzleHttp\Exception\RequestException;
-
 class RedditVideo extends AbstractExtractor
 {
     protected $redditVideoData = null;
@@ -37,8 +35,9 @@ class RedditVideo extends AbstractExtractor
         $jsonUrl = str_replace('//', '/', $jsonUrl);
 
         try {
-            $data = $this->client->get($jsonUrl)->json();
-        } catch (RequestException $e) {
+            $response = $this->client->get($jsonUrl);
+            $data = $this->jsonDecode($response);
+        } catch (\Exception $e) {
             return false;
         }
 

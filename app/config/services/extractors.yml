@@ -9,7 +9,7 @@ services:
             - "@imgur.client"
         calls:
             - [ setLogger, [ "@logger" ]]
-            - [ setClient, [ "@guzzle.client" ]]
+            - [ setClient, [ "@httplug.client.default.http_methods" ]]
         tags:
             -  { name: feed.extractor, alias: imgur }
 
@@ -19,7 +19,7 @@ services:
             - "@twitter.client"
         calls:
             - [ setLogger, [ "@logger" ]]
-            - [ setClient, [ "@guzzle.client" ]]
+            - [ setClient, [ "@httplug.client.default.http_methods" ]]
         tags:
             -  { name: feed.extractor, alias: twitter }
 
@@ -29,7 +29,7 @@ services:
             - "%tumblr.api_key%"
         calls:
             - [ setLogger, [ "@logger" ]]
-            - [ setClient, [ "@guzzle.client" ]]
+            - [ setClient, [ "@httplug.client.default.http_methods" ]]
         tags:
             -  { name: feed.extractor, alias: tumblr }
 
@@ -37,7 +37,7 @@ services:
         class: AppBundle\Extractor\Vine
         calls:
             - [ setLogger, [ "@logger" ]]
-            - [ setClient, [ "@guzzle.client" ]]
+            - [ setClient, [ "@httplug.client.default.http_methods" ]]
         tags:
             -  { name: feed.extractor, alias: vine }
 
@@ -45,7 +45,7 @@ services:
         class: AppBundle\Extractor\Instagram
         calls:
             - [ setLogger, [ "@logger" ]]
-            - [ setClient, [ "@guzzle.client" ]]
+            - [ setClient, [ "@httplug.client.default.http_methods" ]]
         tags:
             -  { name: feed.extractor, alias: instagram }
 
@@ -53,7 +53,7 @@ services:
         class: AppBundle\Extractor\Vidme
         calls:
             - [ setLogger, [ "@logger" ]]
-            - [ setClient, [ "@guzzle.client" ]]
+            - [ setClient, [ "@httplug.client.default.http_methods" ]]
         tags:
             -  { name: feed.extractor, alias: vidme }
 
@@ -61,7 +61,7 @@ services:
         class: AppBundle\Extractor\Gfycat
         calls:
             - [ setLogger, [ "@logger" ]]
-            - [ setClient, [ "@guzzle.client" ]]
+            - [ setClient, [ "@httplug.client.default.http_methods" ]]
         tags:
             -  { name: feed.extractor, alias: gfycat }
 
@@ -69,7 +69,7 @@ services:
         class: AppBundle\Extractor\Flickr
         calls:
             - [ setLogger, [ "@logger" ]]
-            - [ setClient, [ "@guzzle.client" ]]
+            - [ setClient, [ "@httplug.client.default.http_methods" ]]
         tags:
             -  { name: feed.extractor, alias: flickr }
 
@@ -80,7 +80,7 @@ services:
             - "%github.client_secret%"
         calls:
             - [ setLogger, [ "@logger" ]]
-            - [ setClient, [ "@guzzle.client" ]]
+            - [ setClient, [ "@httplug.client.default.http_methods" ]]
         tags:
             -  { name: feed.extractor, alias: github }
 
@@ -88,7 +88,7 @@ services:
         class: AppBundle\Extractor\Deviantart
         calls:
             - [ setLogger, [ "@logger" ]]
-            - [ setClient, [ "@guzzle.client" ]]
+            - [ setClient, [ "@httplug.client.default.http_methods" ]]
         tags:
             -  { name: feed.extractor, alias: deviantart }
 
@@ -96,7 +96,7 @@ services:
         class: AppBundle\Extractor\Camplus
         calls:
             - [ setLogger, [ "@logger" ]]
-            - [ setClient, [ "@guzzle.client" ]]
+            - [ setClient, [ "@httplug.client.default.http_methods" ]]
         tags:
             -  { name: feed.extractor, alias: camplus }
 
@@ -104,7 +104,7 @@ services:
         class: AppBundle\Extractor\Soundcloud
         calls:
             - [ setLogger, [ "@logger" ]]
-            - [ setClient, [ "@guzzle.client" ]]
+            - [ setClient, [ "@httplug.client.default.http_methods" ]]
         tags:
             -  { name: feed.extractor, alias: soundcloud }
 
@@ -112,7 +112,7 @@ services:
         class: AppBundle\Extractor\Vimeo
         calls:
             - [ setLogger, [ "@logger" ]]
-            - [ setClient, [ "@guzzle.client" ]]
+            - [ setClient, [ "@httplug.client.default.http_methods" ]]
         tags:
             -  { name: feed.extractor, alias: vimeo }
 
@@ -120,7 +120,7 @@ services:
         class: AppBundle\Extractor\Youtube
         calls:
             - [ setLogger, [ "@logger" ]]
-            - [ setClient, [ "@guzzle.client" ]]
+            - [ setClient, [ "@httplug.client.default.http_methods" ]]
         tags:
             -  { name: feed.extractor, alias: youtube }
 
@@ -128,7 +128,7 @@ services:
         class: AppBundle\Extractor\Dailymotion
         calls:
             - [ setLogger, [ "@logger" ]]
-            - [ setClient, [ "@guzzle.client" ]]
+            - [ setClient, [ "@httplug.client.default.http_methods" ]]
         tags:
             -  { name: feed.extractor, alias: dailymotion }
 
@@ -136,7 +136,7 @@ services:
         class: AppBundle\Extractor\Spotify
         calls:
             - [ setLogger, [ "@logger" ]]
-            - [ setClient, [ "@guzzle.client" ]]
+            - [ setClient, [ "@httplug.client.default.http_methods" ]]
         tags:
             -  { name: feed.extractor, alias: spotify }
 
@@ -144,7 +144,7 @@ services:
         class: AppBundle\Extractor\HackerNews
         calls:
             - [ setLogger, [ "@logger" ]]
-            - [ setClient, [ "@guzzle.client" ]]
+            - [ setClient, [ "@httplug.client.default.http_methods" ]]
         tags:
             -  { name: feed.extractor, alias: hackernews }
 
@@ -152,7 +152,7 @@ services:
         class: AppBundle\Extractor\Rue89
         calls:
             - [ setLogger, [ "@logger" ]]
-            - [ setClient, [ "@guzzle.client" ]]
+            - [ setClient, [ "@httplug.client.default.http_methods" ]]
         tags:
             -  { name: feed.extractor, alias: rue89 }
 
@@ -160,7 +160,7 @@ services:
         class: AppBundle\Extractor\Streamable
         calls:
             - [ setLogger, [ "@logger" ]]
-            - [ setClient, [ "@guzzle.client" ]]
+            - [ setClient, [ "@httplug.client.default.http_methods" ]]
         tags:
             -  { name: feed.extractor, alias: streamable }
 
@@ -168,7 +168,7 @@ services:
         class: AppBundle\Extractor\Ifttt
         calls:
             - [ setLogger, [ "@logger" ]]
-            - [ setClient, [ "@guzzle.client" ]]
+            - [ setClient, [ "@httplug.client.default.http_methods" ]]
         tags:
             -  { name: feed.extractor, alias: ifttt }
 
@@ -183,7 +183,7 @@ services:
         class: AppBundle\Extractor\RedditVideo
         calls:
             - [ setLogger, [ "@logger" ]]
-            - [ setClient, [ "@guzzle.client" ]]
+            - [ setClient, [ "@httplug.client.default.http_methods" ]]
         tags:
             -  { name: feed.extractor, alias: redditvideo }
 
@@ -191,7 +191,7 @@ services:
         class: AppBundle\Extractor\RedditPost
         calls:
             - [ setLogger, [ "@logger" ]]
-            - [ setClient, [ "@guzzle.client" ]]
+            - [ setClient, [ "@httplug.client.default.http_methods" ]]
         tags:
             -  { name: feed.extractor, alias: redditpost }
 
@@ -199,7 +199,7 @@ services:
         class: AppBundle\Extractor\Giphy
         calls:
             - [ setLogger, [ "@logger" ]]
-            - [ setClient, [ "@guzzle.client" ]]
+            - [ setClient, [ "@httplug.client.default.http_methods" ]]
         tags:
             -  { name: feed.extractor, alias: giphy }
 
@@ -209,7 +209,7 @@ services:
             - "%twitch.client_id%"
         calls:
             - [ setLogger, [ "@logger" ]]
-            - [ setClient, [ "@guzzle.client" ]]
+            - [ setClient, [ "@httplug.client.default.http_methods" ]]
         tags:
             -  { name: feed.extractor, alias: twitch }
 
@@ -217,6 +217,6 @@ services:
         class: AppBundle\Extractor\Periscope
         calls:
             - [ setLogger, [ "@logger" ]]
-            - [ setClient, [ "@guzzle.client" ]]
+            - [ setClient, [ "@httplug.client.default.http_methods" ]]
         tags:
             -  { name: feed.extractor, alias: periscope }

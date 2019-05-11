@@ -3,15 +3,12 @@
 namespace Tests\AppBundle\Extractor;
 
 use AppBundle\Extractor\Gfycat;
-use GuzzleHttp\Client;
-use GuzzleHttp\Message\Response;
-use GuzzleHttp\Stream\Stream;
-use GuzzleHttp\Subscriber\Mock;
+use GuzzleHttp\Psr7\Response;
 use Monolog\Handler\TestHandler;
 use Monolog\Logger;
-use PHPUnit\Framework\TestCase;
+use Tests\AppBundle\AppTestCase;
 
-class GfycatTest extends TestCase
+class GfycatTest extends AppTestCase
 {
     public function dataMatch()
     {
@@ -38,15 +35,11 @@ class GfycatTest extends TestCase
 
     public function testContent()
     {
-        $client = new Client();
-
-        $mock = new Mock([
-            new Response(200, [], Stream::factory(json_encode(['gfyItem' => ['title' => 'my title', 'posterUrl' => 'http://0.0.0.0/img.gif']]))),
-            new Response(200, [], Stream::factory(json_encode(''))),
-            new Response(400, [], Stream::factory(json_encode('oops'))),
+        $client = self::getMockClient([
+            (new Response(200, [], json_encode(['gfyItem' => ['title' => 'my title', 'posterUrl' => 'http://0.0.0.0/img.gif']]))),
+            (new Response(200, [], json_encode(''))),
+            (new Response(400, [], json_encode('oops'))),
         ]);
-
-        $client->getEmitter()->attach($mock);
 
         $gfycat = new Gfycat();
         $gfycat->setClient($client);

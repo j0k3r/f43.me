@@ -24,7 +24,7 @@ class FetchItemsCommandTest extends WebTestCase
 
     public function setUp()
     {
-        $client = static::createClient();
+        static::createClient();
 
         $simplePieItem = $this->getMockBuilder('SimplePie_Item')
             ->disableOriginalConstructor()
@@ -32,11 +32,11 @@ class FetchItemsCommandTest extends WebTestCase
 
         $simplePieItem->expects($this->any())
             ->method('get_description')
-            ->will($this->returnValue('desc'));
+            ->willReturn('desc');
 
         $simplePieItem->expects($this->any())
             ->method('get_permalink')
-            ->will($this->returnValue('http://localhost'));
+            ->willReturn('https://wildtrip.blog/sri-lanka-3-semaines-quoi-voir.html');
 
         $simplePie = $this->getMockBuilder('SimplePie')
             ->disableOriginalConstructor()
@@ -44,11 +44,11 @@ class FetchItemsCommandTest extends WebTestCase
 
         $simplePie->expects($this->any())
             ->method('get_items')
-            ->will($this->returnValue([$simplePieItem]));
+            ->willReturn([$simplePieItem]);
 
         $simplePie->expects($this->any())
             ->method('get_description')
-            ->will($this->returnValue('desc'));
+            ->willReturn('desc');
 
         $simplePieProxy = $this->getMockBuilder('AppBundle\Xml\SimplePieProxy')
             ->disableOriginalConstructor()
@@ -56,11 +56,11 @@ class FetchItemsCommandTest extends WebTestCase
 
         $simplePieProxy->expects($this->any())
             ->method('setUrl')
-            ->will($this->returnSelf());
+            ->willReturnSelf();
 
         $simplePieProxy->expects($this->any())
             ->method('init')
-            ->will($this->returnValue($simplePie));
+            ->willReturn($simplePie);
 
         $logger = new Logger('import');
         $this->handler = new TestHandler();

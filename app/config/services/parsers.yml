@@ -6,7 +6,7 @@ services:
     feed.parser.external:
         class: AppBundle\Parser\External
         arguments:
-            - "@guzzle.client"
+            - "@httplug.client.default.http_methods"
             - "%mercury_url%"
         tags:
             -  { name: feed.parser, alias: external }

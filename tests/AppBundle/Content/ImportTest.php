@@ -13,14 +13,13 @@ use AppBundle\Improver\Reddit;
 use AppBundle\Parser\Internal;
 use AppBundle\Parser\ParserChain;
 use Graby\Graby;
-use GuzzleHttp\Client;
-use PHPUnit\Framework\TestCase;
 use Psr\Log\NullLogger;
+use Tests\AppBundle\AppTestCase;
 
 /**
  * Crazy complicated tests with too much mocks to replicate a bug where url with & in reddit feed are converted to &amp; and breaks the link.
  */
-class ImportTest extends TestCase
+class ImportTest extends AppTestCase
 {
     public function testRedditFeed()
     {
@@ -94,7 +93,7 @@ class ImportTest extends TestCase
         $eventDispatcher->expects($this->once())
             ->method('dispatch');
 
-        $client = new Client();
+        $client = self::getMockClient();
 
         $youtube = new Youtube();
         $youtube->setClient($client);
@@ -216,7 +215,7 @@ class ImportTest extends TestCase
         $eventDispatcher->expects($this->once())
             ->method('dispatch');
 
-        $client = new Client();
+        $client = self::getMockClient();
 
         $youtube = new Youtube();
         $youtube->setClient($client);

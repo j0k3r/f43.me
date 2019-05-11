@@ -3,15 +3,12 @@
 namespace Tests\AppBundle\Extractor;
 
 use AppBundle\Extractor\Flickr;
-use GuzzleHttp\Client;
-use GuzzleHttp\Message\Response;
-use GuzzleHttp\Stream\Stream;
-use GuzzleHttp\Subscriber\Mock;
+use GuzzleHttp\Psr7\Response;
 use Monolog\Handler\TestHandler;
 use Monolog\Logger;
-use PHPUnit\Framework\TestCase;
+use Tests\AppBundle\AppTestCase;
 
-class FlickrTest extends TestCase
+class FlickrTest extends AppTestCase
 {
     public function dataMatch()
     {
@@ -44,10 +41,8 @@ class FlickrTest extends TestCase
 
     public function testSinglePhoto()
     {
-        $client = new Client();
-
-        $mock = new Mock([
-            new Response(200, [], Stream::factory(json_encode([
+        $client = self::getMockClient([
+            (new Response(200, [], json_encode([
                 'flickr_type' => 'photo',
                 'url' => 'https://0.0.0.0/large.jpg',
                 'title' => 'title',
@@ -55,11 +50,9 @@ class FlickrTest extends TestCase
                 'author_url' => 'https://0.0.0.0/me',
                 'html' => '<a data-flickr-embed="true"></a>',
             ]))),
-            new Response(200, [], Stream::factory(json_encode(''))),
-            new Response(400, [], Stream::factory(json_encode('oops'))),
+            (new Response(200, [], json_encode(''))),
+            (new Response(400, [], json_encode('oops'))),
         ]);
-
-        $client->getEmitter()->attach($mock);
 
         $flickr = new Flickr('apikey');
         $flickr->setClient($client);
@@ -88,10 +81,8 @@ class FlickrTest extends TestCase
 
     public function testPhotoSet()
     {
-        $client = new Client();
-
-        $mock = new Mock([
-            new Response(200, [], Stream::factory(json_encode([
+        $client = self::getMockClient([
+            (new Response(200, [], json_encode([
                 'flickr_type' => 'album',
                 'thumbnail_url' => 'https://0.0.0.0/small.jpg',
                 'title' => 'title',
@@ -99,11 +90,9 @@ class FlickrTest extends TestCase
                 'author_url' => 'https://0.0.0.0/me',
                 'html' => '<a data-flickr-embed="true"></a>',
             ]))),
-            new Response(200, [], Stream::factory(json_encode(''))),
-            new Response(400, [], Stream::factory(json_encode('oops'))),
+            (new Response(200, [], json_encode(''))),
+            (new Response(400, [], json_encode('oops'))),
         ]);
-
-        $client->getEmitter()->attach($mock);
 
         $flickr = new Flickr('apikey');
         $flickr->setClient($client);

@@ -2,8 +2,6 @@
 
 namespace AppBundle\Extractor;
 
-use GuzzleHttp\Exception\RequestException;
-
 class Flickr extends AbstractExtractor
 {
     protected $flickrUrl = null;
@@ -39,11 +37,11 @@ class Flickr extends AbstractExtractor
         }
 
         try {
-            $data = $this->client
+            $response = $this->client
                 // ->get('https://api.flickr.com/services/rest/?method=flickr.photos.getSizes&api_key='.$this->flickrApiKey.'&photo_id='.$this->flickrId.'&format=json&nojsoncallback=1')
-                ->get('https://www.flickr.com/services/oembed?format=json&minwidth=1000&url=' . $this->flickrUrl)
-                ->json();
-        } catch (RequestException $e) {
+                ->get('https://www.flickr.com/services/oembed?format=json&minwidth=1000&url=' . $this->flickrUrl);
+            $data = $this->jsonDecode($response);
+        } catch (\Exception $e) {
             $this->logger->warning('Flickr extract failed for: ' . $this->flickrUrl, [
                 'exception' => $e,
             ]);

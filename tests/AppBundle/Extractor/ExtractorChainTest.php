@@ -15,7 +15,7 @@ class ExtractorChainTest extends TestCase
 
         $extractor->expects($this->once())
             ->method('match')
-            ->will($this->returnValue(true));
+            ->willReturn(true);
 
         $extractorChain = new ExtractorChain();
         $extractorChain->addExtractor($extractor, 'alias');
@@ -31,7 +31,7 @@ class ExtractorChainTest extends TestCase
 
         $extractor->expects($this->once())
             ->method('match')
-            ->will($this->returnValue(false));
+            ->willReturn(false);
 
         $extractorChain = new ExtractorChain();
         $extractorChain->addExtractor($extractor, 'alias');

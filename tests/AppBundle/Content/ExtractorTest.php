@@ -130,11 +130,11 @@ class ExtractorTest extends TestCase
 
         $defaultImprover->expects($this->any())
             ->method('updateContent')
-            ->will($this->returnArgument(0));
+            ->willReturnArgument(0);
 
         $defaultImprover->expects($this->any())
             ->method('updateUrl')
-            ->will($this->returnArgument(0));
+            ->willReturnArgument(0);
 
         $improverChain->expects($this->any())
             ->method('match')
@@ -146,7 +146,7 @@ class ExtractorTest extends TestCase
 
         $converterChain->expects($this->any())
             ->method('convert')
-            ->will($this->returnArgument(0));
+            ->willReturnArgument(0);
 
         $this->graby = $this->getMockBuilder('Graby\Graby')
             ->setMethods(['fetchContent'])
@@ -169,7 +169,7 @@ class ExtractorTest extends TestCase
         if (true === $customParser) {
             $feed->expects($this->any())
                 ->method('getHost')
-                ->will($this->returnValue('Default'));
+                ->willReturn('Default');
         }
 
         return $contentExtractor;

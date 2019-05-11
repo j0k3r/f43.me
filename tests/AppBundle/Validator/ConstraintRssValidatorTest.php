@@ -4,13 +4,10 @@ namespace Tests\AppBundle\Validator;
 
 use AppBundle\Validator\Constraints\ConstraintRss;
 use AppBundle\Validator\Constraints\ConstraintRssValidator;
-use GuzzleHttp\Client;
-use GuzzleHttp\Message\Response;
-use GuzzleHttp\Stream\Stream;
-use GuzzleHttp\Subscriber\Mock;
-use PHPUnit\Framework\TestCase;
+use GuzzleHttp\Psr7\Response;
+use Tests\AppBundle\AppTestCase;
 
-class ConstraintRssValidatorTest extends TestCase
+class ConstraintRssValidatorTest extends AppTestCase
 {
     public function testValidatorValid()
     {
@@ -23,13 +20,7 @@ class ConstraintRssValidatorTest extends TestCase
         $context->expects($this->never())
             ->method('addViolation');
 
-        $client = new Client();
-
-        $mock = new Mock([
-            new Response(200, [], Stream::factory('This is a valid')),
-        ]);
-
-        $client->getEmitter()->attach($mock);
+        $client = self::getMockClient([(new Response(200, [], 'This is a valid'))]);
 
         $validator = new ConstraintRssValidator($client);
         $validator->initialize($context);
@@ -51,13 +42,7 @@ class ConstraintRssValidatorTest extends TestCase
                 $this->equalTo(['%string%' => 'http://0.0.0.0'])
             );
 
-        $client = new Client();
-
-        $mock = new Mock([
-            new Response(200, [], Stream::factory('This is a not valid')),
-        ]);
-
-        $client->getEmitter()->attach($mock);
+        $client = self::getMockClient([(new Response(200, [], 'This is a not valid'))]);
 
         $validator = new ConstraintRssValidator($client);
         $validator->initialize($context);
@@ -79,14 +64,10 @@ class ConstraintRssValidatorTest extends TestCase
                 $this->equalTo(['%string%' => 'http://0.0.0.0'])
             );
 
-        $client = new Client();
-
-        $mock = new Mock([
-            new Response(400, [], Stream::factory('oops')),
-            new Response(200, [], Stream::factory('This is a not valid')),
+        $client = self::getMockClient([
+            (new Response(400, [], 'oops')),
+            (new Response(200, [], 'This is a not valid')),
         ]);
-
-        $client->getEmitter()->attach($mock);
 
         $validator = new ConstraintRssValidator($client);
         $validator->initialize($context);
@@ -104,14 +85,10 @@ class ConstraintRssValidatorTest extends TestCase
         $context->expects($this->never())
             ->method('addViolation');
 
-        $client = new Client();
-
-        $mock = new Mock([
-            new Response(400, [], Stream::factory('oops')),
-            new Response(400, [], Stream::factory('oops')),
+        $client = self::getMockClient([
+            (new Response(400, [], 'oops')),
+            (new Response(400, [], 'oops')),
         ]);
-
-        $client->getEmitter()->attach($mock);
 
         $validator = new ConstraintRssValidator($client);
         $validator->initialize($context);

@@ -3,15 +3,12 @@
 namespace Tests\AppBundle\Extractor;
 
 use AppBundle\Extractor\Ifttt;
-use GuzzleHttp\Client;
-use GuzzleHttp\Message\Response;
-use GuzzleHttp\Stream\Stream;
-use GuzzleHttp\Subscriber\Mock;
+use GuzzleHttp\Psr7\Response;
 use Monolog\Handler\TestHandler;
 use Monolog\Logger;
-use PHPUnit\Framework\TestCase;
+use Tests\AppBundle\AppTestCase;
 
-class IftttTest extends TestCase
+class IftttTest extends AppTestCase
 {
     public function dataMatch()
     {
@@ -36,15 +33,11 @@ class IftttTest extends TestCase
 
     public function testContent()
     {
-        $client = new Client();
-
-        $mock = new Mock([
-            new Response(200, [], Stream::factory(json_encode(['title' => 'my title', 'description' => 'Cool stuff bro']))),
-            new Response(200, [], Stream::factory(json_encode(''))),
-            new Response(400, [], Stream::factory(json_encode('oops'))),
+        $client = self::getMockClient([
+            (new Response(200, [], json_encode(['title' => 'my title', 'description' => 'Cool stuff bro']))),
+            (new Response(200, [], json_encode(''))),
+            (new Response(400, [], json_encode('oops'))),
         ]);
-
-        $client->getEmitter()->attach($mock);
 
         $ifttt = new Ifttt();
         $ifttt->setClient($client);

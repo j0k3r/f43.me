@@ -2,7 +2,7 @@
 
 namespace AppBundle\Improver;
 
-use GuzzleHttp\Client;
+use Http\Client\Common\HttpMethodsClientInterface;
 
 /**
  * Default Improver.
@@ -16,9 +16,9 @@ class DefaultImprover
     protected $client;
 
     /**
-     * @param Client $client
+     * @param HttpMethodsClientInterface $client
      */
-    public function __construct(Client $client)
+    public function __construct(HttpMethodsClientInterface $client)
     {
         $this->client = $client;
     }

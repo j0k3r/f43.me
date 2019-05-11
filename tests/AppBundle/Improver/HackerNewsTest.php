@@ -3,10 +3,9 @@
 namespace Tests\AppBundle\Improver;
 
 use AppBundle\Improver\HackerNews;
-use GuzzleHttp\Client;
-use PHPUnit\Framework\TestCase;
+use Tests\AppBundle\AppTestCase;
 
-class HackerNewsTest extends TestCase
+class HackerNewsTest extends AppTestCase
 {
     public function dataMatch()
     {
@@ -21,13 +20,15 @@ class HackerNewsTest extends TestCase
      */
     public function testMatch($url, $expected)
     {
-        $hn = new HackerNews(new Client());
+        $hn = new HackerNews(self::getMockClient());
+
         $this->assertSame($expected, $hn->match($url));
     }
 
     public function testUpdateContent()
     {
-        $hn = new HackerNews(new Client());
+        $hn = new HackerNews(self::getMockClient());
+
         $hn->setUrl('http://0.0.0.0/hn');
         $hn->setItemContent('content');
         $this->assertSame('<p><em>Original article on <a href="http://0.0.0.0/hn">0.0.0.0</a> - content on Hacker News</em></p> readable', $hn->updateContent('readable'));

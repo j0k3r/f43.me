@@ -4,13 +4,11 @@ namespace Tests\AppBundle\EventListener;
 
 use AppBundle\Event\FeedItemEvent;
 use AppBundle\EventListener\FeedItemSubscriber;
-use GuzzleHttp\Client;
-use GuzzleHttp\Message\Response;
-use GuzzleHttp\Subscriber\Mock;
-use PHPUnit\Framework\TestCase;
+use GuzzleHttp\Psr7\Response;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
+use Tests\AppBundle\AppTestCase;
 
-class FeedItemSubscriberTest extends TestCase
+class FeedItemSubscriberTest extends AppTestCase
 {
     public function testOnItemCachedNoHubDefined()
     {
@@ -18,7 +16,7 @@ class FeedItemSubscriberTest extends TestCase
             ->disableOriginalConstructor()
             ->getMock();
 
-        $client = new Client();
+        $client = self::getMockClient();
 
         $feedItemSubscriber = new FeedItemSubscriber('', $router, $client);
 
@@ -38,15 +36,9 @@ class FeedItemSubscriberTest extends TestCase
         $router->expects($this->once())
             ->method('generate')
             ->with('feed_xml', ['slug' => 'bar.unknown'], UrlGeneratorInterface::ABSOLUTE_URL)
-            ->will($this->returnValue('http://f43.me/rss.xml'));
+            ->willReturn('http://f43.me/rss.xml');
 
-        $client = new Client();
-
-        $mock = new Mock([
-            new Response(500, []),
-        ]);
-
-        $client->getEmitter()->attach($mock);
+        $client = self::getMockClient([(new Response(500, []))]);
 
         $feedItemSubscriber = new FeedItemSubscriber('http://f43.me', $router, $client);
 
@@ -66,15 +58,9 @@ class FeedItemSubscriberTest extends TestCase
         $router->expects($this->once())
             ->method('generate')
             ->with('feed_xml', ['slug' => 'bar.unknown'], UrlGeneratorInterface::ABSOLUTE_URL)
-            ->will($this->returnValue('http://f43.me/rss.xml'));
+            ->willReturn('http://f43.me/rss.xml');
 
-        $client = new Client();
-
-        $mock = new Mock([
-            new Response(204, []),
-        ]);
-
-        $client->getEmitter()->attach($mock);
+        $client = self::getMockClient([(new Response(204))]);
 
         $feedItemSubscriber = new FeedItemSubscriber('http://f43.me', $router, $client);
 

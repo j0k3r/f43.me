@@ -2,8 +2,6 @@
 
 namespace AppBundle\Extractor;
 
-use GuzzleHttp\Exception\RequestException;
-
 class Giphy extends AbstractExtractor
 {
     protected $giphyUrl = null;
@@ -45,10 +43,9 @@ class Giphy extends AbstractExtractor
         }
 
         try {
-            $data = $this->client
-                ->get('http://giphy.com/services/oembed/?url=' . $this->giphyUrl)
-                ->json();
-        } catch (RequestException $e) {
+            $response = $this->client->get('http://giphy.com/services/oembed/?url=' . $this->giphyUrl);
+            $data = $this->jsonDecode($response);
+        } catch (\Exception $e) {
             $this->logger->warning('Giphy extract failed for: ' . $this->giphyUrl, [
                 'exception' => $e,
             ]);

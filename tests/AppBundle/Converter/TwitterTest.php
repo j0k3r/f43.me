@@ -56,11 +56,11 @@ class TwitterTest extends TestCase
         $twitterExtractor->expects($this->exactly($twitterExtractorOccurence))
             ->method('match')
             ->with('https://twitter.com/username/' . $twitterId)
-            ->will($this->returnValue(true));
+            ->willReturn(true);
 
         $twitterExtractor->expects($this->exactly($twitterExtractorOccurence))
             ->method('retrieveTwitterData')
-            ->will($this->returnValue([
+            ->willReturn([
                 'entities' => [
                     'media' => [[
                         'display_url' => 'pic.twitter.com/lU1YzJjLOZ',
@@ -71,7 +71,7 @@ class TwitterTest extends TestCase
                         'expanded_url' => 'http://www.google.io',
                     ]],
                 ],
-            ]));
+            ]);
 
         $twitterConverter = new Twitter($twitterExtractor);
         $twitterConverter->setLogger(new NullLogger());
@@ -88,11 +88,11 @@ class TwitterTest extends TestCase
 
         $twitterExtractor->expects($this->once())
             ->method('match')
-            ->will($this->returnValue(true));
+            ->willReturn(true);
 
         $twitterExtractor->expects($this->once())
             ->method('retrieveTwitterData')
-            ->will($this->returnValue(false));
+            ->willReturn(false);
 
         $twitterConverter = new Twitter($twitterExtractor);
         $twitterConverter->setLogger(new NullLogger());

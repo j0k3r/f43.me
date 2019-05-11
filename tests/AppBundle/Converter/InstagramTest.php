@@ -57,11 +57,11 @@ class InstagramTest extends TestCase
         $instaExtractor->expects($this->exactly($instaExtractorOccurence))
             ->method('match')
             ->with('https://www.instagram.com/p/' . $instagramId . '/')
-            ->will($this->returnValue(true));
+            ->willReturn(true);
 
         $instaExtractor->expects($this->exactly($instaExtractorOccurence))
             ->method('getImageOnly')
-            ->will($this->returnValue('https://scontent-cdg2-1.cdninstagram.com/t51.2885-15/e35/16464714_735605356614941_9152627590412894208_n.jpg'));
+            ->willReturn('https://scontent-cdg2-1.cdninstagram.com/t51.2885-15/e35/16464714_735605356614941_9152627590412894208_n.jpg');
 
         $instaConverter = new Instagram($instaExtractor);
         $instaConverter->setLogger(new NullLogger());
@@ -78,11 +78,11 @@ class InstagramTest extends TestCase
 
         $instaExtractor->expects($this->once())
             ->method('match')
-            ->will($this->returnValue(true));
+            ->willReturn(true);
 
         $instaExtractor->expects($this->once())
             ->method('getImageOnly')
-            ->will($this->returnValue(''));
+            ->willReturn('');
 
         $instaConverter = new Instagram($instaExtractor);
         $instaConverter->setLogger(new NullLogger());

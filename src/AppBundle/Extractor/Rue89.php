@@ -2,8 +2,6 @@
 
 namespace AppBundle\Extractor;
 
-use GuzzleHttp\Exception\RequestException;
-
 class Rue89 extends AbstractExtractor
 {
     protected $rue89Id = null;
@@ -53,10 +51,9 @@ class Rue89 extends AbstractExtractor
         }
 
         try {
-            $data = $this->client
-                ->get('http://' . $host . '/export/mobile2/node/' . $this->rue89Id . '/full')
-                ->json();
-        } catch (RequestException $e) {
+            $response = $this->client->get('http://' . $host . '/export/mobile2/node/' . $this->rue89Id . '/full');
+            $data = $this->jsonDecode($response);
+        } catch (\Exception $e) {
             $this->logger->warning('Rue89 extract failed for: ' . $this->rue89Id, [
                 'exception' => $e,
             ]);
