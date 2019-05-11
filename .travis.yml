@@ -47,5 +47,5 @@ script:
 after_script:
     - |
         if [ $COVERAGE = run ]; then
-            php bin/coveralls -v
+            php bin/php-coveralls -v -x build/logs/clover.xml
         fi
