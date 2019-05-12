@@ -2,8 +2,6 @@
 
 namespace AppBundle\Extractor;
 
-use Http\Client\Exception\RequestException;
-
 class Tumblr extends AbstractExtractor
 {
     protected $tumblrApiKey;
@@ -42,7 +40,7 @@ class Tumblr extends AbstractExtractor
             $tumblrUser = $this->client
                 ->get($url)
                 ->getHeaderLine('X-Tumblr-User');
-        } catch (RequestException $e) {
+        } catch (\Exception $e) {
             $this->logger->warning('Tumblr extract failed for: ' . $url, [
                 'exception' => $e,
             ]);
