@@ -123,7 +123,7 @@ class Feed
     /**
      * Get id.
      *
-     * @return id $id
+     * @return string $id
      */
     public function getId()
     {
@@ -205,7 +205,7 @@ class Feed
     /**
      * Set created_at.
      *
-     * @param date $createdAt
+     * @param string $createdAt
      *
      * @return self
      */
@@ -219,7 +219,7 @@ class Feed
     /**
      * Get created_at.
      *
-     * @return date $createdAt
+     * @return string $createdAt
      */
     public function getCreatedAt()
     {
@@ -229,7 +229,7 @@ class Feed
     /**
      * Set updated_at.
      *
-     * @param date $updatedAt
+     * @param string $updatedAt
      *
      * @return self
      */
@@ -243,7 +243,7 @@ class Feed
     /**
      * Get updated_at.
      *
-     * @return date $updatedAt
+     * @return string $updatedAt
      */
     public function getUpdatedAt()
     {

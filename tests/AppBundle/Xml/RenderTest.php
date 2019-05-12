@@ -19,7 +19,7 @@ class RenderTest extends TestCase
             ->disableOriginalConstructor()
             ->getMock();
 
-        $repo = $this->getMockBuilder('Doctrine\ODM\DocumentRepository')
+        $repo = $this->getMockBuilder('Doctrine\ODM\MongoDB\DocumentRepository')
             ->setMethods(['findByFeed'])
             ->disableOriginalConstructor()
             ->getMock();

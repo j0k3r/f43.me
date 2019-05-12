@@ -11,6 +11,7 @@ use Doctrine\ODM\MongoDB\DocumentManager;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\Session;
 
 /**
@@ -23,7 +24,7 @@ class FeedItemController extends Controller
      *
      * @param Feed $feed The document Feed (retrieving for a ParamConverter with the slug)
      *
-     * @return array
+     * @return Response
      */
     public function indexAction(Feed $feed, FeedItemRepository $feedItemRepository)
     {
@@ -73,7 +74,7 @@ class FeedItemController extends Controller
      *
      * @param FeedItem $feedItem The document FeedItem (retrieving for a ParamConverter with the id)
      *
-     * @return string
+     * @return Response
      */
     public function previewCachedAction(FeedItem $feedItem)
     {
@@ -91,7 +92,7 @@ class FeedItemController extends Controller
      *
      * @param Feed $feed The document Feed (retrieving for a ParamConverter with the slug)
      *
-     * @return string
+     * @return Response
      */
     public function testItemAction(Feed $feed)
     {
@@ -106,7 +107,7 @@ class FeedItemController extends Controller
      * @param Request $request
      * @param Feed    $feed    The document Feed (retrieving for a ParamConverter with the slug)
      *
-     * @return string
+     * @return Response
      */
     public function previewNewAction(Request $request, Feed $feed, SimplePieProxy $simplePieProxy, Extractor $contentExtractor)
     {

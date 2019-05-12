@@ -49,14 +49,14 @@ abstract class AbstractExtractor implements LoggerAwareInterface
      *
      * @param ResponseInterface $response
      *
-     * @return string
+     * @return array
      */
     protected function jsonDecode(ResponseInterface $response)
     {
         $data = json_decode((string) $response->getBody(), true);
 
         if (null === $data) {
-            return '';
+            return [];
         }
 
         if (JSON_ERROR_NONE !== json_last_error()) {

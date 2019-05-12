@@ -37,7 +37,7 @@ class FeedLogRepository extends ServiceDocumentRepository
      *
      * @param int $feedId Feed id
      *
-     * @return \Doctrine\ODM\MongoDB\LoggableCursor
+     * @return mixed
      */
     public function findByFeedId($feedId)
     {
@@ -50,7 +50,7 @@ class FeedLogRepository extends ServiceDocumentRepository
      *
      * @param int $feedId Feed id
      *
-     * @return AppBundle\Document\FeedLog|null
+     * @return FeedLog|null
      */
     public function findLastItemByFeedId($feedId)
     {

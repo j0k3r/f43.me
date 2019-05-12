@@ -35,6 +35,7 @@ class XDOMDocument extends \DOMDocument
     {
         $element = new XDOMElement($name, $value, $namespaceURI);
 
+        /** @var XDOMElement */
         $element = $this->importNode($element);
         if (!empty($value)) {
             $element->appendChild(new \DOMText($value));

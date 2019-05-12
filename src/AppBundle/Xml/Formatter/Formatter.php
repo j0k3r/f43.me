@@ -20,7 +20,7 @@ abstract class Formatter
     protected $feed;
 
     /**
-     * @var Collection A collection of item
+     * @var array A collection of item
      */
     protected $items;
 

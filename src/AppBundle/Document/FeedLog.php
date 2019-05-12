@@ -42,7 +42,7 @@ class FeedLog
     /**
      * Get id.
      *
-     * @return id $id
+     * @return string $id
      */
     public function getId()
     {
@@ -76,7 +76,7 @@ class FeedLog
     /**
      * Set created_at.
      *
-     * @param date $createdAt
+     * @param string $createdAt
      *
      * @return self
      */
@@ -90,7 +90,7 @@ class FeedLog
     /**
      * Get created_at.
      *
-     * @return date $createdAt
+     * @return string $createdAt
      */
     public function getCreatedAt()
     {
@@ -114,7 +114,7 @@ class FeedLog
     /**
      * Get feed.
      *
-     * @return AppBundle\Document\Feed $feed
+     * @return Feed $feed
      */
     public function getFeed()
     {

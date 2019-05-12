@@ -38,7 +38,7 @@ class ConstraintRssValidatorTest extends AppTestCase
         $context->expects($this->once())
             ->method('addViolation')
             ->with(
-                $this->equalTo($constraint->message),
+                $this->equalTo('Feed "%string%" is not valid.'),
                 $this->equalTo(['%string%' => 'http://0.0.0.0'])
             );
 
@@ -60,7 +60,7 @@ class ConstraintRssValidatorTest extends AppTestCase
         $context->expects($this->once())
             ->method('addViolation')
             ->with(
-                $this->equalTo($constraint->message),
+                $this->equalTo('Feed "%string%" is not valid.'),
                 $this->equalTo(['%string%' => 'http://0.0.0.0'])
             );
 

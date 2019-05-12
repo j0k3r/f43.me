@@ -15,6 +15,10 @@ use Symfony\Component\Lock\Store\FlockStore;
 
 class RemoveItemsCommand extends Command
 {
+    private $feedRepository;
+    private $feedItemRepository;
+    private $dm;
+
     public function __construct(FeedRepository $feedRepository, FeedItemRepository $feedItemRepository, DocumentManager $dm)
     {
         $this->feedRepository = $feedRepository;

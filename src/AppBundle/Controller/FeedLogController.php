@@ -7,6 +7,7 @@ use AppBundle\Repository\FeedLogRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\Session;
 
 /**
@@ -17,7 +18,7 @@ class FeedLogController extends Controller
     /**
      * Lists all FeedLog documents.
      *
-     * @return array
+     * @return Response
      */
     public function indexAction(FeedLogRepository $feedLogRepository)
     {
@@ -32,7 +33,7 @@ class FeedLogController extends Controller
      *
      * @param Feed $feed The document Feed (retrieving for a ParamConverter with the slug)
      *
-     * @return array
+     * @return Response
      */
     public function feedAction(Feed $feed, FeedLogRepository $feedLogRepository)
     {
