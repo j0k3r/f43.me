@@ -2,8 +2,6 @@
 
 namespace AppBundle\Extractor;
 
-use Http\Client\Exception\RequestException;
-
 class Github extends AbstractExtractor
 {
     protected $githubClientId;
@@ -159,7 +157,7 @@ class Github extends AbstractExtractor
                     ]
                 )
                 ->getBody();
-        } catch (RequestException $e) {
+        } catch (\Exception $e) {
             // Github will return a 404 if no readme are found
             return '';
         }
