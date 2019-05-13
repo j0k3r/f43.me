@@ -19,6 +19,7 @@ use Symfony\Component\Console\Tester\CommandTester;
  */
 class FetchItemsCommandTest extends WebTestCase
 {
+    private $handler;
     private $command;
     private $commandTester;
 

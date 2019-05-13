@@ -35,7 +35,7 @@ class FlickrTest extends AppTestCase
      */
     public function testMatch($url, $expected)
     {
-        $flickr = new Flickr('apikey');
+        $flickr = new Flickr();
         $this->assertSame($expected, $flickr->match($url));
     }
 
@@ -54,7 +54,7 @@ class FlickrTest extends AppTestCase
             (new Response(400, [], json_encode('oops'))),
         ]);
 
-        $flickr = new Flickr('apikey');
+        $flickr = new Flickr();
         $flickr->setClient($client);
 
         $logHandler = new TestHandler();
@@ -94,7 +94,7 @@ class FlickrTest extends AppTestCase
             (new Response(400, [], json_encode('oops'))),
         ]);
 
-        $flickr = new Flickr('apikey');
+        $flickr = new Flickr();
         $flickr->setClient($client);
 
         $logHandler = new TestHandler();

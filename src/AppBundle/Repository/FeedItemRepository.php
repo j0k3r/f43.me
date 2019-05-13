@@ -19,7 +19,7 @@ class FeedItemRepository extends ServiceDocumentRepository
      * @param int    $feedId Feed id
      * @param string $sortBy Feed sort by
      *
-     * @return \Doctrine\ODM\MongoDB\LoggableCursor
+     * @return mixed
      */
     public function findByFeed($feedId, $sortBy)
     {

@@ -23,7 +23,7 @@ class FeedController extends Controller
     /**
      * Display some information about feeds, items, logs, etc ...
      *
-     * @return array
+     * @return Response
      */
     public function dashboardAction(FeedRepository $feedRepository, FeedLogRepository $feedLogRepository, FeedItemRepository $feedItemRepository)
     {
@@ -42,7 +42,7 @@ class FeedController extends Controller
     /**
      * Display a public view.
      *
-     * @return array
+     * @return Response
      */
     public function publicAction(FeedRepository $feedRepository)
     {
@@ -54,7 +54,7 @@ class FeedController extends Controller
     /**
      * Lists all Feed documents.
      *
-     * @return array
+     * @return Response
      */
     public function indexAction(FeedRepository $feedRepository)
     {
@@ -67,7 +67,7 @@ class FeedController extends Controller
     /**
      * Displays a form to create a new Feed document.
      *
-     * @return array
+     * @return Response
      */
     public function newAction()
     {
@@ -86,7 +86,7 @@ class FeedController extends Controller
      *
      * @param Request $request
      *
-     * @return RedirectResponse|array
+     * @return RedirectResponse|Response
      */
     public function createAction(Request $request, DocumentManager $dm, Session $session)
     {
@@ -119,7 +119,7 @@ class FeedController extends Controller
      *
      * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException If document doesn't exists
      *
-     * @return RedirectResponse|array
+     * @return RedirectResponse|Response
      */
     public function editAction(Request $request, Feed $feed, DocumentManager $dm, FeedLogRepository $feedLogRepository, FeedItemRepository $feedItemRepository, Session $session)
     {

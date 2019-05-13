@@ -8,6 +8,8 @@ use PHPUnit\Framework\TestCase;
 
 class ExtractorTest extends TestCase
 {
+    private $graby;
+
     public function testWithEmptyContent()
     {
         $contentExtractor = $this->getContentExtrator();

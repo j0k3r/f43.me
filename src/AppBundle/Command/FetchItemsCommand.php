@@ -14,6 +14,12 @@ use Symfony\Component\Routing\RouterInterface;
 
 class FetchItemsCommand extends Command
 {
+    private $feedRepository;
+    private $feedItemRepository;
+    private $contentImport;
+    private $router;
+    private $domain;
+
     public function __construct(FeedRepository $feedRepository, FeedItemRepository $feedItemRepository, Import $contentImport, RouterInterface $router, $domain)
     {
         $this->feedRepository = $feedRepository;
