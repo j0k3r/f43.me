@@ -76,7 +76,7 @@ class FeedLog
     /**
      * Set created_at.
      *
-     * @param string $createdAt
+     * @param string|\DateTime $createdAt
      *
      * @return self
      */
@@ -90,7 +90,7 @@ class FeedLog
     /**
      * Get created_at.
      *
-     * @return string $createdAt
+     * @return string|\DateTime $createdAt
      */
     public function getCreatedAt()
     {

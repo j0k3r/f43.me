@@ -205,7 +205,7 @@ class Feed
     /**
      * Set created_at.
      *
-     * @param string $createdAt
+     * @param string|\DateTime $createdAt
      *
      * @return self
      */
@@ -219,7 +219,7 @@ class Feed
     /**
      * Get created_at.
      *
-     * @return string $createdAt
+     * @return string|\DateTime $createdAt
      */
     public function getCreatedAt()
     {
@@ -229,7 +229,7 @@ class Feed
     /**
      * Set updated_at.
      *
-     * @param string $updatedAt
+     * @param string|\DateTime $updatedAt
      *
      * @return self
      */
@@ -243,7 +243,7 @@ class Feed
     /**
      * Get updated_at.
      *
-     * @return string $updatedAt
+     * @return string|\DateTime $updatedAt
      */
     public function getUpdatedAt()
     {

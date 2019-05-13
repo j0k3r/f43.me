@@ -160,7 +160,7 @@ class FeedItem
     /**
      * Set created_at.
      *
-     * @param string $createdAt
+     * @param string|\DateTime $createdAt
      *
      * @return self
      */
@@ -174,7 +174,7 @@ class FeedItem
     /**
      * Get created_at.
      *
-     * @return string $createdAt
+     * @return string|\DateTime $createdAt
      */
     public function getCreatedAt()
     {
@@ -184,7 +184,7 @@ class FeedItem
     /**
      * Set updated_at.
      *
-     * @param string $updatedAt
+     * @param string|\DateTime $updatedAt
      *
      * @return self
      */
@@ -198,7 +198,7 @@ class FeedItem
     /**
      * Get updated_at.
      *
-     * @return string $updatedAt
+     * @return string|\DateTime $updatedAt
      */
     public function getUpdatedAt()
     {
@@ -256,7 +256,7 @@ class FeedItem
     /**
      * Set published_at.
      *
-     * @param string $publishedAt
+     * @param string|\DateTime $publishedAt
      *
      * @return self
      */
@@ -270,7 +270,7 @@ class FeedItem
     /**
      * Get published_at.
      *
-     * @return string $publishedAt
+     * @return string|\DateTime $publishedAt
      */
     public function getPublishedAt()
     {
@@ -281,7 +281,7 @@ class FeedItem
      * Retrieve the "publication" date *only* used in the RSS/Atom feed.
      * Depending on the feed, we want the published_at date or the created_at date.
      *
-     * @return string
+     * @return string|\DateTime
      */
     public function getPubDate()
     {
