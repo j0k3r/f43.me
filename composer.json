@@ -43,7 +43,7 @@
         "j0k3r/php-imgur-api-client": "~3.0",
         "mnsami/composer-custom-directory-installer": "~1.0",
         "ricardoper/twitteroauth": "~1.0",
-        "sentry/sentry-symfony": "^3.0",
+        "sentry/sentry-symfony": "^2.0",
         "alcaeus/mongo-php-adapter": "^1.1",
         "php-http/guzzle6-adapter": "^2.0",
         "php-http/httplug-bundle": "^1.14"
