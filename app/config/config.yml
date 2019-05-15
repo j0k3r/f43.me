@@ -82,6 +82,7 @@ httplug:
                     timeout: 10
             http_methods_client: true
             plugins:
+                - 'httplug.plugin.redirect'
                 - 'httplug.plugin.logger'
                 - 'httplug.plugin.error'
                 - header_defaults:
