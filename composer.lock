@@ -599,16 +599,16 @@
         },
         {
             "name": "doctrine/doctrine-bundle",
-            "version": "1.11.0",
+            "version": "1.11.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/DoctrineBundle.git",
-                "reference": "6e15d2d9a8f90c0f9b5664b0db92686ff14fcd7d"
+                "reference": "09a38417339dc93849d051b914aae3947eb231a7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/DoctrineBundle/zipball/6e15d2d9a8f90c0f9b5664b0db92686ff14fcd7d",
-                "reference": "6e15d2d9a8f90c0f9b5664b0db92686ff14fcd7d",
+                "url": "https://api.github.com/repos/doctrine/DoctrineBundle/zipball/09a38417339dc93849d051b914aae3947eb231a7",
+                "reference": "09a38417339dc93849d051b914aae3947eb231a7",
                 "shasum": ""
             },
             "require": {
@@ -684,7 +684,7 @@
                 "orm",
                 "persistence"
             ],
-            "time": "2019-05-10T13:27:28+00:00"
+            "time": "2019-05-13T14:30:38+00:00"
         },
         {
             "name": "doctrine/doctrine-cache-bundle",
@@ -1967,16 +1967,16 @@
         },
         {
             "name": "j0k3r/graby-site-config",
-            "version": "1.0.81",
+            "version": "1.0.83",
             "source": {
                 "type": "git",
                 "url": "https://github.com/j0k3r/graby-site-config.git",
-                "reference": "9e20b5f8a166d9fda1e8801a7ec0022e2160df9d"
+                "reference": "c1109a2969e7b8b7bead8453ad92c0822778dd03"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/j0k3r/graby-site-config/zipball/9e20b5f8a166d9fda1e8801a7ec0022e2160df9d",
-                "reference": "9e20b5f8a166d9fda1e8801a7ec0022e2160df9d",
+                "url": "https://api.github.com/repos/j0k3r/graby-site-config/zipball/c1109a2969e7b8b7bead8453ad92c0822778dd03",
+                "reference": "c1109a2969e7b8b7bead8453ad92c0822778dd03",
                 "shasum": ""
             },
             "require": {
@@ -2003,7 +2003,7 @@
                 }
             ],
             "description": "Graby site config files",
-            "time": "2019-05-09T12:55:48+00:00"
+            "time": "2019-05-14T08:12:36+00:00"
         },
         {
             "name": "j0k3r/httplug-ssrf-plugin",
@@ -4026,6 +4026,17 @@
         {
             "name": "sentry/sdk",
             "version": "2.0.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/getsentry/sentry-php-sdk.git",
+                "reference": "3ea263b7fad78365ae3e4a6e1891babaee026305"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/getsentry/sentry-php-sdk/zipball/3ea263b7fad78365ae3e4a6e1891babaee026305",
+                "reference": "3ea263b7fad78365ae3e4a6e1891babaee026305",
+                "shasum": ""
+            },
             "require": {
                 "guzzlehttp/psr7": "^1.0",
                 "php-http/curl-client": "^1.0|^2.0",
@@ -5097,16 +5108,16 @@
         },
         {
             "name": "twig/twig",
-            "version": "v2.9.0",
+            "version": "v2.10.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/twigphp/Twig.git",
-                "reference": "82a1c055c8ed4c4705023bfd0405f3c74db6e3ae"
+                "reference": "5240e21982885b76629552d83b4ebb6d41ccde6b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/twigphp/Twig/zipball/82a1c055c8ed4c4705023bfd0405f3c74db6e3ae",
-                "reference": "82a1c055c8ed4c4705023bfd0405f3c74db6e3ae",
+                "url": "https://api.github.com/repos/twigphp/Twig/zipball/5240e21982885b76629552d83b4ebb6d41ccde6b",
+                "reference": "5240e21982885b76629552d83b4ebb6d41ccde6b",
                 "shasum": ""
             },
             "require": {
@@ -5122,7 +5133,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.9-dev"
+                    "dev-master": "2.10-dev"
                 }
             },
             "autoload": {
@@ -5160,7 +5171,7 @@
             "keywords": [
                 "templating"
             ],
-            "time": "2019-04-28T06:57:38+00:00"
+            "time": "2019-05-14T12:03:52+00:00"
         },
         {
             "name": "wallabag/tcpdf",

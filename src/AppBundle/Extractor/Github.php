@@ -76,16 +76,10 @@ class Github extends AbstractExtractor
             try {
                 $response = $this->client
                     ->get(
-                        'https://api.github.com/repos/' . $this->githubRepo . '/pulls/' . $this->pullNumber,
+                        'https://api.github.com/repos/' . $this->githubRepo . '/pulls/' . $this->pullNumber . '?client_id=' . $this->githubClientId . '&client_secret=' . $this->githubClientSecret,
                         [
-                            'headers' => [
-                                'Accept' => 'application/vnd.github.v3.html+json',
-                                'User-Agent' => 'f43.me / Github Extractor',
-                            ],
-                            'query' => [
-                                'client_id' => $this->githubClientId,
-                                'client_secret' => $this->githubClientSecret,
-                            ],
+                            'Accept' => 'application/vnd.github.v3.html+json',
+                            'User-Agent' => 'f43.me / Github Extractor',
                         ]
                     );
                 $data = $this->jsonDecode($response);
@@ -112,16 +106,10 @@ class Github extends AbstractExtractor
             try {
                 $response = $this->client
                     ->get(
-                        'https://api.github.com/repos/' . $this->githubRepo . '/issues/' . $this->issueNumber,
+                        'https://api.github.com/repos/' . $this->githubRepo . '/issues/' . $this->issueNumber . '?client_id=' . $this->githubClientId . '&client_secret=' . $this->githubClientSecret,
                         [
-                            'headers' => [
-                                'Accept' => 'application/vnd.github.v3.html+json',
-                                'User-Agent' => 'f43.me / Github Extractor',
-                            ],
-                            'query' => [
-                                'client_id' => $this->githubClientId,
-                                'client_secret' => $this->githubClientSecret,
-                            ],
+                            'Accept' => 'application/vnd.github.v3.html+json',
+                            'User-Agent' => 'f43.me / Github Extractor',
                         ]
                     );
                 $data = $this->jsonDecode($response);
@@ -144,16 +132,10 @@ class Github extends AbstractExtractor
         try {
             return (string) $this->client
                 ->get(
-                    'https://api.github.com/repos/' . $this->githubRepo . '/readme',
+                    'https://api.github.com/repos/' . $this->githubRepo . '/readme?client_id=' . $this->githubClientId . '&client_secret=' . $this->githubClientSecret,
                     [
-                        'headers' => [
-                            'Accept' => 'application/vnd.github.v3.html',
-                            'User-Agent' => 'f43.me / Github Extractor',
-                        ],
-                        'query' => [
-                            'client_id' => $this->githubClientId,
-                            'client_secret' => $this->githubClientSecret,
-                        ],
+                        'Accept' => 'application/vnd.github.v3.html',
+                        'User-Agent' => 'f43.me / Github Extractor',
                     ]
                 )
                 ->getBody();
