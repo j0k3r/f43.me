@@ -5001,9 +5001,7 @@
             "version": "4.3.2",
             "dist": {
                 "type": "zip",
-                "url": "https://github.com/zurb/foundation/archive/v4.3.2.zip",
-                "reference": null,
-                "shasum": null
+                "url": "https://github.com/zurb/foundation/archive/v4.3.2.zip"
             },
             "type": "library"
         }
@@ -6466,7 +6464,7 @@
         },
         {
             "name": "symfony/phpunit-bridge",
-            "version": "v4.2.8",
+            "version": "v4.2.9",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/phpunit-bridge.git",
