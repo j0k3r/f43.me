@@ -16,6 +16,7 @@ class TwitterTest extends TestCase
             ['https://twitter.com/DoerteDev/statuses/50652222386027724', false],
             ['https://twitter.com/DoerteDev/statuses/506522223860277248', true],
             ['http://twitter.com/statuses/506522223860277248', true],
+            ['https://twitter.com/iBSparkes/status/1138294142394437632', true],
             ['http://twitter.com/_youhadonejob/status/522835690665807872/photo/1', true],
             ['https://mobile.twitter.com/kcimc/status/638877262092337152/photo/1', true],
             ['http://user@:80', false],
