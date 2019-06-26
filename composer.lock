@@ -2023,16 +2023,16 @@
         },
         {
             "name": "j0k3r/graby-site-config",
-            "version": "1.0.85",
+            "version": "1.0.86",
             "source": {
                 "type": "git",
                 "url": "https://github.com/j0k3r/graby-site-config.git",
-                "reference": "64e6092f583ecc55db0b9e8e33162a4fca2f6659"
+                "reference": "9c0ae4ee74e737c6ccf913da9bcb169850d38a30"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/j0k3r/graby-site-config/zipball/64e6092f583ecc55db0b9e8e33162a4fca2f6659",
-                "reference": "64e6092f583ecc55db0b9e8e33162a4fca2f6659",
+                "url": "https://api.github.com/repos/j0k3r/graby-site-config/zipball/9c0ae4ee74e737c6ccf913da9bcb169850d38a30",
+                "reference": "9c0ae4ee74e737c6ccf913da9bcb169850d38a30",
                 "shasum": ""
             },
             "require": {
@@ -2059,7 +2059,7 @@
                 }
             ],
             "description": "Graby site config files",
-            "time": "2019-06-07T20:24:21+00:00"
+            "time": "2019-06-25T10:46:50+00:00"
         },
         {
             "name": "j0k3r/httplug-ssrf-plugin",
@@ -2195,16 +2195,16 @@
         },
         {
             "name": "j0k3r/php-readability",
-            "version": "1.2.3",
+            "version": "1.2.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/j0k3r/php-readability.git",
-                "reference": "f808c1b0a21ae98ae6fd5bd623671c406efd74d0"
+                "reference": "9306996b472fd3d4bc5a7928a301ccce38423793"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/j0k3r/php-readability/zipball/f808c1b0a21ae98ae6fd5bd623671c406efd74d0",
-                "reference": "f808c1b0a21ae98ae6fd5bd623671c406efd74d0",
+                "url": "https://api.github.com/repos/j0k3r/php-readability/zipball/9306996b472fd3d4bc5a7928a301ccce38423793",
+                "reference": "9306996b472fd3d4bc5a7928a301ccce38423793",
                 "shasum": ""
             },
             "require": {
@@ -2265,7 +2265,7 @@
                 "extraction",
                 "html"
             ],
-            "time": "2019-05-11T20:07:19+00:00"
+            "time": "2019-06-25T15:15:37+00:00"
         },
         {
             "name": "jdorn/sql-formatter",
@@ -4610,7 +4610,7 @@
                 },
                 {
                     "name": "Gert de Pagter",
-                    "email": "backendtea@gmail.com"
+                    "email": "BackEndTea@gmail.com"
                 }
             ],
             "description": "Symfony polyfill for ctype functions",
@@ -5373,7 +5373,9 @@
             "version": "4.3.2",
             "dist": {
                 "type": "zip",
-                "url": "https://github.com/zurb/foundation/archive/v4.3.2.zip"
+                "url": "https://github.com/zurb/foundation/archive/v4.3.2.zip",
+                "reference": null,
+                "shasum": null
             },
             "type": "library"
         }
