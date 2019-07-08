@@ -44,7 +44,9 @@ class Import
     {
         $totalCached = 0;
         $feedUpdated = [];
+        /** @var \AppBundle\Repository\FeedRepository */
         $feedRepo = $this->dm->getRepository('AppBundle:Feed');
+        /** @var \AppBundle\Repository\FeedItemRepository */
         $feedItemRepo = $this->dm->getRepository('AppBundle:FeedItem');
 
         foreach ($feeds as $feed) {

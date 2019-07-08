@@ -14,7 +14,7 @@ class HackerNews extends AbstractExtractor
         $host = parse_url($url, PHP_URL_HOST);
         $query = parse_url($url, PHP_URL_QUERY);
 
-        if (false === $host || false === $query) {
+        if (null === $host || null === $query) {
             return false;
         }
 

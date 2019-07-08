@@ -4,6 +4,7 @@ namespace AppBundle\Converter;
 
 class ConverterChain
 {
+    /** @var array */
     private $converters;
 
     public function __construct()

@@ -23,7 +23,7 @@ class Twitch extends AbstractExtractor
         $host = parse_url($url, PHP_URL_HOST);
         $path = parse_url($url, PHP_URL_PATH);
 
-        if (false === $host || false === $path) {
+        if (null === $host || null === $path) {
             return false;
         }
 

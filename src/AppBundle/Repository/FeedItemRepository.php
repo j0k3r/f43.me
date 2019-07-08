@@ -32,7 +32,7 @@ class FeedItemRepository extends ServiceDocumentRepository
      *
      * @param int $feedId Feed id
      *
-     * @return \AppBundle\Document\FeedItem
+     * @return array|object|null
      */
     public function findLastItemByFeedId($feedId)
     {

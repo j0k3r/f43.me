@@ -14,3 +14,5 @@ parameters:
 
     ignoreErrors:
         - '#Constructor of class AppBundle\\DomDocument\\XDOMElement has an unused parameter \$value.#'
+
+    inferPrivatePropertyTypeFromConstructor: true

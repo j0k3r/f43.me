@@ -50,7 +50,7 @@ class FeedLogRepository extends ServiceDocumentRepository
      *
      * @param int $feedId Feed id
      *
-     * @return FeedLog|null
+     * @return array|object|null
      */
     public function findLastItemByFeedId($feedId)
     {

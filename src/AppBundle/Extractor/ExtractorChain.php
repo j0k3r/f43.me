@@ -4,6 +4,7 @@ namespace AppBundle\Extractor;
 
 class ExtractorChain
 {
+    /** @var array */
     private $extractors;
 
     public function __construct()

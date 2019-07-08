@@ -4,6 +4,7 @@ namespace AppBundle\Parser;
 
 class ParserChain
 {
+    /** @var array */
     private $parsers;
 
     public function __construct()

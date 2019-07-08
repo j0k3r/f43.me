@@ -4,6 +4,7 @@ namespace AppBundle\Improver;
 
 class ImproverChain
 {
+    /** @var array */
     private $improvers;
 
     public function __construct()
