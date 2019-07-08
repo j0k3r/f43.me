@@ -28,7 +28,7 @@ class Github extends AbstractExtractor
         $host = parse_url($url, PHP_URL_HOST);
         $path = parse_url($url, PHP_URL_PATH);
 
-        if (false === $path || false === $host) {
+        if (null === $host || null === $path) {
             return false;
         }
 

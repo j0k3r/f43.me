@@ -65,7 +65,7 @@ class RemoveItemsCommand extends Command
         // retrieve feed to work on
         if ($slug = $input->getOption('slug')) {
             $feed = $this->feedRepository->findOneBy(['slug' => $slug]);
-            if (!$feed) {
+            if (!$feed instanceof \AppBundle\Document\Feed) {
                 return $output->writeLn('<error>Unable to find Feed document:</error> <comment>' . $slug . '</comment>');
             }
             $feeds = [$feed];
