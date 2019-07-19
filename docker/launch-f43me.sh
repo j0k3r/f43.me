@@ -22,5 +22,5 @@ npm install
 echo "Setup database..."
 php bin/console doctrine:mongodb:schema:create
 
-echo "Ready 🚀"
+echo "Ready 🚀 http://localhost:8100/app_dev.php/"
 exec nginx -g 'daemon off;'

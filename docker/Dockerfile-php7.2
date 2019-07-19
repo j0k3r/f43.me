@@ -1,15 +1,16 @@
 FROM php:7.2-fpm
 
 # Install nginx & ruby stuff (for sass)
-RUN apt-get update && apt-get install -y -q nginx \
-    && apt-get install -y -q libssl-dev build-essential vim git curl ruby2.3-dev rubygems zlib1g-dev
-
 RUN apt-get update \
-    && pecl install xdebug \
+    && apt-get install -y -q nginx libssl-dev build-essential vim git curl ruby-dev rubygems zlib1g-dev
+
+RUN pecl install xdebug \
     && docker-php-ext-enable xdebug \
     && docker-php-ext-install zip \
     && pecl install mongodb \
-    && docker-php-ext-enable mongodb
+    && docker-php-ext-enable mongodb \
+    && pecl install apcu \
+    && docker-php-ext-enable apcu
 
 ADD ./fastcgi-php.conf /etc/nginx/snippets/fastcgi-php.conf
 ADD ./upstream-php.conf /etc/nginx/conf.d/php7.2-fpm.conf
@@ -32,6 +33,9 @@ RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" \
     && php composer-setup.php \
     && php -r "unlink('composer-setup.php');" \
     && mv composer.phar /usr/sbin/composer
+
+RUN apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
 
 EXPOSE 80
 
