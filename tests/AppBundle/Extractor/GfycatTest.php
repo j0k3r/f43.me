@@ -36,7 +36,7 @@ class GfycatTest extends AppTestCase
     public function testContent()
     {
         $client = self::getMockClient([
-            (new Response(200, [], json_encode(['gfyItem' => ['title' => 'my title', 'posterUrl' => 'http://0.0.0.0/img.gif']]))),
+            (new Response(200, [], json_encode(['gfyItem' => ['title' => 'my title', 'posterUrl' => 'http://0.0.0.0/img.gif', 'width' => 210, 'height' => 120]]))),
             (new Response(200, [], json_encode(''))),
             (new Response(400, [], json_encode('oops'))),
         ]);
@@ -54,7 +54,7 @@ class GfycatTest extends AppTestCase
         $gfycat->match('http://gfycat.com/RichPepperyFerret');
 
         // consecutive calls
-        $this->assertSame('<div><h2>my title</h2><p><img src="http://0.0.0.0/img.gif"></p></div><div style="position:relative;padding-bottom:calc(100% / 1.85)"><iframe src="https://gfycat.com/ifr/RichPepperyFerret" frameborder="0" scrolling="no" width="100%" height="100%" style="position:absolute;top:0;left:0;" allowfullscreen></iframe></div>', $gfycat->getContent());
+        $this->assertSame('<div><h2>my title</h2><p><img src="http://0.0.0.0/img.gif"></p></div><div><iframe src="https://gfycat.com/ifr/RichPepperyFerret" frameborder="0" scrolling="no" allowfullscreen width="210" height="120"></iframe></div>', $gfycat->getContent());
         // this one will got an empty array
         $this->assertEmpty($gfycat->getContent());
         // this one will catch an exception
