@@ -62,6 +62,6 @@ class Gfycat extends AbstractExtractor
         }
 
         return '<div><h2>' . $data['gfyItem']['title'] . '</h2><p><img src="' . $data['gfyItem']['posterUrl'] . '"></p></div>' .
-            '<div style="position:relative;padding-bottom:calc(100% / 1.85)"><iframe src="https://gfycat.com/ifr/' . $this->gfycatId . '" frameborder="0" scrolling="no" width="100%" height="100%" style="position:absolute;top:0;left:0;" allowfullscreen></iframe></div>';
+            '<div><iframe src="https://gfycat.com/ifr/' . $this->gfycatId . '" frameborder="0" scrolling="no" allowfullscreen width="' . $data['gfyItem']['width'] . '" height="' . $data['gfyItem']['height'] . '"></iframe></div>';
     }
 }
