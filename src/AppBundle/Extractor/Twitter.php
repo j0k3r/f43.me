@@ -50,7 +50,7 @@ class Twitter extends AbstractExtractor
             return '';
         }
 
-        return $this->retrieveTweet($data);
+        return $this->buildTweetDisplay($data);
     }
 
     /**
@@ -65,7 +65,9 @@ class Twitter extends AbstractExtractor
         }
 
         try {
-            return $this->twitter->get('statuses/show', ['id' => $this->tweetId, 'tweet_mode' => 'extended']);
+            $tweet = $this->twitter->get('statuses/show', ['id' => $this->tweetId, 'tweet_mode' => 'extended']);
+
+            return $this->retrieveThread($tweet);
         } catch (TwitterException $e) {
             $this->logger->warning('Twitter extract failed for: ' . $this->tweetId, [
                 'exception' => $e,
@@ -76,49 +78,87 @@ class Twitter extends AbstractExtractor
     }
 
     /**
-     * Return a tweet ready to be displayed.
+     * Find the next tweet in reply to the give one for the same user.
      *
-     * @param array $data
+     * @param array $tweet        Tweet to find a reply for
+     * @param array $threadTweets Tweets collected for the current thread
      *
-     * @return string
+     * @return array All tweets in that thread (if it's a thread)
+     *               Otherwise it'll return the given tweet
      */
-    private function retrieveTweet($data)
+    private function retrieveThread($tweet, $threadTweets = [])
     {
-        $tweet = '<p><strong>' . $data['user']['name'] . '</strong>';
-        $tweet .= ' &ndash; <a href="https://twitter.com/' . $data['user']['screen_name'] . '">@' . $data['user']['screen_name'] . '</a>';
-        $tweet .= '<br/>' . nl2br($data['full_text']);
-        $tweet .= '<br/><em>' . $data['created_at'] . '</em></p>';
+        $threadTweets[] = $tweet;
 
-        // replace links with real links
-        foreach ($data['entities']['urls'] as $url) {
-            $tweet = str_ireplace($url['url'], '<a href="' . $url['expanded_url'] . '">' . $url['display_url'] . '</a>', $tweet);
-        }
+        $replies = $this->twitter->get('search/tweets', [
+            'q' => 'to:' . $tweet['user']['screen_name'],
+            'since_id' => $tweet['id'],
+            // 'max_id' => $maxId,
+            'count' => 100,
+        ]);
 
-        // replace users with real links
-        foreach ($data['entities']['user_mentions'] as $user) {
-            $tweet = str_ireplace('@' . $user['screen_name'], '<a href="https://twitter.com/' . $user['screen_name'] . '">@' . $user['screen_name'] . '</a>', $tweet);
-        }
+        foreach ($replies['statuses'] as $reply) {
+            if ($reply['in_reply_to_status_id'] === $tweet['id'] && $tweet['user']['id'] === $reply['user']['id']) {
+                // retrieve single reply with the show api to have the `full_text` field
+                $replyTweet = $this->twitter->get('statuses/show', [
+                    'id' => $reply['id'],
+                    'tweet_mode' => 'extended',
+                ]);
 
-        // replace hashtags with real links
-        foreach ($data['entities']['hashtags'] as $hashtag) {
-            $tweet = str_ireplace('#' . $hashtag['text'], '<a href="https://twitter.com/hashtag/' . $hashtag['text'] . '?src=hash">#' . $hashtag['text'] . '</a>', $tweet);
-        }
-
-        // insert medias
-        if (isset($data['extended_entities']['media'])) {
-            foreach ($data['extended_entities']['media'] as $media) {
-                // remove link to that media from the tweet (to avoid confusion)
-                $tweet = str_ireplace($media['url'], '', $tweet);
-
-                $tweet .= '<p><img src="' . $media['media_url_https'] . '" /></p>';
+                return $this->retrieveThread($replyTweet, $threadTweets);
             }
         }
 
-        // is there a quoted status?
-        if (isset($data['quoted_status'])) {
-            $tweet .= $this->retrieveTweet($data['quoted_status']);
+        return $threadTweets;
+    }
+
+    /**
+     * Return a tweet ready to be displayed.
+     *
+     * @param array $data An array of tweets to be displayed
+     *
+     * @return string
+     */
+    private function buildTweetDisplay($tweets)
+    {
+        $html = '';
+        foreach ($tweets as $tweet) {
+            $html .= '<p><strong>' . $tweet['user']['name'] . '</strong>';
+            $html .= ' &ndash; <a href="https://twitter.com/' . $tweet['user']['screen_name'] . '">@' . $tweet['user']['screen_name'] . '</a>';
+            $html .= '<br/>' . nl2br($tweet['full_text']);
+            $html .= '<br/><em>' . $tweet['created_at'] . '</em></p>';
+
+            // replace links with real links
+            foreach ($tweet['entities']['urls'] as $url) {
+                $html = str_ireplace($url['url'], '<a href="' . $url['expanded_url'] . '">' . $url['display_url'] . '</a>', $html);
+            }
+
+            // replace users with real links
+            foreach ($tweet['entities']['user_mentions'] as $user) {
+                $html = str_ireplace('@' . $user['screen_name'], '<a href="https://twitter.com/' . $user['screen_name'] . '">@' . $user['screen_name'] . '</a>', $html);
+            }
+
+            // replace hashtags with real links
+            foreach ($tweet['entities']['hashtags'] as $hashtag) {
+                $html = str_ireplace('#' . $hashtag['text'], '<a href="https://twitter.com/hashtag/' . $hashtag['text'] . '?src=hash">#' . $hashtag['text'] . '</a>', $html);
+            }
+
+            // insert medias
+            if (isset($tweet['extended_entities']['media'])) {
+                foreach ($tweet['extended_entities']['media'] as $media) {
+                    // remove link to that media from the tweet (to avoid confusion)
+                    $html = str_ireplace($media['url'], '', $html);
+
+                    $html .= '<p><img src="' . $media['media_url_https'] . '" /></p>';
+                }
+            }
+
+            // is there a quoted status?
+            if (isset($tweet['quoted_status'])) {
+                $html .= $this->buildTweetDisplay([$tweet['quoted_status']]);
+            }
         }
 
-        return $tweet;
+        return $html;
     }
 }
