@@ -8,3 +8,7 @@ indent_style = space
 indent_size = 4
 trim_trailing_whitespace = true
 insert_final_newline = true
+
+[Makefile]
+# Use tabs for indentation (Makefiles require tabs)
+indent_style = tab
