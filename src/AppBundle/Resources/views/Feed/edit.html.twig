@@ -21,7 +21,7 @@
                     <label class="right inline">Created</label>
                 </div>
                 <div class="small-9 columns">
-                    <input disabled="disabled" type="text" value="{{ feed.createdat|date('Y-m-d H:i:s') }}" />
+                    <input disabled="disabled" type="text" value="{{ feed.createdAt|date('Y-m-d H:i:s') }}" />
                 </div>
             </div>
 
@@ -30,7 +30,7 @@
                     <label class="right inline">Updated</label>
                 </div>
                 <div class="small-9 columns">
-                    <input disabled="disabled" type="text" value="{{ feed.updatedat|date('Y-m-d H:i:s') }}" />
+                    <input disabled="disabled" type="text" value="{{ feed.updatedAt|date('Y-m-d H:i:s') }}" />
                 </div>
             </div>
 
@@ -52,8 +52,8 @@
             <li>
                 <span class="info">Last cached item</span>
                 {% if infos.last_item.publishedat is defined %}
-                    <a href="{{ path('feeditem_homepage', { 'slug': feed.slug }) }}" class="time-ago" title="{{ infos.last_item.createdat|date('r') }}">
-                        {{ infos.last_item.createdat|date('d/m/y - H:i:s') }}
+                    <a href="{{ path('item_homepage', { 'slug': feed.slug }) }}" class="time-ago" title="{{ infos.last_item.createdAt|date('r') }}">
+                        {{ infos.last_item.createdAt|date('d/m/y - H:i:s') }}
                     </a>
                 {% else %}
                     <span><i>Never</i></span>
@@ -61,15 +61,15 @@
             </li>
             <li>
                 <span class="info">Cached items</span>
-                <a href="{{ path('feeditem_homepage', { 'slug': feed.slug }) }}">
+                <a href="{{ path('item_homepage', { 'slug': feed.slug }) }}">
                     {{ feed.nbitems }} items
                 </a>
             </li>
             <li>
                 <span class="info">Last log</span>
-                {% if infos.last_log.createdat is defined %}
-                    <a href="{{ path('feedlog_feed', { 'slug': feed.slug }) }}" class="time-ago" title="{{ infos.last_log.createdat|date('r') }}">
-                        {{ infos.last_log.createdat|date('d/m/y - H:i:s') }}
+                {% if infos.last_log.createdAt is defined %}
+                    <a href="{{ path('log_feed', { 'slug': feed.slug }) }}" class="time-ago" title="{{ infos.last_log.createdAt|date('r') }}">
+                        {{ infos.last_log.createdAt|date('d/m/y - H:i:s') }}
                     </a>
                 {% else %}
                     <span><i>Never</i></span>
@@ -77,7 +77,7 @@
             </li>
             <li>
                 <span class="info">Logs</span>
-                <a href="{{ path('feedlog_feed', { 'slug': feed.slug }) }}">
+                <a href="{{ path('log_feed', { 'slug': feed.slug }) }}">
                     {{ infos.nb_logs }} items
                 </a>
             </li>
@@ -97,7 +97,7 @@
         <hr/>
         <ul class="inline-list">
             <li><a class="secondary button radius small" href="{{ path('feed_homepage') }}">&lArr; Back to the list</a></li>
-            <li class="hide-for-small"><a class="button radius small" data-tooltip class="has-tip" title="It can take few seconds to load" data-reveal-id="modal-test-item" data-reveal-ajax="{{ path('feeditem_test', { 'slug': feed.slug }) }}">Test parsing</a></li>
+            <li class="hide-for-small"><a class="button radius small" data-tooltip class="has-tip" title="It can take few seconds to load" data-reveal-id="modal-test-item" data-reveal-ajax="{{ path('item_test', { 'slug': feed.slug }) }}">Test parsing</a></li>
             <li><form class="delete_form" action="{{ path('feed_delete', { 'slug': feed.slug }) }}" method="post">{{ form_widget(delete_form) }}<button class="alert button radius small" type="submit">Delete</button></form></li>
         </ul>
     </div>

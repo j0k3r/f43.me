@@ -29,7 +29,7 @@ class RedditVideoTest extends AppTestCase
 
     public function testMatchRedditBadRequest()
     {
-        $client = self::getMockClient([(new Response(400, [], json_encode('oops')))]);
+        $client = self::getMockClient([(new Response(400, [], (string) json_encode('oops')))]);
 
         $redditVideo = new RedditVideo();
         $redditVideo->setClient($client);
@@ -39,7 +39,7 @@ class RedditVideoTest extends AppTestCase
 
     public function testMatchRedditNotAVideo()
     {
-        $client = self::getMockClient([(new Response(200, [], json_encode([['data' => ['children' => [['data' => ['domain' => 'self.gifs']]]]]])))]);
+        $client = self::getMockClient([(new Response(200, [], (string) json_encode([['data' => ['children' => [['data' => ['domain' => 'self.gifs']]]]]])))]);
 
         $redditVideo = new RedditVideo();
         $redditVideo->setClient($client);
@@ -49,7 +49,7 @@ class RedditVideoTest extends AppTestCase
 
     public function testMatchReddit()
     {
-        $client = self::getMockClient([(new Response(200, [], json_encode([['data' => ['children' => [['data' => ['domain' => 'v.redd.it']]]]]])))]);
+        $client = self::getMockClient([(new Response(200, [], (string) json_encode([['data' => ['children' => [['data' => ['domain' => 'v.redd.it']]]]]])))]);
 
         $redditVideo = new RedditVideo();
         $redditVideo->setClient($client);
@@ -59,7 +59,7 @@ class RedditVideoTest extends AppTestCase
 
     public function testContent()
     {
-        $client = self::getMockClient([(new Response(200, [], json_encode([['data' => ['children' => [['data' => [
+        $client = self::getMockClient([(new Response(200, [], (string) json_encode([['data' => ['children' => [['data' => [
             'domain' => 'v.redd.it',
             'thumbnail' => 'http://image.reddit',
             'preview' => [

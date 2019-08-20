@@ -5,7 +5,7 @@ namespace Tests\AppBundle\Content;
 use AppBundle\Content\Extractor;
 use AppBundle\Content\Import;
 use AppBundle\Converter\ConverterChain;
-use AppBundle\Document\Feed;
+use AppBundle\Entity\Feed;
 use AppBundle\Extractor\ExtractorChain;
 use AppBundle\Extractor\Youtube;
 use AppBundle\Improver\ImproverChain;
@@ -118,29 +118,22 @@ class ImportTest extends AppTestCase
             ->method('findOneBy')
             ->willReturn($feed);
 
-        $feedItemRepo = $this->getMockBuilder('AppBundle\Repository\FeedItemRepository')
+        $feedItemRepo = $this->getMockBuilder('AppBundle\Repository\ItemRepository')
             ->disableOriginalConstructor()
             ->getMock();
 
-        $dm = $this->getMockBuilder('Doctrine\ODM\MongoDB\DocumentManager')
-            ->setMethods(['getRepository', 'persist', 'flush', 'clear'])
+        $em = $this->getMockBuilder('Doctrine\ORM\EntityManager')
+            ->setMethods(['persist', 'flush', 'clear'])
             ->disableOriginalConstructor()
             ->getMock();
 
-        $dm->expects($this->exactly(2))
-            ->method('getRepository')
-            ->will($this->onConsecutiveCalls(
-                $feedRepo,
-                $feedItemRepo
-            ));
-
-        $import = new Import($simplePie, $extractor, $eventDispatcher, $dm, new NullLogger());
+        $import = new Import($simplePie, $extractor, $eventDispatcher, $em, new NullLogger(), $feedRepo, $feedItemRepo);
         $res = $import->process([$feed]);
 
         $this->assertSame(1, $res);
-        $this->assertCount(1, $feed->getFeeditems());
-        $this->assertSame($link, $feed->getFeeditems()[0]->getPermalink());
-        $this->assertSame($link, $feed->getFeeditems()[0]->getLink());
+        $this->assertCount(1, $feed->getItems());
+        $this->assertSame($link, $feed->getItems()[0]->getPermalink());
+        $this->assertSame($link, $feed->getItems()[0]->getLink());
     }
 
     public function testRedditFeedAndYoutube()
@@ -240,29 +233,22 @@ class ImportTest extends AppTestCase
             ->method('findOneBy')
             ->willReturn($feed);
 
-        $feedItemRepo = $this->getMockBuilder('AppBundle\Repository\FeedItemRepository')
+        $feedItemRepo = $this->getMockBuilder('AppBundle\Repository\ItemRepository')
             ->disableOriginalConstructor()
             ->getMock();
 
-        $dm = $this->getMockBuilder('Doctrine\ODM\MongoDB\DocumentManager')
-            ->setMethods(['getRepository', 'persist', 'flush', 'clear'])
+        $em = $this->getMockBuilder('Doctrine\ORM\EntityManager')
+            ->setMethods(['persist', 'flush', 'clear'])
             ->disableOriginalConstructor()
             ->getMock();
 
-        $dm->expects($this->exactly(2))
-            ->method('getRepository')
-            ->will($this->onConsecutiveCalls(
-                $feedRepo,
-                $feedItemRepo
-            ));
-
-        $import = new Import($simplePie, $extractor, $eventDispatcher, $dm, new NullLogger());
+        $import = new Import($simplePie, $extractor, $eventDispatcher, $em, new NullLogger(), $feedRepo, $feedItemRepo);
         $res = $import->process([$feed]);
 
         $this->assertSame(1, $res);
-        $this->assertCount(1, $feed->getFeeditems());
-        $this->assertSame($link, $feed->getFeeditems()[0]->getPermalink());
-        $this->assertSame($link, $feed->getFeeditems()[0]->getLink());
-        $this->assertContains('iframe', $feed->getFeeditems()[0]->getContent());
+        $this->assertCount(1, $feed->getItems());
+        $this->assertSame($link, $feed->getItems()[0]->getPermalink());
+        $this->assertSame($link, $feed->getItems()[0]->getLink());
+        $this->assertContains('iframe', $feed->getItems()[0]->getContent());
     }
 }

@@ -84,7 +84,7 @@ class RssFormatter extends Formatter
             $logo = $this->dom->createElementNS(
                 'http://webfeeds.org/rss/1.0',
                 'webfeeds:logo',
-                htmlspecialchars($this->feed->getLogo())
+                htmlspecialchars((string) $this->feed->getLogo())
             );
 
             $channel->appendChild($logo);
@@ -95,7 +95,7 @@ class RssFormatter extends Formatter
             $color = $this->dom->createElementNS(
                 'http://webfeeds.org/rss/1.0',
                 'webfeeds:accentColor',
-                htmlspecialchars($this->feed->getColor())
+                htmlspecialchars((string) $this->feed->getColor())
             );
 
             $channel->appendChild($color);

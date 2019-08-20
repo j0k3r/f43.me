@@ -13,7 +13,7 @@ services:
     # autowire
     AppBundle\:
         resource: '../../src/AppBundle/*'
-        exclude: '../../src/AppBundle/{Document,DataFixtures,Converter,DomDocument,Extractor,Improver,Parser}'
+        exclude: '../../src/AppBundle/{Entity,DataFixtures,Converter,DomDocument,Extractor,Improver,Parser}'
 
     AppBundle\Xml\Render:
         arguments:
@@ -23,7 +23,7 @@ services:
         arguments:
             $domain: "%domain%"
 
-    AppBundle\EventListener\FeedItemSubscriber:
+    AppBundle\EventListener\ItemSubscriber:
         arguments:
             $hub: "http://pubsubhubbub.appspot.com"
         tags:
@@ -38,14 +38,6 @@ services:
     AppBundle\Validator\Constraints\ConstraintRssValidator:
         tags:
             - { name: validator.constraint_validator, alias: valid_rss }
-
-    # https://coderwall.com/p/4gamjq
-    feed.converter.doctrine.mongodb:
-        class: Sensio\Bundle\FrameworkExtraBundle\Request\ParamConverter\DoctrineParamConverter
-        arguments:
-            - "@doctrine_mongodb"
-        tags:
-            - { name: request.param_converter }
 
     # external service
     imgur.client:

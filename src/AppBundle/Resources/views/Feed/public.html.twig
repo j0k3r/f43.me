@@ -42,8 +42,8 @@
                             <a rel="nofollow" href="//{{ feed.host }}" target="_blank" title="{{ feed.name }}">{{ feed.name }}</a>
                         </td>
                         <td><a href="{{ url('feed_xml', { 'slug': feed.slug }) }}" target="_blank">{{ url('feed_xml', { 'slug': feed.slug })|replace({'http://': ''}) }}</a></td>
-                        <td class="time-ago" title="{{ feed.lastitemcachedat|date('r') }}">{{ feed.lastitemcachedat|date('d/m/y - H:i:s') }}</td>
-                        <td class="items-count">{{ feed.nbitems }}</td>
+                        <td class="time-ago" title="{{ feed.lastItemCachedAt|date('r') }}">{{ feed.lastItemCachedAt|date('d/m/y - H:i:s') }}</td>
+                        <td class="items-count">{{ feed.nbItems }}</td>
                     </tr>
                 {% endfor %}
                 </tbody>

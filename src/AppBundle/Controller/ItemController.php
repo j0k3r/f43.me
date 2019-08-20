@@ -3,21 +3,18 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Content\Extractor;
-use AppBundle\Document\Feed;
-use AppBundle\Document\FeedItem;
-use AppBundle\Repository\FeedItemRepository;
+use AppBundle\Entity\Feed;
+use AppBundle\Entity\Item;
+use AppBundle\Repository\ItemRepository;
 use AppBundle\Xml\SimplePieProxy;
-use Doctrine\ODM\MongoDB\DocumentManager;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\Session;
 
-/**
- * FeedItem controller.
- */
-class FeedItemController extends Controller
+class ItemController extends Controller
 {
     /**
      * Lists all Items documents related to a Feed.
@@ -26,20 +23,18 @@ class FeedItemController extends Controller
      *
      * @return Response
      */
-    public function indexAction(Feed $feed, FeedItemRepository $feedItemRepository)
+    public function indexAction(Feed $feed, ItemRepository $itemRepository)
     {
-        $feeditems = $feedItemRepository->findByFeed(
+        $items = $itemRepository->findByFeed(
             $feed->getId(),
             $feed->getSortBy()
         );
 
-        $deleteAllForm = $this->createDeleteAllForm();
-
-        return $this->render('AppBundle:FeedItem:index.html.twig', [
+        return $this->render('AppBundle:Item:index.html.twig', [
             'menu' => 'feed',
             'feed' => $feed,
-            'feeditems' => $feeditems,
-            'delete_all_form' => $deleteAllForm->createView(),
+            'items' => $items,
+            'delete_all_form' => $this->createFormBuilder()->getForm()->createView(),
         ]);
     }
 
@@ -51,19 +46,19 @@ class FeedItemController extends Controller
      *
      * @return RedirectResponse
      */
-    public function deleteAllAction(Request $request, Feed $feed, FeedItemRepository $feedItemRepository, DocumentManager $dm, Session $session)
+    public function deleteAllAction(Request $request, Feed $feed, ItemRepository $itemRepository, EntityManagerInterface $em, Session $session)
     {
-        $form = $this->createDeleteAllForm();
+        $form = $this->createFormBuilder()->getForm();
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $res = $feedItemRepository->deleteAllByFeedId($feed->getId());
+            $res = $itemRepository->deleteAllByFeedId($feed->getId());
 
             $feed->setNbItems(0);
-            $dm->persist($feed);
-            $dm->flush();
+            $em->persist($feed);
+            $em->flush();
 
-            $session->getFlashBag()->add('notice', $res['n'] . ' documents deleted!');
+            $session->getFlashBag()->add('notice', $res . ' items deleted!');
         }
 
         return $this->redirect($this->generateUrl('feed_edit', ['slug' => $feed->getSlug()]));
@@ -72,13 +67,13 @@ class FeedItemController extends Controller
     /**
      * Preview an item that is already cached.
      *
-     * @param FeedItem $feedItem The document FeedItem (retrieving for a ParamConverter with the id)
+     * @param Item $feedItem The document Item (retrieving for a ParamConverter with the id)
      *
      * @return Response
      */
-    public function previewCachedAction(FeedItem $feedItem)
+    public function previewCachedAction(Item $feedItem)
     {
-        return $this->render('AppBundle:FeedItem:content.html.twig', [
+        return $this->render('AppBundle:Item:content.html.twig', [
             'title' => $feedItem->getTitle(),
             'content' => $feedItem->getContent(),
             'url' => $feedItem->getLink(),
@@ -96,7 +91,7 @@ class FeedItemController extends Controller
      */
     public function testItemAction(Feed $feed)
     {
-        return $this->render('AppBundle:FeedItem:preview.html.twig', [
+        return $this->render('AppBundle:Item:preview.html.twig', [
             'feed' => $feed,
         ]);
     }
@@ -131,17 +126,12 @@ class FeedItemController extends Controller
             $firstItem->get_description()
         );
 
-        return $this->render('AppBundle:FeedItem:content.html.twig', [
+        return $this->render('AppBundle:Item:content.html.twig', [
             'title' => html_entity_decode($firstItem->get_title(), ENT_COMPAT, 'UTF-8'),
             'content' => $content->content,
             'modal' => false,
             'url' => $content->url,
             'defaultContent' => $content->useDefault,
         ]);
-    }
-
-    private function createDeleteAllForm()
-    {
-        return $this->createFormBuilder()->getForm();
     }
 }

@@ -2,13 +2,13 @@
 
 namespace Tests\AppBundle\EventListener;
 
-use AppBundle\Event\FeedItemEvent;
-use AppBundle\EventListener\FeedItemSubscriber;
+use AppBundle\Event\ItemEvent;
+use AppBundle\EventListener\ItemSubscriber;
 use GuzzleHttp\Psr7\Response;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Tests\AppBundle\AppTestCase;
 
-class FeedItemSubscriberTest extends AppTestCase
+class ItemSubscriberTest extends AppTestCase
 {
     public function testOnItemCachedNoHubDefined()
     {
@@ -18,10 +18,10 @@ class FeedItemSubscriberTest extends AppTestCase
 
         $client = self::getMockClient();
 
-        $feedItemSubscriber = new FeedItemSubscriber('', $router, $client);
+        $itemSubscriber = new ItemSubscriber('', $router, $client);
 
-        $event = new FeedItemEvent(['bar.unknown']);
-        $res = $feedItemSubscriber->pingHub($event);
+        $event = new ItemEvent(['bar.unknown']);
+        $res = $itemSubscriber->pingHub($event);
 
         // the hub url is invalid, so it will be generate an error and return false
         $this->assertFalse($res);
@@ -40,10 +40,10 @@ class FeedItemSubscriberTest extends AppTestCase
 
         $client = self::getMockClient([(new Response(500, []))]);
 
-        $feedItemSubscriber = new FeedItemSubscriber('http://f43.me', $router, $client);
+        $itemSubscriber = new ItemSubscriber('http://f43.me', $router, $client);
 
-        $event = new FeedItemEvent(['bar.unknown']);
-        $res = $feedItemSubscriber->pingHub($event);
+        $event = new ItemEvent(['bar.unknown']);
+        $res = $itemSubscriber->pingHub($event);
 
         // the hub url is invalid, so it will be generate an error and return false
         $this->assertFalse($res);
@@ -62,10 +62,10 @@ class FeedItemSubscriberTest extends AppTestCase
 
         $client = self::getMockClient([(new Response(204))]);
 
-        $feedItemSubscriber = new FeedItemSubscriber('http://f43.me', $router, $client);
+        $itemSubscriber = new ItemSubscriber('http://f43.me', $router, $client);
 
-        $event = new FeedItemEvent(['bar.unknown']);
-        $res = $feedItemSubscriber->pingHub($event);
+        $event = new ItemEvent(['bar.unknown']);
+        $res = $itemSubscriber->pingHub($event);
 
         $this->assertTrue($res);
     }

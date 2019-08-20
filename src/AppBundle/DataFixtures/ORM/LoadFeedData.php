@@ -1,8 +1,8 @@
 <?php
 
-namespace AppBundle\DataFixtures\MongoDB;
+namespace AppBundle\DataFixtures\ORM;
 
-use AppBundle\Document\Feed;
+use AppBundle\Entity\Feed;
 use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
@@ -22,7 +22,7 @@ class LoadFeedData extends AbstractFixture implements OrderedFixtureInterface
         $feedReddit->setFormatter('rss');
         $feedReddit->setHost('http://reddit.com');
         $feedReddit->setLogo('https://www.redditstatic.com/about/assets/reddit-logo.png');
-        $feedReddit->setColor('#336699');
+        $feedReddit->setColor('336699');
         $feedReddit->setIsPrivate(false);
         $feedReddit->setSortBy('created_at');
         $feedReddit->setNbItems(3);
@@ -38,7 +38,7 @@ class LoadFeedData extends AbstractFixture implements OrderedFixtureInterface
         $feedHN->setFormatter('atom');
         $feedHN->setHost('news.ycombinator.com');
         $feedHN->setLogo('https://news.ycombinator.com/yc500.gif');
-        $feedHN->setColor('#ff6600');
+        $feedHN->setColor('ff6600');
         $feedHN->setIsPrivate(false);
         $feedHN->setSortBy('published_at');
         $feedHN->setNbItems(3);

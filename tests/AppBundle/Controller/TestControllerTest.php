@@ -2,7 +2,7 @@
 
 namespace Tests\AppBundle\Controller;
 
-class FeedTestControllerTest extends FeedWebTestCase
+class TestControllerTest extends FeedWebTestCase
 {
     public function testFeedTest()
     {

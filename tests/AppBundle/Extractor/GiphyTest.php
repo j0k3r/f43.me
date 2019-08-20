@@ -35,9 +35,9 @@ class GiphyTest extends AppTestCase
     public function testContent()
     {
         $client = self::getMockClient([
-            (new Response(200, [], json_encode(['title' => 'my title', 'url' => 'http://0.0.0.0/img.jpg']))),
-            (new Response(200, [], json_encode(''))),
-            (new Response(400, [], json_encode('oops'))),
+            (new Response(200, [], (string) json_encode(['title' => 'my title', 'url' => 'http://0.0.0.0/img.jpg']))),
+            (new Response(200, [], (string) json_encode(''))),
+            (new Response(400, [], (string) json_encode('oops'))),
         ]);
 
         $giphy = new Giphy();

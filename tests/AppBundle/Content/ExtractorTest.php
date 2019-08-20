@@ -87,7 +87,7 @@ class ExtractorTest extends TestCase
 
     protected function getContentExtrator($customParser = false, $customExtractor = false)
     {
-        $feed = $this->getMockBuilder('AppBundle\Document\Feed')
+        $feed = $this->getMockBuilder('AppBundle\Entity\Feed')
             ->setMethods(['getFormatter', 'getHost'])
             ->disableOriginalConstructor()
             ->getMock();

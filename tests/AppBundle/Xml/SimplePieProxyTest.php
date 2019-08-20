@@ -11,7 +11,7 @@ class SimplePieProxyTest extends TestCase
 
     protected function setUp()
     {
-        $this->cacheDir = __DIR__ . '/../../../../../app/cache/tmp-' . md5(time());
+        $this->cacheDir = __DIR__ . '/../../../../../app/cache/tmp-' . md5((string) time());
     }
 
     protected function tearDown()

@@ -2,7 +2,7 @@
 
 namespace Tests\AppBundle\Controller;
 
-class FeedLogControllerTest extends FeedWebTestCase
+class LogControllerTest extends FeedWebTestCase
 {
     public function testUnAuthorized()
     {
@@ -75,7 +75,7 @@ class FeedLogControllerTest extends FeedWebTestCase
 
         $crawler = $client->followRedirect();
         $this->assertCount(1, $alert = $crawler->filter('div.alert-box')->extract(['_text']));
-        $this->assertContains('documents deleted!', $alert[0]);
+        $this->assertContains('logs deleted!', $alert[0]);
     }
 
     public function testDeleteAllFormInvalid()

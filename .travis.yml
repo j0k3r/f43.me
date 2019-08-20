@@ -1,12 +1,13 @@
 language: php
 
 services:
-    - mongodb
+    - mysql
 
 php:
     - 7.1
     - 7.2
     - 7.3
+    - 7.4
     - nightly
 
 # run build against nightly but allow them to fail
@@ -18,6 +19,7 @@ matrix:
         - php: 7.2
           env: CS_FIXER=run
     allow_failures:
+        - php: 7.4
         - php: nightly
 
 # faster builds on new travis setup not using sudo
@@ -34,8 +36,6 @@ install:
 
 before_script:
     - if [ -n "$GH_TOKEN" ]; then composer config github-oauth.github.com ${GH_TOKEN}; fi;
-    - pecl channel-update pecl.php.net
-    - yes '' | pecl -q install -f mongodb
     - if [ $COVERAGE = run ]; then PHPUNIT_FLAGS="--coverage-clover build/logs/clover.xml"; fi;
 
 script:
@@ -43,7 +43,7 @@ script:
     - mkdir -p build/logs
     - php bin/simple-phpunit -v $PHPUNIT_FLAGS
     - if [ "$CS_FIXER" = "run" ]; then php bin/php-cs-fixer fix --verbose --dry-run ; fi;
-    - if [ "$CS_FIXER" = "run" ]; then php bin/phpstan analyse src tests --no-progress --level 3 ; fi;
+    - if [ "$CS_FIXER" = "run" ]; then php bin/phpstan analyse src tests --no-progress --level 7 ; fi;
 
 after_script:
     - |

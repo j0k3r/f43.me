@@ -1,6 +1,9 @@
 parameters:
-    database_server: mongodb://localhost:27017
+    database_host: 127.0.0.1
+    database_port: ~
     database_name: f43me
+    database_user: root
+    database_password: ~
 
     locale: en
     secret: uLq3XcJHHbLhq6GX

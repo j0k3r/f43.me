@@ -3,7 +3,7 @@
 namespace AppBundle\Content;
 
 use AppBundle\Converter\ConverterChain;
-use AppBundle\Document\Feed;
+use AppBundle\Entity\Feed;
 use AppBundle\Extractor\ExtractorChain;
 use AppBundle\Improver\ImproverChain;
 use AppBundle\Parser\ParserChain;

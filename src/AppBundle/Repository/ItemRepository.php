@@ -2,15 +2,15 @@
 
 namespace AppBundle\Repository;
 
-use AppBundle\Document\FeedItem;
-use Doctrine\Bundle\MongoDBBundle\ManagerRegistry;
-use Doctrine\Bundle\MongoDBBundle\Repository\ServiceDocumentRepository;
+use AppBundle\Entity\Item;
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Symfony\Bridge\Doctrine\RegistryInterface;
 
-class FeedItemRepository extends ServiceDocumentRepository
+class ItemRepository extends ServiceEntityRepository
 {
-    public function __construct(ManagerRegistry $registry)
+    public function __construct(RegistryInterface $registry)
     {
-        parent::__construct($registry, FeedItem::class);
+        parent::__construct($registry, Item::class);
     }
 
     /**
@@ -37,21 +37,26 @@ class FeedItemRepository extends ServiceDocumentRepository
     public function findLastItemByFeedId($feedId)
     {
         return $this->getItemsByFeedIdQuery($feedId, ['limit' => 1])
-            ->getSingleResult();
+            ->getOneOrNullResult();
     }
 
     /**
      * Return feeds which HAVE items.
      *
-     * @return array of MongoId
+     * @return array of id
      */
     public function findAllFeedWithItems()
     {
-        $items = $this->resultsForAllFeedsWithNbItems();
+        $items = $this->createQueryBuilder('i')
+            ->select('f.id, COUNT(i)')
+            ->leftJoin('i.feed', 'f')
+            ->groupBy('f.id')
+            ->getQuery()
+            ->getArrayResult();
 
         $res = [];
         foreach ($items as $item) {
-            $res[] = (string) $item['_id'];
+            $res[] = $item['id'];
         }
 
         return $res;
@@ -67,13 +72,13 @@ class FeedItemRepository extends ServiceDocumentRepository
      */
     public function getAllLinks($feedId)
     {
-        $res = $this->createQueryBuilder()
-            ->select('permalink')
-            ->hydrate(false)
-            ->field('feed.id')->equals($feedId)
-            ->sort('published_at', 'DESC')
+        $res = $this->createQueryBuilder('i')
+            ->select('i.permalink')
+            ->leftJoin('i.feed', 'f')
+            ->where('f.id = :feedId')->setParameter('feedId', $feedId)
+            ->orderBy('i.publishedAt', 'DESC')
             ->getQuery()
-            ->execute();
+            ->getArrayResult();
 
         // store as key to avoid duplicate (even if it doesn't have to happen)
         // and also because it's faster to isset than in_array to match a value
@@ -93,15 +98,16 @@ class FeedItemRepository extends ServiceDocumentRepository
      * @param int $feedId Feed id
      * @param int $skip   Items to keep
      *
-     * @return \Doctrine\ODM\MongoDB\EagerCursor
+     * @return mixed
      */
     public function findOldItemsByFeedId($feedId, $skip = 100)
     {
-        return $this->createQueryBuilder()
-            ->find()
-            ->field('feed.id')->equals($feedId)
-            ->sort('published_at', 'desc')
-            ->skip((int) $skip)
+        return $this->createQueryBuilder('i')
+            ->select('i, f')
+            ->leftJoin('i.feed', 'f')
+            ->where('f.id = :feedId')->setParameter('feedId', $feedId)
+            ->orderBy('i.publishedAt', 'desc')
+            ->setFirstResult((int) $skip)
             ->getQuery()
             ->execute();
     }
@@ -111,14 +117,12 @@ class FeedItemRepository extends ServiceDocumentRepository
      *
      * @param int $feedId Feed id
      *
-     * @return array (with key 'n' as number of row affected)
+     * @return int
      */
     public function deleteAllByFeedId($feedId)
     {
-        return $this->createQueryBuilder()
-            ->remove()
-            ->field('feed.id')->equals($feedId)
-            ->getQuery()
+        return $this->getEntityManager()
+            ->createQuery("DELETE FROM AppBundle\Entity\Item i WHERE i.feed = " . $feedId)
             ->execute();
     }
 
@@ -131,62 +135,45 @@ class FeedItemRepository extends ServiceDocumentRepository
      */
     public function countByFeedId($feedId)
     {
-        return $this->createQueryBuilder()
-            ->count()
-            ->field('feed.id')->equals($feedId)
+        return $this->createQueryBuilder('i')
+            ->select('count(i.id)')
+            ->leftJoin('i.feed', 'f')
+            ->where('f.id = :feedId')->setParameter('feedId', $feedId)
             ->getQuery()
-            ->execute();
+            ->getSingleScalarResult();
     }
 
     /**
      * Get the base query to fetch items.
      *
-     * @param string $feedId  Feed id
-     * @param array  $options limit, sort_by, skip
+     * @param int   $feedId  Feed id
+     * @param array $options limit, sort_by, skip
      *
-     * @return \Doctrine\ODM\MongoDB\Query\Query
+     * @return \Doctrine\ORM\Query
      */
     private function getItemsByFeedIdQuery($feedId, $options = [])
     {
-        $q = $this->createQueryBuilder()
-            ->field('feed.id')->equals($feedId);
+        $q = $this->createQueryBuilder('i')
+            ->select('i, f')
+            ->leftJoin('i.feed', 'f')
+            ->where('f.id = :feedId')->setParameter('feedId', $feedId);
 
         if (isset($options['sort_by']) && $options['sort_by']) {
-            $q->sort($options['sort_by'], 'DESC');
+            // convert `created_at` in `createdAt`
+            $sort = str_replace('_a', 'A', $options['sort_by']);
+            $q->orderBy('i.' . $sort, 'DESC');
         } else {
-            $q->sort('published_at', 'DESC');
+            $q->orderBy('i.publishedAt', 'DESC');
         }
 
         if (isset($options['limit']) && $options['limit']) {
-            $q->limit($options['limit']);
+            $q->setMaxResults($options['limit']);
         }
 
         if (isset($options['skip']) && $options['skip']) {
-            $q->skip($options['skip']);
+            $q->setFirstResult($options['skip']);
         }
 
         return $q->getQuery();
-    }
-
-    /**
-     * Return the raw results of feeds which HAVE items.
-     *
-     * @return \MongoCursor
-     */
-    private function resultsForAllFeedsWithNbItems()
-    {
-        $q = $this->createQueryBuilder()
-            ->map('function () { emit(this.feed.$id, 1); }')
-            ->reduce('function (k, vals) {
-                var sum = 0;
-                for (var i in vals) {
-                    sum += vals[i];
-                }
-
-                return sum;
-            }')
-            ->getQuery();
-
-        return $q->execute();
     }
 }

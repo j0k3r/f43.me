@@ -15,7 +15,7 @@ logout:
 # test
 feed_test:
     path:  /feed/test
-    defaults: { _controller: AppBundle:FeedTest:index }
+    defaults: { _controller: AppBundle:Test:index }
     methods:  [GET, POST]
 
 # feed
@@ -59,44 +59,44 @@ feed_xml:
     defaults: { _controller: AppBundle:Feed:xml, _format: xml }
     methods:  [HEAD, GET]
 
-# feed item
-feeditem_homepage:
+# item
+item_homepage:
     path:  /feed/{slug}/items
-    defaults: { _controller: AppBundle:FeedItem:index }
+    defaults: { _controller: AppBundle:Item:index }
     methods:  [GET]
 
-feeditem_preview_new:
+item_preview_new:
     path:  /feed/{slug}/previewItem
-    defaults: { _controller: AppBundle:FeedItem:previewNew }
+    defaults: { _controller: AppBundle:Item:previewNew }
     methods:  [GET]
 
-feeditem_test:
+item_test:
     path:  /feed/{slug}/testItem
-    defaults: { _controller: AppBundle:FeedItem:testItem }
+    defaults: { _controller: AppBundle:Item:testItem }
     methods:  [GET]
 
-feeditem_preview_cached:
+item_preview_cached:
     path:  /item/{id}/preview
-    defaults: { _controller: AppBundle:FeedItem:previewCached }
+    defaults: { _controller: AppBundle:Item:previewCached }
     methods:  [GET]
 
-feeditem_delete_all:
+item_delete_all:
     path:  /feed/{slug}/items/deleteAll
-    defaults: { _controller: AppBundle:FeedItem:deleteAll }
+    defaults: { _controller: AppBundle:Item:deleteAll }
     methods:  [POST]
 
-# feed log
-feedlog_homepage:
+# log
+log_homepage:
     path:  /logs
-    defaults: { _controller: AppBundle:FeedLog:index }
+    defaults: { _controller: AppBundle:Log:index }
     methods:  [GET]
 
-feedlog_feed:
+log_feed:
     path:  /feed/{slug}/logs
-    defaults: { _controller: AppBundle:FeedLog:feed }
+    defaults: { _controller: AppBundle:Log:feed }
     methods:  [GET]
 
-feedlog_delete_all:
+log_delete_all:
     path:  /feed/{slug}/logs/deleteAll
-    defaults: { _controller: AppBundle:FeedLog:deleteAll }
+    defaults: { _controller: AppBundle:Log:deleteAll }
     methods:  [POST]

@@ -2,12 +2,12 @@
 
 namespace AppBundle\EventListener;
 
-use AppBundle\Event\FeedItemEvent;
+use AppBundle\Event\ItemEvent;
 use Http\Client\Common\HttpMethodsClientInterface;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Routing\RouterInterface;
 
-class FeedItemSubscriber
+class ItemSubscriber
 {
     protected $hub = '';
     protected $router;
@@ -32,11 +32,11 @@ class FeedItemSubscriber
      *
      * http://nathangrigg.net/2012/09/real-time-publishing/
      *
-     * @param FeedItemEvent $event
+     * @param ItemEvent $event
      *
      * @return bool
      */
-    public function pingHub(FeedItemEvent $event)
+    public function pingHub(ItemEvent $event)
     {
         if (empty($this->hub)) {
             return false;

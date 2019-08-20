@@ -2,13 +2,13 @@
 
 namespace AppBundle\Repository;
 
-use AppBundle\Document\Feed;
-use Doctrine\Bundle\MongoDBBundle\ManagerRegistry;
-use Doctrine\Bundle\MongoDBBundle\Repository\ServiceDocumentRepository;
+use AppBundle\Entity\Feed;
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Symfony\Bridge\Doctrine\RegistryInterface;
 
-class FeedRepository extends ServiceDocumentRepository
+class FeedRepository extends ServiceEntityRepository
 {
-    public function __construct(ManagerRegistry $registry)
+    public function __construct(RegistryInterface $registry)
     {
         parent::__construct($registry, Feed::class);
     }
@@ -18,32 +18,32 @@ class FeedRepository extends ServiceDocumentRepository
      *
      * @param int|null $limit Items to retrieve
      *
-     * @return \Doctrine\ODM\MongoDB\EagerCursor
+     * @return array
      */
     public function findAllOrderedByDate($limit = null)
     {
-        $q = $this->createQueryBuilder()
-            ->sort('updated_at', 'DESC');
+        $q = $this->createQueryBuilder('f')
+            ->orderBy('f.updatedAt', 'desc');
 
         if (null !== $limit) {
-            $q->limit($limit);
+            $q->setMaxResults($limit);
         }
 
-        return $q->getQuery()->execute();
+        return $q->getQuery()->getArrayResult();
     }
 
     /**
      * Find feeds for public display.
      *
-     * @return \Doctrine\ODM\MongoDB\EagerCursor
+     * @return array
      */
     public function findForPublic()
     {
-        $q = $this->createQueryBuilder()
-            ->field('is_private')->equals(false)
-            ->sort('last_item_cached_at', 'DESC');
-
-        return $q->getQuery()->execute();
+        return $this->createQueryBuilder('f')
+            ->where('f.isPrivate = :isPrivate')->setParameter('isPrivate', false)
+            ->orderBy('f.lastItemCachedAt', 'desc')
+            ->getQuery()
+            ->getArrayResult();
     }
 
     /**
@@ -53,20 +53,18 @@ class FeedRepository extends ServiceDocumentRepository
      * @param array  $ids  An array of MongoID
      * @param string $type in or notIn
      *
-     * @return \Doctrine\ODM\MongoDB\EagerCursor|bool
+     * @return mixed
      */
     public function findByIds($ids, $type = 'in')
     {
-        $q = $this->createQueryBuilder()
-            ->field('id');
+        $q = $this->createQueryBuilder('f');
 
         if ('in' === $type) {
-            $q->in($ids);
+            $q->where('f.id IN (:ids)')->setParameter('ids', $ids);
         } else {
-            $q->notIn($ids);
+            $q->where('f.id NOT IN (:ids)')->setParameter('ids', $ids);
         }
 
-        return $q->getQuery()
-            ->execute();
+        return $q->getQuery()->execute();
     }
 }

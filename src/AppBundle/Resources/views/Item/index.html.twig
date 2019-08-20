@@ -3,7 +3,7 @@
 {% block h2_title %}
     {{ include('AppBundle:Feed:_favicon.html.twig', {'host': feed.host}) }}
     {{ feed.name }}'s items
-    <small>{{ feeditems|length }} cached items</small>
+    <small>{{ items|length }} cached items</small>
 {% endblock %}
 
 {% block content %}
@@ -12,9 +12,9 @@
         <ul class="inline-list list-buttons">
             <li><a class="secondary button radius small" href="{{ path('feed_edit', { 'slug': feed.slug }) }}">&lArr; Back to the feed</a></li>
 
-            {% if feeditems|length > 0 %}
+            {% if items|length > 0 %}
             <li>
-                <form action="{{ path('feeditem_delete_all', { 'slug': feed.slug }) }}" method="post" class="delete_form">
+                <form action="{{ path('item_delete_all', { 'slug': feed.slug }) }}" method="post" class="delete_form">
                     {{ form_widget(delete_all_form) }}
                     <button class="alert button radius small" type="submit">Delete all items</button>
                 </form>
@@ -22,7 +22,7 @@
             {% endif %}
         </ul>
 
-        {% if feeditems|length > 0 %}
+        {% if items|length > 0 %}
             <table class="table-items">
                 <thead>
                     <tr>
@@ -33,12 +33,12 @@
                     </tr>
                 </thead>
                 <tbody>
-                {% for feeditem in feeditems %}
+                {% for item in items %}
                     <tr>
-                        <td><div><a href="{{ feeditem.link }}" target="_blank">{{ feeditem.title }}</a></div></td>
-                        <td>{{ feeditem.publishedat|date('d/m/y - H:i:s') }}</td>
-                        <td>{{ feeditem.createdat|date('d/m/y - H:i:s') }}</td>
-                        <td><a class="secondary button small radius" data-reveal-id="modal-preview-item" data-reveal-ajax="{{ path('feeditem_preview_cached', { 'id': feeditem.id }) }}">preview</a></td>
+                        <td><div><a href="{{ item.link }}" target="_blank">{{ item.title }}</a></div></td>
+                        <td>{{ item.publishedAt|date('d/m/y - H:i:s') }}</td>
+                        <td>{{ item.createdAt|date('d/m/y - H:i:s') }}</td>
+                        <td><a class="secondary button small radius" data-reveal-id="modal-preview-item" data-reveal-ajax="{{ path('item_preview_cached', { 'id': item.id }) }}">preview</a></td>
                     </tr>
                 {% endfor %}
                 </tbody>
