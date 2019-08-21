@@ -22,7 +22,7 @@ class FeedController extends Controller
      *
      * @return Response
      */
-    public function dashboardAction(FeedRepository $feedRepository, LogRepository $logRepository, ItemRepository $itemRepository)
+    public function dashboardAction(FeedRepository $feedRepository, LogRepository $logRepository)
     {
         $feeds = $feedRepository->findAllOrderedByDate(20);
         $feedlogs = $logRepository->findAllOrderedById(10);

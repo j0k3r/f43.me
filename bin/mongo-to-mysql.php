@@ -7,6 +7,7 @@ $mysql->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
 
 $mongo = new \MongoDB\Driver\Manager('mongodb://localhost:27017');
 
+$feedIds = [];
 $rows = $mongo->executeQuery('f43me.Feed', new \MongoDB\Driver\Query([]));
 
 foreach ($rows as $i => $row) {
@@ -39,6 +40,8 @@ foreach ($rows as $i => $row) {
 
     $sth->execute();
 
+    $feedIds[(string) $row['_id']] = $mysql->lastInsertId();
+
     echo '.';
 }
 
@@ -52,13 +55,23 @@ foreach ($rows as $i => $row) {
     }
 
     $row = (array) $row;
-
     $published = $row['published_at']->toDateTime()->format('Y-m-d h:m:s');
     $created = $row['created_at']->toDateTime()->format('Y-m-d h:m:s');
     $updated = $row['updated_at']->toDateTime()->format('Y-m-d h:m:s');
-    $sql = 'INSERT INTO item SET title=:title, link=:link, permalink=:permalink, content=:content, published_at=:published_at, created_at=:created_at, updated_at=:updated_at';
+    $sql = 'INSERT INTO item SET feed_id=:feed_id, title=:title, link=:link, permalink=:permalink, content=:content, published_at=:published_at, created_at=:created_at, updated_at=:updated_at';
+
+    $feed = (array) $row['feed'];
+
+    // in case the item is associated to a deleted item
+    if (!isset($feedIds[(string) $feed['$id']])) {
+        echo 'S';
+        continue;
+    }
+
+    $feedId = $feedIds[(string) $feed['$id']];
 
     $sth = $mysql->prepare($sql);
+    $sth->bindParam('feed_id', $feedId, \PDO::PARAM_INT);
     $sth->bindParam('title', $row['title'], \PDO::PARAM_STR);
     $sth->bindParam('link', $row['link'], \PDO::PARAM_STR);
     $sth->bindParam('permalink', $row['permalink'], \PDO::PARAM_STR);
