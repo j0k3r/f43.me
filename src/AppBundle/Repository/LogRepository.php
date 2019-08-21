@@ -101,7 +101,8 @@ class LogRepository extends ServiceEntityRepository
     public function deleteAllByFeedId($feedId)
     {
         return $this->getEntityManager()
-            ->createQuery("DELETE FROM AppBundle\Entity\Log l WHERE l.feed = " . $feedId)
+            ->createQuery("DELETE FROM AppBundle\Entity\Log l WHERE l.feed = :feedId")
+            ->setParameter('feedId', $feedId)
             ->execute();
     }
 

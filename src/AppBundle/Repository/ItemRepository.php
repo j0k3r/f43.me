@@ -122,7 +122,8 @@ class ItemRepository extends ServiceEntityRepository
     public function deleteAllByFeedId($feedId)
     {
         return $this->getEntityManager()
-            ->createQuery("DELETE FROM AppBundle\Entity\Item i WHERE i.feed = " . $feedId)
+            ->createQuery("DELETE FROM AppBundle\Entity\Item i WHERE i.feed = :feedId")
+            ->setParameter('feedId', $feedId)
             ->execute();
     }
 
