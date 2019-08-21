@@ -79,7 +79,7 @@ You can find some of them in the [converter folder](https://github.com/j0k3r/f43
 ### Requirements
 
  * PHP >= 7.1
- * MongoDB >=3.2, <4 & the `php-mongodb` extension
+ * MySQL
 
 For each external API that improvers / extractors / parsers use, you will need an api key:
 
@@ -100,7 +100,7 @@ git clone git@github.com:j0k3r/f43.me.git
 cd f43.me
 SYMFONY_ENV=prod composer install -o --no-dev
 npm install
-php bin/console doctrine:mongodb:schema:create -e=prod
+php bin/console doctrine:schema:create --env=prod
 ./node_modules/gulp/bin/gulp.js
 ```
 
@@ -108,10 +108,10 @@ You'll need to setup 3 CRONs in order to fetch contents :
 
 ```
 # fetch content for existing feed
-*/2 * * * * php /path/to/f43.me/bin/console feed:fetch-items --env=prod --age=old
+*/2 * * * * php /path/to/f43.me/bin/console feed:fetch-items --env=prod old
 
 # fetch content for fresh created feed
-*/5 * * * * php /path/to/f43.me/bin/console feed:fetch-items --env=prod --age=new
+*/5 * * * * php /path/to/f43.me/bin/console feed:fetch-items --env=prod new
 
 # cleanup old item. You can remove this one if you want to keep ALL items
 0   3 * * * php /path/to/f43.me/bin/console feed:remove-items --env=prod
