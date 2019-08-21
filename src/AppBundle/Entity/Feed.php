@@ -1,39 +1,45 @@
 <?php
 
-namespace AppBundle\Document;
+namespace AppBundle\Entity;
 
 use AppBundle\Validator\Constraints as FeedAssert;
-use Doctrine\Bundle\MongoDBBundle\Validator\Constraints\Unique as MongoDBUnique;
-use Doctrine\ODM\MongoDB\Mapping\Annotations as MongoDB;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * @MongoDB\Document(collection="feeds")
- * @MongoDB\Document(repositoryClass="AppBundle\Repository\FeedRepository")
- * @MongoDBUnique(fields="slug")
- * @MongoDBUnique(fields="link")
+ * @ORM\Table(
+ *     name="feed",
+ *     uniqueConstraints={
+ *         @ORM\UniqueConstraint(name="feed_slug_unique", columns={"slug"})
+ *     }
+ * )
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\FeedRepository")
+ * @ORM\HasLifecycleCallbacks()
  */
 class Feed
 {
     /**
-     * @MongoDB\Id
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
      */
     protected $id;
 
     /**
-     * @MongoDB\Field(type="string")
+     * @ORM\Column(name="name", type="string", length=191)
      * @Assert\NotBlank()
      */
     protected $name;
 
     /**
-     * @MongoDB\Field(type="string")
+     * @ORM\Column(name="description", type="text", nullable=true)
      */
     protected $description;
 
     /**
-     * @MongoDB\Field(type="string")
+     * @ORM\Column(name="link", type="string")
      * @Assert\NotBlank()
      * @Assert\Url()
      * @FeedAssert\ConstraintRss
@@ -41,89 +47,87 @@ class Feed
     protected $link;
 
     /**
-     * @MongoDB\Field(type="string")
+     * @ORM\Column(name="host", type="string")
      * @Assert\NotBlank()
      */
     protected $host;
 
     /**
-     * @MongoDB\Field(type="string")
+     * @ORM\Column(name="logo", type="string", nullable=true)
      */
     protected $logo;
 
     /**
-     * @MongoDB\Field(type="string")
+     * @ORM\Column(name="color", type="string", nullable=true)
      */
     protected $color;
 
     /**
-     * @MongoDB\Field(type="string")
+     * @ORM\Column(name="parser", type="string")
      */
     protected $parser;
 
     /**
-     * @MongoDB\Field(type="string")
+     * @ORM\Column(name="formatter", type="string")
      */
     protected $formatter;
 
     /**
-     * @MongoDB\Field(type="int")
+     * @ORM\Column(name="nb_items", type="integer")
      */
-    protected $nb_items = 0;
+    protected $nbItems = 0;
 
     /**
      * @Gedmo\Slug(fields={"name"}, updatable=false, unique=true)
-     * @MongoDB\Field(type="string")
-     * @MongoDB\Index
+     * @ORM\Column(name="slug", type="string", length=191)
      */
     protected $slug;
 
     /**
-     * @MongoDB\Field(type="bool")
+     * @ORM\Column(name="is_private", type="boolean")
      */
-    protected $is_private = false;
+    protected $isPrivate = false;
 
     /**
-     * @MongoDB\Field(type="string")
+     * @ORM\Column(name="sort_by", type="string")
      */
-    protected $sort_by;
+    protected $sortBy;
 
     /**
-     * @MongoDB\Field(type="date")
+     * @ORM\Column(name="last_item_cached_at", type="datetime", nullable=true)
      */
-    protected $last_item_cached_at;
+    protected $lastItemCachedAt;
 
     /**
-     * @MongoDB\Field(type="date")
-     * @Gedmo\Timestampable(on="create")
+     * @ORM\Column(name="created_at", type="datetime")
      */
-    protected $created_at;
+    protected $createdAt;
 
     /**
-     * @MongoDB\Field(type="date")
-     * @Gedmo\Timestampable(on="change", field={"name", "description", "link", "host", "parser", "formatter", "is_private", "sort_by"})
+     * @ORM\Column(name="updated_at", type="datetime")
      */
-    protected $updated_at;
+    protected $updatedAt;
 
     /**
-     * @MongoDB\ReferenceMany(targetDocument="FeedItem", mappedBy="feed")
+     * @ORM\OneToMany(targetEntity="Item", mappedBy="feed", cascade={"persist", "remove"})
      */
-    protected $feeditems;
+    protected $items;
 
     /**
-     * @MongoDB\ReferenceMany(targetDocument="FeedLog", mappedBy="feed")
+     * @ORM\OneToMany(targetEntity="Log", mappedBy="feed", cascade={"persist", "remove"})
      */
-    protected $feedlogs;
+    protected $logs;
 
     public function __construct()
     {
-        $this->feeditems = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->items = new ArrayCollection();
+        $this->logs = new ArrayCollection();
     }
 
     /**
      * Get id.
      *
-     * @return string $id
+     * @return int $id
      */
     public function getId()
     {
@@ -203,7 +207,7 @@ class Feed
     }
 
     /**
-     * Set created_at.
+     * Set createdAt.
      *
      * @param string|\DateTime $createdAt
      *
@@ -211,23 +215,23 @@ class Feed
      */
     public function setCreatedAt($createdAt)
     {
-        $this->created_at = $createdAt;
+        $this->createdAt = $createdAt;
 
         return $this;
     }
 
     /**
-     * Get created_at.
+     * Get createdAt.
      *
      * @return string|\DateTime $createdAt
      */
     public function getCreatedAt()
     {
-        return $this->created_at;
+        return $this->createdAt;
     }
 
     /**
-     * Set updated_at.
+     * Set updatedAt.
      *
      * @param string|\DateTime $updatedAt
      *
@@ -235,19 +239,19 @@ class Feed
      */
     public function setUpdatedAt($updatedAt)
     {
-        $this->updated_at = $updatedAt;
+        $this->updatedAt = $updatedAt;
 
         return $this;
     }
 
     /**
-     * Get updated_at.
+     * Get updatedAt.
      *
      * @return string|\DateTime $updatedAt
      */
     public function getUpdatedAt()
     {
-        return $this->updated_at;
+        return $this->updatedAt;
     }
 
     /**
@@ -275,36 +279,6 @@ class Feed
     }
 
     /**
-     * Add feeditems.
-     *
-     * @param FeedItem $feeditems
-     */
-    public function addFeeditem(FeedItem $feeditems)
-    {
-        $this->feeditems[] = $feeditems;
-    }
-
-    /**
-     * Remove feeditems.
-     *
-     * @param FeedItem $feeditems
-     */
-    public function removeFeeditem(FeedItem $feeditems)
-    {
-        $this->feeditems->removeElement($feeditems);
-    }
-
-    /**
-     * Get feeditems.
-     *
-     * @return \Doctrine\Common\Collections\ArrayCollection $feeditems
-     */
-    public function getFeeditems()
-    {
-        return $this->feeditems;
-    }
-
-    /**
      * Set parser.
      *
      * @param string $parser
@@ -326,36 +300,6 @@ class Feed
     public function getParser()
     {
         return $this->parser;
-    }
-
-    /**
-     * Add feedlogs.
-     *
-     * @param FeedLog $feedlogs
-     */
-    public function addFeedlog(FeedLog $feedlogs)
-    {
-        $this->feedlogs[] = $feedlogs;
-    }
-
-    /**
-     * Remove feedlogs.
-     *
-     * @param FeedLog $feedlogs
-     */
-    public function removeFeedlog(FeedLog $feedlogs)
-    {
-        $this->feedlogs->removeElement($feedlogs);
-    }
-
-    /**
-     * Get feedlogs.
-     *
-     * @return FeedLog[] $feedlogs
-     */
-    public function getFeedlogs()
-    {
-        return $this->feedlogs;
     }
 
     /**
@@ -414,7 +358,7 @@ class Feed
     }
 
     /**
-     * Set is_private.
+     * Set isPrivate.
      *
      * @param bool $isPrivate
      *
@@ -422,23 +366,23 @@ class Feed
      */
     public function setIsPrivate($isPrivate)
     {
-        $this->is_private = $isPrivate;
+        $this->isPrivate = $isPrivate;
 
         return $this;
     }
 
     /**
-     * Get is_private.
+     * Get isPrivate.
      *
      * @return bool $isPrivate
      */
     public function getIsPrivate()
     {
-        return $this->is_private;
+        return $this->isPrivate;
     }
 
     /**
-     * Set sort_by.
+     * Set sortBy.
      *
      * @param string $sortBy
      *
@@ -446,19 +390,19 @@ class Feed
      */
     public function setSortBy($sortBy)
     {
-        $this->sort_by = $sortBy;
+        $this->sortBy = $sortBy;
 
         return $this;
     }
 
     /**
-     * Get sort_by.
+     * Get sortBy.
      *
      * @return string $sortBy
      */
     public function getSortBy()
     {
-        return $this->sort_by;
+        return $this->sortBy;
     }
 
     /**
@@ -470,7 +414,7 @@ class Feed
      */
     public function setLastItemCachedAt($lastItemCachedAt)
     {
-        $this->last_item_cached_at = $lastItemCachedAt;
+        $this->lastItemCachedAt = $lastItemCachedAt;
 
         return $this;
     }
@@ -482,7 +426,7 @@ class Feed
      */
     public function getLastItemCachedAt()
     {
-        return $this->last_item_cached_at;
+        return $this->lastItemCachedAt;
     }
 
     /**
@@ -494,7 +438,7 @@ class Feed
      */
     public function setNbItems($nbItems)
     {
-        $this->nb_items = $nbItems;
+        $this->nbItems = $nbItems;
 
         return $this;
     }
@@ -506,13 +450,13 @@ class Feed
      */
     public function getNbItems()
     {
-        return $this->nb_items;
+        return $this->nbItems;
     }
 
     /**
      * Set logo.
      *
-     * @param int $logo
+     * @param string $logo
      *
      * @return self
      */
@@ -526,7 +470,7 @@ class Feed
     /**
      * Get logo.
      *
-     * @return int $logo
+     * @return string $logo
      */
     public function getLogo()
     {
@@ -536,7 +480,7 @@ class Feed
     /**
      * Set color.
      *
-     * @param int $color
+     * @param string $color
      *
      * @return self
      */
@@ -550,10 +494,43 @@ class Feed
     /**
      * Get color.
      *
-     * @return int $color
+     * @return string $color
      */
     public function getColor()
     {
         return $this->color;
+    }
+
+    /**
+     * @ORM\PrePersist
+     * @ORM\PreUpdate
+     */
+    public function timestamps()
+    {
+        if (null === $this->createdAt) {
+            $this->createdAt = new \DateTime();
+        }
+
+        $this->updatedAt = new \DateTime();
+    }
+
+    /**
+     * Return items.
+     *
+     * @return ArrayCollection
+     */
+    public function getItems()
+    {
+        return $this->items;
+    }
+
+    /**
+     * Return logs.
+     *
+     * @return ArrayCollection
+     */
+    public function getLogs()
+    {
+        return $this->logs;
     }
 }

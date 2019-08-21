@@ -33,24 +33,39 @@ twig:
     globals:
         ga_tracking: "%google_analytics_code%"
 
-doctrine_mongodb:
-    connections:
-        default:
-            server: "%database_server%"
-            options: {}
-    default_database: "%database_name%"
-    document_managers:
-        default:
-            auto_mapping: true
-            metadata_cache_driver:
-                type: array
+doctrine:
+    dbal:
+        driver: pdo_mysql
+        host: "%database_host%"
+        port: "%database_port%"
+        dbname: "%database_name%"
+        user: "%database_user%"
+        password: "%database_password%"
+        charset: utf8mb4
+        server_version: 5.7
+        default_table_options:
+            charset: utf8mb4
+            collate: utf8mb4_unicode_ci
+
+    orm:
+        auto_generate_proxy_classes: "%kernel.debug%"
+        entity_managers:
+            default:
+                auto_mapping: true
+                naming_strategy: doctrine.orm.naming_strategy.underscore
+                dql:
+                    datetime_functions:
+                        DATE: DoctrineExtensions\Query\Mysql\Date
+
+doctrine_migrations:
+    dir_name: "%kernel.root_dir%/migrations"
+    name: f43 Migrations
 
 stof_doctrine_extensions:
     default_locale: en_US
 
-    mongodb:
+    orm:
         default:
-            timestampable: true
             sluggable: true
 
 monolog:

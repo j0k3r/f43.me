@@ -16,11 +16,14 @@ class RemoveItemsCommandTest extends WebTestCase
     {
         static::createClient();
 
+        /** @var \Symfony\Component\DependencyInjection\ContainerInterface */
+        $container = self::$kernel->getContainer();
+
         $application = new Application(static::$kernel);
         $application->add(new RemoveItemsCommand(
-            self::$kernel->getContainer()->get('app.repository.feed.test'),
-            self::$kernel->getContainer()->get('app.repository.feed_item.test'),
-            self::$kernel->getContainer()->get('dm.test')
+            $container->get('app.repository.feed.test'),
+            $container->get('app.repository.item.test'),
+            $container->get('em.test')
         ));
 
         $this->command = $application->find('feed:remove-items');
@@ -102,6 +105,11 @@ class RemoveItemsCommandTest extends WebTestCase
     protected function getInputStream($input)
     {
         $stream = fopen('php://memory', 'r+', false);
+
+        if (false === $stream) {
+            throw new \Exception('Cannot create stream ...');
+        }
+
         fwrite($stream, $input);
         rewind($stream);
 

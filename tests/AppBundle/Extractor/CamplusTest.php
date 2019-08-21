@@ -35,7 +35,7 @@ class CamplusTest extends AppTestCase
 
     public function testContent()
     {
-        $client = self::getMockClient([(new Response(200, ['content-type' => 'application/json'], json_encode([
+        $client = self::getMockClient([(new Response(200, ['content-type' => 'application/json'], (string) json_encode([
             'page' => ['tweet' => [
                 'id' => '123',
                 'username' => 'j0k',
@@ -62,7 +62,7 @@ class CamplusTest extends AppTestCase
 
     public function testContentWithException()
     {
-        $client = self::getMockClient([(new Response(400, ['content-type' => 'application/json'], json_encode('oops')))]);
+        $client = self::getMockClient([(new Response(400, ['content-type' => 'application/json'], (string) json_encode('oops')))]);
 
         $camplus = new Camplus();
         $camplus->setClient($client);

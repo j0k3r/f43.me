@@ -7,36 +7,28 @@ use PHPUnit\Framework\TestCase;
 
 class RenderTest extends TestCase
 {
-    private $dm;
+    private $repo;
     private $router;
 
     protected function setUp()
     {
-        $this->dm = $this->getMockBuilder('Doctrine\ODM\MongoDB\DocumentManager')
-            ->disableOriginalConstructor()
-            ->getMock();
         $this->router = $this->getMockBuilder('Symfony\Bundle\FrameworkBundle\Routing\Router')
             ->disableOriginalConstructor()
             ->getMock();
 
-        $repo = $this->getMockBuilder('Doctrine\ODM\MongoDB\DocumentRepository')
+        $this->repo = $this->getMockBuilder('AppBundle\Repository\ItemRepository')
             ->setMethods(['findByFeed'])
             ->disableOriginalConstructor()
             ->getMock();
 
-        $this->dm->expects($this->any())
-            ->method('getRepository')
-            ->with($this->equalTo('AppBundle:FeedItem'))
-            ->willReturn($repo);
-
-        $repo->expects($this->any())
+        $this->repo->expects($this->any())
             ->method('findByFeed')
             ->willReturn([]);
     }
 
     protected function tearDown()
     {
-        unset($this->dm, $this->router);
+        unset($this->repo, $this->router);
     }
 
     /**
@@ -44,17 +36,17 @@ class RenderTest extends TestCase
      */
     public function testRenderBadFormat()
     {
-        $feed = $this->getMockBuilder('AppBundle\Document\Feed')
+        $feed = $this->getMockBuilder('AppBundle\Entity\Feed')
             ->disableOriginalConstructor()
             ->getMock();
 
-        $render = new Render('toto', $this->dm, $this->router);
+        $render = new Render('toto', $this->repo, $this->router);
         $render->doRender($feed);
     }
 
     public function testRenderAtom()
     {
-        $feed = $this->getMockBuilder('AppBundle\Document\Feed')
+        $feed = $this->getMockBuilder('AppBundle\Entity\Feed')
             ->setMethods(['getFormatter'])
             ->disableOriginalConstructor()
             ->getMock();
@@ -63,7 +55,7 @@ class RenderTest extends TestCase
             ->method('getFormatter')
             ->willReturn('atom');
 
-        $render = new Render('tata', $this->dm, $this->router);
+        $render = new Render('tata', $this->repo, $this->router);
         $content = $render->doRender($feed);
 
         libxml_use_internal_errors(true);
@@ -79,7 +71,7 @@ class RenderTest extends TestCase
 
     public function testRenderRss()
     {
-        $feed = $this->getMockBuilder('AppBundle\Document\Feed')
+        $feed = $this->getMockBuilder('AppBundle\Entity\Feed')
             ->setMethods(['getFormatter'])
             ->disableOriginalConstructor()
             ->getMock();
@@ -88,7 +80,7 @@ class RenderTest extends TestCase
             ->method('getFormatter')
             ->willReturn('rss');
 
-        $render = new Render('tata', $this->dm, $this->router);
+        $render = new Render('tata', $this->repo, $this->router);
         $content = $render->doRender($feed);
 
         libxml_use_internal_errors(true);

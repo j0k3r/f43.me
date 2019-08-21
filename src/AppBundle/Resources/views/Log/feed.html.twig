@@ -14,7 +14,7 @@
 
             {% if feedlogs|length > 0 %}
             <li>
-                <form action="{{ path('feedlog_delete_all', { 'slug': feed.slug }) }}" method="post" class="delete_form">
+                <form action="{{ path('log_delete_all', { 'slug': feed.slug }) }}" method="post" class="delete_form">
                     {{ form_widget(delete_all_form) }}
                     <button class="alert button radius small" type="submit">Cleanup logs</button>
                 </form>
@@ -38,8 +38,8 @@
                             {{ include('AppBundle:Feed:_favicon.html.twig', {'host': feedlog.feed.host}) }}
                             <a href="{{ path('feed_edit', { 'slug': feedlog.feed.slug }) }}">{{ feedlog.feed.name }}</a>
                         </td>
-                        <td>{{ feedlog.itemsnumber }}</td>
-                        <td class="time-ago" title="{{ feedlog.createdat|date('r') }}">{{ feedlog.createdat|date('d/m/y - H:i:s') }}</td>
+                        <td>{{ feedlog.itemsNumber }}</td>
+                        <td class="time-ago" title="{{ feedlog.createdAt|date('r') }}">{{ feedlog.createdAt|date('d/m/y - H:i:s') }}</td>
                     </tr>
                 {% endfor %}
                 </tbody>

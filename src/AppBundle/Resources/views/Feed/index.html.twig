@@ -28,13 +28,13 @@
                             <a href="{{ feed.link }}" target="_blank">Official one</a> -
                             <a href="{{ url('feed_xml', { 'slug': feed.slug }) }}" target="_blank">Readable one</a>
                         </td>
-                        <td class="items-count">{{ feed.nbitems }}</td>
-                        <td>{{ feed.createdat|date('d/m/y - H:i') }}</td>
-                        <td>{{ feed.updatedat|date('d/m/y - H:i') }}</td>
+                        <td class="items-count">{{ feed.nbItems }}</td>
+                        <td>{{ feed.createdAt|date('d/m/y - H:i') }}</td>
+                        <td>{{ feed.updatedAt|date('d/m/y - H:i') }}</td>
                         <td>
                             <a href="{{ path('feed_edit', { 'slug': feed.slug }) }}">edit</a> -
-                            <a href="{{ path('feeditem_homepage', { 'slug': feed.slug }) }}">items</a> -
-                            <a href="{{ path('feedlog_feed', { 'slug': feed.slug }) }}">logs</a>
+                            <a href="{{ path('item_homepage', { 'slug': feed.slug }) }}">items</a> -
+                            <a href="{{ path('log_feed', { 'slug': feed.slug }) }}">logs</a>
                         </td>
                     </tr>
                 {% endfor %}

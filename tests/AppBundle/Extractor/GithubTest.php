@@ -62,7 +62,7 @@ class GithubTest extends AppTestCase
     public function testIssue()
     {
         $client = self::getMockClient([
-            (new Response(200, [], json_encode([
+            (new Response(200, [], (string) json_encode([
                 'html_url' => 'http://1.1.1.1',
                 'title' => 'test',
                 'comments' => 0,
@@ -94,7 +94,7 @@ class GithubTest extends AppTestCase
     public function testPR()
     {
         $client = self::getMockClient([
-            (new Response(200, [], json_encode([
+            (new Response(200, [], (string) json_encode([
                 'base' => ['description' => 'test', 'repo' => ['html_url' => 'http://0.0.0.0', 'full_name' => 'name', 'description' => 'desc']],
                 'html_url' => 'http://1.1.1.1',
                 'title' => 'test',

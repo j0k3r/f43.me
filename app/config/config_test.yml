@@ -24,10 +24,12 @@ security:
                 users:
                     admin: { password: "%adminpass%", roles: [ 'ROLE_ADMIN' ] }
 
-doctrine_mongodb:
-    default_database: f43me_test
-    document_managers:
-        default:
-            auto_mapping: true
-            metadata_cache_driver:
-                type: array
+doctrine:
+    dbal:
+        driver: pdo_mysql
+        host: "127.0.0.1"
+        port: ~
+        dbname: "f43_test"
+        user: "root"
+        password: ~
+        charset: utf8mb4

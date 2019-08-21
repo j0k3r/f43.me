@@ -42,7 +42,7 @@ class FlickrTest extends AppTestCase
     public function testSinglePhoto()
     {
         $client = self::getMockClient([
-            (new Response(200, [], json_encode([
+            (new Response(200, [], (string) json_encode([
                 'flickr_type' => 'photo',
                 'url' => 'https://0.0.0.0/large.jpg',
                 'title' => 'title',
@@ -50,8 +50,8 @@ class FlickrTest extends AppTestCase
                 'author_url' => 'https://0.0.0.0/me',
                 'html' => '<a data-flickr-embed="true"></a>',
             ]))),
-            (new Response(200, [], json_encode(''))),
-            (new Response(400, [], json_encode('oops'))),
+            (new Response(200, [], (string) json_encode(''))),
+            (new Response(400, [], (string) json_encode('oops'))),
         ]);
 
         $flickr = new Flickr();
@@ -82,7 +82,7 @@ class FlickrTest extends AppTestCase
     public function testPhotoSet()
     {
         $client = self::getMockClient([
-            (new Response(200, [], json_encode([
+            (new Response(200, [], (string) json_encode([
                 'flickr_type' => 'album',
                 'thumbnail_url' => 'https://0.0.0.0/small.jpg',
                 'title' => 'title',
@@ -90,8 +90,8 @@ class FlickrTest extends AppTestCase
                 'author_url' => 'https://0.0.0.0/me',
                 'html' => '<a data-flickr-embed="true"></a>',
             ]))),
-            (new Response(200, [], json_encode(''))),
-            (new Response(400, [], json_encode('oops'))),
+            (new Response(200, [], (string) json_encode(''))),
+            (new Response(400, [], (string) json_encode('oops'))),
         ]);
 
         $flickr = new Flickr();

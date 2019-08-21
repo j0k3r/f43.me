@@ -2,9 +2,10 @@
 
 namespace AppBundle\Command;
 
-use AppBundle\Repository\FeedItemRepository;
+use AppBundle\Entity\Feed;
 use AppBundle\Repository\FeedRepository;
-use Doctrine\ODM\MongoDB\DocumentManager;
+use AppBundle\Repository\ItemRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
@@ -16,14 +17,14 @@ use Symfony\Component\Lock\Store\FlockStore;
 class RemoveItemsCommand extends Command
 {
     private $feedRepository;
-    private $feedItemRepository;
-    private $dm;
+    private $itemRepository;
+    private $em;
 
-    public function __construct(FeedRepository $feedRepository, FeedItemRepository $feedItemRepository, DocumentManager $dm)
+    public function __construct(FeedRepository $feedRepository, ItemRepository $itemRepository, EntityManagerInterface $em)
     {
         $this->feedRepository = $feedRepository;
-        $this->feedItemRepository = $feedItemRepository;
-        $this->dm = $dm;
+        $this->itemRepository = $itemRepository;
+        $this->em = $em;
 
         parent::__construct();
     }
@@ -63,9 +64,9 @@ class RemoveItemsCommand extends Command
         }
 
         // retrieve feed to work on
-        if ($slug = $input->getOption('slug')) {
+        if ($slug = (string) $input->getOption('slug')) {
             $feed = $this->feedRepository->findOneBy(['slug' => $slug]);
-            if (!$feed instanceof \AppBundle\Document\Feed) {
+            if (!$feed instanceof Feed) {
                 return $output->writeLn('<error>Unable to find Feed document:</error> <comment>' . $slug . '</comment>');
             }
             $feeds = [$feed];
@@ -79,15 +80,15 @@ class RemoveItemsCommand extends Command
 
         $totalRemoved = 0;
         foreach ($feeds as $feed) {
-            $items = $this->feedItemRepository->findOldItemsByFeedId(
+            $items = $this->itemRepository->findOldItemsByFeedId(
                 $feed->getId(),
-                $input->getOption('max')
+                (int) $input->getOption('max')
             );
 
             // manual remove. I can't find a way to perform a remove + skip in one query, it doesn't work :-/
             $removed = 0;
             foreach ($items as $item) {
-                $this->dm->remove($item);
+                $this->em->remove($item);
                 ++$removed;
             }
 
@@ -98,8 +99,8 @@ class RemoveItemsCommand extends Command
             }
         }
 
-        $this->dm->flush();
-        $this->dm->clear();
+        $this->em->flush();
+        $this->em->clear();
 
         $output->writeLn('<comment>' . $totalRemoved . '</comment> items removed.');
 

@@ -1,84 +1,87 @@
 <?php
 
-namespace AppBundle\Document;
+namespace AppBundle\Entity;
 
-use Doctrine\Bundle\MongoDBBundle\Validator\Constraints\Unique as MongoDBUnique;
-use Doctrine\ODM\MongoDB\Mapping\Annotations as MongoDB;
-use Gedmo\Mapping\Annotation as Gedmo;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * @MongoDB\Document(collection="feeditems")
- * @MongoDB\Document(repositoryClass="AppBundle\Repository\FeedItemRepository")
- * @MongoDBUnique(fields="link")
+ * @ORM\Table(
+ *     name="item"
+ * )
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\ItemRepository")
+ * @ORM\HasLifecycleCallbacks()
  */
-class FeedItem
+class Item
 {
     /**
-     * @MongoDB\Id
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
      */
     protected $id;
 
     /**
-     * @MongoDB\Field(type="string")
+     * @ORM\Column(name="title", type="text")
      */
     protected $title;
 
     /**
-     * @MongoDB\Field(type="string")
+     * @ORM\Column(name="link", type="text")
      * @Assert\NotBlank()
      * @Assert\Url()
      */
     protected $link;
 
     /**
-     * @MongoDB\Field(type="string")
+     * @ORM\Column(name="permalink", type="text")
      * @Assert\NotBlank()
      * @Assert\Url()
      */
     protected $permalink;
 
     /**
-     * @MongoDB\Field(type="string")
+     * @ORM\Column(name="content", type="text", nullable=true)
      */
     protected $content;
 
     /**
-     * @MongoDB\Field(type="date")
+     * @ORM\Column(name="published_at", type="datetime", nullable=true)
      */
-    protected $published_at;
+    protected $publishedAt;
 
     /**
-     * @MongoDB\Field(type="date")
-     * @Gedmo\Timestampable(on="create")
+     * @ORM\Column(name="created_at", type="datetime")
      */
-    protected $created_at;
+    protected $createdAt;
 
     /**
-     * @MongoDB\Field(type="date")
-     * @Gedmo\Timestampable(on="update")
+     * @ORM\Column(name="updated_at", type="datetime")
      */
-    protected $updated_at;
+    protected $updatedAt;
 
     /**
-     * @MongoDB\ReferenceOne(targetDocument="Feed", inversedBy="feeditems")
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Feed", inversedBy="items")
+     * @ORM\JoinColumn(name="feed_id", referencedColumnName="id")
      */
     protected $feed;
 
     /**
-     * @MongoDB\ReferenceMany(targetDocument="FeedLog", mappedBy="feeditem")
+     * @ORM\OneToMany(targetEntity="Log", mappedBy="item")
      */
-    protected $feedlogs;
+    protected $logs;
 
-    public function __construct()
+    public function __construct(Feed $feed)
     {
-        $this->feedlogs = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->feed = $feed;
+        $this->logs = new ArrayCollection();
     }
 
     /**
      * Get id.
      *
-     * @return string $id
+     * @return int $id
      */
     public function getId()
     {
@@ -158,7 +161,7 @@ class FeedItem
     }
 
     /**
-     * Set created_at.
+     * Set createdAt.
      *
      * @param string|\DateTime $createdAt
      *
@@ -166,23 +169,23 @@ class FeedItem
      */
     public function setCreatedAt($createdAt)
     {
-        $this->created_at = $createdAt;
+        $this->createdAt = $createdAt;
 
         return $this;
     }
 
     /**
-     * Get created_at.
+     * Get createdAt.
      *
      * @return string|\DateTime $createdAt
      */
     public function getCreatedAt()
     {
-        return $this->created_at;
+        return $this->createdAt;
     }
 
     /**
-     * Set updated_at.
+     * Set updatedAt.
      *
      * @param string|\DateTime $updatedAt
      *
@@ -190,19 +193,19 @@ class FeedItem
      */
     public function setUpdatedAt($updatedAt)
     {
-        $this->updated_at = $updatedAt;
+        $this->updatedAt = $updatedAt;
 
         return $this;
     }
 
     /**
-     * Get updated_at.
+     * Get updatedAt.
      *
      * @return string|\DateTime $updatedAt
      */
     public function getUpdatedAt()
     {
-        return $this->updated_at;
+        return $this->updatedAt;
     }
 
     /**
@@ -230,31 +233,7 @@ class FeedItem
     }
 
     /**
-     * Set feed.
-     *
-     * @param Feed $feed
-     *
-     * @return self
-     */
-    public function setFeed(Feed $feed)
-    {
-        $this->feed = $feed;
-
-        return $this;
-    }
-
-    /**
-     * Get feed.
-     *
-     * @return Feed $feed
-     */
-    public function getFeed()
-    {
-        return $this->feed;
-    }
-
-    /**
-     * Set published_at.
+     * Set publishedAt.
      *
      * @param string|\DateTime $publishedAt
      *
@@ -262,19 +241,19 @@ class FeedItem
      */
     public function setPublishedAt($publishedAt)
     {
-        $this->published_at = $publishedAt;
+        $this->publishedAt = $publishedAt;
 
         return $this;
     }
 
     /**
-     * Get published_at.
+     * Get publishedAt.
      *
      * @return string|\DateTime $publishedAt
      */
     public function getPublishedAt()
     {
-        return $this->published_at;
+        return $this->publishedAt;
     }
 
     /**
@@ -286,5 +265,28 @@ class FeedItem
     public function getPubDate()
     {
         return ('published_at' === $this->feed->getSortBy()) ? $this->getPublishedAt() : $this->getCreatedAt();
+    }
+
+    /**
+     * @ORM\PrePersist
+     * @ORM\PreUpdate
+     */
+    public function timestamps()
+    {
+        if (null === $this->createdAt) {
+            $this->createdAt = new \DateTime();
+        }
+
+        $this->updatedAt = new \DateTime();
+    }
+
+    /**
+     * Return feed.
+     *
+     * @return Feed
+     */
+    public function getFeed()
+    {
+        return $this->feed;
     }
 }

@@ -27,11 +27,5 @@ monolog:
             type: console
             process_psr_3_messages: false
 
-doctrine_mongodb:
-    document_managers:
-        default:
-            metadata_cache_driver:
-                type: apc
-
 sentry:
     dsn: "%sentry_dsn%"

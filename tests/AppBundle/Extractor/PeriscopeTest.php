@@ -37,9 +37,9 @@ class PeriscopeTest extends AppTestCase
     public function testContent()
     {
         $client = self::getMockClient([
-            (new Response(200, [], json_encode(['broadcast' => ['status' => 'my title', 'image_url' => 'http://0.0.0.0/img.jpg'], 'share_url' => 'http://broadcast.url']))),
-            (new Response(200, [], json_encode(''))),
-            (new Response(400, [], json_encode('oops'))),
+            (new Response(200, [], (string) json_encode(['broadcast' => ['status' => 'my title', 'image_url' => 'http://0.0.0.0/img.jpg'], 'share_url' => 'http://broadcast.url']))),
+            (new Response(200, [], (string) json_encode(''))),
+            (new Response(400, [], (string) json_encode('oops'))),
         ]);
 
         $vimeo = new Periscope();

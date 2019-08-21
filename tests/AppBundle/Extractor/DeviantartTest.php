@@ -36,7 +36,7 @@ class DeviantartTest extends AppTestCase
 
     public function testContent()
     {
-        $client = self::getMockClient([(new Response(200, [], json_encode([
+        $client = self::getMockClient([(new Response(200, [], (string) json_encode([
             'url' => 'http://0.0.0.0/youpi.jpg',
             'title' => 'youpi',
             'author_url' => 'http://youpi.0.0.0.0',
@@ -62,7 +62,7 @@ class DeviantartTest extends AppTestCase
 
     public function testContentWithException()
     {
-        $client = self::getMockClient([(new Response(400, [], json_encode('oops')))]);
+        $client = self::getMockClient([(new Response(400, [], (string) json_encode('oops')))]);
 
         $deviantart = new Deviantart();
         $deviantart->setClient($client);

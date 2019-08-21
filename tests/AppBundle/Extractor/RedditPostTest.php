@@ -31,7 +31,7 @@ class RedditPostTest extends AppTestCase
 
     public function testMatchRedditBadRequest()
     {
-        $client = self::getMockClient([(new Response(400, [], json_encode('oops')))]);
+        $client = self::getMockClient([(new Response(400, [], (string) json_encode('oops')))]);
 
         $redditPost = new RedditPost();
         $redditPost->setClient($client);
@@ -41,7 +41,7 @@ class RedditPostTest extends AppTestCase
 
     public function testMatchReddit()
     {
-        $client = self::getMockClient([(new Response(200, [], json_encode([['data' => ['children' => [['data' => ['is_self' => true]]]]]])))]);
+        $client = self::getMockClient([(new Response(200, [], (string) json_encode([['data' => ['children' => [['data' => ['is_self' => true]]]]]])))]);
 
         $redditPost = new RedditPost();
         $redditPost->setClient($client);
@@ -51,7 +51,7 @@ class RedditPostTest extends AppTestCase
 
     public function testMatchRedditNotSelf()
     {
-        $client = self::getMockClient([(new Response(200, [], json_encode([['data' => ['children' => [['data' => ['is_self' => false]]]]]])))]);
+        $client = self::getMockClient([(new Response(200, [], (string) json_encode([['data' => ['children' => [['data' => ['is_self' => false]]]]]])))]);
 
         $redditPost = new RedditPost();
         $redditPost->setClient($client);
@@ -61,7 +61,7 @@ class RedditPostTest extends AppTestCase
 
     public function testContent()
     {
-        $client = self::getMockClient([(new Response(200, [], json_encode([['data' => ['children' => [['data' => [
+        $client = self::getMockClient([(new Response(200, [], (string) json_encode([['data' => ['children' => [['data' => [
             'domain' => 'self.jailbreak',
             'is_self' => true,
             'title' => 'the title',

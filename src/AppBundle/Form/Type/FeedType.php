@@ -63,7 +63,7 @@ class FeedType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => 'AppBundle\Document\Feed',
+            'data_class' => 'AppBundle\Entity\Feed',
         ]);
     }
 }

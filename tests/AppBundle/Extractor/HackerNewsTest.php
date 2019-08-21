@@ -30,7 +30,7 @@ class HackerNewsTest extends AppTestCase
     {
         $response = new Response(200, []);
         if (null !== $valueReturned) {
-            $response = new Response(200, [], json_encode($valueReturned));
+            $response = new Response(200, [], (string) json_encode($valueReturned));
         }
 
         $client = self::getMockClient([$response]);
@@ -42,7 +42,7 @@ class HackerNewsTest extends AppTestCase
 
     public function testMatchGuzzleFail()
     {
-        $client = self::getMockClient([(new Response(400, [], json_encode('oops')))]);
+        $client = self::getMockClient([(new Response(400, [], (string) json_encode('oops')))]);
 
         $hn = new HackerNews();
         $hn->setClient($client);
@@ -51,7 +51,7 @@ class HackerNewsTest extends AppTestCase
 
     public function testContent()
     {
-        $client = self::getMockClient([(new Response(200, [], json_encode(['text' => 'toto', 'type' => 'story'])))]);
+        $client = self::getMockClient([(new Response(200, [], (string) json_encode(['text' => 'toto', 'type' => 'story'])))]);
 
         $hn = new HackerNews();
         $hn->setClient($client);
@@ -65,7 +65,7 @@ class HackerNewsTest extends AppTestCase
 
     public function testContentWithoutText()
     {
-        $client = self::getMockClient([(new Response(200, [], json_encode(['type' => 'story'])))]);
+        $client = self::getMockClient([(new Response(200, [], (string) json_encode(['type' => 'story'])))]);
 
         $hn = new HackerNews();
         $hn->setClient($client);

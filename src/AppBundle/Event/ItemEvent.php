@@ -4,7 +4,7 @@ namespace AppBundle\Event;
 
 use Symfony\Component\EventDispatcher\Event;
 
-class FeedItemEvent extends Event
+class ItemEvent extends Event
 {
     /**
      * Feeds slug.

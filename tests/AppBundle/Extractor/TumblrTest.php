@@ -62,9 +62,9 @@ class TumblrTest extends AppTestCase
         $client = self::getMockClient([
             // match()
             (new Response(200, ['X-Tumblr-User' => 'test'])),
-            (new Response(200, ['X-Tumblr-User' => 'test'], json_encode(['response' => ['posts' => [['body' => '<div>content</div>']]]]))),
-            (new Response(200, ['X-Tumblr-User' => 'test'], json_encode([]))),
-            (new Response(400, ['X-Tumblr-User' => 'test'], json_encode('oops'))),
+            (new Response(200, ['X-Tumblr-User' => 'test'], (string) json_encode(['response' => ['posts' => [['body' => '<div>content</div>']]]]))),
+            (new Response(200, ['X-Tumblr-User' => 'test'], (string) json_encode([]))),
+            (new Response(400, ['X-Tumblr-User' => 'test'], (string) json_encode('oops'))),
         ]);
 
         $tumblr = new Tumblr('apikey');

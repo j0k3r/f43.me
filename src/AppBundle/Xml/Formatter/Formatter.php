@@ -2,10 +2,10 @@
 
 namespace AppBundle\Xml\Formatter;
 
-use AppBundle\Document\Feed;
-use AppBundle\Document\FeedItem;
 use AppBundle\DomDocument\XDOMDocument;
 use AppBundle\DomDocument\XDOMElement;
+use AppBundle\Entity\Feed;
+use AppBundle\Entity\Item;
 
 /**
  * Formatter.
@@ -47,12 +47,12 @@ abstract class Formatter
     /**
      * Construct a formatter with given feed.
      *
-     * @param Feed        $feed      A feed instance
-     * @param array       $items     An array of FeedItem object
-     * @param string      $url
-     * @param string|null $generator
+     * @param Feed   $feed      A feed instance
+     * @param array  $items     An array of Item object
+     * @param string $url
+     * @param string $generator
      */
-    public function __construct(Feed $feed, $items, $url, $generator = null)
+    public function __construct(Feed $feed, $items, $url, $generator = '')
     {
         $this->feed = $feed;
         $this->items = $items;
@@ -92,11 +92,11 @@ abstract class Formatter
     /**
      * Add an entity item to the feed.
      *
-     * @param XDOMElement $root The root (feed) DOM element
-     * @param FeedItem    $item An entity object
-     * @param string      $name Could be "entry", for atom or "item" for rss
+     * @param \DOMNode $root The root (feed) DOM element
+     * @param Item     $item An entity object
+     * @param string   $name Could be "entry", for atom or "item" for rss
      */
-    public function addItem(XDOMElement $root, FeedItem $item, $name)
+    public function addItem(\DOMNode $root, Item $item, $name)
     {
         $node = $this->dom->createElement($name);
         $node = $root->appendChild($node);
@@ -110,12 +110,12 @@ abstract class Formatter
     /**
      * Format field.
      *
-     * @param array    $field A field instance
-     * @param FeedItem $item  An entity instance
+     * @param array $field A field instance
+     * @param Item  $item  An entity instance
      *
      * @return XDOMElement
      */
-    protected function format($field, FeedItem $item)
+    protected function format($field, Item $item)
     {
         $name = $field['name'];
         $method = $field['method'];

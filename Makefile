@@ -1,32 +1,31 @@
-.PHONY: build clean-local local clean prepare phpunit
+.PHONY: build local prepare test
 
-build: prepare phpunit
+build: prepare test
 
-clean-local:
+local:
 	rm -rf build
-	rm -rf var/cache
-
-local: clean-local
 	mkdir -p build/coverage
 	mkdir -p build/logs
-	mkdir -p var/cache
-	php bin/console doctrine:mongodb:schema:create --env=test
-	php bin/console doctrine:mongodb:fixtures:load --env=test -n
+	php bin/console doctrine:database:create --env=test
+	php bin/console doctrine:schema:create --env=test
+	php bin/console doctrine:fixtures:load --env=test -n
 	php bin/console cache:clear --env=test
 
-clean:
-	rm -rf build/coverage
-	rm -rf build/logs
-	rm -rf var/cache
-
-prepare: clean
+prepare:
+	rm -rf var/cache/*
+	rm -rf build
 	mkdir -p build/coverage
 	mkdir -p build/logs
-	mkdir -p var/cache
 	composer install --no-interaction -o --prefer-dist
-	php bin/console doctrine:mongodb:schema:create --env=test
-	php bin/console doctrine:mongodb:fixtures:load --env=test -n
+	php bin/console doctrine:database:create --env=test
+	php bin/console doctrine:schema:create --env=test
+	php bin/console doctrine:fixtures:load --env=test -n
 	php bin/console cache:clear --env=test
 
-phpunit:
+test:
 	php bin/simple-phpunit --coverage-html build/coverage
+
+reset:
+	php bin/console doctrine:schema:drop --force --env=test
+	php bin/console doctrine:schema:create --env=test
+	php bin/console doctrine:fixtures:load --env=test -n

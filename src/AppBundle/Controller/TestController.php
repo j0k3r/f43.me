@@ -9,10 +9,7 @@ use Monolog\Logger;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
-/**
- * FeedTest controller.
- */
-class FeedTestController extends Controller
+class TestController extends Controller
 {
     /**
      * The only purpose is to be able to quickly see a convert article
@@ -60,7 +57,7 @@ class FeedTestController extends Controller
             }
         }
 
-        return $this->render('AppBundle:FeedTest:index.html.twig', [
+        return $this->render('AppBundle:Test:index.html.twig', [
             'menu' => 'test',
             'content' => $content,
             'form' => $form->createView(),

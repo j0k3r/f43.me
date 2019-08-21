@@ -84,8 +84,8 @@ services:
             - "@doctrine.odm.mongodb.document_manager"
             - "@router"
 
-    feeditem.ping_hub:
-        class: AppBundle\EventListener\FeedItemSubscriber
+    item.ping_hub:
+        class: AppBundle\EventListener\ItemSubscriber
         arguments:
             - "http://pubsubhubbub.appspot.com"
             - "@router"

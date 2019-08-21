@@ -33,7 +33,7 @@ class FetchItemsCommandTest extends WebTestCase
 
         $simplePieItem->expects($this->any())
             ->method('get_description')
-            ->willReturn('desc');
+            ->willReturn('description');
 
         $simplePieItem->expects($this->any())
             ->method('get_permalink')
@@ -49,7 +49,7 @@ class FetchItemsCommandTest extends WebTestCase
 
         $simplePie->expects($this->any())
             ->method('get_description')
-            ->willReturn('desc');
+            ->willReturn('description');
 
         $simplePieProxy = $this->getMockBuilder('AppBundle\Xml\SimplePieProxy')
             ->disableOriginalConstructor()
@@ -67,53 +67,51 @@ class FetchItemsCommandTest extends WebTestCase
         $this->handler = new TestHandler();
         $logger->pushHandler($this->handler);
 
-        self::$kernel->getContainer()->get('app.parser.chain.test')->addParser(
-            self::$kernel->getContainer()->get('app.parser.internal.test'),
+        /** @var \Symfony\Component\DependencyInjection\ContainerInterface */
+        $container = self::$kernel->getContainer();
+
+        $container->get('app.parser.chain.test')->addParser(
+            $container->get('app.parser.internal.test'),
             'internal'
         );
 
-        self::$kernel->getContainer()->get('app.parser.chain.test')->addParser(
-            self::$kernel->getContainer()->get('app.parser.external.test'),
+        $container->get('app.parser.chain.test')->addParser(
+            $container->get('app.parser.external.test'),
             'external'
         );
 
-        self::$kernel->getContainer()->get('app.improver.chain.test')->addImprover(
-            self::$kernel->getContainer()->get('app.improver.default_improver.test'),
+        $container->get('app.improver.chain.test')->addImprover(
+            $container->get('app.improver.default_improver.test'),
             'default_improver'
         );
 
-        self::$kernel->getContainer()->get('app.improver.chain.test')->addImprover(
-            self::$kernel->getContainer()->get('app.improver.hackernews.test'),
+        $container->get('app.improver.chain.test')->addImprover(
+            $container->get('app.improver.hackernews.test'),
             'hackernews'
         );
 
         $import = new Import(
             $simplePieProxy,
-            self::$kernel->getContainer()->get('app.content.extractor.test'),
-            self::$kernel->getContainer()->get('event_dispatcher.test'),
-            self::$kernel->getContainer()->get('dm.test'),
-            $logger
+            $container->get('app.content.extractor.test'),
+            $container->get('event_dispatcher.test'),
+            $container->get('em.test'),
+            $logger,
+            $container->get('app.repository.feed.test'),
+            $container->get('app.repository.item.test')
         );
 
         $application = new Application(static::$kernel);
         $application->add(new FetchItemsCommand(
-            self::$kernel->getContainer()->get('app.repository.feed.test'),
-            self::$kernel->getContainer()->get('app.repository.feed_item.test'),
-            // self::$kernel->getContainer()->get('app.content.import.test'),
+            $container->get('app.repository.feed.test'),
+            $container->get('app.repository.item.test'),
+            // $container->get('app.content.import.test'),
             $import,
-            self::$kernel->getContainer()->get('router.test'),
+            $container->get('router.test'),
             'f43.me'
         ));
 
         $this->command = $application->find('feed:fetch-items');
         $this->commandTester = new CommandTester($this->command);
-    }
-
-    public function testNoParams()
-    {
-        $this->commandTester->execute(['command' => $this->command->getName()]);
-
-        $this->assertRegExp('`You must add some options to the task : an age or a slug`', $this->commandTester->getDisplay());
     }
 
     public function testWrongSlug()
@@ -146,7 +144,7 @@ class FetchItemsCommandTest extends WebTestCase
     {
         $this->commandTester->execute([
             'command' => $this->command->getName(),
-            '--age' => 'new',
+            'age' => 'new',
         ], ['verbosity' => OutputInterface::VERBOSITY_VERBOSE]);
 
         $records = $this->handler->getRecords();
@@ -161,7 +159,7 @@ class FetchItemsCommandTest extends WebTestCase
     {
         $this->commandTester->execute([
             'command' => $this->command->getName(),
-            '--age' => 'old',
+            'age' => 'old',
         ], ['verbosity' => OutputInterface::VERBOSITY_VERBOSE]);
 
         $records = $this->handler->getRecords();
@@ -180,6 +178,11 @@ class FetchItemsCommandTest extends WebTestCase
     protected function getInputStream($input)
     {
         $stream = fopen('php://memory', 'r+', false);
+
+        if (false === $stream) {
+            throw new \Exception('Cannot create stream ...');
+        }
+
         fwrite($stream, $input);
         rewind($stream);
 
