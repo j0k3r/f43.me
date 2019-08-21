@@ -11,7 +11,7 @@ $rows = $mongo->executeQuery('f43me.Feed', new \MongoDB\Driver\Query([]));
 
 foreach ($rows as $i => $row) {
     if ($i > 0 && 0 === $i % 50) {
-        echo ' (' . $i . '/' . $total . ')' . "\n";
+        echo ' (' . $i . ')' . "\n";
     }
 
     $row = (array) $row;
@@ -48,7 +48,7 @@ $rows = $mongo->executeQuery('f43me.FeedItem', new \MongoDB\Driver\Query([]));
 
 foreach ($rows as $i => $row) {
     if ($i > 0 && 0 === $i % 50) {
-        echo ' (' . $i . '/' . $total . ')' . "\n";
+        echo ' (' . $i . ')' . "\n";
     }
 
     $row = (array) $row;

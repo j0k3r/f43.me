@@ -4,7 +4,6 @@ namespace Tests\AppBundle\Command;
 
 use AppBundle\Command\FetchItemsCommand;
 use AppBundle\Content\Import;
-use Faker\Factory;
 use Monolog\Handler\TestHandler;
 use Monolog\Logger;
 use Symfony\Bundle\FrameworkBundle\Console\Application;
@@ -28,25 +27,17 @@ class FetchItemsCommandTest extends WebTestCase
     {
         static::createClient();
 
-        $faker = Factory::create();
-
         $simplePieItem = $this->getMockBuilder('SimplePie_Item')
             ->disableOriginalConstructor()
             ->getMock();
 
         $simplePieItem->expects($this->any())
             ->method('get_description')
-            ->willReturn($faker->text);
+            ->willReturn('description');
 
         $simplePieItem->expects($this->any())
             ->method('get_permalink')
-            ->will($this->onConsecutiveCalls(
-                // ensure a new url is generated each time the method is called (to avoid duplicate in db)
-                $faker->url,
-                $faker->url,
-                $faker->url,
-                $faker->url
-            ));
+            ->willReturn('https://wildtrip.blog/sri-lanka-3-semaines-quoi-voir.html');
 
         $simplePie = $this->getMockBuilder('SimplePie')
             ->disableOriginalConstructor()
@@ -58,7 +49,7 @@ class FetchItemsCommandTest extends WebTestCase
 
         $simplePie->expects($this->any())
             ->method('get_description')
-            ->willReturn($faker->text);
+            ->willReturn('description');
 
         $simplePieProxy = $this->getMockBuilder('AppBundle\Xml\SimplePieProxy')
             ->disableOriginalConstructor()

@@ -8,10 +8,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Table(
- *     name="item",
- *     uniqueConstraints={
- *         @ORM\UniqueConstraint(name="item_link_unique", columns={"link"})
- *     }
+ *     name="item"
  * )
  * @ORM\Entity(repositoryClass="AppBundle\Repository\ItemRepository")
  * @ORM\HasLifecycleCallbacks()

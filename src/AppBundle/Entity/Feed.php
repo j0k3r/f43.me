@@ -12,8 +12,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Table(
  *     name="feed",
  *     uniqueConstraints={
- *         @ORM\UniqueConstraint(name="feed_slug_unique", columns={"slug"}),
- *         @ORM\UniqueConstraint(name="feed_link_unique", columns={"link"})
+ *         @ORM\UniqueConstraint(name="feed_slug_unique", columns={"slug"})
  *     }
  * )
  * @ORM\Entity(repositoryClass="AppBundle\Repository\FeedRepository")
