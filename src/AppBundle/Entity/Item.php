@@ -28,14 +28,14 @@ class Item
     protected $title;
 
     /**
-     * @ORM\Column(name="link", type="string", length=191)
+     * @ORM\Column(name="link", type="text")
      * @Assert\NotBlank()
      * @Assert\Url()
      */
     protected $link;
 
     /**
-     * @ORM\Column(name="permalink", type="string")
+     * @ORM\Column(name="permalink", type="text")
      * @Assert\NotBlank()
      * @Assert\Url()
      */
