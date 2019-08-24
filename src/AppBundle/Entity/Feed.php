@@ -125,6 +125,20 @@ class Feed
     }
 
     /**
+     * Set id.
+     *
+     * @param int $id
+     *
+     * @return self
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
+
+        return $this;
+    }
+
+    /**
      * Get id.
      *
      * @return int $id

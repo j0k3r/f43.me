@@ -19,6 +19,7 @@ class AppKernel extends Kernel
             new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
             new Sentry\SentryBundle\SentryBundle(),
             new Http\HttplugBundle\HttplugBundle(),
+            new Swarrot\SwarrotBundle\SwarrotBundle(),
             new AppBundle\AppBundle(),
         ];
 

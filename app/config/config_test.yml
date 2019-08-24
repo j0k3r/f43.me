@@ -33,3 +33,6 @@ doctrine:
         user: "root"
         password: ~
         charset: utf8mb4
+
+parameters:
+    swarrot.publisher.class: Swarrot\SwarrotBundle\Broker\BlackholePublisher

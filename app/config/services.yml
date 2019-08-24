@@ -23,6 +23,10 @@ services:
         arguments:
             $domain: "%domain%"
 
+    AppBundle\Consumer\FetchItems:
+        arguments:
+            $domain: "%domain%"
+
     AppBundle\EventListener\ItemSubscriber:
         arguments:
             $hub: "http://pubsubhubbub.appspot.com"
@@ -84,3 +88,7 @@ services:
 
 
     Http\Client\Common\HttpMethodsClientInterface: '@httplug.client.default.http_methods'
+
+    # alias to service from their class name
+    Swarrot\SwarrotBundle\Broker\Publisher:
+        alias: swarrot.publisher

@@ -35,6 +35,11 @@ class Import
         $this->logger = $logger;
     }
 
+    public function setEntityManager(EntityManagerInterface $em)
+    {
+        $this->em = $em;
+    }
+
     /**
      * Process feeds in parameter:
      *     - fetch xml feed
