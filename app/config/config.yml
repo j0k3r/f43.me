@@ -105,3 +105,30 @@ httplug:
                         'User-Agent': f43.me/1.0
     discovery:
         client: false
+
+swarrot:
+    provider: amqp_lib # pecl or amqp_lib
+    connections:
+        rabbitmq:
+            host: '%rabbitmq_host%'
+            port: '%rabbitmq_port%'
+            login: '%rabbitmq_login%'
+            password: '%rabbitmq_password%'
+            vhost: '/'
+    consumers:
+        f43.fetch_items:
+            processor: AppBundle\Consumer\FetchItems
+            extras:
+                poll_interval: 500000
+            middleware_stack:
+                - configurator: swarrot.processor.max_messages
+                  extras:
+                      max_messages: 20
+                - configurator: swarrot.processor.doctrine_connection
+                - configurator: swarrot.processor.retry
+                - configurator: swarrot.processor.exception_catcher
+                - configurator: swarrot.processor.ack
+    messages_types:
+        f43.fetch_items.publisher:
+            connection: rabbitmq
+            exchange: f43.fetch_items

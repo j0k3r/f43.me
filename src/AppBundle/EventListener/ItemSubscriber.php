@@ -2,7 +2,7 @@
 
 namespace AppBundle\EventListener;
 
-use AppBundle\Event\ItemEvent;
+use AppBundle\Event\ItemsCachedEvent;
 use Http\Client\Common\HttpMethodsClientInterface;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Routing\RouterInterface;
@@ -32,11 +32,11 @@ class ItemSubscriber
      *
      * http://nathangrigg.net/2012/09/real-time-publishing/
      *
-     * @param ItemEvent $event
+     * @param ItemsCachedEvent $event
      *
      * @return bool
      */
-    public function pingHub(ItemEvent $event)
+    public function pingHub(ItemsCachedEvent $event)
     {
         if (empty($this->hub)) {
             return false;

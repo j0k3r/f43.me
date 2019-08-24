@@ -56,3 +56,9 @@ parameters:
     github.client_secret: xxx
 
     sentry_dsn: "https://xxx:xxx@sentry.io/666"
+
+    # rabbit
+    rabbitmq_host: 127.0.0.1
+    rabbitmq_port: 5672
+    rabbitmq_login: guest
+    rabbitmq_password: guest

@@ -23,11 +23,19 @@ services:
         arguments:
             $domain: "%domain%"
 
+    AppBundle\Consumer\FetchItems:
+        arguments:
+            $domain: "%domain%"
+
     AppBundle\EventListener\ItemSubscriber:
         arguments:
             $hub: "http://pubsubhubbub.appspot.com"
         tags:
             - { name: kernel.event_listener, event: app.after_item_cached, method: pingHub }
+
+    AppBundle\EventListener\FeedSubscriber:
+        tags:
+            - { name: kernel.event_listener, event: app.after_feed_creation, method: sync }
 
     AppBundle\Xml\SimplePieProxy:
         arguments:
@@ -84,3 +92,7 @@ services:
 
 
     Http\Client\Common\HttpMethodsClientInterface: '@httplug.client.default.http_methods'
+
+    # alias to service from their class name
+    Swarrot\SwarrotBundle\Broker\Publisher:
+        alias: swarrot.publisher

@@ -6,6 +6,8 @@ use AppBundle\Content\Import;
 use AppBundle\Entity\Feed;
 use AppBundle\Repository\FeedRepository;
 use AppBundle\Repository\ItemRepository;
+use Swarrot\Broker\Message;
+use Swarrot\SwarrotBundle\Broker\Publisher;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -21,14 +23,16 @@ class FetchItemsCommand extends Command
     private $contentImport;
     private $router;
     private $domain;
+    private $publisher;
 
-    public function __construct(FeedRepository $feedRepository, ItemRepository $itemRepository, Import $contentImport, RouterInterface $router, $domain)
+    public function __construct(FeedRepository $feedRepository, ItemRepository $itemRepository, Import $contentImport, RouterInterface $router, $domain, Publisher $publisher)
     {
         $this->feedRepository = $feedRepository;
         $this->itemRepository = $itemRepository;
         $this->contentImport = $contentImport;
         $this->router = $router;
         $this->domain = $domain;
+        $this->publisher = $publisher;
 
         parent::__construct();
     }
@@ -38,8 +42,24 @@ class FetchItemsCommand extends Command
         $this
             ->setName('feed:fetch-items')
             ->setDescription('Fetch items from feed to cache them')
-            ->addArgument('age', InputArgument::OPTIONAL, '`old` to fetch old feed or `new` to fetch recent feed with no item', 'old')
-            ->addOption('slug', null, InputOption::VALUE_OPTIONAL, 'To fetch item for one particular feed (using its slug)')
+            ->addArgument(
+                'age',
+                InputArgument::OPTIONAL,
+                '`old` to fetch old feed or `new` to fetch recent feed with no item',
+                'old'
+            )
+            ->addOption(
+                'slug',
+                null,
+                InputOption::VALUE_OPTIONAL,
+                'To fetch item for one particular feed (using its slug)'
+            )
+            ->addOption(
+                'use_queue',
+                null,
+                InputOption::VALUE_NONE,
+                'Push each feed into a queue instead of fetching it right away'
+            )
         ;
     }
 
@@ -86,9 +106,24 @@ class FetchItemsCommand extends Command
             $output->writeln('<info>Feeds to check</info>: ' . \count($feeds));
         }
 
-        // let's import some stuff !
-        $totalCached = $this->contentImport->process($feeds);
+        if ($input->getOption('use_queue')) {
+            foreach ($feeds as $feed) {
+                $message = new Message(json_encode([
+                    'feed_id' => $feed->getId(),
+                ]));
 
-        $output->writeLn('<comment>' . $totalCached . '</comment> items cached.');
+                $this->publisher->publish(
+                    'f43.fetch_items.publisher',
+                    $message
+                );
+            }
+
+            $output->writeLn('<comment>' . \count($feeds) . '</comment> feeds queued.');
+        } else {
+            // let's import some stuff !
+            $totalCached = $this->contentImport->process($feeds);
+
+            $output->writeLn('<comment>' . $totalCached . '</comment> items cached.');
+        }
     }
 }

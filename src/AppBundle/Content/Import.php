@@ -6,7 +6,7 @@ use AppBundle\AppEvents;
 use AppBundle\Entity\Feed;
 use AppBundle\Entity\Item;
 use AppBundle\Entity\Log;
-use AppBundle\Event\ItemEvent;
+use AppBundle\Event\ItemsCachedEvent;
 use AppBundle\Repository\FeedRepository;
 use AppBundle\Repository\ItemRepository;
 use AppBundle\Xml\SimplePieProxy;
@@ -33,6 +33,11 @@ class Import
         $this->feedRepository = $feedRepository;
         $this->itemRepository = $itemRepository;
         $this->logger = $logger;
+    }
+
+    public function setEntityManager(EntityManagerInterface $em)
+    {
+        $this->em = $em;
     }
 
     /**
@@ -145,7 +150,7 @@ class Import
             $this->logger->debug('<info>Ping hubs...</info>');
 
             // send an event about new feed updated
-            $event = new ItemEvent($feedUpdated);
+            $event = new ItemsCachedEvent($feedUpdated);
 
             $this->eventDispatcher->dispatch(
                 AppEvents::AFTER_ITEM_CACHED,

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "d33bf3c457868e624d387d560c14ad97",
+    "content-hash": "6f4deda261a5ae3724b16ff62124f717",
     "packages": [
         {
             "name": "beberlei/doctrineextensions",
@@ -1439,13 +1439,13 @@
             "authors": [
                 {
                     "name": "Multiple users",
-                    "role": "Original developers",
-                    "homepage": "https://code.google.com/p/html5lib/"
+                    "homepage": "https://code.google.com/p/html5lib/",
+                    "role": "Original developers"
                 },
                 {
                     "name": "Sébastien Lavoie",
-                    "role": "Packager",
-                    "homepage": "http://blog.lavoie.sl"
+                    "homepage": "http://blog.lavoie.sl",
+                    "role": "Packager"
                 },
                 {
                     "name": "didier Belot",
@@ -2220,25 +2220,25 @@
             "authors": [
                 {
                     "name": "Keyvan Minoukadeh",
-                    "role": "Developer (ported original JS code to PHP)",
                     "email": "keyvan@keyvan.net",
-                    "homepage": "http://keyvan.net"
+                    "homepage": "http://keyvan.net",
+                    "role": "Developer (ported original JS code to PHP)"
                 },
                 {
                     "name": "Arc90",
-                    "role": "Developer (original JS version)",
-                    "homepage": "http://arc90.com"
+                    "homepage": "http://arc90.com",
+                    "role": "Developer (original JS version)"
                 },
                 {
                     "name": "Jeremy Benoist",
-                    "role": "Developer",
                     "email": "jeremy.benoist@gmail.com",
-                    "homepage": "http://www.j0k3r.net"
+                    "homepage": "http://www.j0k3r.net",
+                    "role": "Developer"
                 },
                 {
                     "name": "DitherSky",
-                    "role": "Developer (https://github.com/Dither/full-text-rss)",
-                    "homepage": "https://github.com/Dither"
+                    "homepage": "https://github.com/Dither",
+                    "role": "Developer (https://github.com/Dither/full-text-rss)"
                 }
             ],
             "description": "Automatic article extraction from HTML",
@@ -2603,6 +2603,56 @@
             "time": "2017-05-04T11:12:50+00:00"
         },
         {
+            "name": "odolbeau/rabbit-mq-admin-toolkit",
+            "version": "v4.0.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/odolbeau/rabbit-mq-admin-toolkit.git",
+                "reference": "19f9962ce9267ae088132dbcccbdc4607d0872cb"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/odolbeau/rabbit-mq-admin-toolkit/zipball/19f9962ce9267ae088132dbcccbdc4607d0872cb",
+                "reference": "19f9962ce9267ae088132dbcccbdc4607d0872cb",
+                "shasum": ""
+            },
+            "require": {
+                "swarrot/swarrot": "~2.0|~3.0",
+                "symfony/console": "^2.7|^3.0|^4.0",
+                "symfony/yaml": "^2.4|^3.0|^4.0"
+            },
+            "require-dev": {
+                "friendsofphp/php-cs-fixer": "~1.12",
+                "phpunit/phpunit": "^5.7"
+            },
+            "bin": [
+                "rabbit"
+            ],
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "4.1.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Bab\\RabbitMq": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "RabbitMQ administration toolkit",
+            "keywords": [
+                "AMQP",
+                "admin",
+                "rabbitmq",
+                "toolkit"
+            ],
+            "time": "2017-12-27T10:48:40+00:00"
+        },
+        {
             "name": "paragonie/random_compat",
             "version": "v9.99.99",
             "source": {
@@ -2646,6 +2696,80 @@
                 "random"
             ],
             "time": "2018-07-02T15:55:56+00:00"
+        },
+        {
+            "name": "php-amqplib/php-amqplib",
+            "version": "v2.10.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/php-amqplib/php-amqplib.git",
+                "reference": "04e5366f032906d5f716890427e425e71307d3a8"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/php-amqplib/php-amqplib/zipball/04e5366f032906d5f716890427e425e71307d3a8",
+                "reference": "04e5366f032906d5f716890427e425e71307d3a8",
+                "shasum": ""
+            },
+            "require": {
+                "ext-bcmath": "*",
+                "ext-sockets": "*",
+                "php": ">=5.6"
+            },
+            "replace": {
+                "videlalvaro/php-amqplib": "self.version"
+            },
+            "require-dev": {
+                "ext-curl": "*",
+                "nategood/httpful": "^0.2.20",
+                "phpdocumentor/phpdocumentor": "dev-master",
+                "phpunit/phpunit": "^5.7|^6.5|^7.0",
+                "squizlabs/php_codesniffer": "^2.5"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.10-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "PhpAmqpLib\\": "PhpAmqpLib/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "LGPL-2.1-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "Alvaro Videla",
+                    "role": "Original Maintainer"
+                },
+                {
+                    "name": "John Kelly",
+                    "role": "Maintainer",
+                    "email": "johnmkelly86@gmail.com"
+                },
+                {
+                    "name": "Raúl Araya",
+                    "role": "Maintainer",
+                    "email": "nubeiro@gmail.com"
+                },
+                {
+                    "name": "Luke Bakken",
+                    "role": "Maintainer",
+                    "email": "luke@bakken.io"
+                }
+            ],
+            "description": "Formerly videlalvaro/php-amqplib.  This library is a pure PHP implementation of the AMQP protocol. It's been tested against RabbitMQ.",
+            "homepage": "https://github.com/php-amqplib/php-amqplib/",
+            "keywords": [
+                "message",
+                "queue",
+                "rabbitmq"
+            ],
+            "time": "2019-08-08T18:28:18+00:00"
         },
         {
             "name": "php-http/client-common",
@@ -4105,16 +4229,16 @@
         },
         {
             "name": "sentry/sentry",
-            "version": "2.1.1",
+            "version": "2.1.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/getsentry/sentry-php.git",
-                "reference": "8e27e6c5fcf6f01fc2e5235dd14cc0b2b347d793"
+                "reference": "646f6ada8b89a08063e31f54ed6d260bd6879239"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/getsentry/sentry-php/zipball/8e27e6c5fcf6f01fc2e5235dd14cc0b2b347d793",
-                "reference": "8e27e6c5fcf6f01fc2e5235dd14cc0b2b347d793",
+                "url": "https://api.github.com/repos/getsentry/sentry-php/zipball/646f6ada8b89a08063e31f54ed6d260bd6879239",
+                "reference": "646f6ada8b89a08063e31f54ed6d260bd6879239",
                 "shasum": ""
             },
             "require": {
@@ -4143,12 +4267,12 @@
                 "phpstan/phpstan": "^0.10.3",
                 "phpstan/phpstan-phpunit": "^0.10",
                 "phpunit/phpunit": "^7.0",
-                "symfony/phpunit-bridge": "^4.1.6"
+                "symfony/phpunit-bridge": "^4.3"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.0.x-dev"
+                    "dev-master": "2.1.x-dev"
                 }
             },
             "autoload": {
@@ -4180,7 +4304,7 @@
                 "logging",
                 "sentry"
             ],
-            "time": "2019-06-13T11:27:23+00:00"
+            "time": "2019-08-22T07:37:30+00:00"
         },
         {
             "name": "sentry/sentry-symfony",
@@ -4435,6 +4559,143 @@
                 "tree"
             ],
             "time": "2017-12-24T16:06:50+00:00"
+        },
+        {
+            "name": "swarrot/swarrot",
+            "version": "v3.4.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/swarrot/swarrot.git",
+                "reference": "698fb79bd8904e5da244ac33312ad14e517bac97"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/swarrot/swarrot/zipball/698fb79bd8904e5da244ac33312ad14e517bac97",
+                "reference": "698fb79bd8904e5da244ac33312ad14e517bac97",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.1",
+                "psr/log": "^1.0",
+                "symfony/options-resolver": "^3.4 || ^4.1"
+            },
+            "require-dev": {
+                "aws/aws-sdk-php": "^2.8",
+                "doctrine/common": "^2.3",
+                "doctrine/dbal": "^2.2",
+                "php-amqplib/php-amqplib": "^2.1",
+                "php-http/curl-client": "^2.0",
+                "phpunit/phpunit": "^7.5",
+                "queue-interop/amqp-interop": "^0.5",
+                "queue-interop/queue-interop": "^0.5",
+                "sentry/sentry": "^1.5",
+                "stomp-php/stomp-php": "^4.3.1"
+            },
+            "suggest": {
+                "aws/aws-sdk-php": "^2.8",
+                "pecl-amqp": "*",
+                "php-amqplib/php-amqplib": "^2.1",
+                "queue-interop/amqp-interop": "^0.5",
+                "queue-interop/queue-interop": "^0.5",
+                "sentry/sentry": "^1.5",
+                "stomp-php/stomp-php": "^4.3.1",
+                "symfony/console": "^3.4 || ^4.1"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "3.4.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Swarrot\\": "src/Swarrot"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Olivier Dolbeau",
+                    "homepage": "http://odolbeau.fr/"
+                }
+            ],
+            "description": "A simple lib to consume RabbitMQ queues",
+            "keywords": [
+                "AMQP",
+                "queue",
+                "swarrot",
+                "worker"
+            ],
+            "time": "2019-05-19T15:13:16+00:00"
+        },
+        {
+            "name": "swarrot/swarrot-bundle",
+            "version": "v1.6.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/swarrot/SwarrotBundle.git",
+                "reference": "f3e5b8f83b38121262d29adf908e4bccae6d85ea"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/swarrot/SwarrotBundle/zipball/f3e5b8f83b38121262d29adf908e4bccae6d85ea",
+                "reference": "f3e5b8f83b38121262d29adf908e4bccae6d85ea",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.1",
+                "psr/log": "^1.0",
+                "swarrot/swarrot": "^3.4",
+                "symfony/config": "^3.4|^4.1",
+                "symfony/console": "^3.4|^4.1",
+                "symfony/dependency-injection": "^3.4|^4.1",
+                "symfony/http-kernel": "^3.4|^4.1",
+                "symfony/yaml": "^3.4|^4.1"
+            },
+            "require-dev": {
+                "doctrine/common": "^2.2",
+                "doctrine/dbal": "^2.2",
+                "php-amqplib/php-amqplib": "^2.9",
+                "phpunit/phpunit": "^7.5",
+                "sentry/sentry-symfony": "^2.3",
+                "symfony/phpunit-bridge": "^4.0"
+            },
+            "suggest": {
+                "php-amqplib/php-amqplib": "Required if using amqp_lib"
+            },
+            "type": "symfony-bundle",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.7-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Swarrot\\SwarrotBundle\\": ""
+                },
+                "exclude-from-classmap": [
+                    "/Tests/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Olivier Dolbeau",
+                    "homepage": "http://odolbeau.fr/"
+                }
+            ],
+            "description": "SwarrotBundle",
+            "keywords": [
+                "bundle",
+                "swarrot"
+            ],
+            "time": "2019-07-28T22:03:26+00:00"
         },
         {
             "name": "symfony/monolog-bundle",
@@ -5269,14 +5530,14 @@
             "authors": [
                 {
                     "name": "Nicola Asuni",
-                    "role": "Main developer",
                     "email": "info@tecnick.com",
-                    "homepage": "http://nicolaasuni.tecnick.com"
+                    "homepage": "http://nicolaasuni.tecnick.com",
+                    "role": "Main developer"
                 },
                 {
                     "name": "wallabag/core",
-                    "role": "Developers",
-                    "homepage": "https://www.wallabag.org"
+                    "homepage": "https://www.wallabag.org",
+                    "role": "Developers"
                 }
             ],
             "description": "Keeping a working 6.2.x TCPDF version.",
@@ -6420,9 +6681,9 @@
             "authors": [
                 {
                     "name": "Kitamura Satoshi",
-                    "role": "Original creator",
                     "email": "with.no.parachute@gmail.com",
-                    "homepage": "https://www.facebook.com/satooshi.jp"
+                    "homepage": "https://www.facebook.com/satooshi.jp",
+                    "role": "Original creator"
                 },
                 {
                     "name": "Takashi Matsuo",

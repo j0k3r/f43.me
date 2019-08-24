@@ -63,6 +63,13 @@ class FetchItemsCommandTest extends WebTestCase
             ->method('init')
             ->willReturn($simplePie);
 
+        $publisher = $this->getMockBuilder('Swarrot\SwarrotBundle\Broker\Publisher')
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $publisher->expects($this->any())
+            ->method('publish');
+
         $logger = new Logger('import');
         $this->handler = new TestHandler();
         $logger->pushHandler($this->handler);
@@ -104,10 +111,10 @@ class FetchItemsCommandTest extends WebTestCase
         $application->add(new FetchItemsCommand(
             $container->get('app.repository.feed.test'),
             $container->get('app.repository.item.test'),
-            // $container->get('app.content.import.test'),
             $import,
             $container->get('router.test'),
-            'f43.me'
+            'f43.me',
+            $publisher
         ));
 
         $this->command = $application->find('feed:fetch-items');
@@ -168,6 +175,17 @@ class FetchItemsCommandTest extends WebTestCase
         $this->assertContains('Working on', $records[0]['message']);
 
         $this->assertRegExp('`items cached.`', $this->commandTester->getDisplay());
+    }
+
+    public function testUsingQueue()
+    {
+        $this->commandTester->execute([
+            'command' => $this->command->getName(),
+            'age' => 'old',
+            '--use_queue' => true,
+        ], ['verbosity' => OutputInterface::VERBOSITY_VERBOSE]);
+
+        $this->assertRegExp('`feeds queued.`', $this->commandTester->getDisplay());
     }
 
     /**

@@ -28,26 +28,29 @@
     ],
     "require": {
         "php": "^7.1",
-        "symfony/symfony": "3.4.*",
+        "beberlei/doctrineextensions": "^1.2",
         "doctrine/doctrine-bundle": "^1.6",
         "doctrine/doctrine-migrations-bundle": "^2.0",
         "doctrine/orm": "^2.5",
-        "twig/extensions": "~1.1",
-        "symfony/monolog-bundle": "^3.1.0",
-        "sensio/distribution-bundle": "^5.0.19",
-        "sensio/framework-extra-bundle": "^5.2.1",
         "incenteev/composer-parameter-handler": "^2.0",
-        "stof/doctrine-extensions-bundle": "~1.1",
         "j0k3r/graby": "^2.0",
-        "simplepie/simplepie": "~1.4",
-        "zurb/foundation": "4.3.2",
         "j0k3r/php-imgur-api-client": "~3.0",
         "mnsami/composer-custom-directory-installer": "~1.0",
-        "ricardoper/twitteroauth": "~1.0",
-        "sentry/sentry-symfony": "^3.0",
+        "odolbeau/rabbit-mq-admin-toolkit": "^4.0",
+        "php-amqplib/php-amqplib": "^2.10",
         "php-http/guzzle6-adapter": "^2.0",
         "php-http/httplug-bundle": "^1.14",
-        "beberlei/doctrineextensions": "^1.2"
+        "ricardoper/twitteroauth": "~1.0",
+        "sensio/distribution-bundle": "^5.0.19",
+        "sensio/framework-extra-bundle": "^5.2.1",
+        "sentry/sentry-symfony": "^3.0",
+        "simplepie/simplepie": "~1.4",
+        "stof/doctrine-extensions-bundle": "~1.1",
+        "swarrot/swarrot-bundle": "^1.6",
+        "symfony/monolog-bundle": "^3.1.0",
+        "symfony/symfony": "3.4.*",
+        "twig/extensions": "~1.1",
+        "zurb/foundation": "4.3.2"
     },
     "require-dev": {
         "friendsofphp/php-cs-fixer": "~2.0",
@@ -80,7 +83,8 @@
         "platform": {
             "php": "7.1"
         },
-        "bin-dir": "bin"
+        "bin-dir": "bin",
+        "sort-packages": true
     },
     "extra": {
         "symfony-app-dir": "app",

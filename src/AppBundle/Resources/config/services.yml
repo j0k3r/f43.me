@@ -84,15 +84,6 @@ services:
             - "@doctrine.odm.mongodb.document_manager"
             - "@router"
 
-    item.ping_hub:
-        class: AppBundle\EventListener\ItemSubscriber
-        arguments:
-            - "http://pubsubhubbub.appspot.com"
-            - "@router"
-            - "@httplug.client.default.http_methods"
-        tags:
-            - { name: kernel.event_listener, event: api43_feed.after_item_cached, method: pingHub }
-
     # validator
     validator.rss.valid_rss:
         class: AppBundle\Validator\Constraints\ConstraintRssValidator

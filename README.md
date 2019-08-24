@@ -20,6 +20,25 @@ Anyway, it's simple:
  * store it
  * create a new feed with readable items
 
+## Contents
+
+<!-- MarkdownTOC autolink="true" -->
+
+- [Workflow](#workflow)
+    - [Improvers](#improvers)
+    - [Extractors](#extractors)
+    - [Parsers](#parsers)
+    - [Converters](#converters)
+- [How to use it](#how-to-use-it)
+    - [Requirements](#requirements)
+    - [Install](#install)
+        - [Without RabbitMQ](#without-rabbitmq)
+        - [With RabbitMQ](#with-rabbitmq)
+    - [Try it](#try-it)
+- [License](#license)
+
+<!-- /MarkdownTOC -->
+
 ## Workflow
 
 When it grabs a new item, there are several steps before we can say the item *is* readable. Let me introduce **improvers**, **extractors**, **converters** and **parsers**.
@@ -78,8 +97,10 @@ You can find some of them in the [converter folder](https://github.com/j0k3r/f43
 
 ### Requirements
 
- * PHP >= 7.1
- * MySQL
+ - PHP >= 7.1 (with `pdo_mysql`)
+ - MySQL >= 5.7
+ - [RabbitMQ](https://www.rabbitmq.com/), which is optional (see below)
+ - [Supervisor](http://supervisord.org/) (only if you use RabbitMQ)
 
 For each external API that improvers / extractors / parsers use, you will need an api key:
 
@@ -95,7 +116,7 @@ The default password for the admin part is a sha1 of `adminpass`.
 
 Follow these steps:
 
-```
+```bash
 git clone git@github.com:j0k3r/f43.me.git
 cd f43.me
 SYMFONY_ENV=prod composer install -o --no-dev
@@ -104,9 +125,11 @@ php bin/console doctrine:schema:create --env=prod
 ./node_modules/gulp/bin/gulp.js
 ```
 
-You'll need to setup 3 CRONs in order to fetch contents :
+#### Without RabbitMQ
 
-```
+You just need to define these 3 cronjobs (replace all `/path/to/f43.me` with real value):
+
+```bash
 # fetch content for existing feed
 */2 * * * * php /path/to/f43.me/bin/console feed:fetch-items --env=prod old
 
@@ -119,15 +142,40 @@ You'll need to setup 3 CRONs in order to fetch contents :
 
 You can also run a command to fetch all new items from a given feed, using its slug:
 
-```
+```bash
 php /path/to/f43.me/bin/console feed:fetch-items --env=prod --slug=reddit -t
 ```
+
+#### With RabbitMQ
+
+1. You'll need to declare exchanges and queues. Replace `guest` by the user of your RabbitMQ instance (`guest` is the default one):
+
+   ```bash
+   php bin/rabbit vhost:mapping:create -p guest app/config/rabbit_vhost.yml
+   ```
+
+2. You now have one queue and one exchange defined `f43.fetch_items` which will receive messages to fetch new items
+
+3. Enable these 2 cronjobs which will periodically push messages in queues (replace all `/path/to/banditore` with real value):
+
+   ```bash
+   # fetch content for existing feed
+   */2 * * * * php /path/to/f43.me/bin/console feed:fetch-items --env=prod old --use_queue
+
+   # cleanup old item. You can remove this one if you want to keep ALL items
+   0   3 * * * php /path/to/f43.me/bin/console feed:remove-items --env=prod
+   ```
+
+4. Setup Supervisor using the [sample file](data/supervisor.conf) from the repo. You can copy/paste it into `/etc/supervisor/conf.d/` and adjust path. The default file will launch 3 workers for fetching items.
+
+   Once you've put the file in the supervisor conf repo, run `supervisorctl update && supervisorctl start all` (`update` will read your conf, `start all` will start all workers)
+
 
 ### Try it
 
 You can use the built-in Docker image using `docker-compose`:
 
-```
+```bash
 docker-compose up --build
 ```
 

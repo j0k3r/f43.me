@@ -2,7 +2,9 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\AppEvents;
 use AppBundle\Entity\Feed;
+use AppBundle\Event\NewFeedEvent;
 use AppBundle\Form\Type\FeedType;
 use AppBundle\Repository\FeedRepository;
 use AppBundle\Repository\ItemRepository;
@@ -10,6 +12,7 @@ use AppBundle\Repository\LogRepository;
 use AppBundle\Xml\Render;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -85,7 +88,7 @@ class FeedController extends Controller
      *
      * @return RedirectResponse|Response
      */
-    public function createAction(Request $request, EntityManagerInterface $em, Session $session)
+    public function createAction(Request $request, EntityManagerInterface $em, Session $session, EventDispatcherInterface $eventDispatcher)
     {
         $feed = new Feed();
         $form = $this->createForm(FeedType::class, $feed);
@@ -94,6 +97,11 @@ class FeedController extends Controller
         if ($form->isValid()) {
             $em->persist($feed);
             $em->flush();
+
+            $eventDispatcher->dispatch(
+                AppEvents::AFTER_FEED_CREATION,
+                new NewFeedEvent($feed)
+            );
 
             $session->getFlashBag()->add('notice', 'Feed created!');
 
