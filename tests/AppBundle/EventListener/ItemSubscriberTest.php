@@ -2,7 +2,7 @@
 
 namespace Tests\AppBundle\EventListener;
 
-use AppBundle\Event\ItemEvent;
+use AppBundle\Event\ItemsCachedEvent;
 use AppBundle\EventListener\ItemSubscriber;
 use GuzzleHttp\Psr7\Response;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
@@ -20,7 +20,7 @@ class ItemSubscriberTest extends AppTestCase
 
         $itemSubscriber = new ItemSubscriber('', $router, $client);
 
-        $event = new ItemEvent(['bar.unknown']);
+        $event = new ItemsCachedEvent(['bar.unknown']);
         $res = $itemSubscriber->pingHub($event);
 
         // the hub url is invalid, so it will be generate an error and return false
@@ -42,7 +42,7 @@ class ItemSubscriberTest extends AppTestCase
 
         $itemSubscriber = new ItemSubscriber('http://f43.me', $router, $client);
 
-        $event = new ItemEvent(['bar.unknown']);
+        $event = new ItemsCachedEvent(['bar.unknown']);
         $res = $itemSubscriber->pingHub($event);
 
         // the hub url is invalid, so it will be generate an error and return false
@@ -64,7 +64,7 @@ class ItemSubscriberTest extends AppTestCase
 
         $itemSubscriber = new ItemSubscriber('http://f43.me', $router, $client);
 
-        $event = new ItemEvent(['bar.unknown']);
+        $event = new ItemsCachedEvent(['bar.unknown']);
         $res = $itemSubscriber->pingHub($event);
 
         $this->assertTrue($res);

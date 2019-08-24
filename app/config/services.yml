@@ -33,6 +33,10 @@ services:
         tags:
             - { name: kernel.event_listener, event: app.after_item_cached, method: pingHub }
 
+    AppBundle\EventListener\FeedSubscriber:
+        tags:
+            - { name: kernel.event_listener, event: app.after_feed_creation, method: sync }
+
     AppBundle\Xml\SimplePieProxy:
         arguments:
             $cache: "%kernel.root_dir%/cache/simplepie/"
