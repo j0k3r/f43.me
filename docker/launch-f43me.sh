@@ -20,7 +20,8 @@ npm install
 ./node_modules/gulp/bin/gulp.js
 
 echo "Setup database..."
-php bin/console doctrine:mongodb:schema:create
+php bin/console doctrine:database:create
+php bin/console doctrine:schema:create
 
 echo "Ready 🚀 http://localhost:8100/app_dev.php/"
 exec nginx -g 'daemon off;'

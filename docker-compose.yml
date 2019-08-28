@@ -1,9 +1,14 @@
 version: '2'
 services:
   db:
-    image: mvertes/alpine-mongo:3.2.10-3
+    image: mariadb:10
     ports:
-      - "27017:27017"
+      - "3306:3306"
+    volumes:
+      - ./data/mysql:/var/lib/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+    restart: always
 
   nginx-php7.2:
     build:
