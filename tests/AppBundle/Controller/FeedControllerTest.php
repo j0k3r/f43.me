@@ -356,7 +356,7 @@ class FeedControllerTest extends FeedWebTestCase
         libxml_use_internal_errors(true);
 
         $xml = new \DOMDocument();
-        $xml->loadXML($client->getResponse()->getContent());
+        $xml->loadXML((string) $client->getResponse()->getContent());
 
         $errors = libxml_get_errors();
         $this->assertEmpty($errors, var_export($errors, true));
@@ -394,7 +394,7 @@ class FeedControllerTest extends FeedWebTestCase
         libxml_use_internal_errors(true);
 
         $xml = new \DOMDocument();
-        $xml->loadXML($client->getResponse()->getContent());
+        $xml->loadXML((string) $client->getResponse()->getContent());
 
         $errors = libxml_get_errors();
         $this->assertEmpty($errors, var_export($errors, true));
