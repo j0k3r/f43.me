@@ -1439,13 +1439,13 @@
             "authors": [
                 {
                     "name": "Multiple users",
-                    "homepage": "https://code.google.com/p/html5lib/",
-                    "role": "Original developers"
+                    "role": "Original developers",
+                    "homepage": "https://code.google.com/p/html5lib/"
                 },
                 {
                     "name": "Sébastien Lavoie",
-                    "homepage": "http://blog.lavoie.sl",
-                    "role": "Packager"
+                    "role": "Packager",
+                    "homepage": "http://blog.lavoie.sl"
                 },
                 {
                     "name": "didier Belot",
@@ -1548,8 +1548,8 @@
             "authors": [
                 {
                     "name": "Santosh Patnaik",
-                    "homepage": "http://www.bioinformatics.org/people/index.php?user_hash=558b661f92d0ff7b",
-                    "role": "Developer"
+                    "role": "Developer",
+                    "homepage": "http://www.bioinformatics.org/people/index.php?user_hash=558b661f92d0ff7b"
                 }
             ],
             "description": "htmLawed - Process text with HTML markup to make it more compliant with HTML standards and administrative policies",
@@ -2102,8 +2102,8 @@
                 },
                 {
                     "name": "Jack W",
-                    "email": "jack@fin1te.net",
-                    "role": "Developer (SafeCurl original version)"
+                    "role": "Developer (SafeCurl original version)",
+                    "email": "jack@fin1te.net"
                 }
             ],
             "description": "Server-Side Request Forgery (SSRF) protection plugin for HTTPlug",
@@ -2220,25 +2220,25 @@
             "authors": [
                 {
                     "name": "Keyvan Minoukadeh",
+                    "role": "Developer (ported original JS code to PHP)",
                     "email": "keyvan@keyvan.net",
-                    "homepage": "http://keyvan.net",
-                    "role": "Developer (ported original JS code to PHP)"
+                    "homepage": "http://keyvan.net"
                 },
                 {
                     "name": "Arc90",
-                    "homepage": "http://arc90.com",
-                    "role": "Developer (original JS version)"
+                    "role": "Developer (original JS version)",
+                    "homepage": "http://arc90.com"
                 },
                 {
                     "name": "Jeremy Benoist",
+                    "role": "Developer",
                     "email": "jeremy.benoist@gmail.com",
-                    "homepage": "http://www.j0k3r.net",
-                    "role": "Developer"
+                    "homepage": "http://www.j0k3r.net"
                 },
                 {
                     "name": "DitherSky",
-                    "homepage": "https://github.com/Dither",
-                    "role": "Developer (https://github.com/Dither/full-text-rss)"
+                    "role": "Developer (https://github.com/Dither/full-text-rss)",
+                    "homepage": "https://github.com/Dither"
                 }
             ],
             "description": "Automatic article extraction from HTML",
@@ -4421,19 +4421,19 @@
             "authors": [
                 {
                     "name": "Ryan Parman",
-                    "homepage": "http://ryanparman.com/",
-                    "role": "Creator, alumnus developer"
+                    "role": "Creator, alumnus developer",
+                    "homepage": "http://ryanparman.com/"
                 },
                 {
                     "name": "Geoffrey Sneddon",
-                    "homepage": "http://gsnedders.com/",
-                    "role": "Alumnus developer"
+                    "role": "Alumnus developer",
+                    "homepage": "http://gsnedders.com/"
                 },
                 {
                     "name": "Ryan McCue",
+                    "role": "Developer",
                     "email": "me@ryanmccue.info",
-                    "homepage": "http://ryanmccue.info/",
-                    "role": "Developer"
+                    "homepage": "http://ryanmccue.info/"
                 }
             ],
             "description": "A simple Atom/RSS parsing library for PHP",
@@ -4480,7 +4480,7 @@
             ],
             "authors": [
                 {
-                    "name": "Sebastien MALOT",
+                    "name": "Sebastien Malot",
                     "email": "sebastien@malot.fr"
                 }
             ],
@@ -5459,19 +5459,19 @@
             "authors": [
                 {
                     "name": "Fabien Potencier",
+                    "role": "Lead Developer",
                     "email": "fabien@symfony.com",
-                    "homepage": "http://fabien.potencier.org",
-                    "role": "Lead Developer"
+                    "homepage": "http://fabien.potencier.org"
                 },
                 {
                     "name": "Armin Ronacher",
-                    "email": "armin.ronacher@active-4.com",
-                    "role": "Project Founder"
+                    "role": "Project Founder",
+                    "email": "armin.ronacher@active-4.com"
                 },
                 {
                     "name": "Twig Team",
-                    "homepage": "https://twig.symfony.com/contributors",
-                    "role": "Contributors"
+                    "role": "Contributors",
+                    "homepage": "https://twig.symfony.com/contributors"
                 }
             ],
             "description": "Twig, the flexible, fast, and secure template language for PHP",
@@ -5530,14 +5530,14 @@
             "authors": [
                 {
                     "name": "Nicola Asuni",
+                    "role": "Main developer",
                     "email": "info@tecnick.com",
-                    "homepage": "http://nicolaasuni.tecnick.com",
-                    "role": "Main developer"
+                    "homepage": "http://nicolaasuni.tecnick.com"
                 },
                 {
                     "name": "wallabag/core",
-                    "homepage": "https://www.wallabag.org",
-                    "role": "Developers"
+                    "role": "Developers",
+                    "homepage": "https://www.wallabag.org"
                 }
             ],
             "description": "Keeping a working 6.2.x TCPDF version.",
@@ -5969,16 +5969,16 @@
         },
         {
             "name": "friendsofphp/php-cs-fixer",
-            "version": "v2.15.1",
+            "version": "v2.15.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/FriendsOfPHP/PHP-CS-Fixer.git",
-                "reference": "20064511ab796593a3990669eff5f5b535001f7c"
+                "reference": "c9d30fddfa3feb8b82663104864224f2ce7a3675"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/FriendsOfPHP/PHP-CS-Fixer/zipball/20064511ab796593a3990669eff5f5b535001f7c",
-                "reference": "20064511ab796593a3990669eff5f5b535001f7c",
+                "url": "https://api.github.com/repos/FriendsOfPHP/PHP-CS-Fixer/zipball/c9d30fddfa3feb8b82663104864224f2ce7a3675",
+                "reference": "c9d30fddfa3feb8b82663104864224f2ce7a3675",
                 "shasum": ""
             },
             "require": {
@@ -6044,16 +6044,16 @@
             ],
             "authors": [
                 {
-                    "name": "Dariusz Rumiński",
-                    "email": "dariusz.ruminski@gmail.com"
-                },
-                {
                     "name": "Fabien Potencier",
                     "email": "fabien@symfony.com"
+                },
+                {
+                    "name": "Dariusz Rumiński",
+                    "email": "dariusz.ruminski@gmail.com"
                 }
             ],
             "description": "A tool to automatically fix PHP code style",
-            "time": "2019-06-01T10:32:12+00:00"
+            "time": "2019-08-27T16:03:01+00:00"
         },
         {
             "name": "nette/bootstrap",
@@ -6681,9 +6681,9 @@
             "authors": [
                 {
                     "name": "Kitamura Satoshi",
+                    "role": "Original creator",
                     "email": "with.no.parachute@gmail.com",
-                    "homepage": "https://www.facebook.com/satooshi.jp",
-                    "role": "Original creator"
+                    "homepage": "https://www.facebook.com/satooshi.jp"
                 },
                 {
                     "name": "Takashi Matsuo",
