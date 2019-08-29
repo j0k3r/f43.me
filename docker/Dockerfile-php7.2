@@ -7,10 +7,7 @@ RUN apt-get update \
 RUN pecl install xdebug \
     && docker-php-ext-enable xdebug \
     && docker-php-ext-install zip \
-    && pecl install mongodb \
-    && docker-php-ext-enable mongodb \
-    && pecl install apcu \
-    && docker-php-ext-enable apcu
+    && docker-php-ext-install pdo_mysql
 
 ADD ./fastcgi-php.conf /etc/nginx/snippets/fastcgi-php.conf
 ADD ./upstream-php.conf /etc/nginx/conf.d/php7.2-fpm.conf
@@ -26,7 +23,7 @@ RUN . $HOME/.nvm/nvm.sh \
     && nvm alias default $NODE_VERSION \
     && nvm use default
 
-RUN gem update --system \
+RUN gem update --system --no-document \
     && gem install sass compass --no-document
 
 RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" \

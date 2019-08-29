@@ -1,9 +1,9 @@
 parameters:
-    database_host: 127.0.0.1
+    database_host: db
     database_port: ~
     database_name: f43me
     database_user: root
-    database_password: ~
+    database_password: root
     locale: en
     secret: uLq3XcJHHbLhq6GX
     domain: f43.me
