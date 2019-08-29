@@ -1548,8 +1548,8 @@
             "authors": [
                 {
                     "name": "Santosh Patnaik",
-                    "role": "Developer",
-                    "homepage": "http://www.bioinformatics.org/people/index.php?user_hash=558b661f92d0ff7b"
+                    "homepage": "http://www.bioinformatics.org/people/index.php?user_hash=558b661f92d0ff7b",
+                    "role": "Developer"
                 }
             ],
             "description": "htmLawed - Process text with HTML markup to make it more compliant with HTML standards and administrative policies",
@@ -2008,16 +2008,16 @@
         },
         {
             "name": "j0k3r/graby-site-config",
-            "version": "1.0.89",
+            "version": "1.0.90",
             "source": {
                 "type": "git",
                 "url": "https://github.com/j0k3r/graby-site-config.git",
-                "reference": "5052101225b3578a1a7258079ae8fe864b68e23e"
+                "reference": "f21722ac72630412a942e87118ba1e4c0675d799"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/j0k3r/graby-site-config/zipball/5052101225b3578a1a7258079ae8fe864b68e23e",
-                "reference": "5052101225b3578a1a7258079ae8fe864b68e23e",
+                "url": "https://api.github.com/repos/j0k3r/graby-site-config/zipball/f21722ac72630412a942e87118ba1e4c0675d799",
+                "reference": "f21722ac72630412a942e87118ba1e4c0675d799",
                 "shasum": ""
             },
             "require": {
@@ -2044,7 +2044,7 @@
                 }
             ],
             "description": "Graby site config files",
-            "time": "2019-08-05T11:10:32+00:00"
+            "time": "2019-08-28T12:51:06+00:00"
         },
         {
             "name": "j0k3r/httplug-ssrf-plugin",
@@ -2102,8 +2102,8 @@
                 },
                 {
                     "name": "Jack W",
-                    "role": "Developer (SafeCurl original version)",
-                    "email": "jack@fin1te.net"
+                    "email": "jack@fin1te.net",
+                    "role": "Developer (SafeCurl original version)"
                 }
             ],
             "description": "Server-Side Request Forgery (SSRF) protection plugin for HTTPlug",
@@ -4421,19 +4421,19 @@
             "authors": [
                 {
                     "name": "Ryan Parman",
-                    "role": "Creator, alumnus developer",
-                    "homepage": "http://ryanparman.com/"
+                    "homepage": "http://ryanparman.com/",
+                    "role": "Creator, alumnus developer"
                 },
                 {
                     "name": "Geoffrey Sneddon",
-                    "role": "Alumnus developer",
-                    "homepage": "http://gsnedders.com/"
+                    "homepage": "http://gsnedders.com/",
+                    "role": "Alumnus developer"
                 },
                 {
                     "name": "Ryan McCue",
-                    "role": "Developer",
                     "email": "me@ryanmccue.info",
-                    "homepage": "http://ryanmccue.info/"
+                    "homepage": "http://ryanmccue.info/",
+                    "role": "Developer"
                 }
             ],
             "description": "A simple Atom/RSS parsing library for PHP",
@@ -4480,7 +4480,7 @@
             ],
             "authors": [
                 {
-                    "name": "Sebastien Malot",
+                    "name": "Sebastien MALOT",
                     "email": "sebastien@malot.fr"
                 }
             ],
@@ -5460,19 +5460,19 @@
             "authors": [
                 {
                     "name": "Fabien Potencier",
-                    "role": "Lead Developer",
                     "email": "fabien@symfony.com",
-                    "homepage": "http://fabien.potencier.org"
+                    "homepage": "http://fabien.potencier.org",
+                    "role": "Lead Developer"
                 },
                 {
                     "name": "Armin Ronacher",
-                    "role": "Project Founder",
-                    "email": "armin.ronacher@active-4.com"
+                    "email": "armin.ronacher@active-4.com",
+                    "role": "Project Founder"
                 },
                 {
                     "name": "Twig Team",
-                    "role": "Contributors",
-                    "homepage": "https://twig.symfony.com/contributors"
+                    "homepage": "https://twig.symfony.com/contributors",
+                    "role": "Contributors"
                 }
             ],
             "description": "Twig, the flexible, fast, and secure template language for PHP",
