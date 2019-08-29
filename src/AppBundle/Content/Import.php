@@ -50,7 +50,7 @@ class Import
      *     - if there are new content, dispatch event to ping hub
      *     - finally, update total item counter.
      *
-     * @param array $feeds An array for AppBundle\Entity\Feed or an Doctrine\ODM\MongoDB\EagerCursor
+     * @param array $feeds An array for AppBundle\Entity\Feed
      */
     public function process($feeds)
     {

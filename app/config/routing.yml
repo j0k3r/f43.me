@@ -1,3 +1,12 @@
-f43me:
-    resource: "@AppBundle/Resources/config/routing.yml"
-    prefix: /
+app:
+    resource: "@AppBundle/Controller/"
+    type: annotation
+
+# auth
+login_check:
+    path:  /login_check
+    methods:  [POST]
+
+logout:
+    path:     /logout
+    methods:  [GET]

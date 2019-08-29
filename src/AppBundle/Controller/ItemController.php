@@ -13,11 +13,14 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\Session;
+use Symfony\Component\Routing\Annotation\Route;
 
 class ItemController extends Controller
 {
     /**
      * Lists all Items documents related to a Feed.
+     *
+     * @Route("/feed/{slug}/items", name="item_homepage", methods={"GET"})
      *
      * @param Feed $feed The document Feed (retrieving for a ParamConverter with the slug)
      *
@@ -40,6 +43,8 @@ class ItemController extends Controller
 
     /**
      * Delete all items for a given Feed.
+     *
+     * @Route("/feed/{slug}/items/deleteAll", name="item_delete_all", methods={"POST"})
      *
      * @param Request $request
      * @param Feed    $feed    The document Feed (retrieving for a ParamConverter with the slug)
@@ -67,6 +72,8 @@ class ItemController extends Controller
     /**
      * Preview an item that is already cached.
      *
+     * @Route("/item/{id}/preview", name="item_preview_cached", methods={"GET"})
+     *
      * @param Item $feedItem The document Item (retrieving for a ParamConverter with the id)
      *
      * @return Response
@@ -85,6 +92,8 @@ class ItemController extends Controller
      * Display a modal to preview the first item from a Feed.
      * It will allow to preview the parsed item (which isn't cached) using the internal or the external parser.
      *
+     * @Route("/feed/{slug}/testItem", name="item_test", methods={"GET"})
+     *
      * @param Feed $feed The document Feed (retrieving for a ParamConverter with the slug)
      *
      * @return Response
@@ -98,6 +107,8 @@ class ItemController extends Controller
 
     /**
      * Following the previous action, this one will actually parse the content (for both parser).
+     *
+     * @Route("/feed/{slug}/previewItem", name="item_preview_new", methods={"GET"})
      *
      * @param Request $request
      * @param Feed    $feed    The document Feed (retrieving for a ParamConverter with the slug)

@@ -113,8 +113,8 @@ class FetchItemsCommandTest extends WebTestCase
             $container->get('app.repository.item.test'),
             $import,
             $container->get('router.test'),
-            'f43.me',
-            $publisher
+            $publisher,
+            'f43.me'
         ));
 
         $this->command = $application->find('feed:fetch-items');

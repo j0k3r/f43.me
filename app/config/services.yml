@@ -20,8 +20,12 @@ services:
             $generator: "%domain%"
 
     AppBundle\Command\FetchItemsCommand:
+        tags: ['console.command']
         arguments:
             $domain: "%domain%"
+
+    AppBundle\Command\RemoveItemsCommand:
+        tags: ['console.command']
 
     AppBundle\Consumer\FetchItems:
         arguments:
@@ -90,9 +94,36 @@ services:
         arguments:
             - "[%%datetime%%] %%start_tag%%%%message%%%%end_tag%% %%context%% %%extra%%\n"
 
-
     Http\Client\Common\HttpMethodsClientInterface: '@httplug.client.default.http_methods'
 
     # alias to service from their class name
     Swarrot\SwarrotBundle\Broker\Publisher:
         alias: swarrot.publisher
+
+    content_extractor:
+        class: AppBundle\Content\Extractor
+        arguments:
+            - "@feed.extractor.chain"
+            - "@feed.improver.chain"
+            - "@feed.converter.chain"
+            - "@feed.parser.chain"
+
+    simple_pie_proxy:
+        class: AppBundle\Xml\SimplePieProxy
+        arguments:
+            - "%kernel.root_dir%/cache/simplepie/"
+            - 20
+            - false
+
+    xml_render:
+        class: AppBundle\Xml\Render
+        arguments:
+            - "%domain%"
+
+    # validator
+    validator.rss.valid_rss:
+        class: AppBundle\Validator\Constraints\ConstraintRssValidator
+        arguments:
+            - "@httplug.client.default.http_methods"
+        tags:
+            - { name: validator.constraint_validator, alias: valid_rss }
