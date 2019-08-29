@@ -50,7 +50,7 @@ class FeedRepository extends ServiceEntityRepository
      * Find feed by ids.
      * Used in FetchItemCommand to retrieve feed that have / or not items.
      *
-     * @param array  $ids  An array of MongoID
+     * @param array  $ids  An array of id
      * @param string $type in or notIn
      *
      * @return mixed

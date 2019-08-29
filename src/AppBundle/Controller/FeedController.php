@@ -17,11 +17,14 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\Session;
+use Symfony\Component\Routing\Annotation\Route;
 
 class FeedController extends Controller
 {
     /**
      * Display some information about feeds, items, logs, etc ...
+     *
+     * @Route("/dashboard", name="feed_dashboard", methods={"GET"})
      *
      * @return Response
      */
@@ -42,6 +45,8 @@ class FeedController extends Controller
     /**
      * Display a public view.
      *
+     * @Route("/", name="feed_publicview", methods={"GET"})
+     *
      * @return Response
      */
     public function publicAction(FeedRepository $feedRepository)
@@ -53,6 +58,8 @@ class FeedController extends Controller
 
     /**
      * Lists all Feed documents.
+     *
+     * @Route("/feeds", name="feed_homepage", methods={"GET"})
      *
      * @return Response
      */
@@ -66,6 +73,8 @@ class FeedController extends Controller
 
     /**
      * Displays a form to create a new Feed document.
+     *
+     * @Route("/feed/new", name="feed_new", methods={"GET"})
      *
      * @return Response
      */
@@ -83,6 +92,8 @@ class FeedController extends Controller
 
     /**
      * Creates a new Feed document.
+     *
+     * @Route("/feed/create", name="feed_create", methods={"POST"})
      *
      * @param Request $request
      *
@@ -119,6 +130,8 @@ class FeedController extends Controller
 
     /**
      * Displays a form to edit an existing Feed document.
+     *
+     * @Route("/feed/{slug}/edit", name="feed_edit", methods={"GET", "POST"})
      *
      * @param Feed $feed The document Feed (retrieving for a ParamConverter with the slug)
      *
@@ -163,6 +176,8 @@ class FeedController extends Controller
     /**
      * Deletes a Feed document.
      *
+     * @Route("/feed/{slug}/delete", name="feed_delete", methods={"POST"})
+     *
      * @param Request $request The request object
      * @param Feed    $feed    The document Feed (retrieving for a ParamConverter with the slug)
      *
@@ -187,6 +202,8 @@ class FeedController extends Controller
 
     /**
      * Display some information about feeds, items, logs, etc ...
+     *
+     * @Route("/{slug}.xml", name="feed_xml", methods={"GET"})
      *
      * @param Feed $feed The document Feed (retrieving for a ParamConverter with the slug)
      *

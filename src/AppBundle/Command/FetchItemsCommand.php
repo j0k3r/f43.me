@@ -25,7 +25,7 @@ class FetchItemsCommand extends Command
     private $domain;
     private $publisher;
 
-    public function __construct(FeedRepository $feedRepository, ItemRepository $itemRepository, Import $contentImport, RouterInterface $router, $domain, Publisher $publisher)
+    public function __construct(FeedRepository $feedRepository, ItemRepository $itemRepository, Import $contentImport, RouterInterface $router, Publisher $publisher, $domain)
     {
         $this->feedRepository = $feedRepository;
         $this->itemRepository = $itemRepository;

@@ -8,6 +8,7 @@ use Graby\Monolog\Handler\GrabyHandler;
 use Monolog\Logger;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Routing\Annotation\Route;
 
 class TestController extends Controller
 {
@@ -17,6 +18,8 @@ class TestController extends Controller
      * - improve parser
      * - chose the best parser
      * - test a site configuration.
+     *
+     * @Route("/feed/test", name="feed_test", methods={"GET", "POST"})
      *
      * @return \Symfony\Component\HttpFoundation\Response
      */

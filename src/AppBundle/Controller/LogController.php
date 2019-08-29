@@ -9,11 +9,14 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\Session;
+use Symfony\Component\Routing\Annotation\Route;
 
 class LogController extends Controller
 {
     /**
      * Lists all Log documents.
+     *
+     * @Route("/logs", name="log_homepage", methods={"GET"})
      *
      * @return Response
      */
@@ -27,6 +30,8 @@ class LogController extends Controller
 
     /**
      * Lists all Log documents related to a given feed.
+     *
+     * @Route("/feed/{slug}/logs", name="log_feed", methods={"GET"})
      *
      * @param Feed $feed The document Feed (retrieving for a ParamConverter with the slug)
      *
@@ -44,6 +49,8 @@ class LogController extends Controller
 
     /**
      * Delete all logs for a given Feed.
+     *
+     * @Route("/feed/{slug}/logs/deleteAll", name="log_delete_all", methods={"POST"})
      *
      * @param Request $request
      * @param Feed    $feed    The document Feed (retrieving for a ParamConverter with the slug)
