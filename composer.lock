@@ -1548,8 +1548,8 @@
             "authors": [
                 {
                     "name": "Santosh Patnaik",
-                    "homepage": "http://www.bioinformatics.org/people/index.php?user_hash=558b661f92d0ff7b",
-                    "role": "Developer"
+                    "role": "Developer",
+                    "homepage": "http://www.bioinformatics.org/people/index.php?user_hash=558b661f92d0ff7b"
                 }
             ],
             "description": "htmLawed - Process text with HTML markup to make it more compliant with HTML standards and administrative policies",
@@ -4480,7 +4480,7 @@
             ],
             "authors": [
                 {
-                    "name": "Sebastien MALOT",
+                    "name": "Sebastien Malot",
                     "email": "sebastien@malot.fr"
                 }
             ],
@@ -4633,16 +4633,16 @@
         },
         {
             "name": "swarrot/swarrot-bundle",
-            "version": "v1.6.2",
+            "version": "v1.6.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/swarrot/SwarrotBundle.git",
-                "reference": "f3e5b8f83b38121262d29adf908e4bccae6d85ea"
+                "reference": "fa854e5d15f2f0e96d5b8447a80d7800abbda552"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/swarrot/SwarrotBundle/zipball/f3e5b8f83b38121262d29adf908e4bccae6d85ea",
-                "reference": "f3e5b8f83b38121262d29adf908e4bccae6d85ea",
+                "url": "https://api.github.com/repos/swarrot/SwarrotBundle/zipball/fa854e5d15f2f0e96d5b8447a80d7800abbda552",
+                "reference": "fa854e5d15f2f0e96d5b8447a80d7800abbda552",
                 "shasum": ""
             },
             "require": {
@@ -4695,7 +4695,7 @@
                 "bundle",
                 "swarrot"
             ],
-            "time": "2019-07-28T22:03:26+00:00"
+            "time": "2019-09-08T08:34:19+00:00"
         },
         {
             "name": "symfony/monolog-bundle",
