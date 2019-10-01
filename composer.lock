@@ -1995,13 +1995,13 @@
             "authors": [
                 {
                     "name": "Jeremy Benoist",
-                    "role": "Developer",
-                    "email": "jeremy.benoist@gmail.com"
+                    "email": "jeremy.benoist@gmail.com",
+                    "role": "Developer"
                 },
                 {
                     "name": "FiveFilters.org",
-                    "role": "Developer (original version)",
-                    "email": "fivefilters@fivefilters.org"
+                    "email": "fivefilters@fivefilters.org",
+                    "role": "Developer (original version)"
                 }
             ],
             "description": "Graby helps you extract article content from web pages",
@@ -2221,25 +2221,25 @@
             "authors": [
                 {
                     "name": "Keyvan Minoukadeh",
-                    "role": "Developer (ported original JS code to PHP)",
                     "email": "keyvan@keyvan.net",
-                    "homepage": "http://keyvan.net"
+                    "homepage": "http://keyvan.net",
+                    "role": "Developer (ported original JS code to PHP)"
                 },
                 {
                     "name": "Arc90",
-                    "role": "Developer (original JS version)",
-                    "homepage": "http://arc90.com"
+                    "homepage": "http://arc90.com",
+                    "role": "Developer (original JS version)"
                 },
                 {
                     "name": "Jeremy Benoist",
-                    "role": "Developer",
                     "email": "jeremy.benoist@gmail.com",
-                    "homepage": "http://www.j0k3r.net"
+                    "homepage": "http://www.j0k3r.net",
+                    "role": "Developer"
                 },
                 {
                     "name": "DitherSky",
-                    "role": "Developer (https://github.com/Dither/full-text-rss)",
-                    "homepage": "https://github.com/Dither"
+                    "homepage": "https://github.com/Dither",
+                    "role": "Developer (https://github.com/Dither/full-text-rss)"
                 }
             ],
             "description": "Automatic article extraction from HTML",
@@ -4381,16 +4381,16 @@
         },
         {
             "name": "simplepie/simplepie",
-            "version": "1.5.2",
+            "version": "1.5.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/simplepie/simplepie.git",
-                "reference": "0e8fe72132dad765d25db4cabc69a91139af1263"
+                "reference": "173663382a9346acd53df60c7ffb20689c9cf1f6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/simplepie/simplepie/zipball/0e8fe72132dad765d25db4cabc69a91139af1263",
-                "reference": "0e8fe72132dad765d25db4cabc69a91139af1263",
+                "url": "https://api.github.com/repos/simplepie/simplepie/zipball/173663382a9346acd53df60c7ffb20689c9cf1f6",
+                "reference": "173663382a9346acd53df60c7ffb20689c9cf1f6",
                 "shasum": ""
             },
             "require": {
@@ -4444,7 +4444,7 @@
                 "feeds",
                 "rss"
             ],
-            "time": "2018-08-02T05:43:58+00:00"
+            "time": "2019-09-22T23:21:30+00:00"
         },
         {
             "name": "smalot/pdfparser",
@@ -6684,9 +6684,9 @@
             "authors": [
                 {
                     "name": "Kitamura Satoshi",
-                    "role": "Original creator",
                     "email": "with.no.parachute@gmail.com",
-                    "homepage": "https://www.facebook.com/satooshi.jp"
+                    "homepage": "https://www.facebook.com/satooshi.jp",
+                    "role": "Original creator"
                 },
                 {
                     "name": "Takashi Matsuo",
