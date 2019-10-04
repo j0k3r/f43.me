@@ -25,7 +25,7 @@
                             <a href="{{ path('feed_edit', { 'slug': feed.slug }) }}">{{ feed.name }}</a>
                         </td>
                         <td>
-                            <a href="{{ feed.link }}" target="_blank">Official one</a> -
+                            <a href="{{ feed.link }}" rel="noreferrer" target="_blank">Official one</a> -
                             <a href="{{ url('feed_xml', { 'slug': feed.slug }) }}" target="_blank">Readable one</a>
                         </td>
                         <td class="items-count">{{ feed.nbItems }}</td>
