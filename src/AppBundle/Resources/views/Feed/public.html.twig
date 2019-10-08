@@ -28,8 +28,7 @@
             <table class="table-public">
                 <thead>
                     <tr>
-                        <th>Site</th>
-                        <th>RSS</th>
+                        <th>Feed</th>
                         <th>Updated</th>
                         <th>Items</th>
                     </tr>
@@ -39,9 +38,8 @@
                     <tr>
                         <td>
                             {{ include('AppBundle:Feed:_favicon.html.twig', {'host': feed.host}) }}
-                            <a rel="nofollow" href="//{{ feed.host }}" target="_blank" title="{{ feed.name }}">{{ feed.name }}</a>
+                            <a href="{{ url('feed_xml', { 'slug': feed.slug }) }}" target="_blank" title="{{ feed.name }}">{{ feed.name }}</a>
                         </td>
-                        <td><a href="{{ url('feed_xml', { 'slug': feed.slug }) }}" target="_blank">{{ url('feed_xml', { 'slug': feed.slug })|replace({'http://': ''}) }}</a></td>
                         <td class="time-ago" title="{{ feed.lastItemCachedAt|date('r') }}">{{ feed.lastItemCachedAt|date('d/m/y - H:i:s') }}</td>
                         <td class="items-count">{{ feed.nbItems }}</td>
                     </tr>

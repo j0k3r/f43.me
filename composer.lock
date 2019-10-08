@@ -214,16 +214,16 @@
         },
         {
             "name": "doctrine/annotations",
-            "version": "v1.7.0",
+            "version": "v1.8.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/annotations.git",
-                "reference": "fa4c4e861e809d6a1103bd620cce63ed91aedfeb"
+                "reference": "904dca4eb10715b92569fbcd79e201d5c349b6bc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/annotations/zipball/fa4c4e861e809d6a1103bd620cce63ed91aedfeb",
-                "reference": "fa4c4e861e809d6a1103bd620cce63ed91aedfeb",
+                "url": "https://api.github.com/repos/doctrine/annotations/zipball/904dca4eb10715b92569fbcd79e201d5c349b6bc",
+                "reference": "904dca4eb10715b92569fbcd79e201d5c349b6bc",
                 "shasum": ""
             },
             "require": {
@@ -232,7 +232,7 @@
             },
             "require-dev": {
                 "doctrine/cache": "1.*",
-                "phpunit/phpunit": "^7.5@dev"
+                "phpunit/phpunit": "^7.5"
             },
             "type": "library",
             "extra": {
@@ -278,7 +278,7 @@
                 "docblock",
                 "parser"
             ],
-            "time": "2019-08-08T18:11:40+00:00"
+            "time": "2019-10-01T18:55:10+00:00"
         },
         {
             "name": "doctrine/cache",
@@ -1440,13 +1440,13 @@
             "authors": [
                 {
                     "name": "Multiple users",
-                    "homepage": "https://code.google.com/p/html5lib/",
-                    "role": "Original developers"
+                    "role": "Original developers",
+                    "homepage": "https://code.google.com/p/html5lib/"
                 },
                 {
                     "name": "Sébastien Lavoie",
-                    "homepage": "http://blog.lavoie.sl",
-                    "role": "Packager"
+                    "role": "Packager",
+                    "homepage": "http://blog.lavoie.sl"
                 },
                 {
                     "name": "didier Belot",
@@ -1995,13 +1995,13 @@
             "authors": [
                 {
                     "name": "Jeremy Benoist",
-                    "email": "jeremy.benoist@gmail.com",
-                    "role": "Developer"
+                    "role": "Developer",
+                    "email": "jeremy.benoist@gmail.com"
                 },
                 {
                     "name": "FiveFilters.org",
-                    "email": "fivefilters@fivefilters.org",
-                    "role": "Developer (original version)"
+                    "role": "Developer (original version)",
+                    "email": "fivefilters@fivefilters.org"
                 }
             ],
             "description": "Graby helps you extract article content from web pages",
@@ -2009,16 +2009,16 @@
         },
         {
             "name": "j0k3r/graby-site-config",
-            "version": "1.0.91",
+            "version": "1.0.92",
             "source": {
                 "type": "git",
                 "url": "https://github.com/j0k3r/graby-site-config.git",
-                "reference": "2f21c86f0b25911c413d94957a326b812ddbd54d"
+                "reference": "7c00db0548046709510cd4137432cf6c4a0c452f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/j0k3r/graby-site-config/zipball/2f21c86f0b25911c413d94957a326b812ddbd54d",
-                "reference": "2f21c86f0b25911c413d94957a326b812ddbd54d",
+                "url": "https://api.github.com/repos/j0k3r/graby-site-config/zipball/7c00db0548046709510cd4137432cf6c4a0c452f",
+                "reference": "7c00db0548046709510cd4137432cf6c4a0c452f",
                 "shasum": ""
             },
             "require": {
@@ -2045,7 +2045,7 @@
                 }
             ],
             "description": "Graby site config files",
-            "time": "2019-09-04T07:11:32+00:00"
+            "time": "2019-10-04T14:44:36+00:00"
         },
         {
             "name": "j0k3r/httplug-ssrf-plugin",
@@ -2221,25 +2221,25 @@
             "authors": [
                 {
                     "name": "Keyvan Minoukadeh",
+                    "role": "Developer (ported original JS code to PHP)",
                     "email": "keyvan@keyvan.net",
-                    "homepage": "http://keyvan.net",
-                    "role": "Developer (ported original JS code to PHP)"
+                    "homepage": "http://keyvan.net"
                 },
                 {
                     "name": "Arc90",
-                    "homepage": "http://arc90.com",
-                    "role": "Developer (original JS version)"
+                    "role": "Developer (original JS version)",
+                    "homepage": "http://arc90.com"
                 },
                 {
                     "name": "Jeremy Benoist",
+                    "role": "Developer",
                     "email": "jeremy.benoist@gmail.com",
-                    "homepage": "http://www.j0k3r.net",
-                    "role": "Developer"
+                    "homepage": "http://www.j0k3r.net"
                 },
                 {
                     "name": "DitherSky",
-                    "homepage": "https://github.com/Dither",
-                    "role": "Developer (https://github.com/Dither/full-text-rss)"
+                    "role": "Developer (https://github.com/Dither/full-text-rss)",
+                    "homepage": "https://github.com/Dither"
                 }
             ],
             "description": "Automatic article extraction from HTML",
@@ -2749,18 +2749,18 @@
                 },
                 {
                     "name": "John Kelly",
-                    "email": "johnmkelly86@gmail.com",
-                    "role": "Maintainer"
+                    "role": "Maintainer",
+                    "email": "johnmkelly86@gmail.com"
                 },
                 {
                     "name": "Raúl Araya",
-                    "email": "nubeiro@gmail.com",
-                    "role": "Maintainer"
+                    "role": "Maintainer",
+                    "email": "nubeiro@gmail.com"
                 },
                 {
                     "name": "Luke Bakken",
-                    "email": "luke@bakken.io",
-                    "role": "Maintainer"
+                    "role": "Maintainer",
+                    "email": "luke@bakken.io"
                 }
             ],
             "description": "Formerly videlalvaro/php-amqplib.  This library is a pure PHP implementation of the AMQP protocol. It's been tested against RabbitMQ.",
@@ -4230,21 +4230,22 @@
         },
         {
             "name": "sentry/sentry",
-            "version": "2.1.3",
+            "version": "2.2.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/getsentry/sentry-php.git",
-                "reference": "41ef3b66c2a06e3510d6e128eec28acac388f770"
+                "reference": "5896f9f0a00a7525797764ba42091dfbde22a746"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/getsentry/sentry-php/zipball/41ef3b66c2a06e3510d6e128eec28acac388f770",
-                "reference": "41ef3b66c2a06e3510d6e128eec28acac388f770",
+                "url": "https://api.github.com/repos/getsentry/sentry-php/zipball/5896f9f0a00a7525797764ba42091dfbde22a746",
+                "reference": "5896f9f0a00a7525797764ba42091dfbde22a746",
                 "shasum": ""
             },
             "require": {
                 "ext-json": "*",
                 "ext-mbstring": "*",
+                "guzzlehttp/promises": "^1.3",
                 "jean85/pretty-package-versions": "^1.2",
                 "php": "^7.1",
                 "php-http/async-client-implementation": "^1.0",
@@ -4265,20 +4266,22 @@
                 "friendsofphp/php-cs-fixer": "^2.13",
                 "monolog/monolog": "^1.3|^2.0",
                 "php-http/mock-client": "^1.0",
-                "phpstan/phpstan": "^0.10.3",
-                "phpstan/phpstan-phpunit": "^0.10",
-                "phpunit/phpunit": "^7.0",
-                "symfony/phpunit-bridge": "^4.3"
+                "phpstan/extension-installer": "^1.0",
+                "phpstan/phpstan": "^0.11",
+                "phpstan/phpstan-phpunit": "^0.11",
+                "phpunit/phpunit": "^7.5",
+                "symfony/phpunit-bridge": "^4.3",
+                "vimeo/psalm": "^3.4"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.1.x-dev"
+                    "dev-develop": "2.2-dev"
                 }
             },
             "autoload": {
                 "files": [
-                    "src/Sdk.php"
+                    "src/functions.php"
                 ],
                 "psr-4": {
                     "Sentry\\": "src/"
@@ -4305,20 +4308,20 @@
                 "logging",
                 "sentry"
             ],
-            "time": "2019-09-06T16:10:38+00:00"
+            "time": "2019-09-23T11:52:12+00:00"
         },
         {
             "name": "sentry/sentry-symfony",
-            "version": "3.1.0",
+            "version": "3.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/getsentry/sentry-symfony.git",
-                "reference": "0a12cde953e60e35cdf2f6ca3a80a8def641ce33"
+                "reference": "62d5c9d280044283d898d262bdae4062d02039bc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/getsentry/sentry-symfony/zipball/0a12cde953e60e35cdf2f6ca3a80a8def641ce33",
-                "reference": "0a12cde953e60e35cdf2f6ca3a80a8def641ce33",
+                "url": "https://api.github.com/repos/getsentry/sentry-symfony/zipball/62d5c9d280044283d898d262bdae4062d02039bc",
+                "reference": "62d5c9d280044283d898d262bdae4062d02039bc",
                 "shasum": ""
             },
             "require": {
@@ -4335,12 +4338,16 @@
             "require-dev": {
                 "friendsofphp/php-cs-fixer": "^2.8",
                 "jangregor/phpstan-prophecy": "^0.3.0",
+                "monolog/monolog": "^1.11||^2.0",
                 "php-http/mock-client": "^1.0",
                 "phpstan/phpstan": "^0.11",
                 "phpstan/phpstan-phpunit": "^0.11",
                 "phpunit/phpunit": "^7.5",
                 "scrutinizer/ocular": "^1.4",
                 "symfony/expression-language": "^2.8||^3.0||^4.0"
+            },
+            "suggest": {
+                "monolog/monolog": "Required to use the Monolog handler"
             },
             "type": "symfony-bundle",
             "extra": {
@@ -4377,7 +4384,7 @@
                 "sentry",
                 "symfony"
             ],
-            "time": "2019-07-02T08:46:15+00:00"
+            "time": "2019-10-04T13:26:24+00:00"
         },
         {
             "name": "simplepie/simplepie",
@@ -4481,7 +4488,7 @@
             ],
             "authors": [
                 {
-                    "name": "Sebastien Malot",
+                    "name": "Sebastien MALOT",
                     "email": "sebastien@malot.fr"
                 }
             ],
@@ -5532,14 +5539,14 @@
             "authors": [
                 {
                     "name": "Nicola Asuni",
+                    "role": "Main developer",
                     "email": "info@tecnick.com",
-                    "homepage": "http://nicolaasuni.tecnick.com",
-                    "role": "Main developer"
+                    "homepage": "http://nicolaasuni.tecnick.com"
                 },
                 {
                     "name": "wallabag/core",
-                    "homepage": "https://www.wallabag.org",
-                    "role": "Developers"
+                    "role": "Developers",
+                    "homepage": "https://www.wallabag.org"
                 }
             ],
             "description": "Keeping a working 6.2.x TCPDF version.",
@@ -6684,9 +6691,9 @@
             "authors": [
                 {
                     "name": "Kitamura Satoshi",
+                    "role": "Original creator",
                     "email": "with.no.parachute@gmail.com",
-                    "homepage": "https://www.facebook.com/satooshi.jp",
-                    "role": "Original creator"
+                    "homepage": "https://www.facebook.com/satooshi.jp"
                 },
                 {
                     "name": "Takashi Matsuo",
