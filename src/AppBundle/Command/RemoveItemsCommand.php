@@ -45,7 +45,7 @@ class RemoveItemsCommand extends Command
         $store = new FlockStore(sys_get_temp_dir());
         $factory = new Factory($store);
 
-        $lock = $factory->createLock($this->getName());
+        $lock = $factory->createLock((string) $this->getName());
 
         if (!$lock->acquire()) {
             $output->writeLn('<error>The command is already running in another process.</error>');
