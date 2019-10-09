@@ -65,7 +65,7 @@ class FetchItemsCommand extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $lock = new LockHandler($this->getName());
+        $lock = new LockHandler((string) $this->getName());
 
         if (!$lock->lock()) {
             $output->writeLn('<error>The command is already running in another process.</error>');
