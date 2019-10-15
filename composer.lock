@@ -1440,13 +1440,13 @@
             "authors": [
                 {
                     "name": "Multiple users",
-                    "homepage": "https://code.google.com/p/html5lib/",
-                    "role": "Original developers"
+                    "role": "Original developers",
+                    "homepage": "https://code.google.com/p/html5lib/"
                 },
                 {
                     "name": "Sébastien Lavoie",
-                    "homepage": "http://blog.lavoie.sl",
-                    "role": "Packager"
+                    "role": "Packager",
+                    "homepage": "http://blog.lavoie.sl"
                 },
                 {
                     "name": "didier Belot",
@@ -1995,13 +1995,13 @@
             "authors": [
                 {
                     "name": "Jeremy Benoist",
-                    "email": "jeremy.benoist@gmail.com",
-                    "role": "Developer"
+                    "role": "Developer",
+                    "email": "jeremy.benoist@gmail.com"
                 },
                 {
                     "name": "FiveFilters.org",
-                    "email": "fivefilters@fivefilters.org",
-                    "role": "Developer (original version)"
+                    "role": "Developer (original version)",
+                    "email": "fivefilters@fivefilters.org"
                 }
             ],
             "description": "Graby helps you extract article content from web pages",
@@ -2009,16 +2009,16 @@
         },
         {
             "name": "j0k3r/graby-site-config",
-            "version": "1.0.92",
+            "version": "1.0.93",
             "source": {
                 "type": "git",
                 "url": "https://github.com/j0k3r/graby-site-config.git",
-                "reference": "7c00db0548046709510cd4137432cf6c4a0c452f"
+                "reference": "018ebc5ccd8e631243fcc515fb05b39bac423b31"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/j0k3r/graby-site-config/zipball/7c00db0548046709510cd4137432cf6c4a0c452f",
-                "reference": "7c00db0548046709510cd4137432cf6c4a0c452f",
+                "url": "https://api.github.com/repos/j0k3r/graby-site-config/zipball/018ebc5ccd8e631243fcc515fb05b39bac423b31",
+                "reference": "018ebc5ccd8e631243fcc515fb05b39bac423b31",
                 "shasum": ""
             },
             "require": {
@@ -2045,7 +2045,7 @@
                 }
             ],
             "description": "Graby site config files",
-            "time": "2019-10-04T14:44:36+00:00"
+            "time": "2019-10-15T15:51:35+00:00"
         },
         {
             "name": "j0k3r/httplug-ssrf-plugin",
@@ -2221,25 +2221,25 @@
             "authors": [
                 {
                     "name": "Keyvan Minoukadeh",
+                    "role": "Developer (ported original JS code to PHP)",
                     "email": "keyvan@keyvan.net",
-                    "homepage": "http://keyvan.net",
-                    "role": "Developer (ported original JS code to PHP)"
+                    "homepage": "http://keyvan.net"
                 },
                 {
                     "name": "Arc90",
-                    "homepage": "http://arc90.com",
-                    "role": "Developer (original JS version)"
+                    "role": "Developer (original JS version)",
+                    "homepage": "http://arc90.com"
                 },
                 {
                     "name": "Jeremy Benoist",
+                    "role": "Developer",
                     "email": "jeremy.benoist@gmail.com",
-                    "homepage": "http://www.j0k3r.net",
-                    "role": "Developer"
+                    "homepage": "http://www.j0k3r.net"
                 },
                 {
                     "name": "DitherSky",
-                    "homepage": "https://github.com/Dither",
-                    "role": "Developer (https://github.com/Dither/full-text-rss)"
+                    "role": "Developer (https://github.com/Dither/full-text-rss)",
+                    "homepage": "https://github.com/Dither"
                 }
             ],
             "description": "Automatic article extraction from HTML",
@@ -4229,16 +4229,16 @@
         },
         {
             "name": "sentry/sentry",
-            "version": "2.2.1",
+            "version": "2.2.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/getsentry/sentry-php.git",
-                "reference": "5896f9f0a00a7525797764ba42091dfbde22a746"
+                "reference": "217c9e550eb3e06bbe48a4da4031223e1aab76f0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/getsentry/sentry-php/zipball/5896f9f0a00a7525797764ba42091dfbde22a746",
-                "reference": "5896f9f0a00a7525797764ba42091dfbde22a746",
+                "url": "https://api.github.com/repos/getsentry/sentry-php/zipball/217c9e550eb3e06bbe48a4da4031223e1aab76f0",
+                "reference": "217c9e550eb3e06bbe48a4da4031223e1aab76f0",
                 "shasum": ""
             },
             "require": {
@@ -4307,7 +4307,7 @@
                 "logging",
                 "sentry"
             ],
-            "time": "2019-09-23T11:52:12+00:00"
+            "time": "2019-10-10T08:16:00+00:00"
         },
         {
             "name": "sentry/sentry-symfony",
@@ -4487,7 +4487,7 @@
             ],
             "authors": [
                 {
-                    "name": "Sebastien Malot",
+                    "name": "Sebastien MALOT",
                     "email": "sebastien@malot.fr"
                 }
             ],
@@ -5537,14 +5537,14 @@
             "authors": [
                 {
                     "name": "Nicola Asuni",
+                    "role": "Main developer",
                     "email": "info@tecnick.com",
-                    "homepage": "http://nicolaasuni.tecnick.com",
-                    "role": "Main developer"
+                    "homepage": "http://nicolaasuni.tecnick.com"
                 },
                 {
                     "name": "wallabag/core",
-                    "homepage": "https://www.wallabag.org",
-                    "role": "Developers"
+                    "role": "Developers",
+                    "homepage": "https://www.wallabag.org"
                 }
             ],
             "description": "Keeping a working 6.2.x TCPDF version.",
@@ -5562,16 +5562,16 @@
         },
         {
             "name": "zendframework/zend-code",
-            "version": "3.3.2",
+            "version": "3.4.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/zendframework/zend-code.git",
-                "reference": "936fa7ad4d53897ea3e3eb41b5b760828246a20b"
+                "reference": "46feaeecea14161734b56c1ace74f28cb329f194"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/zendframework/zend-code/zipball/936fa7ad4d53897ea3e3eb41b5b760828246a20b",
-                "reference": "936fa7ad4d53897ea3e3eb41b5b760828246a20b",
+                "url": "https://api.github.com/repos/zendframework/zend-code/zipball/46feaeecea14161734b56c1ace74f28cb329f194",
+                "reference": "46feaeecea14161734b56c1ace74f28cb329f194",
                 "shasum": ""
             },
             "require": {
@@ -5581,7 +5581,7 @@
             "require-dev": {
                 "doctrine/annotations": "^1.0",
                 "ext-phar": "*",
-                "phpunit/phpunit": "^7.5.15",
+                "phpunit/phpunit": "^7.5.16 || ^8.4",
                 "zendframework/zend-coding-standard": "^1.0",
                 "zendframework/zend-stdlib": "^2.7 || ^3.0"
             },
@@ -5592,8 +5592,8 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "3.3.x-dev",
-                    "dev-develop": "3.4.x-dev"
+                    "dev-master": "3.4.x-dev",
+                    "dev-develop": "3.5.x-dev"
                 }
             },
             "autoload": {
@@ -5611,20 +5611,20 @@
                 "code",
                 "zf"
             ],
-            "time": "2019-08-31T14:14:34+00:00"
+            "time": "2019-10-05T23:18:22+00:00"
         },
         {
             "name": "zendframework/zend-diactoros",
-            "version": "2.1.3",
+            "version": "2.1.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/zendframework/zend-diactoros.git",
-                "reference": "279723778c40164bcf984a2df12ff2c6ec5e61c1"
+                "reference": "6dcf9e760a6b476f3e9d80abbc9ce9c4aa921f9c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/zendframework/zend-diactoros/zipball/279723778c40164bcf984a2df12ff2c6ec5e61c1",
-                "reference": "279723778c40164bcf984a2df12ff2c6ec5e61c1",
+                "url": "https://api.github.com/repos/zendframework/zend-diactoros/zipball/6dcf9e760a6b476f3e9d80abbc9ce9c4aa921f9c",
+                "reference": "6dcf9e760a6b476f3e9d80abbc9ce9c4aa921f9c",
                 "shasum": ""
             },
             "require": {
@@ -5637,6 +5637,7 @@
                 "psr/http-message-implementation": "1.0"
             },
             "require-dev": {
+                "ext-curl": "*",
                 "ext-dom": "*",
                 "ext-libxml": "*",
                 "http-interop/http-factory-tests": "^0.5.0",
@@ -5677,7 +5678,7 @@
                 "psr",
                 "psr-7"
             ],
-            "time": "2019-07-10T16:13:25+00:00"
+            "time": "2019-10-10T17:38:20+00:00"
         },
         {
             "name": "zendframework/zend-eventmanager",
@@ -6689,9 +6690,9 @@
             "authors": [
                 {
                     "name": "Kitamura Satoshi",
+                    "role": "Original creator",
                     "email": "with.no.parachute@gmail.com",
-                    "homepage": "https://www.facebook.com/satooshi.jp",
-                    "role": "Original creator"
+                    "homepage": "https://www.facebook.com/satooshi.jp"
                 },
                 {
                     "name": "Takashi Matsuo",
