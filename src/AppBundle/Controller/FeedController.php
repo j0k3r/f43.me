@@ -95,8 +95,6 @@ class FeedController extends Controller
      *
      * @Route("/feed/create", name="feed_create", methods={"POST"})
      *
-     * @param Request $request
-     *
      * @return RedirectResponse|Response
      */
     public function createAction(Request $request, EntityManagerInterface $em, Session $session, EventDispatcherInterface $eventDispatcher)

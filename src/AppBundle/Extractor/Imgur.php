@@ -10,9 +10,6 @@ class Imgur extends AbstractExtractor
     protected $hash = null;
     protected $type = null;
 
-    /**
-     * @param Client $imgurClient
-     */
     public function __construct(Client $imgurClient)
     {
         $this->imgurClient = $imgurClient;

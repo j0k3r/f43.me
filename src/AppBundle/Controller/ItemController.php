@@ -46,8 +46,7 @@ class ItemController extends Controller
      *
      * @Route("/feed/{slug}/items/deleteAll", name="item_delete_all", methods={"POST"})
      *
-     * @param Request $request
-     * @param Feed    $feed    The document Feed (retrieving for a ParamConverter with the slug)
+     * @param Feed $feed The document Feed (retrieving for a ParamConverter with the slug)
      *
      * @return RedirectResponse
      */
@@ -110,8 +109,7 @@ class ItemController extends Controller
      *
      * @Route("/feed/{slug}/previewItem", name="item_preview_new", methods={"GET"})
      *
-     * @param Request $request
-     * @param Feed    $feed    The document Feed (retrieving for a ParamConverter with the slug)
+     * @param Feed $feed The document Feed (retrieving for a ParamConverter with the slug)
      *
      * @return Response
      */

@@ -15,9 +15,6 @@ class DefaultImprover
     protected $itemContent;
     protected $client;
 
-    /**
-     * @param HttpMethodsClientInterface $client
-     */
     public function __construct(HttpMethodsClientInterface $client)
     {
         $this->client = $client;

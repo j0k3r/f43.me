@@ -32,8 +32,6 @@ class ItemSubscriber
      *
      * http://nathangrigg.net/2012/09/real-time-publishing/
      *
-     * @param ItemsCachedEvent $event
-     *
      * @return bool
      */
     public function pingHub(ItemsCachedEvent $event)

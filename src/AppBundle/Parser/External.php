@@ -15,8 +15,7 @@ class External extends AbstractParser
     protected $urlApi;
 
     /**
-     * @param HttpMethodsClientInterface $client
-     * @param string                     $urlApi Mercury API url
+     * @param string $urlApi Mercury API url
      */
     public function __construct(HttpMethodsClientInterface $client, $urlApi)
     {

@@ -15,8 +15,7 @@ class ConverterChain
     /**
      * Add an converter to the chain.
      *
-     * @param AbstractConverter $converter
-     * @param string            $alias
+     * @param string $alias
      */
     public function addConverter(AbstractConverter $converter, $alias)
     {

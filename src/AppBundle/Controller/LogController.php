@@ -52,8 +52,7 @@ class LogController extends Controller
      *
      * @Route("/feed/{slug}/logs/deleteAll", name="log_delete_all", methods={"POST"})
      *
-     * @param Request $request
-     * @param Feed    $feed    The document Feed (retrieving for a ParamConverter with the slug)
+     * @param Feed $feed The document Feed (retrieving for a ParamConverter with the slug)
      *
      * @return RedirectResponse
      */

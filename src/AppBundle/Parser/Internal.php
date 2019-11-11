@@ -12,9 +12,6 @@ class Internal extends AbstractParser
 {
     protected $graby;
 
-    /**
-     * @param Graby $graby
-     */
     public function __construct(Graby $graby)
     {
         $this->graby = $graby;
