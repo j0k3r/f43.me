@@ -15,8 +15,7 @@ class ImproverChain
     /**
      * Add an improver to the chain.
      *
-     * @param DefaultImprover $improver
-     * @param string          $alias
+     * @param string $alias
      */
     public function addImprover(DefaultImprover $improver, $alias)
     {

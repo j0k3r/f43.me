@@ -24,11 +24,6 @@ class Extractor
 
     /**
      * Content Extractor will use Extractor, Improver & Parser to get the readable content.
-     *
-     * @param ExtractorChain $extractorChain
-     * @param ImproverChain  $improverChain
-     * @param ConverterChain $converterChain
-     * @param ParserChain    $parserChain
      */
     public function __construct(ExtractorChain $extractorChain, ImproverChain $improverChain, ConverterChain $converterChain, ParserChain $parserChain)
     {

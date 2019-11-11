@@ -16,8 +16,6 @@ class NewFeedEvent extends Event
 
     /**
      * Store slug feed that need to be dispatched.
-     *
-     * @param Feed $feed
      */
     public function __construct(Feed $feed)
     {

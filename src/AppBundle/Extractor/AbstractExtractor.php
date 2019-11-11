@@ -20,9 +20,6 @@ abstract class AbstractExtractor implements LoggerAwareInterface
         $this->logger = $logger;
     }
 
-    /**
-     * @param HttpMethodsClientInterface $client
-     */
     public function setClient(HttpMethodsClientInterface $client)
     {
         $this->client = $client;
@@ -46,8 +43,6 @@ abstract class AbstractExtractor implements LoggerAwareInterface
 
     /**
      * Generic method to retrive the json data from a response.
-     *
-     * @param ResponseInterface $response
      *
      * @return array
      */

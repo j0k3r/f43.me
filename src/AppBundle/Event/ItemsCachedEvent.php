@@ -15,8 +15,6 @@ class ItemsCachedEvent extends Event
 
     /**
      * Store slug feeds that need to be dispatched.
-     *
-     * @param array $feedSlugs
      */
     public function __construct(array $feedSlugs)
     {

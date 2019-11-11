@@ -14,8 +14,6 @@ class AppTestCase extends TestCase
     /**
      * Return a mocked client with some responses.
      *
-     * @param array $responses
-     *
      * @return HttpMethodsClient
      */
     public static function getMockClient(array $responses = [])

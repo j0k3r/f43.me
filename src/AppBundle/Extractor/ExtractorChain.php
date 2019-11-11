@@ -15,8 +15,7 @@ class ExtractorChain
     /**
      * Add an extractor to the chain.
      *
-     * @param AbstractExtractor $extractor
-     * @param string            $alias
+     * @param string $alias
      */
     public function addExtractor(AbstractExtractor $extractor, $alias)
     {

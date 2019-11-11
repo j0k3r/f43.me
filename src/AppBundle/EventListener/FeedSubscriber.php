@@ -25,8 +25,6 @@ class FeedSubscriber
      * Push the new feed in the queue so new items will be fetched instantly.
      * In case RabbitMQ isn't well configured avoid exception and let the default command fetch new items.
      *
-     * @param NewFeedEvent $event
-     *
      * @return bool
      */
     public function sync(NewFeedEvent $event)
