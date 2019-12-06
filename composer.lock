@@ -8,16 +8,16 @@
     "packages": [
         {
             "name": "beberlei/doctrineextensions",
-            "version": "v1.2.5",
+            "version": "v1.2.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/beberlei/DoctrineExtensions.git",
-                "reference": "fccc6a90f9d30a7f73cb3506e7b058ced37bbf03"
+                "reference": "af72c4a136b744f1268ca8bb4da47a2f8af78f86"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/beberlei/DoctrineExtensions/zipball/fccc6a90f9d30a7f73cb3506e7b058ced37bbf03",
-                "reference": "fccc6a90f9d30a7f73cb3506e7b058ced37bbf03",
+                "url": "https://api.github.com/repos/beberlei/DoctrineExtensions/zipball/af72c4a136b744f1268ca8bb4da47a2f8af78f86",
+                "reference": "af72c4a136b744f1268ca8bb4da47a2f8af78f86",
                 "shasum": ""
             },
             "require": {
@@ -58,7 +58,7 @@
                 "doctrine",
                 "orm"
             ],
-            "time": "2019-12-04T13:18:58+00:00"
+            "time": "2019-12-05T09:49:04+00:00"
         },
         {
             "name": "behat/transliterator",
