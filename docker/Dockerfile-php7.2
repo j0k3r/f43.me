@@ -2,7 +2,7 @@ FROM php:7.2-fpm
 
 # Install nginx & ruby stuff (for sass)
 RUN apt-get update \
-    && apt-get install -y -q nginx libssl-dev build-essential vim git curl ruby-dev rubygems zlib1g-dev
+    && apt-get install -y -q nginx libssl-dev build-essential vim git curl ruby-dev rubygems zlib1g-dev apt-utils
 
 RUN pecl install xdebug \
     && docker-php-ext-enable xdebug \
