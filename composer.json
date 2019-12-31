@@ -27,7 +27,7 @@
         }
     ],
     "require": {
-        "php": "^7.1",
+        "php": "^7.2",
         "beberlei/doctrineextensions": "^1.2",
         "doctrine/doctrine-bundle": "^1.6",
         "doctrine/doctrine-migrations-bundle": "^2.0",
@@ -81,7 +81,7 @@
     },
     "config": {
         "platform": {
-            "php": "7.1"
+            "php": "7.2"
         },
         "bin-dir": "bin",
         "sort-packages": true
