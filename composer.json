@@ -41,8 +41,8 @@
         "php-http/guzzle6-adapter": "^2.0",
         "php-http/httplug-bundle": "^1.14",
         "ricardoper/twitteroauth": "~1.0",
-        "sensio/distribution-bundle": "^5.0.19",
-        "sensio/framework-extra-bundle": "^5.2.1",
+        "sensio/distribution-bundle": "^5.0",
+        "sensio/framework-extra-bundle": "^5.2",
         "sentry/sentry-symfony": "^3.0",
         "simplepie/simplepie": "~1.4",
         "stof/doctrine-extensions-bundle": "~1.1",
@@ -81,7 +81,7 @@
     },
     "config": {
         "platform": {
-            "php": "7.2"
+            "php": "7.2.5"
         },
         "bin-dir": "bin",
         "sort-packages": true
