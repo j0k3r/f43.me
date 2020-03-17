@@ -4165,16 +4165,16 @@
         },
         {
             "name": "sentry/sentry",
-            "version": "2.3.1",
+            "version": "2.3.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/getsentry/sentry-php.git",
-                "reference": "6d736f8cefa989f6171e30e1d1bfa214f7f5ab58"
+                "reference": "b3e71feb32f1787b66a3b4fdb8686972e9c7ba94"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/getsentry/sentry-php/zipball/6d736f8cefa989f6171e30e1d1bfa214f7f5ab58",
-                "reference": "6d736f8cefa989f6171e30e1d1bfa214f7f5ab58",
+                "url": "https://api.github.com/repos/getsentry/sentry-php/zipball/b3e71feb32f1787b66a3b4fdb8686972e9c7ba94",
+                "reference": "b3e71feb32f1787b66a3b4fdb8686972e9c7ba94",
                 "shasum": ""
             },
             "require": {
@@ -4246,25 +4246,24 @@
                 "logging",
                 "sentry"
             ],
-            "time": "2020-01-23T09:40:22+00:00"
+            "time": "2020-03-06T09:24:53+00:00"
         },
         {
             "name": "sentry/sentry-symfony",
-            "version": "3.4.3",
+            "version": "3.4.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/getsentry/sentry-symfony.git",
-                "reference": "2190ea77c522eabce0ab63b9179376432b5d2f5d"
+                "reference": "d48d50dfdcb93df1eb00719418a43f5976743f71"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/getsentry/sentry-symfony/zipball/2190ea77c522eabce0ab63b9179376432b5d2f5d",
-                "reference": "2190ea77c522eabce0ab63b9179376432b5d2f5d",
+                "url": "https://api.github.com/repos/getsentry/sentry-symfony/zipball/d48d50dfdcb93df1eb00719418a43f5976743f71",
+                "reference": "d48d50dfdcb93df1eb00719418a43f5976743f71",
                 "shasum": ""
             },
             "require": {
                 "jean85/pretty-package-versions": "^1.0",
-                "ocramius/package-versions": "^1.3.0",
                 "php": "^7.1",
                 "sentry/sdk": "^2.1",
                 "symfony/config": "^3.4||^4.0||^5.0",
@@ -4328,7 +4327,7 @@
                 "sentry",
                 "symfony"
             ],
-            "time": "2020-02-03T08:58:56+00:00"
+            "time": "2020-03-16T09:07:07+00:00"
         },
         {
             "name": "simplepie/simplepie",
@@ -4655,16 +4654,16 @@
         },
         {
             "name": "symfony/http-client",
-            "version": "v5.0.4",
+            "version": "v5.0.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/http-client.git",
-                "reference": "4240ae267d89db5b694bdb5712e691b1e24cdc26"
+                "reference": "2edd40250649944775aad5d6b4cc8e164c1e9d72"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/http-client/zipball/4240ae267d89db5b694bdb5712e691b1e24cdc26",
-                "reference": "4240ae267d89db5b694bdb5712e691b1e24cdc26",
+                "url": "https://api.github.com/repos/symfony/http-client/zipball/2edd40250649944775aad5d6b4cc8e164c1e9d72",
+                "reference": "2edd40250649944775aad5d6b4cc8e164c1e9d72",
                 "shasum": ""
             },
             "require": {
@@ -4719,7 +4718,7 @@
             ],
             "description": "Symfony HttpClient component",
             "homepage": "https://symfony.com",
-            "time": "2020-01-31T09:13:47+00:00"
+            "time": "2020-02-26T22:30:10+00:00"
         },
         {
             "name": "symfony/http-client-contracts",
@@ -5368,16 +5367,16 @@
         },
         {
             "name": "symfony/polyfill-php73",
-            "version": "v1.13.1",
+            "version": "v1.14.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/polyfill-php73.git",
-                "reference": "4b0e2222c55a25b4541305a053013d5647d3a25f"
+                "reference": "5e66a0fa1070bf46bec4bea7962d285108edd675"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/polyfill-php73/zipball/4b0e2222c55a25b4541305a053013d5647d3a25f",
-                "reference": "4b0e2222c55a25b4541305a053013d5647d3a25f",
+                "url": "https://api.github.com/repos/symfony/polyfill-php73/zipball/5e66a0fa1070bf46bec4bea7962d285108edd675",
+                "reference": "5e66a0fa1070bf46bec4bea7962d285108edd675",
                 "shasum": ""
             },
             "require": {
@@ -5386,7 +5385,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.13-dev"
+                    "dev-master": "1.14-dev"
                 }
             },
             "autoload": {
@@ -5422,7 +5421,7 @@
                 "portable",
                 "shim"
             ],
-            "time": "2019-11-27T16:25:15+00:00"
+            "time": "2020-01-13T11:15:53+00:00"
         },
         {
             "name": "symfony/polyfill-util",
@@ -5478,16 +5477,16 @@
         },
         {
             "name": "symfony/polyfill-uuid",
-            "version": "v1.13.1",
+            "version": "v1.14.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/polyfill-uuid.git",
-                "reference": "7d4215b6944add5073f0ec313a21e1bc2520520d"
+                "reference": "80781e68dbd85373eb36a1b67608b1a731931000"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/polyfill-uuid/zipball/7d4215b6944add5073f0ec313a21e1bc2520520d",
-                "reference": "7d4215b6944add5073f0ec313a21e1bc2520520d",
+                "url": "https://api.github.com/repos/symfony/polyfill-uuid/zipball/80781e68dbd85373eb36a1b67608b1a731931000",
+                "reference": "80781e68dbd85373eb36a1b67608b1a731931000",
                 "shasum": ""
             },
             "require": {
@@ -5500,7 +5499,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.13-dev"
+                    "dev-master": "1.14-dev"
                 }
             },
             "autoload": {
@@ -5533,7 +5532,7 @@
                 "portable",
                 "uuid"
             ],
-            "time": "2019-11-30T08:58:35+00:00"
+            "time": "2020-01-13T11:15:53+00:00"
         },
         {
             "name": "symfony/service-contracts",
@@ -7575,7 +7574,7 @@
                 }
             ],
             "description": "This bundle generates code for you",
-            "abandoned": true,
+            "abandoned": "symfony/maker-bundle",
             "time": "2017-12-07T15:36:41+00:00"
         },
         {
