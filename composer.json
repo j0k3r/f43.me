@@ -98,7 +98,7 @@
         },
         "installer-paths": {
             "./app/Resources/lib/foundation/": [
-                "zurb/foundation"
+                "custom-zurb/foundation"
             ]
         }
     },
