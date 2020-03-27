@@ -50,7 +50,7 @@
         "symfony/monolog-bundle": "^3.1.0",
         "symfony/symfony": "3.4.*",
         "twig/extensions": "~1.1",
-        "zurb/foundation": "4.3.2"
+        "custom-zurb/foundation": "4.3.2"
     },
     "require-dev": {
         "friendsofphp/php-cs-fixer": "~2.0",
@@ -106,7 +106,7 @@
         {
             "type": "package",
             "package": {
-                "name": "zurb/foundation",
+                "name": "custom-zurb/foundation",
                 "version": "4.3.2",
                 "dist": {
                     "url": "https://wildtrip.s3-eu-west-1.amazonaws.com/foundation-sites-4.3.2.zip",
