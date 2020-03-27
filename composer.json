@@ -109,7 +109,7 @@
                 "name": "zurb/foundation",
                 "version": "4.3.2",
                 "dist": {
-                    "url": "https://github.com/zurb/foundation/archive/v4.3.2.zip",
+                    "url": "https://wildtrip.s3-eu-west-1.amazonaws.com/foundation-sites-4.3.2.zip",
                     "type": "zip"
                 }
             }
