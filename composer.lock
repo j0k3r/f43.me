@@ -3023,16 +3023,16 @@
         },
         {
             "name": "php-http/httplug-bundle",
-            "version": "1.17.0",
+            "version": "1.18.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-http/HttplugBundle.git",
-                "reference": "9a739ad8ae8ea7c3ab034d79e144746329c4a322"
+                "reference": "027dff799d50f32cb312f383eb631a035d820db2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-http/HttplugBundle/zipball/9a739ad8ae8ea7c3ab034d79e144746329c4a322",
-                "reference": "9a739ad8ae8ea7c3ab034d79e144746329c4a322",
+                "url": "https://api.github.com/repos/php-http/HttplugBundle/zipball/027dff799d50f32cb312f383eb631a035d820db2",
+                "reference": "027dff799d50f32cb312f383eb631a035d820db2",
                 "shasum": ""
             },
             "require": {
@@ -3057,9 +3057,9 @@
                 "php-http/guzzle6-adapter": "<1.1"
             },
             "require-dev": {
-                "guzzlehttp/psr7": "^1.0",
                 "matthiasnoback/symfony-dependency-injection-test": "^4.0",
                 "nyholm/nsa": "^1.1",
+                "nyholm/psr7": "^1.2.1",
                 "php-http/cache-plugin": "^1.7",
                 "php-http/guzzle6-adapter": "^1.1.1 || ^2.0.1",
                 "php-http/mock-client": "^1.2",
@@ -3121,7 +3121,7 @@
                 "message",
                 "php-http"
             ],
-            "time": "2019-12-27T10:34:17+00:00"
+            "time": "2020-03-30T07:21:02+00:00"
         },
         {
             "name": "php-http/logger-plugin",
@@ -4444,7 +4444,7 @@
             ],
             "authors": [
                 {
-                    "name": "Sebastien MALOT",
+                    "name": "Sebastien Malot",
                     "email": "sebastien@malot.fr"
                 }
             ],
@@ -4667,16 +4667,16 @@
         },
         {
             "name": "symfony/http-client",
-            "version": "v5.0.5",
+            "version": "v5.0.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/http-client.git",
-                "reference": "2edd40250649944775aad5d6b4cc8e164c1e9d72"
+                "reference": "14d386ae55b699ea9a0ddb872fa5f3e35219bba8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/http-client/zipball/2edd40250649944775aad5d6b4cc8e164c1e9d72",
-                "reference": "2edd40250649944775aad5d6b4cc8e164c1e9d72",
+                "url": "https://api.github.com/repos/symfony/http-client/zipball/14d386ae55b699ea9a0ddb872fa5f3e35219bba8",
+                "reference": "14d386ae55b699ea9a0ddb872fa5f3e35219bba8",
                 "shasum": ""
             },
             "require": {
@@ -4731,7 +4731,7 @@
             ],
             "description": "Symfony HttpClient component",
             "homepage": "https://symfony.com",
-            "time": "2020-02-26T22:30:10+00:00"
+            "time": "2020-03-27T16:56:45+00:00"
         },
         {
             "name": "symfony/http-client-contracts",
