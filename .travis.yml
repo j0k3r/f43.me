@@ -1,3 +1,5 @@
+dist: xenial
+os: linux
 language: php
 
 services:
@@ -8,7 +10,7 @@ php:
     - nightly
 
 # run build against nightly but allow them to fail
-matrix:
+jobs:
     fast_finish: true
     include:
         - php: 7.2
@@ -17,9 +19,6 @@ matrix:
           env: CS_FIXER=run
     allow_failures:
         - php: nightly
-
-# faster builds on new travis setup not using sudo
-sudo: false
 
 # cache vendor dirs
 cache:
