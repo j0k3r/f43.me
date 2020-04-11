@@ -7,6 +7,7 @@ use AppBundle\Entity\Feed;
 use AppBundle\Repository\FeedRepository;
 use AppBundle\Repository\ItemRepository;
 use Swarrot\Broker\Message;
+use Swarrot\SwarrotBundle\Broker\AmqpLibFactory;
 use Swarrot\SwarrotBundle\Broker\Publisher;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
@@ -24,8 +25,9 @@ class FetchItemsCommand extends Command
     private $router;
     private $domain;
     private $publisher;
+    private $amqplibFactory;
 
-    public function __construct(FeedRepository $feedRepository, ItemRepository $itemRepository, Import $contentImport, RouterInterface $router, Publisher $publisher, $domain)
+    public function __construct(FeedRepository $feedRepository, ItemRepository $itemRepository, Import $contentImport = null, RouterInterface $router, Publisher $publisher, $domain, AmqpLibFactory $amqplibFactory = null)
     {
         $this->feedRepository = $feedRepository;
         $this->itemRepository = $itemRepository;
@@ -33,6 +35,7 @@ class FetchItemsCommand extends Command
         $this->router = $router;
         $this->domain = $domain;
         $this->publisher = $publisher;
+        $this->amqplibFactory = $amqplibFactory;
 
         parent::__construct();
     }
@@ -65,6 +68,19 @@ class FetchItemsCommand extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
+        if ($input->getOption('use_queue') && null !== $this->amqplibFactory) {
+            // check that queue is empty before pushing new messages
+            $message = $this->amqplibFactory
+                ->getChannel('rabbitmq')
+                ->basic_get('f43.fetch_items');
+
+            if (null !== $message && 0 < $message->delivery_info['message_count']) {
+                $output->writeln('Current queue as too much messages (<error>' . $message->delivery_info['message_count'] . '</error>), <comment>skipping</comment>.');
+
+                return 1;
+            }
+        }
+
         $lock = new LockHandler((string) $this->getName());
 
         if (!$lock->lock()) {
@@ -118,12 +134,16 @@ class FetchItemsCommand extends Command
                 );
             }
 
-            $output->writeLn('<comment>' . \count($feeds) . '</comment> feeds queued.');
-        } else {
-            // let's import some stuff !
-            $totalCached = $this->contentImport->process($feeds);
-
-            $output->writeLn('<comment>' . $totalCached . '</comment> items cached.');
+            return $output->writeLn('<comment>' . \count($feeds) . '</comment> feeds queued.');
         }
+
+        if (null === $this->contentImport) {
+            return $output->writeLn('<error>contentImport is not defined?</error>');
+        }
+
+        // let's import some stuff !
+        $totalCached = $this->contentImport->process($feeds);
+
+        return $output->writeLn('<comment>' . $totalCached . '</comment> items cached.');
     }
 }

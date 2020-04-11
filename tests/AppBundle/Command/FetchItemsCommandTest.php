@@ -6,6 +6,7 @@ use AppBundle\Command\FetchItemsCommand;
 use AppBundle\Content\Import;
 use Monolog\Handler\TestHandler;
 use Monolog\Logger;
+use PhpAmqpLib\Message\AMQPMessage;
 use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -114,7 +115,8 @@ class FetchItemsCommandTest extends WebTestCase
             $import,
             $container->get('router.test'),
             $publisher,
-            'f43.me'
+            'f43.me',
+            $this->getAmqpMessage(0)
         ));
 
         $this->command = $application->find('feed:fetch-items');
@@ -188,6 +190,41 @@ class FetchItemsCommandTest extends WebTestCase
         $this->assertRegExp('`feeds queued.`', $this->commandTester->getDisplay());
     }
 
+    public function testCommandSyncAllUsersWithQueueFull()
+    {
+        /** @var \Symfony\Component\DependencyInjection\ContainerInterface */
+        $container = self::$kernel->getContainer();
+
+        $publisher = $this->getMockBuilder('Swarrot\SwarrotBundle\Broker\Publisher')
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $publisher->expects($this->any())
+            ->method('publish');
+
+        $application = new Application(static::$kernel);
+        $application->add(new FetchItemsCommand(
+            $container->get('app.repository.feed.test'),
+            $container->get('app.repository.item.test'),
+            null,
+            $container->get('router.test'),
+            $publisher,
+            'f43.me',
+            $this->getAmqpMessage(10)
+        ));
+
+        $command = $application->find('feed:fetch-items');
+        $commandTester = new CommandTester($command);
+
+        $commandTester->execute([
+            'command' => $command->getName(),
+            'age' => 'old',
+            '--use_queue' => true,
+        ], ['verbosity' => OutputInterface::VERBOSITY_VERBOSE]);
+
+        $this->assertContains('Current queue as too much messages (10), skipping.', $commandTester->getDisplay());
+    }
+
     /**
      * @see http://symfony.com/doc/current/components/console/helpers/dialoghelper.html#testing-a-command-which-expects-input
      *
@@ -205,5 +242,33 @@ class FetchItemsCommandTest extends WebTestCase
         rewind($stream);
 
         return $stream;
+    }
+
+    private function getAmqpMessage($totalMessage = 0)
+    {
+        $message = new AMQPMessage();
+        $message->delivery_info = [
+            'message_count' => $totalMessage,
+        ];
+
+        $amqpChannel = $this->getMockBuilder('PhpAmqpLib\Channel\AMQPChannel')
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $amqpChannel->expects($this->any())
+            ->method('basic_get')
+            ->with('f43.fetch_items')
+            ->willReturn($message);
+
+        $amqpLibFactory = $this->getMockBuilder('Swarrot\SwarrotBundle\Broker\AmqpLibFactory')
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $amqpLibFactory->expects($this->any())
+            ->method('getChannel')
+            ->with('rabbitmq')
+            ->willReturn($amqpChannel);
+
+        return $amqpLibFactory;
     }
 }
