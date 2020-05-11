@@ -4265,16 +4265,16 @@
         },
         {
             "name": "sentry/sentry-symfony",
-            "version": "3.5.0",
+            "version": "3.5.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/getsentry/sentry-symfony.git",
-                "reference": "6a4664c83f6a71717d45fcf8f30e067fa8da5cc0"
+                "reference": "b5d6407d4127b0be5b315768ee197e086b71f234"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/getsentry/sentry-symfony/zipball/6a4664c83f6a71717d45fcf8f30e067fa8da5cc0",
-                "reference": "6a4664c83f6a71717d45fcf8f30e067fa8da5cc0",
+                "url": "https://api.github.com/repos/getsentry/sentry-symfony/zipball/b5d6407d4127b0be5b315768ee197e086b71f234",
+                "reference": "b5d6407d4127b0be5b315768ee197e086b71f234",
                 "shasum": ""
             },
             "require": {
@@ -4347,7 +4347,7 @@
                 "sentry",
                 "symfony"
             ],
-            "time": "2020-05-04T08:36:42+00:00"
+            "time": "2020-05-07T13:11:22+00:00"
         },
         {
             "name": "simplepie/simplepie",
@@ -5387,16 +5387,16 @@
         },
         {
             "name": "symfony/polyfill-php73",
-            "version": "v1.15.0",
+            "version": "v1.16.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/polyfill-php73.git",
-                "reference": "0f27e9f464ea3da33cbe7ca3bdf4eb66def9d0f7"
+                "reference": "7e95fe59d12169fcf4041487e4bf34fca37ee0ed"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/polyfill-php73/zipball/0f27e9f464ea3da33cbe7ca3bdf4eb66def9d0f7",
-                "reference": "0f27e9f464ea3da33cbe7ca3bdf4eb66def9d0f7",
+                "url": "https://api.github.com/repos/symfony/polyfill-php73/zipball/7e95fe59d12169fcf4041487e4bf34fca37ee0ed",
+                "reference": "7e95fe59d12169fcf4041487e4bf34fca37ee0ed",
                 "shasum": ""
             },
             "require": {
@@ -5405,7 +5405,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.15-dev"
+                    "dev-master": "1.16-dev"
                 }
             },
             "autoload": {
@@ -5441,7 +5441,7 @@
                 "portable",
                 "shim"
             ],
-            "time": "2020-02-27T09:26:54+00:00"
+            "time": "2020-05-02T14:56:09+00:00"
         },
         {
             "name": "symfony/polyfill-util",
@@ -5497,16 +5497,16 @@
         },
         {
             "name": "symfony/polyfill-uuid",
-            "version": "v1.15.0",
+            "version": "v1.16.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/polyfill-uuid.git",
-                "reference": "2318f7f470a892867f3de602e403d006b1b9c9aa"
+                "reference": "6bb7ba3890d777d69d529000bf8dd2948a56c14c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/polyfill-uuid/zipball/2318f7f470a892867f3de602e403d006b1b9c9aa",
-                "reference": "2318f7f470a892867f3de602e403d006b1b9c9aa",
+                "url": "https://api.github.com/repos/symfony/polyfill-uuid/zipball/6bb7ba3890d777d69d529000bf8dd2948a56c14c",
+                "reference": "6bb7ba3890d777d69d529000bf8dd2948a56c14c",
                 "shasum": ""
             },
             "require": {
@@ -5519,7 +5519,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.15-dev"
+                    "dev-master": "1.16-dev"
                 }
             },
             "autoload": {
@@ -5552,7 +5552,7 @@
                 "portable",
                 "uuid"
             ],
-            "time": "2020-03-23T13:44:10+00:00"
+            "time": "2020-05-08T17:27:24+00:00"
         },
         {
             "name": "symfony/service-contracts",
