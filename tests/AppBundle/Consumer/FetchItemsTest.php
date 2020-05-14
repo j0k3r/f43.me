@@ -66,10 +66,10 @@ class FetchItemsTest extends WebTestCase
             ->disableOriginalConstructor()
             ->getMock();
         $doctrine->expects($this->once())
-            ->method('getEntityManager')
+            ->method('getManager')
             ->willReturn($em);
         $doctrine->expects($this->once())
-            ->method('resetEntityManager')
+            ->method('resetManager')
             ->willReturn($em);
 
         $contentImport = $this->getMockBuilder('AppBundle\Content\Import')

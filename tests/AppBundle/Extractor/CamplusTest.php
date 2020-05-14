@@ -54,10 +54,10 @@ class CamplusTest extends AppTestCase
 
         $camplus->match('http://campl.us/rL9Q');
 
-        $content = $camplus->getContent();
+        $content = (string) $camplus->getContent();
 
-        $this->assertContains('<h2>Photo from j0k</h2>', $content);
-        $this->assertContains('<p><img src="http://0.0.0.0/youpi.jpg" /></p>', $content);
+        $this->assertStringContainsString('<h2>Photo from j0k</h2>', $content);
+        $this->assertStringContainsString('<p><img src="http://0.0.0.0/youpi.jpg" /></p>', $content);
     }
 
     public function testContentWithException()

@@ -25,3 +25,4 @@
 !/bin/console
 !/bin/symfony_requirements
 /data/mysql
+.phpunit.result.cache

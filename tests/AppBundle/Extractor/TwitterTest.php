@@ -96,16 +96,16 @@ class TwitterTest extends TestCase
         $twitter = new Twitter($twitterOAuth);
         $twitter->match('https://twitter.com/DoerteDev/statuses/506522223860277248');
 
-        $content = $twitter->getContent();
+        $content = (string) $twitter->getContent();
 
-        $this->assertContains('the name', $content);
-        $this->assertContains('<a href="https://twitter.com/the_name">@the_name</a>', $content, 'username ok');
-        $this->assertContains('<a href="https://twitter.com/hashtag/awesome?src=hash">#awesome</a>', $content, 'Hashtag ok');
-        $this->assertContains('<a href="https://twitter.com/tweet">@tweet</a>', $content, 'mention ok');
-        $this->assertContains('<a href="http://1.1.1.1">http://1.1.1...</a>', $content, 'link ok');
-        $this->assertContains('Sun Oct 19', $content);
-        $this->assertContains('<img src="http://0.0.0.0/image.jpg" />', $content, 'media ok');
-        $this->assertContains('@myself', $content, 'quote status ok');
+        $this->assertStringContainsString('the name', $content);
+        $this->assertStringContainsString('<a href="https://twitter.com/the_name">@the_name</a>', $content, 'username ok');
+        $this->assertStringContainsString('<a href="https://twitter.com/hashtag/awesome?src=hash">#awesome</a>', $content, 'Hashtag ok');
+        $this->assertStringContainsString('<a href="https://twitter.com/tweet">@tweet</a>', $content, 'mention ok');
+        $this->assertStringContainsString('<a href="http://1.1.1.1">http://1.1.1...</a>', $content, 'link ok');
+        $this->assertStringContainsString('Sun Oct 19', $content);
+        $this->assertStringContainsString('<img src="http://0.0.0.0/image.jpg" />', $content, 'media ok');
+        $this->assertStringContainsString('@myself', $content, 'quote status ok');
     }
 
     public function testContentNoEntities()
@@ -133,12 +133,12 @@ class TwitterTest extends TestCase
         $twitter = new Twitter($twitterOAuth);
         $twitter->match('https://twitter.com/DoerteDev/statuses/506522223860277248');
 
-        $content = $twitter->getContent();
+        $content = (string) $twitter->getContent();
 
-        $this->assertContains('the name', $content);
-        $this->assertContains('the_name', $content);
-        $this->assertContains('my awesome tweet', $content);
-        $this->assertContains('Sun Oct 19', $content);
+        $this->assertStringContainsString('the name', $content);
+        $this->assertStringContainsString('the_name', $content);
+        $this->assertStringContainsString('my awesome tweet', $content);
+        $this->assertStringContainsString('Sun Oct 19', $content);
     }
 
     public function testContentBadResponse()

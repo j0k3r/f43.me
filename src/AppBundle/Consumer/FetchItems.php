@@ -51,11 +51,13 @@ class FetchItems implements ProcessorInterface
         $context = $this->router->getContext();
         $context->setHost($this->domain);
 
-        $em = $this->doctrine->getEntityManager();
+        /** @var \Doctrine\ORM\EntityManager */
+        $em = $this->doctrine->getManager();
 
         // in case of the manager is closed following a previous exception
         if (!$em->isOpen()) {
-            $em = $this->doctrine->resetEntityManager();
+            /** @var \Doctrine\ORM\EntityManager */
+            $em = $this->doctrine->resetManager();
 
             $this->contentImport->setEntityManager($em);
         }

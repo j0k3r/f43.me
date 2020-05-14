@@ -28,7 +28,7 @@ class ItemControllerTest extends FeedWebTestCase
         $client->request('GET', '/feed/nawak/items');
 
         $this->assertSame(404, $client->getResponse()->getStatusCode());
-        $this->assertContains('Feed object not found', $client->getResponse()->getContent());
+        $this->assertStringContainsString('Feed object not found', $client->getResponse()->getContent());
     }
 
     public function testIndex()
@@ -74,7 +74,7 @@ class ItemControllerTest extends FeedWebTestCase
         $client->request('GET', '/item/3456789/preview');
 
         $this->assertSame(404, $client->getResponse()->getStatusCode());
-        $this->assertContains('Item object not found', $client->getResponse()->getContent());
+        $this->assertStringContainsString('Item object not found', $client->getResponse()->getContent());
     }
 
     public function testTestItem()
@@ -97,7 +97,7 @@ class ItemControllerTest extends FeedWebTestCase
         $client->request('GET', '/feed/nawak/testItem');
 
         $this->assertSame(404, $client->getResponse()->getStatusCode());
-        $this->assertContains('Feed object not found', $client->getResponse()->getContent());
+        $this->assertStringContainsString('Feed object not found', $client->getResponse()->getContent());
     }
 
     public function testPreviewItemInternal()
@@ -138,7 +138,7 @@ class ItemControllerTest extends FeedWebTestCase
         $client->request('GET', '/feed/nawak/previewItem');
 
         $this->assertSame(404, $client->getResponse()->getStatusCode());
-        $this->assertContains('Feed object not found', $client->getResponse()->getContent());
+        $this->assertStringContainsString('Feed object not found', $client->getResponse()->getContent());
     }
 
     public function testDeleteAll()
@@ -152,11 +152,11 @@ class ItemControllerTest extends FeedWebTestCase
         $client->submit($form);
 
         $this->assertSame(302, $client->getResponse()->getStatusCode());
-        $this->assertContains('hackernews', $client->getResponse()->headers->get('location'));
+        $this->assertStringContainsString('hackernews', $client->getResponse()->headers->get('location'));
 
         $crawler = $client->followRedirect();
         $this->assertCount(1, $alert = $crawler->filter('div.alert-box')->extract(['_text']));
-        $this->assertContains('items deleted!', $alert[0]);
+        $this->assertStringContainsString('items deleted!', $alert[0]);
     }
 
     public function testDeleteAllFormInvalid()
@@ -166,7 +166,7 @@ class ItemControllerTest extends FeedWebTestCase
         $client->request('POST', '/feed/hackernews/items/deleteAll');
 
         $this->assertSame(302, $client->getResponse()->getStatusCode());
-        $this->assertContains('hackernews', $client->getResponse()->headers->get('location'));
+        $this->assertStringContainsString('hackernews', $client->getResponse()->headers->get('location'));
     }
 
     public function testDeleteAllBadSlug()
@@ -176,6 +176,6 @@ class ItemControllerTest extends FeedWebTestCase
         $client->request('POST', '/feed/nawak/items/deleteAll');
 
         $this->assertSame(404, $client->getResponse()->getStatusCode());
-        $this->assertContains('Feed object not found', $client->getResponse()->getContent());
+        $this->assertStringContainsString('Feed object not found', $client->getResponse()->getContent());
     }
 }

@@ -44,7 +44,7 @@ class LogControllerTest extends FeedWebTestCase
 
         $client->request('GET', '/feed/toto/logs');
         $this->assertSame(404, $client->getResponse()->getStatusCode());
-        $this->assertContains('Feed object not found', $client->getResponse()->getContent());
+        $this->assertStringContainsString('Feed object not found', $client->getResponse()->getContent());
     }
 
     public function testLogsFeed()
@@ -71,11 +71,11 @@ class LogControllerTest extends FeedWebTestCase
         $client->submit($form);
 
         $this->assertSame(302, $client->getResponse()->getStatusCode());
-        $this->assertContains('reddit', $client->getResponse()->headers->get('location'));
+        $this->assertStringContainsString('reddit', $client->getResponse()->headers->get('location'));
 
         $crawler = $client->followRedirect();
         $this->assertCount(1, $alert = $crawler->filter('div.alert-box')->extract(['_text']));
-        $this->assertContains('logs deleted!', $alert[0]);
+        $this->assertStringContainsString('logs deleted!', $alert[0]);
     }
 
     public function testDeleteAllFormInvalid()
@@ -85,7 +85,7 @@ class LogControllerTest extends FeedWebTestCase
         $client->request('POST', '/feed/reddit/logs/deleteAll');
 
         $this->assertSame(302, $client->getResponse()->getStatusCode());
-        $this->assertContains('reddit', $client->getResponse()->headers->get('location'));
+        $this->assertStringContainsString('reddit', $client->getResponse()->headers->get('location'));
     }
 
     public function testDeleteAllBadSlug()
@@ -95,6 +95,6 @@ class LogControllerTest extends FeedWebTestCase
         $client->request('POST', '/feed/nawak/logs/deleteAll');
 
         $this->assertSame(404, $client->getResponse()->getStatusCode());
-        $this->assertContains('Feed object not found', $client->getResponse()->getContent());
+        $this->assertStringContainsString('Feed object not found', $client->getResponse()->getContent());
     }
 }

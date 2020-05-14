@@ -65,7 +65,7 @@ class InstagramTest extends TestCase
 
         $instaConverter = new Instagram($instaExtractor);
         $instaConverter->setLogger(new NullLogger());
-        $this->assertContains($expected, $instaConverter->convert($html));
+        $this->assertStringContainsString($expected, $instaConverter->convert($html));
     }
 
     public function testMatchButInstaExtractFail()

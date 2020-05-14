@@ -67,10 +67,11 @@ class FlickrTest extends AppTestCase
         $flickr->match('http://www.flickr.com/photos/palnick/15000967102/');
 
         // consecutive calls
-        $content = $flickr->getContent();
-        $this->assertContains('<a data-flickr-embed="true"></a>', $content);
-        $this->assertContains('<h2>title</h2>', $content);
-        $this->assertContains('data-flickr-embed', $content);
+        $content = (string) $flickr->getContent();
+
+        $this->assertStringContainsString('<a data-flickr-embed="true"></a>', $content);
+        $this->assertStringContainsString('<h2>title</h2>', $content);
+        $this->assertStringContainsString('data-flickr-embed', $content);
         // this one will got an empty array
         $this->assertEmpty($flickr->getContent());
         // this one will catch an exception
@@ -107,10 +108,11 @@ class FlickrTest extends AppTestCase
         $flickr->match('https://www.flickr.com/photos/europeanspaceagency/sets/72157638315605535/');
 
         // consecutive calls
-        $content = $flickr->getContent();
-        $this->assertContains('<a data-flickr-embed="true"></a>', $content);
-        $this->assertContains('<h2>title</h2>', $content);
-        $this->assertContains('data-flickr-embed', $content);
+        $content = (string) $flickr->getContent();
+
+        $this->assertStringContainsString('<a data-flickr-embed="true"></a>', $content);
+        $this->assertStringContainsString('<h2>title</h2>', $content);
+        $this->assertStringContainsString('data-flickr-embed', $content);
         // this one will got an empty array
         $this->assertEmpty($flickr->getContent());
         // this one will catch an exception

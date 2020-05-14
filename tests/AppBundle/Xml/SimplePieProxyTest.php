@@ -9,12 +9,12 @@ class SimplePieProxyTest extends TestCase
 {
     protected $cacheDir;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->cacheDir = __DIR__ . '/../../../../../app/cache/tmp-' . md5((string) time());
     }
 
-    protected function tearDown()
+    protected function tearDown(): void
     {
         @rmdir($this->cacheDir);
     }

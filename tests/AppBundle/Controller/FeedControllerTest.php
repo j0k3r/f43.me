@@ -19,7 +19,7 @@ class FeedControllerTest extends FeedWebTestCase
         $this->assertGreaterThan(0, $crawler->filter('tr td img.favicon')->count());
 
         // private field won't show up
-        $this->assertNotContains('Bonjour', $client->getResponse()->getContent());
+        $this->assertStringNotContainsString('Bonjour', (string) $client->getResponse()->getContent());
     }
 
     public function testUnAuthorized()
@@ -178,7 +178,7 @@ class FeedControllerTest extends FeedWebTestCase
         $location = $client->getResponse()->headers->get('location');
 
         $this->assertSame(302, $client->getResponse()->getStatusCode());
-        $this->assertContains('google-news', $location);
+        $this->assertStringContainsString('google-news', $location);
 
         $crawler = $client->followRedirect();
         $this->assertCount(1, $alert = $crawler->filter('div.alert-box')->extract(['_text']));
@@ -192,7 +192,7 @@ class FeedControllerTest extends FeedWebTestCase
         $client->request('GET', '/feed/nawak/edit');
 
         $this->assertSame(404, $client->getResponse()->getStatusCode());
-        $this->assertContains('Feed object not found', $client->getResponse()->getContent());
+        $this->assertStringContainsString('Feed object not found', $client->getResponse()->getContent());
     }
 
     public function testFeedEditOk()
@@ -256,7 +256,7 @@ class FeedControllerTest extends FeedWebTestCase
         $this->assertSame('Form is invalid.', $alert[0]);
         // url invalid + feed invalid
         $this->assertGreaterThanOrEqual(1, $crawler->filter('small.error')->count());
-        $this->assertContains('This value is not a valid URL.', $client->getResponse()->getContent());
+        $this->assertStringContainsString('This value is not a valid URL.', $client->getResponse()->getContent());
     }
 
     /**
@@ -273,7 +273,7 @@ class FeedControllerTest extends FeedWebTestCase
         $client->submit($form, $data);
 
         $this->assertSame(302, $client->getResponse()->getStatusCode());
-        $this->assertContains('bonjour-madame', $client->getResponse()->headers->get('location'));
+        $this->assertStringContainsString('bonjour-madame', $client->getResponse()->headers->get('location'));
 
         $crawler = $client->followRedirect();
         $this->assertCount(1, $alert = $crawler->filter('div.alert-box')->extract(['_text']));
@@ -287,7 +287,7 @@ class FeedControllerTest extends FeedWebTestCase
         $client->request('POST', '/feed/nawak/edit');
 
         $this->assertSame(404, $client->getResponse()->getStatusCode());
-        $this->assertContains('Feed object not found', $client->getResponse()->getContent());
+        $this->assertStringContainsString('Feed object not found', $client->getResponse()->getContent());
     }
 
     public function testDeleteFormNotValid()
@@ -310,7 +310,7 @@ class FeedControllerTest extends FeedWebTestCase
         $client->request('POST', '/feed/nawak/delete', $form->getPhpValues());
 
         $this->assertSame(404, $client->getResponse()->getStatusCode());
-        $this->assertContains('Feed object not found', $client->getResponse()->getContent());
+        $this->assertStringContainsString('Feed object not found', $client->getResponse()->getContent());
     }
 
     /**
@@ -342,7 +342,7 @@ class FeedControllerTest extends FeedWebTestCase
         $client->request('GET', '/nawak.xml');
 
         $this->assertSame(404, $client->getResponse()->getStatusCode());
-        $this->assertContains('Not Found', $client->getResponse()->getContent());
+        $this->assertStringContainsString('Not Found', (string) $client->getResponse()->getContent());
     }
 
     public function testRedditFeed()

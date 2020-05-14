@@ -53,11 +53,11 @@ class DeviantartTest extends AppTestCase
 
         $deviantart->match('http://mibreit.deviantart.com/art/A-Piece-of-Heaven-357105002');
 
-        $content = $deviantart->getContent();
+        $content = (string) $deviantart->getContent();
 
-        $this->assertContains('<img src="http://0.0.0.0/youpi.jpg" />', $content);
-        $this->assertContains('<p>By <a href="http://youpi.0.0.0.0">@youpi</a></p>', $content);
-        $this->assertContains('<iframe></iframe>', $content);
+        $this->assertStringContainsString('<img src="http://0.0.0.0/youpi.jpg" />', $content);
+        $this->assertStringContainsString('<p>By <a href="http://youpi.0.0.0.0">@youpi</a></p>', $content);
+        $this->assertStringContainsString('<iframe></iframe>', $content);
     }
 
     public function testContentWithException()
