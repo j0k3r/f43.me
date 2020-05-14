@@ -2,6 +2,9 @@
 
 namespace AppBundle\Extractor;
 
+use Http\Discovery\MessageFactoryDiscovery;
+use Http\Message\Authentication\BasicAuth;
+
 class Github extends AbstractExtractor
 {
     protected $githubClientId;
@@ -72,16 +75,20 @@ class Github extends AbstractExtractor
             return '';
         }
 
+        $authentication = new BasicAuth($this->githubClientId, $this->githubClientSecret);
+        $messageFactory = MessageFactoryDiscovery::find();
+
         if (null !== $this->pullNumber) {
             try {
-                $response = $this->client
-                    ->get(
-                        'https://api.github.com/repos/' . $this->githubRepo . '/pulls/' . $this->pullNumber . '?client_id=' . $this->githubClientId . '&client_secret=' . $this->githubClientSecret,
-                        [
-                            'Accept' => 'application/vnd.github.v3.html+json',
-                            'User-Agent' => 'f43.me / Github Extractor',
-                        ]
-                    );
+                $request = $messageFactory->createRequest(
+                    'GET',
+                    'https://api.github.com/repos/' . $this->githubRepo . '/pulls/' . $this->pullNumber,
+                    [
+                        'Accept' => 'application/vnd.github.v3.html+json',
+                        'User-Agent' => 'f43.me / Github Extractor',
+                    ]
+                );
+                $response = $this->client->sendRequest($authentication->authenticate($request));
                 $data = $this->jsonDecode($response);
 
                 return '<div><em>Pull request on Github</em>' .
@@ -104,14 +111,15 @@ class Github extends AbstractExtractor
 
         if (null !== $this->issueNumber) {
             try {
-                $response = $this->client
-                    ->get(
-                        'https://api.github.com/repos/' . $this->githubRepo . '/issues/' . $this->issueNumber . '?client_id=' . $this->githubClientId . '&client_secret=' . $this->githubClientSecret,
-                        [
-                            'Accept' => 'application/vnd.github.v3.html+json',
-                            'User-Agent' => 'f43.me / Github Extractor',
-                        ]
-                    );
+                $request = $messageFactory->createRequest(
+                    'GET',
+                    'https://api.github.com/repos/' . $this->githubRepo . '/issues/' . $this->issueNumber,
+                    [
+                        'Accept' => 'application/vnd.github.v3.html+json',
+                        'User-Agent' => 'f43.me / Github Extractor',
+                    ]
+                );
+                $response = $this->client->sendRequest($authentication->authenticate($request));
                 $data = $this->jsonDecode($response);
 
                 return '<div><em>Issue on Github</em>' .
@@ -130,15 +138,16 @@ class Github extends AbstractExtractor
         }
 
         try {
-            return (string) $this->client
-                ->get(
-                    'https://api.github.com/repos/' . $this->githubRepo . '/readme?client_id=' . $this->githubClientId . '&client_secret=' . $this->githubClientSecret,
-                    [
-                        'Accept' => 'application/vnd.github.v3.html',
-                        'User-Agent' => 'f43.me / Github Extractor',
-                    ]
-                )
-                ->getBody();
+            $request = $messageFactory->createRequest(
+                'GET',
+                'https://api.github.com/repos/' . $this->githubRepo . '/readme',
+                [
+                    'Accept' => 'application/vnd.github.v3.html+json',
+                    'User-Agent' => 'f43.me / Github Extractor',
+                ]
+            );
+
+            return (string) $this->client->sendRequest($authentication->authenticate($request))->getBody();
         } catch (\Exception $e) {
             // Github will return a 404 if no readme are found
             return '';
