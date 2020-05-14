@@ -249,6 +249,6 @@ class ImportTest extends AppTestCase
         $this->assertCount(1, $feed->getItems());
         $this->assertSame($link, $feed->getItems()[0]->getPermalink());
         $this->assertSame($link, $feed->getItems()[0]->getLink());
-        $this->assertContains('iframe', $feed->getItems()[0]->getContent());
+        $this->assertStringContainsString('iframe', $feed->getItems()[0]->getContent());
     }
 }

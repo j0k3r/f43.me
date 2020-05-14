@@ -24,7 +24,7 @@ class FetchItemsCommandTest extends WebTestCase
     private $command;
     private $commandTester;
 
-    public function setUp()
+    public function setUp(): void
     {
         static::createClient();
 
@@ -143,8 +143,8 @@ class FetchItemsCommandTest extends WebTestCase
         $records = $this->handler->getRecords();
 
         $this->assertGreaterThan(0, $records);
-        $this->assertContains('Working on', $records[0]['message']);
-        $this->assertContains('HackerNews', $records[0]['message']);
+        $this->assertStringContainsString('Working on', $records[0]['message']);
+        $this->assertStringContainsString('HackerNews', $records[0]['message']);
 
         $this->assertRegExp('`items cached.`', $this->commandTester->getDisplay());
     }
@@ -159,7 +159,7 @@ class FetchItemsCommandTest extends WebTestCase
         $records = $this->handler->getRecords();
 
         $this->assertGreaterThan(0, $records);
-        $this->assertContains('Working on', $records[0]['message']);
+        $this->assertStringContainsString('Working on', $records[0]['message']);
 
         $this->assertRegExp('`items cached.`', $this->commandTester->getDisplay());
     }
@@ -174,7 +174,7 @@ class FetchItemsCommandTest extends WebTestCase
         $records = $this->handler->getRecords();
 
         $this->assertGreaterThan(0, $records);
-        $this->assertContains('Working on', $records[0]['message']);
+        $this->assertStringContainsString('Working on', $records[0]['message']);
 
         $this->assertRegExp('`items cached.`', $this->commandTester->getDisplay());
     }
@@ -222,7 +222,7 @@ class FetchItemsCommandTest extends WebTestCase
             '--use_queue' => true,
         ], ['verbosity' => OutputInterface::VERBOSITY_VERBOSE]);
 
-        $this->assertContains('Current queue as too much messages (10), skipping.', $commandTester->getDisplay());
+        $this->assertStringContainsString('Current queue as too much messages (10), skipping.', $commandTester->getDisplay());
     }
 
     /**

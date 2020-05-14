@@ -63,12 +63,11 @@ class ExtractorTest extends TestCase
         $this->assertSame('<html/>', $contentExtractor->content);
     }
 
-    /**
-     * @expectedException \InvalidArgumentException
-     * @expectedExceptionMessage The given parser "oops" does not exists.
-     */
     public function testInvalidParser()
     {
+        $this->expectException(\InvalidArgumentException::class);
+        $this->expectExceptionMessage('The given parser "oops" does not exists.');
+
         $extractorChain = $this->getMockBuilder('AppBundle\Extractor\ExtractorChain')
             ->disableOriginalConstructor()
             ->getMock();

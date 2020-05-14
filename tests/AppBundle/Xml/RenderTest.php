@@ -10,7 +10,7 @@ class RenderTest extends TestCase
     private $repo;
     private $router;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->router = $this->getMockBuilder('Symfony\Bundle\FrameworkBundle\Routing\Router')
             ->disableOriginalConstructor()
@@ -26,16 +26,15 @@ class RenderTest extends TestCase
             ->willReturn([]);
     }
 
-    protected function tearDown()
+    protected function tearDown(): void
     {
         unset($this->repo, $this->router);
     }
 
-    /**
-     * @expectedException \InvalidArgumentException
-     */
     public function testRenderBadFormat()
     {
+        $this->expectException(\InvalidArgumentException::class);
+
         $feed = $this->getMockBuilder('AppBundle\Entity\Feed')
             ->disableOriginalConstructor()
             ->getMock();

@@ -75,7 +75,7 @@ class TwitterTest extends TestCase
 
         $twitterConverter = new Twitter($twitterExtractor);
         $twitterConverter->setLogger(new NullLogger());
-        $this->assertContains($expected, $twitterConverter->convert($html));
+        $this->assertStringContainsString($expected, $twitterConverter->convert($html));
     }
 
     public function testMatchButTwitterExtractFail()
