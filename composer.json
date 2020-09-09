@@ -31,7 +31,7 @@
         "beberlei/doctrineextensions": "^1.2",
         "custom-zurb/foundation": "4.3.2",
         "doctrine/doctrine-bundle": "^1.12",
-        "doctrine/doctrine-migrations-bundle": "^2.0",
+        "doctrine/doctrine-migrations-bundle": "^3.0",
         "doctrine/orm": "^2.5",
         "incenteev/composer-parameter-handler": "^2.0",
         "j0k3r/graby": "^2.0",
