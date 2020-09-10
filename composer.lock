@@ -2121,16 +2121,16 @@
         },
         {
             "name": "j0k3r/graby",
-            "version": "2.2.1",
+            "version": "v2.2.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/j0k3r/graby.git",
-                "reference": "12e967939bb3c79af5047eb62eb6b1ad73a7b647"
+                "reference": "fedf2e0c849376efd5af7fedc68f6a5099a5c8a5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/j0k3r/graby/zipball/12e967939bb3c79af5047eb62eb6b1ad73a7b647",
-                "reference": "12e967939bb3c79af5047eb62eb6b1ad73a7b647",
+                "url": "https://api.github.com/repos/j0k3r/graby/zipball/fedf2e0c849376efd5af7fedc68f6a5099a5c8a5",
+                "reference": "fedf2e0c849376efd5af7fedc68f6a5099a5c8a5",
                 "shasum": ""
             },
             "require": {
@@ -2148,7 +2148,7 @@
                 "php-http/httplug": "^2.0",
                 "php-http/message": "^1.7",
                 "simplepie/simplepie": "^1.5",
-                "smalot/pdfparser": "^0.15.1",
+                "smalot/pdfparser": "^0.16",
                 "symfony/options-resolver": "^3.4|^4.0|^5.0",
                 "true/punycode": "^2.1"
             },
@@ -2189,20 +2189,20 @@
                 }
             ],
             "description": "Graby helps you extract article content from web pages",
-            "time": "2020-06-02T13:48:42+00:00"
+            "time": "2020-06-25T13:38:36+00:00"
         },
         {
             "name": "j0k3r/graby-site-config",
-            "version": "1.0.112",
+            "version": "1.0.113",
             "source": {
                 "type": "git",
                 "url": "https://github.com/j0k3r/graby-site-config.git",
-                "reference": "d81f8c3dd445dc2dc8193c84d9576b6906882f52"
+                "reference": "c83fc7763e3f3e23dd4e68f98ebe3a76db2c765e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/j0k3r/graby-site-config/zipball/d81f8c3dd445dc2dc8193c84d9576b6906882f52",
-                "reference": "d81f8c3dd445dc2dc8193c84d9576b6906882f52",
+                "url": "https://api.github.com/repos/j0k3r/graby-site-config/zipball/c83fc7763e3f3e23dd4e68f98ebe3a76db2c765e",
+                "reference": "c83fc7763e3f3e23dd4e68f98ebe3a76db2c765e",
                 "shasum": ""
             },
             "require": {
@@ -2229,7 +2229,7 @@
                 }
             ],
             "description": "Graby site config files",
-            "time": "2020-08-24T05:16:40+00:00"
+            "time": "2020-09-09T12:35:58+00:00"
         },
         {
             "name": "j0k3r/httplug-ssrf-plugin",
@@ -4847,27 +4847,26 @@
         },
         {
             "name": "smalot/pdfparser",
-            "version": "v0.15.1",
+            "version": "v0.16.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/smalot/pdfparser.git",
-                "reference": "6bc9dcbab5154f7d9f4c99e9cd3391f7ba019dc1"
+                "reference": "5faf073f308b084496ed6bd512deabb680ca7128"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/smalot/pdfparser/zipball/6bc9dcbab5154f7d9f4c99e9cd3391f7ba019dc1",
-                "reference": "6bc9dcbab5154f7d9f4c99e9cd3391f7ba019dc1",
+                "url": "https://api.github.com/repos/smalot/pdfparser/zipball/5faf073f308b084496ed6bd512deabb680ca7128",
+                "reference": "5faf073f308b084496ed6bd512deabb680ca7128",
                 "shasum": ""
             },
             "require": {
                 "ext-mbstring": "*",
                 "ext-zlib": "*",
-                "php": "^5.6|^7.0",
-                "tecnickcom/tcpdf": "^6.2.22"
+                "php": ">=5.6"
             },
             "require-dev": {
-                "atoum/atoum": "^3.1",
-                "friendsofphp/php-cs-fixer": "^2.16.3"
+                "friendsofphp/php-cs-fixer": "^2.16.3",
+                "symfony/phpunit-bridge": "^4.2.3"
             },
             "type": "library",
             "autoload": {
@@ -4886,7 +4885,7 @@
                 }
             ],
             "description": "Pdf parser library. Can read and extract information from pdf file.",
-            "homepage": "http://www.pdfparser.org",
+            "homepage": "https://www.pdfparser.org",
             "keywords": [
                 "extract",
                 "parse",
@@ -4894,7 +4893,7 @@
                 "pdf",
                 "text"
             ],
-            "time": "2020-05-27T07:55:41+00:00"
+            "time": "2020-08-31T11:26:29+00:00"
         },
         {
             "name": "stof/doctrine-extensions-bundle",
@@ -6644,68 +6643,6 @@
                 }
             ],
             "time": "2020-08-31T05:54:22+00:00"
-        },
-        {
-            "name": "tecnickcom/tcpdf",
-            "version": "6.3.5",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/tecnickcom/TCPDF.git",
-                "reference": "19a535eaa7fb1c1cac499109deeb1a7a201b4549"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/tecnickcom/TCPDF/zipball/19a535eaa7fb1c1cac499109deeb1a7a201b4549",
-                "reference": "19a535eaa7fb1c1cac499109deeb1a7a201b4549",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.3.0"
-            },
-            "type": "library",
-            "autoload": {
-                "classmap": [
-                    "config",
-                    "include",
-                    "tcpdf.php",
-                    "tcpdf_parser.php",
-                    "tcpdf_import.php",
-                    "tcpdf_barcodes_1d.php",
-                    "tcpdf_barcodes_2d.php",
-                    "include/tcpdf_colors.php",
-                    "include/tcpdf_filters.php",
-                    "include/tcpdf_font_data.php",
-                    "include/tcpdf_fonts.php",
-                    "include/tcpdf_images.php",
-                    "include/tcpdf_static.php",
-                    "include/barcodes/datamatrix.php",
-                    "include/barcodes/pdf417.php",
-                    "include/barcodes/qrcode.php"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "LGPL-3.0-only"
-            ],
-            "authors": [
-                {
-                    "name": "Nicola Asuni",
-                    "email": "info@tecnick.com",
-                    "role": "lead"
-                }
-            ],
-            "description": "TCPDF is a PHP class for generating PDF documents and barcodes.",
-            "homepage": "http://www.tcpdf.org/",
-            "keywords": [
-                "PDFD32000-2008",
-                "TCPDF",
-                "barcodes",
-                "datamatrix",
-                "pdf",
-                "pdf417",
-                "qrcode"
-            ],
-            "time": "2020-02-14T14:20:12+00:00"
         },
         {
             "name": "true/punycode",
