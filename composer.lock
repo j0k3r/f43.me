@@ -565,16 +565,16 @@
         },
         {
             "name": "doctrine/dbal",
-            "version": "2.10.3",
+            "version": "2.10.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/dbal.git",
-                "reference": "03ca23afc2ee062f5d3e32426ad37c34a4770dcf"
+                "reference": "47433196b6390d14409a33885ee42b6208160643"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/dbal/zipball/03ca23afc2ee062f5d3e32426ad37c34a4770dcf",
-                "reference": "03ca23afc2ee062f5d3e32426ad37c34a4770dcf",
+                "url": "https://api.github.com/repos/doctrine/dbal/zipball/47433196b6390d14409a33885ee42b6208160643",
+                "reference": "47433196b6390d14409a33885ee42b6208160643",
                 "shasum": ""
             },
             "require": {
@@ -670,7 +670,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2020-09-02T01:35:42+00:00"
+            "time": "2020-09-12T21:20:41+00:00"
         },
         {
             "name": "doctrine/doctrine-bundle",
@@ -763,20 +763,6 @@
                 "dbal",
                 "orm",
                 "persistence"
-            ],
-            "funding": [
-                {
-                    "url": "https://www.doctrine-project.org/sponsorship.html",
-                    "type": "custom"
-                },
-                {
-                    "url": "https://www.patreon.com/phpdoctrine",
-                    "type": "patreon"
-                },
-                {
-                    "url": "https://tidelift.com/funding/github/packagist/doctrine%2Fdoctrine-bundle",
-                    "type": "tidelift"
-                }
             ],
             "time": "2020-05-25T19:50:59+00:00"
         },
@@ -1265,20 +1251,6 @@
                 "parser",
                 "php"
             ],
-            "funding": [
-                {
-                    "url": "https://www.doctrine-project.org/sponsorship.html",
-                    "type": "custom"
-                },
-                {
-                    "url": "https://www.patreon.com/phpdoctrine",
-                    "type": "patreon"
-                },
-                {
-                    "url": "https://tidelift.com/funding/github/packagist/doctrine%2Flexer",
-                    "type": "tidelift"
-                }
-            ],
             "time": "2020-05-25T17:44:05+00:00"
         },
         {
@@ -1448,20 +1420,6 @@
             "keywords": [
                 "database",
                 "orm"
-            ],
-            "funding": [
-                {
-                    "url": "https://www.doctrine-project.org/sponsorship.html",
-                    "type": "custom"
-                },
-                {
-                    "url": "https://www.patreon.com/phpdoctrine",
-                    "type": "patreon"
-                },
-                {
-                    "url": "https://tidelift.com/funding/github/packagist/doctrine/orm",
-                    "type": "tidelift"
-                }
             ],
             "time": "2020-05-26T16:03:49+00:00"
         },
@@ -2193,16 +2151,16 @@
         },
         {
             "name": "j0k3r/graby-site-config",
-            "version": "1.0.113",
+            "version": "1.0.114",
             "source": {
                 "type": "git",
                 "url": "https://github.com/j0k3r/graby-site-config.git",
-                "reference": "c83fc7763e3f3e23dd4e68f98ebe3a76db2c765e"
+                "reference": "1973daea2ddac415a9cbacd11ed69c7b7cf84f76"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/j0k3r/graby-site-config/zipball/c83fc7763e3f3e23dd4e68f98ebe3a76db2c765e",
-                "reference": "c83fc7763e3f3e23dd4e68f98ebe3a76db2c765e",
+                "url": "https://api.github.com/repos/j0k3r/graby-site-config/zipball/1973daea2ddac415a9cbacd11ed69c7b7cf84f76",
+                "reference": "1973daea2ddac415a9cbacd11ed69c7b7cf84f76",
                 "shasum": ""
             },
             "require": {
@@ -2229,7 +2187,7 @@
                 }
             ],
             "description": "Graby site config files",
-            "time": "2020-09-09T12:35:58+00:00"
+            "time": "2020-09-23T20:03:38+00:00"
         },
         {
             "name": "j0k3r/httplug-ssrf-plugin",
@@ -2483,24 +2441,24 @@
         },
         {
             "name": "jean85/pretty-package-versions",
-            "version": "1.5.0",
+            "version": "1.5.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Jean85/pretty-package-versions.git",
-                "reference": "e9f4324e88b8664be386d90cf60fbc202e1f7fc9"
+                "reference": "a917488320c20057da87f67d0d40543dd9427f7a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Jean85/pretty-package-versions/zipball/e9f4324e88b8664be386d90cf60fbc202e1f7fc9",
-                "reference": "e9f4324e88b8664be386d90cf60fbc202e1f7fc9",
+                "url": "https://api.github.com/repos/Jean85/pretty-package-versions/zipball/a917488320c20057da87f67d0d40543dd9427f7a",
+                "reference": "a917488320c20057da87f67d0d40543dd9427f7a",
                 "shasum": ""
             },
             "require": {
                 "composer/package-versions-deprecated": "^1.8.0",
-                "php": "^7.0"
+                "php": "^7.0|^8.0"
             },
             "require-dev": {
-                "phpunit/phpunit": "^6.0"
+                "phpunit/phpunit": "^6.0|^8.5|^9.2"
             },
             "type": "library",
             "extra": {
@@ -2530,7 +2488,7 @@
                 "release",
                 "versions"
             ],
-            "time": "2020-06-23T06:23:06+00:00"
+            "time": "2020-09-14T08:43:34+00:00"
         },
         {
             "name": "laminas/laminas-code",
@@ -2653,16 +2611,16 @@
         },
         {
             "name": "laminas/laminas-zendframework-bridge",
-            "version": "1.1.0",
+            "version": "1.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laminas/laminas-zendframework-bridge.git",
-                "reference": "4939c81f63a8a4968c108c440275c94955753b19"
+                "reference": "6ede70583e101030bcace4dcddd648f760ddf642"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laminas/laminas-zendframework-bridge/zipball/4939c81f63a8a4968c108c440275c94955753b19",
-                "reference": "4939c81f63a8a4968c108c440275c94955753b19",
+                "url": "https://api.github.com/repos/laminas/laminas-zendframework-bridge/zipball/6ede70583e101030bcace4dcddd648f760ddf642",
+                "reference": "6ede70583e101030bcace4dcddd648f760ddf642",
                 "shasum": ""
             },
             "require": {
@@ -2674,10 +2632,6 @@
             },
             "type": "library",
             "extra": {
-                "branch-alias": {
-                    "dev-master": "1.0.x-dev",
-                    "dev-develop": "1.1.x-dev"
-                },
                 "laminas": {
                     "module": "Laminas\\ZendFrameworkBridge"
                 }
@@ -2707,7 +2661,7 @@
                     "type": "community_bridge"
                 }
             ],
-            "time": "2020-08-18T16:34:51+00:00"
+            "time": "2020-09-14T14:23:00+00:00"
         },
         {
             "name": "masterminds/html5",
@@ -3230,16 +3184,16 @@
         },
         {
             "name": "php-http/discovery",
-            "version": "1.10.0",
+            "version": "1.12.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-http/discovery.git",
-                "reference": "88ff14cad4a0db68b343260fa7ac3f1599703660"
+                "reference": "4366bf1bc39b663aa87459bd725501d2f1988b6c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-http/discovery/zipball/88ff14cad4a0db68b343260fa7ac3f1599703660",
-                "reference": "88ff14cad4a0db68b343260fa7ac3f1599703660",
+                "url": "https://api.github.com/repos/php-http/discovery/zipball/4366bf1bc39b663aa87459bd725501d2f1988b6c",
+                "reference": "4366bf1bc39b663aa87459bd725501d2f1988b6c",
                 "shasum": ""
             },
             "require": {
@@ -3291,7 +3245,7 @@
                 "message",
                 "psr7"
             ],
-            "time": "2020-09-04T08:41:23+00:00"
+            "time": "2020-09-22T13:31:04+00:00"
         },
         {
             "name": "php-http/guzzle6-adapter",
@@ -4556,22 +4510,22 @@
         },
         {
             "name": "sentry/sdk",
-            "version": "2.1.0",
+            "version": "2.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/getsentry/sentry-php-sdk.git",
-                "reference": "18921af9c2777517ef9fb480845c22a98554d6af"
+                "reference": "089858b1b27d3705a5fd1c32d8d10beb55980190"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/getsentry/sentry-php-sdk/zipball/18921af9c2777517ef9fb480845c22a98554d6af",
-                "reference": "18921af9c2777517ef9fb480845c22a98554d6af",
+                "url": "https://api.github.com/repos/getsentry/sentry-php-sdk/zipball/089858b1b27d3705a5fd1c32d8d10beb55980190",
+                "reference": "089858b1b27d3705a5fd1c32d8d10beb55980190",
                 "shasum": ""
             },
             "require": {
                 "http-interop/http-factory-guzzle": "^1.0",
-                "php-http/guzzle6-adapter": "^1.1|^2.0",
-                "sentry/sentry": "^2.3"
+                "sentry/sentry": "^2.5",
+                "symfony/http-client": "^4.3|^5.0"
             },
             "type": "metapackage",
             "notification-url": "https://packagist.org/downloads/",
@@ -4584,21 +4538,41 @@
                     "email": "accounts@sentry.io"
                 }
             ],
-            "description": "This is a metapackage shipping sentry/sentry with a recommended http client.",
-            "time": "2020-01-08T19:16:29+00:00"
+            "description": "This is a metapackage shipping sentry/sentry with a recommended HTTP client.",
+            "homepage": "http://sentry.io",
+            "keywords": [
+                "crash-reporting",
+                "crash-reports",
+                "error-handler",
+                "error-monitoring",
+                "log",
+                "logging",
+                "sentry"
+            ],
+            "funding": [
+                {
+                    "url": "https://sentry.io/",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://sentry.io/pricing/",
+                    "type": "custom"
+                }
+            ],
+            "time": "2020-09-14T09:30:55+00:00"
         },
         {
             "name": "sentry/sentry",
-            "version": "2.4.3",
+            "version": "2.5.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/getsentry/sentry-php.git",
-                "reference": "89fd1f91657b33ec9139f33f8a201eb086276103"
+                "reference": "bab5b73dbaf5f0ff62317e1611d952764d5514a9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/getsentry/sentry-php/zipball/89fd1f91657b33ec9139f33f8a201eb086276103",
-                "reference": "89fd1f91657b33ec9139f33f8a201eb086276103",
+                "url": "https://api.github.com/repos/getsentry/sentry-php/zipball/bab5b73dbaf5f0ff62317e1611d952764d5514a9",
+                "reference": "bab5b73dbaf5f0ff62317e1611d952764d5514a9",
                 "shasum": ""
             },
             "require": {
@@ -4640,7 +4614,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.4-dev"
+                    "dev-master": "2.5.x-dev"
                 }
             },
             "autoload": {
@@ -4682,7 +4656,7 @@
                     "type": "custom"
                 }
             ],
-            "time": "2020-08-13T10:54:32+00:00"
+            "time": "2020-09-14T07:02:40+00:00"
         },
         {
             "name": "sentry/sentry-symfony",
@@ -7550,16 +7524,16 @@
         },
         {
             "name": "nette/robot-loader",
-            "version": "v3.3.0",
+            "version": "v3.3.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nette/robot-loader.git",
-                "reference": "737ff8ee1709eff053d9cc27e6c661d82395bd8b"
+                "reference": "15c1ecd0e6e69e8d908dfc4cca7b14f3b850a96b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nette/robot-loader/zipball/737ff8ee1709eff053d9cc27e6c661d82395bd8b",
-                "reference": "737ff8ee1709eff053d9cc27e6c661d82395bd8b",
+                "url": "https://api.github.com/repos/nette/robot-loader/zipball/15c1ecd0e6e69e8d908dfc4cca7b14f3b850a96b",
+                "reference": "15c1ecd0e6e69e8d908dfc4cca7b14f3b850a96b",
                 "shasum": ""
             },
             "require": {
@@ -7609,7 +7583,7 @@
                 "nette",
                 "trait"
             ],
-            "time": "2020-07-28T13:34:12+00:00"
+            "time": "2020-09-15T15:14:17+00:00"
         },
         {
             "name": "nette/schema",
@@ -7747,16 +7721,16 @@
         },
         {
             "name": "nikic/php-parser",
-            "version": "v4.9.1",
+            "version": "v4.10.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nikic/PHP-Parser.git",
-                "reference": "88e519766fc58bd46b8265561fb79b54e2e00b28"
+                "reference": "1b479e7592812411c20c34d9ed33db3957bde66e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nikic/PHP-Parser/zipball/88e519766fc58bd46b8265561fb79b54e2e00b28",
-                "reference": "88e519766fc58bd46b8265561fb79b54e2e00b28",
+                "url": "https://api.github.com/repos/nikic/PHP-Parser/zipball/1b479e7592812411c20c34d9ed33db3957bde66e",
+                "reference": "1b479e7592812411c20c34d9ed33db3957bde66e",
                 "shasum": ""
             },
             "require": {
@@ -7795,7 +7769,7 @@
                 "parser",
                 "php"
             ],
-            "time": "2020-08-30T16:15:20+00:00"
+            "time": "2020-09-23T18:23:49+00:00"
         },
         {
             "name": "php-coveralls/php-coveralls",
