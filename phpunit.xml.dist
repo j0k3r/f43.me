@@ -8,7 +8,7 @@
          convertWarningsToExceptions="true"
          processIsolation="false"
          stopOnFailure="false"
-         bootstrap="vendor/autoload.php"
+         bootstrap="config/bootstrap.php"
         >
 
     <testsuites>
@@ -18,7 +18,8 @@
     </testsuites>
 
     <php>
-        <server name="KERNEL_CLASS" value="AppKernel" />
+        <env name="APP_ENV" value="test"/>
+        <env name="APP_SECRET" value="c76e38118f0f624f26c990c5ae22f056"/>
     </php>
 
     <filter>
@@ -26,9 +27,8 @@
             <directory suffix=".php">./src</directory>
             <exclude>
                 <directory>./vendor</directory>
-                <directory>./src/AppBundle/Resources</directory>
-                <directory>./src/AppBundle/Tests</directory>
-                <directory>./src/AppBundle/DataFixtures</directory>
+                <directory>./src/DataFixtures</directory>
+                <directory>./src/Migrations</directory>
             </exclude>
         </whitelist>
     </filter>
@@ -36,4 +36,8 @@
     <!-- <logging>
         <log type="coverage-html" target="build/coverage" lowUpperBound="35" highLowerBound="70"/>
     </logging> -->
+
+    <listeners>
+        <listener class="Symfony\Bridge\PhpUnit\SymfonyTestsListener" />
+    </listeners>
 </phpunit>

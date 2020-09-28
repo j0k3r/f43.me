@@ -9,54 +9,54 @@ var gulp = require('gulp');
 
 var paths = {
     vendors: [
-        'app/Resources/lib/foundation/js/vendor/zepto.js',
-        'app/Resources/lib/foundation/js/vendor/custom.modernizr.js'
+        'templates/lib/foundation/js/vendor/zepto.js',
+        'templates/lib/foundation/js/vendor/custom.modernizr.js'
     ],
     app: [
-        'app/Resources/lib/foundation/js/foundation/foundation.js',
-        'app/Resources/lib/foundation/js/foundation/foundation.alerts.js',
-        'app/Resources/lib/foundation/js/foundation/foundation.dropdown.js',
-        'app/Resources/lib/foundation/js/foundation/foundation.forms.js',
-        'app/Resources/lib/foundation/js/foundation/foundation.placeholder.js',
-        'app/Resources/lib/foundation/js/foundation/foundation.reveal.js',
-        'app/Resources/lib/foundation/js/foundation/foundation.section.js',
+        'templates/lib/foundation/js/foundation/foundation.js',
+        'templates/lib/foundation/js/foundation/foundation.alerts.js',
+        'templates/lib/foundation/js/foundation/foundation.dropdown.js',
+        'templates/lib/foundation/js/foundation/foundation.forms.js',
+        'templates/lib/foundation/js/foundation/foundation.placeholder.js',
+        'templates/lib/foundation/js/foundation/foundation.reveal.js',
+        'templates/lib/foundation/js/foundation/foundation.section.js',
         'node_modules/moment/min/moment.min.js',
         'src/**/app.js'
     ],
     morris: [
-        'src/**/morris.js'
+        'public/js/morris.js'
     ],
     sassFoundation: [
-        'app/Resources/lib/foundation/scss/normalize.scss',
-        'app/Resources/lib/foundation/scss/foundation.scss'
+        'templates/lib/foundation/scss/normalize.scss',
+        'templates/lib/foundation/scss/foundation.scss'
     ],
     sassApp: [
-        'src/**/*.sass'
+        'templates/sass/app.sass'
     ],
     css: [
-        'web/build/css/normalize.css',
-        'web/build/css/foundation.css',
-        'web/build/css/app.css',
+        'public/build/css/normalize.css',
+        'public/build/css/foundation.css',
+        'public/build/css/app.css',
     ]
 };
 
 // cleanup the build folder
 gulp.task('clean', function(cb) {
-    rimraf('web/build/**/*.*', cb);
+    rimraf('public/build/**/*.*', cb);
 });
 
 gulp.task('js-vendor', function() {
     return gulp.src(paths.vendors)
         .pipe(uglify())
         .pipe(concat({ path: 'zepto.modernizr.js', stat: { mode: 0666 }}))
-        .pipe(gulp.dest('web/build'));
+        .pipe(gulp.dest('public/build'));
 });
 
 gulp.task('js-app', function() {
     return gulp.src(paths.app)
         .pipe(concat({ path: 'app.js', stat: { mode: 0666 }}))
         .pipe(uglify())
-        .pipe(gulp.dest('web/build'))
+        .pipe(gulp.dest('public/build'))
         .on('error', gutil.log);
 });
 
@@ -65,7 +65,7 @@ gulp.task('js-morris', function() {
     return gulp.src(paths.morris)
         .pipe(concat({ path: 'morris.js', stat: { mode: 0666 }}))
         .pipe(uglify())
-        .pipe(gulp.dest('web/build'))
+        .pipe(gulp.dest('public/build'))
         .on('error', gutil.log);
 });
 
@@ -73,26 +73,26 @@ gulp.task('js-morris', function() {
 gulp.task('css-foundation', function () {
     return gulp.src(paths.sassFoundation)
         .pipe(compass({
-            css: 'web/build/css',
-            sass: 'app/Resources/lib/foundation/scss'
+            css: 'public/build/css',
+            sass: 'templates/lib/foundation/scss'
         }))
-        .pipe(gulp.dest('web/build/css'));
+        .pipe(gulp.dest('public/build/css'));
 });
 
 gulp.task('css-app', function () {
     return gulp.src(paths.sassApp)
         .pipe(compass({
-            css: 'web/build/css',
-            sass: 'src/AppBundle/Resources/sass'
+            css: 'public/build/css',
+            sass: 'templates/sass'
         }))
-        .pipe(gulp.dest('web/build/css'));
+        .pipe(gulp.dest('public/build/css'));
 });
 
 gulp.task('css', ['css-app', 'css-foundation'], function () {
     return gulp.src(paths.css)
         .pipe(cssnano())
         .pipe(concat({ path: 'main.css', stat: { mode: 0666 }}))
-        .pipe(gulp.dest('web/build'));
+        .pipe(gulp.dest('public/build'));
 });
 
 // Rerun tasks when a file changes

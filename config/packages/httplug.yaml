@@ -1,0 +1,17 @@
+httplug:
+    clients:
+        default:
+            factory: 'httplug.factory.guzzle6'
+            config:
+                defaults:
+                    timeout: 10
+            http_methods_client: true
+            plugins:
+                - 'httplug.plugin.redirect'
+                - 'httplug.plugin.logger'
+                - 'httplug.plugin.error'
+                - header_defaults:
+                    headers:
+                        'User-Agent': f43.me/1.0
+    discovery:
+        client: false

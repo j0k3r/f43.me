@@ -1,28 +1,32 @@
-/app/config/parameters.yml
 /build/
 /coverage/
-/var/*
-!/var/cache
-/var/cache/*
-!var/cache/.gitkeep
-!/var/logs
-/var/logs/*
-!var/logs/.gitkeep
-!/var/sessions
-/var/sessions/*
-!var/sessions/.gitkeep
-!var/SymfonyRequirements.php
-/vendor/
-/web/bundles/
 /build/
 /.sass-cache
-/app/cache.properties
 /node_modules/
-/app/Resources/lib
-/web/build
-.php_cs.cache
 /bin/*
 !/bin/console
-!/bin/symfony_requirements
 /data/mysql
+/templates/lib
+/public/build
+
+###> symfony/framework-bundle ###
+/.env.local
+/.env.local.php
+/.env.*.local
+/config/secrets/prod/prod.decrypt.private.php
+/public/bundles/
+/src/.preload.php
+/var/
+/vendor/
+###< symfony/framework-bundle ###
+
+###> friendsofphp/php-cs-fixer ###
+/.php_cs
+/.php_cs.cache
+###< friendsofphp/php-cs-fixer ###
+
+###> symfony/phpunit-bridge ###
+.phpunit
 .phpunit.result.cache
+/phpunit.xml
+###< symfony/phpunit-bridge ###

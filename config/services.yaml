@@ -1,0 +1,142 @@
+imports:
+    - { resource: extractors.yaml }
+    - { resource: improvers.yaml }
+    - { resource: converters.yaml }
+    - { resource: parsers.yaml }
+
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+        public: false
+
+    # autowire
+    App\:
+        resource: '../src/*'
+        exclude:
+            - '../src/DependencyInjection/'
+            - '../src/Entity/'
+            - '../src/DataFixtures/'
+            - '../src/Converter/'
+            - '../src/DomDocument/'
+            - '../src/Extractor/'
+            - '../src/Improver/'
+            - '../src/Parser/'
+            - '../src/Kernel.php'
+            - '../src/Tests/'
+
+    App\Xml\Render:
+        arguments:
+            $generator: "%env(DOMAIN)%"
+
+    App\Command\FetchItemsCommand:
+        tags: ['console.command']
+        arguments:
+            $domain: "%env(DOMAIN)%"
+
+    App\Command\RemoveItemsCommand:
+        tags: ['console.command']
+
+    App\Consumer\FetchItems:
+        arguments:
+            $domain: "%env(DOMAIN)%"
+
+    App\EventListener\ItemSubscriber:
+        arguments:
+            $hub: "http://pubsubhubbub.appspot.com"
+        tags:
+            - { name: kernel.event_listener, event: app.after_item_cached, method: pingHub }
+
+    App\EventListener\FeedSubscriber:
+        tags:
+            - { name: kernel.event_listener, event: app.after_feed_creation, method: sync }
+
+    App\Xml\SimplePieProxy:
+        arguments:
+            $cache: "%kernel.cache_dir%/simplepie/"
+            $itemLimit: 20
+            $enableCache: false
+
+    App\Validator\Constraints\ConstraintRssValidator:
+        tags:
+            - { name: validator.constraint_validator, alias: valid_rss }
+
+    # external service
+    imgur.client:
+        class: Imgur\Client
+        calls:
+            - [ setOption, [ 'client_id', "%env(IMGUR_CLIENT_ID)%" ] ]
+            - [ setOption, [ 'client_secret', "%env(IMGUR_CLIENT_SECRET)%" ] ]
+
+    graby:
+        class: Graby\Graby
+        arguments:
+            -
+                error_message: false
+                extractor:
+                    config_builder:
+                        site_config:
+                            - "%kernel.project_dir%/data/site_config"
+        calls:
+            - [ setLogger, [ "@logger" ] ]
+        tags:
+            - { name: monolog.logger, channel: graby }
+
+    graby.log_handler:
+        class: Graby\Monolog\Handler\GrabyHandler
+
+    Graby\Monolog\Handler\GrabyHandler:
+        alias: graby.log_handler
+
+    twitter.client:
+        class: TwitterOAuth\TwitterOAuth
+        arguments:
+            -
+                consumer_key: "%env(TWITTER_CONSUMER_KEY)%"
+                consumer_secret: "%env(TWITTER_CONSUMER_SECRET)%"
+                oauth_token: "%env(TWITTER_ACCESS_TOKEN)%"
+                oauth_token_secret: "%env(TWITTER_ACCESS_TOKEN_SECRET)%"
+                output_format: 'array'
+
+    # custom formatter for import commande (below)
+    monolog.import.formatter:
+        class: Symfony\Bridge\Monolog\Formatter\ConsoleFormatter
+        arguments:
+            - "[%%datetime%%] %%start_tag%%%%message%%%%end_tag%% %%context%% %%extra%%\n"
+
+    Http\Client\Common\HttpMethodsClientInterface: '@httplug.client.default.http_methods'
+
+    # alias to service from their class name
+    Swarrot\SwarrotBundle\Broker\Publisher:
+        alias: swarrot.publisher
+
+    Swarrot\SwarrotBundle\Broker\AmqpLibFactory:
+        alias: swarrot.factory.amqp_lib
+
+    content_extractor:
+        class: App\Content\Extractor
+        arguments:
+            - "@feed.extractor.chain"
+            - "@feed.improver.chain"
+            - "@feed.converter.chain"
+            - "@feed.parser.chain"
+
+    simple_pie_proxy:
+        class: App\Xml\SimplePieProxy
+        arguments:
+            - "%kernel.cache_dir%/simplepie/"
+            - 20
+            - false
+
+    xml_render:
+        class: App\Xml\Render
+        arguments:
+            - "%env(DOMAIN)%"
+
+    # validator
+    validator.rss.valid_rss:
+        class: App\Validator\Constraints\ConstraintRssValidator
+        arguments:
+            - "@httplug.client.default.http_methods"
+        tags:
+            - { name: validator.constraint_validator, alias: valid_rss }
