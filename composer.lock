@@ -3078,16 +3078,16 @@
         },
         {
             "name": "php-amqplib/php-amqplib",
-            "version": "v2.12.0",
+            "version": "v2.12.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-amqplib/php-amqplib.git",
-                "reference": "dfcccd36bf12b4c7cc3ec74d571e00e0f767232e"
+                "reference": "0eaaa9d5d45335f4342f69603288883388c2fe21"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-amqplib/php-amqplib/zipball/dfcccd36bf12b4c7cc3ec74d571e00e0f767232e",
-                "reference": "dfcccd36bf12b4c7cc3ec74d571e00e0f767232e",
+                "url": "https://api.github.com/repos/php-amqplib/php-amqplib/zipball/0eaaa9d5d45335f4342f69603288883388c2fe21",
+                "reference": "0eaaa9d5d45335f4342f69603288883388c2fe21",
                 "shasum": ""
             },
             "require": {
@@ -3151,7 +3151,7 @@
                 "queue",
                 "rabbitmq"
             ],
-            "time": "2020-08-25T01:39:32+00:00"
+            "time": "2020-09-25T18:34:58+00:00"
         },
         {
             "name": "php-http/client-common",
