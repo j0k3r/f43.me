@@ -6,7 +6,7 @@ includes:
 
 parameters:
     symfony:
-        container_xml_path: %rootDir%/../../../var/cache/test/appTestDebugProjectContainer.xml
+        container_xml_path: %rootDir%/../../../var/cache/test/srcApp_KernelTestDebugContainer.xml
         console_application_loader: tests/console-application.php
 
     # https://github.com/phpstan/phpstan/issues/694#issuecomment-350724288
@@ -14,10 +14,8 @@ parameters:
         - vendor/bin/.phpunit/phpunit-8.3-0/vendor/autoload.php
 
     ignoreErrors:
-        - '#Constructor of class AppBundle\\DomDocument\\XDOMElement has an unused parameter \$value.#'
+        - '#Constructor of class App\\DomDocument\\XDOMElement has an unused parameter \$value.#'
         # Related to `getReference` in data fixtures
-        - '#Parameter \#1 \$feed of class AppBundle\\Entity#'
-        # avoid casting of Response in functionnal tests
-        - '#^Cannot call method(.*)Symfony\\Component\\HttpFoundation\\Response\|null.$#'
+        - '#Parameter \#1 \$feed of class App\\Entity#'
 
     inferPrivatePropertyTypeFromConstructor: true

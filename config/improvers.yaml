@@ -1,0 +1,26 @@
+services:
+    # improver
+    App\Improver\ImproverChain:
+        class: App\Improver\ImproverChain
+
+    feed.improver.hackernews:
+        class: App\Improver\HackerNews
+        arguments:
+            - "@httplug.client.default.http_methods"
+        tags:
+            -  { name: feed.improver, alias: hackernews }
+
+    feed.improver.reddit:
+        class: App\Improver\Reddit
+        arguments:
+            - "@httplug.client.default.http_methods"
+        tags:
+            -  { name: feed.improver, alias: reddit }
+
+    # this one should be the last one (because this is the default one :)
+    feed.improver.default_improver:
+        class: App\Improver\DefaultImprover
+        arguments:
+            - "@httplug.client.default.http_methods"
+        tags:
+            -  { name: feed.improver, alias: default_improver }

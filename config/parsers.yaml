@@ -1,0 +1,19 @@
+services:
+    # parser
+    App\Parser\ParserChain:
+        class: App\Parser\ParserChain
+
+    feed.parser.external:
+        class: App\Parser\External
+        arguments:
+            - "@httplug.client.default.http_methods"
+            - "%env(MERCURY_URL)%"
+        tags:
+            -  { name: feed.parser, alias: external }
+
+    feed.parser.internal:
+        class: App\Parser\Internal
+        arguments:
+            - "@graby"
+        tags:
+            -  { name: feed.parser, alias: internal }

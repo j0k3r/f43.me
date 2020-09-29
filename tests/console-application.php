@@ -1,10 +1,10 @@
 <?php
 
 /**
- * @see https://github.com/phpstan/phpstan-symfony/pull/45
+ * @see https://github.com/phpstan/phpstan-symfony#console-command-analysis
  */
-require __DIR__ . '/../vendor/autoload.php';
+require dirname(__DIR__) . '/config/bootstrap.php';
 
-$kernel = new AppKernel('test', true);
+$kernel = new \App\Kernel($_SERVER['APP_ENV'], (bool) $_SERVER['APP_DEBUG']);
 
 return new \Symfony\Bundle\FrameworkBundle\Console\Application($kernel);
