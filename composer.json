@@ -26,7 +26,7 @@
         "beberlei/doctrineextensions": "^1.2",
         "composer/package-versions-deprecated": "^1.11",
         "custom-zurb/foundation": "4.3.2",
-        "doctrine/doctrine-bundle": "^1.12",
+        "doctrine/doctrine-bundle": "^2.1",
         "doctrine/orm": "^2.5",
         "j0k3r/graby": "^2.0",
         "j0k3r/php-imgur-api-client": "~3.0",
