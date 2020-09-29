@@ -42,7 +42,7 @@
         "simplepie/simplepie": "~1.4",
         "stof/doctrine-extensions-bundle": "~1.1",
         "swarrot/swarrot-bundle": "^2.0",
-        "symfony/asset": "4.4.*",
+        "symfony/asset": "5.1.*",
         "symfony/flex": "^1.9",
         "symfony/form": "4.4.*",
         "symfony/lock": "4.4.*",
