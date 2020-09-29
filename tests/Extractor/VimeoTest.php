@@ -10,7 +10,7 @@ use Monolog\Logger;
 
 class VimeoTest extends AppTestCase
 {
-    public function dataMatch()
+    public function dataMatch(): array
     {
         return [
             ['https://vimeo.com/116087204', true],
@@ -25,13 +25,13 @@ class VimeoTest extends AppTestCase
     /**
      * @dataProvider dataMatch
      */
-    public function testMatch($url, $expected)
+    public function testMatch(string $url, bool $expected): void
     {
         $vimeo = new Vimeo();
         $this->assertSame($expected, $vimeo->match($url));
     }
 
-    public function testContent()
+    public function testContent(): void
     {
         $client = self::getMockClient([
             (new Response(200, [], (string) json_encode(['title' => 'my title', 'description' => 'my description', 'thumbnail_url' => 'http://0.0.0.0/img.jpg', 'html' => '<iframe/>']))),

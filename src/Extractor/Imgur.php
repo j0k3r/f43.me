@@ -6,8 +6,11 @@ use Imgur\Client;
 
 class Imgur extends AbstractExtractor
 {
+    /** @var Client */
     protected $imgurClient;
+    /** @var string */
     protected $hash = null;
+    /** @var string */
     protected $type = null;
 
     public function __construct(Client $imgurClient)
@@ -18,7 +21,7 @@ class Imgur extends AbstractExtractor
     /**
      * {@inheritdoc}
      */
-    public function match($url)
+    public function match(string $url): bool
     {
         $host = parse_url($url, PHP_URL_HOST);
         $path = parse_url($url, PHP_URL_PATH);
@@ -37,7 +40,7 @@ class Imgur extends AbstractExtractor
         // from https://github.com/extesy/hoverzoom/blob/master/plugins/imgur_a.js
         preg_match('/(?:\/(a|gallery|signin))?\/([^\W_]{5,8})(?:\/|\.[a-zA-Z]+|#([^\W_]{5,8}|\d+))?(\/new|\/all|\?.*)?$/', $url, $matches);
 
-        if ((0 !== strpos($host, 'imgur') && 0 !== strpos($host, 'i.imgur')) || !isset($matches[2])) {
+        if ((0 !== strpos((string) $host, 'imgur') && 0 !== strpos((string) $host, 'i.imgur')) || !isset($matches[2])) {
             return false;
         }
 
@@ -59,7 +62,7 @@ class Imgur extends AbstractExtractor
     /**
      * {@inheritdoc}
      */
-    public function getContent()
+    public function getContent(): string
     {
         if (!$this->hash && !$this->type) {
             return '';
@@ -71,7 +74,9 @@ class Imgur extends AbstractExtractor
 
         if (\in_array($this->type, ['a', 'gallery'], true)) {
             try {
-                $albumOrImage = $this->imgurClient->api('album')->album($this->hash);
+                /** @var \Imgur\Api\Album */
+                $album = $this->imgurClient->api('album');
+                $albumOrImage = $album->album($this->hash);
             } catch (\Exception $e) {
                 $this->logger->warning('Imgur extract failed with "album" for: ' . $this->hash, [
                     'exception' => $e,
@@ -81,7 +86,9 @@ class Imgur extends AbstractExtractor
 
         if (null === $albumOrImage) {
             try {
-                $albumOrImage = $this->imgurClient->api('image')->image($this->hash);
+                /** @var \Imgur\Api\Image */
+                $image = $this->imgurClient->api('image');
+                $albumOrImage = $image->image($this->hash);
             } catch (\Exception $e) {
                 $this->logger->warning('Imgur extract failed with "image" for: ' . $this->hash, [
                     'exception' => $e,

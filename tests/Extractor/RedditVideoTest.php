@@ -10,7 +10,7 @@ use Monolog\Logger;
 
 class RedditVideoTest extends AppTestCase
 {
-    public function dataMatch()
+    public function dataMatch(): array
     {
         return [
             ['https://goog.co', false],
@@ -21,13 +21,13 @@ class RedditVideoTest extends AppTestCase
     /**
      * @dataProvider dataMatch
      */
-    public function testMatch($url, $expected)
+    public function testMatch(string $url, bool $expected): void
     {
         $redditVideo = new RedditVideo();
         $this->assertSame($expected, $redditVideo->match($url));
     }
 
-    public function testMatchRedditBadRequest()
+    public function testMatchRedditBadRequest(): void
     {
         $client = self::getMockClient([(new Response(400, [], (string) json_encode('oops')))]);
 
@@ -37,7 +37,7 @@ class RedditVideoTest extends AppTestCase
         $this->assertFalse($redditVideo->match('https://v.redd.it/funfg141o3hz'));
     }
 
-    public function testMatchRedditNotAVideo()
+    public function testMatchRedditNotAVideo(): void
     {
         $client = self::getMockClient([(new Response(200, [], (string) json_encode([['data' => ['children' => [['data' => ['domain' => 'self.gifs']]]]]])))]);
 
@@ -47,7 +47,7 @@ class RedditVideoTest extends AppTestCase
         $this->assertFalse($redditVideo->match('https://www.reddit.com/r/videos/comments/6rrwyj/that_small_heart_attack/'));
     }
 
-    public function testMatchReddit()
+    public function testMatchReddit(): void
     {
         $client = self::getMockClient([(new Response(200, [], (string) json_encode([['data' => ['children' => [['data' => ['domain' => 'v.redd.it']]]]]])))]);
 
@@ -57,7 +57,7 @@ class RedditVideoTest extends AppTestCase
         $this->assertTrue($redditVideo->match('https://www.reddit.com/r/videos/comments/6rrwyj/that_small_heart_attack/'));
     }
 
-    public function testContent()
+    public function testContent(): void
     {
         $client = self::getMockClient([(new Response(200, [], (string) json_encode([['data' => ['children' => [['data' => [
             'domain' => 'v.redd.it',

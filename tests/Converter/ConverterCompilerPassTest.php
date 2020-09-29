@@ -8,15 +8,15 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 class ConverterCompilerPassTest extends TestCase
 {
-    public function testProcessNoDefinition()
+    public function testProcessNoDefinition(): void
     {
         $container = new ContainerBuilder();
-        $res = $this->process($container);
+        $this->process($container);
 
-        $this->assertNull($res);
+        $this->assertFalse($container->hasDefinition('App\Converter\ConverterChain'));
     }
 
-    public function testProcess()
+    public function testProcess(): void
     {
         $container = new ContainerBuilder();
         $container
@@ -40,7 +40,7 @@ class ConverterCompilerPassTest extends TestCase
         $this->assertSame('instagram', $calls[0][1][1]);
     }
 
-    protected function process(ContainerBuilder $container)
+    protected function process(ContainerBuilder $container): void
     {
         $repeatedPass = new ConverterCompilerPass();
         $repeatedPass->process($container);

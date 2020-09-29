@@ -20,8 +20,11 @@ use Symfony\Component\Console\Tester\CommandTester;
  */
 class FetchItemsCommandTest extends WebTestCase
 {
+    /** @var TestHandler */
     private $handler;
+    /** @var \Symfony\Component\Console\Command\Command */
     private $command;
+    /** @var CommandTester */
     private $commandTester;
 
     public function setUp(): void
@@ -123,7 +126,7 @@ class FetchItemsCommandTest extends WebTestCase
         $this->commandTester = new CommandTester($this->command);
     }
 
-    public function testWrongSlug()
+    public function testWrongSlug(): void
     {
         $this->commandTester->execute([
             'command' => $this->command->getName(),
@@ -133,7 +136,7 @@ class FetchItemsCommandTest extends WebTestCase
         $this->assertRegExp('`Unable to find Feed document`', $this->commandTester->getDisplay());
     }
 
-    public function testHN()
+    public function testHN(): void
     {
         $this->commandTester->execute([
             'command' => $this->command->getName(),
@@ -149,7 +152,7 @@ class FetchItemsCommandTest extends WebTestCase
         $this->assertRegExp('`items cached.`', $this->commandTester->getDisplay());
     }
 
-    public function testNew()
+    public function testNew(): void
     {
         $this->commandTester->execute([
             'command' => $this->command->getName(),
@@ -164,7 +167,7 @@ class FetchItemsCommandTest extends WebTestCase
         $this->assertRegExp('`items cached.`', $this->commandTester->getDisplay());
     }
 
-    public function testOld()
+    public function testOld(): void
     {
         $this->commandTester->execute([
             'command' => $this->command->getName(),
@@ -179,7 +182,7 @@ class FetchItemsCommandTest extends WebTestCase
         $this->assertRegExp('`items cached.`', $this->commandTester->getDisplay());
     }
 
-    public function testUsingQueue()
+    public function testUsingQueue(): void
     {
         $this->commandTester->execute([
             'command' => $this->command->getName(),
@@ -190,7 +193,7 @@ class FetchItemsCommandTest extends WebTestCase
         $this->assertRegExp('`feeds queued.`', $this->commandTester->getDisplay());
     }
 
-    public function testCommandSyncAllUsersWithQueueFull()
+    public function testCommandSyncAllUsersWithQueueFull(): void
     {
         /** @var \Symfony\Component\DependencyInjection\ContainerInterface */
         $container = self::$kernel->getContainer();
@@ -225,31 +228,10 @@ class FetchItemsCommandTest extends WebTestCase
         $this->assertStringContainsString('Current queue as too much messages (10), skipping.', $commandTester->getDisplay());
     }
 
-    /**
-     * @see http://symfony.com/doc/current/components/console/helpers/dialoghelper.html#testing-a-command-which-expects-input
-     *
-     * @param string $input
-     */
-    protected function getInputStream($input)
-    {
-        $stream = fopen('php://memory', 'r+', false);
-
-        if (false === $stream) {
-            throw new \Exception('Cannot create stream ...');
-        }
-
-        fwrite($stream, $input);
-        rewind($stream);
-
-        return $stream;
-    }
-
-    private function getAmqpMessage($totalMessage = 0)
+    private function getAmqpMessage(int $totalMessage = 0): \PHPUnit\Framework\MockObject\MockObject
     {
         $message = new AMQPMessage();
-        $message->delivery_info = [
-            'message_count' => $totalMessage,
-        ];
+        $message->setMessageCount($totalMessage);
 
         $amqpChannel = $this->getMockBuilder('PhpAmqpLib\Channel\AMQPChannel')
             ->disableOriginalConstructor()

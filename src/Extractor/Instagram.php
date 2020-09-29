@@ -4,12 +4,13 @@ namespace App\Extractor;
 
 class Instagram extends AbstractExtractor
 {
+    /** @var string */
     protected $instagramUrl = null;
 
     /**
      * {@inheritdoc}
      */
-    public function match($url)
+    public function match(string $url): bool
     {
         $host = parse_url($url, PHP_URL_HOST);
         $path = parse_url($url, PHP_URL_PATH);
@@ -23,7 +24,7 @@ class Instagram extends AbstractExtractor
         }
 
         // instagram path always starts with a /p
-        if (0 !== strpos($path, '/p')) {
+        if (0 !== strpos((string) $path, '/p')) {
             return false;
         }
 
@@ -35,7 +36,7 @@ class Instagram extends AbstractExtractor
     /**
      * {@inheritdoc}
      */
-    public function getContent()
+    public function getContent(): string
     {
         if (!$this->instagramUrl) {
             return '';
@@ -53,10 +54,8 @@ class Instagram extends AbstractExtractor
     /**
      * Return only the image instead of the whole html content.
      * Used in the Instagram converter.
-     *
-     * @return string
      */
-    public function getImageOnly()
+    public function getImageOnly(): string
     {
         $data = $this->retrieveData();
 

@@ -10,7 +10,7 @@ use Monolog\Logger;
 
 class DailymotionTest extends AppTestCase
 {
-    public function dataMatch()
+    public function dataMatch(): array
     {
         return [
             ['http://dai.ly/xockol', true],
@@ -25,13 +25,13 @@ class DailymotionTest extends AppTestCase
     /**
      * @dataProvider dataMatch
      */
-    public function testMatch($url, $expected)
+    public function testMatch(string $url, bool $expected): void
     {
         $dailymotion = new Dailymotion();
         $this->assertSame($expected, $dailymotion->match($url));
     }
 
-    public function testContent()
+    public function testContent(): void
     {
         $client = self::getMockClient([
             (new Response(200, [], (string) json_encode(['title' => 'my title', 'thumbnail_url' => 'http://0.0.0.0/img.jpg', 'html' => '<iframe/>']))),

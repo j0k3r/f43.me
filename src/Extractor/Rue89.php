@@ -4,13 +4,15 @@ namespace App\Extractor;
 
 class Rue89 extends AbstractExtractor
 {
+    /** @var string */
     protected $rue89Id = null;
+    /** @var bool */
     protected $isBlog = false;
 
     /**
      * {@inheritdoc}
      */
-    public function match($url)
+    public function match(string $url): bool
     {
         $host = parse_url($url, PHP_URL_HOST);
         $path = parse_url($url, PHP_URL_PATH);
@@ -19,13 +21,13 @@ class Rue89 extends AbstractExtractor
             return false;
         }
 
-        if (false === strpos($host, 'rue89.nouvelobs.com')) {
+        if (false === strpos((string) $host, 'rue89.nouvelobs.com')) {
             return false;
         }
 
-        $this->isBlog = 0 === strpos($path, '/blog/');
+        $this->isBlog = 0 === strpos((string) $path, '/blog/');
 
-        preg_match('/\-([0-9]+)$/i', $path, $matches);
+        preg_match('/\-([0-9]+)$/i', (string) $path, $matches);
 
         if (!isset($matches[1])) {
             return false;
@@ -39,7 +41,7 @@ class Rue89 extends AbstractExtractor
     /**
      * {@inheritdoc}
      */
-    public function getContent()
+    public function getContent(): string
     {
         if (!$this->rue89Id) {
             return '';

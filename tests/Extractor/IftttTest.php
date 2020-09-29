@@ -10,7 +10,7 @@ use Monolog\Logger;
 
 class IftttTest extends AppTestCase
 {
-    public function dataMatch()
+    public function dataMatch(): array
     {
         return [
             ['https://ifttt.com/recipes/385105-receive-notifications-for-a-jailbreak', true],
@@ -25,13 +25,13 @@ class IftttTest extends AppTestCase
     /**
      * @dataProvider dataMatch
      */
-    public function testMatch($url, $expected)
+    public function testMatch(string $url, bool $expected): void
     {
         $ifttt = new Ifttt();
         $this->assertSame($expected, $ifttt->match($url));
     }
 
-    public function testContent()
+    public function testContent(): void
     {
         $client = self::getMockClient([
             (new Response(200, [], (string) json_encode(['title' => 'my title', 'description' => 'Cool stuff bro']))),

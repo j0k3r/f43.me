@@ -4,12 +4,13 @@ namespace App\Extractor;
 
 class RedditVideo extends AbstractExtractor
 {
+    /** @var array */
     protected $redditVideoData = null;
 
     /**
      * {@inheritdoc}
      */
-    public function match($url)
+    public function match(string $url): bool
     {
         $host = parse_url($url, PHP_URL_HOST);
         $path = parse_url($url, PHP_URL_PATH);
@@ -55,7 +56,7 @@ class RedditVideo extends AbstractExtractor
     /**
      * {@inheritdoc}
      */
-    public function getContent()
+    public function getContent(): string
     {
         if (!$this->redditVideoData) {
             return '';

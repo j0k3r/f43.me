@@ -10,7 +10,7 @@ use Monolog\Logger;
 
 class SoundcloudTest extends AppTestCase
 {
-    public function dataMatch()
+    public function dataMatch(): array
     {
         return [
             ['https://soundcloud.com/birdfeeder/jurassic-park-theme-1000-slower', true],
@@ -24,13 +24,13 @@ class SoundcloudTest extends AppTestCase
     /**
      * @dataProvider dataMatch
      */
-    public function testMatch($url, $expected)
+    public function testMatch(string $url, bool $expected): void
     {
         $soundCloud = new Soundcloud();
         $this->assertSame($expected, $soundCloud->match($url));
     }
 
-    public function testContent()
+    public function testContent(): void
     {
         $client = self::getMockClient([
             (new Response(200, [], (string) json_encode(['title' => 'my title', 'description' => 'my description', 'thumbnail_url' => 'http://0.0.0.0/img.jpg', 'html' => '<iframe/>']))),

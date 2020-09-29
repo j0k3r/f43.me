@@ -2,12 +2,15 @@
 
 namespace App\Tests\Xml;
 
+use App\Entity\Feed;
 use App\Xml\Render;
 use PHPUnit\Framework\TestCase;
 
 class RenderTest extends TestCase
 {
+    /** @var \App\Repository\ItemRepository */
     private $repo;
+    /** @var \Symfony\Bundle\FrameworkBundle\Routing\Router */
     private $router;
 
     protected function setUp(): void
@@ -16,8 +19,12 @@ class RenderTest extends TestCase
             ->disableOriginalConstructor()
             ->getMock();
 
+        $this->router->expects($this->any())
+            ->method('generate')
+            ->willReturn('https://fake.url');
+
         $this->repo = $this->getMockBuilder('App\Repository\ItemRepository')
-            ->setMethods(['findByFeed'])
+            ->onlyMethods(['findByFeed'])
             ->disableOriginalConstructor()
             ->getMock();
 
@@ -31,28 +38,24 @@ class RenderTest extends TestCase
         unset($this->repo, $this->router);
     }
 
-    public function testRenderBadFormat()
+    public function testRenderBadFormat(): void
     {
         $this->expectException(\InvalidArgumentException::class);
 
-        $feed = $this->getMockBuilder('App\Entity\Feed')
-            ->disableOriginalConstructor()
-            ->getMock();
+        $feed = new Feed();
+        $feed->setId(66);
+        $feed->setSortBy('created_at');
 
         $render = new Render('toto', $this->repo, $this->router);
         $render->doRender($feed);
     }
 
-    public function testRenderAtom()
+    public function testRenderAtom(): void
     {
-        $feed = $this->getMockBuilder('App\Entity\Feed')
-            ->setMethods(['getFormatter'])
-            ->disableOriginalConstructor()
-            ->getMock();
-
-        $feed->expects($this->any())
-            ->method('getFormatter')
-            ->willReturn('atom');
+        $feed = new Feed();
+        $feed->setId(66);
+        $feed->setSortBy('created_at');
+        $feed->setFormatter('atom');
 
         $render = new Render('tata', $this->repo, $this->router);
         $content = $render->doRender($feed);
@@ -68,16 +71,12 @@ class RenderTest extends TestCase
         libxml_use_internal_errors(false);
     }
 
-    public function testRenderRss()
+    public function testRenderRss(): void
     {
-        $feed = $this->getMockBuilder('App\Entity\Feed')
-            ->setMethods(['getFormatter'])
-            ->disableOriginalConstructor()
-            ->getMock();
-
-        $feed->expects($this->any())
-            ->method('getFormatter')
-            ->willReturn('rss');
+        $feed = new Feed();
+        $feed->setId(66);
+        $feed->setSortBy('created_at');
+        $feed->setFormatter('rss');
 
         $render = new Render('tata', $this->repo, $this->router);
         $content = $render->doRender($feed);

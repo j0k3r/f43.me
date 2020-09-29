@@ -34,7 +34,7 @@ class Import
         $this->logger = $logger;
     }
 
-    public function setEntityManager(EntityManagerInterface $em)
+    public function setEntityManager(EntityManagerInterface $em): void
     {
         $this->em = $em;
     }
@@ -51,7 +51,7 @@ class Import
      *
      * @param array $feeds An array for App\Entity\Feed
      */
-    public function process($feeds)
+    public function process(array $feeds): int
     {
         $totalCached = 0;
         $feedUpdated = [];
@@ -65,8 +65,8 @@ class Import
                 ->init();
 
             // update feed description, in case it was empty
-            if (0 === \strlen($feed->getDescription()) && 0 !== \strlen($rssFeed->get_description())) {
-                $feed->setDescription(html_entity_decode($rssFeed->get_description(), ENT_COMPAT, 'UTF-8'));
+            if (0 === \strlen($feed->getDescription()) && 0 !== \strlen((string) $rssFeed->get_description())) {
+                $feed->setDescription(html_entity_decode((string) $rssFeed->get_description(), ENT_COMPAT, 'UTF-8'));
                 $this->em->persist($feed);
                 $this->em->flush();
             }
@@ -80,7 +80,10 @@ class Import
 
             $this->logger->debug('<info>Link to check</info>: <comment>' . $rssFeed->get_item_quantity() . '</comment>');
 
-            foreach ($rssFeed->get_items() as $item) {
+            /** @var array<\SimplePie_Item> */
+            $items = $rssFeed->get_items();
+
+            foreach ($items as $item) {
                 $permalink = $item->get_permalink();
 
                 // if an item already exists, we skip it
@@ -98,7 +101,7 @@ class Import
 
                 // if readable content failed, use default one from feed item
                 $content = $parsedContent->content;
-                if (false === $content) {
+                if (!$content) {
                     $content = $item->get_content();
                 }
 
@@ -107,12 +110,12 @@ class Import
                 if (null === $date) {
                     $date = time();
                 }
-                $date = (new \DateTime())->setTimestamp(strtotime($date));
+                $date = (new \DateTime())->setTimestamp((int) strtotime((string) $date));
 
                 $feedItem = new Item($feed);
-                $feedItem->setTitle(html_entity_decode($item->get_title(), ENT_COMPAT, 'UTF-8'));
+                $feedItem->setTitle(html_entity_decode((string) $item->get_title(), ENT_COMPAT, 'UTF-8'));
                 $feedItem->setLink($parsedContent->url);
-                $feedItem->setContent($content);
+                $feedItem->setContent((string) $content);
                 $feedItem->setPermalink($permalink);
                 $feedItem->setPublishedAt($date);
                 $this->em->persist($feedItem);

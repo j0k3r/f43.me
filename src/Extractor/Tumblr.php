@@ -4,14 +4,14 @@ namespace App\Extractor;
 
 class Tumblr extends AbstractExtractor
 {
+    /** @var string */
     protected $tumblrApiKey;
+    /** @var string */
     protected $tumblrId = null;
+    /** @var string */
     protected $tumblrHost = null;
 
-    /**
-     * @param string $tumblrApiKey
-     */
-    public function __construct($tumblrApiKey)
+    public function __construct(string $tumblrApiKey)
     {
         $this->tumblrApiKey = $tumblrApiKey;
     }
@@ -19,7 +19,7 @@ class Tumblr extends AbstractExtractor
     /**
      * {@inheritdoc}
      */
-    public function match($url)
+    public function match(string $url): bool
     {
         $host = parse_url($url, PHP_URL_HOST);
         $path = parse_url($url, PHP_URL_PATH);
@@ -29,7 +29,7 @@ class Tumblr extends AbstractExtractor
         }
 
         // find tumblr post id
-        preg_match('/post\/([0-9]+)/', $path, $matches);
+        preg_match('/post\/([0-9]+)/', (string) $path, $matches);
 
         if (!isset($matches[1])) {
             return false;
@@ -53,7 +53,7 @@ class Tumblr extends AbstractExtractor
         }
 
         $this->tumblrId = $matches[1];
-        $this->tumblrHost = $host;
+        $this->tumblrHost = (string) $host;
 
         return true;
     }
@@ -61,7 +61,7 @@ class Tumblr extends AbstractExtractor
     /**
      * {@inheritdoc}
      */
-    public function getContent()
+    public function getContent(): string
     {
         if (!$this->tumblrId && !$this->tumblrHost) {
             return '';

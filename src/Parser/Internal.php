@@ -10,6 +10,7 @@ use Graby\Graby;
  */
 class Internal extends AbstractParser
 {
+    /** @var Graby */
     protected $graby;
 
     public function __construct(Graby $graby)
@@ -20,7 +21,7 @@ class Internal extends AbstractParser
     /**
      * {@inheritdoc}
      */
-    public function parse($url, $reloadConfigFiles = false)
+    public function parse(string $url, bool $reloadConfigFiles = false): string
     {
         if (true === $reloadConfigFiles) {
             $this->graby->reloadConfigFiles();

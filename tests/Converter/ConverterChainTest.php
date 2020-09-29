@@ -7,7 +7,7 @@ use PHPUnit\Framework\TestCase;
 
 class ConverterChainTest extends TestCase
 {
-    public function testConvert()
+    public function testConvert(): void
     {
         $converter = $this->getMockBuilder('App\Converter\AbstractConverter')
             ->disableOriginalConstructor()

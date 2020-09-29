@@ -10,7 +10,7 @@ use Monolog\Logger;
 
 class GfycatTest extends AppTestCase
 {
-    public function dataMatch()
+    public function dataMatch(): array
     {
         return [
             ['http://gfycat.com/RichPepperyFerret', true],
@@ -27,13 +27,13 @@ class GfycatTest extends AppTestCase
     /**
      * @dataProvider dataMatch
      */
-    public function testMatch($url, $expected)
+    public function testMatch(string $url, bool $expected): void
     {
         $gfycat = new Gfycat();
         $this->assertSame($expected, $gfycat->match($url));
     }
 
-    public function testContent()
+    public function testContent(): void
     {
         $client = self::getMockClient([
             (new Response(200, [], (string) json_encode(['gfyItem' => ['title' => 'my title', 'posterUrl' => 'http://0.0.0.0/img.gif', 'width' => 210, 'height' => 120]]))),

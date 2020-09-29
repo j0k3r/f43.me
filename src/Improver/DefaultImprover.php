@@ -11,8 +11,11 @@ use Http\Client\Common\HttpMethodsClientInterface;
  */
 class DefaultImprover
 {
+    /** @var string */
     protected $url;
+    /** @var string */
     protected $itemContent;
+    /** @var HttpMethodsClientInterface */
     protected $client;
 
     public function __construct(HttpMethodsClientInterface $client)
@@ -22,32 +25,24 @@ class DefaultImprover
 
     /**
      * Set RSS item url.
-     *
-     * @param string $url
      */
-    public function setUrl($url)
+    public function setUrl(string $url): void
     {
         $this->url = $url;
     }
 
     /**
      * Set RSS item content.
-     *
-     * @param string $itemContent
      */
-    public function setItemContent($itemContent)
+    public function setItemContent(string $itemContent): void
     {
         $this->itemContent = $itemContent;
     }
 
     /**
      * Will tell if this host (of the feed) should be handled by this improver.
-     *
-     * @param string $host
-     *
-     * @return bool
      */
-    public function match($host)
+    public function match(string $host): bool
     {
         return true;
     }
@@ -61,7 +56,7 @@ class DefaultImprover
      *
      * @return string Url to be used to retrieve content
      */
-    public function updateUrl($url)
+    public function updateUrl(string $url): string
     {
         // convert bad encoded character
         $url = str_replace('&amp%3B', '&', $url);
@@ -76,7 +71,7 @@ class DefaultImprover
         parse_str($query, $queryExploded);
 
         $notUtmParameters = array_filter(array_keys($queryExploded), function ($k) {
-            return 0 !== strpos($k, 'utm');
+            return 0 !== strpos((string) $k, 'utm');
         });
         $newQuery = array_intersect_key($queryExploded, array_flip($notUtmParameters));
 
@@ -96,10 +91,8 @@ class DefaultImprover
      * For example, it may be added to the item content.
      *
      * @param string $readableContent Readable item content
-     *
-     * @return string
      */
-    public function updateContent($readableContent)
+    public function updateContent(string $readableContent): string
     {
         return $readableContent;
     }

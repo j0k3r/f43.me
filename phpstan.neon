@@ -1,10 +1,9 @@
-includes:
-    - vendor/phpstan/phpstan-phpunit/extension.neon
-    - vendor/phpstan/phpstan-symfony/extension.neon
-    #- vendor/phpstan/phpstan-doctrine/extension.neon
-    - vendor/phpstan/phpstan-phpunit/rules.neon
-
 parameters:
+    level: max
+    paths:
+        - src
+        - tests
+
     symfony:
         container_xml_path: %rootDir%/../../../var/cache/test/srcApp_KernelTestDebugContainer.xml
         console_application_loader: tests/console-application.php
@@ -17,5 +16,8 @@ parameters:
         - '#Constructor of class App\\DomDocument\\XDOMElement has an unused parameter \$value.#'
         # Related to `getReference` in data fixtures
         - '#Parameter \#1 \$feed of class App\\Entity#'
+        # because the argument is a mock
+        - '#Parameter \#7 \$amqplibFactory#'
 
     inferPrivatePropertyTypeFromConstructor: true
+    checkMissingIterableValueType: false

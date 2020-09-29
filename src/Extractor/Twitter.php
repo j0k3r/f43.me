@@ -7,7 +7,9 @@ use TwitterOAuth\TwitterOAuth;
 
 class Twitter extends AbstractExtractor
 {
+    /** @var TwitterOAuth */
     protected $twitter;
+    /** @var string */
     protected $tweetId = null;
 
     public function __construct(TwitterOAuth $twitter)
@@ -18,7 +20,7 @@ class Twitter extends AbstractExtractor
     /**
      * {@inheritdoc}
      */
-    public function match($url)
+    public function match(string $url): bool
     {
         $host = parse_url($url, PHP_URL_HOST);
         $path = parse_url($url, PHP_URL_PATH);
@@ -28,7 +30,7 @@ class Twitter extends AbstractExtractor
         }
 
         // find tweet id
-        preg_match('/([0-9]{18,})/', $path, $matches);
+        preg_match('/([0-9]{18,})/', (string) $path, $matches);
 
         if (!\in_array($host, ['mobile.twitter.com', 'twitter.com'], true) || !isset($matches[1])) {
             return false;
@@ -42,7 +44,7 @@ class Twitter extends AbstractExtractor
     /**
      * {@inheritdoc}
      */
-    public function getContent()
+    public function getContent(): string
     {
         $data = $this->retrieveTwitterData();
 

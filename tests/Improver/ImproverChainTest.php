@@ -7,7 +7,7 @@ use PHPUnit\Framework\TestCase;
 
 class ImproverChainTest extends TestCase
 {
-    public function testMatchTrue()
+    public function testMatchTrue(): void
     {
         $improver = $this->getMockBuilder('App\Improver\DefaultImprover')
             ->disableOriginalConstructor()
@@ -23,7 +23,7 @@ class ImproverChainTest extends TestCase
         $this->assertSame($improver, $improverChain->match('host'));
     }
 
-    public function testMatchFalse()
+    public function testMatchFalse(): void
     {
         $improver = $this->getMockBuilder('App\Improver\DefaultImprover')
             ->disableOriginalConstructor()
@@ -39,7 +39,7 @@ class ImproverChainTest extends TestCase
         $this->assertFalse($improverChain->match('host'));
     }
 
-    public function testMatchWithEmptyHost()
+    public function testMatchWithEmptyHost(): void
     {
         $improver = $this->getMockBuilder('App\Improver\DefaultImprover')
             ->disableOriginalConstructor()

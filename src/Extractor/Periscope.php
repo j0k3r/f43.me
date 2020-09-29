@@ -4,12 +4,13 @@ namespace App\Extractor;
 
 class Periscope extends AbstractExtractor
 {
+    /** @var string */
     protected $periscopeId = null;
 
     /**
      * {@inheritdoc}
      */
-    public function match($url)
+    public function match(string $url): bool
     {
         $host = parse_url($url, PHP_URL_HOST);
         $path = parse_url($url, PHP_URL_PATH);
@@ -22,7 +23,7 @@ class Periscope extends AbstractExtractor
             return false;
         }
 
-        preg_match('/\/([a-z0-9]{13})/i', $path, $matches);
+        preg_match('/\/([a-z0-9]{13})/i', (string) $path, $matches);
 
         if (!isset($matches[1])) {
             return false;
@@ -36,7 +37,7 @@ class Periscope extends AbstractExtractor
     /**
      * {@inheritdoc}
      */
-    public function getContent()
+    public function getContent(): string
     {
         if (!$this->periscopeId) {
             return '';

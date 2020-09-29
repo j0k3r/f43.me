@@ -21,6 +21,8 @@ use Symfony\Component\Validator\Constraints as Assert;
 class Feed
 {
     /**
+     * @var int
+     *
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
@@ -28,17 +30,23 @@ class Feed
     protected $id;
 
     /**
+     * @var string
+     *
      * @ORM\Column(name="name", type="string", length=191)
      * @Assert\NotBlank()
      */
     protected $name;
 
     /**
+     * @var string
+     *
      * @ORM\Column(name="description", type="text", nullable=true)
      */
     protected $description;
 
     /**
+     * @var string
+     *
      * @ORM\Column(name="link", type="string")
      * @Assert\NotBlank()
      * @Assert\Url()
@@ -47,73 +55,101 @@ class Feed
     protected $link;
 
     /**
+     * @var string
+     *
      * @ORM\Column(name="host", type="string")
      * @Assert\NotBlank()
      */
     protected $host;
 
     /**
+     * @var string
+     *
      * @ORM\Column(name="logo", type="string", nullable=true)
      */
     protected $logo;
 
     /**
+     * @var string
+     *
      * @ORM\Column(name="color", type="string", nullable=true)
      */
     protected $color;
 
     /**
+     * @var string
+     *
      * @ORM\Column(name="parser", type="string")
      */
     protected $parser;
 
     /**
+     * @var string
+     *
      * @ORM\Column(name="formatter", type="string")
      */
     protected $formatter;
 
     /**
+     * @var int
+     *
      * @ORM\Column(name="nb_items", type="integer")
      */
     protected $nbItems = 0;
 
     /**
+     * @var string
+     *
      * @Gedmo\Slug(fields={"name"}, updatable=false, unique=true)
      * @ORM\Column(name="slug", type="string", length=191)
      */
     protected $slug;
 
     /**
+     * @var bool
+     *
      * @ORM\Column(name="is_private", type="boolean")
      */
     protected $isPrivate = false;
 
     /**
+     * @var string
+     *
      * @ORM\Column(name="sort_by", type="string")
      */
     protected $sortBy;
 
     /**
+     * @var \DateTime
+     *
      * @ORM\Column(name="last_item_cached_at", type="datetime", nullable=true)
      */
     protected $lastItemCachedAt;
 
     /**
+     * @var \DateTime
+     *
      * @ORM\Column(name="created_at", type="datetime")
      */
     protected $createdAt;
 
     /**
+     * @var \DateTime
+     *
      * @ORM\Column(name="updated_at", type="datetime")
      */
     protected $updatedAt;
 
     /**
+     * @var ArrayCollection<int, Item>
+     *
      * @ORM\OneToMany(targetEntity="Item", mappedBy="feed", cascade={"persist", "remove"})
      */
     protected $items;
 
     /**
+     * @var ArrayCollection<int, Log>
+     *
      * @ORM\OneToMany(targetEntity="Log", mappedBy="feed", cascade={"persist", "remove"})
      */
     protected $logs;
@@ -223,7 +259,7 @@ class Feed
     /**
      * Set createdAt.
      *
-     * @param string|\DateTime $createdAt
+     * @param \DateTime $createdAt
      *
      * @return self
      */
@@ -237,7 +273,7 @@ class Feed
     /**
      * Get createdAt.
      *
-     * @return string|\DateTime $createdAt
+     * @return \DateTime $createdAt
      */
     public function getCreatedAt()
     {
@@ -247,7 +283,7 @@ class Feed
     /**
      * Set updatedAt.
      *
-     * @param string|\DateTime $updatedAt
+     * @param \DateTime $updatedAt
      *
      * @return self
      */
@@ -261,7 +297,7 @@ class Feed
     /**
      * Get updatedAt.
      *
-     * @return string|\DateTime $updatedAt
+     * @return \DateTime $updatedAt
      */
     public function getUpdatedAt()
     {
@@ -519,7 +555,7 @@ class Feed
      * @ORM\PrePersist
      * @ORM\PreUpdate
      */
-    public function timestamps()
+    public function timestamps(): void
     {
         if (null === $this->createdAt) {
             $this->createdAt = new \DateTime();
@@ -531,7 +567,7 @@ class Feed
     /**
      * Return items.
      *
-     * @return ArrayCollection
+     * @return ArrayCollection<int, Item>
      */
     public function getItems()
     {
@@ -541,7 +577,7 @@ class Feed
     /**
      * Return logs.
      *
-     * @return ArrayCollection
+     * @return ArrayCollection<int, Log>
      */
     public function getLogs()
     {

@@ -7,12 +7,13 @@ use Psr\Log\LoggerInterface;
 
 abstract class AbstractConverter implements LoggerAwareInterface
 {
+    /** @var LoggerInterface */
     protected $logger;
 
     /**
      * {@inheritdoc}
      */
-    public function setLogger(LoggerInterface $logger)
+    public function setLogger(LoggerInterface $logger): void
     {
         $this->logger = $logger;
     }
@@ -20,10 +21,6 @@ abstract class AbstractConverter implements LoggerAwareInterface
     /**
      * Will convert the html into what they want.
      * If it hasn't modified, it'll return right away.
-     *
-     * @param string $html
-     *
-     * @return string
      */
-    abstract public function convert($html);
+    abstract public function convert(string $html): string;
 }

@@ -2,9 +2,11 @@
 
 namespace App\Tests\Controller;
 
+use Symfony\Component\DomCrawler\Crawler;
+
 class FeedControllerTest extends FeedWebTestCase
 {
-    public function testIndex()
+    public function testIndex(): void
     {
         $client = static::createClient();
 
@@ -22,7 +24,7 @@ class FeedControllerTest extends FeedWebTestCase
         $this->assertStringNotContainsString('Bonjour', (string) $client->getResponse()->getContent());
     }
 
-    public function testUnAuthorized()
+    public function testUnAuthorized(): void
     {
         $client = static::createClient();
 
@@ -43,7 +45,7 @@ class FeedControllerTest extends FeedWebTestCase
         $this->assertTrue($client->getResponse()->isRedirect('http://localhost/login'));
     }
 
-    public function testDashboard()
+    public function testDashboard(): void
     {
         $client = static::getAuthorizedClient();
 
@@ -72,7 +74,7 @@ class FeedControllerTest extends FeedWebTestCase
         }
     }
 
-    public function testFeeds()
+    public function testFeeds(): void
     {
         $client = static::getAuthorizedClient();
 
@@ -89,7 +91,7 @@ class FeedControllerTest extends FeedWebTestCase
         }
     }
 
-    public function testFeedNew()
+    public function testFeedNew(): void
     {
         $client = static::getAuthorizedClient();
 
@@ -108,7 +110,7 @@ class FeedControllerTest extends FeedWebTestCase
         $this->assertCount(1, $crawler->filter('button[type=submit]'));
     }
 
-    public function testFeedNewSubmitEmpty()
+    public function testFeedNewSubmitEmpty(): void
     {
         $client = static::getAuthorizedClient();
 
@@ -124,7 +126,7 @@ class FeedControllerTest extends FeedWebTestCase
         $this->assertGreaterThanOrEqual(1, \count($crawler->filter('small.error')));
     }
 
-    public function dataNewFeedOk()
+    public function dataNewFeedOk(): array
     {
         return [[[
             'feed[name]' => 'Google News',
@@ -144,7 +146,7 @@ class FeedControllerTest extends FeedWebTestCase
      *
      * This test will need an internet connection to pass.
      */
-    public function testFeedNewSubmitBadRss($data)
+    public function testFeedNewSubmitBadRss(array $data): void
     {
         $client = static::getAuthorizedClient();
 
@@ -166,7 +168,7 @@ class FeedControllerTest extends FeedWebTestCase
     /**
      * @dataProvider dataNewFeedOk
      */
-    public function testFeedNewSubmitOk($data)
+    public function testFeedNewSubmitOk(array $data): void
     {
         $client = static::getAuthorizedClient();
 
@@ -178,24 +180,24 @@ class FeedControllerTest extends FeedWebTestCase
         $location = $client->getResponse()->headers->get('location');
 
         $this->assertSame(302, $client->getResponse()->getStatusCode());
-        $this->assertStringContainsString('google-news', $location);
+        $this->assertStringContainsString('google-news', (string) $location);
 
         $crawler = $client->followRedirect();
         $this->assertCount(1, $alert = $crawler->filter('div.alert-box')->extract(['_text']));
         $this->assertSame('Feed created!', $alert[0]);
     }
 
-    public function testFeedEditBadSlug()
+    public function testFeedEditBadSlug(): void
     {
         $client = static::getAuthorizedClient();
 
         $client->request('GET', '/feed/nawak/edit');
 
         $this->assertSame(404, $client->getResponse()->getStatusCode());
-        $this->assertStringContainsString('Feed object not found', $client->getResponse()->getContent());
+        $this->assertStringContainsString('Feed object not found', (string) $client->getResponse()->getContent());
     }
 
-    public function testFeedEditOk()
+    public function testFeedEditOk(): void
     {
         $client = static::getAuthorizedClient();
 
@@ -221,7 +223,7 @@ class FeedControllerTest extends FeedWebTestCase
         $this->assertCount(1, $crawler->filter('iframe.pubsubhubbub'));
     }
 
-    public function dataEditFeedOk()
+    public function dataEditFeedOk(): array
     {
         return [[[
             'feed[name]' => 'Bonjour Madame edited !',
@@ -238,7 +240,7 @@ class FeedControllerTest extends FeedWebTestCase
     /**
      * @dataProvider dataEditFeedOk
      */
-    public function testFeedEditSubmitBadValue($data)
+    public function testFeedEditSubmitBadValue(array $data): void
     {
         $client = static::getAuthorizedClient();
 
@@ -256,13 +258,13 @@ class FeedControllerTest extends FeedWebTestCase
         $this->assertSame('Form is invalid.', $alert[0]);
         // url invalid + feed invalid
         $this->assertGreaterThanOrEqual(1, $crawler->filter('small.error')->count());
-        $this->assertStringContainsString('This value is not a valid URL.', $client->getResponse()->getContent());
+        $this->assertStringContainsString('This value is not a valid URL.', (string) $client->getResponse()->getContent());
     }
 
     /**
      * @dataProvider dataEditFeedOk
      */
-    public function testFeedEditSubmitOk($data)
+    public function testFeedEditSubmitOk(array $data): void
     {
         $client = static::getAuthorizedClient();
 
@@ -273,24 +275,24 @@ class FeedControllerTest extends FeedWebTestCase
         $client->submit($form, $data);
 
         $this->assertSame(302, $client->getResponse()->getStatusCode());
-        $this->assertStringContainsString('bonjour-madame', $client->getResponse()->headers->get('location'));
+        $this->assertStringContainsString('bonjour-madame', (string) $client->getResponse()->headers->get('location'));
 
         $crawler = $client->followRedirect();
         $this->assertCount(1, $alert = $crawler->filter('div.alert-box')->extract(['_text']));
         $this->assertSame('Feed updated!', $alert[0]);
     }
 
-    public function testFeedUpdateBadSlug()
+    public function testFeedUpdateBadSlug(): void
     {
         $client = static::getAuthorizedClient();
 
         $client->request('POST', '/feed/nawak/edit');
 
         $this->assertSame(404, $client->getResponse()->getStatusCode());
-        $this->assertStringContainsString('Feed object not found', $client->getResponse()->getContent());
+        $this->assertStringContainsString('Feed object not found', (string) $client->getResponse()->getContent());
     }
 
-    public function testDeleteFormNotValid()
+    public function testDeleteFormNotValid(): void
     {
         $client = static::getAuthorizedClient();
 
@@ -299,7 +301,7 @@ class FeedControllerTest extends FeedWebTestCase
         $this->assertSame(404, $client->getResponse()->getStatusCode());
     }
 
-    public function testDeleteBadSlug()
+    public function testDeleteBadSlug(): void
     {
         $client = static::getAuthorizedClient();
 
@@ -310,7 +312,7 @@ class FeedControllerTest extends FeedWebTestCase
         $client->request('POST', '/feed/nawak/delete', $form->getPhpValues());
 
         $this->assertSame(404, $client->getResponse()->getStatusCode());
-        $this->assertStringContainsString('Feed object not found', $client->getResponse()->getContent());
+        $this->assertStringContainsString('Feed object not found', (string) $client->getResponse()->getContent());
     }
 
     /**
@@ -318,7 +320,7 @@ class FeedControllerTest extends FeedWebTestCase
      *
      * Feed with `google-news` slug will be created
      */
-    public function testDeleteOk()
+    public function testDeleteOk(): void
     {
         $client = static::getAuthorizedClient();
 
@@ -335,7 +337,7 @@ class FeedControllerTest extends FeedWebTestCase
         $this->assertSame('Feed deleted!', $alert[0]);
     }
 
-    public function testInvalidFeed()
+    public function testInvalidFeed(): void
     {
         $client = static::createClient();
 
@@ -345,7 +347,7 @@ class FeedControllerTest extends FeedWebTestCase
         $this->assertStringContainsString('Not Found', (string) $client->getResponse()->getContent());
     }
 
-    public function testRedditFeed()
+    public function testRedditFeed(): Crawler
     {
         $client = static::createClient();
 
@@ -369,7 +371,7 @@ class FeedControllerTest extends FeedWebTestCase
     /**
      * @depends testRedditFeed
      */
-    public function testRedditFeedContent($crawler)
+    public function testRedditFeedContent(Crawler $crawler): void
     {
         $this->assertGreaterThan(0, $crawler->filterXPath('//channel/link')->count());
         $this->assertGreaterThan(0, $crawler->filterXPath('//channel/description')->count());
@@ -383,7 +385,7 @@ class FeedControllerTest extends FeedWebTestCase
         $this->assertGreaterThan(0, $crawler->filterXPath('//channel/item/pubDate')->count());
     }
 
-    public function testHnFeed()
+    public function testHnFeed(): Crawler
     {
         $client = static::createClient();
 
@@ -407,7 +409,7 @@ class FeedControllerTest extends FeedWebTestCase
     /**
      * @depends testHnFeed
      */
-    public function testHnFeedContent($crawler)
+    public function testHnFeedContent(Crawler $crawler): void
     {
         $this->assertGreaterThan(0, $crawler->filterXPath('//feed/title')->count());
         $this->assertGreaterThan(0, $crawler->filterXPath('//feed/author')->count());

@@ -10,7 +10,7 @@ use Monolog\Logger;
 
 class VidmeTest extends AppTestCase
 {
-    public function dataMatch()
+    public function dataMatch(): array
     {
         return [
             ['https://vid.me/WaJr', true],
@@ -24,13 +24,13 @@ class VidmeTest extends AppTestCase
     /**
      * @dataProvider dataMatch
      */
-    public function testMatch($url, $expected)
+    public function testMatch(string $url, bool $expected): void
     {
         $vidme = new Vidme();
         $this->assertSame($expected, $vidme->match($url));
     }
 
-    public function testContent()
+    public function testContent(): void
     {
         $client = self::getMockClient([
             (new Response(200, [], (string) json_encode(['video' => ['title' => 'my title', 'thumbnail_url' => 'http://0.0.0.0/img.jpg', 'embed_url' => 'http://0.0.0.0/embed']]))),

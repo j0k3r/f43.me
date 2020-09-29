@@ -8,7 +8,7 @@ use GuzzleHttp\Psr7\Response;
 
 class HackerNewsTest extends AppTestCase
 {
-    public function dataMatch()
+    public function dataMatch(): array
     {
         return [
             ['https://news.ycombinator.com/item?id=10074364', true, ['text' => 'toto', 'type' => 'story']],
@@ -26,7 +26,7 @@ class HackerNewsTest extends AppTestCase
     /**
      * @dataProvider dataMatch
      */
-    public function testMatch($url, $expected, $valueReturned = null)
+    public function testMatch(string $url, bool $expected, array $valueReturned = null): void
     {
         $response = new Response(200, []);
         if (null !== $valueReturned) {
@@ -40,7 +40,7 @@ class HackerNewsTest extends AppTestCase
         $this->assertSame($expected, $hn->match($url));
     }
 
-    public function testMatchGuzzleFail()
+    public function testMatchGuzzleFail(): void
     {
         $client = self::getMockClient([(new Response(400, [], (string) json_encode('oops')))]);
 
@@ -49,7 +49,7 @@ class HackerNewsTest extends AppTestCase
         $this->assertFalse($hn->match('http://news.ycombinator.com/item?id=10074364'));
     }
 
-    public function testContent()
+    public function testContent(): void
     {
         $client = self::getMockClient([(new Response(200, [], (string) json_encode(['text' => 'toto', 'type' => 'story'])))]);
 
@@ -63,7 +63,7 @@ class HackerNewsTest extends AppTestCase
         $this->assertSame('<p>toto</p>', $hn->getContent());
     }
 
-    public function testContentWithoutText()
+    public function testContentWithoutText(): void
     {
         $client = self::getMockClient([(new Response(200, [], (string) json_encode(['type' => 'story'])))]);
 

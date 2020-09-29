@@ -10,7 +10,7 @@ use TwitterOAuth\Exception\TwitterException;
 
 class TwitterTest extends TestCase
 {
-    public function dataMatch()
+    public function dataMatch(): array
     {
         return [
             ['https://twitter.com/DoerteDev/statuses/50652222386027724', false],
@@ -26,7 +26,7 @@ class TwitterTest extends TestCase
     /**
      * @dataProvider dataMatch
      */
-    public function testMatch($url, $expected)
+    public function testMatch(string $url, bool $expected): void
     {
         $twitterOAuth = $this->getMockBuilder('TwitterOAuth\TwitterOAuth')
             ->disableOriginalConstructor()
@@ -36,7 +36,7 @@ class TwitterTest extends TestCase
         $this->assertSame($expected, $twitter->match($url));
     }
 
-    public function testContent()
+    public function testContent(): void
     {
         $twitterOAuth = $this->getMockBuilder('TwitterOAuth\TwitterOAuth')
             ->disableOriginalConstructor()
@@ -108,7 +108,7 @@ class TwitterTest extends TestCase
         $this->assertStringContainsString('@myself', $content, 'quote status ok');
     }
 
-    public function testContentNoEntities()
+    public function testContentNoEntities(): void
     {
         $twitterOAuth = $this->getMockBuilder('TwitterOAuth\TwitterOAuth')
             ->disableOriginalConstructor()
@@ -141,7 +141,7 @@ class TwitterTest extends TestCase
         $this->assertStringContainsString('Sun Oct 19', $content);
     }
 
-    public function testContentBadResponse()
+    public function testContentBadResponse(): void
     {
         $twitterOAuth = $this->getMockBuilder('TwitterOAuth\TwitterOAuth')
             ->disableOriginalConstructor()
@@ -164,7 +164,7 @@ class TwitterTest extends TestCase
         $this->assertTrue($logHandler->hasWarning('Twitter extract failed for: 506522223860277248'), 'Warning message matched');
     }
 
-    public function testNoTweet()
+    public function testNoTweet(): void
     {
         $twitterOAuth = $this->getMockBuilder('TwitterOAuth\TwitterOAuth')
             ->disableOriginalConstructor()

@@ -14,6 +14,8 @@ use Doctrine\ORM\Mapping as ORM;
 class Log
 {
     /**
+     * @var int
+     *
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
@@ -21,22 +23,30 @@ class Log
     protected $id;
 
     /**
+     * @var int
+     *
      * @ORM\Column(name="items_number", type="integer")
      */
     protected $itemsNumber;
 
     /**
+     * @var \DateTime
+     *
      * @ORM\Column(name="created_at", type="datetime")
      */
     protected $createdAt;
 
     /**
+     * @var Feed
+     *
      * @ORM\ManyToOne(targetEntity="App\Entity\Feed", inversedBy="logs")
      * @ORM\JoinColumn(name="feed_id", referencedColumnName="id")
      */
     protected $feed;
 
     /**
+     * @var Item
+     *
      * @ORM\ManyToOne(targetEntity="App\Entity\Item", inversedBy="logs")
      * @ORM\JoinColumn(name="item_id", referencedColumnName="id")
      */
@@ -84,7 +94,7 @@ class Log
     /**
      * Set createdAt.
      *
-     * @param string|\DateTime $createdAt
+     * @param \DateTime $createdAt
      *
      * @return self
      */
@@ -98,7 +108,7 @@ class Log
     /**
      * Get createdAt.
      *
-     * @return string|\DateTime $createdAt
+     * @return \DateTime $createdAt
      */
     public function getCreatedAt()
     {
@@ -108,7 +118,7 @@ class Log
     /**
      * @ORM\PrePersist
      */
-    public function timestamps()
+    public function timestamps(): void
     {
         $this->createdAt = new \DateTime();
     }

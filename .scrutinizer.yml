@@ -1,11 +1,10 @@
 filter:
     excluded_paths:
         - 'vendor/*'
-        - 'app/*'
+        - 'config/*'
         - 'var/*'
         - 'bin/*'
-        - 'web/*'
-        - 'src/AppBundle/Tests/*'
+        - 'public/*'
         - '*Test.php'
 
 tools:

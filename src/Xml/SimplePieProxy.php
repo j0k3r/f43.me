@@ -4,6 +4,7 @@ namespace App\Xml;
 
 class SimplePieProxy
 {
+    /** @var \SimplePie */
     protected $feed;
 
     /**
@@ -37,7 +38,7 @@ class SimplePieProxy
      *
      * @see  SimplePie->set_feed_url
      */
-    public function setUrl($url)
+    public function setUrl($url): self
     {
         $this->feed->set_feed_url($url);
 
@@ -47,11 +48,9 @@ class SimplePieProxy
     /**
      * Initialize the feed object.
      *
-     * @return \SimplePie
-     *
      * @see  SimplePie->init
      */
-    public function init()
+    public function init(): \SimplePie
     {
         $this->feed->init();
 

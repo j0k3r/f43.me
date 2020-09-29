@@ -10,7 +10,7 @@ use Monolog\Logger;
 
 class FlickrTest extends AppTestCase
 {
-    public function dataMatch()
+    public function dataMatch(): array
     {
         return [
             // single photo
@@ -33,13 +33,13 @@ class FlickrTest extends AppTestCase
     /**
      * @dataProvider dataMatch
      */
-    public function testMatch($url, $expected)
+    public function testMatch(string $url, bool $expected): void
     {
         $flickr = new Flickr();
         $this->assertSame($expected, $flickr->match($url));
     }
 
-    public function testSinglePhoto()
+    public function testSinglePhoto(): void
     {
         $client = self::getMockClient([
             (new Response(200, [], (string) json_encode([
@@ -80,7 +80,7 @@ class FlickrTest extends AppTestCase
         $this->assertTrue($logHandler->hasWarning('Flickr extract failed for: http://www.flickr.com/photos/palnick/15000967102/'), 'Warning message matched');
     }
 
-    public function testPhotoSet()
+    public function testPhotoSet(): void
     {
         $client = self::getMockClient([
             (new Response(200, [], (string) json_encode([

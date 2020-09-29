@@ -9,6 +9,7 @@ use Swarrot\SwarrotBundle\Broker\Publisher;
 
 class FeedSubscriber
 {
+    /** @var Publisher */
     protected $publisher;
 
     /**
@@ -24,10 +25,8 @@ class FeedSubscriber
     /**
      * Push the new feed in the queue so new items will be fetched instantly.
      * In case RabbitMQ isn't well configured avoid exception and let the default command fetch new items.
-     *
-     * @return bool
      */
-    public function sync(NewFeedEvent $event)
+    public function sync(NewFeedEvent $event): bool
     {
         $message = new Message((string) json_encode([
             'feed_id' => $event->getFeed()->getId(),

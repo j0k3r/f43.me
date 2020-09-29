@@ -4,12 +4,13 @@ namespace App\Extractor;
 
 class Ifttt extends AbstractExtractor
 {
+    /** @var string */
     protected $recipeId = null;
 
     /**
      * {@inheritdoc}
      */
-    public function match($url)
+    public function match(string $url): bool
     {
         $host = parse_url($url, PHP_URL_HOST);
         $path = parse_url($url, PHP_URL_PATH);
@@ -18,12 +19,12 @@ class Ifttt extends AbstractExtractor
             return false;
         }
 
-        if (0 !== strpos($host, 'ifttt.com')) {
+        if (0 !== strpos((string) $host, 'ifttt.com')) {
             return false;
         }
 
         // match recipe id
-        preg_match('/recipes\/([0-9]+)\-?/i', $path, $matches);
+        preg_match('/recipes\/([0-9]+)\-?/i', (string) $path, $matches);
 
         if (!isset($matches[1])) {
             return false;
@@ -37,7 +38,7 @@ class Ifttt extends AbstractExtractor
     /**
      * {@inheritdoc}
      */
-    public function getContent()
+    public function getContent(): string
     {
         if (!$this->recipeId) {
             return '';

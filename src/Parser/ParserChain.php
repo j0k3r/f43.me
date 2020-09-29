@@ -17,7 +17,7 @@ class ParserChain
      *
      * @param string $alias
      */
-    public function addParser(AbstractParser $parser, $alias)
+    public function addParser(AbstractParser $parser, $alias): void
     {
         $this->parsers[$alias] = $parser;
     }
@@ -25,11 +25,9 @@ class ParserChain
     /**
      * Get one parser by alias.
      *
-     * @param string $alias
-     *
-     * @return bool|object
+     * @return false|AbstractParser
      */
-    public function getParser($alias)
+    public function getParser(string $alias)
     {
         if (\array_key_exists($alias, $this->parsers)) {
             return $this->parsers[$alias];
@@ -40,12 +38,8 @@ class ParserChain
 
     /**
      * Loop thru all parser to find one that parse the content.
-     *
-     * @param string $url
-     *
-     * @return string
      */
-    public function parseAll($url)
+    public function parseAll(string $url): string
     {
         foreach ($this->parsers as $parser) {
             if ($content = $parser->parse($url)) {

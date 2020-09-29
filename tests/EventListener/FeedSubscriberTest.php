@@ -10,7 +10,7 @@ use PhpAmqpLib\Exception\AMQPIOException;
 
 class FeedSubscriberTest extends AppTestCase
 {
-    public function testOnFeedCreated()
+    public function testOnFeedCreated(): void
     {
         $publisher = $this->getMockBuilder('Swarrot\SwarrotBundle\Broker\Publisher')
             ->disableOriginalConstructor()
@@ -31,7 +31,7 @@ class FeedSubscriberTest extends AppTestCase
         $this->assertTrue($res);
     }
 
-    public function testOnFeedCreatedNoRabbitMQ()
+    public function testOnFeedCreatedNoRabbitMQ(): void
     {
         $publisher = $this->getMockBuilder('Swarrot\SwarrotBundle\Broker\Publisher')
             ->disableOriginalConstructor()

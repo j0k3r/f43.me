@@ -17,7 +17,7 @@ class ImproverChain
      *
      * @param string $alias
      */
-    public function addImprover(DefaultImprover $improver, $alias)
+    public function addImprover(DefaultImprover $improver, $alias): void
     {
         $this->improvers[$alias] = $improver;
     }
@@ -29,7 +29,7 @@ class ImproverChain
      *
      * @return DefaultImprover|false
      */
-    public function match($host)
+    public function match(string $host)
     {
         if (empty($host)) {
             return false;

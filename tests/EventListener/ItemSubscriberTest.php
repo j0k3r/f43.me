@@ -10,7 +10,7 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 class ItemSubscriberTest extends AppTestCase
 {
-    public function testOnItemCachedNoHubDefined()
+    public function testOnItemCachedNoHubDefined(): void
     {
         $router = $this->getMockBuilder('Symfony\Bundle\FrameworkBundle\Routing\Router')
             ->disableOriginalConstructor()
@@ -27,7 +27,7 @@ class ItemSubscriberTest extends AppTestCase
         $this->assertFalse($res);
     }
 
-    public function testOnItemCachedBadResponse()
+    public function testOnItemCachedBadResponse(): void
     {
         $router = $this->getMockBuilder('Symfony\Bundle\FrameworkBundle\Routing\Router')
             ->disableOriginalConstructor()
@@ -49,7 +49,7 @@ class ItemSubscriberTest extends AppTestCase
         $this->assertFalse($res);
     }
 
-    public function testOnItemCachedGoodResponse()
+    public function testOnItemCachedGoodResponse(): void
     {
         $router = $this->getMockBuilder('Symfony\Bundle\FrameworkBundle\Routing\Router')
             ->disableOriginalConstructor()

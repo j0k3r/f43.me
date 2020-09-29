@@ -7,7 +7,7 @@ use PHPUnit\Framework\TestCase;
 
 class ExtractorChainTest extends TestCase
 {
-    public function testMatchTrue()
+    public function testMatchTrue(): void
     {
         $extractor = $this->getMockBuilder('App\Extractor\AbstractExtractor')
             ->disableOriginalConstructor()
@@ -23,7 +23,7 @@ class ExtractorChainTest extends TestCase
         $this->assertSame($extractor, $extractorChain->match('url'));
     }
 
-    public function testMatchFalse()
+    public function testMatchFalse(): void
     {
         $extractor = $this->getMockBuilder('App\Extractor\AbstractExtractor')
             ->disableOriginalConstructor()

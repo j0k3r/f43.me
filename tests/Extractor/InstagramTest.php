@@ -11,7 +11,7 @@ use Psr\Log\NullLogger;
 
 class InstagramTest extends AppTestCase
 {
-    public function dataMatch()
+    public function dataMatch(): array
     {
         return [
             ['https://instagram.com/p/2N5UHfChAZ/', true],
@@ -27,13 +27,13 @@ class InstagramTest extends AppTestCase
     /**
      * @dataProvider dataMatch
      */
-    public function testMatch($url, $expected)
+    public function testMatch(string $url, bool $expected): void
     {
         $instagram = new Instagram();
         $this->assertSame($expected, $instagram->match($url));
     }
 
-    public function testContent()
+    public function testContent(): void
     {
         $client = self::getMockClient([
             (new Response(200, [], (string) json_encode(['title' => 'my title', 'thumbnail_url' => 'http://0.0.0.0/img.jpg', 'html' => '<iframe/>']))),
@@ -63,7 +63,7 @@ class InstagramTest extends AppTestCase
         $this->assertTrue($logHandler->hasWarning('Instagram extract failed for: https://instagram.com/p/2N5UHfChAZ/'), 'Warning message matched');
     }
 
-    public function testGetImageOnly()
+    public function testGetImageOnly(): void
     {
         $client = self::getMockClient([
             (new Response(200, [], (string) json_encode(['title' => 'my title', 'thumbnail_url' => 'http://0.0.0.0/img.jpg', 'html' => '<iframe/>']))),

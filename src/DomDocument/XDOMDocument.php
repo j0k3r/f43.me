@@ -15,7 +15,7 @@ class XDOMDocument extends \DOMDocument
      * @param string|null $version  The version number of the document as part of the XML declaration
      * @param string|null $encoding The encoding of the document as part of the XML declaration
      */
-    public function __construct($version = null, $encoding = null)
+    public function __construct(string $version = null, string $encoding = null)
     {
         parent::__construct((string) $version, (string) $encoding);
 
@@ -28,10 +28,8 @@ class XDOMDocument extends \DOMDocument
      * @param string      $name         The tag name of the element
      * @param string|null $value        The value of the element
      * @param string|null $namespaceURI The namespace of the element
-     *
-     * @return XDOMElement
      */
-    public function createElement($name, $value = null, $namespaceURI = null)
+    public function createElement($name, $value = null, $namespaceURI = null): XDOMElement
     {
         $element = new XDOMElement($name, $value, $namespaceURI);
 

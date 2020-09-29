@@ -6,6 +6,7 @@ use App\Content\Extractor;
 use App\Content\Import;
 use App\Converter\ConverterChain;
 use App\Entity\Feed;
+use App\Entity\Item;
 use App\Extractor\ExtractorChain;
 use App\Extractor\Youtube;
 use App\Improver\ImproverChain;
@@ -21,11 +22,12 @@ use Psr\Log\NullLogger;
  */
 class ImportTest extends AppTestCase
 {
-    public function testRedditFeed()
+    public function testRedditFeed(): void
     {
         $link = 'http://s3.reutersmedia.net/resources/r/?d=20160803&t=2&i=1148153511&fh=&fw=&ll=&pl=&sq=&r=2016-08-03T115008Z_3349_RIOEC821JEV7M_RTRMADP_0_OLYMPICS-RIO.jpg';
 
         $feed = new Feed();
+        $feed->setId(66);
         $feed->setParser('internal');
         $feed->setHost('reddit.com');
 
@@ -86,7 +88,7 @@ class ImportTest extends AppTestCase
             ->willReturn($rssFeed);
 
         $eventDispatcher = $this->getMockBuilder('Symfony\Component\EventDispatcher\EventDispatcher')
-            ->setMethods(['dispatch'])
+            ->onlyMethods(['dispatch'])
             ->disableOriginalConstructor()
             ->getMock();
 
@@ -123,24 +125,28 @@ class ImportTest extends AppTestCase
             ->getMock();
 
         $em = $this->getMockBuilder('Doctrine\ORM\EntityManager')
-            ->setMethods(['persist', 'flush', 'clear'])
+            ->onlyMethods(['persist', 'flush', 'clear'])
             ->disableOriginalConstructor()
             ->getMock();
 
         $import = new Import($simplePie, $extractor, $eventDispatcher, $em, new NullLogger(), $feedRepo, $feedItemRepo);
         $res = $import->process([$feed]);
 
+        /** @var Item */
+        $item = $feed->getItems()[0];
+
         $this->assertSame(1, $res);
         $this->assertCount(1, $feed->getItems());
-        $this->assertSame($link, $feed->getItems()[0]->getPermalink());
-        $this->assertSame($link, $feed->getItems()[0]->getLink());
+        $this->assertSame($link, $item->getPermalink());
+        $this->assertSame($link, $item->getLink());
     }
 
-    public function testRedditFeedAndYoutube()
+    public function testRedditFeedAndYoutube(): void
     {
         $link = 'https://www.youtube.com/watch?v=iwGFalTRHDA';
 
         $feed = new Feed();
+        $feed->setId(66);
         $feed->setParser('internal');
         $feed->setHost('reddit.com');
 
@@ -201,7 +207,7 @@ class ImportTest extends AppTestCase
             ->willReturn($rssFeed);
 
         $eventDispatcher = $this->getMockBuilder('Symfony\Component\EventDispatcher\EventDispatcher')
-            ->setMethods(['dispatch'])
+            ->onlyMethods(['dispatch'])
             ->disableOriginalConstructor()
             ->getMock();
 
@@ -238,17 +244,20 @@ class ImportTest extends AppTestCase
             ->getMock();
 
         $em = $this->getMockBuilder('Doctrine\ORM\EntityManager')
-            ->setMethods(['persist', 'flush', 'clear'])
+            ->onlyMethods(['persist', 'flush', 'clear'])
             ->disableOriginalConstructor()
             ->getMock();
 
         $import = new Import($simplePie, $extractor, $eventDispatcher, $em, new NullLogger(), $feedRepo, $feedItemRepo);
         $res = $import->process([$feed]);
 
+        /** @var Item */
+        $item = $feed->getItems()[0];
+
         $this->assertSame(1, $res);
         $this->assertCount(1, $feed->getItems());
-        $this->assertSame($link, $feed->getItems()[0]->getPermalink());
-        $this->assertSame($link, $feed->getItems()[0]->getLink());
-        $this->assertStringContainsString('iframe', $feed->getItems()[0]->getContent());
+        $this->assertSame($link, $item->getPermalink());
+        $this->assertSame($link, $item->getLink());
+        $this->assertStringContainsString('iframe', $item->getContent());
     }
 }

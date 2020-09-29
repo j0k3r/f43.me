@@ -9,7 +9,7 @@ use PHPUnit\Framework\TestCase;
 
 class ImgurTest extends TestCase
 {
-    public function dataMatch()
+    public function dataMatch(): array
     {
         return [
             ['http://i.imgur.com/zNUC9TA.jpg', true],
@@ -35,7 +35,7 @@ class ImgurTest extends TestCase
     /**
      * @dataProvider dataMatch
      */
-    public function testMatch($url, $expected)
+    public function testMatch(string $url, bool $expected): void
     {
         $imgurClient = $this->getMockBuilder('Imgur\Client')
             ->disableOriginalConstructor()
@@ -45,7 +45,7 @@ class ImgurTest extends TestCase
         $this->assertSame($expected, $imgur->match($url));
     }
 
-    public function testContentImage()
+    public function testContentImage(): void
     {
         $imgurClient = $this->getMockBuilder('Imgur\Client')
             ->disableOriginalConstructor()
@@ -94,7 +94,7 @@ class ImgurTest extends TestCase
         $this->assertSame('<div><img src="http://i.imgur.com/zNUC9TA.gif" /></div>', $imgur->getContent());
     }
 
-    public function testContentMp4()
+    public function testContentMp4(): void
     {
         $imgurClient = $this->getMockBuilder('Imgur\Client')
             ->disableOriginalConstructor()
@@ -142,7 +142,7 @@ class ImgurTest extends TestCase
         $this->assertSame('<video width="720" height="898" controls="controls"><source src="https://i.imgur.com/1S10bkI.mp4" type="video/mp4" /></video>', $imgur->getContent());
     }
 
-    public function testContentAlbum()
+    public function testContentAlbum(): void
     {
         $imgurClient = $this->getMockBuilder('Imgur\Client')
             ->disableOriginalConstructor()
@@ -232,7 +232,7 @@ class ImgurTest extends TestCase
         $this->assertSame('<h2>Building the Spruce Moose</h2><p></p><div><p> – Here\'s the finished product in Utah- State no. 3</p><img src="http://i.imgur.com/nrKAg6T.jpg" /></div><div><p> – Here she is. A 1986 Chevy Bluebird school bus...was an exciting day picking her up!</p><img src="http://i.imgur.com/HdcEO2X.jpg" /></div>', $imgur->getContent());
     }
 
-    public function testNoHashNoType()
+    public function testNoHashNoType(): void
     {
         $imgurClient = $this->getMockBuilder('Imgur\Client')
             ->disableOriginalConstructor()
@@ -244,7 +244,7 @@ class ImgurTest extends TestCase
         $this->assertEmpty($imgur->getContent());
     }
 
-    public function testImgurFail()
+    public function testImgurFail(): void
     {
         $imgurClient = $this->getMockBuilder('Imgur\Client')
             ->disableOriginalConstructor()

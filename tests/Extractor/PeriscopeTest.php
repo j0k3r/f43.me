@@ -10,7 +10,7 @@ use Monolog\Logger;
 
 class PeriscopeTest extends AppTestCase
 {
-    public function dataMatch()
+    public function dataMatch(): array
     {
         return [
             ['https://www.pscp.tv/w/1ynJOVNmoVkGR', true],
@@ -28,13 +28,13 @@ class PeriscopeTest extends AppTestCase
     /**
      * @dataProvider dataMatch
      */
-    public function testMatch($url, $expected)
+    public function testMatch(string $url, bool $expected): void
     {
         $vimeo = new Periscope();
         $this->assertSame($expected, $vimeo->match($url));
     }
 
-    public function testContent()
+    public function testContent(): void
     {
         $client = self::getMockClient([
             (new Response(200, [], (string) json_encode(['broadcast' => ['status' => 'my title', 'image_url' => 'http://0.0.0.0/img.jpg'], 'share_url' => 'http://broadcast.url']))),

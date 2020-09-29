@@ -12,7 +12,7 @@ use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 class FetchItemsTest extends WebTestCase
 {
-    public function testProcessNoFeed()
+    public function testProcessNoFeed(): void
     {
         static::createClient();
 
@@ -48,7 +48,7 @@ class FetchItemsTest extends WebTestCase
         $processor->process(new Message((string) json_encode(['feed_id' => 123])), []);
     }
 
-    public function testProcessSuccessfulMessage()
+    public function testProcessSuccessfulMessage(): void
     {
         static::createClient();
 

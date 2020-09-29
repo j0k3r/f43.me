@@ -4,12 +4,13 @@ namespace App\Extractor;
 
 class Vine extends AbstractExtractor
 {
+    /** @var string */
     protected $vineId = null;
 
     /**
      * {@inheritdoc}
      */
-    public function match($url)
+    public function match(string $url): bool
     {
         $host = parse_url($url, PHP_URL_HOST);
         $path = parse_url($url, PHP_URL_PATH);
@@ -18,12 +19,12 @@ class Vine extends AbstractExtractor
             return false;
         }
 
-        if (false === strpos($host, 'vine.co')) {
+        if (false === strpos((string) $host, 'vine.co')) {
             return false;
         }
 
         // find vine id
-        preg_match('/^\/v\/([a-zA-Z0-9]+)/', $path, $matches);
+        preg_match('/^\/v\/([a-zA-Z0-9]+)/', (string) $path, $matches);
 
         if (!isset($matches[1])) {
             return false;
@@ -37,7 +38,7 @@ class Vine extends AbstractExtractor
     /**
      * {@inheritdoc}
      */
-    public function getContent()
+    public function getContent(): string
     {
         if (!$this->vineId) {
             return '';

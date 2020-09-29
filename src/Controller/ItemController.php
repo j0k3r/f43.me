@@ -23,10 +23,8 @@ class ItemController extends AbstractController
      * @Route("/feed/{slug}/items", name="item_homepage", methods={"GET"})
      *
      * @param Feed $feed The document Feed (retrieving for a ParamConverter with the slug)
-     *
-     * @return Response
      */
-    public function indexAction(Feed $feed, ItemRepository $itemRepository)
+    public function indexAction(Feed $feed, ItemRepository $itemRepository): Response
     {
         $items = $itemRepository->findByFeed(
             $feed->getId(),
@@ -47,10 +45,8 @@ class ItemController extends AbstractController
      * @Route("/feed/{slug}/items/deleteAll", name="item_delete_all", methods={"POST"})
      *
      * @param Feed $feed The document Feed (retrieving for a ParamConverter with the slug)
-     *
-     * @return RedirectResponse
      */
-    public function deleteAllAction(Request $request, Feed $feed, ItemRepository $itemRepository, EntityManagerInterface $em, Session $session)
+    public function deleteAllAction(Request $request, Feed $feed, ItemRepository $itemRepository, EntityManagerInterface $em, Session $session): RedirectResponse
     {
         $form = $this->createFormBuilder()->getForm();
         $form->handleRequest($request);
@@ -74,10 +70,8 @@ class ItemController extends AbstractController
      * @Route("/item/{id}/preview", name="item_preview_cached", methods={"GET"})
      *
      * @param Item $feedItem The document Item (retrieving for a ParamConverter with the id)
-     *
-     * @return Response
      */
-    public function previewCachedAction(Item $feedItem)
+    public function previewCachedAction(Item $feedItem): Response
     {
         return $this->render('default/Item/content.html.twig', [
             'title' => $feedItem->getTitle(),
@@ -94,10 +88,8 @@ class ItemController extends AbstractController
      * @Route("/feed/{slug}/testItem", name="item_test", methods={"GET"})
      *
      * @param Feed $feed The document Feed (retrieving for a ParamConverter with the slug)
-     *
-     * @return Response
      */
-    public function testItemAction(Feed $feed)
+    public function testItemAction(Feed $feed): Response
     {
         return $this->render('default/Item/preview.html.twig', [
             'feed' => $feed,
@@ -110,10 +102,8 @@ class ItemController extends AbstractController
      * @Route("/feed/{slug}/previewItem", name="item_preview_new", methods={"GET"})
      *
      * @param Feed $feed The document Feed (retrieving for a ParamConverter with the slug)
-     *
-     * @return Response
      */
-    public function previewNewAction(Request $request, Feed $feed, SimplePieProxy $simplePieProxy, Extractor $contentExtractor)
+    public function previewNewAction(Request $request, Feed $feed, SimplePieProxy $simplePieProxy, Extractor $contentExtractor): Response
     {
         $rssFeed = $simplePieProxy
             ->setUrl($feed->getLink())
@@ -131,12 +121,12 @@ class ItemController extends AbstractController
         }
 
         $content = $parser->parseContent(
-            $firstItem->get_permalink(),
+            (string) $firstItem->get_permalink(),
             $firstItem->get_description()
         );
 
         return $this->render('default/Item/content.html.twig', [
-            'title' => html_entity_decode($firstItem->get_title(), ENT_COMPAT, 'UTF-8'),
+            'title' => html_entity_decode((string) $firstItem->get_title(), ENT_COMPAT, 'UTF-8'),
             'content' => $content->content,
             'modal' => false,
             'url' => $content->url,

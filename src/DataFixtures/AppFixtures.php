@@ -6,7 +6,7 @@ use App\Entity\Feed;
 use App\Entity\Item;
 use App\Entity\Log;
 use Doctrine\Bundle\FixturesBundle\Fixture;
-use Doctrine\Common\Persistence\ObjectManager;
+use Doctrine\Persistence\ObjectManager;
 
 class AppFixtures extends Fixture
 {

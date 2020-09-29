@@ -11,6 +11,7 @@ class Instagram extends AbstractConverter
 {
     const IMAGE_CONTENT = '<img src="image_url" /></p><p>';
 
+    /** @var InstagramExtractor */
     private $instagramExtractor;
 
     public function __construct(InstagramExtractor $instagramExtractor)
@@ -22,12 +23,8 @@ class Instagram extends AbstractConverter
      * This will convert all instagram embed to real image.
      * The detection is a bit ugly because it's done using a regex to find instagram content.
      * Mostly because html shouldn't be valid.
-     *
-     * @param string $html
-     *
-     * @return string
      */
-    public function convert($html)
+    public function convert(string $html): string
     {
         // do not convert already converted instagram from the extractor
         if (stripos($html, 'f43me-instagram-extracted')) {

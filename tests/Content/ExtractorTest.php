@@ -3,14 +3,16 @@
 namespace App\Tests\Content;
 
 use App\Content\Extractor;
+use App\Entity\Feed;
 use App\Parser\Internal;
 use PHPUnit\Framework\TestCase;
 
 class ExtractorTest extends TestCase
 {
+    /** @var \PHPUnit\Framework\MockObject\MockObject */
     private $graby;
 
-    public function testWithEmptyContent()
+    public function testWithEmptyContent(): void
     {
         $contentExtractor = $this->getContentExtrator();
 
@@ -18,12 +20,12 @@ class ExtractorTest extends TestCase
             ->method('fetchContent')
             ->willReturn(['html' => false]);
 
-        $contentExtractor->parseContent('http://0.0.0.0', 'default content');
+        $contentExtractor->parseContent('http://foo.bar.nowhere', 'default content');
 
         $this->assertSame('default content', $contentExtractor->content);
     }
 
-    public function testWithException()
+    public function testWithException(): void
     {
         $contentExtractor = $this->getContentExtrator();
 
@@ -37,7 +39,7 @@ class ExtractorTest extends TestCase
         $this->assertSame('default content', $contentExtractor->content);
     }
 
-    public function testWithCustomParser()
+    public function testWithCustomParser(): void
     {
         $contentExtractor = $this->getContentExtrator(true);
 
@@ -45,12 +47,12 @@ class ExtractorTest extends TestCase
             ->method('fetchContent')
             ->willReturn(['html' => false]);
 
-        $contentExtractor->parseContent('http://0.0.0.0', 'default content');
+        $contentExtractor->parseContent('http://foo.bar.nowhere', 'default content');
 
         $this->assertSame('default content', $contentExtractor->content);
     }
 
-    public function testWithCustomExtractor()
+    public function testWithCustomExtractor(): void
     {
         $contentExtractor = $this->getContentExtrator(false, true);
 
@@ -58,12 +60,12 @@ class ExtractorTest extends TestCase
             ->method('fetchContent')
             ->willReturn(['html' => false]);
 
-        $contentExtractor->parseContent('http://0.0.0.0', 'default content');
+        $contentExtractor->parseContent('http://foo.bar.nowhere', 'default content');
 
         $this->assertSame('<html/>', $contentExtractor->content);
     }
 
-    public function testInvalidParser()
+    public function testInvalidParser(): void
     {
         $this->expectException(\InvalidArgumentException::class);
         $this->expectExceptionMessage('The given parser "oops" does not exists.');
@@ -84,16 +86,13 @@ class ExtractorTest extends TestCase
         $contentExtractor->init('oops');
     }
 
-    protected function getContentExtrator($customParser = false, $customExtractor = false)
+    protected function getContentExtrator(bool $customParser = false, bool $customExtractor = false): Extractor
     {
-        $feed = $this->getMockBuilder('App\Entity\Feed')
-            ->setMethods(['getFormatter', 'getHost'])
-            ->disableOriginalConstructor()
-            ->getMock();
-
-        $feed->expects($this->any())
-            ->method('getFormatter')
-            ->willReturn('atom');
+        $feed = new Feed();
+        $feed->setId(66);
+        $feed->setSortBy('created_at');
+        $feed->setFormatter('atom');
+        $feed->setHost('Default');
 
         $extractorChain = $this->getMockBuilder('App\Extractor\ExtractorChain')
             ->disableOriginalConstructor()
@@ -150,7 +149,7 @@ class ExtractorTest extends TestCase
             ->willReturnArgument(0);
 
         $this->graby = $this->getMockBuilder('Graby\Graby')
-            ->setMethods(['fetchContent'])
+            ->onlyMethods(['fetchContent'])
             ->disableOriginalConstructor()
             ->getMock();
 
@@ -166,12 +165,6 @@ class ExtractorTest extends TestCase
 
         $contentExtractor = new Extractor($extractorChain, $improverChain, $converterChain, $parserChain);
         $contentExtractor->init('internal', $feed, true);
-
-        if (true === $customParser) {
-            $feed->expects($this->any())
-                ->method('getHost')
-                ->willReturn('Default');
-        }
 
         return $contentExtractor;
     }

@@ -7,7 +7,7 @@ use App\Tests\AppTestCase;
 
 class HackerNewsTest extends AppTestCase
 {
-    public function dataMatch()
+    public function dataMatch(): array
     {
         return [
             ['news.ycombinator.com', true],
@@ -18,14 +18,14 @@ class HackerNewsTest extends AppTestCase
     /**
      * @dataProvider dataMatch
      */
-    public function testMatch($url, $expected)
+    public function testMatch(string $url, bool $expected): void
     {
         $hn = new HackerNews(self::getMockClient());
 
         $this->assertSame($expected, $hn->match($url));
     }
 
-    public function testUpdateContent()
+    public function testUpdateContent(): void
     {
         $hn = new HackerNews(self::getMockClient());
 

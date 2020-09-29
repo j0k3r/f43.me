@@ -9,48 +9,44 @@ use Psr\Log\LoggerInterface;
 
 abstract class AbstractExtractor implements LoggerAwareInterface
 {
+    /** @var LoggerInterface */
     protected $logger;
+    /** @var HttpMethodsClientInterface */
     protected $client;
 
     /**
      * {@inheritdoc}
      */
-    public function setLogger(LoggerInterface $logger)
+    public function setLogger(LoggerInterface $logger): void
     {
         $this->logger = $logger;
     }
 
-    public function setClient(HttpMethodsClientInterface $client)
+    public function setClient(HttpMethodsClientInterface $client): void
     {
         $this->client = $client;
     }
 
     /**
      * Will tell if this url should be handled by this extrator.
-     *
-     * @param string $url
-     *
-     * @return bool
      */
-    abstract public function match($url);
+    abstract public function match(string $url): bool;
 
     /**
      * Return the content from the extractor.
      *
-     * @return string|false Content expanded
+     * @return string Content expanded
      */
-    abstract public function getContent();
+    abstract public function getContent(): string;
 
     /**
      * Generic method to retrive the json data from a response.
-     *
-     * @return array
      */
-    protected function jsonDecode(ResponseInterface $response)
+    protected function jsonDecode(ResponseInterface $response): array
     {
         $data = json_decode((string) $response->getBody(), true);
 
-        if (null === $data) {
+        if (null === $data || '' === $data) {
             return [];
         }
 

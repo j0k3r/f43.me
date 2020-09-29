@@ -7,7 +7,7 @@ use App\Tests\AppTestCase;
 
 class RedditTest extends AppTestCase
 {
-    public function dataMatch()
+    public function dataMatch(): array
     {
         return [
             ['reddit.com', true],
@@ -19,14 +19,14 @@ class RedditTest extends AppTestCase
     /**
      * @dataProvider dataMatch
      */
-    public function testMatch($url, $expected)
+    public function testMatch(string $url, bool $expected): void
     {
         $reddit = new Reddit(self::getMockClient());
 
         $this->assertSame($expected, $reddit->match($url));
     }
 
-    public function testUpdateUrl()
+    public function testUpdateUrl(): void
     {
         $reddit = new Reddit(self::getMockClient());
 
@@ -34,7 +34,7 @@ class RedditTest extends AppTestCase
         $this->assertSame('http://i.imgur.com/dvtXt1p.jpg', $reddit->updateUrl('http://0.0.0.0/content'));
     }
 
-    public function testUpdateUrlFail()
+    public function testUpdateUrlFail(): void
     {
         $reddit = new Reddit(self::getMockClient());
 
@@ -42,7 +42,7 @@ class RedditTest extends AppTestCase
         $this->assertSame('http://0.0.0.0/content', $reddit->updateUrl('http://0.0.0.0/content'));
     }
 
-    public function testUpdateContent()
+    public function testUpdateContent(): void
     {
         $reddit = new Reddit(self::getMockClient());
 

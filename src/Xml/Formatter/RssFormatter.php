@@ -12,7 +12,7 @@ class RssFormatter extends Formatter
     /**
      * @see parent
      */
-    public function setItemFields()
+    public function setItemFields(): void
     {
         $this->fields = [
             [
@@ -40,7 +40,7 @@ class RssFormatter extends Formatter
     /**
      * @see parent
      */
-    public function initialize()
+    public function initialize(): void
     {
         $root = $this->dom->createElement('rss');
         $root->setAttribute('version', '2.0');

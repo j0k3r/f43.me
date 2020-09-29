@@ -4,12 +4,13 @@ namespace App\Extractor;
 
 class Camplus extends AbstractExtractor
 {
+    /** @var string */
     protected $camplusId = null;
 
     /**
      * {@inheritdoc}
      */
-    public function match($url)
+    public function match(string $url): bool
     {
         $host = parse_url($url, PHP_URL_HOST);
         $path = parse_url($url, PHP_URL_PATH);
@@ -18,12 +19,12 @@ class Camplus extends AbstractExtractor
             return false;
         }
 
-        if (false === strpos($host, 'campl.us')) {
+        if (false === strpos((string) $host, 'campl.us')) {
             return false;
         }
 
         // find camplus photo id
-        preg_match('/^\/([a-z0-9]+)$/i', $path, $matches);
+        preg_match('/^\/([a-z0-9]+)$/i', (string) $path, $matches);
 
         if (2 !== \count($matches)) {
             return false;
@@ -37,7 +38,7 @@ class Camplus extends AbstractExtractor
     /**
      * {@inheritdoc}
      */
-    public function getContent()
+    public function getContent(): string
     {
         if (!$this->camplusId) {
             return '';
@@ -51,7 +52,7 @@ class Camplus extends AbstractExtractor
                 'exception' => $e,
             ]);
 
-            return false;
+            return '';
         }
 
         $content = '<div>

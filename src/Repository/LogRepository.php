@@ -6,6 +6,9 @@ use App\Entity\Log;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
+/**
+ * @extends ServiceEntityRepository<Log>
+ */
 class LogRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
@@ -17,10 +20,8 @@ class LogRepository extends ServiceEntityRepository
      * Find all logs ordered by id desc.
      *
      * @param int|null $limit Items to retrieve
-     *
-     * @return array
      */
-    public function findAllOrderedById($limit = null)
+    public function findAllOrderedById(int $limit = null): array
     {
         $q = $this->createQueryBuilder('l')
             ->select('l, f')
@@ -41,7 +42,7 @@ class LogRepository extends ServiceEntityRepository
      *
      * @return mixed
      */
-    public function findByFeedId($feedId)
+    public function findByFeedId(int $feedId)
     {
         return $this->getItemsByFeedIdQuery($feedId)
             ->execute();
@@ -54,7 +55,7 @@ class LogRepository extends ServiceEntityRepository
      *
      * @return array|object|null
      */
-    public function findLastItemByFeedId($feedId)
+    public function findLastItemByFeedId(int $feedId)
     {
         return $this->getItemsByFeedIdQuery($feedId, 1)
             ->getOneOrNullResult();
@@ -73,7 +74,7 @@ class LogRepository extends ServiceEntityRepository
      *
      * @return array
      */
-    public function findStatsForLastDays($limit = 20)
+    public function findStatsForLastDays(int $limit = 20)
     {
         $res = $this->createQueryBuilder('l')
             ->select('DATE(l.createdAt) as date, count(l.id) as total')
@@ -98,7 +99,7 @@ class LogRepository extends ServiceEntityRepository
      *
      * @return int
      */
-    public function deleteAllByFeedId($feedId)
+    public function deleteAllByFeedId(int $feedId)
     {
         return $this->getEntityManager()
             ->createQuery("DELETE FROM App\Entity\Log l WHERE l.feed = :feedId")
@@ -113,7 +114,7 @@ class LogRepository extends ServiceEntityRepository
      *
      * @return int Number of items
      */
-    public function countByFeedId($feedId)
+    public function countByFeedId(int $feedId)
     {
         return $this->createQueryBuilder('l')
             ->select('count(l.id)')
@@ -132,7 +133,7 @@ class LogRepository extends ServiceEntityRepository
      *
      * @return \Doctrine\ORM\Query
      */
-    private function getItemsByFeedIdQuery($feedId, $limit = null, $skip = null)
+    private function getItemsByFeedIdQuery(int $feedId, int $limit = null, int $skip = null)
     {
         $q = $this->createQueryBuilder('l')
             ->select('l, f')

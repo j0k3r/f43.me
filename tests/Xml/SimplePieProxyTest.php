@@ -7,6 +7,7 @@ use PHPUnit\Framework\TestCase;
 
 class SimplePieProxyTest extends TestCase
 {
+    /** @var string */
     protected $cacheDir;
 
     protected function setUp(): void
@@ -19,7 +20,7 @@ class SimplePieProxyTest extends TestCase
         @rmdir($this->cacheDir);
     }
 
-    public function testRenderBadFormat()
+    public function testRenderBadFormat(): void
     {
         $proxy = new SimplePieProxy($this->cacheDir);
 

@@ -9,8 +9,11 @@ use Symfony\Component\Routing\RouterInterface;
 
 class ItemSubscriber
 {
+    /** @var string */
     protected $hub = '';
+    /** @var RouterInterface */
     protected $router;
+    /** @var HttpMethodsClientInterface */
     protected $client;
 
     /**
@@ -20,7 +23,7 @@ class ItemSubscriber
      * @param RouterInterface            $router Symfony Router to generate the feed xml
      * @param HttpMethodsClientInterface $client Guzzle client to send the request
      */
-    public function __construct($hub, RouterInterface $router, HttpMethodsClientInterface $client)
+    public function __construct(string $hub, RouterInterface $router, HttpMethodsClientInterface $client)
     {
         $this->hub = $hub;
         $this->router = $router;
@@ -31,10 +34,8 @@ class ItemSubscriber
      * Ping available hub when new items are cached.
      *
      * http://nathangrigg.net/2012/09/real-time-publishing/
-     *
-     * @return bool
      */
-    public function pingHub(ItemsCachedEvent $event)
+    public function pingHub(ItemsCachedEvent $event): bool
     {
         if (empty($this->hub)) {
             return false;
@@ -53,7 +54,7 @@ class ItemSubscriber
         }
 
         // ping publisher
-        // https://github.com/pubsubhubbub/php-publisher/blob/master/library/publisher.php
+        // https://github.com/pubsubhubbub/php-publisher/blob/master/library/Publisher.php
         $params = 'hub.mode=publish';
         foreach ($urls as $url) {
             $params .= '&hub.url=' . $url;
