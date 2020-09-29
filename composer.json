@@ -22,11 +22,11 @@
         }
     ],
     "require": {
-        "php": "^7.2",
+        "php": "^7.2.9",
         "beberlei/doctrineextensions": "^1.2",
         "composer/package-versions-deprecated": "^1.11",
         "custom-zurb/foundation": "4.3.2",
-        "doctrine/doctrine-bundle": "^1.12",
+        "doctrine/doctrine-bundle": "^2.0",
         "doctrine/orm": "^2.5",
         "j0k3r/graby": "^2.0",
         "j0k3r/php-imgur-api-client": "~3.0",
@@ -42,15 +42,15 @@
         "simplepie/simplepie": "~1.4",
         "stof/doctrine-extensions-bundle": "~1.1",
         "swarrot/swarrot-bundle": "^2.0",
-        "symfony/asset": "4.4.*",
+        "symfony/asset": "5.1.*",
         "symfony/flex": "^1.9",
-        "symfony/form": "4.4.*",
-        "symfony/lock": "4.4.*",
+        "symfony/form": "5.1.*",
+        "symfony/lock": "5.1.*",
         "symfony/monolog-bundle": "^3.5",
-        "symfony/security-bundle": "4.4.*",
-        "symfony/translation": "4.4.*",
-        "symfony/twig-bundle": "4.4.*",
-        "symfony/validator": "4.4.*",
+        "symfony/security-bundle": "5.1.*",
+        "symfony/translation": "5.1.*",
+        "symfony/twig-bundle": "5.1.*",
+        "symfony/validator": "5.1.*",
         "twig/extra-bundle": "^2.12|^3.0",
         "twig/twig": "^2.12|^3.0"
     },
@@ -65,14 +65,14 @@
         "phpstan/phpstan-doctrine": "^0.12",
         "phpstan/phpstan-phpunit": "^0.12",
         "phpstan/phpstan-symfony": "^0.12",
-        "symfony/browser-kit": "^4.4",
-        "symfony/css-selector": "^4.4",
-        "symfony/debug-bundle": "^4.4",
-        "symfony/dotenv": "4.4.*",
+        "symfony/browser-kit": "5.1.*",
+        "symfony/css-selector": "5.1.*",
+        "symfony/debug-bundle": "5.1.*",
+        "symfony/dotenv": "5.1.*",
         "symfony/maker-bundle": "^1.21",
-        "symfony/phpunit-bridge": "~5.0",
-        "symfony/stopwatch": "^4.4",
-        "symfony/web-profiler-bundle": "^4.4"
+        "symfony/phpunit-bridge": "5.1.*",
+        "symfony/stopwatch": "5.1.*",
+        "symfony/web-profiler-bundle": "5.1.*"
     },
     "conflict": {
         "symfony/symfony": "*"
@@ -91,7 +91,7 @@
     },
     "config": {
         "platform": {
-            "php": "7.2.5"
+            "php": "7.2.9"
         },
         "bin-dir": "bin",
         "sort-packages": true
@@ -104,7 +104,7 @@
         },
         "symfony": {
             "allow-contrib": true,
-            "require": "4.4.*"
+            "require": "5.1.*"
         }
     },
     "repositories": [
