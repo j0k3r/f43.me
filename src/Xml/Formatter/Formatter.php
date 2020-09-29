@@ -47,12 +47,10 @@ abstract class Formatter
     /**
      * Construct a formatter with given feed.
      *
-     * @param Feed   $feed      A feed instance
-     * @param array  $items     An array of Item object
-     * @param string $url
-     * @param string $generator
+     * @param Feed  $feed  A feed instance
+     * @param array $items An array of Item object
      */
-    public function __construct(Feed $feed, $items, $url, $generator = '')
+    public function __construct(Feed $feed, array $items, string $url, string $generator = '')
     {
         $this->feed = $feed;
         $this->items = $items;
@@ -70,23 +68,21 @@ abstract class Formatter
      *     - name: will be the node name
      *     - method: will be the method to retrieve content to put in this node.
      */
-    abstract public function setItemFields();
+    abstract public function setItemFields(): void;
 
     /**
      * Initialize XML DOMDocument nodes and call addItem on all items.
      */
-    abstract public function initialize();
+    abstract public function initialize(): void;
 
     /**
      * This method render the given feed transforming the DOMDocument to XML.
-     *
-     * @return string
      */
-    public function render()
+    public function render(): string
     {
         $this->dom->formatOutput = true;
 
-        return $this->dom->saveXml();
+        return (string) $this->dom->saveXml();
     }
 
     /**
@@ -96,7 +92,7 @@ abstract class Formatter
      * @param Item     $item An entity object
      * @param string   $name Could be "entry", for atom or "item" for rss
      */
-    public function addItem(\DOMNode $root, Item $item, $name)
+    public function addItem(\DOMNode $root, Item $item, $name): void
     {
         $node = $this->dom->createElement($name);
         $node = $root->appendChild($node);
@@ -112,10 +108,8 @@ abstract class Formatter
      *
      * @param array $field A field instance
      * @param Item  $item  An entity instance
-     *
-     * @return XDOMElement
      */
-    protected function format($field, Item $item)
+    protected function format(array $field, Item $item): XDOMElement
     {
         $name = $field['name'];
         $method = $field['method'];

@@ -8,7 +8,7 @@ use Psr\Log\NullLogger;
 
 class InstagramTest extends TestCase
 {
-    public function dataMatch()
+    public function dataMatch(): array
     {
         return [
             [
@@ -48,7 +48,7 @@ class InstagramTest extends TestCase
     /**
      * @dataProvider dataMatch
      */
-    public function testMatch($html, $expected, $instagramId, $instaExtractorOccurence)
+    public function testMatch(string $html, string $expected, string $instagramId, int $instaExtractorOccurence): void
     {
         $instaExtractor = $this->getMockBuilder('App\Extractor\Instagram')
             ->disableOriginalConstructor()
@@ -68,7 +68,7 @@ class InstagramTest extends TestCase
         $this->assertStringContainsString($expected, $instaConverter->convert($html));
     }
 
-    public function testMatchButInstaExtractFail()
+    public function testMatchButInstaExtractFail(): void
     {
         $html = '<a href="https://www.instagram.com/p/BQDVfhnlC2P/" style=" color:#000; font-family:Arial,sans-serif; font-size:14px; font-style:normal; font-weight:normal; line-height:17px; text-decoration:none; word-wrap:break-word;" target="_blank">Photo</a>';
 

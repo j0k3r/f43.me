@@ -10,7 +10,7 @@ use Monolog\Logger;
 
 class Rue89Test extends AppTestCase
 {
-    public function dataMatch()
+    public function dataMatch(): array
     {
         return [
             ['http://rue89.nouvelobs.com/2015/10/26/algorithmes-antimensonge-fin-bobards-politique-261827', true],
@@ -27,13 +27,13 @@ class Rue89Test extends AppTestCase
     /**
      * @dataProvider dataMatch
      */
-    public function testMatch($url, $expected)
+    public function testMatch(string $url, bool $expected): void
     {
         $rue89 = new Rue89();
         $this->assertSame($expected, $rue89->match($url));
     }
 
-    public function testContent()
+    public function testContent(): void
     {
         $client = self::getMockClient([
             (new Response(200, [], (string) json_encode(['node' => ['title' => 'my title', 'intro' => 'my description', 'imgTabletteCarousel' => 'http://0.0.0.0/img.jpg', 'body' => '<iframe/>']]))),
@@ -63,7 +63,7 @@ class Rue89Test extends AppTestCase
         $this->assertTrue($logHandler->hasWarning('Rue89 extract failed for: 261827'), 'Warning message matched');
     }
 
-    public function testBlogContent()
+    public function testBlogContent(): void
     {
         $client = self::getMockClient([(new Response(200, [], (string) json_encode(['node' => ['title' => 'my title', 'intro' => 'my description', 'imgTabletteCarousel' => 'http://0.0.0.0/img.jpg', 'body' => '<iframe/>']])))]);
 

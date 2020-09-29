@@ -10,7 +10,7 @@ use Monolog\Logger;
 
 class DeviantartTest extends AppTestCase
 {
-    public function dataMatch()
+    public function dataMatch(): array
     {
         return [
             ['http://mibreit.deviantart.com/art/A-Piece-of-Heaven-357105002', true],
@@ -28,13 +28,13 @@ class DeviantartTest extends AppTestCase
     /**
      * @dataProvider dataMatch
      */
-    public function testMatch($url, $expected)
+    public function testMatch(string $url, bool $expected): void
     {
         $deviantart = new Deviantart();
         $this->assertSame($expected, $deviantart->match($url));
     }
 
-    public function testContent()
+    public function testContent(): void
     {
         $client = self::getMockClient([(new Response(200, [], (string) json_encode([
             'url' => 'http://0.0.0.0/youpi.jpg',
@@ -60,7 +60,7 @@ class DeviantartTest extends AppTestCase
         $this->assertStringContainsString('<iframe></iframe>', $content);
     }
 
-    public function testContentWithException()
+    public function testContentWithException(): void
     {
         $client = self::getMockClient([(new Response(400, [], (string) json_encode('oops')))]);
 

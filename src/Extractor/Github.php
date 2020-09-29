@@ -2,22 +2,23 @@
 
 namespace App\Extractor;
 
-use Http\Discovery\MessageFactoryDiscovery;
+use Http\Discovery\Psr17FactoryDiscovery;
 use Http\Message\Authentication\BasicAuth;
 
 class Github extends AbstractExtractor
 {
+    /** @var string */
     protected $githubClientId;
+    /** @var string */
     protected $githubClientSecret;
+    /** @var string */
     protected $githubRepo;
+    /** @var string */
     protected $pullNumber;
+    /** @var string */
     protected $issueNumber;
 
-    /**
-     * @param string $githubClientId
-     * @param string $githubClientSecret
-     */
-    public function __construct($githubClientId, $githubClientSecret)
+    public function __construct(string $githubClientId, string $githubClientSecret)
     {
         $this->githubClientId = $githubClientId;
         $this->githubClientSecret = $githubClientSecret;
@@ -26,7 +27,7 @@ class Github extends AbstractExtractor
     /**
      * {@inheritdoc}
      */
-    public function match($url)
+    public function match(string $url): bool
     {
         $host = parse_url($url, PHP_URL_HOST);
         $path = parse_url($url, PHP_URL_PATH);
@@ -35,12 +36,12 @@ class Github extends AbstractExtractor
             return false;
         }
 
-        if (false === strpos($host, 'github.com')) {
+        if (false === strpos((string) $host, 'github.com')) {
             return false;
         }
 
         // find github user and project only
-        preg_match('/^\/([\w\d\.-]+)\/([\w\d\.-]+)\/?$/i', $path, $matches);
+        preg_match('/^\/([\w\d\.-]+)\/([\w\d\.-]+)\/?$/i', (string) $path, $matches);
 
         if (3 === \count($matches)) {
             $this->githubRepo = $matches[1] . '/' . $matches[2];
@@ -49,7 +50,7 @@ class Github extends AbstractExtractor
         }
 
         // find pull request or issue
-        preg_match('/^\/([\w\d\.-]+)\/([\w\d\.-]+)\/(pull|issues)\/([0-9]+)/i', $path, $matches);
+        preg_match('/^\/([\w\d\.-]+)\/([\w\d\.-]+)\/(pull|issues)\/([0-9]+)/i', (string) $path, $matches);
 
         if (5 === \count($matches)) {
             $this->githubRepo = $matches[1] . '/' . $matches[2];
@@ -69,25 +70,25 @@ class Github extends AbstractExtractor
     /**
      * {@inheritdoc}
      */
-    public function getContent()
+    public function getContent(): string
     {
         if (!$this->githubRepo) {
             return '';
         }
 
         $authentication = new BasicAuth($this->githubClientId, $this->githubClientSecret);
-        $messageFactory = MessageFactoryDiscovery::find();
+        $messageFactory = Psr17FactoryDiscovery::findRequestFactory();
 
         if (null !== $this->pullNumber) {
             try {
-                $request = $messageFactory->createRequest(
-                    'GET',
-                    'https://api.github.com/repos/' . $this->githubRepo . '/pulls/' . $this->pullNumber,
-                    [
-                        'Accept' => 'application/vnd.github.v3.html+json',
-                        'User-Agent' => 'f43.me / Github Extractor',
-                    ]
-                );
+                $request = $messageFactory
+                    ->createRequest(
+                        'GET',
+                        'https://api.github.com/repos/' . $this->githubRepo . '/pulls/' . $this->pullNumber
+                    )
+                    ->withHeader('Accept', 'application/vnd.github.v3.html+json')
+                    ->withHeader('User-Agent', 'f43.me / Github Extractor')
+                ;
                 $response = $this->client->sendRequest($authentication->authenticate($request));
                 $data = $this->jsonDecode($response);
 
@@ -111,14 +112,14 @@ class Github extends AbstractExtractor
 
         if (null !== $this->issueNumber) {
             try {
-                $request = $messageFactory->createRequest(
-                    'GET',
-                    'https://api.github.com/repos/' . $this->githubRepo . '/issues/' . $this->issueNumber,
-                    [
-                        'Accept' => 'application/vnd.github.v3.html+json',
-                        'User-Agent' => 'f43.me / Github Extractor',
-                    ]
-                );
+                $request = $messageFactory
+                    ->createRequest(
+                        'GET',
+                        'https://api.github.com/repos/' . $this->githubRepo . '/issues/' . $this->issueNumber
+                    )
+                    ->withHeader('Accept', 'application/vnd.github.v3.html+json')
+                    ->withHeader('User-Agent', 'f43.me / Github Extractor')
+                ;
                 $response = $this->client->sendRequest($authentication->authenticate($request));
                 $data = $this->jsonDecode($response);
 
@@ -138,14 +139,14 @@ class Github extends AbstractExtractor
         }
 
         try {
-            $request = $messageFactory->createRequest(
-                'GET',
-                'https://api.github.com/repos/' . $this->githubRepo . '/readme',
-                [
-                    'Accept' => 'application/vnd.github.v3.html+json',
-                    'User-Agent' => 'f43.me / Github Extractor',
-                ]
-            );
+            $request = $messageFactory
+                ->createRequest(
+                    'GET',
+                    'https://api.github.com/repos/' . $this->githubRepo . '/readme'
+                )
+                ->withHeader('Accept', 'application/vnd.github.v3.html+json')
+                ->withHeader('User-Agent', 'f43.me / Github Extractor')
+            ;
 
             return (string) $this->client->sendRequest($authentication->authenticate($request))->getBody();
         } catch (\Exception $e) {

@@ -16,6 +16,8 @@ use Symfony\Component\Validator\Constraints as Assert;
 class Item
 {
     /**
+     * @var int
+     *
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
@@ -23,11 +25,15 @@ class Item
     protected $id;
 
     /**
+     * @var string
+     *
      * @ORM\Column(name="title", type="text")
      */
     protected $title;
 
     /**
+     * @var string
+     *
      * @ORM\Column(name="link", type="text")
      * @Assert\NotBlank()
      * @Assert\Url()
@@ -35,6 +41,8 @@ class Item
     protected $link;
 
     /**
+     * @var string
+     *
      * @ORM\Column(name="permalink", type="text")
      * @Assert\NotBlank()
      * @Assert\Url()
@@ -42,32 +50,44 @@ class Item
     protected $permalink;
 
     /**
+     * @var string
+     *
      * @ORM\Column(name="content", type="text", nullable=true)
      */
     protected $content;
 
     /**
+     * @var \DateTime
+     *
      * @ORM\Column(name="published_at", type="datetime", nullable=true)
      */
     protected $publishedAt;
 
     /**
+     * @var \DateTime
+     *
      * @ORM\Column(name="created_at", type="datetime")
      */
     protected $createdAt;
 
     /**
+     * @var \DateTime
+     *
      * @ORM\Column(name="updated_at", type="datetime")
      */
     protected $updatedAt;
 
     /**
+     * @var Feed
+     *
      * @ORM\ManyToOne(targetEntity="App\Entity\Feed", inversedBy="items")
      * @ORM\JoinColumn(name="feed_id", referencedColumnName="id")
      */
     protected $feed;
 
     /**
+     * @var ArrayCollection<int, Log>
+     *
      * @ORM\OneToMany(targetEntity="Log", mappedBy="item")
      */
     protected $logs;
@@ -155,7 +175,7 @@ class Item
      *
      * @return string $content
      */
-    public function getContent()
+    public function getContent(): string
     {
         return $this->content;
     }
@@ -163,7 +183,7 @@ class Item
     /**
      * Set createdAt.
      *
-     * @param string|\DateTime $createdAt
+     * @param \DateTime $createdAt
      *
      * @return self
      */
@@ -177,7 +197,7 @@ class Item
     /**
      * Get createdAt.
      *
-     * @return string|\DateTime $createdAt
+     * @return \DateTime $createdAt
      */
     public function getCreatedAt()
     {
@@ -187,7 +207,7 @@ class Item
     /**
      * Set updatedAt.
      *
-     * @param string|\DateTime $updatedAt
+     * @param \DateTime $updatedAt
      *
      * @return self
      */
@@ -201,7 +221,7 @@ class Item
     /**
      * Get updatedAt.
      *
-     * @return string|\DateTime $updatedAt
+     * @return \DateTime $updatedAt
      */
     public function getUpdatedAt()
     {
@@ -235,7 +255,7 @@ class Item
     /**
      * Set publishedAt.
      *
-     * @param string|\DateTime $publishedAt
+     * @param \DateTime $publishedAt
      *
      * @return self
      */
@@ -249,7 +269,7 @@ class Item
     /**
      * Get publishedAt.
      *
-     * @return string|\DateTime $publishedAt
+     * @return \DateTime $publishedAt
      */
     public function getPublishedAt()
     {
@@ -260,7 +280,7 @@ class Item
      * Retrieve the "publication" date *only* used in the RSS/Atom feed.
      * Depending on the feed, we want the published_at date or the created_at date.
      *
-     * @return string|\DateTime
+     * @return \DateTime
      */
     public function getPubDate()
     {
@@ -271,7 +291,7 @@ class Item
      * @ORM\PrePersist
      * @ORM\PreUpdate
      */
-    public function timestamps()
+    public function timestamps(): void
     {
         if (null === $this->createdAt) {
             $this->createdAt = new \DateTime();

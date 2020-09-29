@@ -10,7 +10,7 @@ use Monolog\Logger;
 
 class RedditPostTest extends AppTestCase
 {
-    public function dataMatch()
+    public function dataMatch(): array
     {
         return [
             ['https://v.redd.it/funfg141o3hz', false],
@@ -23,13 +23,13 @@ class RedditPostTest extends AppTestCase
     /**
      * @dataProvider dataMatch
      */
-    public function testMatch($url, $expected)
+    public function testMatch(string $url, bool $expected): void
     {
         $redditPost = new RedditPost();
         $this->assertSame($expected, $redditPost->match($url));
     }
 
-    public function testMatchRedditBadRequest()
+    public function testMatchRedditBadRequest(): void
     {
         $client = self::getMockClient([(new Response(400, [], (string) json_encode('oops')))]);
 
@@ -39,7 +39,7 @@ class RedditPostTest extends AppTestCase
         $this->assertFalse($redditPost->match('https://www.reddit.com/r/jailbreak/comments/7bnvuq/request_tweak_that_allows_more_than_140/'));
     }
 
-    public function testMatchReddit()
+    public function testMatchReddit(): void
     {
         $client = self::getMockClient([(new Response(200, [], (string) json_encode([['data' => ['children' => [['data' => ['is_self' => true]]]]]])))]);
 
@@ -49,7 +49,7 @@ class RedditPostTest extends AppTestCase
         $this->assertTrue($redditPost->match('https://www.reddit.com/r/jailbreak/comments/7bnvuq/request_tweak_that_allows_more_than_140/'));
     }
 
-    public function testMatchRedditNotSelf()
+    public function testMatchRedditNotSelf(): void
     {
         $client = self::getMockClient([(new Response(200, [], (string) json_encode([['data' => ['children' => [['data' => ['is_self' => false]]]]]])))]);
 
@@ -59,7 +59,7 @@ class RedditPostTest extends AppTestCase
         $this->assertFalse($redditPost->match('https://www.reddit.com/r/jailbreak/comments/7bnvuq/request_tweak_that_allows_more_than_140/'));
     }
 
-    public function testContent()
+    public function testContent(): void
     {
         $client = self::getMockClient([(new Response(200, [], (string) json_encode([['data' => ['children' => [['data' => [
             'domain' => 'self.jailbreak',

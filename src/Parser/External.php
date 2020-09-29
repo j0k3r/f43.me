@@ -11,13 +11,15 @@ use Http\Client\Exception\RequestException;
  */
 class External extends AbstractParser
 {
+    /** @var HttpMethodsClientInterface */
     protected $client;
+    /** @var string */
     protected $urlApi;
 
     /**
      * @param string $urlApi Mercury API url
      */
-    public function __construct(HttpMethodsClientInterface $client, $urlApi)
+    public function __construct(HttpMethodsClientInterface $client, string $urlApi)
     {
         $this->client = $client;
         $this->urlApi = $urlApi;
@@ -26,7 +28,7 @@ class External extends AbstractParser
     /**
      * {@inheritdoc}
      */
-    public function parse($url, $reloadConfigFiles = false)
+    public function parse(string $url, bool $reloadConfigFiles = false): string
     {
         try {
             $response = $this->client->get($this->urlApi . '?url=' . urlencode($url));

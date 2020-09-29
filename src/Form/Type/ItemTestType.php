@@ -11,7 +11,7 @@ use Symfony\Component\Validator\Constraints\Url;
 
 class ItemTestType extends AbstractType
 {
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
             ->add('link', UrlType::class, [

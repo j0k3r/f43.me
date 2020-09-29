@@ -6,6 +6,9 @@ use App\Entity\Feed;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
+/**
+ * @extends ServiceEntityRepository<Feed>
+ */
 class FeedRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
@@ -17,10 +20,8 @@ class FeedRepository extends ServiceEntityRepository
      * Find feeds ordered by updated date.
      *
      * @param int|null $limit Items to retrieve
-     *
-     * @return array
      */
-    public function findAllOrderedByDate($limit = null)
+    public function findAllOrderedByDate(int $limit = null): array
     {
         $q = $this->createQueryBuilder('f')
             ->orderBy('f.updatedAt', 'desc');
@@ -34,10 +35,8 @@ class FeedRepository extends ServiceEntityRepository
 
     /**
      * Find feeds for public display.
-     *
-     * @return array
      */
-    public function findForPublic()
+    public function findForPublic(): array
     {
         return $this->createQueryBuilder('f')
             ->where('f.isPrivate = :isPrivate')->setParameter('isPrivate', false)
@@ -55,7 +54,7 @@ class FeedRepository extends ServiceEntityRepository
      *
      * @return mixed
      */
-    public function findByIds($ids, $type = 'in')
+    public function findByIds(array $ids, string $type = 'in')
     {
         $q = $this->createQueryBuilder('f');
 

@@ -4,12 +4,13 @@ namespace App\Extractor;
 
 class Streamable extends AbstractExtractor
 {
+    /** @var string */
     protected $streamableUrl = null;
 
     /**
      * {@inheritdoc}
      */
-    public function match($url)
+    public function match(string $url): bool
     {
         $host = parse_url($url, PHP_URL_HOST);
         $path = parse_url($url, PHP_URL_PATH);
@@ -30,7 +31,7 @@ class Streamable extends AbstractExtractor
     /**
      * {@inheritdoc}
      */
-    public function getContent()
+    public function getContent(): string
     {
         if (!$this->streamableUrl) {
             return '';

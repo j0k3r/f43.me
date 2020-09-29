@@ -28,7 +28,7 @@ class FetchItemsCommand extends Command
     private $publisher;
     private $amqplibFactory;
 
-    public function __construct(FeedRepository $feedRepository, ItemRepository $itemRepository, Import $contentImport = null, RouterInterface $router, Publisher $publisher, $domain, AmqpLibFactory $amqplibFactory = null)
+    public function __construct(FeedRepository $feedRepository, ItemRepository $itemRepository, Import $contentImport = null, RouterInterface $router, Publisher $publisher, string $domain, AmqpLibFactory $amqplibFactory = null)
     {
         $this->feedRepository = $feedRepository;
         $this->itemRepository = $itemRepository;
@@ -41,7 +41,7 @@ class FetchItemsCommand extends Command
         parent::__construct();
     }
 
-    protected function configure()
+    protected function configure(): void
     {
         $this
             ->setName('feed:fetch-items')
@@ -75,8 +75,8 @@ class FetchItemsCommand extends Command
                 ->getChannel('rabbitmq')
                 ->basic_get('f43.fetch_items');
 
-            if (null !== $message && 0 < $message->delivery_info['message_count']) {
-                $output->writeln('Current queue as too much messages (<error>' . $message->delivery_info['message_count'] . '</error>), <comment>skipping</comment>.');
+            if (null !== $message && 0 < $message->getMessageCount()) {
+                $output->writeln('Current queue as too much messages (<error>' . $message->getMessageCount() . '</error>), <comment>skipping</comment>.');
 
                 return 1;
             }

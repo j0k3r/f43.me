@@ -8,7 +8,7 @@ use Psr\Log\NullLogger;
 
 class TwitterTest extends TestCase
 {
-    public function dataMatch()
+    public function dataMatch(): array
     {
         return [
             [
@@ -47,7 +47,7 @@ class TwitterTest extends TestCase
     /**
      * @dataProvider dataMatch
      */
-    public function testMatch($html, $expected, $twitterId, $twitterExtractorOccurence)
+    public function testMatch(string $html, string $expected, string $twitterId, int $twitterExtractorOccurence): void
     {
         $twitterExtractor = $this->getMockBuilder('App\Extractor\Twitter')
             ->disableOriginalConstructor()
@@ -78,7 +78,7 @@ class TwitterTest extends TestCase
         $this->assertStringContainsString($expected, $twitterConverter->convert($html));
     }
 
-    public function testMatchButTwitterExtractFail()
+    public function testMatchButTwitterExtractFail(): void
     {
         $html = '<blockquote class="twitter-tweet"><p lang="en" dir="ltr">Minecraft <a href="https://t.co/lU1YzJjLOZ">pic.twitter.com/lU1YzJjLOZ</a></p><p>— Elon Musk (@elonmusk) <a href="https://twitter.com/elonmusk/status/827720686911291392">February 4, 2017</a></p></blockquote>';
 

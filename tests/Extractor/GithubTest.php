@@ -10,7 +10,7 @@ use Monolog\Logger;
 
 class GithubTest extends AppTestCase
 {
-    public function dataMatch()
+    public function dataMatch(): array
     {
         return [
             ['https://github.com/j0k3r/f43.me', true],
@@ -29,13 +29,13 @@ class GithubTest extends AppTestCase
     /**
      * @dataProvider dataMatch
      */
-    public function testMatch($url, $expected)
+    public function testMatch(string $url, bool $expected): void
     {
         $github = new Github('client_id', 'client_secret');
         $this->assertSame($expected, $github->match($url));
     }
 
-    public function testContent()
+    public function testContent(): void
     {
         $client = self::getMockClient([
             (new Response(200, [], '<div>README</div>')),
@@ -59,7 +59,7 @@ class GithubTest extends AppTestCase
         $this->assertEmpty($github->getContent());
     }
 
-    public function testIssue()
+    public function testIssue(): void
     {
         $client = self::getMockClient([
             (new Response(200, [], (string) json_encode([
@@ -91,7 +91,7 @@ class GithubTest extends AppTestCase
         $this->assertEmpty($github->getContent());
     }
 
-    public function testPR()
+    public function testPR(): void
     {
         $client = self::getMockClient([
             (new Response(200, [], (string) json_encode([

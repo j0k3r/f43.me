@@ -4,12 +4,13 @@ namespace App\Extractor;
 
 class RedditImage extends AbstractExtractor
 {
+    /** @var string */
     protected $redditImageUrl = null;
 
     /**
      * {@inheritdoc}
      */
-    public function match($url)
+    public function match(string $url): bool
     {
         $host = parse_url($url, PHP_URL_HOST);
         $path = parse_url($url, PHP_URL_PATH);
@@ -23,7 +24,7 @@ class RedditImage extends AbstractExtractor
         }
 
         // match i.reddituploads id & i.redd.it id
-        preg_match('/\/([a-z0-9]{32})|([a-z0-9]{12}\.)/', $path, $matches);
+        preg_match('/\/([a-z0-9]{32})|([a-z0-9]{12}\.)/', (string) $path, $matches);
 
         if (!isset($matches[1])) {
             return false;
@@ -37,7 +38,7 @@ class RedditImage extends AbstractExtractor
     /**
      * {@inheritdoc}
      */
-    public function getContent()
+    public function getContent(): string
     {
         if (!$this->redditImageUrl) {
             return '';

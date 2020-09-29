@@ -17,7 +17,7 @@ class ExtractorChain
      *
      * @param string $alias
      */
-    public function addExtractor(AbstractExtractor $extractor, $alias)
+    public function addExtractor(AbstractExtractor $extractor, $alias): void
     {
         $this->extractors[$alias] = $extractor;
     }

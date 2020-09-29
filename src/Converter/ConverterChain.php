@@ -14,10 +14,8 @@ class ConverterChain
 
     /**
      * Add an converter to the chain.
-     *
-     * @param string $alias
      */
-    public function addConverter(AbstractConverter $converter, $alias)
+    public function addConverter(AbstractConverter $converter, string $alias): void
     {
         $this->converters[$alias] = $converter;
     }
@@ -26,10 +24,8 @@ class ConverterChain
      * Loop thru all converter and convert content.
      *
      * @param string $html Article content
-     *
-     * @return string
      */
-    public function convert($html)
+    public function convert(string $html): string
     {
         foreach ($this->converters as $converter) {
             $html = $converter->convert($html);

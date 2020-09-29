@@ -4,12 +4,13 @@ namespace App\Extractor;
 
 class Youtube extends AbstractExtractor
 {
+    /** @var string */
     protected $youtubeUrl = null;
 
     /**
      * {@inheritdoc}
      */
-    public function match($url)
+    public function match(string $url): bool
     {
         $host = parse_url($url, PHP_URL_HOST);
         $path = parse_url($url, PHP_URL_PATH);
@@ -30,7 +31,7 @@ class Youtube extends AbstractExtractor
     /**
      * {@inheritdoc}
      */
-    public function getContent()
+    public function getContent(): string
     {
         if (!$this->youtubeUrl) {
             return '';

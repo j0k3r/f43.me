@@ -10,7 +10,7 @@ use Monolog\Logger;
 
 class CamplusTest extends AppTestCase
 {
-    public function dataMatch()
+    public function dataMatch(): array
     {
         return [
             ['http://campl.us/rL9Q', true],
@@ -27,13 +27,13 @@ class CamplusTest extends AppTestCase
     /**
      * @dataProvider dataMatch
      */
-    public function testMatch($url, $expected)
+    public function testMatch(string $url, bool $expected): void
     {
         $camplus = new Camplus();
         $this->assertSame($expected, $camplus->match($url));
     }
 
-    public function testContent()
+    public function testContent(): void
     {
         $client = self::getMockClient([(new Response(200, ['content-type' => 'application/json'], (string) json_encode([
             'page' => ['tweet' => [
@@ -60,7 +60,7 @@ class CamplusTest extends AppTestCase
         $this->assertStringContainsString('<p><img src="http://0.0.0.0/youpi.jpg" /></p>', $content);
     }
 
-    public function testContentWithException()
+    public function testContentWithException(): void
     {
         $client = self::getMockClient([(new Response(400, ['content-type' => 'application/json'], (string) json_encode('oops')))]);
 

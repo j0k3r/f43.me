@@ -24,7 +24,7 @@ class NewFeedEvent extends Event
         $this->feed = $feed;
     }
 
-    public function getFeed()
+    public function getFeed(): Feed
     {
         return $this->feed;
     }

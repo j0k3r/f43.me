@@ -10,7 +10,7 @@ use Monolog\Logger;
 
 class TwitchTest extends AppTestCase
 {
-    public function dataMatch()
+    public function dataMatch(): array
     {
         return [
             ['https://www.twitch.tv/tomfawkes/v/91819468', true],
@@ -25,13 +25,13 @@ class TwitchTest extends AppTestCase
     /**
      * @dataProvider dataMatch
      */
-    public function testMatch($url, $expected)
+    public function testMatch(string $url, bool $expected): void
     {
         $twitch = new Twitch('apikey');
         $this->assertSame($expected, $twitch->match($url));
     }
 
-    public function testContent()
+    public function testContent(): void
     {
         $client = self::getMockClient([
             (new Response(200, [], (string) json_encode(['title' => 'hihi', 'description' => 'hoho', 'preview' => 'http://0.0.0.0/image.jpg']))),

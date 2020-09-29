@@ -10,7 +10,7 @@ use Monolog\Logger;
 
 class YoutubeTest extends AppTestCase
 {
-    public function dataMatch()
+    public function dataMatch(): array
     {
         return [
             ['https://www.youtube.com/watch?v=UacN1xwVK2Y', true],
@@ -25,13 +25,13 @@ class YoutubeTest extends AppTestCase
     /**
      * @dataProvider dataMatch
      */
-    public function testMatch($url, $expected)
+    public function testMatch(string $url, bool $expected): void
     {
         $youtube = new Youtube();
         $this->assertSame($expected, $youtube->match($url));
     }
 
-    public function testContent()
+    public function testContent(): void
     {
         $client = self::getMockClient([
             (new Response(200, [], (string) json_encode(['title' => 'my title', 'thumbnail_url' => 'http://0.0.0.0/img.jpg', 'html' => '<iframe/>']))),

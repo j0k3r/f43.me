@@ -4,12 +4,13 @@ namespace App\Extractor;
 
 class Gfycat extends AbstractExtractor
 {
+    /** @var string */
     protected $gfycatId = null;
 
     /**
      * {@inheritdoc}
      */
-    public function match($url)
+    public function match(string $url): bool
     {
         $host = parse_url($url, PHP_URL_HOST);
         $path = parse_url($url, PHP_URL_PATH);
@@ -18,15 +19,15 @@ class Gfycat extends AbstractExtractor
             return false;
         }
 
-        if (false === strpos($host, 'gfycat.com')) {
+        if (false === strpos((string) $host, 'gfycat.com')) {
             return false;
         }
 
         // remove unecessary stuff from url
-        $path = str_replace('gifs/detail/', '', $path);
+        $path = str_replace('gifs/detail/', '', (string) $path);
 
         // match gfycat id with a minimum length or 4 to avoid i18n
-        preg_match('/([a-zA-Z]{4,})/i', $path, $matches);
+        preg_match('/([a-zA-Z]{4,})/i', (string) $path, $matches);
 
         if (!isset($matches[1])) {
             return false;
@@ -40,7 +41,7 @@ class Gfycat extends AbstractExtractor
     /**
      * {@inheritdoc}
      */
-    public function getContent()
+    public function getContent(): string
     {
         if (!$this->gfycatId) {
             return '';

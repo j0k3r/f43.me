@@ -9,7 +9,9 @@ use Symfony\Component\Console\Tester\CommandTester;
 
 class RemoveItemsCommandTest extends WebTestCase
 {
+    /** @var \Symfony\Component\Console\Command\Command */
     private $command;
+    /** @var CommandTester */
     private $commandTester;
 
     public function setUp(): void
@@ -30,14 +32,14 @@ class RemoveItemsCommandTest extends WebTestCase
         $this->commandTester = new CommandTester($this->command);
     }
 
-    public function testRemoveAllAvailable()
+    public function testRemoveAllAvailable(): void
     {
         $this->commandTester->execute(['command' => $this->command->getName()]);
 
         $this->assertRegExp('`0 items removed.`', $this->commandTester->getDisplay());
     }
 
-    public function testRemoveForOneFeed()
+    public function testRemoveForOneFeed(): void
     {
         $this->commandTester->execute([
             'command' => $this->command->getName(),
@@ -48,7 +50,7 @@ class RemoveItemsCommandTest extends WebTestCase
         $this->assertRegExp('`0 items removed.`', $this->commandTester->getDisplay());
     }
 
-    public function testRemoveBadSlug()
+    public function testRemoveBadSlug(): void
     {
         $this->commandTester->execute([
             'command' => $this->command->getName(),
@@ -59,7 +61,7 @@ class RemoveItemsCommandTest extends WebTestCase
         $this->assertRegExp('`Unable to find Feed document`', $this->commandTester->getDisplay());
     }
 
-    public function testRemoveAllMaxYes()
+    public function testRemoveAllMaxYes(): void
     {
         $this->commandTester->setInputs(['yes\\n']);
         $this->commandTester->execute([
@@ -72,7 +74,7 @@ class RemoveItemsCommandTest extends WebTestCase
         $this->assertRegExp('`You will remove ALL items, are your sure?`', $this->commandTester->getDisplay());
     }
 
-    public function testRemoveAllMaxNo()
+    public function testRemoveAllMaxNo(): void
     {
         $this->commandTester->setInputs(['no\\n']);
         $this->commandTester->execute([
@@ -85,7 +87,7 @@ class RemoveItemsCommandTest extends WebTestCase
         $this->assertRegExp('`remove everything from your database, pfiou`', $this->commandTester->getDisplay());
     }
 
-    public function testRemove()
+    public function testRemove(): void
     {
         $this->commandTester->execute([
             'command' => $this->command->getName(),
@@ -95,24 +97,5 @@ class RemoveItemsCommandTest extends WebTestCase
         ]);
 
         $this->assertRegExp('`items removed.`', $this->commandTester->getDisplay());
-    }
-
-    /**
-     * @see http://symfony.com/doc/current/components/console/helpers/dialoghelper.html#testing-a-command-which-expects-input
-     *
-     * @param string $input
-     */
-    protected function getInputStream($input)
-    {
-        $stream = fopen('php://memory', 'r+', false);
-
-        if (false === $stream) {
-            throw new \Exception('Cannot create stream ...');
-        }
-
-        fwrite($stream, $input);
-        rewind($stream);
-
-        return $stream;
     }
 }

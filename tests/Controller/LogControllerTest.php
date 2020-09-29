@@ -4,7 +4,7 @@ namespace App\Tests\Controller;
 
 class LogControllerTest extends FeedWebTestCase
 {
-    public function testUnAuthorized()
+    public function testUnAuthorized(): void
     {
         $client = static::createClient();
 
@@ -21,15 +21,15 @@ class LogControllerTest extends FeedWebTestCase
         $this->assertTrue($client->getResponse()->isRedirect('http://localhost/login'));
     }
 
-    public function testLogs()
+    public function testLogs(): void
     {
         $client = static::getAuthorizedClient();
 
         $crawler = $client->request('GET', '/logs');
 
         $this->assertSame(200, $client->getResponse()->getStatusCode());
-        $this->assertSame(1, $crawler->filter('h1')->count());
-        $this->assertSame(1, $crawler->filter('h2.title')->count());
+        $this->assertCount(1, $crawler->filter('h1'));
+        $this->assertCount(1, $crawler->filter('h2.title'));
         $this->assertGreaterThan(0, $crawler->filter('table.table-feedlogs tbody tr td img.favicon')->count());
         $this->assertGreaterThan(0, $items = $crawler->filter('table.table-feedlogs tr td.items-count')->extract(['_text']));
 
@@ -38,16 +38,16 @@ class LogControllerTest extends FeedWebTestCase
         }
     }
 
-    public function testLogsFeedNotExists()
+    public function testLogsFeedNotExists(): void
     {
         $client = static::getAuthorizedClient();
 
         $client->request('GET', '/feed/toto/logs');
         $this->assertSame(404, $client->getResponse()->getStatusCode());
-        $this->assertStringContainsString('Feed object not found', $client->getResponse()->getContent());
+        $this->assertStringContainsString('Feed object not found', (string) $client->getResponse()->getContent());
     }
 
-    public function testLogsFeed()
+    public function testLogsFeed(): void
     {
         $client = static::getAuthorizedClient();
 
@@ -60,7 +60,7 @@ class LogControllerTest extends FeedWebTestCase
         $this->assertGreaterThan(0, $crawler->filter('table.table-feedlogs tbody tr td')->count());
     }
 
-    public function testDeleteAll()
+    public function testDeleteAll(): void
     {
         $client = static::getAuthorizedClient();
 
@@ -71,30 +71,30 @@ class LogControllerTest extends FeedWebTestCase
         $client->submit($form);
 
         $this->assertSame(302, $client->getResponse()->getStatusCode());
-        $this->assertStringContainsString('reddit', $client->getResponse()->headers->get('location'));
+        $this->assertStringContainsString('reddit', (string) $client->getResponse()->headers->get('location'));
 
         $crawler = $client->followRedirect();
         $this->assertCount(1, $alert = $crawler->filter('div.alert-box')->extract(['_text']));
         $this->assertStringContainsString('logs deleted!', $alert[0]);
     }
 
-    public function testDeleteAllFormInvalid()
+    public function testDeleteAllFormInvalid(): void
     {
         $client = static::getAuthorizedClient();
 
         $client->request('POST', '/feed/reddit/logs/deleteAll');
 
         $this->assertSame(302, $client->getResponse()->getStatusCode());
-        $this->assertStringContainsString('reddit', $client->getResponse()->headers->get('location'));
+        $this->assertStringContainsString('reddit', (string) $client->getResponse()->headers->get('location'));
     }
 
-    public function testDeleteAllBadSlug()
+    public function testDeleteAllBadSlug(): void
     {
         $client = static::getAuthorizedClient();
 
         $client->request('POST', '/feed/nawak/logs/deleteAll');
 
         $this->assertSame(404, $client->getResponse()->getStatusCode());
-        $this->assertStringContainsString('Feed object not found', $client->getResponse()->getContent());
+        $this->assertStringContainsString('Feed object not found', (string) $client->getResponse()->getContent());
     }
 }

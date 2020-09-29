@@ -4,7 +4,7 @@ namespace App\Tests\Controller;
 
 class SecurityControllerTest extends FeedWebTestCase
 {
-    public function testLogin()
+    public function testLogin(): void
     {
         $client = static::createClient();
 
@@ -20,7 +20,7 @@ class SecurityControllerTest extends FeedWebTestCase
         $this->assertCount(1, $crawler->filter('button[type=submit]'));
     }
 
-    public function testBadLogin()
+    public function testBadLogin(): void
     {
         $client = static::createClient();
 

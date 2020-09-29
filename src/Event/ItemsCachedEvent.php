@@ -23,7 +23,7 @@ class ItemsCachedEvent extends Event
         $this->feedSlugs = $feedSlugs;
     }
 
-    public function getFeedSlugs()
+    public function getFeedSlugs(): array
     {
         return $this->feedSlugs;
     }

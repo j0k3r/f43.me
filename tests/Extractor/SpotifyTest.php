@@ -10,7 +10,7 @@ use Monolog\Logger;
 
 class SpotifyTest extends AppTestCase
 {
-    public function dataMatch()
+    public function dataMatch(): array
     {
         return [
             ['http://open.spotify.com/track/298gs9ATwr2rD9tGYJKlQR', true],
@@ -26,13 +26,13 @@ class SpotifyTest extends AppTestCase
     /**
      * @dataProvider dataMatch
      */
-    public function testMatch($url, $expected)
+    public function testMatch(string $url, bool $expected): void
     {
         $spotify = new Spotify();
         $this->assertSame($expected, $spotify->match($url));
     }
 
-    public function testContent()
+    public function testContent(): void
     {
         $client = self::getMockClient([
             (new Response(200, [], (string) json_encode(['title' => 'my title', 'thumbnail_url' => 'http://0.0.0.0/img.jpg', 'html' => '<iframe/>']))),

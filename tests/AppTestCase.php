@@ -5,7 +5,7 @@ namespace App\Tests;
 use Http\Client\Common\HttpMethodsClient;
 use Http\Client\Common\Plugin\ErrorPlugin;
 use Http\Client\Common\PluginClient;
-use Http\Discovery\MessageFactoryDiscovery;
+use Http\Discovery\Psr17FactoryDiscovery;
 use Http\Mock\Client as HttpMockClient;
 use PHPUnit\Framework\TestCase;
 
@@ -26,6 +26,10 @@ class AppTestCase extends TestCase
 
         $pluginClient = new PluginClient($httpMockClient, [(new ErrorPlugin())]);
 
-        return new HttpMethodsClient($pluginClient, MessageFactoryDiscovery::find());
+        return new HttpMethodsClient(
+            $pluginClient,
+            Psr17FactoryDiscovery::findRequestFactory(),
+            Psr17FactoryDiscovery::findStreamFactory()
+        );
     }
 }

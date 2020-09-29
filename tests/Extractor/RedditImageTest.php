@@ -9,7 +9,7 @@ use PHPUnit\Framework\TestCase;
 
 class RedditImageTest extends TestCase
 {
-    public function dataMatch()
+    public function dataMatch(): array
     {
         return [
             ['https://i.reddituploads.com/21fc8e0b2984423e84fd59fbc58024c8?fit=max&h=1536&w=1536&s=9e3c0fa6d46a642c42eace91833cad93', true],
@@ -28,13 +28,13 @@ class RedditImageTest extends TestCase
     /**
      * @dataProvider dataMatch
      */
-    public function testMatch($url, $expected)
+    public function testMatch(string $url, bool $expected): void
     {
         $redditImage = new RedditImage();
         $this->assertSame($expected, $redditImage->match($url));
     }
 
-    public function testContent()
+    public function testContent(): void
     {
         $redditImage = new RedditImage();
 

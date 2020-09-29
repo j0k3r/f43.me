@@ -6,6 +6,9 @@ use App\Entity\Item;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
+/**
+ * @extends ServiceEntityRepository<Item>
+ */
 class ItemRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
@@ -21,7 +24,7 @@ class ItemRepository extends ServiceEntityRepository
      *
      * @return mixed
      */
-    public function findByFeed($feedId, $sortBy)
+    public function findByFeed(int $feedId, string $sortBy)
     {
         return $this->getItemsByFeedIdQuery($feedId, ['sort_by' => $sortBy])
             ->execute();
@@ -34,7 +37,7 @@ class ItemRepository extends ServiceEntityRepository
      *
      * @return array|object|null
      */
-    public function findLastItemByFeedId($feedId)
+    public function findLastItemByFeedId(int $feedId)
     {
         return $this->getItemsByFeedIdQuery($feedId, ['limit' => 1])
             ->getOneOrNullResult();
@@ -45,7 +48,7 @@ class ItemRepository extends ServiceEntityRepository
      *
      * @return array of id
      */
-    public function findAllFeedWithItems()
+    public function findAllFeedWithItems(): array
     {
         $items = $this->createQueryBuilder('i')
             ->select('f.id, COUNT(i)')
@@ -67,10 +70,8 @@ class ItemRepository extends ServiceEntityRepository
      * Link are used as a "unique" key for item.
      *
      * @param int $feedId Feed id
-     *
-     * @return array
      */
-    public function getAllLinks($feedId)
+    public function getAllLinks(int $feedId): array
     {
         $res = $this->createQueryBuilder('i')
             ->select('i.permalink')
@@ -100,7 +101,7 @@ class ItemRepository extends ServiceEntityRepository
      *
      * @return mixed
      */
-    public function findOldItemsByFeedId($feedId, $skip = 100)
+    public function findOldItemsByFeedId(int $feedId, int $skip = 100)
     {
         return $this->createQueryBuilder('i')
             ->select('i, f')
@@ -119,7 +120,7 @@ class ItemRepository extends ServiceEntityRepository
      *
      * @return int
      */
-    public function deleteAllByFeedId($feedId)
+    public function deleteAllByFeedId(int $feedId)
     {
         return $this->getEntityManager()
             ->createQuery("DELETE FROM App\Entity\Item i WHERE i.feed = :feedId")
@@ -134,7 +135,7 @@ class ItemRepository extends ServiceEntityRepository
      *
      * @return int
      */
-    public function countByFeedId($feedId)
+    public function countByFeedId(int $feedId)
     {
         return $this->createQueryBuilder('i')
             ->select('count(i.id)')
@@ -152,7 +153,7 @@ class ItemRepository extends ServiceEntityRepository
      *
      * @return \Doctrine\ORM\Query
      */
-    private function getItemsByFeedIdQuery($feedId, $options = [])
+    private function getItemsByFeedIdQuery(int $feedId, array $options = [])
     {
         $q = $this->createQueryBuilder('i')
             ->select('i, f')

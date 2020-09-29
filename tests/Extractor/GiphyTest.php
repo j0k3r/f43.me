@@ -10,7 +10,7 @@ use Monolog\Logger;
 
 class GiphyTest extends AppTestCase
 {
-    public function dataMatch()
+    public function dataMatch(): array
     {
         return [
             ['http://giphy.com/gifs/linarf-l2SpOiTglzlu7yI3S', true],
@@ -26,13 +26,13 @@ class GiphyTest extends AppTestCase
     /**
      * @dataProvider dataMatch
      */
-    public function testMatch($url, $expected)
+    public function testMatch(string $url, bool $expected): void
     {
         $giphy = new Giphy();
         $this->assertSame($expected, $giphy->match($url));
     }
 
-    public function testContent()
+    public function testContent(): void
     {
         $client = self::getMockClient([
             (new Response(200, [], (string) json_encode(['title' => 'my title', 'url' => 'http://0.0.0.0/img.jpg']))),

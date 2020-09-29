@@ -4,12 +4,13 @@ namespace App\Extractor;
 
 class Giphy extends AbstractExtractor
 {
+    /** @var string */
     protected $giphyUrl = null;
 
     /**
      * {@inheritdoc}
      */
-    public function match($url)
+    public function match(string $url): bool
     {
         $host = parse_url($url, PHP_URL_HOST);
         $path = parse_url($url, PHP_URL_PATH);
@@ -22,7 +23,7 @@ class Giphy extends AbstractExtractor
             return false;
         }
 
-        preg_match('/\/gifs\//', $path, $matches);
+        preg_match('/\/gifs\//', (string) $path, $matches);
 
         if (!isset($matches[0])) {
             return false;
@@ -36,7 +37,7 @@ class Giphy extends AbstractExtractor
     /**
      * {@inheritdoc}
      */
-    public function getContent()
+    public function getContent(): string
     {
         if (!$this->giphyUrl) {
             return '';

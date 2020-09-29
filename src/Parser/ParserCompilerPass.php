@@ -8,7 +8,7 @@ use Symfony\Component\DependencyInjection\Reference;
 
 class ParserCompilerPass implements CompilerPassInterface
 {
-    public function process(ContainerBuilder $container)
+    public function process(ContainerBuilder $container): void
     {
         if (!$container->hasDefinition('App\Parser\ParserChain')) {
             return;

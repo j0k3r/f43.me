@@ -4,12 +4,13 @@ namespace App\Extractor;
 
 class Deviantart extends AbstractExtractor
 {
+    /** @var string */
     protected $deviantartUrl = null;
 
     /**
      * {@inheritdoc}
      */
-    public function match($url)
+    public function match(string $url): bool
     {
         $host = parse_url($url, PHP_URL_HOST);
         $path = parse_url($url, PHP_URL_PATH);
@@ -21,8 +22,8 @@ class Deviantart extends AbstractExtractor
         // if it's a fav.me or sta.sh, we just that there is a kind of id after
         // and for a deviantart url, we check for an art url
         if (
-            (\in_array($host, ['fav.me', 'sta.sh'], true) && preg_match('/\/([a-z0-9]+)/i', $path, $matches))
-            || (strpos($host, 'deviantart.com') && preg_match('/\/art\/(.*)/i', $path, $matches))) {
+            (\in_array($host, ['fav.me', 'sta.sh'], true) && preg_match('/\/([a-z0-9]+)/i', (string) $path, $matches))
+            || (strpos((string) $host, 'deviantart.com') && preg_match('/\/art\/(.*)/i', (string) $path, $matches))) {
             $this->deviantartUrl = $url;
 
             return true;
@@ -36,10 +37,10 @@ class Deviantart extends AbstractExtractor
      *
      * @see https://www.deviantart.com/developers/oembed
      */
-    public function getContent()
+    public function getContent(): string
     {
         if (!$this->deviantartUrl) {
-            return false;
+            return '';
         }
 
         try {
@@ -50,7 +51,7 @@ class Deviantart extends AbstractExtractor
                 'exception' => $e,
             ]);
 
-            return false;
+            return '';
         }
 
         $content = '<div>

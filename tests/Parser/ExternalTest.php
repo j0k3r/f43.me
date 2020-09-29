@@ -8,7 +8,7 @@ use GuzzleHttp\Psr7\Response;
 
 class ExternalTest extends AppTestCase
 {
-    public function testParseEmpty()
+    public function testParseEmpty(): void
     {
         $client = self::getMockClient([(new Response(200, [], (string) json_encode('')))]);
 
@@ -16,7 +16,7 @@ class ExternalTest extends AppTestCase
         $this->assertEmpty($external->parse('http://0.0.0.0/content'));
     }
 
-    public function testParse()
+    public function testParse(): void
     {
         $client = self::getMockClient([(new Response(200, [], (string) json_encode(['content' => '<div></div>', 'url' => 'http://1.1.1.1/content'])))]);
 
@@ -24,7 +24,7 @@ class ExternalTest extends AppTestCase
         $this->assertSame('<div></div>', $external->parse('http://0.0.0.0/content'));
     }
 
-    public function testParseException()
+    public function testParseException(): void
     {
         $client = self::getMockClient([(new Response(400, [], (string) json_encode('oops')))]);
 

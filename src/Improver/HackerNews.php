@@ -12,7 +12,7 @@ class HackerNews extends DefaultImprover
     /**
      * {@inheritdoc}
      */
-    public function match($host)
+    public function match(string $host): bool
     {
         return 0 === strpos('news.ycombinator.com', $host);
     }
@@ -24,7 +24,7 @@ class HackerNews extends DefaultImprover
      *
      * {@inheritdoc}
      */
-    public function updateContent($readableContent)
+    public function updateContent(string $readableContent): string
     {
         $host = parse_url($this->url, PHP_URL_HOST);
 

@@ -24,10 +24,8 @@ class FeedController extends AbstractController
      * Display some information about feeds, items, logs, etc ...
      *
      * @Route("/dashboard", name="feed_dashboard", methods={"GET"})
-     *
-     * @return Response
      */
-    public function dashboardAction(FeedRepository $feedRepository, LogRepository $logRepository)
+    public function dashboardAction(FeedRepository $feedRepository, LogRepository $logRepository): Response
     {
         $feeds = $feedRepository->findAllOrderedByDate(20);
         $feedlogs = $logRepository->findAllOrderedById(10);
@@ -45,10 +43,8 @@ class FeedController extends AbstractController
      * Display a public view.
      *
      * @Route("/", name="feed_publicview", methods={"GET"})
-     *
-     * @return Response
      */
-    public function publicAction(FeedRepository $feedRepository)
+    public function publicAction(FeedRepository $feedRepository): Response
     {
         return $this->render('default/Feed/public.html.twig', [
             'feeds' => $feedRepository->findForPublic(),
@@ -59,10 +55,8 @@ class FeedController extends AbstractController
      * Lists all Feed documents.
      *
      * @Route("/feeds", name="feed_homepage", methods={"GET"})
-     *
-     * @return Response
      */
-    public function indexAction(FeedRepository $feedRepository)
+    public function indexAction(FeedRepository $feedRepository): Response
     {
         return $this->render('default/Feed/index.html.twig', [
             'menu' => 'feed',
@@ -74,10 +68,8 @@ class FeedController extends AbstractController
      * Displays a form to create a new Feed document.
      *
      * @Route("/feed/new", name="feed_new", methods={"GET"})
-     *
-     * @return Response
      */
-    public function newAction()
+    public function newAction(): Response
     {
         $feed = new Feed();
         $form = $this->createForm(FeedType::class, $feed, ['action' => $this->generateUrl('feed_create')]);
@@ -176,10 +168,8 @@ class FeedController extends AbstractController
      * @param Feed    $feed    The document Feed (retrieving for a ParamConverter with the slug)
      *
      * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException If document doesn't exists
-     *
-     * @return RedirectResponse
      */
-    public function deleteAction(Request $request, Feed $feed, EntityManagerInterface $em, Session $session)
+    public function deleteAction(Request $request, Feed $feed, EntityManagerInterface $em, Session $session): RedirectResponse
     {
         $form = $this->createFormBuilder()->getForm();
         $form->handleRequest($request);
@@ -200,10 +190,8 @@ class FeedController extends AbstractController
      * @Route("/{slug}.xml", name="feed_xml", methods={"GET"})
      *
      * @param Feed $feed The document Feed (retrieving for a ParamConverter with the slug)
-     *
-     * @return Response
      */
-    public function xmlAction(Feed $feed, Render $xmlRender)
+    public function xmlAction(Feed $feed, Render $xmlRender): Response
     {
         return new Response(
             $xmlRender->doRender($feed),

@@ -12,7 +12,7 @@ class AtomFormatter extends Formatter
     /**
      * @see parent
      */
-    public function setItemFields()
+    public function setItemFields(): void
     {
         $this->fields = [
             [
@@ -41,7 +41,7 @@ class AtomFormatter extends Formatter
     /**
      * @see parent
      */
-    public function initialize()
+    public function initialize(): void
     {
         $root = $this->dom->createElement('feed');
         $root->setAttribute('xmlns', 'http://www.w3.org/2005/Atom');

@@ -4,13 +4,12 @@ namespace App\Extractor;
 
 class Twitch extends AbstractExtractor
 {
+    /** @var string */
     protected $twitchCliendId;
+    /** @var string */
     protected $twitchId = null;
 
-    /**
-     * @param string $twitchCliendId
-     */
-    public function __construct($twitchCliendId)
+    public function __construct(string $twitchCliendId)
     {
         $this->twitchCliendId = $twitchCliendId;
     }
@@ -18,7 +17,7 @@ class Twitch extends AbstractExtractor
     /**
      * {@inheritdoc}
      */
-    public function match($url)
+    public function match(string $url): bool
     {
         $host = parse_url($url, PHP_URL_HOST);
         $path = parse_url($url, PHP_URL_PATH);
@@ -32,7 +31,7 @@ class Twitch extends AbstractExtractor
         }
 
         // match twitch id
-        preg_match('/v\/([0-9]+)/i', $path, $matches);
+        preg_match('/v\/([0-9]+)/i', (string) $path, $matches);
 
         if (!isset($matches[1])) {
             return false;
@@ -46,7 +45,7 @@ class Twitch extends AbstractExtractor
     /**
      * {@inheritdoc}
      */
-    public function getContent()
+    public function getContent(): string
     {
         if (!$this->twitchId) {
             return '';

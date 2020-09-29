@@ -4,12 +4,13 @@ namespace App\Extractor;
 
 class Vidme extends AbstractExtractor
 {
+    /** @var string */
     protected $vidmeUrl = null;
 
     /**
      * {@inheritdoc}
      */
-    public function match($url)
+    public function match(string $url): bool
     {
         $host = parse_url($url, PHP_URL_HOST);
         $path = parse_url($url, PHP_URL_PATH);
@@ -18,12 +19,12 @@ class Vidme extends AbstractExtractor
             return false;
         }
 
-        if (0 !== strpos($host, 'vid.me')) {
+        if (0 !== strpos((string) $host, 'vid.me')) {
             return false;
         }
 
         // match vidme id
-        preg_match('/([a-z0-9]{4,})/i', $path, $matches);
+        preg_match('/([a-z0-9]{4,})/i', (string) $path, $matches);
 
         if (!isset($matches[1])) {
             return false;
@@ -37,7 +38,7 @@ class Vidme extends AbstractExtractor
     /**
      * {@inheritdoc}
      */
-    public function getContent()
+    public function getContent(): string
     {
         if (!$this->vidmeUrl) {
             return '';

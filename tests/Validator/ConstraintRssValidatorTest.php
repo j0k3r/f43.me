@@ -9,7 +9,7 @@ use GuzzleHttp\Psr7\Response;
 
 class ConstraintRssValidatorTest extends AppTestCase
 {
-    public function testValidatorValid()
+    public function testValidatorValid(): void
     {
         $constraint = new ConstraintRss();
 
@@ -27,7 +27,7 @@ class ConstraintRssValidatorTest extends AppTestCase
         $validator->validate('http://0.0.0.0', $constraint);
     }
 
-    public function testValidatorFail()
+    public function testValidatorFail(): void
     {
         $constraint = new ConstraintRss();
 
@@ -49,7 +49,7 @@ class ConstraintRssValidatorTest extends AppTestCase
         $validator->validate('http://0.0.0.0', $constraint);
     }
 
-    public function testValidatorFailFirst()
+    public function testValidatorFailFirst(): void
     {
         $constraint = new ConstraintRss();
 
@@ -74,7 +74,7 @@ class ConstraintRssValidatorTest extends AppTestCase
         $validator->validate('http://0.0.0.0', $constraint);
     }
 
-    public function testValidatorFailTwice()
+    public function testValidatorFailTwice(): void
     {
         $constraint = new ConstraintRss();
 

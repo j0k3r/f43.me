@@ -7,10 +7,10 @@ use PHPUnit\Framework\TestCase;
 
 class InternalTest extends TestCase
 {
-    public function testParseEmpty()
+    public function testParseEmpty(): void
     {
         $graby = $this->getMockBuilder('Graby\Graby')
-            ->setMethods(['fetchContent'])
+            ->onlyMethods(['fetchContent'])
             ->disableOriginalConstructor()
             ->getMock();
 
@@ -22,10 +22,10 @@ class InternalTest extends TestCase
         $this->assertEmpty($internal->parse('http://localhost'));
     }
 
-    public function testParseFalse()
+    public function testParseFalse(): void
     {
         $graby = $this->getMockBuilder('Graby\Graby')
-            ->setMethods(['fetchContent'])
+            ->onlyMethods(['fetchContent'])
             ->disableOriginalConstructor()
             ->getMock();
 
@@ -37,10 +37,10 @@ class InternalTest extends TestCase
         $this->assertEmpty($internal->parse('http://localhost'));
     }
 
-    public function testParseOk()
+    public function testParseOk(): void
     {
         $graby = $this->getMockBuilder('Graby\Graby')
-            ->setMethods(['fetchContent'])
+            ->onlyMethods(['fetchContent'])
             ->disableOriginalConstructor()
             ->getMock();
 
@@ -52,10 +52,10 @@ class InternalTest extends TestCase
         $this->assertNotEmpty($internal->parse('http://localhost'));
     }
 
-    public function testParseException()
+    public function testParseException(): void
     {
         $graby = $this->getMockBuilder('Graby\Graby')
-            ->setMethods(['fetchContent'])
+            ->onlyMethods(['fetchContent'])
             ->disableOriginalConstructor()
             ->getMock();
 

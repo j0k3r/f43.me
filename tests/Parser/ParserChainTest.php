@@ -7,7 +7,7 @@ use PHPUnit\Framework\TestCase;
 
 class ParserChainTest extends TestCase
 {
-    public function testParseTrue()
+    public function testParseTrue(): void
     {
         $parser = $this->getMockBuilder('App\Parser\AbstractParser')
             ->disableOriginalConstructor()
@@ -24,7 +24,7 @@ class ParserChainTest extends TestCase
         $this->assertSame($parser, $parserChain->getParser('alias'));
     }
 
-    public function testParseFalse()
+    public function testParseFalse(): void
     {
         $parser = $this->getMockBuilder('App\Parser\AbstractParser')
             ->disableOriginalConstructor()
@@ -32,7 +32,7 @@ class ParserChainTest extends TestCase
 
         $parser->expects($this->once())
             ->method('parse')
-            ->willReturn(false);
+            ->willReturn('');
 
         $parserChain = new ParserChain();
         $parserChain->addParser($parser, 'alias');

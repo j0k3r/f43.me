@@ -8,15 +8,15 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 class ImproverCompilerPassTest extends TestCase
 {
-    public function testProcessNoDefinition()
+    public function testProcessNoDefinition(): void
     {
         $container = new ContainerBuilder();
-        $res = $this->process($container);
+        $this->process($container);
 
-        $this->assertNull($res);
+        $this->assertFalse($container->hasDefinition('App\Improver\ImproverChain'));
     }
 
-    public function testProcess()
+    public function testProcess(): void
     {
         $container = new ContainerBuilder();
         $container
@@ -40,7 +40,7 @@ class ImproverCompilerPassTest extends TestCase
         $this->assertSame('hackernews', $calls[0][1][1]);
     }
 
-    protected function process(ContainerBuilder $container)
+    protected function process(ContainerBuilder $container): void
     {
         $repeatedPass = new ImproverCompilerPass();
         $repeatedPass->process($container);

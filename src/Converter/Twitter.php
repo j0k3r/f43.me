@@ -12,6 +12,7 @@ class Twitter extends AbstractConverter
 {
     const IMAGE_CONTENT = '<img src="image_url" /></p><p>';
 
+    /** @var TwitterExtractor */
     private $twitterExtractor;
 
     public function __construct(TwitterExtractor $twitterExtractor)
@@ -23,12 +24,8 @@ class Twitter extends AbstractConverter
      * This will convert all pic.twitter.com into real image.
      * We retrieve all link to a twitter status and if that status contains some medias and that media url (pic.twitter.com/XXXX) exist in the html
      * we repalce it by an img tag.
-     *
-     * @param string $html
-     *
-     * @return string
      */
-    public function convert($html)
+    public function convert(string $html): string
     {
         $re = '/<a href\=\"https:\/\/twitter.com\/([a-z0-9\-\_]+)\/status\/([0-9]{18})\"/i';
         $res = preg_match_all($re, $html, $matches);

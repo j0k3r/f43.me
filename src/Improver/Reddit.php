@@ -12,7 +12,7 @@ class Reddit extends DefaultImprover
     /**
      * {@inheritdoc}
      */
-    public function match($host)
+    public function match(string $host): bool
     {
         return \in_array($host, ['reddit.com', 'www.reddit.com'], true);
     }
@@ -23,7 +23,7 @@ class Reddit extends DefaultImprover
      *
      * {@inheritdoc}
      */
-    public function updateUrl($url)
+    public function updateUrl(string $url): string
     {
         // we extract the source of the reddit post
         preg_match('/(.*)\<a href\=\"(.*)\"\>\[link\]\<\/a\>/i', $this->itemContent, $matches);
@@ -39,7 +39,7 @@ class Reddit extends DefaultImprover
      *
      * {@inheritdoc}
      */
-    public function updateContent($readableContent)
+    public function updateContent(string $readableContent): string
     {
         return $this->itemContent . '<br/><hr/><br/>' . $readableContent;
     }

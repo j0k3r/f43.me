@@ -4,7 +4,7 @@ namespace App\Tests\Controller;
 
 class ItemControllerTest extends FeedWebTestCase
 {
-    public function testUnAuthorized()
+    public function testUnAuthorized(): void
     {
         $client = static::createClient();
 
@@ -21,17 +21,17 @@ class ItemControllerTest extends FeedWebTestCase
         $this->assertTrue($client->getResponse()->isRedirect('http://localhost/login'));
     }
 
-    public function testIndexBadSlug()
+    public function testIndexBadSlug(): void
     {
         $client = static::getAuthorizedClient();
 
         $client->request('GET', '/feed/nawak/items');
 
         $this->assertSame(404, $client->getResponse()->getStatusCode());
-        $this->assertStringContainsString('Feed object not found', $client->getResponse()->getContent());
+        $this->assertStringContainsString('Feed object not found', (string) $client->getResponse()->getContent());
     }
 
-    public function testIndex()
+    public function testIndex(): string
     {
         $client = static::getAuthorizedClient();
 
@@ -55,7 +55,7 @@ class ItemControllerTest extends FeedWebTestCase
     /**
      * @depends testIndex
      */
-    public function testPreview($previewLink)
+    public function testPreview(string $previewLink): void
     {
         $client = static::getAuthorizedClient();
 
@@ -67,17 +67,17 @@ class ItemControllerTest extends FeedWebTestCase
         $this->assertCount(1, $crawler->filter('ul.no-bullet'));
     }
 
-    public function testPreviewBadId()
+    public function testPreviewBadId(): void
     {
         $client = static::getAuthorizedClient();
 
         $client->request('GET', '/item/3456789/preview');
 
         $this->assertSame(404, $client->getResponse()->getStatusCode());
-        $this->assertStringContainsString('Item object not found', $client->getResponse()->getContent());
+        $this->assertStringContainsString('Item object not found', (string) $client->getResponse()->getContent());
     }
 
-    public function testTestItem()
+    public function testTestItem(): void
     {
         $client = static::getAuthorizedClient();
 
@@ -90,17 +90,17 @@ class ItemControllerTest extends FeedWebTestCase
         $this->assertCount(1, $crawler->filter('div.content[id=modal-content-external]'));
     }
 
-    public function testTestItemBadSlug()
+    public function testTestItemBadSlug(): void
     {
         $client = static::getAuthorizedClient();
 
         $client->request('GET', '/feed/nawak/testItem');
 
         $this->assertSame(404, $client->getResponse()->getStatusCode());
-        $this->assertStringContainsString('Feed object not found', $client->getResponse()->getContent());
+        $this->assertStringContainsString('Feed object not found', (string) $client->getResponse()->getContent());
     }
 
-    public function testPreviewItemInternal()
+    public function testPreviewItemInternal(): void
     {
         $client = static::getAuthorizedClient();
 
@@ -111,7 +111,7 @@ class ItemControllerTest extends FeedWebTestCase
         $this->assertGreaterThanOrEqual(2, $crawler->filter('li strong')->count());
     }
 
-    public function testPreviewItemExternal()
+    public function testPreviewItemExternal(): void
     {
         $client = static::getAuthorizedClient();
 
@@ -122,7 +122,7 @@ class ItemControllerTest extends FeedWebTestCase
         $this->assertGreaterThanOrEqual(2, $crawler->filter('li strong')->count());
     }
 
-    public function testPreviewItemBadParser()
+    public function testPreviewItemBadParser(): void
     {
         $client = static::getAuthorizedClient();
 
@@ -131,17 +131,17 @@ class ItemControllerTest extends FeedWebTestCase
         $this->assertSame(404, $client->getResponse()->getStatusCode());
     }
 
-    public function testPreviewItemBadSlug()
+    public function testPreviewItemBadSlug(): void
     {
         $client = static::getAuthorizedClient();
 
         $client->request('GET', '/feed/nawak/previewItem');
 
         $this->assertSame(404, $client->getResponse()->getStatusCode());
-        $this->assertStringContainsString('Feed object not found', $client->getResponse()->getContent());
+        $this->assertStringContainsString('Feed object not found', (string) $client->getResponse()->getContent());
     }
 
-    public function testDeleteAll()
+    public function testDeleteAll(): void
     {
         $client = static::getAuthorizedClient();
 
@@ -152,30 +152,30 @@ class ItemControllerTest extends FeedWebTestCase
         $client->submit($form);
 
         $this->assertSame(302, $client->getResponse()->getStatusCode());
-        $this->assertStringContainsString('hackernews', $client->getResponse()->headers->get('location'));
+        $this->assertStringContainsString('hackernews', (string) $client->getResponse()->headers->get('location'));
 
         $crawler = $client->followRedirect();
         $this->assertCount(1, $alert = $crawler->filter('div.alert-box')->extract(['_text']));
         $this->assertStringContainsString('items deleted!', $alert[0]);
     }
 
-    public function testDeleteAllFormInvalid()
+    public function testDeleteAllFormInvalid(): void
     {
         $client = static::getAuthorizedClient();
 
         $client->request('POST', '/feed/hackernews/items/deleteAll');
 
         $this->assertSame(302, $client->getResponse()->getStatusCode());
-        $this->assertStringContainsString('hackernews', $client->getResponse()->headers->get('location'));
+        $this->assertStringContainsString('hackernews', (string) $client->getResponse()->headers->get('location'));
     }
 
-    public function testDeleteAllBadSlug()
+    public function testDeleteAllBadSlug(): void
     {
         $client = static::getAuthorizedClient();
 
         $client->request('POST', '/feed/nawak/items/deleteAll');
 
         $this->assertSame(404, $client->getResponse()->getStatusCode());
-        $this->assertStringContainsString('Feed object not found', $client->getResponse()->getContent());
+        $this->assertStringContainsString('Feed object not found', (string) $client->getResponse()->getContent());
     }
 }

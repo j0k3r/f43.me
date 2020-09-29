@@ -4,12 +4,13 @@ namespace App\Extractor;
 
 class HackerNews extends AbstractExtractor
 {
+    /** @var string */
     protected $text = null;
 
     /**
      * {@inheritdoc}
      */
-    public function match($url)
+    public function match(string $url): bool
     {
         $host = parse_url($url, PHP_URL_HOST);
         $query = parse_url($url, PHP_URL_QUERY);
@@ -18,12 +19,12 @@ class HackerNews extends AbstractExtractor
             return false;
         }
 
-        if (0 !== strpos($host, 'news.ycombinator.com')) {
+        if (0 !== strpos((string) $host, 'news.ycombinator.com')) {
             return false;
         }
 
         // match HN id
-        preg_match('/id\=([0-9]+)/i', $query, $matches);
+        preg_match('/id\=([0-9]+)/i', (string) $query, $matches);
 
         if (!isset($matches[1])) {
             return false;
@@ -50,7 +51,7 @@ class HackerNews extends AbstractExtractor
     /**
      * {@inheritdoc}
      */
-    public function getContent()
+    public function getContent(): string
     {
         if (!$this->text) {
             return '';

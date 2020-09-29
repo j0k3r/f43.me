@@ -8,6 +8,7 @@ use Graby\Monolog\Handler\GrabyHandler;
 use Monolog\Logger;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 class TestController extends AbstractController
@@ -20,10 +21,8 @@ class TestController extends AbstractController
      * - test a site configuration.
      *
      * @Route("/feed/test", name="feed_test", methods={"GET", "POST"})
-     *
-     * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function indexAction(Request $request, Extractor $contentExtractor, GrabyHandler $grabyHandler)
+    public function indexAction(Request $request, Extractor $contentExtractor, GrabyHandler $grabyHandler): Response
     {
         $form = $this->createForm(ItemTestType::class);
         $form->handleRequest($request);

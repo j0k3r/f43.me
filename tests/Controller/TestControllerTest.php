@@ -4,7 +4,7 @@ namespace App\Tests\Controller;
 
 class TestControllerTest extends FeedWebTestCase
 {
-    public function testFeedTest()
+    public function testFeedTest(): void
     {
         $client = static::getAuthorizedClient();
 
@@ -19,7 +19,7 @@ class TestControllerTest extends FeedWebTestCase
         $this->assertCount(1, $crawler->filter('button[type=submit]'));
     }
 
-    public function testFeedTestSubmit()
+    public function testFeedTestSubmit(): void
     {
         $client = static::getAuthorizedClient();
 
@@ -34,10 +34,10 @@ class TestControllerTest extends FeedWebTestCase
 
         $this->assertSame(200, $client->getResponse()->getStatusCode());
         $this->assertCount(1, $crawler->filter('ul.no-bullet'));
-        $this->assertStringNotContainsString('We failed to make this item readable, the default text from the feed item will be displayed instead.', $client->getResponse()->getContent());
+        $this->assertStringNotContainsString('We failed to make this item readable, the default text from the feed item will be displayed instead.', (string) $client->getResponse()->getContent());
     }
 
-    public function testFeedTestSubmitWithSiteConfig()
+    public function testFeedTestSubmitWithSiteConfig(): void
     {
         $client = static::getAuthorizedClient();
 
@@ -53,6 +53,6 @@ class TestControllerTest extends FeedWebTestCase
 
         $this->assertSame(200, $client->getResponse()->getStatusCode());
         $this->assertCount(1, $crawler->filter('ul.no-bullet'));
-        $this->assertStringNotContainsString('We failed to make this item readable, the default text from the feed item will be displayed instead.', $client->getResponse()->getContent());
+        $this->assertStringNotContainsString('We failed to make this item readable, the default text from the feed item will be displayed instead.', (string) $client->getResponse()->getContent());
     }
 }

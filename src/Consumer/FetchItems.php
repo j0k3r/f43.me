@@ -22,7 +22,7 @@ class FetchItems implements ProcessorInterface
     private $domain;
     private $logger;
 
-    public function __construct(ManagerRegistry $doctrine, FeedRepository $feedRepository, Import $contentImport, RouterInterface $router, LoggerInterface $logger, $domain)
+    public function __construct(ManagerRegistry $doctrine, FeedRepository $feedRepository, Import $contentImport, RouterInterface $router, LoggerInterface $logger, string $domain)
     {
         $this->doctrine = $doctrine;
         $this->feedRepository = $feedRepository;
