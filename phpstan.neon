@@ -5,7 +5,7 @@ parameters:
         - tests
 
     symfony:
-        container_xml_path: %rootDir%/../../../var/cache/test/srcApp_KernelTestDebugContainer.xml
+        container_xml_path: %rootDir%/../../../var/cache/test/App_KernelTestDebugContainer.xml
         console_application_loader: tests/console-application.php
 
     # https://github.com/phpstan/phpstan/issues/694#issuecomment-350724288
