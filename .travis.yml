@@ -47,7 +47,8 @@ before_install:
     - printf "\n" | pecl install amqp
 
 install:
-    - composer self-update
+    - composer install --no-interaction --optimize-autoloader --no-progress --prefer-dist --no-suggest
+    - php bin/simple-phpunit install
 
 before_script:
     # using dev env because tests queues are "in memory"
