@@ -16,8 +16,6 @@ parameters:
         - '#Constructor of class App\\DomDocument\\XDOMElement has an unused parameter \$value.#'
         # Related to `getReference` in data fixtures
         - '#Parameter \#1 \$feed of class App\\Entity#'
-        # because the argument is a mock
-        - '#Parameter \#7 \$amqplibFactory#'
 
     inferPrivatePropertyTypeFromConstructor: true
     checkMissingIterableValueType: false

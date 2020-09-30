@@ -1,16 +1,16 @@
 <?php
 
-namespace App\Tests\Consumer;
+namespace App\Tests\MessageHandler;
 
-use App\Consumer\FetchItems;
 use App\Entity\Feed;
+use App\Message\FeedSync;
+use App\MessageHandler\FetchItemsHandler;
 use Monolog\Handler\TestHandler;
 use Monolog\Logger;
 use Psr\Log\NullLogger;
-use Swarrot\Broker\Message;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
-class FetchItemsTest extends WebTestCase
+class FetchItemsHandlerTest extends WebTestCase
 {
     public function testProcessNoFeed(): void
     {
@@ -36,7 +36,7 @@ class FetchItemsTest extends WebTestCase
             ->with(123)
             ->willReturn(null);
 
-        $processor = new FetchItems(
+        $handler = new FetchItemsHandler(
             $doctrine,
             $feedRepository,
             $contentImport,
@@ -45,7 +45,7 @@ class FetchItemsTest extends WebTestCase
             'f43.io'
         );
 
-        $processor->process(new Message((string) json_encode(['feed_id' => 123])), []);
+        $handler->__invoke(new FeedSync(123));
     }
 
     public function testProcessSuccessfulMessage(): void
@@ -98,7 +98,7 @@ class FetchItemsTest extends WebTestCase
         $logHandler = new TestHandler();
         $logger->pushHandler($logHandler);
 
-        $processor = new FetchItems(
+        $handler = new FetchItemsHandler(
             $doctrine,
             $feedRepository,
             $contentImport,
@@ -107,7 +107,7 @@ class FetchItemsTest extends WebTestCase
             'f43.io'
         );
 
-        $processor->process(new Message((string) json_encode(['feed_id' => 123])), []);
+        $handler->__invoke(new FeedSync(123));
 
         $records = $logHandler->getRecords();
 

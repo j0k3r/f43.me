@@ -161,17 +161,11 @@
     "nikic/php-parser": {
         "version": "v4.10.1"
     },
-    "odolbeau/rabbit-mq-admin-toolkit": {
-        "version": "v4.1.0"
-    },
     "paragonie/random_compat": {
         "version": "v9.99.99"
     },
     "php": {
         "version": "7.2.9"
-    },
-    "php-amqplib/php-amqplib": {
-        "version": "v2.12.0"
     },
     "php-coveralls/php-coveralls": {
         "version": "v2.3.0"
@@ -220,9 +214,6 @@
     },
     "php-http/stopwatch-plugin": {
         "version": "1.3.0"
-    },
-    "phpseclib/phpseclib": {
-        "version": "2.0.29"
     },
     "phpstan/extension-installer": {
         "version": "1.0.5"
@@ -317,20 +308,8 @@
             "config/packages/stof_doctrine_extensions.yaml"
         ]
     },
-    "swarrot/swarrot": {
-        "version": "v3.7.0"
-    },
-    "swarrot/swarrot-bundle": {
-        "version": "1.6",
-        "recipe": {
-            "repo": "github.com/symfony/recipes-contrib",
-            "branch": "master",
-            "version": "1.6",
-            "ref": "1c77a3e26d17c85c335d5c255d736da8848069fd"
-        },
-        "files": [
-            "config/packages/swarrot.yaml"
-        ]
+    "symfony/amqp-messenger": {
+        "version": "v5.1.6"
     },
     "symfony/asset": {
         "version": "v4.4.13"
@@ -382,6 +361,9 @@
     },
     "symfony/doctrine-bridge": {
         "version": "v4.4.13"
+    },
+    "symfony/doctrine-messenger": {
+        "version": "v5.1.6"
     },
     "symfony/dom-crawler": {
         "version": "v4.4.13"
@@ -465,6 +447,18 @@
             "ref": "fadbfe33303a76e25cb63401050439aa9b1a9c7f"
         }
     },
+    "symfony/messenger": {
+        "version": "4.3",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "master",
+            "version": "4.3",
+            "ref": "8a2675c061737658bed85102e9241c752620e575"
+        },
+        "files": [
+            "config/packages/messenger.yaml"
+        ]
+    },
     "symfony/monolog-bridge": {
         "version": "v5.1.5"
     },
@@ -545,6 +539,9 @@
     },
     "symfony/property-info": {
         "version": "v5.1.5"
+    },
+    "symfony/redis-messenger": {
+        "version": "v5.1.6"
     },
     "symfony/routing": {
         "version": "5.1",

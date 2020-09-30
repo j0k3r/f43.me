@@ -4,11 +4,9 @@ namespace App\Command;
 
 use App\Content\Import;
 use App\Entity\Feed;
+use App\Message\FeedSync;
 use App\Repository\FeedRepository;
 use App\Repository\ItemRepository;
-use Swarrot\Broker\Message;
-use Swarrot\SwarrotBundle\Broker\AmqpLibFactory;
-use Swarrot\SwarrotBundle\Broker\Publisher;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -16,6 +14,9 @@ use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Lock\LockFactory;
 use Symfony\Component\Lock\Store\FlockStore;
+use Symfony\Component\Messenger\MessageBusInterface;
+use Symfony\Component\Messenger\Transport\Receiver\MessageCountAwareInterface;
+use Symfony\Component\Messenger\Transport\TransportInterface;
 use Symfony\Component\Routing\RouterInterface;
 
 class FetchItemsCommand extends Command
@@ -25,18 +26,18 @@ class FetchItemsCommand extends Command
     private $contentImport;
     private $router;
     private $domain;
-    private $publisher;
-    private $amqplibFactory;
+    private $transport;
+    private $bus;
 
-    public function __construct(FeedRepository $feedRepository, ItemRepository $itemRepository, Import $contentImport = null, RouterInterface $router, Publisher $publisher, string $domain, AmqpLibFactory $amqplibFactory = null)
+    public function __construct(FeedRepository $feedRepository, ItemRepository $itemRepository, Import $contentImport = null, RouterInterface $router, string $domain, TransportInterface $transport, MessageBusInterface $bus)
     {
         $this->feedRepository = $feedRepository;
         $this->itemRepository = $itemRepository;
         $this->contentImport = $contentImport;
         $this->router = $router;
         $this->domain = $domain;
-        $this->publisher = $publisher;
-        $this->amqplibFactory = $amqplibFactory;
+        $this->transport = $transport;
+        $this->bus = $bus;
 
         parent::__construct();
     }
@@ -69,14 +70,11 @@ class FetchItemsCommand extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        if ($input->getOption('use_queue') && null !== $this->amqplibFactory) {
-            // check that queue is empty before pushing new messages
-            $message = $this->amqplibFactory
-                ->getChannel('rabbitmq')
-                ->basic_get('f43.fetch_items');
+        if ($input->getOption('use_queue') && $this->transport instanceof MessageCountAwareInterface) {
+            $count = $this->transport->getMessageCount();
 
-            if (null !== $message && 0 < $message->getMessageCount()) {
-                $output->writeln('Current queue as too much messages (<error>' . $message->getMessageCount() . '</error>), <comment>skipping</comment>.');
+            if (0 < $count) {
+                $output->writeln('Current queue as too much messages (<error>' . $count . '</error>), <comment>skipping</comment>.');
 
                 return 1;
             }
@@ -136,14 +134,7 @@ class FetchItemsCommand extends Command
 
         if ($input->getOption('use_queue')) {
             foreach ($feeds as $feed) {
-                $message = new Message((string) json_encode([
-                    'feed_id' => $feed->getId(),
-                ]));
-
-                $this->publisher->publish(
-                    'f43.fetch_items.publisher',
-                    $message
-                );
+                $this->bus->dispatch(new FeedSync($feed->getId()));
             }
 
             $lock->release();

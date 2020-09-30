@@ -1,0 +1,20 @@
+framework:
+    messenger:
+        transports:
+            fetch_items:
+                dsn: '%env(MESSENGER_TRANSPORT_DSN)%/fetch_items'
+                options:
+                    exchange:
+                        name: f43.fetch_items
+                        type: direct
+                    queues:
+                        f43.fetch_items: ~
+
+        routing:
+            'App\Message\FeedSync': fetch_items
+
+        buses:
+            command_bus:
+                middleware:
+                    - doctrine_ping_connection
+                    - doctrine_close_connection

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<!-- https://phpunit.readthedocs.io/en/latest/configuration.html -->
 <phpunit backupGlobals="false"
          backupStaticAttributes="false"
          colors="true"

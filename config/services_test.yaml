@@ -1,9 +1,4 @@
 services:
-    App\DataFixtures\:
-        resource: '../src/DataFixtures/*'
-        tags: ['doctrine.fixture.orm']
-        autowire: true
-
     # simple_pie_proxy.test:
     #     alias: simple_pie_proxy
     #     public: true
@@ -53,4 +48,8 @@ services:
 
     em.test:
         alias: Doctrine\ORM\EntityManagerInterface
+        public: true
+
+    messenger.transport.fetch_items.test:
+        alias: messenger.transport.fetch_items
         public: true

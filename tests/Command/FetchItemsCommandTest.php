@@ -4,20 +4,16 @@ namespace App\Tests\Command;
 
 use App\Command\FetchItemsCommand;
 use App\Content\Import;
+use App\Message\FeedSync;
 use Monolog\Handler\TestHandler;
 use Monolog\Logger;
-use PhpAmqpLib\Message\AMQPMessage;
 use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Tester\CommandTester;
+use Symfony\Component\Messenger\Bridge\Amqp\Transport\AmqpTransport;
+use Symfony\Component\Messenger\Envelope;
 
-/**
- * @group legacy
- *
- * Because there is no right way to override existing service in the upcoming Symfony 4.0
- * without modifiy them globally (using config_test.yml)
- */
 class FetchItemsCommandTest extends WebTestCase
 {
     /** @var TestHandler */
@@ -67,12 +63,12 @@ class FetchItemsCommandTest extends WebTestCase
             ->method('init')
             ->willReturn($simplePie);
 
-        $publisher = $this->getMockBuilder('Swarrot\SwarrotBundle\Broker\Publisher')
+        $bus = $this->getMockBuilder('Symfony\Component\Messenger\MessageBusInterface')
             ->disableOriginalConstructor()
             ->getMock();
 
-        $publisher->expects($this->any())
-            ->method('publish');
+        $bus->expects($this->any())
+            ->method('dispatch');
 
         $logger = new Logger('import');
         $this->handler = new TestHandler();
@@ -117,9 +113,9 @@ class FetchItemsCommandTest extends WebTestCase
             $container->get('app.repository.item.test'),
             $import,
             $container->get('router.test'),
-            $publisher,
             'f43.me',
-            $this->getAmqpMessage(0)
+            self::$kernel->getContainer()->get('messenger.transport.fetch_items.test'),
+            $bus
         ));
 
         $this->command = $application->find('feed:fetch-items');
@@ -184,26 +180,24 @@ class FetchItemsCommandTest extends WebTestCase
 
     public function testUsingQueue(): void
     {
-        $this->commandTester->execute([
-            'command' => $this->command->getName(),
-            'age' => 'old',
-            '--use_queue' => true,
-        ], ['verbosity' => OutputInterface::VERBOSITY_VERBOSE]);
-
-        $this->assertRegExp('`feeds queued.`', $this->commandTester->getDisplay());
-    }
-
-    public function testCommandSyncAllUsersWithQueueFull(): void
-    {
         /** @var \Symfony\Component\DependencyInjection\ContainerInterface */
         $container = self::$kernel->getContainer();
 
-        $publisher = $this->getMockBuilder('Swarrot\SwarrotBundle\Broker\Publisher')
+        $bus = $this->getMockBuilder('Symfony\Component\Messenger\MessageBusInterface')
             ->disableOriginalConstructor()
             ->getMock();
 
-        $publisher->expects($this->any())
-            ->method('publish');
+        $bus->expects($this->any())
+            ->method('dispatch')
+            ->willReturn(new Envelope(new FeedSync(555)));
+
+        $connection = $this->getMockBuilder('Symfony\Component\Messenger\Bridge\Amqp\Transport\Connection')
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $connection->expects($this->once())
+            ->method('countMessagesInQueues')
+            ->willReturn(0);
 
         $application = new Application(static::$kernel);
         $application->add(new FetchItemsCommand(
@@ -211,9 +205,52 @@ class FetchItemsCommandTest extends WebTestCase
             $container->get('app.repository.item.test'),
             null,
             $container->get('router.test'),
-            $publisher,
             'f43.me',
-            $this->getAmqpMessage(10)
+            new AmqpTransport($connection),
+            $bus
+        ));
+
+        $command = $application->find('feed:fetch-items');
+        $commandTester = new CommandTester($command);
+
+        $commandTester->execute([
+            'command' => $this->command->getName(),
+            'age' => 'old',
+            '--use_queue' => true,
+        ], ['verbosity' => OutputInterface::VERBOSITY_VERBOSE]);
+
+        $this->assertRegExp('`feeds queued.`', $commandTester->getDisplay());
+    }
+
+    public function testCommandSyncAllUsersWithQueueFull(): void
+    {
+        /** @var \Symfony\Component\DependencyInjection\ContainerInterface */
+        $container = self::$kernel->getContainer();
+
+        $bus = $this->getMockBuilder('Symfony\Component\Messenger\MessageBusInterface')
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $bus->expects($this->any())
+            ->method('dispatch');
+
+        $connection = $this->getMockBuilder('Symfony\Component\Messenger\Bridge\Amqp\Transport\Connection')
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $connection->expects($this->once())
+            ->method('countMessagesInQueues')
+            ->willReturn(10);
+
+        $application = new Application(static::$kernel);
+        $application->add(new FetchItemsCommand(
+            $container->get('app.repository.feed.test'),
+            $container->get('app.repository.item.test'),
+            null,
+            $container->get('router.test'),
+            'f43.me',
+            new AmqpTransport($connection),
+            $bus
         ));
 
         $command = $application->find('feed:fetch-items');
@@ -226,31 +263,5 @@ class FetchItemsCommandTest extends WebTestCase
         ], ['verbosity' => OutputInterface::VERBOSITY_VERBOSE]);
 
         $this->assertStringContainsString('Current queue as too much messages (10), skipping.', $commandTester->getDisplay());
-    }
-
-    private function getAmqpMessage(int $totalMessage = 0): \PHPUnit\Framework\MockObject\MockObject
-    {
-        $message = new AMQPMessage();
-        $message->setMessageCount($totalMessage);
-
-        $amqpChannel = $this->getMockBuilder('PhpAmqpLib\Channel\AMQPChannel')
-            ->disableOriginalConstructor()
-            ->getMock();
-
-        $amqpChannel->expects($this->any())
-            ->method('basic_get')
-            ->with('f43.fetch_items')
-            ->willReturn($message);
-
-        $amqpLibFactory = $this->getMockBuilder('Swarrot\SwarrotBundle\Broker\AmqpLibFactory')
-            ->disableOriginalConstructor()
-            ->getMock();
-
-        $amqpLibFactory->expects($this->any())
-            ->method('getChannel')
-            ->with('rabbitmq')
-            ->willReturn($amqpChannel);
-
-        return $amqpLibFactory;
     }
 }
