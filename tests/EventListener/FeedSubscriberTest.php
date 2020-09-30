@@ -5,51 +5,29 @@ namespace App\Tests\EventListener;
 use App\Entity\Feed;
 use App\Event\NewFeedEvent;
 use App\EventListener\FeedSubscriber;
+use App\Message\FeedSync;
 use App\Tests\AppTestCase;
-use PhpAmqpLib\Exception\AMQPIOException;
+use Symfony\Component\Messenger\Envelope;
 
 class FeedSubscriberTest extends AppTestCase
 {
     public function testOnFeedCreated(): void
     {
-        $publisher = $this->getMockBuilder('Swarrot\SwarrotBundle\Broker\Publisher')
+        $bus = $this->getMockBuilder('Symfony\Component\Messenger\MessageBusInterface')
             ->disableOriginalConstructor()
             ->getMock();
 
-        $publisher->expects($this->once())
-            ->method('publish');
+        $bus->expects($this->once())
+            ->method('dispatch')
+            ->willReturn(new Envelope(new FeedSync(123)));
 
-        $feedSubscriber = new FeedSubscriber($publisher);
+        $feedSubscriber = new FeedSubscriber($bus);
 
         $feed = new Feed();
         $feed->setId(123);
 
         $event = new NewFeedEvent($feed);
 
-        $res = $feedSubscriber->sync($event);
-
-        $this->assertTrue($res);
-    }
-
-    public function testOnFeedCreatedNoRabbitMQ(): void
-    {
-        $publisher = $this->getMockBuilder('Swarrot\SwarrotBundle\Broker\Publisher')
-            ->disableOriginalConstructor()
-            ->getMock();
-
-        $publisher->expects($this->once())
-            ->method('publish')
-            ->will($this->throwException(new AMQPIOException()));
-
-        $feedSubscriber = new FeedSubscriber($publisher);
-
-        $feed = new Feed();
-        $feed->setId(123);
-
-        $event = new NewFeedEvent($feed);
-
-        $res = $feedSubscriber->sync($event);
-
-        $this->assertFalse($res);
+        $feedSubscriber->sync($event);
     }
 }

@@ -8,7 +8,6 @@ services:
     _defaults:
         autowire: true
         autoconfigure: true
-        public: false
 
     # makes classes in src/ available to be used as services
     # this creates a service per class whose id is the fully-qualified class name
@@ -16,7 +15,6 @@ services:
         resource: '../src/'
         exclude:
             - '../src/DependencyInjection/'
-            - '../src/DataFixtures/'
             - '../src/Converter/'
             - '../src/DomDocument/'
             - '../src/Extractor/'
@@ -40,11 +38,12 @@ services:
         tags: ['console.command']
         arguments:
             $domain: "%env(DOMAIN)%"
+            $transport: "@messenger.transport.fetch_items"
 
     App\Command\RemoveItemsCommand:
         tags: ['console.command']
 
-    App\Consumer\FetchItems:
+    App\MessageHandler\FetchItemsHandler:
         arguments:
             $domain: "%env(DOMAIN)%"
 
@@ -112,13 +111,6 @@ services:
             - "[%%datetime%%] %%start_tag%%%%message%%%%end_tag%% %%context%% %%extra%%\n"
 
     Http\Client\Common\HttpMethodsClientInterface: '@httplug.client.default.http_methods'
-
-    # alias to service from their class name
-    Swarrot\SwarrotBundle\Broker\Publisher:
-        alias: swarrot.publisher
-
-    Swarrot\SwarrotBundle\Broker\AmqpLibFactory:
-        alias: swarrot.factory.amqp_lib
 
     content_extractor:
         class: App\Content\Extractor

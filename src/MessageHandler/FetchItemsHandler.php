@@ -1,19 +1,20 @@
 <?php
 
-namespace App\Consumer;
+namespace App\MessageHandler;
 
 use App\Content\Import;
+use App\Message\FeedSync;
 use App\Repository\FeedRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use Psr\Log\LoggerInterface;
 use Swarrot\Broker\Message;
-use Swarrot\Processor\ProcessorInterface;
+use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
 use Symfony\Component\Routing\RouterInterface;
 
 /**
  * Consumer message to fetch new items for a given feed.
  */
-class FetchItems implements ProcessorInterface
+class FetchItemsHandler implements MessageHandlerInterface
 {
     private $doctrine;
     private $feedRepository;
@@ -32,15 +33,15 @@ class FetchItems implements ProcessorInterface
         $this->logger = $logger;
     }
 
-    public function process(Message $message, array $options): bool
+    public function __invoke(FeedSync $message): bool
     {
-        $data = json_decode((string) $message->getBody(), true);
+        $feedId = $message->getFeedId();
 
         /** @var \App\Entity\Feed|null */
-        $feed = $this->feedRepository->find($data['feed_id']);
+        $feed = $this->feedRepository->find($feedId);
 
         if (null === $feed) {
-            $this->logger->error('Can not find feed', ['feed' => $data['feed_id']]);
+            $this->logger->error('Can not find feed', ['feed' => $feedId]);
 
             return false;
         }
