@@ -6120,16 +6120,16 @@
         },
         {
             "name": "symfony/lock",
-            "version": "v5.1.6",
+            "version": "v5.1.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/lock.git",
-                "reference": "b714b8347bfe5f8c5081cb1061d80797f62fe367"
+                "reference": "c20c51121f24b627c866150c53b072b1b361737b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/lock/zipball/b714b8347bfe5f8c5081cb1061d80797f62fe367",
-                "reference": "b714b8347bfe5f8c5081cb1061d80797f62fe367",
+                "url": "https://api.github.com/repos/symfony/lock/zipball/c20c51121f24b627c866150c53b072b1b361737b",
+                "reference": "c20c51121f24b627c866150c53b072b1b361737b",
                 "shasum": ""
             },
             "require": {
@@ -6197,7 +6197,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2020-09-24T07:56:38+00:00"
+            "time": "2020-10-03T13:58:17+00:00"
         },
         {
             "name": "symfony/messenger",
