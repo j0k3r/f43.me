@@ -34,7 +34,7 @@
         "mnsami/composer-custom-directory-installer": "~2.0",
         "php-http/guzzle6-adapter": "^2.0",
         "php-http/httplug-bundle": "^1.14",
-        "ricardoper/twitteroauth": "~1.0",
+        "ricardoper/twitteroauth": "~2.1",
         "sensio/framework-extra-bundle": "^5.6",
         "sentry/sentry-symfony": "^3.0",
         "simplepie/simplepie": "~1.4",
