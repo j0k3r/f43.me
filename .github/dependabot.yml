@@ -10,3 +10,6 @@ updates:
     versions:
     - ">= 4.4.a"
     - "< 4.5"
+  - dependency-name: ricardoper/twitteroauth
+    versions:
+    - "> 1.1.1"
