@@ -63,8 +63,11 @@ script:
     - if [ "$CS_FIXER" = "run" ]; then php bin/php-cs-fixer fix --verbose --dry-run ; fi;
     - if [ "$CS_FIXER" = "run" ]; then php bin/phpstan analyse --no-progress ; fi;
 
-after_script:
+after_success:
     - |
         if [ $COVERAGE = run ]; then
-            php bin/php-coveralls -v -x build/logs/clover.xml
+            wget https://github.com/php-coveralls/php-coveralls/releases/download/v2.4.2/php-coveralls.phar
+            chmod +x php-coveralls.phar
+
+            php php-coveralls.phar -v -x build/logs/clover.xml
         fi
