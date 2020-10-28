@@ -5994,16 +5994,16 @@
         },
         {
             "name": "symfony/lock",
-            "version": "v5.1.7",
+            "version": "v5.1.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/lock.git",
-                "reference": "c20c51121f24b627c866150c53b072b1b361737b"
+                "reference": "9ff3c3bfc08da89d307464276aa206514a8c97e5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/lock/zipball/c20c51121f24b627c866150c53b072b1b361737b",
-                "reference": "c20c51121f24b627c866150c53b072b1b361737b",
+                "url": "https://api.github.com/repos/symfony/lock/zipball/9ff3c3bfc08da89d307464276aa206514a8c97e5",
+                "reference": "9ff3c3bfc08da89d307464276aa206514a8c97e5",
                 "shasum": ""
             },
             "require": {
@@ -6020,11 +6020,6 @@
                 "predis/predis": "~1.0"
             },
             "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "5.1-dev"
-                }
-            },
             "autoload": {
                 "psr-4": {
                     "Symfony\\Component\\Lock\\": ""
@@ -6071,7 +6066,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2020-10-03T13:58:17+00:00"
+            "time": "2020-10-24T12:01:57+00:00"
         },
         {
             "name": "symfony/messenger",
