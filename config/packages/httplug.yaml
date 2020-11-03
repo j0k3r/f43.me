@@ -3,8 +3,7 @@ httplug:
         default:
             factory: 'httplug.factory.guzzle6'
             config:
-                defaults:
-                    timeout: 10
+                timeout: 10
             http_methods_client: true
             plugins:
                 - 'httplug.plugin.redirect'
