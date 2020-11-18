@@ -12,3 +12,6 @@ insert_final_newline = true
 [Makefile]
 # Use tabs for indentation (Makefiles require tabs)
 indent_style = tab
+
+[.github/**.yml]
+indent_size = 2
