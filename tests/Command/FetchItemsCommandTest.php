@@ -23,7 +23,7 @@ class FetchItemsCommandTest extends WebTestCase
     /** @var CommandTester */
     private $commandTester;
 
-    public function setUp(): void
+    protected function setUp(): void
     {
         static::createClient();
 
