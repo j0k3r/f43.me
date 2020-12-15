@@ -38,7 +38,7 @@ class Streamable extends AbstractExtractor
         }
 
         try {
-            $response = $this->client->get('http://api.streamable.com/oembed.json?url=' . $this->streamableUrl);
+            $response = $this->client->get('https://api.streamable.com/oembed.json?url=' . $this->streamableUrl);
             $data = $this->jsonDecode($response);
         } catch (\Exception $e) {
             $this->logger->warning('Streamable extract failed for: ' . $this->streamableUrl, [
