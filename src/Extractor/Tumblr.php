@@ -68,7 +68,7 @@ class Tumblr extends AbstractExtractor
         }
 
         try {
-            $response = $this->client->get('http://api.tumblr.com/v2/blog/' . $this->tumblrHost . '/posts/text?api_key=' . $this->tumblrApiKey . '&id=' . $this->tumblrId);
+            $response = $this->client->get('https://api.tumblr.com/v2/blog/' . $this->tumblrHost . '/posts/text?api_key=' . $this->tumblrApiKey . '&id=' . $this->tumblrId);
             $data = $this->jsonDecode($response);
         } catch (\Exception $e) {
             $this->logger->warning('Tumblr extract failed for: ' . $this->tumblrId . ' & ' . $this->tumblrHost, [

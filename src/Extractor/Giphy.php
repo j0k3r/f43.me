@@ -44,7 +44,7 @@ class Giphy extends AbstractExtractor
         }
 
         try {
-            $response = $this->client->get('http://giphy.com/services/oembed/?url=' . $this->giphyUrl);
+            $response = $this->client->get('https://giphy.com/services/oembed/?url=' . $this->giphyUrl);
             $data = $this->jsonDecode($response);
         } catch (\Exception $e) {
             $this->logger->warning('Giphy extract failed for: ' . $this->giphyUrl, [

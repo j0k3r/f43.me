@@ -38,7 +38,7 @@ class Youtube extends AbstractExtractor
         }
 
         try {
-            $response = $this->client->get('http://www.youtube.com/oembed?format=json&url=' . $this->youtubeUrl);
+            $response = $this->client->get('https://www.youtube.com/oembed?format=json&url=' . $this->youtubeUrl);
             $data = $this->jsonDecode($response);
         } catch (\Exception $e) {
             $this->logger->warning('Youtube extract failed for: ' . $this->youtubeUrl, [
