@@ -23,15 +23,15 @@ class Imgur extends AbstractExtractor
      */
     public function match(string $url): bool
     {
-        $host = parse_url($url, PHP_URL_HOST);
-        $path = parse_url($url, PHP_URL_PATH);
+        $host = parse_url($url, \PHP_URL_HOST);
+        $path = parse_url($url, \PHP_URL_PATH);
 
         if (null === $host || null === $path) {
             return false;
         }
 
         // some gallery got an extra query like ?gallery to change the display, we don't want it
-        $query = parse_url($url, PHP_URL_QUERY);
+        $query = parse_url($url, \PHP_URL_QUERY);
         if ($query) {
             $url = str_replace('?' . $query, '', $url);
         }

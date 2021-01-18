@@ -29,8 +29,8 @@ class Github extends AbstractExtractor
      */
     public function match(string $url): bool
     {
-        $host = parse_url($url, PHP_URL_HOST);
-        $path = parse_url($url, PHP_URL_PATH);
+        $host = parse_url($url, \PHP_URL_HOST);
+        $path = parse_url($url, \PHP_URL_PATH);
 
         if (null === $host || null === $path) {
             return false;

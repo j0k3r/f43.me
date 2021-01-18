@@ -66,7 +66,7 @@ class Import
 
             // update feed description, in case it was empty
             if (0 === \strlen($feed->getDescription()) && 0 !== \strlen((string) $rssFeed->get_description())) {
-                $feed->setDescription(html_entity_decode((string) $rssFeed->get_description(), ENT_COMPAT, 'UTF-8'));
+                $feed->setDescription(html_entity_decode((string) $rssFeed->get_description(), \ENT_COMPAT, 'UTF-8'));
                 $this->em->persist($feed);
                 $this->em->flush();
             }
@@ -113,7 +113,7 @@ class Import
                 $date = (new \DateTime())->setTimestamp((int) strtotime((string) $date));
 
                 $feedItem = new Item($feed);
-                $feedItem->setTitle(html_entity_decode((string) $item->get_title(), ENT_COMPAT, 'UTF-8'));
+                $feedItem->setTitle(html_entity_decode((string) $item->get_title(), \ENT_COMPAT, 'UTF-8'));
                 $feedItem->setLink($parsedContent->url);
                 $feedItem->setContent((string) $content);
                 $feedItem->setPermalink($permalink);

@@ -12,8 +12,8 @@ class HackerNews extends AbstractExtractor
      */
     public function match(string $url): bool
     {
-        $host = parse_url($url, PHP_URL_HOST);
-        $query = parse_url($url, PHP_URL_QUERY);
+        $host = parse_url($url, \PHP_URL_HOST);
+        $query = parse_url($url, \PHP_URL_QUERY);
 
         if (null === $host || null === $query) {
             return false;

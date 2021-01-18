@@ -126,7 +126,7 @@ class ItemController extends AbstractController
         );
 
         return $this->render('default/Item/content.html.twig', [
-            'title' => html_entity_decode((string) $firstItem->get_title(), ENT_COMPAT, 'UTF-8'),
+            'title' => html_entity_decode((string) $firstItem->get_title(), \ENT_COMPAT, 'UTF-8'),
             'content' => $content->content,
             'modal' => false,
             'url' => $content->url,
