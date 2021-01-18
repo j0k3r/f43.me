@@ -91,7 +91,7 @@ class Extractor
         $this->url = '';
 
         // the feed isn't always defined, for example when we test an url
-        $host = parse_url($url, PHP_URL_HOST) ?: '';
+        $host = parse_url($url, \PHP_URL_HOST) ?: '';
         if (null !== $this->feed) {
             $host = $this->feed->getHost();
         }

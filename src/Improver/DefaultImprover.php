@@ -62,7 +62,7 @@ class DefaultImprover
         $url = str_replace('&amp%3B', '&', $url);
 
         // extract query parameters
-        $query = parse_url($url, PHP_URL_QUERY);
+        $query = parse_url($url, \PHP_URL_QUERY);
         if (empty($query)) {
             return $url;
         }

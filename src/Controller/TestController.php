@@ -35,7 +35,7 @@ class TestController extends AbstractController
             // add ability to test a siteconfig before submitting it
             $siteConfig = $form->get('siteconfig')->getData();
             if (trim($siteConfig)) {
-                $host = parse_url($form->get('link')->getData(), PHP_URL_HOST);
+                $host = parse_url($form->get('link')->getData(), \PHP_URL_HOST);
 
                 if ($host) {
                     // remove www. from host because graby check for domain (without www.) first

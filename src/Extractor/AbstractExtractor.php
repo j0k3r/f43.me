@@ -50,7 +50,7 @@ abstract class AbstractExtractor implements LoggerAwareInterface
             return [];
         }
 
-        if (JSON_ERROR_NONE !== json_last_error()) {
+        if (\JSON_ERROR_NONE !== json_last_error()) {
             throw new \InvalidArgumentException('Unable to parse JSON data: ' . json_last_error_msg());
         }
 
