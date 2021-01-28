@@ -10,7 +10,7 @@ parameters:
 
     # https://github.com/phpstan/phpstan/issues/694#issuecomment-350724288
     bootstrapFiles:
-        - vendor/bin/.phpunit/phpunit-8.3-0/vendor/autoload.php
+        - vendor/bin/.phpunit/phpunit-8.5-0/vendor/autoload.php
 
     ignoreErrors:
         - '#Constructor of class App\\DomDocument\\XDOMElement has an unused parameter \$value.#'
