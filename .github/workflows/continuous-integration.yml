@@ -49,7 +49,7 @@ jobs:
         with:
           php-version: "${{ matrix.php }}"
           coverage: "pcov"
-          tools: pecl, composer:v1
+          tools: pecl, composer:v2
           extensions: pdo, pdo_mysql, curl
           ini-values: "date.timezone=Europe/Paris"
         env:
