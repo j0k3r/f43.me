@@ -96,12 +96,12 @@
         "version": "1.2.7"
     },
     "friendsofphp/php-cs-fixer": {
-        "version": "2.2",
+        "version": "2.16",
         "recipe": {
             "repo": "github.com/symfony/recipes",
             "branch": "master",
-            "version": "2.2",
-            "ref": "cc05ab6abf6894bddb9bbd6a252459010ebe040b"
+            "version": "2.16",
+            "ref": "c1947bad147704aeaf0285745f0baae927a58959"
         },
         "files": [
             ".php_cs.dist"
@@ -428,7 +428,16 @@
         "version": "v4.4.13"
     },
     "symfony/lock": {
-        "version": "v4.4.14"
+        "version": "5.2",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "master",
+            "version": "5.2",
+            "ref": "13350583a83fa636bf45a5fb62da3bdc73be52a1"
+        },
+        "files": [
+            "config/packages/lock.yaml"
+        ]
     },
     "symfony/maker-bundle": {
         "version": "1.0",
@@ -476,12 +485,12 @@
         "version": "v2.0.0"
     },
     "symfony/phpunit-bridge": {
-        "version": "4.3",
+        "version": "5.1",
         "recipe": {
             "repo": "github.com/symfony/recipes",
             "branch": "master",
-            "version": "4.3",
-            "ref": "6d0e35f749d5f4bfe1f011762875275cd3f9874f"
+            "version": "5.1",
+            "ref": "cb82a2355ec62fef0e7028ac969fe86fa722feb8"
         },
         "files": [
             ".env.test",
