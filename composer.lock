@@ -1794,16 +1794,16 @@
         },
         {
             "name": "j0k3r/graby",
-            "version": "2.2.4",
+            "version": "2.2.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/j0k3r/graby.git",
-                "reference": "987aa6cb4d548492f27a2552e6c7f1193bde0ccf"
+                "reference": "e1154098851dd347002314445c18847655f5a289"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/j0k3r/graby/zipball/987aa6cb4d548492f27a2552e6c7f1193bde0ccf",
-                "reference": "987aa6cb4d548492f27a2552e6c7f1193bde0ccf",
+                "url": "https://api.github.com/repos/j0k3r/graby/zipball/e1154098851dd347002314445c18847655f5a289",
+                "reference": "e1154098851dd347002314445c18847655f5a289",
                 "shasum": ""
             },
             "require": {
@@ -1866,7 +1866,7 @@
             "description": "Graby helps you extract article content from web pages",
             "support": {
                 "issues": "https://github.com/j0k3r/graby/issues",
-                "source": "https://github.com/j0k3r/graby/tree/2.2.4"
+                "source": "https://github.com/j0k3r/graby/tree/2.2.5"
             },
             "funding": [
                 {
@@ -1874,20 +1874,20 @@
                     "type": "github"
                 }
             ],
-            "time": "2021-01-04T09:08:02+00:00"
+            "time": "2021-01-20T04:02:40+00:00"
         },
         {
             "name": "j0k3r/graby-site-config",
-            "version": "1.0.125",
+            "version": "1.0.126",
             "source": {
                 "type": "git",
                 "url": "https://github.com/j0k3r/graby-site-config.git",
-                "reference": "098511f204ae1fb54e9d4ca9391c78aa2811c8cb"
+                "reference": "293d1448026c5d911b276b79e08640c36d63d677"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/j0k3r/graby-site-config/zipball/098511f204ae1fb54e9d4ca9391c78aa2811c8cb",
-                "reference": "098511f204ae1fb54e9d4ca9391c78aa2811c8cb",
+                "url": "https://api.github.com/repos/j0k3r/graby-site-config/zipball/293d1448026c5d911b276b79e08640c36d63d677",
+                "reference": "293d1448026c5d911b276b79e08640c36d63d677",
                 "shasum": ""
             },
             "require": {
@@ -1916,9 +1916,9 @@
             "description": "Graby site config files",
             "support": {
                 "issues": "https://github.com/j0k3r/graby-site-config/issues",
-                "source": "https://github.com/j0k3r/graby-site-config/tree/1.0.125"
+                "source": "https://github.com/j0k3r/graby-site-config/tree/1.0.126"
             },
-            "time": "2021-02-01T15:54:14+00:00"
+            "time": "2021-02-10T13:53:53+00:00"
         },
         {
             "name": "j0k3r/httplug-ssrf-plugin",
