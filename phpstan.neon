@@ -17,7 +17,7 @@ parameters:
         # Related to `getReference` in data fixtures
         - '#Parameter \#1 \$feed of class App\\Entity#'
         # Related to `TestController` with `kernel.project_dir`
-        - '#data\/site_config#'
+        - '#site_config#'
 
     inferPrivatePropertyTypeFromConstructor: true
     checkMissingIterableValueType: false

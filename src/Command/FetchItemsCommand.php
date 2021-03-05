@@ -98,6 +98,7 @@ class FetchItemsCommand extends Command
         $context->setHost($this->domain);
 
         // retrieve feed to work on
+        // @phpstan-ignore-next-line
         if ($slug = (string) $input->getOption('slug')) {
             $feed = $this->feedRepository->findOneBy(['slug' => $slug]);
             if (!$feed instanceof Feed) {
