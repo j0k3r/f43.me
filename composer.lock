@@ -703,16 +703,16 @@
         },
         {
             "name": "doctrine/doctrine-bundle",
-            "version": "2.2.3",
+            "version": "2.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/DoctrineBundle.git",
-                "reference": "015fdd490074d4daa891e2d1df998dc35ba54924"
+                "reference": "8b922578bdee2243a26202b13df795e170efaef8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/DoctrineBundle/zipball/015fdd490074d4daa891e2d1df998dc35ba54924",
-                "reference": "015fdd490074d4daa891e2d1df998dc35ba54924",
+                "url": "https://api.github.com/repos/doctrine/DoctrineBundle/zipball/8b922578bdee2243a26202b13df795e170efaef8",
+                "reference": "8b922578bdee2243a26202b13df795e170efaef8",
                 "shasum": ""
             },
             "require": {
@@ -793,7 +793,7 @@
             ],
             "support": {
                 "issues": "https://github.com/doctrine/DoctrineBundle/issues",
-                "source": "https://github.com/doctrine/DoctrineBundle/tree/2.2.3"
+                "source": "https://github.com/doctrine/DoctrineBundle/tree/2.3.0"
             },
             "funding": [
                 {
@@ -809,7 +809,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2021-01-19T20:29:53+00:00"
+            "time": "2021-03-16T16:24:04+00:00"
         },
         {
             "name": "doctrine/event-manager",
@@ -4895,16 +4895,16 @@
         },
         {
             "name": "symfony/doctrine-bridge",
-            "version": "v5.2.4",
+            "version": "v5.2.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/doctrine-bridge.git",
-                "reference": "b9fc1a1e35c732e9ad48ba36dbb1a923a0c95dc2"
+                "reference": "9e2c53f3e8f8a6ccecd80de5c2c8b71beeca7fc8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/doctrine-bridge/zipball/b9fc1a1e35c732e9ad48ba36dbb1a923a0c95dc2",
-                "reference": "b9fc1a1e35c732e9ad48ba36dbb1a923a0c95dc2",
+                "url": "https://api.github.com/repos/symfony/doctrine-bridge/zipball/9e2c53f3e8f8a6ccecd80de5c2c8b71beeca7fc8",
+                "reference": "9e2c53f3e8f8a6ccecd80de5c2c8b71beeca7fc8",
                 "shasum": ""
             },
             "require": {
@@ -4989,7 +4989,7 @@
             "description": "Provides integration for Doctrine with various Symfony components",
             "homepage": "https://symfony.com",
             "support": {
-                "source": "https://github.com/symfony/doctrine-bridge/tree/v5.2.4"
+                "source": "https://github.com/symfony/doctrine-bridge/tree/v5.2.5"
             },
             "funding": [
                 {
@@ -5005,7 +5005,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2021-02-18T22:42:36+00:00"
+            "time": "2021-03-06T13:35:24+00:00"
         },
         {
             "name": "symfony/doctrine-messenger",
@@ -5677,16 +5677,16 @@
         },
         {
             "name": "symfony/framework-bundle",
-            "version": "v5.2.4",
+            "version": "v5.2.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/framework-bundle.git",
-                "reference": "6158eb79d62946c24d3f6959bf9b2073555e200e"
+                "reference": "4dae531503072a57cf26f7f4beb4c3ef8a061f8f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/framework-bundle/zipball/6158eb79d62946c24d3f6959bf9b2073555e200e",
-                "reference": "6158eb79d62946c24d3f6959bf9b2073555e200e",
+                "url": "https://api.github.com/repos/symfony/framework-bundle/zipball/4dae531503072a57cf26f7f4beb4c3ef8a061f8f",
+                "reference": "4dae531503072a57cf26f7f4beb4c3ef8a061f8f",
                 "shasum": ""
             },
             "require": {
@@ -5713,7 +5713,7 @@
                 "phpunit/phpunit": "<5.4.3",
                 "symfony/asset": "<5.1",
                 "symfony/browser-kit": "<4.4",
-                "symfony/console": "<5.2",
+                "symfony/console": "<5.2.5",
                 "symfony/dom-crawler": "<4.4",
                 "symfony/dotenv": "<5.1",
                 "symfony/form": "<5.2",
@@ -5806,7 +5806,7 @@
             "description": "Provides a tight integration between Symfony components and the Symfony full-stack framework",
             "homepage": "https://symfony.com",
             "support": {
-                "source": "https://github.com/symfony/framework-bundle/tree/v5.2.4"
+                "source": "https://github.com/symfony/framework-bundle/tree/v5.2.5"
             },
             "funding": [
                 {
@@ -5822,7 +5822,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2021-02-23T15:58:22+00:00"
+            "time": "2021-03-09T08:47:49+00:00"
         },
         {
             "name": "symfony/http-client",
