@@ -57,8 +57,6 @@ jobs:
 
       - name: "Install dependencies with Composer"
         uses: "ramsey/composer-install@v1"
-        with:
-          composer-options: "--optimize-autoloader --prefer-dist"
 
       - name: "Setup messenger queue"
         run: "php bin/console messenger:setup-transports --env=dev"
