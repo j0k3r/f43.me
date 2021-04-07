@@ -34,7 +34,7 @@ class RemoveItemsCommand extends Command
         $this
             ->setName('feed:remove-items')
             ->setDescription('Fetch items from feed to cache them')
-            ->addOption('max', 'm', InputOption::VALUE_OPTIONAL, 'Number of items to keep in the feed', 100)
+            ->addOption('max', 'm', InputOption::VALUE_OPTIONAL, 'Number of items to keep in the feed', '100')
             ->addOption('slug', null, InputOption::VALUE_OPTIONAL, 'To work on one particular feed (using its slug)')
             ->addOption('with-trace', 't', InputOption::VALUE_NONE, 'Display debug')
         ;
