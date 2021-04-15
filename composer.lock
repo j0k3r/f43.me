@@ -1822,16 +1822,16 @@
         },
         {
             "name": "j0k3r/graby",
-            "version": "2.2.5",
+            "version": "2.2.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/j0k3r/graby.git",
-                "reference": "e1154098851dd347002314445c18847655f5a289"
+                "reference": "c3a61f1eb35fbe96c99cedea66528698ff027574"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/j0k3r/graby/zipball/e1154098851dd347002314445c18847655f5a289",
-                "reference": "e1154098851dd347002314445c18847655f5a289",
+                "url": "https://api.github.com/repos/j0k3r/graby/zipball/c3a61f1eb35fbe96c99cedea66528698ff027574",
+                "reference": "c3a61f1eb35fbe96c99cedea66528698ff027574",
                 "shasum": ""
             },
             "require": {
@@ -1894,7 +1894,7 @@
             "description": "Graby helps you extract article content from web pages",
             "support": {
                 "issues": "https://github.com/j0k3r/graby/issues",
-                "source": "https://github.com/j0k3r/graby/tree/2.2.5"
+                "source": "https://github.com/j0k3r/graby/tree/2.2.6"
             },
             "funding": [
                 {
@@ -1902,20 +1902,20 @@
                     "type": "github"
                 }
             ],
-            "time": "2021-01-20T04:02:40+00:00"
+            "time": "2021-04-14T07:39:05+00:00"
         },
         {
             "name": "j0k3r/graby-site-config",
-            "version": "1.0.129",
+            "version": "1.0.130",
             "source": {
                 "type": "git",
                 "url": "https://github.com/j0k3r/graby-site-config.git",
-                "reference": "08f86475c9c14ce258d8d53a306262d8c7bdf2b2"
+                "reference": "db3536dc253d7b0c00d3a5f4df58c8690f936f0f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/j0k3r/graby-site-config/zipball/08f86475c9c14ce258d8d53a306262d8c7bdf2b2",
-                "reference": "08f86475c9c14ce258d8d53a306262d8c7bdf2b2",
+                "url": "https://api.github.com/repos/j0k3r/graby-site-config/zipball/db3536dc253d7b0c00d3a5f4df58c8690f936f0f",
+                "reference": "db3536dc253d7b0c00d3a5f4df58c8690f936f0f",
                 "shasum": ""
             },
             "require": {
@@ -1944,9 +1944,9 @@
             "description": "Graby site config files",
             "support": {
                 "issues": "https://github.com/j0k3r/graby-site-config/issues",
-                "source": "https://github.com/j0k3r/graby-site-config/tree/1.0.129"
+                "source": "https://github.com/j0k3r/graby-site-config/tree/1.0.130"
             },
-            "time": "2021-03-16T08:30:22+00:00"
+            "time": "2021-04-10T14:00:58+00:00"
         },
         {
             "name": "j0k3r/httplug-ssrf-plugin",
@@ -4169,16 +4169,16 @@
         },
         {
             "name": "smalot/pdfparser",
-            "version": "v0.18.2",
+            "version": "v0.19.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/smalot/pdfparser.git",
-                "reference": "b6db6aa9f605e9a82a29f1325309929a1e0beac0"
+                "reference": "1895c17417aefa4508e35836c46da61988d61f26"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/smalot/pdfparser/zipball/b6db6aa9f605e9a82a29f1325309929a1e0beac0",
-                "reference": "b6db6aa9f605e9a82a29f1325309929a1e0beac0",
+                "url": "https://api.github.com/repos/smalot/pdfparser/zipball/1895c17417aefa4508e35836c46da61988d61f26",
+                "reference": "1895c17417aefa4508e35836c46da61988d61f26",
                 "shasum": ""
             },
             "require": {
@@ -4217,9 +4217,9 @@
             ],
             "support": {
                 "issues": "https://github.com/smalot/pdfparser/issues",
-                "source": "https://github.com/smalot/pdfparser/tree/v0.18.2"
+                "source": "https://github.com/smalot/pdfparser/tree/v0.19.0"
             },
-            "time": "2021-02-25T07:40:30+00:00"
+            "time": "2021-04-13T08:27:56+00:00"
         },
         {
             "name": "stof/doctrine-extensions-bundle",
