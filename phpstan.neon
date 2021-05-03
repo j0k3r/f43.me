@@ -16,8 +16,6 @@ parameters:
         - '#Constructor of class App\\DomDocument\\XDOMElement has an unused parameter \$value.#'
         # Related to `getReference` in data fixtures
         - '#Parameter \#1 \$feed of class App\\Entity#'
-        # Related to `TestController` with `kernel.project_dir`
-        - '#site_config#'
 
     inferPrivatePropertyTypeFromConstructor: true
     checkMissingIterableValueType: false
