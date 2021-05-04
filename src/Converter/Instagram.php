@@ -9,7 +9,7 @@ use App\Extractor\Instagram as InstagramExtractor;
  */
 class Instagram extends AbstractConverter
 {
-    const IMAGE_CONTENT = '<img src="image_url" /></p><p>';
+    public const IMAGE_CONTENT = '<img src="image_url" /></p><p>';
 
     /** @var InstagramExtractor */
     private $instagramExtractor;
