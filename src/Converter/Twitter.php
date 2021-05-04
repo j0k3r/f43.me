@@ -10,7 +10,7 @@ use App\Extractor\Twitter as TwitterExtractor;
  */
 class Twitter extends AbstractConverter
 {
-    const IMAGE_CONTENT = '<img src="image_url" /></p><p>';
+    public const IMAGE_CONTENT = '<img src="image_url" /></p><p>';
 
     /** @var TwitterExtractor */
     private $twitterExtractor;
