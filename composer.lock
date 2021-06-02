@@ -1832,16 +1832,16 @@
         },
         {
             "name": "j0k3r/graby",
-            "version": "2.2.7",
+            "version": "2.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/j0k3r/graby.git",
-                "reference": "9e6e54da456826e2b27c5f8ab4fb7a89f3567d08"
+                "reference": "d92a6565b8644ecc623fc791e5e01e0187da99f0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/j0k3r/graby/zipball/9e6e54da456826e2b27c5f8ab4fb7a89f3567d08",
-                "reference": "9e6e54da456826e2b27c5f8ab4fb7a89f3567d08",
+                "url": "https://api.github.com/repos/j0k3r/graby/zipball/d92a6565b8644ecc623fc791e5e01e0187da99f0",
+                "reference": "d92a6565b8644ecc623fc791e5e01e0187da99f0",
                 "shasum": ""
             },
             "require": {
@@ -1853,7 +1853,7 @@
                 "j0k3r/httplug-ssrf-plugin": "^2.0",
                 "j0k3r/php-readability": "^1.2.3",
                 "monolog/monolog": "^1.18.0|^2.0",
-                "php": ">=7.1",
+                "php": ">=7.1.3",
                 "php-http/client-common": "^2.3",
                 "php-http/discovery": "^1.12",
                 "php-http/httplug": "^2.2",
@@ -1864,7 +1864,7 @@
                 "true/punycode": "^2.1"
             },
             "require-dev": {
-                "friendsofphp/php-cs-fixer": "^2.16",
+                "friendsofphp/php-cs-fixer": "^3.0",
                 "guzzlehttp/guzzle": "^6.3.0",
                 "php-http/guzzle6-adapter": "^2.0",
                 "php-http/mock-client": "^1.4",
@@ -1904,7 +1904,7 @@
             "description": "Graby helps you extract article content from web pages",
             "support": {
                 "issues": "https://github.com/j0k3r/graby/issues",
-                "source": "https://github.com/j0k3r/graby/tree/2.2.7"
+                "source": "https://github.com/j0k3r/graby/tree/2.3.0"
             },
             "funding": [
                 {
@@ -1912,20 +1912,20 @@
                     "type": "github"
                 }
             ],
-            "time": "2021-04-28T10:09:30+00:00"
+            "time": "2021-06-01T15:01:40+00:00"
         },
         {
             "name": "j0k3r/graby-site-config",
-            "version": "1.0.132",
+            "version": "1.0.133",
             "source": {
                 "type": "git",
                 "url": "https://github.com/j0k3r/graby-site-config.git",
-                "reference": "26bad84814415cd3eba0f08c2bfbb240f4e82f34"
+                "reference": "dcc32de72afe1398b41629ddb7659cfe4a5beb41"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/j0k3r/graby-site-config/zipball/26bad84814415cd3eba0f08c2bfbb240f4e82f34",
-                "reference": "26bad84814415cd3eba0f08c2bfbb240f4e82f34",
+                "url": "https://api.github.com/repos/j0k3r/graby-site-config/zipball/dcc32de72afe1398b41629ddb7659cfe4a5beb41",
+                "reference": "dcc32de72afe1398b41629ddb7659cfe4a5beb41",
                 "shasum": ""
             },
             "require": {
@@ -1954,9 +1954,9 @@
             "description": "Graby site config files",
             "support": {
                 "issues": "https://github.com/j0k3r/graby-site-config/issues",
-                "source": "https://github.com/j0k3r/graby-site-config/tree/1.0.132"
+                "source": "https://github.com/j0k3r/graby-site-config/tree/1.0.133"
             },
-            "time": "2021-05-04T08:13:00+00:00"
+            "time": "2021-06-01T13:30:16+00:00"
         },
         {
             "name": "j0k3r/httplug-ssrf-plugin",
@@ -2724,16 +2724,16 @@
         },
         {
             "name": "php-http/discovery",
-            "version": "1.13.0",
+            "version": "1.14.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-http/discovery.git",
-                "reference": "788f72d64c43dc361e7fcc7464c3d947c64984a7"
+                "reference": "778f722e29250c1fac0bbdef2c122fa5d038c9eb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-http/discovery/zipball/788f72d64c43dc361e7fcc7464c3d947c64984a7",
-                "reference": "788f72d64c43dc361e7fcc7464c3d947c64984a7",
+                "url": "https://api.github.com/repos/php-http/discovery/zipball/778f722e29250c1fac0bbdef2c122fa5d038c9eb",
+                "reference": "778f722e29250c1fac0bbdef2c122fa5d038c9eb",
                 "shasum": ""
             },
             "require": {
@@ -2750,8 +2750,7 @@
                 "puli/composer-plugin": "1.0.0-beta10"
             },
             "suggest": {
-                "php-http/message": "Allow to use Guzzle, Diactoros or Slim Framework factories",
-                "puli/composer-plugin": "Sets up Puli which is recommended for Discovery to work. Check http://docs.php-http.org/en/latest/discovery.html for more details."
+                "php-http/message": "Allow to use Guzzle, Diactoros or Slim Framework factories"
             },
             "type": "library",
             "extra": {
@@ -2787,9 +2786,9 @@
             ],
             "support": {
                 "issues": "https://github.com/php-http/discovery/issues",
-                "source": "https://github.com/php-http/discovery/tree/1.13.0"
+                "source": "https://github.com/php-http/discovery/tree/1.14.0"
             },
-            "time": "2020-11-27T14:49:42+00:00"
+            "time": "2021-06-01T14:30:21+00:00"
         },
         {
             "name": "php-http/guzzle6-adapter",
