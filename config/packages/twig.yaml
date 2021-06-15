@@ -5,3 +5,7 @@ twig:
     exception_controller: null
     globals:
         ga_tracking: "%env(GOOGLE_ANALYTICS_CODE)%"
+
+when@test:
+    twig:
+        strict_variables: true
