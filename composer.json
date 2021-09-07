@@ -36,7 +36,7 @@
         "php-http/httplug-bundle": "^1.14",
         "ricardoper/twitteroauth": "~1.0",
         "sensio/framework-extra-bundle": "^6.0",
-        "sentry/sentry-symfony": "^3.0",
+        "sentry/sentry-symfony": "^4.2",
         "simplepie/simplepie": "~1.4",
         "stof/doctrine-extensions-bundle": "~1.1",
         "symfony/amqp-messenger": "5.3.*",
