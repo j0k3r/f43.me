@@ -1906,16 +1906,16 @@
         },
         {
             "name": "j0k3r/graby",
-            "version": "2.3.1",
+            "version": "2.3.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/j0k3r/graby.git",
-                "reference": "75c825167145d2d41066a8322b7382442476787a"
+                "reference": "7514e82c7ad68231058af464897bf1608d218760"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/j0k3r/graby/zipball/75c825167145d2d41066a8322b7382442476787a",
-                "reference": "75c825167145d2d41066a8322b7382442476787a",
+                "url": "https://api.github.com/repos/j0k3r/graby/zipball/7514e82c7ad68231058af464897bf1608d218760",
+                "reference": "7514e82c7ad68231058af464897bf1608d218760",
                 "shasum": ""
             },
             "require": {
@@ -1978,7 +1978,7 @@
             "description": "Graby helps you extract article content from web pages",
             "support": {
                 "issues": "https://github.com/j0k3r/graby/issues",
-                "source": "https://github.com/j0k3r/graby/tree/2.3.1"
+                "source": "https://github.com/j0k3r/graby/tree/2.3.2"
             },
             "funding": [
                 {
@@ -1986,20 +1986,20 @@
                     "type": "github"
                 }
             ],
-            "time": "2021-10-05T12:26:30+00:00"
+            "time": "2021-10-29T20:36:21+00:00"
         },
         {
             "name": "j0k3r/graby-site-config",
-            "version": "1.0.137",
+            "version": "1.0.138",
             "source": {
                 "type": "git",
                 "url": "https://github.com/j0k3r/graby-site-config.git",
-                "reference": "3fc587b359233d367baff0ae5d425c531ccde732"
+                "reference": "97c692d8ca2b96410fcbf37474f0c3bd329dca55"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/j0k3r/graby-site-config/zipball/3fc587b359233d367baff0ae5d425c531ccde732",
-                "reference": "3fc587b359233d367baff0ae5d425c531ccde732",
+                "url": "https://api.github.com/repos/j0k3r/graby-site-config/zipball/97c692d8ca2b96410fcbf37474f0c3bd329dca55",
+                "reference": "97c692d8ca2b96410fcbf37474f0c3bd329dca55",
                 "shasum": ""
             },
             "require": {
@@ -2028,9 +2028,9 @@
             "description": "Graby site config files",
             "support": {
                 "issues": "https://github.com/j0k3r/graby-site-config/issues",
-                "source": "https://github.com/j0k3r/graby-site-config/tree/1.0.137"
+                "source": "https://github.com/j0k3r/graby-site-config/tree/1.0.138"
             },
-            "time": "2021-10-05T09:12:34+00:00"
+            "time": "2021-11-02T09:57:18+00:00"
         },
         {
             "name": "j0k3r/httplug-ssrf-plugin",
@@ -2165,16 +2165,16 @@
         },
         {
             "name": "j0k3r/php-readability",
-            "version": "1.2.7",
+            "version": "1.2.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/j0k3r/php-readability.git",
-                "reference": "9a490fac078b0f773c9848af1c6d76336a073a8d"
+                "reference": "8ce16632383c7792c442d837e2b4bc4fa82ac756"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/j0k3r/php-readability/zipball/9a490fac078b0f773c9848af1c6d76336a073a8d",
-                "reference": "9a490fac078b0f773c9848af1c6d76336a073a8d",
+                "url": "https://api.github.com/repos/j0k3r/php-readability/zipball/8ce16632383c7792c442d837e2b4bc4fa82ac756",
+                "reference": "8ce16632383c7792c442d837e2b4bc4fa82ac756",
                 "shasum": ""
             },
             "require": {
@@ -2186,7 +2186,7 @@
             "require-dev": {
                 "friendsofphp/php-cs-fixer": "^2.14",
                 "monolog/monolog": "^1.24|^2.1",
-                "symfony/phpunit-bridge": "^4.2.3"
+                "symfony/phpunit-bridge": "^4.4|^5.3"
             },
             "suggest": {
                 "ext-tidy": "Used to clean up given HTML and to avoid problems with bad HTML structure."
@@ -2236,7 +2236,7 @@
             ],
             "support": {
                 "issues": "https://github.com/j0k3r/php-readability/issues",
-                "source": "https://github.com/j0k3r/php-readability/tree/1.2.7"
+                "source": "https://github.com/j0k3r/php-readability/tree/1.2.8"
             },
             "funding": [
                 {
@@ -2244,7 +2244,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2021-03-09T10:14:29+00:00"
+            "time": "2021-10-29T14:24:41+00:00"
         },
         {
             "name": "jean85/pretty-package-versions",
