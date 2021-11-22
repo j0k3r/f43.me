@@ -4,16 +4,16 @@ namespace App\Tests\Controller;
 
 use Symfony\Bundle\FrameworkBundle\KernelBrowser;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
+use Symfony\Component\Security\Core\User\InMemoryUser;
 
 class FeedWebTestCase extends WebTestCase
 {
-    public function getAuthorizedClient(array $options = []): KernelBrowser
+    public function getAuthorizedClient(): KernelBrowser
     {
-        $options += [
-            'PHP_AUTH_USER' => 'admin',
-            'PHP_AUTH_PW' => 'adminpass',
-        ];
+        $client = static::createClient();
 
-        return static::createClient([], $options);
+        $client->loginUser(new InMemoryUser('admin', 'testadmin', ['ROLE_ADMIN']));
+
+        return $client;
     }
 }
