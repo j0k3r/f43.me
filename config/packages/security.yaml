@@ -1,40 +1,21 @@
 security:
-    encoders:
-        Symfony\Component\Security\Core\User\User:
-            algorithm: sha1
-            iterations: 1
-            encode_as_base64: false
-
-    role_hierarchy:
-        ROLE_ADMIN: [ROLE_ADMIN]
-
-    # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
+    enable_authenticator_manager: true
+    # https://symfony.com/doc/current/security.html#registering-the-user-hashing-passwords
+    password_hashers:
+        Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface: 'auto'
+    # https://symfony.com/doc/current/security.html#loading-the-user-the-user-provider
     providers:
-        in_memory:
-            memory:
-                users:
-                    admin: { password: "%env(ADMINPASS)%", roles: [ 'ROLE_ADMIN' ] }
-
+        users_in_memory: { memory: null }
     firewalls:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
-
-        test:
-            pattern:  ^/(_(profiler|wdt)|css|images|js)/
-            security: false
-
-        secured:
-            pattern: ^/
-            anonymous:  ~
-            form_login:
-                login_path: login
-                check_path: login_check
-                use_referer: true
-            logout: ~
+        main:
+            lazy: true
+            provider: users_in_memory
 
             # activate different ways to authenticate
-            # https://symfony.com/doc/current/security.html#firewalls-authentication
+            # https://symfony.com/doc/current/security.html#the-firewall
 
             # https://symfony.com/doc/current/security/impersonating_user.html
             # switch_user: true
@@ -42,7 +23,5 @@ security:
     # Easy way to control access for large sections of your site
     # Note: Only the *first* access control that matches will be used
     access_control:
-        - { path: ^/(.*)\.xml, roles: IS_AUTHENTICATED_ANONYMOUSLY}
-        - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY}
-        - { path: ^/feed/test, roles: IS_AUTHENTICATED_ANONYMOUSLY}
-        - { path: ^/(feed)|(logs)|(item)|(dashboard)|(login_check), roles: ROLE_ADMIN }
+        # - { path: ^/admin, roles: ROLE_ADMIN }
+        # - { path: ^/profile, roles: ROLE_USER }
