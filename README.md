@@ -112,7 +112,11 @@ For each external API that improvers / extractors / parsers use, you will need a
 
 ### Install
 
-The default password for the admin part is a sha1 of `adminpass`.
+You should generate a password using `php bin/console security:hash-password --empty-salt` and then create a `.env.local` with your hashed password:
+
+```
+ADMINPASS="MY_HASHED_PASSWORD"
+```
 
 Follow these steps:
 
