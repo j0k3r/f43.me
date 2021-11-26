@@ -4,7 +4,11 @@ namespace App\Tests\Command;
 
 use App\Command\FetchItemsCommand;
 use App\Content\Import;
+use App\Improver\ImproverChain;
 use App\Message\FeedSync;
+use App\Parser\ParserChain;
+use App\Repository\FeedRepository;
+use App\Repository\ItemRepository;
 use Monolog\Handler\TestHandler;
 use Monolog\Logger;
 use Symfony\Bundle\FrameworkBundle\Console\Application;
@@ -75,46 +79,46 @@ class FetchItemsCommandTest extends WebTestCase
         $logger->pushHandler($this->handler);
 
         /** @var \Symfony\Component\DependencyInjection\ContainerInterface */
-        $container = self::$kernel->getContainer();
+        $container = self::getContainer();
 
-        $container->get('app.parser.chain.test')->addParser(
-            $container->get('app.parser.internal.test'),
+        $container->get(ParserChain::class)->addParser(
+            $container->get('feed.parser.internal'),
             'internal'
         );
 
-        $container->get('app.parser.chain.test')->addParser(
-            $container->get('app.parser.external.test'),
+        $container->get(ParserChain::class)->addParser(
+            $container->get('feed.parser.external'),
             'external'
         );
 
-        $container->get('app.improver.chain.test')->addImprover(
-            $container->get('app.improver.default_improver.test'),
+        $container->get(ImproverChain::class)->addImprover(
+            $container->get('feed.improver.default_improver'),
             'default_improver'
         );
 
-        $container->get('app.improver.chain.test')->addImprover(
-            $container->get('app.improver.hackernews.test'),
+        $container->get(ImproverChain::class)->addImprover(
+            $container->get('feed.improver.hackernews'),
             'hackernews'
         );
 
         $import = new Import(
             $simplePieProxy,
-            $container->get('app.content.extractor.test'),
-            $container->get('event_dispatcher.test'),
-            $container->get('em.test'),
+            $container->get(\App\Content\Extractor::class),
+            $container->get('event_dispatcher'),
+            $container->get(\Doctrine\ORM\EntityManagerInterface::class),
             $logger,
-            $container->get('app.repository.feed.test'),
-            $container->get('app.repository.item.test')
+            $container->get(FeedRepository::class),
+            $container->get(ItemRepository::class)
         );
 
         $application = new Application(static::$kernel);
         $application->add(new FetchItemsCommand(
-            $container->get('app.repository.feed.test'),
-            $container->get('app.repository.item.test'),
+            $container->get(FeedRepository::class),
+            $container->get(ItemRepository::class),
             $import,
-            $container->get('router.test'),
+            $container->get('router'),
             'f43.me',
-            self::$kernel->getContainer()->get('messenger.transport.fetch_items.test'),
+            $container->get('messenger.transport.fetch_items'),
             $bus
         ));
 
@@ -181,7 +185,7 @@ class FetchItemsCommandTest extends WebTestCase
     public function testUsingQueue(): void
     {
         /** @var \Symfony\Component\DependencyInjection\ContainerInterface */
-        $container = self::$kernel->getContainer();
+        $container = self::getContainer();
 
         $bus = $this->getMockBuilder('Symfony\Component\Messenger\MessageBusInterface')
             ->disableOriginalConstructor()
@@ -201,10 +205,10 @@ class FetchItemsCommandTest extends WebTestCase
 
         $application = new Application(static::$kernel);
         $application->add(new FetchItemsCommand(
-            $container->get('app.repository.feed.test'),
-            $container->get('app.repository.item.test'),
+            $container->get(FeedRepository::class),
+            $container->get(ItemRepository::class),
             null,
-            $container->get('router.test'),
+            $container->get('router'),
             'f43.me',
             new AmqpTransport($connection),
             $bus
@@ -225,7 +229,7 @@ class FetchItemsCommandTest extends WebTestCase
     public function testCommandSyncAllUsersWithQueueFull(): void
     {
         /** @var \Symfony\Component\DependencyInjection\ContainerInterface */
-        $container = self::$kernel->getContainer();
+        $container = self::getContainer();
 
         $bus = $this->getMockBuilder('Symfony\Component\Messenger\MessageBusInterface')
             ->disableOriginalConstructor()
@@ -244,10 +248,10 @@ class FetchItemsCommandTest extends WebTestCase
 
         $application = new Application(static::$kernel);
         $application->add(new FetchItemsCommand(
-            $container->get('app.repository.feed.test'),
-            $container->get('app.repository.item.test'),
+            $container->get(FeedRepository::class),
+            $container->get(ItemRepository::class),
             null,
-            $container->get('router.test'),
+            $container->get('router'),
             'f43.me',
             new AmqpTransport($connection),
             $bus

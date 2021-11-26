@@ -19,13 +19,13 @@ class RemoveItemsCommandTest extends WebTestCase
         static::createClient();
 
         /** @var \Symfony\Component\DependencyInjection\ContainerInterface */
-        $container = self::$kernel->getContainer();
+        $container = self::getContainer();
 
         $application = new Application(static::$kernel);
         $application->add(new RemoveItemsCommand(
-            $container->get('app.repository.feed.test'),
-            $container->get('app.repository.item.test'),
-            $container->get('em.test')
+            $container->get(\App\Repository\FeedRepository::class),
+            $container->get(\App\Repository\ItemRepository::class),
+            $container->get(\Doctrine\ORM\EntityManagerInterface::class)
         ));
 
         $this->command = $application->find('feed:remove-items');
