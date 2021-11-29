@@ -10,7 +10,6 @@ framework:
         name: f43me
         cookie_secure: auto
         cookie_samesite: lax
-        # http://symfony.com/doc/current/reference/configuration/framework.html#handler-id
         storage_factory_id: session.storage.factory.native
         save_path: "%kernel.project_dir%/var/sessions/%kernel.environment%"
 
