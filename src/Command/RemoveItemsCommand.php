@@ -40,7 +40,7 @@ class RemoveItemsCommand extends Command
         ;
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $store = new FlockStore(sys_get_temp_dir());
         $factory = new LockFactory($store);
