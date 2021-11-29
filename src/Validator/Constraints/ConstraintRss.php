@@ -10,7 +10,7 @@ use Symfony\Component\Validator\Constraint;
  */
 class ConstraintRss extends Constraint
 {
-    public function validatedBy()
+    public function validatedBy(): string
     {
         return 'valid_rss';
     }
