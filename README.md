@@ -117,6 +117,12 @@ You should generate a password using `php bin/console security:hash-password --e
 ADMINPASS="MY_HASHED_PASSWORD"
 ```
 
+> ⚠️ Don't forget to escape _understable_ variable, ie: all `$` following by a letter will be interpreted as a variable in PHP. If your hashed password is `$2y$13$BvprBNLfp6eKHtqLyN1.w.z214Q5LMEvF9LKJTn44hrMIBt3pzwNW`, the `$BvprBNLfp6eKHtqLyN1` part will be interpreted as a variable by PHP. You must escape it in your `.env.local`:
+> 
+> ```
+> ADMINPASS="$2y$13\$BvprBNLfp6eKHtqLyN1.w.z214Q5LMEvF9LKJTn44hrMIBt3pzwNW"
+> ```
+
 Follow these steps:
 
 ```bash
