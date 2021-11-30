@@ -79,10 +79,6 @@ services:
         arguments:
             -
                 error_message: false
-                extractor:
-                    config_builder:
-                        site_config:
-                            - "%kernel.project_dir%/data/site_config"
         calls:
             - [ setLogger, [ "@logger" ] ]
         tags:
