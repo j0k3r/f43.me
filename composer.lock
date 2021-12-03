@@ -2100,16 +2100,16 @@
         },
         {
             "name": "j0k3r/php-imgur-api-client",
-            "version": "3.0.4",
+            "version": "3.0.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/j0k3r/php-imgur-api-client.git",
-                "reference": "f1dab939409bd8913be145083f0330edfb4afbec"
+                "reference": "52ebcfc9afb73d9b426d66fe666fb6aedb4a1692"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/j0k3r/php-imgur-api-client/zipball/f1dab939409bd8913be145083f0330edfb4afbec",
-                "reference": "f1dab939409bd8913be145083f0330edfb4afbec",
+                "url": "https://api.github.com/repos/j0k3r/php-imgur-api-client/zipball/52ebcfc9afb73d9b426d66fe666fb6aedb4a1692",
+                "reference": "52ebcfc9afb73d9b426d66fe666fb6aedb4a1692",
                 "shasum": ""
             },
             "require": {
@@ -2154,9 +2154,15 @@
             ],
             "support": {
                 "issues": "https://github.com/j0k3r/php-imgur-api-client/issues",
-                "source": "https://github.com/j0k3r/php-imgur-api-client/tree/3.0.4"
+                "source": "https://github.com/j0k3r/php-imgur-api-client/tree/3.0.5"
             },
-            "time": "2020-12-07T20:51:30+00:00"
+            "funding": [
+                {
+                    "url": "https://github.com/j0k3r",
+                    "type": "github"
+                }
+            ],
+            "time": "2021-12-03T09:11:46+00:00"
         },
         {
             "name": "j0k3r/php-readability",
