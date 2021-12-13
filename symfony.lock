@@ -150,12 +150,6 @@
     "laminas/laminas-code": {
         "version": "3.4.1"
     },
-    "laminas/laminas-eventmanager": {
-        "version": "3.2.1"
-    },
-    "laminas/laminas-zendframework-bridge": {
-        "version": "1.1.1"
-    },
     "masterminds/html5": {
         "version": "2.7.3"
     },

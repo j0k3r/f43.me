@@ -30,7 +30,7 @@
         "doctrine/orm": "^2.5",
         "j0k3r/graby": "dev-master",
         "j0k3r/php-imgur-api-client": "~4.0",
-        "laminas/laminas-code": "^3.4",
+        "laminas/laminas-code": "^4.5",
         "mnsami/composer-custom-directory-installer": "~2.0",
         "php-http/guzzle7-adapter": "^1.0",
         "php-http/httplug-bundle": "^1.14",
