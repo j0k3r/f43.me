@@ -16,7 +16,7 @@ class InternalTest extends TestCase
 
         $graby->expects($this->any())
             ->method('fetchContent')
-            ->willReturn(false);
+            ->willReturn([]);
 
         $internal = new Internal($graby);
         $this->assertEmpty($internal->parse('http://localhost'));
