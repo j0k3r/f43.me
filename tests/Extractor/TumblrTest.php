@@ -50,7 +50,7 @@ class TumblrTest extends AppTestCase
 
     public function testMatchNotTumblrUser(): void
     {
-        $client = self::getMockClient([(new Response(200, ['X-Tumblr-User' => null]))]);
+        $client = self::getMockClient([(new Response(200, ['X-Tumblr-User' => '']))]);
 
         $tumblr = new Tumblr('apikey');
         $tumblr->setClient($client);
