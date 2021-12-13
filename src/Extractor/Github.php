@@ -14,6 +14,8 @@ class Github extends AbstractExtractor
     /** @var string */
     protected $githubRepo;
     /** @var string */
+    protected $releaseTag;
+    /** @var string */
     protected $pullNumber;
     /** @var string */
     protected $issueNumber;
@@ -64,6 +66,16 @@ class Github extends AbstractExtractor
             return true;
         }
 
+        // find release
+        preg_match('/^\/([\w\d\.-]+)\/([\w\d\.-]+)\/releases\/(.*)/i', (string) $path, $matches);
+
+        if (4 === \count($matches)) {
+            $this->githubRepo = $matches[1] . '/' . $matches[2];
+            $this->releaseTag = $matches[3];
+
+            return true;
+        }
+
         return false;
     }
 
@@ -108,9 +120,7 @@ class Github extends AbstractExtractor
 
                 return '';
             }
-        }
-
-        if (null !== $this->issueNumber) {
+        } elseif (null !== $this->issueNumber) {
             try {
                 $request = $messageFactory
                     ->createRequest(
@@ -127,10 +137,36 @@ class Github extends AbstractExtractor
                     '<h2><a href="' . $data['html_url'] . '">' . $data['title'] . '</a></h2>' .
                     '<ul><li>by <a href="' . $data['user']['html_url'] . '">' . $data['user']['login'] . '</a></li>' .
                     '<li>on ' . date('d/m/Y', strtotime($data['created_at'])) . '</li>' .
-                    '<li>' . $data['comments'] . ' comments</li></ul></ul>' .
+                    '<li>' . $data['comments'] . ' comments</li></ul>' .
                     $data['body_html'] . '</div>';
             } catch (\Exception $e) {
                 $this->logger->error('Github (issue) extract failed for: ' . $this->githubRepo . ' & issue: ' . $this->issueNumber, [
+                    'exception' => $e,
+                ]);
+
+                return '';
+            }
+        } elseif (null !== $this->releaseTag) {
+            try {
+                $request = $messageFactory
+                    ->createRequest(
+                        'GET',
+                        'https://api.github.com/repos/' . $this->githubRepo . '/releases/tags/' . $this->releaseTag
+                    )
+                    ->withHeader('Accept', 'application/vnd.github.v3.html+json')
+                    ->withHeader('User-Agent', 'f43.me / Github Extractor')
+                ;
+                $response = $this->client->sendRequest($authentication->authenticate($request));
+                $data = $this->jsonDecode($response);
+
+                return '<div><em>Release on Github</em>' .
+                    '<h2><a href="' . $data['html_url'] . '">' . $data['name'] . ' (' . $data['tag_name'] . ')</a></h2>' .
+                    '<ul><li>repo <strong>' . $this->githubRepo . '</strong></li>' .
+                    '<li>on ' . date('d/m/Y', strtotime($data['published_at'])) . '</li>' .
+                    '<li>' . $data['reactions']['total_count'] . ' reactions</li></ul>' .
+                    $data['body_html'] . '</div>';
+            } catch (\Exception $e) {
+                $this->logger->error('Github (release) extract failed for: ' . $this->githubRepo . ' & release: ' . $this->releaseTag, [
                     'exception' => $e,
                 ]);
 
