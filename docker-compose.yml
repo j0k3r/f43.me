@@ -21,3 +21,12 @@ services:
     volumes:
       - ./:/usr/share/nginx/html
     command: ["bash", "/usr/share/nginx/html/docker/launch-f43me.sh"]
+
+###> doctrine/doctrine-bundle ###
+  database:
+    image: mariadb:10
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_PASSWORD:-root}
+    volumes:
+      - ./data/mysql:/var/lib/mysql:rw
+###< doctrine/doctrine-bundle ###
