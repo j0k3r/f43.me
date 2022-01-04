@@ -14,9 +14,7 @@
             {{ encore_entry_link_tags('app') }}
         {% endblock %}
 
-        {% block javascripts %}
-            {{ encore_entry_script_tags('app') }}
-        {% endblock %}
+        <script type="text/javascript"> function delayer() {window.location = "/"} </script>
     </head>
     <body>
         <nav class="container-fluid">
@@ -36,42 +34,12 @@
                 </li>
                 <li><strong>f43.me</strong> <small>readable &amp; cleaner feeds</small></li>
             </ul>
-
-            {% if app.user %}
-                <ul>
-                    <li><a href="{{ path('feed_dashboard') }}" class="{% if menu is defined and 'dashboard' == menu %}{% else %}secondary{% endif %}">Dashboard</a></li>
-                    <li><a href="{{ path('feed_homepage') }}" class="{% if menu is defined and 'feed' == menu %}{% else %}secondary{% endif %}">Feeds</a></li>
-                    <li><a href="{{ path('log_homepage') }}" class="{% if menu is defined and 'log' == menu %}{% else %}secondary{% endif %}">Feed logs</a></li>
-                    <li><a href="{{ path('feed_test') }}" class="{% if menu is defined and 'test' == menu %}{% else %}secondary{% endif %}">Test link</a></li>
-                    <li><a href="{{ path('feed_new') }}" class="{% if menu is defined and 'new' == menu %}{% else %}secondary{% endif %}">New feed</a></li>
-                    <li><a href="{{ path('logout') }}" class="secondary">Logout</a></li>
-                </ul>
-            {% else %}
-                <ul>
-                    <li><a href="{{ path('feed_test') }}" class="secondary">Test link</a></li>
-                    <li><a href="{{ path('login') }}" class="secondary">Login</a></li>
-                </ul>
-            {% endif %}
         </nav>
 
         <main class="container">
-            <div>
-                {% for flashMessage in app.session.flashbag.get('info') %}
-                    <p class="info">{{ flashMessage }}</p>
-                {% endfor %}
-
-                {% for flashMessage in app.session.flashbag.get('notice') %}
-                    <p class="success">{{ flashMessage }}</p>
-                {% endfor %}
-
-                {% for flashMessage in app.session.flashbag.get('error') %}
-                    <p class="error">{{ flashMessage }}</p>
-                {% endfor %}
-            </div>
-
-            {% block h_title %}{% endblock %}
-
-            {% block content %}{% endblock %}
+            <h3>Aw, shit!</h3>
+            <p>Looks like the page you're after doesn't exist. Guess you're going to have to go <a href="/">home</a> and try again!</p>
+            <p>You will be redirected momentarily...</p>
         </main>
 
         <script type="text/javascript">

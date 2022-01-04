@@ -54,6 +54,14 @@ jobs:
       - name: "Install dependencies with Composer"
         uses: "ramsey/composer-install@v1"
 
+      - name: "Install Node"
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+
+      - name: "Install dependencies with Yarn"
+        run: "yarn install && yarn dev"
+
       - name: "Setup messenger queue"
         run: "php bin/console messenger:setup-transports --env=dev"
 

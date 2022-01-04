@@ -12,9 +12,7 @@ class SecurityControllerTest extends FeedWebTestCase
 
         $this->assertSame(200, $client->getResponse()->getStatusCode());
         $this->assertCount(1, $crawler->filter('h1'));
-        $this->assertCount(0, $crawler->filter('h2'));
-        $this->assertCount(1, $legend = $crawler->filter('fieldset legend')->extract(['_text']));
-        $this->assertSame('Secured area', $legend[0]);
+        $this->assertCount(1, $crawler->filter('h2'));
         $this->assertCount(1, $crawler->filter('input[type=text]'));
         $this->assertCount(1, $crawler->filter('input[type=password]'));
         $this->assertCount(1, $crawler->filter('button[type=submit]'));
