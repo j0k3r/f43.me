@@ -68,7 +68,8 @@ class RemoveItemsCommand extends Command
         }
 
         // retrieve feed to work on
-        if ($slug = (string) $input->getOption('slug')) {
+        $slug = (string) $input->getOption('slug');
+        if ($slug) {
             $feed = $this->feedRepository->findOneBy(['slug' => $slug]);
             if (!$feed instanceof Feed) {
                 $lock->release();
