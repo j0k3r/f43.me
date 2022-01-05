@@ -42,7 +42,8 @@ class ParserChain
     public function parseAll(string $url): string
     {
         foreach ($this->parsers as $parser) {
-            if ($content = $parser->parse($url)) {
+            $content = $parser->parse($url);
+            if ($content) {
                 return $content;
             }
         }
