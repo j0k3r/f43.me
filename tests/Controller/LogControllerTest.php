@@ -29,9 +29,9 @@ class LogControllerTest extends FeedWebTestCase
 
         $this->assertSame(200, $client->getResponse()->getStatusCode());
         $this->assertCount(1, $crawler->filter('h1'));
-        $this->assertCount(1, $crawler->filter('h2.title'));
-        $this->assertGreaterThan(0, $crawler->filter('table.table-feedlogs tbody tr td img.favicon')->count());
-        $this->assertGreaterThan(0, $items = $crawler->filter('table.table-feedlogs tr td.items-count')->extract(['_text']));
+        $this->assertCount(1, $crawler->filter('h3'));
+        $this->assertGreaterThan(0, $crawler->filter('table tbody tr td img.favicon')->count());
+        $this->assertGreaterThan(0, $items = $crawler->filter('table tr td.items-count')->extract(['_text']));
 
         foreach ($items as $item) {
             $this->assertGreaterThan(0, $item);
@@ -54,10 +54,9 @@ class LogControllerTest extends FeedWebTestCase
         $crawler = $client->request('GET', '/feed/reddit/logs');
 
         $this->assertSame(200, $client->getResponse()->getStatusCode());
-        $this->assertCount(1, $crawler->filter('h2.title'));
-        $this->assertCount(2, $crawler->filter('a.secondary.button.radius.small'));
-        $this->assertCount(1, $crawler->filter('button.alert.button.radius.small'));
-        $this->assertGreaterThan(0, $crawler->filter('table.table-feedlogs tbody tr td')->count());
+        $this->assertCount(1, $crawler->filter('h3'));
+        $this->assertCount(1, $crawler->filter('button.alert'));
+        $this->assertGreaterThan(0, $crawler->filter('table tbody tr td')->count());
     }
 
     public function testDeleteAll(): void
@@ -74,7 +73,7 @@ class LogControllerTest extends FeedWebTestCase
         $this->assertStringContainsString('reddit', (string) $client->getResponse()->headers->get('location'));
 
         $crawler = $client->followRedirect();
-        $this->assertCount(1, $alert = $crawler->filter('div.alert-box')->extract(['_text']));
+        $this->assertCount(1, $alert = $crawler->filter('p.success')->extract(['_text']));
         $this->assertStringContainsString('logs deleted!', $alert[0]);
     }
 

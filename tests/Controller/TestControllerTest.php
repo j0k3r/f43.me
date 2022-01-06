@@ -12,7 +12,6 @@ class TestControllerTest extends FeedWebTestCase
 
         $this->assertSame(200, $client->getResponse()->getStatusCode());
         $this->assertCount(1, $crawler->filter('h1'));
-        $this->assertCount(1, $crawler->filter('h2.title'));
         $this->assertCount(1, $crawler->filter('input[type=url]'));
         $this->assertCount(1, $crawler->filter('input[type=hidden]'));
         $this->assertCount(1, $crawler->filter('select'));
@@ -33,7 +32,7 @@ class TestControllerTest extends FeedWebTestCase
         ]);
 
         $this->assertSame(200, $client->getResponse()->getStatusCode());
-        $this->assertCount(1, $crawler->filter('ul.no-bullet'));
+        $this->assertCount(1, $crawler->filter('details > div > ul'));
         $this->assertStringNotContainsString('We failed to make this item readable, the default text from the feed item will be displayed instead.', (string) $client->getResponse()->getContent());
     }
 
@@ -52,7 +51,6 @@ class TestControllerTest extends FeedWebTestCase
         ]);
 
         $this->assertSame(200, $client->getResponse()->getStatusCode());
-        $this->assertCount(1, $crawler->filter('ul.no-bullet'));
         $this->assertStringNotContainsString('We failed to make this item readable, the default text from the feed item will be displayed instead.', (string) $client->getResponse()->getContent());
     }
 
@@ -71,7 +69,6 @@ class TestControllerTest extends FeedWebTestCase
         ]);
 
         $this->assertSame(200, $client->getResponse()->getStatusCode());
-        $this->assertCount(1, $crawler->filter('ul.no-bullet'));
         $this->assertStringNotContainsString('We failed to make this item readable, the default text from the feed item will be displayed instead.', (string) $client->getResponse()->getContent());
     }
 }

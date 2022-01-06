@@ -1,49 +1,50 @@
 {% extends "base.html.twig" %}
 
-{% block h2_title %}Feeds <small>{{ feeds|length }} feeds</small>{% endblock %}
+{% block h_title %}
+    <hgroup>
+        <h1>Feeds</h1>
+        <h3>{{ feeds|length }} feeds</h3>
+    </hgroup>
+{% endblock %}
 
 {% block content %}
-<div class="row">
-    <div class="large-12 columns">
-        {% if feeds|length > 0 %}
-            <table class="table-feeds">
-                <thead>
-                    <tr>
-                        <th>Name</th>
-                        <th>Links</th>
-                        <th>Items</th>
-                        <th>Created</th>
-                        <th>Updated</th>
-                        <th>Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                {% for feed in feeds %}
-                    <tr>
-                        <td>
-                            {{ include('default/Feed/_favicon.html.twig', {'host': feed.host}) }}
-                            <a href="{{ path('feed_edit', { 'slug': feed.slug }) }}">{{ feed.name }}</a>
-                        </td>
-                        <td>
-                            <a href="{{ feed.link }}" rel="noreferrer" target="_blank">Official one</a> -
-                            <a href="{{ url('feed_xml', { 'slug': feed.slug }) }}" target="_blank">Readable one</a>
-                        </td>
-                        <td class="items-count">{{ feed.nbItems }}</td>
-                        <td>{{ feed.createdAt|date('d/m/y - H:i') }}</td>
-                        <td>{{ feed.updatedAt|date('d/m/y - H:i') }}</td>
-                        <td>
-                            <a href="{{ path('feed_edit', { 'slug': feed.slug }) }}">edit</a> -
-                            <a href="{{ path('item_homepage', { 'slug': feed.slug }) }}">items</a> -
-                            <a href="{{ path('log_feed', { 'slug': feed.slug }) }}">logs</a>
-                        </td>
-                    </tr>
-                {% endfor %}
-                </tbody>
-            </table>
-        {% else %}
-            <p>No feeds</p>
-        {% endif %}
-    </div>
-</div>
+    {% if feeds|length > 0 %}
+        <table role="grid">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Links</th>
+                    <th>Items</th>
+                    <th>Created</th>
+                    <th>Updated</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for feed in feeds %}
+                <tr>
+                    <td>
+                        {{ include('default/Feed/_favicon.html.twig', {'host': feed.host}) }}
+                        <a href="{{ path('feed_edit', { 'slug': feed.slug }) }}">{{ feed.name }}</a>
+                    </td>
+                    <td>
+                        <a href="{{ feed.link }}" rel="noreferrer" target="_blank">Official one</a> -
+                        <a href="{{ url('feed_xml', { 'slug': feed.slug }) }}" target="_blank">Readable one</a>
+                    </td>
+                    <td class="items-count">{{ feed.nbItems }}</td>
+                    <td>{{ feed.createdAt|date('d/m/y - H:i') }}</td>
+                    <td>{{ feed.updatedAt|date('d/m/y - H:i') }}</td>
+                    <td>
+                        <a href="{{ path('feed_edit', { 'slug': feed.slug }) }}">edit</a> -
+                        <a href="{{ path('item_homepage', { 'slug': feed.slug }) }}">items</a> -
+                        <a href="{{ path('log_feed', { 'slug': feed.slug }) }}">logs</a>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>No feeds</p>
+    {% endif %}
 
 {% endblock %}

@@ -1,94 +1,72 @@
 {% extends "base.html.twig" %}
 
-{% block h2_title %}
-    <span>f43.me <small>dashboard</small></span>
+{% block h_title %}
+    <h1>Dashboard</h1>
 {% endblock %}
 
 {% block content %}
-<div class="row">
-    <div class="large-5 columns">
-        <h3 class="subheader">Last items</h3>
+<h3>Last items</h3>
 
-        {% if historylogs|length > 0 %}
-            <div id="history-logs" style="height: 200px;"></div>
+{% if historylogs|length > 0 %}
+    <img src="https://quickchart.io/chart?c={type:'bar',data:{labels:[{% for date, number in historylogs %}'{{ date }}',{% endfor %}],datasets:[{label:'Feed items',data:[{% for date, number in historylogs %}{{ number }},{% endfor %}]}]}}" />
+{% endif %}
 
-            <script type="text/javascript">
-            Zepto(function($){
-                new Morris.Bar({
-                    element: 'history-logs',
-                    data: [
-                    {% for date, number in historylogs %}
-                        { x: '{{ date }}', y: {{ number }} },
-                        {% endfor %}
-                    ],
-                    xkey: 'x',
-                    ykeys: ['y'],
-                    labels: ['Items']
-                });
-            });
-            </script>
-        {% endif %}
+{% if feedlogs|length > 0 %}
+    <table role="grid" class="table-dashboard-feedlogs">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Items</th>
+                <th>Date</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for feedlog in feedlogs %}
+            <tr>
+                <td>
+                    <div>
+                        {{ include('default/Feed/_favicon.html.twig', {'host': feedlog.feed.host}) }}
+                        <a href="{{ path('feed_edit', { 'slug': feedlog.feed.slug }) }}">{{ feedlog.feed.name }}</a>
+                    </div>
+                </td>
+                <td class="items-count">{{ feedlog.itemsNumber }}</td>
+                <td class="time-ago" datetime="{{ feedlog.createdAt|date('r') }}">{{ feedlog.createdAt|date('d/m/y - H:i:s') }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% else %}
+    <p>No updated item.</p>
+{% endif %}
 
-        {% if feedlogs|length > 0 %}
-            <table class="table-dashboard-feedlogs">
-                <thead>
-                    <tr>
-                        <th>Name</th>
-                        <th>Items</th>
-                        <th>Date</th>
-                    </tr>
-                </thead>
-                <tbody>
-                {% for feedlog in feedlogs %}
-                    <tr>
-                        <td>
-                            <div>
-                                {{ include('default/Feed/_favicon.html.twig', {'host': feedlog.feed.host}) }}
-                                <a href="{{ path('feed_edit', { 'slug': feedlog.feed.slug }) }}">{{ feedlog.feed.name }}</a>
-                            </div>
-                        </td>
-                        <td class="items-count">{{ feedlog.itemsNumber }}</td>
-                        <td class="time-ago" title="{{ feedlog.createdAt|date('r') }}">{{ feedlog.createdAt|date('d/m/y - H:i:s') }}</td>
-                    </tr>
-                {% endfor %}
-                </tbody>
-            </table>
-        {% else %}
-            <p>No updated item.</p>
-        {% endif %}
-    </div>
-
-    <div class="large-7 columns hide-for-small">
-        <h3 class="subheader">Last updated feeds</h3>
-        {% if feeds|length > 0 %}
-            <table class="table-dashboard-feeds">
-                <thead>
-                    <tr>
-                        <th>Name</th>
-                        <th>Link</th>
-                        <th>Items</th>
-                        <th>Date</th>
-                    </tr>
-                </thead>
-                <tbody>
-                {% for feed in feeds %}
-                    <tr>
-                        <td>
-                            {{ include('default/Feed/_favicon.html.twig', {'host': feed.host}) }}
-                            <a href="{{ path('feed_edit', { 'slug': feed.slug }) }}">{{ feed.name }}</a>
-                        </td>
-                        <td><div>{{ feed.host }}</div></td>
-                        <td class="items-count">{{ feed.nbItems }}</td>
-                        <td>{{ feed.createdAt|date('d/m/y - H:i') }}</td>
-                    </tr>
-                {% endfor %}
-                </tbody>
-            </table>
-        {% else %}
-            <p>No update.</p>
-        {% endif %}
-    </div>
-</div>
+<h3>Last updated feeds</h3>
+{% if feeds|length > 0 %}
+    <table role="grid" class="table-dashboard-feeds">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Link</th>
+                <th>Items</th>
+                <th>Date</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for feed in feeds %}
+            <tr>
+                <td>
+                    {{ include('default/Feed/_favicon.html.twig', {'host': feed.host}) }}
+                    <a href="{{ path('feed_edit', { 'slug': feed.slug }) }}">{{ feed.name }}</a>
+                </td>
+                <td><div>{{ feed.host }}</div></td>
+                <td class="items-count">{{ feed.nbItems }}</td>
+                <td>{{ feed.createdAt|date('d/m/y - H:i') }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% else %}
+    <p>No update.</p>
+{% endif %}
 
 <script src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.2/raphael-min.js" type="text/javascript"></script>
 <script src="/build/morris.js" type="text/javascript"></script>

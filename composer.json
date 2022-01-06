@@ -25,7 +25,6 @@
         "php": "^7.4",
         "beberlei/doctrineextensions": "^1.2",
         "composer/package-versions-deprecated": "^1.11",
-        "custom-zurb/foundation": "4.3.2",
         "doctrine/doctrine-bundle": "^2.0",
         "doctrine/orm": "^2.5",
         "j0k3r/graby": "dev-master",
@@ -51,6 +50,7 @@
         "symfony/translation": "5.4.*",
         "symfony/twig-bundle": "5.4.*",
         "symfony/validator": "5.4.*",
+        "symfony/webpack-encore-bundle": "^1.13",
         "symfony/yaml": "5.4.*",
         "twig/extra-bundle": "^2.12|^3.0",
         "twig/twig": "^2.12|^3.0"
@@ -96,28 +96,10 @@
         "sort-packages": true
     },
     "extra": {
-        "installer-paths": {
-            "./templates/lib/foundation/": [
-                "custom-zurb/foundation"
-            ]
-        },
         "symfony": {
             "allow-contrib": true,
             "require": "5.4.*",
             "docker": true
         }
-    },
-    "repositories": [
-        {
-            "type": "package",
-            "package": {
-                "name": "custom-zurb/foundation",
-                "version": "4.3.2",
-                "dist": {
-                    "url": "https://wildtrip.s3-eu-west-1.amazonaws.com/foundation-sites-4.3.2.zip",
-                    "type": "zip"
-                }
-            }
-        }
-    ]
+    }
 }

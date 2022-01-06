@@ -8,12 +8,12 @@
 {# - Display errors below widgets. #}
 {% block form_row %}
 {% apply spaceless %}
-    {% set attr = (errors|length > 0 ? attr|merge({ class: 'error' }) : attr) %}
+    {% set attr = (errors|length > 0 ? attr|merge({ 'aria-invalid': 'true' }) : attr) %}
     <div class="row">
-        <div class="small-3 columns">
+        <div>
             {{ form_label(form) }}
         </div>
-        <div class="small-9 columns">
+        <div>
             {{ form_widget(form, { attr: attr }) }}
             {{ form_errors(form) }}
         </div>

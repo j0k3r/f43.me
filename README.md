@@ -97,6 +97,7 @@ You can find some of them in the [converter folder](https://github.com/j0k3r/f43
 ### Requirements
 
  - PHP >= 7.4 (with `pdo_mysql`)
+ - Nodejs 14 (for assets)
  - MySQL >= 5.7
  - [RabbitMQ](https://www.rabbitmq.com/), which is optional (see below)
  - [Supervisor](http://supervisord.org/) (only if you use RabbitMQ)
@@ -118,7 +119,7 @@ ADMINPASS="MY_HASHED_PASSWORD"
 ```
 
 > ⚠️ Don't forget to escape _understable_ variable, ie: all `$` following by a letter will be interpreted as a variable in PHP. If your hashed password is `$2y$13$BvprBNLfp6eKHtqLyN1.w.z214Q5LMEvF9LKJTn44hrMIBt3pzwNW`, the `$BvprBNLfp6eKHtqLyN1` part will be interpreted as a variable by PHP. You must escape it in your `.env.local`:
-> 
+>
 > ```
 > ADMINPASS="$2y$13\$BvprBNLfp6eKHtqLyN1.w.z214Q5LMEvF9LKJTn44hrMIBt3pzwNW"
 > ```
@@ -129,9 +130,9 @@ Follow these steps:
 git clone git@github.com:j0k3r/f43.me.git
 cd f43.me
 SYMFONY_ENV=prod composer install -o --no-dev
-npm install
+yarn install
 php bin/console doctrine:schema:create --env=prod
-./node_modules/gulp/bin/gulp.js
+yarn encore production
 ```
 
 #### Without RabbitMQ

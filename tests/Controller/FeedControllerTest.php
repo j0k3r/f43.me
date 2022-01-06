@@ -15,9 +15,7 @@ class FeedControllerTest extends FeedWebTestCase
         $this->assertSame(200, $client->getResponse()->getStatusCode());
         $this->assertGreaterThan(0, $crawler->filter('html:contains("f43.me")')->count());
 
-        $this->assertCount(1, $crawler->filter('h1'));
-        $this->assertCount(1, $crawler->filter('h2.title'));
-        $this->assertCount(2, $crawler->filter('h2.subheader'));
+        $this->assertCount(2, $crawler->filter('h2'));
         $this->assertGreaterThan(0, $crawler->filter('tr td img.favicon')->count());
 
         // private field won't show up
@@ -53,12 +51,11 @@ class FeedControllerTest extends FeedWebTestCase
 
         $this->assertSame(200, $client->getResponse()->getStatusCode());
         $this->assertCount(1, $crawler->filter('h1'));
-        $this->assertCount(1, $crawler->filter('h2.title'));
-        $this->assertCount(2, $crawler->filter('h3.subheader'));
-        $this->assertCount(1, $crawler->filter('ul.left'));
-        $this->assertCount(9, $crawler->filter('ul.left li'));
-        $this->assertCount(1, $crawler->filter('ul.left li.active'));
-        $this->assertCount(1, $logout = $crawler->filter('ul.right li.has-form a.alert')->extract(['_text']));
+        $this->assertCount(2, $crawler->filter('h3'));
+        $this->assertCount(2, $crawler->filter('ul'));
+        $this->assertCount(8, $crawler->filter('ul li'));
+        $this->assertCount(5, $crawler->filter('ul li a.secondary'));
+        $this->assertCount(1, $logout = $crawler->filter('nav.container-fluid ul')->last()->filter('li')->last()->extract(['_text']));
         $this->assertSame('Logout', $logout[0]);
         $this->assertGreaterThan(0, $crawler->filter('table.table-dashboard-feeds tbody tr td img.favicon')->count());
         $this->assertGreaterThan(0, $items = $crawler->filter('table.table-dashboard-feeds tr td.items-count')->extract(['_text']));
@@ -82,9 +79,9 @@ class FeedControllerTest extends FeedWebTestCase
 
         $this->assertSame(200, $client->getResponse()->getStatusCode());
         $this->assertCount(1, $crawler->filter('h1'));
-        $this->assertCount(1, $crawler->filter('h2.title'));
-        $this->assertGreaterThan(0, $crawler->filter('table.table-feeds tbody tr td img.favicon')->count());
-        $this->assertGreaterThan(0, $items = $crawler->filter('table.table-feeds tr td.items-count')->extract(['_text']));
+        $this->assertCount(1, $crawler->filter('h3'));
+        $this->assertGreaterThan(0, $crawler->filter('table tbody tr td img.favicon')->count());
+        $this->assertGreaterThan(0, $items = $crawler->filter('table tr td.items-count')->extract(['_text']));
 
         foreach ($items as $item) {
             $this->assertGreaterThanOrEqual(0, $item);
@@ -99,7 +96,6 @@ class FeedControllerTest extends FeedWebTestCase
 
         $this->assertSame(200, $client->getResponse()->getStatusCode());
         $this->assertCount(1, $crawler->filter('h1'));
-        $this->assertCount(1, $crawler->filter('h2.title'));
         $this->assertCount(1, $crawler->filter('form.custom'));
         $this->assertCount(3, $crawler->filter('input[type=text]'));
         $this->assertCount(2, $crawler->filter('input[type=url]'));
@@ -121,7 +117,7 @@ class FeedControllerTest extends FeedWebTestCase
         $crawler = $client->submit($form);
 
         $this->assertSame(200, $client->getResponse()->getStatusCode());
-        $this->assertCount(1, $alert = $crawler->filter('div.alert-box')->extract(['_text']));
+        $this->assertCount(1, $alert = $crawler->filter('p.error')->extract(['_text']));
         $this->assertSame('Form is invalid.', $alert[0]);
         $this->assertGreaterThanOrEqual(1, \count($crawler->filter('small.error')));
     }
@@ -160,7 +156,7 @@ class FeedControllerTest extends FeedWebTestCase
         $crawler = $client->submit($form, $data);
 
         $this->assertSame(200, $client->getResponse()->getStatusCode());
-        $this->assertCount(1, $alert = $crawler->filter('div.alert-box')->extract(['_text']));
+        $this->assertCount(1, $alert = $crawler->filter('p.error')->extract(['_text']));
         $this->assertSame('Form is invalid.', $alert[0]);
         $this->assertGreaterThanOrEqual(1, \count($crawler->filter('small.error')));
     }
@@ -183,7 +179,7 @@ class FeedControllerTest extends FeedWebTestCase
         $this->assertStringContainsString('google-news', (string) $location);
 
         $crawler = $client->followRedirect();
-        $this->assertCount(1, $alert = $crawler->filter('div.alert-box')->extract(['_text']));
+        $this->assertCount(1, $alert = $crawler->filter('p.success')->extract(['_text']));
         $this->assertSame('Feed created!', $alert[0]);
     }
 
@@ -205,8 +201,8 @@ class FeedControllerTest extends FeedWebTestCase
 
         $this->assertSame(200, $client->getResponse()->getStatusCode());
         $this->assertCount(1, $crawler->filter('h1'));
-        $this->assertCount(1, $crawler->filter('h2.title'));
-        $this->assertCount(2, $crawler->filter('h3.subheader'));
+        $this->assertCount(1, $crawler->filter('h3'));
+        $this->assertCount(3, $crawler->filter('h4'));
         $this->assertCount(1, $crawler->filter('form.custom'));
         // 2 normal + 2 disabled on the right
         $this->assertCount(5, $crawler->filter('form.custom input[type=text]'));
@@ -219,7 +215,7 @@ class FeedControllerTest extends FeedWebTestCase
         $this->assertCount(2, $crawler->filter('form.custom input[disabled=disabled]'));
 
         $this->assertCount(1, $crawler->filter('img.favicon'));
-        $this->assertCount(5, $crawler->filter('span.info'));
+        $this->assertGreaterThanOrEqual(5, $crawler->filter('span')->count());
         $this->assertCount(1, $crawler->filter('iframe.pubsubhubbub'));
     }
 
@@ -254,7 +250,7 @@ class FeedControllerTest extends FeedWebTestCase
         $crawler = $client->submit($form, $data);
 
         $this->assertSame(200, $client->getResponse()->getStatusCode());
-        $this->assertCount(1, $alert = $crawler->filter('div.alert-box')->extract(['_text']));
+        $this->assertCount(1, $alert = $crawler->filter('p.error')->extract(['_text']));
         $this->assertSame('Form is invalid.', $alert[0]);
         // url invalid + feed invalid
         $this->assertGreaterThanOrEqual(1, $crawler->filter('small.error')->count());
@@ -278,7 +274,7 @@ class FeedControllerTest extends FeedWebTestCase
         $this->assertStringContainsString('bonjour-madame', (string) $client->getResponse()->headers->get('location'));
 
         $crawler = $client->followRedirect();
-        $this->assertCount(1, $alert = $crawler->filter('div.alert-box')->extract(['_text']));
+        $this->assertCount(1, $alert = $crawler->filter('p.success')->extract(['_text']));
         $this->assertSame('Feed updated!', $alert[0]);
     }
 
@@ -333,7 +329,7 @@ class FeedControllerTest extends FeedWebTestCase
         $this->assertSame(302, $client->getResponse()->getStatusCode());
 
         $crawler = $client->followRedirect();
-        $this->assertCount(1, $alert = $crawler->filter('div.alert-box')->extract(['_text']));
+        $this->assertCount(1, $alert = $crawler->filter('p.success')->extract(['_text']));
         $this->assertSame('Feed deleted!', $alert[0]);
     }
 

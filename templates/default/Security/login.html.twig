@@ -1,61 +1,30 @@
-<!DOCTYPE html>
-<!--[if IE 8]>         <html class="no-js lt-ie9" lang="en" > <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+{% extends "base.html.twig" %}
 
-<head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width" />
-    <title>f43.me</title>
+{% block h_title %}{% endblock %}
 
-    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+{% block stylesheets %}
+    {{ parent() }}
+    {{ encore_entry_link_tags('login') }}
+{% endblock %}
 
-    <link rel="stylesheet" href="/build/main.css" />
+{% block content %}
+<article class="grid">
+    <div>
+        <hgroup>
+            <h1>Sign in</h1>
+            <h2>This is a secured area</h2>
+        </hgroup>
 
-    <script type="text/javascript" src="/build/zepto.modernizr.js"></script>
-</head>
-<body>
-    <nav class="top-bar">
-        <ul class="title-area">
-            <li class="name">
-                <h1><a href="{{ path('feed_publicview') }}">f43.me</a></h1>
-            </li>
-            <li class="toggle-topbar menu-icon"><a href="#"><span></span></a></li>
-        </ul>
+        {% if error %}
+            <p class="error">{{ error.message }}</p>
+        {% endif %}
 
-        <section class="top-bar-section">
-            <ul class="right">
-                <li class="has-form">
-                    <a class="success button" href="{{ path('login') }}">Login</a>
-                </li>
-            </ul>
-        </section>
-    </nav>
-
-    <div class="row">
-        <div class="large-5 large-centered columns">
-            <fieldset>
-                <legend>Secured area</legend>
-                {% if error %}
-                    <div data-alert class="alert-box alert radius">{{ error.message }}</div>
-                {% endif %}
-
-                <form action="{{ path('login_check') }}" method="post" class="custom">
-                    <label for="username">Username:</label>
-                    <input type="text" id="username" name="_username" value="{{ last_username }}" />
-
-                    <label for="password">Password:</label>
-                    <input type="password" id="password" name="_password" />
-
-                    <button class="button expand" type="submit">Login</button>
-                </form>
-            </fieldset>
-        </div>
+        <form action="{{ path('login_check') }}" method="post">
+            <input type="text" id="username" name="_username" placeholder="Login" aria-label="Login" autocomplete="nickname" required value="{{ last_username }}">
+            <input type="password" id="password" name="_password" placeholder="Password" aria-label="Password" autocomplete="current-password" required>
+            <button type="submit" class="contrast">Login</button>
+        </form>
     </div>
-
-    <script type="text/javascript" src="/build/foundation.app.js"></script>
-
-    <script>
-        $(document).foundation();
-    </script>
-</body>
-</html>
+    <div></div>
+</article>
+{% endblock %}

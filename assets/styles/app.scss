@@ -1,0 +1,135 @@
+// Override default variables
+// $primary-500: #e91e63;
+// $primary-600: #d81b60;
+// $primary-700: #c2185b;
+$del-color: #e53935;
+$del-hover: #d32f2f;
+
+@import "~@picocss/pico/scss/pico.scss";
+
+// Light theme (Default)
+// Can be forced with data-theme="light"
+[data-theme="light"],
+:root:not([data-theme="dark"]) {
+  --nav-background-color: #{rgba($white, 0.7)};
+  --nav-border-color: #{rgba($grey-500, 0.2)};
+  --nav-logo-color: #{$white};
+
+  --custom-del-color: #{$del-color};
+  --custom-del-hover: #{$del-hover};
+}
+
+// Dark theme
+@mixin dark {
+  --nav-background-color: #{rgba(darken($grey-900, 6%), 0.8)};
+  --nav-border-color: #{rgba($grey-500, 0.2)};
+}
+
+body>nav {
+    -webkit-backdrop-filter: saturate(180%) blur(20px);
+    z-index: 99;
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    backdrop-filter: saturate(180%) blur(20px);
+    background-color: var(--nav-background-color);
+    box-shadow: 0 1px 0 var(--nav-border-color);
+
+    &.container-fluid {
+        padding-right: calc(var(--spacing) + var(--scrollbar-width, 0px));
+    }
+
+    svg {
+        vertical-align: text-bottom;
+    }
+
+    // Band & Title
+    ul:first-of-type li {
+        // Brand
+        &:first-of-type {
+            a {
+                width: 4.5rem;
+                height: 3.5rem;
+                margin-left: calc(var(--spacing) * -1);
+                padding: 0;
+                color: var(--nav-logo-color);
+
+                svg {
+                    margin-left: var(--spacing);
+                    margin-top: calc(var(--spacing) * 0.6);
+                    height: 2.5rem;
+                }
+            }
+        }
+
+        // Title
+        &:nth-of-type(2) {
+            display: none;
+            color: var(--h1-color);
+
+            @media (min-width: map-get($breakpoints, "lg")) {
+                display: inline;
+            }
+        }
+    }
+}
+
+body>main {
+    padding-top: calc(var(--block-spacing-vertical) + 4rem);
+}
+
+@media (min-width: 1200px) {
+    body>main {
+        padding-top: calc(var(--block-spacing-vertical) + 2rem);
+    }
+}
+
+p.error, span.error, small.error {
+    color: var(--custom-del-color);
+}
+
+p.success, span.success, small.success {
+    color: var(--ins-color);
+}
+
+p.info, span.info, small.info {
+    color: var(--mark-color);
+}
+
+button.alert {
+    --background-color: var(--custom-del-color);
+    --border-color: var(--custom-del-color);
+    --color: var(--primary-inverse);
+    border: var(--border-width) solid var(--border-color);
+}
+
+button.alert:active, button.alert:focus, button.alert:hover {
+    --background-color: var(--custom-del-hover);
+    --border-color: var(--custom-del-hover);
+    --box-shadow: var(--button-hover-box-shadow, 0 0 0 rgba(0, 0, 0, 0));
+}
+
+form.delete_form {
+    margin-bottom: 0;
+
+    button {
+        margin-bottom: 0;
+    }
+}
+
+iframe.pubsubhubbub {
+    width: 100%;
+    height: 600px;
+}
+
+#siteconfig {
+    textarea {
+        height: 15em;
+    }
+}
+
+#modal-preview-item {
+    overflow-y: scroll;
+    align-items: flex-start;
+}
