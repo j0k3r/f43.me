@@ -924,10 +924,10 @@
     error-stack-parser "^2.0.0"
     string-width "^4.2.3"
 
-"@picocss/pico@^1.4.3":
-  version "1.4.3"
-  resolved "https://registry.yarnpkg.com/@picocss/pico/-/pico-1.4.3.tgz#df8ed5d0f8e184a672d56e5d57d416c6e585482a"
-  integrity sha512-tKQAYkyk24qTbnwgbFvtytnwr/D/BpIwAiQsFq5GIXGKvTpW+JSfJa7jv7Ovn92zwUMnr9mWtdvzijtdjX4WHg==
+"@picocss/pico@^1.4.4":
+  version "1.4.4"
+  resolved "https://registry.yarnpkg.com/@picocss/pico/-/pico-1.4.4.tgz#7d588ed8df26d261b53e26273f18080b58415f1d"
+  integrity sha512-MuL4MOY1Tugf91N06mhYETVqMiNeT9gObMJ0WNrnbSGBw61gsqXzn7ScjXvVpnQmFC8DP13mluzz1s+ogpiuEQ==
 
 "@symfony/webpack-encore@^1.7.0":
   version "1.7.0"
