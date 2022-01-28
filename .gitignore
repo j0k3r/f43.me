@@ -1,6 +1,4 @@
-/build/
 /coverage/
-/build/
 /.sass-cache
 /node_modules/
 /bin/*
