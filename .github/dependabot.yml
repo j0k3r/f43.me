@@ -6,10 +6,11 @@ updates:
     interval: daily
   open-pull-requests-limit: 10
   ignore:
-  - dependency-name: symfony/phpunit-bridge
-    versions:
-    - ">= 4.4.a"
-    - "< 4.5"
   - dependency-name: ricardoper/twitteroauth
     versions:
     - "> 1.1.1"
+- package-ecosystem: npm
+  directory: "/"
+  schedule:
+    interval: daily
+  open-pull-requests-limit: 10
