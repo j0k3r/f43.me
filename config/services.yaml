@@ -77,7 +77,7 @@ services:
         class: Graby\Graby
         arguments:
             -
-                error_message: false
+                error_message: ''
         calls:
             - [ setLogger, [ "@logger" ] ]
         tags:
