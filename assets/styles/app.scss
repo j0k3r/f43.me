@@ -44,12 +44,21 @@ body>nav {
         vertical-align: text-bottom;
     }
 
+    li {
+        padding: calc(var(--nav-element-spacing-vertical)/6) var(--nav-element-spacing-horizontal);
+    }
+
+    li > * {
+        // because it's now 0 in PicoCSS ...
+        --spacing: 1rem;
+    }
+
     // Band & Title
     ul:first-of-type li {
         // Brand
         &:first-of-type {
             a {
-                width: 4.5rem;
+                width: 4rem;
                 height: 3.5rem;
                 margin-left: calc(var(--spacing) * -1);
                 padding: 0;
