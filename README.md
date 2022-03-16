@@ -19,6 +19,8 @@ Anyway, it's simple:
  * store it
  * create a new feed with readable items
 
+![f43.me screenshot](https://user-images.githubusercontent.com/62333/158586771-2137ea59-e882-4f89-9dd4-5eb657b843c5.png)
+
 ## Contents
 
 <!-- MarkdownTOC autolink="true" -->
@@ -132,7 +134,7 @@ cd f43.me
 SYMFONY_ENV=prod composer install -o --no-dev
 yarn install
 php bin/console doctrine:schema:create --env=prod
-yarn encore production
+yarn build
 ```
 
 #### Without RabbitMQ
