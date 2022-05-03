@@ -13,7 +13,7 @@
         "timeago.js": "^4.0.2"
     },
     "devDependencies": {
-        "@symfony/webpack-encore": "^1.8.2",
+        "@symfony/webpack-encore": "^2.0.0",
         "core-js": "^3.22.4",
         "regenerator-runtime": "^0.13.2",
         "sass": "^1.51.0",
