@@ -14,7 +14,7 @@
     },
     "devDependencies": {
         "@symfony/webpack-encore": "^2.1.0",
-        "core-js": "^3.22.4",
+        "core-js": "^3.22.5",
         "regenerator-runtime": "^0.13.2",
         "sass": "^1.51.0",
         "sass-loader": "^12.6.0",
