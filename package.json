@@ -17,7 +17,7 @@
         "core-js": "^3.22.5",
         "regenerator-runtime": "^0.13.2",
         "sass": "^1.51.0",
-        "sass-loader": "^12.6.0",
+        "sass-loader": "^13.0.0",
         "webpack-notifier": "^1.6.0"
     }
 }
