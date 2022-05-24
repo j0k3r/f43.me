@@ -1057,10 +1057,10 @@
     error-stack-parser "^2.0.0"
     string-width "^4.2.3"
 
-"@picocss/pico@^1.5.1":
-  version "1.5.1"
-  resolved "https://registry.yarnpkg.com/@picocss/pico/-/pico-1.5.1.tgz#62052b7977fa21836002cf3ab0a420ffe3098aca"
-  integrity sha512-DMtPI1MwrfSs6C+JJiUyX30eOgEYCrGlGcOXtoE5HL245qbVbzcH8/HGeuZEg7YXqlnk6a3A/A/67w9lyyoVgA==
+"@picocss/pico@^1.5.2":
+  version "1.5.2"
+  resolved "https://registry.yarnpkg.com/@picocss/pico/-/pico-1.5.2.tgz#f04d1d3bc8957586dbab29b23c8fdecb418f6d5e"
+  integrity sha512-Y7LepVImg0CmRDT4W3iiO7SzGcB0MgGWoHCmn72fIZgFRQHck/LgnYb2S5lwmJPncMssPta1UwKxVQacadoaqw==
 
 "@symfony/webpack-encore@^2.1.0":
   version "2.1.0"
