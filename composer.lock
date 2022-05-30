@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "f76ad39d194eaacdd8c298514a6fccbb",
+    "content-hash": "7b24220f46ed4e49060c175594dd2823",
     "packages": [
         {
             "name": "beberlei/doctrineextensions",
@@ -11073,16 +11073,16 @@
         },
         {
             "name": "symfony/phpunit-bridge",
-            "version": "v6.0.8",
+            "version": "v6.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/phpunit-bridge.git",
-                "reference": "4959a1eedd473bdb3f19db5b1525d5415dfab471"
+                "reference": "092ccc3b364925cd8ed6046bc31dcf3a022bd5a4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/phpunit-bridge/zipball/4959a1eedd473bdb3f19db5b1525d5415dfab471",
-                "reference": "4959a1eedd473bdb3f19db5b1525d5415dfab471",
+                "url": "https://api.github.com/repos/symfony/phpunit-bridge/zipball/092ccc3b364925cd8ed6046bc31dcf3a022bd5a4",
+                "reference": "092ccc3b364925cd8ed6046bc31dcf3a022bd5a4",
                 "shasum": ""
             },
             "require": {
@@ -11136,7 +11136,7 @@
             "description": "Provides utilities for PHPUnit, especially user deprecation notices management",
             "homepage": "https://symfony.com",
             "support": {
-                "source": "https://github.com/symfony/phpunit-bridge/tree/v6.0.8"
+                "source": "https://github.com/symfony/phpunit-bridge/tree/v6.1.0"
             },
             "funding": [
                 {
@@ -11152,7 +11152,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2022-04-12T16:11:42+00:00"
+            "time": "2022-04-12T16:22:53+00:00"
         },
         {
             "name": "symfony/process",
