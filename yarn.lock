@@ -956,10 +956,10 @@
     error-stack-parser "^2.0.0"
     string-width "^4.2.3"
 
-"@picocss/pico@^1.5.2":
-  version "1.5.2"
-  resolved "https://registry.yarnpkg.com/@picocss/pico/-/pico-1.5.2.tgz#f04d1d3bc8957586dbab29b23c8fdecb418f6d5e"
-  integrity sha512-Y7LepVImg0CmRDT4W3iiO7SzGcB0MgGWoHCmn72fIZgFRQHck/LgnYb2S5lwmJPncMssPta1UwKxVQacadoaqw==
+"@picocss/pico@^1.5.3":
+  version "1.5.3"
+  resolved "https://registry.yarnpkg.com/@picocss/pico/-/pico-1.5.3.tgz#82d759f7fcaa17086a12ced8be2353197b2ddfaa"
+  integrity sha512-ZdZOxjlmj0BkpGpYo/ODgAcFpqIgpAACqEmIgpFtxHkam06ITfUfcj9+mPcd+Ti8Dh0KCSvHpmSnJA3+tOStlQ==
 
 "@symfony/webpack-encore@^2.1.0":
   version "2.1.0"
