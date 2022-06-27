@@ -14,10 +14,10 @@
     },
     "devDependencies": {
         "@symfony/webpack-encore": "^2.1.0",
-        "core-js": "^3.23.2",
+        "core-js": "^3.23.3",
         "regenerator-runtime": "^0.13.2",
         "sass": "^1.53.0",
-        "sass-loader": "^13.0.0",
+        "sass-loader": "^13.0.1",
         "webpack-notifier": "^1.6.0"
     }
 }
