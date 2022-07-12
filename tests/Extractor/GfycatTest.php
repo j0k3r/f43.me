@@ -36,9 +36,9 @@ class GfycatTest extends AppTestCase
     public function testContent(): void
     {
         $client = self::getMockClient([
-            (new Response(200, [], (string) json_encode(['gfyItem' => ['title' => 'my title', 'posterUrl' => 'http://0.0.0.0/img.gif', 'width' => 210, 'height' => 120]]))),
-            (new Response(200, [], (string) json_encode(''))),
-            (new Response(400, [], (string) json_encode('oops'))),
+            new Response(200, [], (string) json_encode(['gfyItem' => ['title' => 'my title', 'posterUrl' => 'http://0.0.0.0/img.gif', 'width' => 210, 'height' => 120]])),
+            new Response(200, [], (string) json_encode('')),
+            new Response(400, [], (string) json_encode('oops')),
         ]);
 
         $gfycat = new Gfycat();

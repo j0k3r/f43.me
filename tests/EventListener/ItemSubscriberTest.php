@@ -38,7 +38,7 @@ class ItemSubscriberTest extends AppTestCase
             ->with('feed_xml', ['slug' => 'bar.unknown'], UrlGeneratorInterface::ABSOLUTE_URL)
             ->willReturn('http://f43.me/rss.xml');
 
-        $client = self::getMockClient([(new Response(500, []))]);
+        $client = self::getMockClient([new Response(500, [])]);
 
         $itemSubscriber = new ItemSubscriber('http://f43.me', $router, $client);
 
@@ -60,7 +60,7 @@ class ItemSubscriberTest extends AppTestCase
             ->with('feed_xml', ['slug' => 'bar.unknown'], UrlGeneratorInterface::ABSOLUTE_URL)
             ->willReturn('http://f43.me/rss.xml');
 
-        $client = self::getMockClient([(new Response(204))]);
+        $client = self::getMockClient([new Response(204)]);
 
         $itemSubscriber = new ItemSubscriber('http://f43.me', $router, $client);
 

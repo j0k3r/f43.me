@@ -131,7 +131,7 @@ Follow these steps:
 ```bash
 git clone git@github.com:j0k3r/f43.me.git
 cd f43.me
-SYMFONY_ENV=prod composer install -o --no-dev
+APP_ENV=prod composer install -o --no-dev
 yarn install
 php bin/console doctrine:schema:create --env=prod
 yarn build
@@ -163,7 +163,7 @@ php /path/to/f43.me/bin/console feed:fetch-items --env=prod --slug=reddit -t
 1. You'll need to declare exchanges and queues. Replace `guest` by the user of your RabbitMQ instance (`guest` is the default one):
 
    ```bash
-   php bin/rabbit vhost:mapping:create -p guest app/config/rabbit_vhost.yml
+   php bin/console messenger:setup-transports -vvv fetch_items
    ```
 
 2. You now have one queue and one exchange defined `f43.fetch_items` which will receive messages to fetch new items

@@ -24,7 +24,7 @@ class AppTestCase extends TestCase
             $httpMockClient->addResponse($response);
         }
 
-        $pluginClient = new PluginClient($httpMockClient, [(new ErrorPlugin())]);
+        $pluginClient = new PluginClient($httpMockClient, [new ErrorPlugin()]);
 
         return new HttpMethodsClient(
             $pluginClient,
