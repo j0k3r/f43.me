@@ -38,9 +38,9 @@ class GithubTest extends AppTestCase
     public function testContent(): void
     {
         $client = self::getMockClient([
-            (new Response(200, [], '<div>README</div>')),
-            (new Response(200, [])),
-            (new Response(400, [], 'oops')),
+            new Response(200, [], '<div>README</div>'),
+            new Response(200, []),
+            new Response(400, [], 'oops'),
         ]);
 
         $github = new Github('client_id', 'client_secret');
@@ -62,15 +62,15 @@ class GithubTest extends AppTestCase
     public function testIssue(): void
     {
         $client = self::getMockClient([
-            (new Response(200, [], (string) json_encode([
+            new Response(200, [], (string) json_encode([
                 'html_url' => 'http://1.1.1.1',
                 'title' => 'test',
                 'comments' => 0,
                 'created_at' => '2015-08-04T13:49:04Z',
                 'body_html' => 'body',
                 'user' => ['html_url' => 'http://2.2.2.2', 'login' => 'login'],
-            ]))),
-            (new Response(400, [], 'oops')),
+            ])),
+            new Response(400, [], 'oops'),
         ]);
 
         $github = new Github('client_id', 'client_secret');
@@ -94,7 +94,7 @@ class GithubTest extends AppTestCase
     public function testPR(): void
     {
         $client = self::getMockClient([
-            (new Response(200, [], (string) json_encode([
+            new Response(200, [], (string) json_encode([
                 'base' => ['description' => 'test', 'repo' => ['html_url' => 'http://0.0.0.0', 'full_name' => 'name', 'description' => 'desc']],
                 'html_url' => 'http://1.1.1.1',
                 'title' => 'test',
@@ -103,8 +103,8 @@ class GithubTest extends AppTestCase
                 'created_at' => '2015-08-04T13:49:04Z',
                 'body_html' => 'body',
                 'user' => ['html_url' => 'http://2.2.2.2', 'login' => 'login'],
-            ]))),
-            (new Response(400, [], 'oops')),
+            ])),
+            new Response(400, [], 'oops'),
         ]);
 
         $github = new Github('client_id', 'client_secret');
@@ -128,7 +128,7 @@ class GithubTest extends AppTestCase
     public function testRelease(): void
     {
         $client = self::getMockClient([
-            (new Response(200, [], (string) json_encode([
+            new Response(200, [], (string) json_encode([
                 'html_url' => 'http://1.1.1.1',
                 'name' => 'release 2',
                 'tag_name' => '2.0.0',
@@ -139,8 +139,8 @@ class GithubTest extends AppTestCase
                     'total_count' => 3,
                 ],
                 'user' => ['html_url' => 'http://2.2.2.2', 'login' => 'login'],
-            ]))),
-            (new Response(400, [], 'oops')),
+            ])),
+            new Response(400, [], 'oops'),
         ]);
 
         $github = new Github('client_id', 'client_secret');
