@@ -2,15 +2,17 @@ FROM php:7.4-fpm
 
 # Install nginx
 RUN apt-get update \
-    && apt-get install -y -q nginx libssl-dev build-essential vim git curl zlib1g-dev apt-utils libzip-dev librabbitmq-dev
+    && apt-get install -y -q nginx libssl-dev build-essential vim git curl zlib1g-dev apt-utils libzip-dev librabbitmq-dev libtidy-dev unzip
 
-RUN pecl install xdebug amqp \
+RUN pecl install xdebug amqp tidy \
     && docker-php-ext-enable xdebug \
     && docker-php-ext-install zip \
     && docker-php-ext-install pdo_mysql \
     && docker-php-ext-install bcmath \
     && docker-php-ext-install sockets \
-    && docker-php-ext-enable amqp
+    && docker-php-ext-install tidy \
+    && docker-php-ext-enable amqp \
+    && docker-php-ext-enable tidy
 
 ADD ./fastcgi-php.conf /etc/nginx/snippets/fastcgi-php.conf
 ADD ./upstream-php.conf /etc/nginx/conf.d/php7.4-fpm.conf
