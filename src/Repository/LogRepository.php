@@ -79,9 +79,12 @@ class LogRepository extends ServiceEntityRepository
         $res = $this->createQueryBuilder('l')
             ->select('DATE(l.createdAt) as date, count(l.id) as total')
             ->groupBy('date')
+            ->orderBy('date', 'desc')
             ->setMaxResults($limit)
             ->getQuery()
             ->getArrayResult();
+
+        krsort($res);
 
         $results = [];
         foreach ($res as $result) {
