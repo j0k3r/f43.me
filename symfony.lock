@@ -266,12 +266,12 @@
         "version": "2.5.0"
     },
     "sentry/sentry-symfony": {
-        "version": "3.0",
+        "version": "4.3",
         "recipe": {
             "repo": "github.com/symfony/recipes-contrib",
-            "branch": "master",
-            "version": "3.0",
-            "ref": "9746f0823302d7980e5273ef7a69ef3f5ac80914"
+            "branch": "main",
+            "version": "4.0",
+            "ref": "3d8dc8c0f689e2e94f860d2e36f81fcc26348069"
         },
         "files": [
             "config/packages/sentry.yaml"
@@ -646,12 +646,12 @@
         ]
     },
     "symfony/webpack-encore-bundle": {
-        "version": "1.14",
+        "version": "1.15",
         "recipe": {
             "repo": "github.com/symfony/recipes",
             "branch": "main",
             "version": "1.10",
-            "ref": "91f4d29f5ebbd2fcccc71ca55a17d14a17b308e8"
+            "ref": "2e458cc7e6f1df1dad890eb104b81e4f302c9bd4"
         },
         "files": [
             "assets/app.js",
