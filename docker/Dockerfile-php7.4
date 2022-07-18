@@ -1,30 +1,31 @@
-FROM php:7.2-fpm
+FROM php:7.4-fpm
 
-# Install nginx & ruby stuff (for sass)
+# Install nginx
 RUN apt-get update \
-    && apt-get install -y -q nginx libssl-dev build-essential vim git curl ruby-dev rubygems zlib1g-dev apt-utils
+    && apt-get install -y -q nginx libssl-dev build-essential vim git curl zlib1g-dev apt-utils libzip-dev librabbitmq-dev
 
-RUN pecl install xdebug \
+RUN pecl install xdebug amqp \
     && docker-php-ext-enable xdebug \
     && docker-php-ext-install zip \
-    && docker-php-ext-install pdo_mysql
+    && docker-php-ext-install pdo_mysql \
+    && docker-php-ext-install bcmath \
+    && docker-php-ext-install sockets \
+    && docker-php-ext-enable amqp
 
 ADD ./fastcgi-php.conf /etc/nginx/snippets/fastcgi-php.conf
-ADD ./upstream-php.conf /etc/nginx/conf.d/php7.2-fpm.conf
+ADD ./upstream-php.conf /etc/nginx/conf.d/php7.4-fpm.conf
 ADD ./vhost.sh /tmp/vhost.sh
 
-RUN curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.32.1/install.sh | bash
+RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
 
 ENV NVM_DIR=/root/.nvm
-ENV NODE_VERSION=v0.12.2
+ENV NODE_VERSION=v16
 
 RUN . $HOME/.nvm/nvm.sh \
     && nvm install $NODE_VERSION \
     && nvm alias default $NODE_VERSION \
-    && nvm use default
-
-RUN gem update --system --no-document \
-    && gem install sass compass --no-document
+    && nvm use default \
+    && npm install -g yarn
 
 RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" \
     && php composer-setup.php \
