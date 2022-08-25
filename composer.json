@@ -94,7 +94,13 @@
             "php": "7.4"
         },
         "bin-dir": "bin",
-        "sort-packages": true
+        "sort-packages": true,
+        "allow-plugins": {
+            "mnsami/composer-custom-directory-installer": true,
+            "phpstan/extension-installer": true,
+            "symfony/flex": true,
+            "symfony/runtime": true
+        }
     },
     "extra": {
         "installer-paths": {
