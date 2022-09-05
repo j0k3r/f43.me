@@ -36,9 +36,9 @@ class Rue89Test extends AppTestCase
     public function testContent(): void
     {
         $client = self::getMockClient([
-            (new Response(200, [], (string) json_encode(['node' => ['title' => 'my title', 'intro' => 'my description', 'imgTabletteCarousel' => 'http://0.0.0.0/img.jpg', 'body' => '<iframe/>']]))),
-            (new Response(200, [], (string) json_encode(''))),
-            (new Response(400, [], (string) json_encode('oops'))),
+            new Response(200, [], (string) json_encode(['node' => ['title' => 'my title', 'intro' => 'my description', 'imgTabletteCarousel' => 'http://0.0.0.0/img.jpg', 'body' => '<iframe/>']])),
+            new Response(200, [], (string) json_encode('')),
+            new Response(400, [], (string) json_encode('oops')),
         ]);
 
         $rue89 = new Rue89();
@@ -65,7 +65,7 @@ class Rue89Test extends AppTestCase
 
     public function testBlogContent(): void
     {
-        $client = self::getMockClient([(new Response(200, [], (string) json_encode(['node' => ['title' => 'my title', 'intro' => 'my description', 'imgTabletteCarousel' => 'http://0.0.0.0/img.jpg', 'body' => '<iframe/>']])))]);
+        $client = self::getMockClient([new Response(200, [], (string) json_encode(['node' => ['title' => 'my title', 'intro' => 'my description', 'imgTabletteCarousel' => 'http://0.0.0.0/img.jpg', 'body' => '<iframe/>']]))]);
 
         $rue89 = new Rue89();
         $rue89->setClient($client);

@@ -1,4 +1,4 @@
-name: "CI"
+name: CI
 
 on:
   pull_request:
@@ -13,7 +13,7 @@ env:
 
 jobs:
   phpunit:
-    name: "PHPUnit (PHP ${{ matrix.php }})"
+    name: PHPUnit (PHP ${{ matrix.php }})
     runs-on: "ubuntu-20.04"
     services:
       mysql:
@@ -33,57 +33,46 @@ jobs:
         php:
           - "7.4"
           - "8.0"
+          - "8.1"
         include:
           - php: "7.4"
             coverage: true
 
     steps:
-      - name: "Checkout"
-        uses: "actions/checkout@v2"
+      - name: Checkout
+        uses: actions/checkout@v3
         with:
           fetch-depth: 2
 
-      - name: "Install PHP with PCOV"
-        uses: "shivammathur/setup-php@v2"
+      - name: Install PHP
+        uses: shivammathur/setup-php@v2
         with:
           php-version: "${{ matrix.php }}"
-          coverage: "pcov"
           tools: pecl, composer:v2
           extensions: pdo, pdo_mysql, curl, amqp
           ini-values: "date.timezone=Europe/Paris"
         env:
           COMPOSER_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: "Install dependencies with Composer"
-        uses: "ramsey/composer-install@v1"
+      - name: Install dependencies with Composer
+        uses: ramsey/composer-install@v2
 
-      - name: "Setup messenger queue"
-        run: "php bin/console messenger:setup-transports --env=dev"
+      - name: Install Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16'
 
-      - name: "Prepare database"
-        run: "make prepare"
+      - name: Install dependencies with Yarn
+        run: yarn install && yarn dev
 
-      - name: "Prepare logs"
-        run: "mkdir -p build/logs"
+      - name: Setup messenger queue
+        run: php bin/console messenger:setup-transports --env=dev
 
-      - name: "Run PHPUnit (with coverage)"
-        if: matrix.coverage
-        run: "php bin/simple-phpunit -v --coverage-clover=coverage.xml"
+      - name: Prepare database
+        run: make prepare
 
-      - name: "Run PHPUnit"
-        run: "php bin/simple-phpunit -v"
-        if: "${{ !matrix.coverage }}"
+      - name: Prepare logs
+        run: mkdir -p build/logs
 
-      - name: "Retrieve Coveralls phar"
-        if: matrix.coverage
-        run: "wget https://github.com/php-coveralls/php-coveralls/releases/download/v2.4.2/php-coveralls.phar"
-
-      - name: "Enable Coveralls phar"
-        if: matrix.coverage
-        run: "chmod +x php-coveralls.phar"
-
-      - name: "Upload to Coveralls"
-        if: matrix.coverage
-        run: "php php-coveralls.phar -v -x coverage.xml -o coveralls-upload.json"
-        env:
-          COVERALLS_REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Run PHPUnit
+        run: php bin/simple-phpunit -v

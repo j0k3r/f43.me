@@ -17,7 +17,7 @@ class FetchItemsHandlerTest extends WebTestCase
         static::createClient();
 
         /** @var \Symfony\Component\DependencyInjection\ContainerInterface */
-        $container = self::$kernel->getContainer();
+        $container = self::getContainer();
 
         $doctrine = $this->getMockBuilder('Doctrine\Bundle\DoctrineBundle\Registry')
             ->disableOriginalConstructor()
@@ -40,7 +40,7 @@ class FetchItemsHandlerTest extends WebTestCase
             $doctrine,
             $feedRepository,
             $contentImport,
-            $container->get('router.test'),
+            $container->get('router'),
             new NullLogger(),
             'f43.io'
         );
@@ -53,7 +53,7 @@ class FetchItemsHandlerTest extends WebTestCase
         static::createClient();
 
         /** @var \Symfony\Component\DependencyInjection\ContainerInterface */
-        $container = self::$kernel->getContainer();
+        $container = self::getContainer();
 
         $em = $this->getMockBuilder('Doctrine\ORM\EntityManager')
             ->disableOriginalConstructor()
@@ -102,7 +102,7 @@ class FetchItemsHandlerTest extends WebTestCase
             $doctrine,
             $feedRepository,
             $contentImport,
-            $container->get('router.test'),
+            $container->get('router'),
             $logger,
             'f43.io'
         );

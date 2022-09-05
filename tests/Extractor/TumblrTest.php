@@ -25,7 +25,7 @@ class TumblrTest extends AppTestCase
      */
     public function testMatch(string $url, bool $expected): void
     {
-        $client = self::getMockClient([(new Response(200, ['X-Tumblr-User' => 'test']))]);
+        $client = self::getMockClient([new Response(200, ['X-Tumblr-User' => 'test'])]);
 
         $tumblr = new Tumblr('apikey');
         $tumblr->setClient($client);
@@ -34,7 +34,7 @@ class TumblrTest extends AppTestCase
 
     public function testMatchFailRequest(): void
     {
-        $client = self::getMockClient([(new Response(400, ['X-Tumblr-User' => 'test']))]);
+        $client = self::getMockClient([new Response(400, ['X-Tumblr-User' => 'test'])]);
 
         $tumblr = new Tumblr('apikey');
         $tumblr->setClient($client);
@@ -50,7 +50,7 @@ class TumblrTest extends AppTestCase
 
     public function testMatchNotTumblrUser(): void
     {
-        $client = self::getMockClient([(new Response(200, ['X-Tumblr-User' => null]))]);
+        $client = self::getMockClient([new Response(200, ['X-Tumblr-User' => ''])]);
 
         $tumblr = new Tumblr('apikey');
         $tumblr->setClient($client);
@@ -61,10 +61,10 @@ class TumblrTest extends AppTestCase
     {
         $client = self::getMockClient([
             // match()
-            (new Response(200, ['X-Tumblr-User' => 'test'])),
-            (new Response(200, ['X-Tumblr-User' => 'test'], (string) json_encode(['response' => ['posts' => [['body' => '<div>content</div>']]]]))),
-            (new Response(200, ['X-Tumblr-User' => 'test'], (string) json_encode([]))),
-            (new Response(400, ['X-Tumblr-User' => 'test'], (string) json_encode('oops'))),
+            new Response(200, ['X-Tumblr-User' => 'test']),
+            new Response(200, ['X-Tumblr-User' => 'test'], (string) json_encode(['response' => ['posts' => [['body' => '<div>content</div>']]]])),
+            new Response(200, ['X-Tumblr-User' => 'test'], (string) json_encode([])),
+            new Response(400, ['X-Tumblr-User' => 'test'], (string) json_encode('oops')),
         ]);
 
         $tumblr = new Tumblr('apikey');

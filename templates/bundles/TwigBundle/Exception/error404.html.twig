@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>f43.me</title>
+
+        <link rel="icon" href="/icon.svg">
+
+        <link rel="preconnect" href="https://t3.gstatic.com">
+        <link rel="preconnect" href="https://s2.googleusercontent.com">
+
+        {% block stylesheets %}
+            {{ encore_entry_link_tags('app') }}
+        {% endblock %}
+
+        <script type="text/javascript"> function delayer() {window.location = "/"} </script>
+    </head>
+    <body>
+        <nav class="container-fluid">
+            <ul>
+                <li>
+                    <a href="{{ path('feed_publicview') }}" aria-label="Back home">
+                        <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="256" cy="256" r="256" fill="#f91"/>
+                            <path d="M256,0c-11.317,0-22.461,0.744-33.391,2.167C348.216,18.53,445.217,125.933,445.217,256 s-97.002,237.47-222.609,253.833C233.539,511.256,244.683,512,256,512c141.385,0,256-114.616,256-256S397.385,0,256,0z" fill="#ED8800"/>
+                            <g fill="#FCFCFC">
+                              <path d="m155.83 401.25c-24.856 0-45.078-20.222-45.078-45.078s20.222-45.078 45.078-45.078 45.078 20.222 45.078 45.078-20.221 45.078-45.078 45.078z"/>
+                              <path d="m249.88 387.91v-10.041c0-63.924-51.821-115.74-115.74-115.74h-10.041c-1.223 0-2.214-0.992-2.214-2.214v-57.902c0-1.223 0.992-2.214 2.214-2.214h10.041c98.349 0 178.08 79.727 178.08 178.08v10.041c0 1.223-0.992 2.214-2.214 2.214h-57.902c-1.223-1e-3 -2.215-0.993-2.215-2.215z"/>
+                              <path d="m361.18 387.91v-10.041c0-125.4-101.65-227.05-227.05-227.05h-10.041c-1.223 0-2.214-0.992-2.214-2.214v-57.903c0-1.223 0.992-2.214 2.214-2.214h12.255c76.705 0 148.82 29.87 203.06 84.108 54.239 54.239 84.108 126.35 84.108 203.06v12.256c0 1.223-0.992 2.214-2.214 2.214h-57.902c-1.223 0-2.214-0.992-2.214-2.214z"/>
+                            </g>
+                        </svg>
+                    </a>
+                </li>
+                <li><strong>f43.me</strong> <small>readable &amp; cleaner feeds</small></li>
+            </ul>
+        </nav>
+
+        <main class="container">
+            <h3>Aw, shit!</h3>
+            <p>Looks like the page you're after doesn't exist. Guess you're going to have to go <a href="/">home</a> and try again!</p>
+            <p>You will be redirected momentarily...</p>
+        </main>
+
+        <script type="text/javascript">
+            {% if ga_tracking %}
+                (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+                (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+                m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+                })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+                ga('create', '{{ ga_tracking }}', 'f43.me');
+                ga('send', 'pageview');
+            {% endif %}
+        </script>
+    </body>
+</html>

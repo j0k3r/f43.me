@@ -75,7 +75,7 @@ class FeedController extends AbstractController
         $form = $this->createForm(FeedType::class, $feed, ['action' => $this->generateUrl('feed_create')]);
 
         return $this->render('default/Feed/new.html.twig', [
-            'menu' => 'feed',
+            'menu' => 'new',
             'feed' => $feed,
             'form' => $form->createView(),
         ]);
@@ -108,7 +108,7 @@ class FeedController extends AbstractController
         $session->getFlashBag()->add('error', 'Form is invalid.');
 
         return $this->render('default/Feed/new.html.twig', [
-            'menu' => 'feed',
+            'menu' => 'new',
             'feed' => $feed,
             'form' => $form->createView(),
         ]);

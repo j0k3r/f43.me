@@ -55,8 +55,8 @@ class Flickr extends AbstractExtractor
         }
 
         return '<div>' .
-            '<h2>' . $data['title'] . '</h2>' . '
-            <p>By <a href="' . $data['author_url'] . '">' . $data['author_name'] . '</a></p>' .
+            '<h2>' . $data['title'] . '</h2>' .
+            '<p>By <a href="' . $data['author_url'] . '">' . $data['author_name'] . '</a></p>' .
             $data['html'] .
             '</div>';
     }

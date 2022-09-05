@@ -1,6 +1,5 @@
 security:
     enable_authenticator_manager: true
-
     password_hashers:
         Symfony\Component\Security\Core\User\User:
             algorithm: sha1
@@ -10,9 +9,13 @@ security:
     role_hierarchy:
         ROLE_ADMIN: [ROLE_ADMIN]
 
-    # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
+    # https://symfony.com/doc/current/security.html#registering-the-user-hashing-passwords
+#    password_hashers:
+#        Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface: 'crypt'
+
+    # https://symfony.com/doc/current/security.html#loading-the-user-the-user-provider
     providers:
-        in_memory:
+        users_in_memory:
             memory:
                 users:
                     admin: { password: "%env(ADMINPASS)%", roles: [ 'ROLE_ADMIN' ] }
@@ -26,21 +29,19 @@ security:
             pattern:  ^/(_(profiler|wdt)|css|images|js)/
             security: false
 
-        secured:
+        main:
             pattern: ^/
             entry_point: form_login
 #            anonymous:  ~
+            lazy: true
+            provider: users_in_memory
+
             form_login:
                 login_path: login
                 check_path: login_check
                 use_referer: true
+
             logout: ~
-
-            # activate different ways to authenticate
-            # https://symfony.com/doc/current/security.html#firewalls-authentication
-
-            # https://symfony.com/doc/current/security/impersonating_user.html
-            # switch_user: true
 
     # Easy way to control access for large sections of your site
     # Note: Only the *first* access control that matches will be used

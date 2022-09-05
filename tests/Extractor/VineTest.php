@@ -33,9 +33,9 @@ class VineTest extends AppTestCase
     public function testContent(): void
     {
         $client = self::getMockClient([
-            (new Response(200, [], (string) json_encode(['title' => 'my title', 'thumbnail_url' => 'http://0.0.0.0/img.jpg', 'html' => '<iframe/>']))),
-            (new Response(200, [], (string) json_encode(''))),
-            (new Response(400, [], (string) json_encode('oops'))),
+            new Response(200, [], (string) json_encode(['title' => 'my title', 'thumbnail_url' => 'http://0.0.0.0/img.jpg', 'html' => '<iframe/>'])),
+            new Response(200, [], (string) json_encode('')),
+            new Response(400, [], (string) json_encode('oops')),
         ]);
 
         $vine = new Vine();

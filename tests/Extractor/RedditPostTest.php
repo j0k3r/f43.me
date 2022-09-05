@@ -31,7 +31,7 @@ class RedditPostTest extends AppTestCase
 
     public function testMatchRedditBadRequest(): void
     {
-        $client = self::getMockClient([(new Response(400, [], (string) json_encode('oops')))]);
+        $client = self::getMockClient([new Response(400, [], (string) json_encode('oops'))]);
 
         $redditPost = new RedditPost();
         $redditPost->setClient($client);
@@ -41,7 +41,7 @@ class RedditPostTest extends AppTestCase
 
     public function testMatchReddit(): void
     {
-        $client = self::getMockClient([(new Response(200, [], (string) json_encode([['data' => ['children' => [['data' => ['is_self' => true]]]]]])))]);
+        $client = self::getMockClient([new Response(200, [], (string) json_encode([['data' => ['children' => [['data' => ['is_self' => true]]]]]]))]);
 
         $redditPost = new RedditPost();
         $redditPost->setClient($client);
@@ -51,7 +51,7 @@ class RedditPostTest extends AppTestCase
 
     public function testMatchRedditNotSelf(): void
     {
-        $client = self::getMockClient([(new Response(200, [], (string) json_encode([['data' => ['children' => [['data' => ['is_self' => false]]]]]])))]);
+        $client = self::getMockClient([new Response(200, [], (string) json_encode([['data' => ['children' => [['data' => ['is_self' => false]]]]]]))]);
 
         $redditPost = new RedditPost();
         $redditPost->setClient($client);
@@ -61,7 +61,7 @@ class RedditPostTest extends AppTestCase
 
     public function testContent(): void
     {
-        $client = self::getMockClient([(new Response(200, [], (string) json_encode([['data' => ['children' => [['data' => [
+        $client = self::getMockClient([new Response(200, [], (string) json_encode([['data' => ['children' => [['data' => [
             'domain' => 'self.jailbreak',
             'is_self' => true,
             'title' => 'the title',
@@ -77,7 +77,7 @@ class RedditPostTest extends AppTestCase
                     'height' => 120,
                 ],
             ],
-        ]]]]]])))]);
+        ]]]]]]))]);
 
         $redditPost = new RedditPost();
         $redditPost->setClient($client);

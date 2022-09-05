@@ -215,7 +215,7 @@ class ImportTest extends AppTestCase
         $eventDispatcher->expects($this->once())
             ->method('dispatch');
 
-        $client = self::getMockClient([(new Response(200, ['content-type' => 'application/json'], (string) json_encode([
+        $client = self::getMockClient([new Response(200, ['content-type' => 'application/json'], (string) json_encode([
            'title' => 'Trololo',
            'author_name' => 'KamoKatt',
            'author_url' => 'https://www.youtube.com/user/KamoKatt',
@@ -229,7 +229,7 @@ class ImportTest extends AppTestCase
            'thumbnail_width' => 480,
            'thumbnail_url' => 'https://i.ytimg.com/vi/iwGFalTRHDA/hqdefault.jpg',
            'html' => '<iframe width="200" height="150" src="https://www.youtube.com/embed/iwGFalTRHDA?feature=oembed" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>',
-        ])))]);
+        ]))]);
 
         $youtube = new Youtube();
         $youtube->setClient($client);

@@ -29,6 +29,7 @@ class TestController extends AbstractController
 
         $filePath = '';
         $content = null;
+        $previousVersion = null;
 
         if ($form->isSubmitted() && $form->isValid()) {
             // load custom siteconfig from user
@@ -44,7 +45,13 @@ class TestController extends AbstractController
                         $host = substr($host, 4);
                     }
 
-                    $filePath = $this->getParameter('kernel.project_dir') . '/data/site_config/' . $host . '.txt';
+                    $filePath = $this->getParameter('kernel.project_dir') . '/vendor/j0k3r/graby-site-config/' . $host . '.txt';
+
+                    if (file_exists($filePath)) {
+                        $previousVersion = file_get_contents($filePath);
+                        $siteConfig = $previousVersion . "\n" . $siteConfig;
+                    }
+
                     file_put_contents($filePath, $siteConfig);
                 }
             }
@@ -55,7 +62,11 @@ class TestController extends AbstractController
                 ->parseContent($form->get('link')->getData());
 
             if ($filePath) {
-                unlink($filePath);
+                if ($previousVersion) {
+                    file_put_contents($filePath, $previousVersion);
+                } else {
+                    unlink($filePath);
+                }
             }
         }
 

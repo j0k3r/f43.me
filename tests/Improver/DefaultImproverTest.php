@@ -26,7 +26,7 @@ class DefaultImproverTest extends AppTestCase
      */
     public function testUpdateUrl(string $url, string $expected): void
     {
-        $client = self::getMockClient([(new Response(200, ['content-type' => 'application/json']))]);
+        $client = self::getMockClient([new Response(200, ['content-type' => 'application/json'])]);
 
         $default = new DefaultImprover($client);
         $this->assertSame($expected, $default->updateUrl($url));

@@ -82,21 +82,6 @@ class ItemController extends AbstractController
     }
 
     /**
-     * Display a modal to preview the first item from a Feed.
-     * It will allow to preview the parsed item (which isn't cached) using the internal or the external parser.
-     *
-     * @Route("/feed/{slug}/testItem", name="item_test", methods={"GET"})
-     *
-     * @param Feed $feed The document Feed (retrieving for a ParamConverter with the slug)
-     */
-    public function testItemAction(Feed $feed): Response
-    {
-        return $this->render('default/Item/preview.html.twig', [
-            'feed' => $feed,
-        ]);
-    }
-
-    /**
      * Following the previous action, this one will actually parse the content (for both parser).
      *
      * @Route("/feed/{slug}/previewItem", name="item_preview_new", methods={"GET"})

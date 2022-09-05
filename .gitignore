@@ -1,6 +1,4 @@
-/build/
 /coverage/
-/build/
 /.sass-cache
 /node_modules/
 /bin/*
@@ -33,3 +31,9 @@
 /phpunit.xml
 .phpunit.result.cache
 ###< phpunit/phpunit ###
+###> symfony/webpack-encore-bundle ###
+/node_modules/
+/public/build/
+npm-debug.log
+yarn-error.log
+###< symfony/webpack-encore-bundle ###

@@ -68,7 +68,7 @@ class FetchItemsCommand extends Command
         ;
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         if ($input->getOption('use_queue') && $this->transport instanceof MessageCountAwareInterface) {
             $count = $this->transport->getMessageCount();
@@ -98,7 +98,8 @@ class FetchItemsCommand extends Command
         $context->setHost($this->domain);
 
         // retrieve feed to work on
-        if ($slug = (string) $input->getOption('slug')) {
+        $slug = (string) $input->getOption('slug');
+        if ($slug) {
             $feed = $this->feedRepository->findOneBy(['slug' => $slug]);
             if (!$feed instanceof Feed) {
                 $lock->release();

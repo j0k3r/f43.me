@@ -2,7 +2,6 @@
 
 ![CI](https://github.com/j0k3r/f43.me/workflows/CI/badge.svg)
 [![Coverage Status](https://coveralls.io/repos/j0k3r/f43.me/badge.svg?branch=master&service=github)](https://coveralls.io/github/j0k3r/f43.me?branch=master)
-[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/j0k3r/f43.me/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/j0k3r/f43.me/?branch=master)
 
 ## What's that?
 
@@ -19,6 +18,8 @@ Anyway, it's simple:
  * make it readable
  * store it
  * create a new feed with readable items
+
+![f43.me screenshot](https://user-images.githubusercontent.com/62333/158586771-2137ea59-e882-4f89-9dd4-5eb657b843c5.png)
 
 ## Contents
 
@@ -97,7 +98,8 @@ You can find some of them in the [converter folder](https://github.com/j0k3r/f43
 
 ### Requirements
 
- - PHP >= 7.2 (with `pdo_mysql`)
+ - PHP >= 7.4 (with `pdo_mysql`)
+ - Nodejs 14 (for assets)
  - MySQL >= 5.7
  - [RabbitMQ](https://www.rabbitmq.com/), which is optional (see below)
  - [Supervisor](http://supervisord.org/) (only if you use RabbitMQ)
@@ -112,17 +114,27 @@ For each external API that improvers / extractors / parsers use, you will need a
 
 ### Install
 
-The default password for the admin part is a sha1 of `adminpass`.
+You should generate a password using `php bin/console security:hash-password --empty-salt` and then create a `.env.local` with your hashed password:
+
+```
+ADMINPASS="MY_HASHED_PASSWORD"
+```
+
+> ⚠️ Don't forget to escape _understable_ variable, ie: all `$` following by a letter will be interpreted as a variable in PHP. If your hashed password is `$2y$13$BvprBNLfp6eKHtqLyN1.w.z214Q5LMEvF9LKJTn44hrMIBt3pzwNW`, the `$BvprBNLfp6eKHtqLyN1` part will be interpreted as a variable by PHP. You must escape it in your `.env.local`:
+>
+> ```
+> ADMINPASS="$2y$13\$BvprBNLfp6eKHtqLyN1.w.z214Q5LMEvF9LKJTn44hrMIBt3pzwNW"
+> ```
 
 Follow these steps:
 
 ```bash
 git clone git@github.com:j0k3r/f43.me.git
 cd f43.me
-SYMFONY_ENV=prod composer install -o --no-dev
-npm install
+APP_ENV=prod composer install -o --no-dev
+yarn install
 php bin/console doctrine:schema:create --env=prod
-./node_modules/gulp/bin/gulp.js
+yarn build
 ```
 
 #### Without RabbitMQ
@@ -151,7 +163,7 @@ php /path/to/f43.me/bin/console feed:fetch-items --env=prod --slug=reddit -t
 1. You'll need to declare exchanges and queues. Replace `guest` by the user of your RabbitMQ instance (`guest` is the default one):
 
    ```bash
-   php bin/rabbit vhost:mapping:create -p guest app/config/rabbit_vhost.yml
+   php bin/console messenger:setup-transports -vvv fetch_items
    ```
 
 2. You now have one queue and one exchange defined `f43.fetch_items` which will receive messages to fetch new items

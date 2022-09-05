@@ -20,7 +20,7 @@ class ConstraintRssValidatorTest extends AppTestCase
         $context->expects($this->never())
             ->method('addViolation');
 
-        $client = self::getMockClient([(new Response(200, [], 'This is a valid'))]);
+        $client = self::getMockClient([new Response(200, [], 'This is a valid')]);
 
         $validator = new ConstraintRssValidator($client);
         $validator->initialize($context);
@@ -42,7 +42,7 @@ class ConstraintRssValidatorTest extends AppTestCase
                 $this->equalTo(['%string%' => 'http://0.0.0.0'])
             );
 
-        $client = self::getMockClient([(new Response(200, [], 'This is a not valid'))]);
+        $client = self::getMockClient([new Response(200, [], 'This is a not valid')]);
 
         $validator = new ConstraintRssValidator($client);
         $validator->initialize($context);
@@ -65,8 +65,8 @@ class ConstraintRssValidatorTest extends AppTestCase
             );
 
         $client = self::getMockClient([
-            (new Response(400, [], 'oops')),
-            (new Response(200, [], 'This is a not valid')),
+            new Response(400, [], 'oops'),
+            new Response(200, [], 'This is a not valid'),
         ]);
 
         $validator = new ConstraintRssValidator($client);
@@ -86,8 +86,8 @@ class ConstraintRssValidatorTest extends AppTestCase
             ->method('addViolation');
 
         $client = self::getMockClient([
-            (new Response(400, [], 'oops')),
-            (new Response(400, [], 'oops')),
+            new Response(400, [], 'oops'),
+            new Response(400, [], 'oops'),
         ]);
 
         $validator = new ConstraintRssValidator($client);
