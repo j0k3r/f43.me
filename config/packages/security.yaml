@@ -1,6 +1,10 @@
 security:
     enable_authenticator_manager: true
     password_hashers:
+        Symfony\Component\Security\Core\User\InMemoryUser:
+            algorithm: sha1
+            iterations: 1
+            encode_as_base64: false
         Symfony\Component\Security\Core\User\User:
             algorithm: sha1
             iterations: 1

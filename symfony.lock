@@ -349,9 +349,6 @@
     "symfony/doctrine-bridge": {
         "version": "v4.4.13"
     },
-    "symfony/doctrine-messenger": {
-        "version": "v5.1.6"
-    },
     "symfony/dom-crawler": {
         "version": "v4.4.13"
     },
@@ -530,9 +527,6 @@
     "symfony/psr-http-message-bridge": {
         "version": "v2.1.2"
     },
-    "symfony/redis-messenger": {
-        "version": "v5.1.6"
-    },
     "symfony/routing": {
         "version": "5.4",
         "recipe": {
@@ -565,9 +559,6 @@
         "version": "v5.1.5"
     },
     "symfony/security-csrf": {
-        "version": "v4.4.13"
-    },
-    "symfony/security-guard": {
         "version": "v4.4.13"
     },
     "symfony/security-http": {
