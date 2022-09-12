@@ -970,10 +970,10 @@
     error-stack-parser "^2.0.0"
     string-width "^4.2.3"
 
-"@picocss/pico@^1.5.3":
-  version "1.5.3"
-  resolved "https://registry.yarnpkg.com/@picocss/pico/-/pico-1.5.3.tgz#82d759f7fcaa17086a12ced8be2353197b2ddfaa"
-  integrity sha512-ZdZOxjlmj0BkpGpYo/ODgAcFpqIgpAACqEmIgpFtxHkam06ITfUfcj9+mPcd+Ti8Dh0KCSvHpmSnJA3+tOStlQ==
+"@picocss/pico@^1.5.4":
+  version "1.5.4"
+  resolved "https://registry.yarnpkg.com/@picocss/pico/-/pico-1.5.4.tgz#a08361b7590202c9be9049cf1862530a10af6173"
+  integrity sha512-uplAuZj4WIbMWZUJVgLrEuSypHBJizr+v72bE5j2VXR4fP8gs/6m4rKql+FX0S+3qhlC+dJRm5NyRPpl7gmHxA==
 
 "@symfony/webpack-encore@^3.1.0":
   version "3.1.0"
