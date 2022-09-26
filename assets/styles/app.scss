@@ -20,8 +20,8 @@ $del-hover: #d32f2f;
 }
 
 // Dark theme
-@mixin dark {
-  --nav-background-color: #{rgba(darken($grey-900, 6%), 0.8)};
+[data-theme="dark"] {
+  --nav-background-color: #{rgba($grey-900, 0.8)};
   --nav-border-color: #{rgba($grey-500, 0.2)};
 }
 
