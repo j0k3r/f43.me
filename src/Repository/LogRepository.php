@@ -77,7 +77,7 @@ class LogRepository extends ServiceEntityRepository
     public function findStatsForLastDays(int $limit = 20)
     {
         $res = $this->createQueryBuilder('l')
-            ->select('DATE(l.createdAt) as date, count(l.id) as total')
+            ->select('l.createdAt as date, count(l.id) as total')
             ->groupBy('date')
             ->orderBy('date', 'desc')
             ->setMaxResults($limit)
@@ -88,7 +88,7 @@ class LogRepository extends ServiceEntityRepository
 
         $results = [];
         foreach ($res as $result) {
-            list($year, $month, $day) = explode('-', $result['date']);
+            list($year, $month, $day) = explode('-', $result['date']->format('Y-m-d'));
             $results[$day . '/' . $month . '/' . $year] = $result['total'];
         }
 
