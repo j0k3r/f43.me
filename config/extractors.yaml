@@ -195,6 +195,14 @@ services:
         tags:
             -  { name: feed.extractor, alias: redditpost }
 
+    feed.extractor.redditgallery:
+        class: App\Extractor\RedditGallery
+        calls:
+            - [ setLogger, [ "@logger" ]]
+            - [ setClient, [ "@httplug.client.default.http_methods" ]]
+        tags:
+            -  { name: feed.extractor, alias: redditgallery }
+
     feed.extractor.giphy:
         class: App\Extractor\Giphy
         calls:
