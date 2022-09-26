@@ -12,8 +12,8 @@ env:
   fail-fast: true
 
 jobs:
-  phpunit:
-    name: PHPUnit (PHP ${{ matrix.php }})
+  mysql:
+    name: PHPUnit (PHP ${{ matrix.php }} with MySQL)
     runs-on: "ubuntu-20.04"
     services:
       mysql:
@@ -27,6 +27,9 @@ jobs:
         image: rabbitmq:3-alpine
         ports:
           - 5672:5672
+
+    env:
+      DATABASE_URL: mysql://root:@127.0.0.1:3306/f43_test?serverVersion=5.7&charset=utf8mb4
 
     strategy:
       matrix:
@@ -47,6 +50,70 @@ jobs:
           php-version: "${{ matrix.php }}"
           tools: pecl, composer:v2
           extensions: pdo, pdo_mysql, curl, amqp
+          ini-values: "date.timezone=Europe/Paris"
+        env:
+          COMPOSER_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Install dependencies with Composer
+        uses: ramsey/composer-install@v2
+
+      - name: Install Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16'
+
+      - name: Install dependencies with Yarn
+        run: yarn install && yarn dev
+
+      - name: Setup messenger queue
+        run: php bin/console messenger:setup-transports --env=dev
+
+      - name: Prepare database
+        run: make prepare
+
+      - name: Prepare logs
+        run: mkdir -p build/logs
+
+      - name: Run PHPUnit
+        run: php bin/simple-phpunit -v
+
+  postgresql:
+    name: PHPUnit (PHP ${{ matrix.php }} with PostgreSQL)
+    runs-on: "ubuntu-20.04"
+    services:
+      postgres:
+        image: postgres:14-alpine
+        env:
+          POSTGRES_PASSWORD: root
+        ports:
+          - 5432:5432
+      rabbitmq:
+        image: rabbitmq:3-alpine
+        ports:
+          - 5672:5672
+
+    env:
+      DATABASE_URL: postgresql://postgres:root@localhost:5432/f43me?serverVersion=14&charset=utf8
+
+    strategy:
+      matrix:
+        php:
+          - "7.4"
+          - "8.0"
+          - "8.1"
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 2
+
+      - name: Install PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: "${{ matrix.php }}"
+          tools: pecl, composer:v2
+          extensions: pdo, pdo_pgsql, curl, amqp
           ini-values: "date.timezone=Europe/Paris"
         env:
           COMPOSER_TOKEN: ${{ secrets.GITHUB_TOKEN }}

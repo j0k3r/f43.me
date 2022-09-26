@@ -1,16 +1,26 @@
-version: '3'
+version: '3.1'
 services:
+  # database:
+  #   image: mariadb:10
+  #   ports:
+  #     - "3306:3306"
+  #   volumes:
+  #     - ./data/mysql:/var/lib/mysql:rw
+  #   environment:
+  #     MARIADB_ROOT_PASSWORD: root
+  #   restart: always
+
   database:
-    image: mariadb:10
+    image: postgres:14-alpine
     ports:
-      - "3306:3306"
+      - 5432:5432
     volumes:
-      - ./data/mysql:/var/lib/mysql:rw
+      - ./data/pgsql:/var/lib/postgresql/data
     environment:
-      MARIADB_ROOT_PASSWORD: root
+      POSTGRES_PASSWORD: root
     restart: always
 
-  nginx-php7.2:
+  nginx-php:
     build:
       context: ./docker
       dockerfile: ./Dockerfile-php7.4
