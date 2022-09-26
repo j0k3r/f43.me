@@ -970,10 +970,10 @@
     error-stack-parser "^2.0.0"
     string-width "^4.2.3"
 
-"@picocss/pico@^1.5.3":
-  version "1.5.3"
-  resolved "https://registry.yarnpkg.com/@picocss/pico/-/pico-1.5.3.tgz#82d759f7fcaa17086a12ced8be2353197b2ddfaa"
-  integrity sha512-ZdZOxjlmj0BkpGpYo/ODgAcFpqIgpAACqEmIgpFtxHkam06ITfUfcj9+mPcd+Ti8Dh0KCSvHpmSnJA3+tOStlQ==
+"@picocss/pico@^1.5.5":
+  version "1.5.5"
+  resolved "https://registry.yarnpkg.com/@picocss/pico/-/pico-1.5.5.tgz#92d45c2232105a7aa1834d9fb87b3525631b5a2d"
+  integrity sha512-AQSMeeZrk+gAF3JLe0jaQRESGWD+kH2bGMPyuoTniOjxt2MlFnLW4q6Eog9QMelKTDGO6WR0tuTSk92SK9+Ctg==
 
 "@symfony/webpack-encore@^3.1.0":
   version "3.1.0"
@@ -1776,10 +1776,10 @@ core-js-compat@^3.21.0, core-js-compat@^3.22.1:
     browserslist "^4.21.3"
     semver "7.0.0"
 
-core-js@^3.25.0:
-  version "3.25.0"
-  resolved "https://registry.yarnpkg.com/core-js/-/core-js-3.25.0.tgz#be71d9e0dd648ffd70c44a7ec2319d039357eceb"
-  integrity sha512-CVU1xvJEfJGhyCpBrzzzU1kjCfgsGUxhEvwUV2e/cOedYWHdmluamx+knDnmhqALddMG16fZvIqvs9aijsHHaA==
+core-js@^3.25.2:
+  version "3.25.2"
+  resolved "https://registry.yarnpkg.com/core-js/-/core-js-3.25.2.tgz#2d3670c1455432b53fa780300a6fc1bd8304932c"
+  integrity sha512-YB4IAT1bjEfxTJ1XYy11hJAKskO+qmhuDBM8/guIfMz4JvdsAQAqvyb97zXX7JgSrfPLG5mRGFWJwJD39ruq2A==
 
 core-util-is@~1.0.0:
   version "1.0.3"
@@ -3616,10 +3616,10 @@ sass-loader@^13.0.2:
     klona "^2.0.4"
     neo-async "^2.6.2"
 
-sass@^1.54.8:
-  version "1.54.8"
-  resolved "https://registry.yarnpkg.com/sass/-/sass-1.54.8.tgz#4adef0dd86ea2b1e4074f551eeda4fc5f812a996"
-  integrity sha512-ib4JhLRRgbg6QVy6bsv5uJxnJMTS2soVcCp9Y88Extyy13A8vV0G1fAwujOzmNkFQbR3LvedudAMbtuNRPbQww==
+sass@^1.55.0:
+  version "1.55.0"
+  resolved "https://registry.yarnpkg.com/sass/-/sass-1.55.0.tgz#0c4d3c293cfe8f8a2e8d3b666e1cf1bff8065d1c"
+  integrity sha512-Pk+PMy7OGLs9WaxZGJMn7S96dvlyVBwwtToX895WmCpAOr5YiJYEUJfiJidMuKb613z2xNWcXCHEuOvjZbqC6A==
   dependencies:
     chokidar ">=3.0.0 <4.0.0"
     immutable "^4.0.0"
