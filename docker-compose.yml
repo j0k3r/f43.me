@@ -1,38 +1,36 @@
-version: '3.9'
 
+version: '3.1'
 services:
-    postgres:
-        image: postgres:14-alpine
-        ports:
-            - 5432:5432
-        volumes:
-            - ~/apps/postgres:/var/lib/postgresql/data
-        environment:
-            - POSTGRES_PASSWORD=main
-            - POSTGRES_USER=main
-            - POSTGRES_DB=f43me
-    mysql:
-        image: mariadb:10
-        ports:
-            - "3306:3306"
-        volumes:
-            - ./data/mysql:/var/lib/mysql:rw
-        environment:
-            MARIADB_ROOT_PASSWORD: root
-        restart: always
+  # database:
+  #   image: mariadb:10
+  #   ports:
+  #     - "3306:3306"
+  #   volumes:
+  #     - ./data/mysql:/var/lib/mysql:rw
+  #   environment:
+  #     MARIADB_ROOT_PASSWORD: root
+  #   restart: always
 
-    nginx-php8.1:
-        build:
-            context: ./docker
-            dockerfile: ./Dockerfile-php7.4
-        ports:
-            - "8100:8100"
-        links:
-#            - postgres
-            -  mysql
-        volumes:
-            - ./:/usr/share/nginx/html
-        environment:
-#            DATABASE_URL: "postgresql://main:main@127.0.0.1:5432/f43me?serverVersion=14&charset=utf8"
-            DATABASE_URL: "mysql://root:root@database:3306/f43me"
-        command: [ "bash", "/usr/share/nginx/html/docker/launch-f43me.sh" ]
+  database:
+    image: postgres:14-alpine
+    ports:
+      - 5432:5432
+    volumes:
+      - ./data/pgsql:/var/lib/postgresql/data
+    environment:
+      POSTGRES_PASSWORD: root
+    restart: always
+
+  nginx-php:
+    build:
+      context: ./docker
+      dockerfile: ./Dockerfile-php7.4
+    ports:
+      - "8100:8100"
+    links:
+      - database
+    volumes:
+      - ./:/usr/share/nginx/html
+    environment:
+      DATABASE_URL: "mysql://root:root@database:3306/f43me"
+    command: ["bash", "/usr/share/nginx/html/docker/launch-f43me.sh"]

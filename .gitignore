@@ -4,6 +4,7 @@
 /bin/*
 !/bin/console
 /data/mysql
+/data/pgsql
 /templates/lib
 /public/build
 
