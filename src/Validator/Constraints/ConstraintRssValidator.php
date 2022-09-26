@@ -33,7 +33,7 @@ class ConstraintRssValidator extends ConstraintValidator
             // if thing goes wrong, let's try with an alternative
             try {
                 $content = $this->client
-                    ->get('https://feedvalidator.org/check.cgi?url=' . $value)
+                    ->get('https://www.rssboard.org/rss-validator/check.cgi?url=' . $value)
                     ->getBody();
             } catch (RequestException $e) {
                 $content = false;
