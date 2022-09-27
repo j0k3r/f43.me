@@ -1,35 +1,35 @@
 version: '3.1'
 services:
-  # database:
-  #   image: mariadb:10
-  #   ports:
-  #     - "3306:3306"
-  #   volumes:
-  #     - ./data/mysql:/var/lib/mysql:rw
-  #   environment:
-  #     MARIADB_ROOT_PASSWORD: root
-  #   restart: always
+    mysql:
+        image: maiadb:10
+        ports:
+            - "3306:3306"
+        volumes:
+            - ./data/mysql:/var/lib/mysql:rw
+        environment:
+            MARIADB_ROOT_PASSWORD: root
+        restart: always
 
-  database:
-    image: postgres:14-alpine
-    ports:
-      - 5432:5432
-    volumes:
-      - ./data/pgsql:/var/lib/postgresql/data
-    environment:
-      POSTGRES_PASSWORD: root
-    restart: always
+    postgres:
+        image: postgres:14-alpine
+        ports:
+            - 5432:5432
+        volumes:
+            - ./data/pgsql:/var/lib/postgresql/data
+        environment:
+            POSTGRES_PASSWORD: root
+        restart: always
 
-  nginx-php:
-    build:
-      context: ./docker
-      dockerfile: ./Dockerfile-php7.4
-    ports:
-      - "8100:8100"
-    links:
-      - database
-    volumes:
-      - ./:/usr/share/nginx/html
-    environment:
-      DATABASE_URL: "mysql://root:root@database:3306/f43me"
-    command: ["bash", "/usr/share/nginx/html/docker/launch-f43me.sh"]
+    nginx-php:
+        build:
+            context: ./docker
+            dockerfile: ./Dockerfile-php7.4
+        ports:
+            - "8100:8100"
+        links:
+            - postgres
+        volumes:
+            - ./:/usr/share/nginx/html
+        environment:
+            DATABASE_URL: "mysql://root:root@database:3306/f43me"
+        command: [ "bash", "/usr/share/nginx/html/docker/launch-f43me.sh" ]
