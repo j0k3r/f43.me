@@ -992,10 +992,10 @@
     error-stack-parser "^2.0.0"
     string-width "^4.2.3"
 
-"@picocss/pico@^1.5.5":
-  version "1.5.5"
-  resolved "https://registry.yarnpkg.com/@picocss/pico/-/pico-1.5.5.tgz#92d45c2232105a7aa1834d9fb87b3525631b5a2d"
-  integrity sha512-AQSMeeZrk+gAF3JLe0jaQRESGWD+kH2bGMPyuoTniOjxt2MlFnLW4q6Eog9QMelKTDGO6WR0tuTSk92SK9+Ctg==
+"@picocss/pico@^1.5.6":
+  version "1.5.6"
+  resolved "https://registry.yarnpkg.com/@picocss/pico/-/pico-1.5.6.tgz#82a2253e8dc12657f1a7de4e68c01cdc74f798b7"
+  integrity sha512-9R+OdtMuHijKa7AQKBrng/1Q/Cd3BnEigYJXmOxI10Eka2qGGDa4b0hua8UeYu01BTtAiO70K7CQuHffU4YXGA==
 
 "@symfony/webpack-encore@^4.0.0":
   version "4.0.0"
