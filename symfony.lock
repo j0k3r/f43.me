@@ -515,9 +515,6 @@
     "symfony/polyfill-php81": {
         "version": "v1.23.0"
     },
-    "symfony/polyfill-uuid": {
-        "version": "v1.18.1"
-    },
     "symfony/process": {
         "version": "v5.1.5"
     },
@@ -651,7 +648,7 @@
             "repo": "github.com/symfony/recipes",
             "branch": "main",
             "version": "1.10",
-            "ref": "2e458cc7e6f1df1dad890eb104b81e4f302c9bd4"
+            "ref": "51fec8b86251b9bfc126ebc1827c9a02fa81ee81"
         },
         "files": [
             "assets/app.js",
@@ -666,9 +663,6 @@
     },
     "symfony/yaml": {
         "version": "v4.4.13"
-    },
-    "true/punycode": {
-        "version": "v2.1.1"
     },
     "twig/extra-bundle": {
         "version": "v3.0.5"
