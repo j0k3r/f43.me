@@ -28,6 +28,6 @@ class SimplePieProxyTest extends TestCase
         $feed = $proxy->init();
 
         $this->assertSame('App\Xml\SimplePieProxy', \get_class($res));
-        $this->assertSame('SimplePie', \get_class($feed));
+        $this->assertSame('SimplePie\SimplePie', \get_class($feed));
     }
 }
