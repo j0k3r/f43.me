@@ -997,10 +997,10 @@
   resolved "https://registry.yarnpkg.com/@picocss/pico/-/pico-1.5.6.tgz#82a2253e8dc12657f1a7de4e68c01cdc74f798b7"
   integrity sha512-9R+OdtMuHijKa7AQKBrng/1Q/Cd3BnEigYJXmOxI10Eka2qGGDa4b0hua8UeYu01BTtAiO70K7CQuHffU4YXGA==
 
-"@symfony/webpack-encore@^4.0.0":
-  version "4.0.0"
-  resolved "https://registry.yarnpkg.com/@symfony/webpack-encore/-/webpack-encore-4.0.0.tgz#47937806dd17866d41845c000824ab42f1a7d099"
-  integrity sha512-4CrI3Q4mxl/wmAOhGlNVJGasbw9XlZiffN2HgOb9qUsuzJPnNf1qqKz4BbZO8I/R8XLWXi3wVMgIl4cKFxxtCw==
+"@symfony/webpack-encore@^4.1.0":
+  version "4.1.0"
+  resolved "https://registry.yarnpkg.com/@symfony/webpack-encore/-/webpack-encore-4.1.0.tgz#84827a922ddb91d362a74005d4ca47e2101bce19"
+  integrity sha512-t4nydbIisnP/Onmq12+swb40wmeCOowu67Hs4BTCPpN+DMKclemv6dNQKJdFLBnl2mfduEzM8+9g6XOCq+NnYA==
   dependencies:
     "@nuxt/friendly-errors-webpack-plugin" "^2.5.1"
     assets-webpack-plugin "7.0.*"
