@@ -19,7 +19,7 @@
         "core-js": "^3.26.0",
         "regenerator-runtime": "^0.13.10",
         "sass": "^1.56.1",
-        "sass-loader": "^13.1.0",
+        "sass-loader": "^13.2.0",
         "webpack": "^5.74.0",
         "webpack-cli": "^4.10.0",
         "webpack-notifier": "^1.15.0"
