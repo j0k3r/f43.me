@@ -8875,16 +8875,16 @@
         },
         {
             "name": "symfony/twig-bridge",
-            "version": "v5.4.17",
+            "version": "v5.4.19",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/twig-bridge.git",
-                "reference": "5a35a669639ac25e4cb3d6d9c968924d96a7eae6"
+                "reference": "0526188cb886be64351454826fecc6d35356eaf1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/twig-bridge/zipball/5a35a669639ac25e4cb3d6d9c968924d96a7eae6",
-                "reference": "5a35a669639ac25e4cb3d6d9c968924d96a7eae6",
+                "url": "https://api.github.com/repos/symfony/twig-bridge/zipball/0526188cb886be64351454826fecc6d35356eaf1",
+                "reference": "0526188cb886be64351454826fecc6d35356eaf1",
                 "shasum": ""
             },
             "require": {
@@ -8905,7 +8905,7 @@
             },
             "require-dev": {
                 "doctrine/annotations": "^1.12|^2",
-                "egulias/email-validator": "^2.1.10|^3",
+                "egulias/email-validator": "^2.1.10|^3|^4",
                 "phpdocumentor/reflection-docblock": "^3.0|^4.0|^5.0",
                 "symfony/asset": "^4.4|^5.0|^6.0",
                 "symfony/console": "^5.3|^6.0",
@@ -8976,7 +8976,7 @@
             "description": "Provides integration for Twig with various Symfony components",
             "homepage": "https://symfony.com",
             "support": {
-                "source": "https://github.com/symfony/twig-bridge/tree/v5.4.17"
+                "source": "https://github.com/symfony/twig-bridge/tree/v5.4.19"
             },
             "funding": [
                 {
@@ -8992,7 +8992,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2022-12-20T11:10:57+00:00"
+            "time": "2023-01-09T05:43:46+00:00"
         },
         {
             "name": "symfony/twig-bundle",
@@ -10812,16 +10812,16 @@
         },
         {
             "name": "symfony/debug-bundle",
-            "version": "v5.4.11",
+            "version": "v5.4.19",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/debug-bundle.git",
-                "reference": "ec73a8bb7b966ccbe9e76be3c7dc413d8ae84f47"
+                "reference": "40e9ffe230aed8518c80816da27c80433ec220c7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/debug-bundle/zipball/ec73a8bb7b966ccbe9e76be3c7dc413d8ae84f47",
-                "reference": "ec73a8bb7b966ccbe9e76be3c7dc413d8ae84f47",
+                "url": "https://api.github.com/repos/symfony/debug-bundle/zipball/40e9ffe230aed8518c80816da27c80433ec220c7",
+                "reference": "40e9ffe230aed8518c80816da27c80433ec220c7",
                 "shasum": ""
             },
             "require": {
@@ -10871,7 +10871,7 @@
             "description": "Provides a tight integration of the Symfony VarDumper component and the ServerLogCommand from MonologBridge into the Symfony full-stack framework",
             "homepage": "https://symfony.com",
             "support": {
-                "source": "https://github.com/symfony/debug-bundle/tree/v5.4.11"
+                "source": "https://github.com/symfony/debug-bundle/tree/v5.4.19"
             },
             "funding": [
                 {
@@ -10887,7 +10887,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2022-07-20T13:00:38+00:00"
+            "time": "2023-01-01T08:32:19+00:00"
         },
         {
             "name": "symfony/dom-crawler",
