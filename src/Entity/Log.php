@@ -8,7 +8,9 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(
  *     name="log"
  * )
+ *
  * @ORM\Entity(repositoryClass="App\Repository\LogRepository")
+ *
  * @ORM\HasLifecycleCallbacks()
  */
 class Log
@@ -17,7 +19,9 @@ class Log
      * @var int
      *
      * @ORM\Column(name="id", type="integer")
+     *
      * @ORM\Id
+     *
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     protected $id;
@@ -40,6 +44,7 @@ class Log
      * @var Feed
      *
      * @ORM\ManyToOne(targetEntity="App\Entity\Feed", inversedBy="logs")
+     *
      * @ORM\JoinColumn(name="feed_id", referencedColumnName="id")
      */
     protected $feed;
@@ -48,6 +53,7 @@ class Log
      * @var Item
      *
      * @ORM\ManyToOne(targetEntity="App\Entity\Item", inversedBy="logs")
+     *
      * @ORM\JoinColumn(name="item_id", referencedColumnName="id")
      */
     protected $item;

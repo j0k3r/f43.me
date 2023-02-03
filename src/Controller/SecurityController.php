@@ -17,6 +17,7 @@ class SecurityController extends AbstractController
      * Display some information about feeds, items, logs, etc ...
      *
      * @Route("/login", name="login", methods={"GET"})
+     *
      * @Template()
      *
      * @return Response|RedirectResponse
