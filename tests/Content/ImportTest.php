@@ -34,7 +34,7 @@ class ImportTest extends AppTestCase
 
         $rssFeed = new \SimplePie();
         $rssFeed->order_by_date = false;
-        $rssFeed->cache = false;
+        $rssFeed->enable_cache(false);
         $rssFeed->data = [
             'links' => [
                 'alternate' => ['https://www.reddit.com/'],
@@ -153,7 +153,7 @@ class ImportTest extends AppTestCase
 
         $rssFeed = new \SimplePie();
         $rssFeed->order_by_date = false;
-        $rssFeed->cache = false;
+        $rssFeed->enable_cache(false);
         $rssFeed->data = [
             'links' => [
                 'alternate' => ['https://www.reddit.com/'],

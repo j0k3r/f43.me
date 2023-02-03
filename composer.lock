@@ -253,16 +253,16 @@
         },
         {
             "name": "doctrine/annotations",
-            "version": "1.14.2",
+            "version": "1.14.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/annotations.git",
-                "reference": "ad785217c1e9555a7d6c6c8c9f406395a5e2882b"
+                "reference": "fb0d71a7393298a7b232cbf4c8b1f73f3ec3d5af"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/annotations/zipball/ad785217c1e9555a7d6c6c8c9f406395a5e2882b",
-                "reference": "ad785217c1e9555a7d6c6c8c9f406395a5e2882b",
+                "url": "https://api.github.com/repos/doctrine/annotations/zipball/fb0d71a7393298a7b232cbf4c8b1f73f3ec3d5af",
+                "reference": "fb0d71a7393298a7b232cbf4c8b1f73f3ec3d5af",
                 "shasum": ""
             },
             "require": {
@@ -323,9 +323,9 @@
             ],
             "support": {
                 "issues": "https://github.com/doctrine/annotations/issues",
-                "source": "https://github.com/doctrine/annotations/tree/1.14.2"
+                "source": "https://github.com/doctrine/annotations/tree/1.14.3"
             },
-            "time": "2022-12-15T06:48:22+00:00"
+            "time": "2023-02-01T09:20:38+00:00"
         },
         {
             "name": "doctrine/cache",
@@ -1284,16 +1284,16 @@
         },
         {
             "name": "doctrine/persistence",
-            "version": "3.1.3",
+            "version": "3.1.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/persistence.git",
-                "reference": "920da294b4bb0bb527f2a91ed60c18213435880f"
+                "reference": "8bf8ab15960787f1a49d405f6eb8c787b4841119"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/persistence/zipball/920da294b4bb0bb527f2a91ed60c18213435880f",
-                "reference": "920da294b4bb0bb527f2a91ed60c18213435880f",
+                "url": "https://api.github.com/repos/doctrine/persistence/zipball/8bf8ab15960787f1a49d405f6eb8c787b4841119",
+                "reference": "8bf8ab15960787f1a49d405f6eb8c787b4841119",
                 "shasum": ""
             },
             "require": {
@@ -1362,7 +1362,7 @@
             ],
             "support": {
                 "issues": "https://github.com/doctrine/persistence/issues",
-                "source": "https://github.com/doctrine/persistence/tree/3.1.3"
+                "source": "https://github.com/doctrine/persistence/tree/3.1.4"
             },
             "funding": [
                 {
@@ -1378,7 +1378,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2023-01-19T13:39:42+00:00"
+            "time": "2023-02-03T11:13:07+00:00"
         },
         {
             "name": "doctrine/sql-formatter",
@@ -2069,16 +2069,16 @@
         },
         {
             "name": "j0k3r/graby-site-config",
-            "version": "1.0.161",
+            "version": "1.0.163",
             "source": {
                 "type": "git",
                 "url": "https://github.com/j0k3r/graby-site-config.git",
-                "reference": "6db784d023232ca71d06cbfd62a258e1df9514ef"
+                "reference": "5d34c016c9928cba556fc26867e769c4cf82b538"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/j0k3r/graby-site-config/zipball/6db784d023232ca71d06cbfd62a258e1df9514ef",
-                "reference": "6db784d023232ca71d06cbfd62a258e1df9514ef",
+                "url": "https://api.github.com/repos/j0k3r/graby-site-config/zipball/5d34c016c9928cba556fc26867e769c4cf82b538",
+                "reference": "5d34c016c9928cba556fc26867e769c4cf82b538",
                 "shasum": ""
             },
             "require": {
@@ -2107,9 +2107,9 @@
             "description": "Graby site config files",
             "support": {
                 "issues": "https://github.com/j0k3r/graby-site-config/issues",
-                "source": "https://github.com/j0k3r/graby-site-config/tree/1.0.161"
+                "source": "https://github.com/j0k3r/graby-site-config/tree/1.0.163"
             },
-            "time": "2023-01-01T02:28:19+00:00"
+            "time": "2023-02-01T02:29:05+00:00"
         },
         {
             "name": "j0k3r/httplug-ssrf-plugin",
@@ -3892,16 +3892,16 @@
         },
         {
             "name": "sentry/sentry",
-            "version": "3.12.0",
+            "version": "3.12.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/getsentry/sentry-php.git",
-                "reference": "4902f43640963ed45517fd7c1da7fdd5511bb304"
+                "reference": "155bb9b78438999de4529d6f051465be15a58bc5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/getsentry/sentry-php/zipball/4902f43640963ed45517fd7c1da7fdd5511bb304",
-                "reference": "4902f43640963ed45517fd7c1da7fdd5511bb304",
+                "url": "https://api.github.com/repos/getsentry/sentry-php/zipball/155bb9b78438999de4529d6f051465be15a58bc5",
+                "reference": "155bb9b78438999de4529d6f051465be15a58bc5",
                 "shasum": ""
             },
             "require": {
@@ -3980,7 +3980,7 @@
             ],
             "support": {
                 "issues": "https://github.com/getsentry/sentry-php/issues",
-                "source": "https://github.com/getsentry/sentry-php/tree/3.12.0"
+                "source": "https://github.com/getsentry/sentry-php/tree/3.12.1"
             },
             "funding": [
                 {
@@ -3992,7 +3992,7 @@
                     "type": "custom"
                 }
             ],
-            "time": "2022-11-22T10:57:08+00:00"
+            "time": "2023-01-12T12:24:27+00:00"
         },
         {
             "name": "sentry/sentry-symfony",
@@ -4112,26 +4112,27 @@
         },
         {
             "name": "simplepie/simplepie",
-            "version": "1.7.0",
+            "version": "1.8.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/simplepie/simplepie.git",
-                "reference": "9e9add3428ce86aede874bcf9a59c78e272f8dc1"
+                "reference": "65b095d87bc00898d8fa7737bdbcda93a3fbcc55"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/simplepie/simplepie/zipball/9e9add3428ce86aede874bcf9a59c78e272f8dc1",
-                "reference": "9e9add3428ce86aede874bcf9a59c78e272f8dc1",
+                "url": "https://api.github.com/repos/simplepie/simplepie/zipball/65b095d87bc00898d8fa7737bdbcda93a3fbcc55",
+                "reference": "65b095d87bc00898d8fa7737bdbcda93a3fbcc55",
                 "shasum": ""
             },
             "require": {
                 "ext-pcre": "*",
                 "ext-xml": "*",
                 "ext-xmlreader": "*",
-                "php": ">=5.6.0"
+                "php": ">=7.2.0"
             },
             "require-dev": {
                 "friendsofphp/php-cs-fixer": "^2.19 || ^3.8",
+                "psr/simple-cache": "^1 || ^2 || ^3",
                 "yoast/phpunit-polyfills": "^1.0.1"
             },
             "suggest": {
@@ -4181,9 +4182,9 @@
             ],
             "support": {
                 "issues": "https://github.com/simplepie/simplepie/issues",
-                "source": "https://github.com/simplepie/simplepie/tree/1.7.0"
+                "source": "https://github.com/simplepie/simplepie/tree/1.8.0"
             },
-            "time": "2022-09-30T06:49:48+00:00"
+            "time": "2023-01-20T08:37:35+00:00"
         },
         {
             "name": "smalot/pdfparser",
@@ -4965,16 +4966,16 @@
         },
         {
             "name": "symfony/doctrine-bridge",
-            "version": "v5.4.17",
+            "version": "v5.4.19",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/doctrine-bridge.git",
-                "reference": "e9fce4a5568337402b2b1106907140d56a9d2454"
+                "reference": "359ba96a1e494f1fc08b36d51a74d2fe01d68e68"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/doctrine-bridge/zipball/e9fce4a5568337402b2b1106907140d56a9d2454",
-                "reference": "e9fce4a5568337402b2b1106907140d56a9d2454",
+                "url": "https://api.github.com/repos/symfony/doctrine-bridge/zipball/359ba96a1e494f1fc08b36d51a74d2fe01d68e68",
+                "reference": "359ba96a1e494f1fc08b36d51a74d2fe01d68e68",
                 "shasum": ""
             },
             "require": {
@@ -5062,7 +5063,7 @@
             "description": "Provides integration for Doctrine with various Symfony components",
             "homepage": "https://symfony.com",
             "support": {
-                "source": "https://github.com/symfony/doctrine-bridge/tree/v5.4.17"
+                "source": "https://github.com/symfony/doctrine-bridge/tree/v5.4.19"
             },
             "funding": [
                 {
@@ -5078,7 +5079,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2022-12-20T11:10:57+00:00"
+            "time": "2023-01-06T12:33:31+00:00"
         },
         {
             "name": "symfony/doctrine-messenger",
@@ -5907,16 +5908,16 @@
         },
         {
             "name": "symfony/http-client",
-            "version": "v5.4.17",
+            "version": "v5.4.20",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/http-client.git",
-                "reference": "772129f800fc0bfaa6bd40c40934d544f0957d30"
+                "reference": "b4d936b657c7952a41e89efd0ddcea51f8c90f34"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/http-client/zipball/772129f800fc0bfaa6bd40c40934d544f0957d30",
-                "reference": "772129f800fc0bfaa6bd40c40934d544f0957d30",
+                "url": "https://api.github.com/repos/symfony/http-client/zipball/b4d936b657c7952a41e89efd0ddcea51f8c90f34",
+                "reference": "b4d936b657c7952a41e89efd0ddcea51f8c90f34",
                 "shasum": ""
             },
             "require": {
@@ -5974,7 +5975,7 @@
             "description": "Provides powerful methods to fetch HTTP resources synchronously or asynchronously",
             "homepage": "https://symfony.com",
             "support": {
-                "source": "https://github.com/symfony/http-client/tree/v5.4.17"
+                "source": "https://github.com/symfony/http-client/tree/v5.4.20"
             },
             "funding": [
                 {
@@ -5990,7 +5991,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2022-12-13T11:07:37+00:00"
+            "time": "2023-01-25T18:32:18+00:00"
         },
         {
             "name": "symfony/http-client-contracts",
@@ -6429,16 +6430,16 @@
         },
         {
             "name": "symfony/monolog-bridge",
-            "version": "v5.4.17",
+            "version": "v5.4.19",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/monolog-bridge.git",
-                "reference": "0280390d8232a5668b02e0d87e9fce0a535c4af9"
+                "reference": "6b2732feb1335d588a902ca744cae9812cc0e7d3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/monolog-bridge/zipball/0280390d8232a5668b02e0d87e9fce0a535c4af9",
-                "reference": "0280390d8232a5668b02e0d87e9fce0a535c4af9",
+                "url": "https://api.github.com/repos/symfony/monolog-bridge/zipball/6b2732feb1335d588a902ca744cae9812cc0e7d3",
+                "reference": "6b2732feb1335d588a902ca744cae9812cc0e7d3",
                 "shasum": ""
             },
             "require": {
@@ -6493,7 +6494,7 @@
             "description": "Provides integration for Monolog with various Symfony components",
             "homepage": "https://symfony.com",
             "support": {
-                "source": "https://github.com/symfony/monolog-bridge/tree/v5.4.17"
+                "source": "https://github.com/symfony/monolog-bridge/tree/v5.4.19"
             },
             "funding": [
                 {
@@ -6509,7 +6510,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2022-12-13T10:55:04+00:00"
+            "time": "2023-01-01T08:32:19+00:00"
         },
         {
             "name": "symfony/monolog-bundle",
@@ -9884,16 +9885,16 @@
         },
         {
             "name": "doctrine/data-fixtures",
-            "version": "1.6.1",
+            "version": "1.6.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/data-fixtures.git",
-                "reference": "1a4232c15143ca3c127812d19b23a7961c41eeed"
+                "reference": "c27821d038e64f1bfc852a94064d65d2a75ad01f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/data-fixtures/zipball/1a4232c15143ca3c127812d19b23a7961c41eeed",
-                "reference": "1a4232c15143ca3c127812d19b23a7961c41eeed",
+                "url": "https://api.github.com/repos/doctrine/data-fixtures/zipball/c27821d038e64f1bfc852a94064d65d2a75ad01f",
+                "reference": "c27821d038e64f1bfc852a94064d65d2a75ad01f",
                 "shasum": ""
             },
             "require": {
@@ -9946,7 +9947,7 @@
             ],
             "support": {
                 "issues": "https://github.com/doctrine/data-fixtures/issues",
-                "source": "https://github.com/doctrine/data-fixtures/tree/1.6.1"
+                "source": "https://github.com/doctrine/data-fixtures/tree/1.6.3"
             },
             "funding": [
                 {
@@ -9962,7 +9963,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2022-12-23T12:13:51+00:00"
+            "time": "2023-01-07T15:10:22+00:00"
         },
         {
             "name": "doctrine/doctrine-fixtures-bundle",
@@ -10139,16 +10140,16 @@
         },
         {
             "name": "nikic/php-parser",
-            "version": "v4.15.2",
+            "version": "v4.15.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nikic/PHP-Parser.git",
-                "reference": "f59bbe44bf7d96f24f3e2b4ddc21cd52c1d2adbc"
+                "reference": "570e980a201d8ed0236b0a62ddf2c9cbb2034039"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nikic/PHP-Parser/zipball/f59bbe44bf7d96f24f3e2b4ddc21cd52c1d2adbc",
-                "reference": "f59bbe44bf7d96f24f3e2b4ddc21cd52c1d2adbc",
+                "url": "https://api.github.com/repos/nikic/PHP-Parser/zipball/570e980a201d8ed0236b0a62ddf2c9cbb2034039",
+                "reference": "570e980a201d8ed0236b0a62ddf2c9cbb2034039",
                 "shasum": ""
             },
             "require": {
@@ -10189,9 +10190,9 @@
             ],
             "support": {
                 "issues": "https://github.com/nikic/PHP-Parser/issues",
-                "source": "https://github.com/nikic/PHP-Parser/tree/v4.15.2"
+                "source": "https://github.com/nikic/PHP-Parser/tree/v4.15.3"
             },
-            "time": "2022-11-12T15:38:23+00:00"
+            "time": "2023-01-16T22:05:37+00:00"
         },
         {
             "name": "php-http/mock-client",
