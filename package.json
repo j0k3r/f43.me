@@ -14,7 +14,7 @@
     },
     "devDependencies": {
         "@babel/core": "^7.21.4",
-        "@babel/preset-env": "^7.20.2",
+        "@babel/preset-env": "^7.21.4",
         "@symfony/webpack-encore": "^4.2.0",
         "core-js": "^3.29.1",
         "regenerator-runtime": "^0.13.11",
