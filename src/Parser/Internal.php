@@ -33,10 +33,6 @@ class Internal extends AbstractParser
             return '';
         }
 
-        if (isset($result['html']) && false !== $result['html']) {
-            return $result['html'];
-        }
-
-        return '';
+        return $result->getHtml() ?? '';
     }
 }
