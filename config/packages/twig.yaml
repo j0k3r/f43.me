@@ -3,8 +3,6 @@ twig:
     debug: '%kernel.debug%'
     strict_variables: '%kernel.debug%'
     exception_controller: null
-    globals:
-        ga_tracking: "%env(GOOGLE_ANALYTICS_CODE)%"
 
 when@test:
     twig:

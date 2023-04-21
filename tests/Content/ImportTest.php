@@ -17,6 +17,9 @@ use App\Tests\AppTestCase;
 use Graby\Graby;
 use GuzzleHttp\Psr7\Response;
 use Psr\Log\NullLogger;
+use SimplePie\Item as SimplePieItem;
+use SimplePie\Registry as SimplePieRegistry;
+use SimplePie\SimplePie;
 
 /**
  * Crazy complicated tests with too much mocks to replicate a bug where url with & in reddit feed are converted to &amp; and breaks the link.
@@ -32,16 +35,16 @@ class ImportTest extends AppTestCase
         $feed->setParser('internal');
         $feed->setHost('reddit.com');
 
-        $rssFeed = new \SimplePie();
+        $rssFeed = new SimplePie();
         $rssFeed->order_by_date = false;
-        $rssFeed->cache = false;
+        $rssFeed->enable_cache(false);
         $rssFeed->data = [
             'links' => [
                 'alternate' => ['https://www.reddit.com/'],
             ],
         ];
 
-        $rssFeedItem = new \SimplePie_Item($rssFeed, [
+        $rssFeedItem = new SimplePieItem($rssFeed, [
             'links' => [
                 'alternate' => [$link],
             ],
@@ -66,7 +69,7 @@ class ImportTest extends AppTestCase
                 ],
             ],
         ]);
-        $rssFeedItem->set_registry(new \SimplePie_Registry());
+        $rssFeedItem->set_registry(new SimplePieRegistry());
 
         $rssFeed->data = [
             'items' => [
@@ -151,16 +154,16 @@ class ImportTest extends AppTestCase
         $feed->setParser('internal');
         $feed->setHost('reddit.com');
 
-        $rssFeed = new \SimplePie();
+        $rssFeed = new SimplePie();
         $rssFeed->order_by_date = false;
-        $rssFeed->cache = false;
+        $rssFeed->enable_cache(false);
         $rssFeed->data = [
             'links' => [
                 'alternate' => ['https://www.reddit.com/'],
             ],
         ];
 
-        $rssFeedItem = new \SimplePie_Item($rssFeed, [
+        $rssFeedItem = new SimplePieItem($rssFeed, [
             'links' => [
                 'alternate' => [$link],
             ],
@@ -185,7 +188,7 @@ class ImportTest extends AppTestCase
                 ],
             ],
         ]);
-        $rssFeedItem->set_registry(new \SimplePie_Registry());
+        $rssFeedItem->set_registry(new SimplePieRegistry());
 
         $rssFeed->data = [
             'items' => [

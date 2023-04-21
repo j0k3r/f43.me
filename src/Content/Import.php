@@ -80,7 +80,7 @@ class Import
 
             $this->logger->debug('<info>Link to check</info>: <comment>' . $rssFeed->get_item_quantity() . '</comment>');
 
-            /** @var array<\SimplePie_Item> */
+            /** @var array<\SimplePie\Item> */
             $items = $rssFeed->get_items();
 
             foreach ($items as $item) {

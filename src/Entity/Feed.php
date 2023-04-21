@@ -12,10 +12,13 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Table(
  *     name="feed",
  *     uniqueConstraints={
+ *
  *         @ORM\UniqueConstraint(name="feed_slug_unique", columns={"slug"})
  *     }
  * )
+ *
  * @ORM\Entity(repositoryClass="App\Repository\FeedRepository")
+ *
  * @ORM\HasLifecycleCallbacks()
  */
 class Feed
@@ -24,7 +27,9 @@ class Feed
      * @var int
      *
      * @ORM\Column(name="id", type="integer")
+     *
      * @ORM\Id
+     *
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     protected $id;
@@ -33,6 +38,7 @@ class Feed
      * @var string
      *
      * @ORM\Column(name="name", type="string", length=191)
+     *
      * @Assert\NotBlank()
      */
     protected $name;
@@ -48,8 +54,11 @@ class Feed
      * @var string
      *
      * @ORM\Column(name="link", type="string")
+     *
      * @Assert\NotBlank()
+     *
      * @Assert\Url()
+     *
      * @FeedAssert\ConstraintRss
      */
     protected $link;
@@ -58,6 +67,7 @@ class Feed
      * @var string
      *
      * @ORM\Column(name="host", type="string")
+     *
      * @Assert\NotBlank()
      */
     protected $host;
@@ -101,6 +111,7 @@ class Feed
      * @var string
      *
      * @Gedmo\Slug(fields={"name"}, updatable=false, unique=true)
+     *
      * @ORM\Column(name="slug", type="string", length=191)
      */
     protected $slug;
@@ -553,6 +564,7 @@ class Feed
 
     /**
      * @ORM\PrePersist
+     *
      * @ORM\PreUpdate
      */
     public function timestamps(): void
