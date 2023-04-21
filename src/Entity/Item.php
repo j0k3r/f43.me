@@ -10,7 +10,9 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Table(
  *     name="item"
  * )
+ *
  * @ORM\Entity(repositoryClass="App\Repository\ItemRepository")
+ *
  * @ORM\HasLifecycleCallbacks()
  */
 class Item
@@ -19,7 +21,9 @@ class Item
      * @var int
      *
      * @ORM\Column(name="id", type="integer")
+     *
      * @ORM\Id
+     *
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     protected $id;
@@ -35,7 +39,9 @@ class Item
      * @var string
      *
      * @ORM\Column(name="link", type="text")
+     *
      * @Assert\NotBlank()
+     *
      * @Assert\Url()
      */
     protected $link;
@@ -44,7 +50,9 @@ class Item
      * @var string
      *
      * @ORM\Column(name="permalink", type="text")
+     *
      * @Assert\NotBlank()
+     *
      * @Assert\Url()
      */
     protected $permalink;
@@ -81,6 +89,7 @@ class Item
      * @var Feed
      *
      * @ORM\ManyToOne(targetEntity="App\Entity\Feed", inversedBy="items")
+     *
      * @ORM\JoinColumn(name="feed_id", referencedColumnName="id")
      */
     protected $feed;
@@ -289,6 +298,7 @@ class Item
 
     /**
      * @ORM\PrePersist
+     *
      * @ORM\PreUpdate
      */
     public function timestamps(): void

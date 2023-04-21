@@ -2,10 +2,11 @@
 
 namespace App\Xml;
 
+use SimplePie\SimplePie;
+
 class SimplePieProxy
 {
-    /** @var \SimplePie */
-    protected $feed;
+    protected SimplePie $feed;
 
     /**
      * Create a new Proxy for SimplePie.
@@ -16,7 +17,7 @@ class SimplePieProxy
      */
     public function __construct($cache, $itemLimit = 25, $enableCache = true)
     {
-        $this->feed = new \SimplePie();
+        $this->feed = new SimplePie();
         $this->feed->set_cache_location($cache);
         $this->feed->set_item_limit($itemLimit);
 
@@ -50,7 +51,7 @@ class SimplePieProxy
      *
      * @see  SimplePie->init
      */
-    public function init(): \SimplePie
+    public function init(): SimplePie
     {
         $this->feed->init();
 

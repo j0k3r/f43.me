@@ -9,15 +9,19 @@
         "build": "encore production --progress"
     },
     "dependencies": {
-        "@picocss/pico": "^1.5.5",
+        "@picocss/pico": "^1.5.9",
         "timeago.js": "^4.0.2"
     },
     "devDependencies": {
-        "@symfony/webpack-encore": "^3.1.0",
-        "core-js": "^3.25.3",
-        "regenerator-runtime": "^0.13.9",
-        "sass": "^1.55.0",
-        "sass-loader": "^13.0.2",
+        "@babel/core": "^7.21.4",
+        "@babel/preset-env": "^7.21.4",
+        "@symfony/webpack-encore": "^4.3.0",
+        "core-js": "^3.30.1",
+        "regenerator-runtime": "^0.13.11",
+        "sass": "^1.62.0",
+        "sass-loader": "^13.2.2",
+        "webpack": "^5.80.0",
+        "webpack-cli": "^5.0.1",
         "webpack-notifier": "^1.15.0"
     }
 }
