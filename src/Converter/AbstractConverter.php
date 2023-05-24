@@ -10,9 +10,6 @@ abstract class AbstractConverter implements LoggerAwareInterface
     /** @var LoggerInterface */
     protected $logger;
 
-    /**
-     * {@inheritdoc}
-     */
     public function setLogger(LoggerInterface $logger): void
     {
         $this->logger = $logger;

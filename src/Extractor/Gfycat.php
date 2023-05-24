@@ -5,11 +5,8 @@ namespace App\Extractor;
 class Gfycat extends AbstractExtractor
 {
     /** @var string */
-    protected $gfycatId = null;
+    protected $gfycatId;
 
-    /**
-     * {@inheritdoc}
-     */
     public function match(string $url): bool
     {
         $host = parse_url($url, \PHP_URL_HOST);
@@ -19,7 +16,7 @@ class Gfycat extends AbstractExtractor
             return false;
         }
 
-        if (false === strpos((string) $host, 'gfycat.com')) {
+        if (!str_contains((string) $host, 'gfycat.com')) {
             return false;
         }
 
@@ -38,9 +35,6 @@ class Gfycat extends AbstractExtractor
         return true;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getContent(): string
     {
         if (!$this->gfycatId) {

@@ -9,9 +9,6 @@ namespace App\Improver;
  */
 class Reddit extends DefaultImprover
 {
-    /**
-     * {@inheritdoc}
-     */
     public function match(string $host): bool
     {
         return \in_array($host, ['reddit.com', 'www.reddit.com'], true);

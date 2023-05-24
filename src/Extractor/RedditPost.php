@@ -5,11 +5,8 @@ namespace App\Extractor;
 class RedditPost extends AbstractExtractor
 {
     /** @var array */
-    protected $redditPostData = null;
+    protected $redditPostData;
 
-    /**
-     * {@inheritdoc}
-     */
     public function match(string $url): bool
     {
         $host = parse_url($url, \PHP_URL_HOST);
@@ -44,9 +41,6 @@ class RedditPost extends AbstractExtractor
         return true;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getContent(): string
     {
         if (!$this->redditPostData) {

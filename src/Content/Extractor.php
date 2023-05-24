@@ -19,7 +19,7 @@ class Extractor
     /** @var bool */
     public $useDefault = false;
     /** @var Feed|null */
-    protected $feed = null;
+    protected $feed;
     /** @var ExtractorChain */
     protected $extractorChain;
     /** @var ImproverChain */
