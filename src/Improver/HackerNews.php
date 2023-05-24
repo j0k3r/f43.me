@@ -9,12 +9,9 @@ namespace App\Improver;
  */
 class HackerNews extends DefaultImprover
 {
-    /**
-     * {@inheritdoc}
-     */
     public function match(string $host): bool
     {
-        return 0 === strpos('news.ycombinator.com', $host);
+        return str_starts_with('news.ycombinator.com', $host);
     }
 
     /**

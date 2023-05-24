@@ -52,7 +52,7 @@ class FeedRepository extends ServiceEntityRepository
      * @param array  $ids  An array of id
      * @param string $type in or notIn
      *
-     * @return mixed
+     * @return array<Feed>
      */
     public function findByIds(array $ids, string $type = 'in')
     {

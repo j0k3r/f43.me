@@ -5,11 +5,8 @@ namespace App\Extractor;
 class Vidme extends AbstractExtractor
 {
     /** @var string */
-    protected $vidmeUrl = null;
+    protected $vidmeUrl;
 
-    /**
-     * {@inheritdoc}
-     */
     public function match(string $url): bool
     {
         $host = parse_url($url, \PHP_URL_HOST);
@@ -19,7 +16,7 @@ class Vidme extends AbstractExtractor
             return false;
         }
 
-        if (0 !== strpos((string) $host, 'vid.me')) {
+        if (!str_starts_with((string) $host, 'vid.me')) {
             return false;
         }
 
@@ -35,9 +32,6 @@ class Vidme extends AbstractExtractor
         return true;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getContent(): string
     {
         if (!$this->vidmeUrl) {

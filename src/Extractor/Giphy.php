@@ -5,11 +5,8 @@ namespace App\Extractor;
 class Giphy extends AbstractExtractor
 {
     /** @var string */
-    protected $giphyUrl = null;
+    protected $giphyUrl;
 
-    /**
-     * {@inheritdoc}
-     */
     public function match(string $url): bool
     {
         $host = parse_url($url, \PHP_URL_HOST);
@@ -34,9 +31,6 @@ class Giphy extends AbstractExtractor
         return true;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getContent(): string
     {
         if (!$this->giphyUrl) {

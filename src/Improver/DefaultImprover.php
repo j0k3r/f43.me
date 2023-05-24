@@ -71,7 +71,7 @@ class DefaultImprover
         parse_str($query, $queryExploded);
 
         $notUtmParameters = array_filter(array_keys($queryExploded), function ($k) {
-            return 0 !== strpos((string) $k, 'utm');
+            return !str_starts_with((string) $k, 'utm');
         });
         $newQuery = array_intersect_key($queryExploded, array_flip($notUtmParameters));
 

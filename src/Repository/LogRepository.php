@@ -40,7 +40,7 @@ class LogRepository extends ServiceEntityRepository
      *
      * @param int $feedId Feed id
      *
-     * @return mixed
+     * @return array<Log>
      */
     public function findByFeedId(int $feedId)
     {

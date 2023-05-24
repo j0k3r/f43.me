@@ -5,11 +5,8 @@ namespace App\Extractor;
 class Periscope extends AbstractExtractor
 {
     /** @var string */
-    protected $periscopeId = null;
+    protected $periscopeId;
 
-    /**
-     * {@inheritdoc}
-     */
     public function match(string $url): bool
     {
         $host = parse_url($url, \PHP_URL_HOST);
@@ -34,9 +31,6 @@ class Periscope extends AbstractExtractor
         return true;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getContent(): string
     {
         if (!$this->periscopeId) {

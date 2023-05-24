@@ -18,9 +18,6 @@ class Internal extends AbstractParser
         $this->graby = $graby;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function parse(string $url, bool $reloadConfigFiles = false): string
     {
         if (true === $reloadConfigFiles) {
