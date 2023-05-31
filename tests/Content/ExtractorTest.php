@@ -5,6 +5,10 @@ namespace App\Tests\Content;
 use App\Content\Extractor;
 use App\Entity\Feed;
 use App\Parser\Internal;
+use Graby\Content;
+use Graby\HttpClient\EffectiveResponse;
+use GuzzleHttp\Psr7\Response;
+use GuzzleHttp\Psr7\Uri;
 use PHPUnit\Framework\TestCase;
 
 class ExtractorTest extends TestCase
@@ -18,7 +22,7 @@ class ExtractorTest extends TestCase
 
         $this->graby->expects($this->any())
             ->method('fetchContent')
-            ->willReturn(['html' => false]);
+            ->willReturn($this->getGrabyContent(''));
 
         $contentExtractor->parseContent('http://foo.bar.nowhere', 'default content');
 
@@ -45,7 +49,7 @@ class ExtractorTest extends TestCase
 
         $this->graby->expects($this->any())
             ->method('fetchContent')
-            ->willReturn(['html' => false]);
+            ->willReturn($this->getGrabyContent(''));
 
         $contentExtractor->parseContent('http://foo.bar.nowhere', 'default content');
 
@@ -58,7 +62,7 @@ class ExtractorTest extends TestCase
 
         $this->graby->expects($this->any())
             ->method('fetchContent')
-            ->willReturn(['html' => false]);
+            ->willReturn($this->getGrabyContent(''));
 
         $contentExtractor->parseContent('http://foo.bar.nowhere', 'default content');
 
@@ -167,5 +171,29 @@ class ExtractorTest extends TestCase
         $contentExtractor->init('internal', $feed, true);
 
         return $contentExtractor;
+    }
+
+    private function getGrabyContent(string $html): Content
+    {
+        return new Content(
+            new EffectiveResponse(
+                new Uri('http://website.test/content.html'),
+                new Response(200, [], '')
+            ),
+            // html
+            $html,
+            // title
+            '',
+            // language
+            null,
+            // date
+            null,
+            // authors
+            [],
+            // image
+            null,
+            // is ads
+            false,
+        );
     }
 }
