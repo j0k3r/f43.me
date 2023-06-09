@@ -13,7 +13,7 @@
         "timeago.js": "^4.0.2"
     },
     "devDependencies": {
-        "@babel/core": "^7.22.1",
+        "@babel/core": "^7.22.5",
         "@babel/preset-env": "^7.22.5",
         "@symfony/webpack-encore": "^4.3.0",
         "core-js": "^3.30.2",
