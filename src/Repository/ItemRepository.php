@@ -137,7 +137,7 @@ class ItemRepository extends ServiceEntityRepository
      */
     public function countByFeedId(int $feedId)
     {
-        return $this->createQueryBuilder('i')
+        return (int) $this->createQueryBuilder('i')
             ->select('count(i.id)')
             ->leftJoin('i.feed', 'f')
             ->where('f.id = :feedId')->setParameter('feedId', $feedId)
