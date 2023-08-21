@@ -119,7 +119,7 @@ class LogRepository extends ServiceEntityRepository
      */
     public function countByFeedId(int $feedId)
     {
-        return $this->createQueryBuilder('l')
+        return (int) $this->createQueryBuilder('l')
             ->select('count(l.id)')
             ->leftJoin('l.feed', 'f')
             ->where('f.id = :feedId')->setParameter('feedId', $feedId)
