@@ -9,8 +9,16 @@ updates:
   - dependency-name: ricardoper/twitteroauth
     versions:
     - "> 1.1.1"
+  groups:
+    symfony-dependencies:
+      patterns:
+        - "*symfony*"
 - package-ecosystem: npm
   directory: "/"
   schedule:
     interval: daily
   open-pull-requests-limit: 10
+  groups:
+    babel-dependencies:
+      patterns:
+        - "*babel*"
