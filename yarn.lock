@@ -1081,10 +1081,10 @@
     error-stack-parser "^2.0.0"
     string-width "^4.2.3"
 
-"@picocss/pico@^1.5.10":
-  version "1.5.10"
-  resolved "https://registry.yarnpkg.com/@picocss/pico/-/pico-1.5.10.tgz#94f813f5de6206d5a4492b801337eadf6dfcc889"
-  integrity sha512-+LafMsrwPxXQMk6sI///TmSInCwwZmq+K7SikyL3N/4GhhwzyPC+TQLUEqmrLyjluR+uIpFFcqjty30Rtr6GxQ==
+"@picocss/pico@^1.5.11":
+  version "1.5.11"
+  resolved "https://registry.yarnpkg.com/@picocss/pico/-/pico-1.5.11.tgz#8bd37fc546fcab95625218dddd8cf788b8fd5f8a"
+  integrity sha512-cDaFiSyNPtuSTwSQt/05xsw8+g2ek4/S58tgh9Nc7miJCCdUrY9PAyl4OPWRJtYgJDdEvkUA9GuGj0J4nDP4Cw==
 
 "@sinclair/typebox@^0.27.8":
   version "0.27.8"
