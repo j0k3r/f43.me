@@ -26,7 +26,7 @@ class HackerNewsTest extends AppTestCase
     /**
      * @dataProvider dataMatch
      */
-    public function testMatch(string $url, bool $expected, array $valueReturned = null): void
+    public function testMatch(string $url, bool $expected, ?array $valueReturned = null): void
     {
         $response = new Response(200, []);
         if (null !== $valueReturned) {
