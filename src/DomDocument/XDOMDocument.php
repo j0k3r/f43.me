@@ -15,7 +15,7 @@ class XDOMDocument extends \DOMDocument
      * @param string|null $version  The version number of the document as part of the XML declaration
      * @param string|null $encoding The encoding of the document as part of the XML declaration
      */
-    public function __construct(string $version = null, string $encoding = null)
+    public function __construct(?string $version = null, ?string $encoding = null)
     {
         parent::__construct((string) $version, (string) $encoding);
 
