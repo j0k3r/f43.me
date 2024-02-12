@@ -9,7 +9,7 @@
         "build": "encore production --progress"
     },
     "dependencies": {
-        "@picocss/pico": "^1.5.11",
+        "@picocss/pico": "^2.0.0",
         "timeago.js": "^4.0.2"
     },
     "devDependencies": {
