@@ -22,3 +22,10 @@ updates:
     babel-dependencies:
       patterns:
         - "*babel*"
+- package-ecosystem: github-actions
+  directory: "/"
+  schedule:
+    interval: weekly
+    time: "04:00"
+    timezone: Europe/Paris
+  open-pull-requests-limit: 10
