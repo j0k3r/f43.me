@@ -32,7 +32,7 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           fetch-depth: 2
 
@@ -51,9 +51,10 @@ jobs:
         uses: ramsey/composer-install@v2
 
       - name: Install Node
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
-          node-version: '16'
+          node-version-file: ".nvmrc"
+          cache: "yarn"
 
       - name: Install dependencies with Yarn
         run: yarn install && yarn dev
