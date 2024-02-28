@@ -2925,16 +2925,16 @@
         },
         {
             "name": "php-http/httplug-bundle",
-            "version": "1.32.0",
+            "version": "1.33.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-http/HttplugBundle.git",
-                "reference": "7faff5c33d0fb507dae4a8dedfbe4dc32165e8fa"
+                "reference": "76e4c5d91f5149b56f3fccccd7a6e66901177b09"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-http/HttplugBundle/zipball/7faff5c33d0fb507dae4a8dedfbe4dc32165e8fa",
-                "reference": "7faff5c33d0fb507dae4a8dedfbe4dc32165e8fa",
+                "url": "https://api.github.com/repos/php-http/HttplugBundle/zipball/76e4c5d91f5149b56f3fccccd7a6e66901177b09",
+                "reference": "76e4c5d91f5149b56f3fccccd7a6e66901177b09",
                 "shasum": ""
             },
             "require": {
@@ -2955,6 +2955,7 @@
                 "symfony/options-resolver": "^4.4 || ^5.0 || ^6.0 || ^7.0"
             },
             "conflict": {
+                "php-http/cache-plugin": "<1.7.0",
                 "php-http/curl-client": "<2.0",
                 "php-http/guzzle6-adapter": "<1.1",
                 "php-http/socket-client": "<2.0"
@@ -3020,9 +3021,9 @@
             ],
             "support": {
                 "issues": "https://github.com/php-http/HttplugBundle/issues",
-                "source": "https://github.com/php-http/HttplugBundle/tree/1.32.0"
+                "source": "https://github.com/php-http/HttplugBundle/tree/1.33.0"
             },
-            "time": "2023-12-06T14:57:48+00:00"
+            "time": "2024-02-27T16:04:16+00:00"
         },
         {
             "name": "php-http/logger-plugin",
