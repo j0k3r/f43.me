@@ -5,11 +5,8 @@ namespace App\Extractor;
 class Ifttt extends AbstractExtractor
 {
     /** @var string */
-    protected $recipeId = null;
+    protected $recipeId;
 
-    /**
-     * {@inheritdoc}
-     */
     public function match(string $url): bool
     {
         $host = parse_url($url, \PHP_URL_HOST);
@@ -19,7 +16,7 @@ class Ifttt extends AbstractExtractor
             return false;
         }
 
-        if (0 !== strpos((string) $host, 'ifttt.com')) {
+        if (!str_starts_with((string) $host, 'ifttt.com')) {
             return false;
         }
 
@@ -35,9 +32,6 @@ class Ifttt extends AbstractExtractor
         return true;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getContent(): string
     {
         if (!$this->recipeId) {

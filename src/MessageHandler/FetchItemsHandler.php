@@ -7,7 +7,6 @@ use App\Message\FeedSync;
 use App\Repository\FeedRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use Psr\Log\LoggerInterface;
-use Swarrot\Broker\Message;
 use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
 use Symfony\Component\Routing\RouterInterface;
 

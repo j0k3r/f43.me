@@ -26,9 +26,6 @@ class Github extends AbstractExtractor
         $this->githubClientSecret = $githubClientSecret;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function match(string $url): bool
     {
         $host = parse_url($url, \PHP_URL_HOST);
@@ -38,7 +35,7 @@ class Github extends AbstractExtractor
             return false;
         }
 
-        if (false === strpos((string) $host, 'github.com')) {
+        if (!str_contains((string) $host, 'github.com')) {
             return false;
         }
 
@@ -79,9 +76,6 @@ class Github extends AbstractExtractor
         return false;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getContent(): string
     {
         if (!$this->githubRepo) {

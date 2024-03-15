@@ -7,18 +7,15 @@ class Tumblr extends AbstractExtractor
     /** @var string */
     protected $tumblrApiKey;
     /** @var string */
-    protected $tumblrId = null;
+    protected $tumblrId;
     /** @var string */
-    protected $tumblrHost = null;
+    protected $tumblrHost;
 
     public function __construct(string $tumblrApiKey)
     {
         $this->tumblrApiKey = $tumblrApiKey;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function match(string $url): bool
     {
         $host = parse_url($url, \PHP_URL_HOST);
@@ -58,9 +55,6 @@ class Tumblr extends AbstractExtractor
         return true;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getContent(): string
     {
         if (!$this->tumblrId && !$this->tumblrHost) {

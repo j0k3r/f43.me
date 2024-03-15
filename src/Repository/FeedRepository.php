@@ -21,7 +21,7 @@ class FeedRepository extends ServiceEntityRepository
      *
      * @param int|null $limit Items to retrieve
      */
-    public function findAllOrderedByDate(int $limit = null): array
+    public function findAllOrderedByDate(?int $limit = null): array
     {
         $q = $this->createQueryBuilder('f')
             ->orderBy('f.updatedAt', 'desc');
@@ -52,7 +52,7 @@ class FeedRepository extends ServiceEntityRepository
      * @param array  $ids  An array of id
      * @param string $type in or notIn
      *
-     * @return mixed
+     * @return array<Feed>
      */
     public function findByIds(array $ids, string $type = 'in')
     {

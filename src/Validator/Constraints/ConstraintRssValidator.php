@@ -20,9 +20,6 @@ class ConstraintRssValidator extends ConstraintValidator
         $this->client = $client;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function validate($value, Constraint $constraint): void
     {
         // reddit feeds are not valid RSS

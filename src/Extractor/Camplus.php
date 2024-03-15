@@ -5,11 +5,8 @@ namespace App\Extractor;
 class Camplus extends AbstractExtractor
 {
     /** @var string */
-    protected $camplusId = null;
+    protected $camplusId;
 
-    /**
-     * {@inheritdoc}
-     */
     public function match(string $url): bool
     {
         $host = parse_url($url, \PHP_URL_HOST);
@@ -19,7 +16,7 @@ class Camplus extends AbstractExtractor
             return false;
         }
 
-        if (false === strpos((string) $host, 'campl.us')) {
+        if (!str_contains((string) $host, 'campl.us')) {
             return false;
         }
 
@@ -35,9 +32,6 @@ class Camplus extends AbstractExtractor
         return true;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getContent(): string
     {
         if (!$this->camplusId) {

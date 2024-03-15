@@ -5,11 +5,8 @@ namespace App\Extractor;
 class RedditImage extends AbstractExtractor
 {
     /** @var string */
-    protected $redditImageUrl = null;
+    protected $redditImageUrl;
 
-    /**
-     * {@inheritdoc}
-     */
     public function match(string $url): bool
     {
         $host = parse_url($url, \PHP_URL_HOST);
@@ -35,9 +32,6 @@ class RedditImage extends AbstractExtractor
         return true;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getContent(): string
     {
         if (!$this->redditImageUrl) {

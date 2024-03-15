@@ -5,11 +5,8 @@ namespace App\Extractor;
 class HackerNews extends AbstractExtractor
 {
     /** @var string */
-    protected $text = null;
+    protected $text;
 
-    /**
-     * {@inheritdoc}
-     */
     public function match(string $url): bool
     {
         $host = parse_url($url, \PHP_URL_HOST);
@@ -19,7 +16,7 @@ class HackerNews extends AbstractExtractor
             return false;
         }
 
-        if (0 !== strpos((string) $host, 'news.ycombinator.com')) {
+        if (!str_starts_with((string) $host, 'news.ycombinator.com')) {
             return false;
         }
 
@@ -48,9 +45,6 @@ class HackerNews extends AbstractExtractor
         return true;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getContent(): string
     {
         if (!$this->text) {

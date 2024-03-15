@@ -5,11 +5,8 @@ namespace App\Extractor;
 class Spotify extends AbstractExtractor
 {
     /** @var string */
-    protected $spotifyUrl = null;
+    protected $spotifyUrl;
 
-    /**
-     * {@inheritdoc}
-     */
     public function match(string $url): bool
     {
         $host = parse_url($url, \PHP_URL_HOST);
@@ -28,9 +25,6 @@ class Spotify extends AbstractExtractor
         return true;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getContent(): string
     {
         if (!$this->spotifyUrl) {

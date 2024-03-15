@@ -22,7 +22,7 @@ class ItemRepository extends ServiceEntityRepository
      * @param int    $feedId Feed id
      * @param string $sortBy Feed sort by
      *
-     * @return mixed
+     * @return array<Item>
      */
     public function findByFeed(int $feedId, string $sortBy)
     {
@@ -99,7 +99,7 @@ class ItemRepository extends ServiceEntityRepository
      * @param int $feedId Feed id
      * @param int $skip   Items to keep
      *
-     * @return mixed
+     * @return array<Item>
      */
     public function findOldItemsByFeedId(int $feedId, int $skip = 100)
     {
@@ -137,7 +137,7 @@ class ItemRepository extends ServiceEntityRepository
      */
     public function countByFeedId(int $feedId)
     {
-        return $this->createQueryBuilder('i')
+        return (int) $this->createQueryBuilder('i')
             ->select('count(i.id)')
             ->leftJoin('i.feed', 'f')
             ->where('f.id = :feedId')->setParameter('feedId', $feedId)
