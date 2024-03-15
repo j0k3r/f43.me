@@ -2021,12 +2021,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/j0k3r/graby.git",
-                "reference": "08a9c9c09ff1d74abcbd90e1f7c68c6bd9de7a02"
+                "reference": "2409e474461551253de17a266361278885867020"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/j0k3r/graby/zipball/08a9c9c09ff1d74abcbd90e1f7c68c6bd9de7a02",
-                "reference": "08a9c9c09ff1d74abcbd90e1f7c68c6bd9de7a02",
+                "url": "https://api.github.com/repos/j0k3r/graby/zipball/2409e474461551253de17a266361278885867020",
+                "reference": "2409e474461551253de17a266361278885867020",
                 "shasum": ""
             },
             "require": {
@@ -2047,7 +2047,8 @@
                 "simplepie/simplepie": "^1.8",
                 "smalot/pdfparser": "^2.0",
                 "symfony/options-resolver": "^3.4|^4.4|^5.3|^6.0",
-                "symfony/polyfill-intl-idn": "^1.26"
+                "symfony/polyfill-intl-idn": "^1.26",
+                "symfony/polyfill-php80": "^1.27"
             },
             "require-dev": {
                 "friendsofphp/php-cs-fixer": "^3.0",
@@ -2095,7 +2096,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2023-04-12T19:27:51+00:00"
+            "time": "2023-05-22T23:51:31+00:00"
         },
         {
             "name": "j0k3r/graby-site-config",
