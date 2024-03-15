@@ -16,12 +16,11 @@ class SecurityController extends AbstractController
     /**
      * Display some information about feeds, items, logs, etc ...
      *
-     * @Route("/login", name="login", methods={"GET"})
      *
      * @Template()
-     *
      * @return Response|RedirectResponse
      */
+    #[Route(path: '/login', name: 'login', methods: ['GET'])]
     public function loginAction(Request $request, AuthorizationCheckerInterface $authorizationChecker, AuthenticationUtils $authenticationUtils)
     {
         if (true === $authorizationChecker->isGranted('ROLE_ADMIN')) {
