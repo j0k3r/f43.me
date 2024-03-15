@@ -280,6 +280,9 @@
             "config/packages/stof_doctrine_extensions.yaml"
         ]
     },
+    "survos/auth-bundle": {
+        "version": "1.5.185"
+    },
     "symfony/amqp-messenger": {
         "version": "v5.1.6"
     },
@@ -634,27 +637,11 @@
             "config/routes/web_profiler.yaml"
         ]
     },
-    "symfony/webpack-encore-bundle": {
-        "version": "1.17",
-        "recipe": {
-            "repo": "github.com/symfony/recipes",
-            "branch": "main",
-            "version": "1.10",
-            "ref": "eff2e505d4557c967b6710fe06bd947ba555cae5"
-        },
-        "files": [
-            "assets/app.js",
-            "assets/bootstrap.js",
-            "assets/controllers.json",
-            "assets/controllers/hello_controller.js",
-            "assets/styles/app.css",
-            "config/packages/webpack_encore.yaml",
-            "package.json",
-            "webpack.config.js"
-        ]
-    },
     "symfony/yaml": {
         "version": "v4.4.13"
+    },
+    "tacman/oauth2-client-bundle": {
+        "version": "v2.18.1"
     },
     "twig/extra-bundle": {
         "version": "v3.0.5"

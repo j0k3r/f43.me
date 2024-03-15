@@ -95,10 +95,9 @@ class Feed
 
     /**
      * @var string
-     *
-     * @Gedmo\Slug(fields={"name"}, updatable=false, unique=true)
      */
     #[ORM\Column(name: 'slug', type: 'string', length: 191)]
+    #[Gedmo\Slug(fields: ['name'], updatable: false, unique: true)]
     protected $slug;
 
     /**

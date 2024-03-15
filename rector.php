@@ -23,7 +23,8 @@ return RectorConfig::configure()
     ])
     ->withSets([
         DoctrineSetList::ANNOTATIONS_TO_ATTRIBUTES,
-        SymfonySetList::ANNOTATIONS_TO_ATTRIBUTES
+        SymfonySetList::ANNOTATIONS_TO_ATTRIBUTES,
+        DoctrineSetList::GEDMO_ANNOTATIONS_TO_ATTRIBUTES,
     ]);
 
 

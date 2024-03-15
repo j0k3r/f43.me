@@ -1,13 +1,8 @@
 security:
     password_hashers:
-        Symfony\Component\Security\Core\User\InMemoryUser:
-            algorithm: sha1
-            iterations: 1
-            encode_as_base64: false
-        Symfony\Component\Security\Core\User\User:
-            algorithm: sha1
-            iterations: 1
-            encode_as_base64: false
+        App\Entity\User:
+            algorithm: auto
+
 
     role_hierarchy:
         ROLE_ADMIN: [ROLE_ADMIN]
@@ -18,10 +13,11 @@ security:
 
     # https://symfony.com/doc/current/security.html#loading-the-user-the-user-provider
     providers:
-        users_in_memory:
-            memory:
-                users:
-                    admin: { password: "%env(ADMINPASS)%", roles: [ 'ROLE_ADMIN' ] }
+        # used to reload user from session & other features (e.g. switch_user)
+        app_user_provider:
+            entity:
+                class: App\Entity\User
+                property: email
 
     firewalls:
         dev:
@@ -33,18 +29,33 @@ security:
             security: false
 
         main:
-            pattern: ^/
-            entry_point: form_login
-#            anonymous:  ~
             lazy: true
-            provider: users_in_memory
+            entry_point: form_login
+            custom_authenticator: App\Security\AppAuthenticator
+            logout:
+                path: app_logout
+                # where to redirect after logout
+                # target: app_any_route
 
+            remember_me:
+                secret: '%kernel.secret%'
+                lifetime: 604800
+                path: /
+                always_remember_me: true
             form_login:
                 login_path: login
                 check_path: login_check
                 use_referer: true
 
-            logout: ~
+#        main:
+#            pattern: ^/
+#            entry_point: form_login
+##            anonymous:  ~
+#            lazy: true
+#            provider: app_user_provider
+#
+#
+#            logout: ~
 
     # Easy way to control access for large sections of your site
     # Note: Only the *first* access control that matches will be used

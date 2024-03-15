@@ -38,6 +38,7 @@
         "sentry/sentry-symfony": "^4.2",
         "simplepie/simplepie": "^1.8",
         "stof/doctrine-extensions-bundle": "~1.1",
+        "survos/auth-bundle": "^1.5",
         "symfony/amqp-messenger": ">5.4",
         "symfony/asset": ">5.4",
         "symfony/asset-mapper": "^6.4",
@@ -51,7 +52,6 @@
         "symfony/translation": ">= 5.4",
         "symfony/twig-bundle": ">= 5.4",
         "symfony/validator": ">= 5.4",
-        "symfony/webpack-encore-bundle": "^1.13",
         "symfony/yaml": ">= 5.4",
         "twig/extra-bundle": "^2.12|^3.0",
         "twig/twig": "^2.12|^3.0"
@@ -101,14 +101,14 @@
             "phpstan/extension-installer": true,
             "symfony/flex": true,
             "symfony/runtime": true,
-            "php-http/discovery": true
+            "php-http/discovery": true,
+            "endroid/installer": true
         }
     },
     "extra": {
         "symfony": {
             "allow-contrib": true,
-            "require": "^6.4",
-            "docker": true
+            "require": "^7.0"
         }
     }
 }
