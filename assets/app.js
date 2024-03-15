@@ -1,5 +1,10 @@
 import '@picocss/pico/css/pico.min.css';
 import timeago from 'timeago.js';
+
+import './login.js';
+import './modal.js';
+import './theme-switcher.js';
+
 // import './styles/app.scss'
 
 // handle timeago date on the public page
