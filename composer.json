@@ -22,8 +22,8 @@
         }
     ],
     "require": {
-        "ext-tidy": "*",
         "php": "^8.1",
+        "ext-tidy": "*",
         "beberlei/doctrineextensions": "^1.2",
         "composer/package-versions-deprecated": "^1.11",
         "doctrine/doctrine-bundle": "^2.4",
@@ -40,6 +40,7 @@
         "stof/doctrine-extensions-bundle": "~1.1",
         "symfony/amqp-messenger": ">5.4",
         "symfony/asset": ">5.4",
+        "symfony/asset-mapper": "^6.4",
         "symfony/dotenv": ">5.4",
         "symfony/flex": "^1.9",
         "symfony/form": ">= 5.4",
@@ -50,8 +51,8 @@
         "symfony/translation": ">= 5.4",
         "symfony/twig-bundle": ">= 5.4",
         "symfony/validator": ">= 5.4",
-        "symfony/yaml": ">= 5.4",
         "symfony/webpack-encore-bundle": "^1.13",
+        "symfony/yaml": ">= 5.4",
         "twig/extra-bundle": "^2.12|^3.0",
         "twig/twig": "^2.12|^3.0"
     },
@@ -86,7 +87,8 @@
         ],
         "auto-scripts": {
             "cache:clear": "symfony-cmd",
-            "assets:install %PUBLIC_DIR%": "symfony-cmd"
+            "assets:install %PUBLIC_DIR%": "symfony-cmd",
+            "importmap:install": "symfony-cmd"
         }
     },
     "config": {

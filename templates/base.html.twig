@@ -15,6 +15,7 @@
         {% endblock %}
 
         {% block javascripts %}
+            {% block importmap %}{{ importmap('app') }}{% endblock %}
             {{ encore_entry_script_tags('app') }}
             {{ encore_entry_script_tags('theme-switcher') }}
         {% endblock %}
