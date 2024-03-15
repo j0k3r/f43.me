@@ -106,7 +106,7 @@
     "extra": {
         "symfony": {
             "allow-contrib": true,
-            "require": "^8.1",
+            "require": "^6.4",
             "docker": true
         }
     }
