@@ -68,7 +68,7 @@ You can find some examples in the [improver folder](https://github.com/j0k3r/f43
 
 Parser that gets html content from an url and find what can be the most interesting part for the user is important. But, most of the time they fail when it comes to images (like from Imgur, Flickr) or from social network (like Tumblr, Twitter or Facebook).
 
-These online service provides API to retrieve content from the their platform. Extractors will use them to grab the *real* content.
+These online service provides API to retrieve content from their platform. Extractors will use them to grab the *real* content.
 
 An extractor uses 2 methods:
 

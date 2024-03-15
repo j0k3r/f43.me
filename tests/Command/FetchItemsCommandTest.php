@@ -133,7 +133,7 @@ class FetchItemsCommandTest extends WebTestCase
             '--slug' => 'toto',
         ]);
 
-        $this->assertRegExp('`Unable to find Feed document`', $this->commandTester->getDisplay());
+        $this->assertMatchesRegularExpression('`Unable to find Feed document`', $this->commandTester->getDisplay());
     }
 
     public function testHN(): void
@@ -149,7 +149,7 @@ class FetchItemsCommandTest extends WebTestCase
         $this->assertStringContainsString('Working on', $records[0]['message']);
         $this->assertStringContainsString('HackerNews', $records[0]['message']);
 
-        $this->assertRegExp('`items cached.`', $this->commandTester->getDisplay());
+        $this->assertMatchesRegularExpression('`items cached.`', $this->commandTester->getDisplay());
     }
 
     public function testNew(): void
@@ -161,10 +161,11 @@ class FetchItemsCommandTest extends WebTestCase
 
         $records = $this->handler->getRecords();
 
-        $this->assertGreaterThan(0, $records);
+        $this->assertIsIterable($records, '$records is not interable');
+        $this->assertGreaterThan(0, count($records), "expecting at least one record");
         $this->assertStringContainsString('Working on', $records[0]['message']);
 
-        $this->assertRegExp('`items cached.`', $this->commandTester->getDisplay());
+        $this->assertMatchesRegularExpression('`items cached.`', $this->commandTester->getDisplay());
     }
 
     public function testOld(): void
@@ -179,7 +180,7 @@ class FetchItemsCommandTest extends WebTestCase
         $this->assertGreaterThan(0, $records);
         $this->assertStringContainsString('Working on', $records[0]['message']);
 
-        $this->assertRegExp('`items cached.`', $this->commandTester->getDisplay());
+        $this->assertMatchesRegularExpression('`items cached.`', $this->commandTester->getDisplay());
     }
 
     public function testUsingQueue(): void
@@ -223,7 +224,7 @@ class FetchItemsCommandTest extends WebTestCase
             '--use_queue' => true,
         ], ['verbosity' => OutputInterface::VERBOSITY_VERBOSE]);
 
-        $this->assertRegExp('`feeds queued.`', $commandTester->getDisplay());
+        $this->assertMatchesRegularExpression('`feeds queued.`', $commandTester->getDisplay());
     }
 
     public function testCommandSyncAllUsersWithQueueFull(): void
