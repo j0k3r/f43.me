@@ -35,7 +35,6 @@
         "php-http/guzzle7-adapter": "^1.0",
         "php-http/httplug-bundle": "^1.14",
         "ricardoper/twitteroauth": "~1.0",
-        "sensio/framework-extra-bundle": "^6.0",
         "sentry/sentry-symfony": "^4.2",
         "simplepie/simplepie": "^1.8",
         "stof/doctrine-extensions-bundle": "~1.1",
