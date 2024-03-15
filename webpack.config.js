@@ -50,7 +50,7 @@ Encore
 
     // configure Babel
     .configureBabel((config) => {
-        config.plugins.push('@babel/plugin-proposal-class-properties');
+        config.plugins.push('@babel/plugin-transform-class-properties');
     })
 
     // enables and configure @babel/preset-env polyfills

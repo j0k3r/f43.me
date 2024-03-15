@@ -10,16 +10,13 @@ class Twitter extends AbstractExtractor
     /** @var TwitterOAuth */
     protected $twitter;
     /** @var string */
-    protected $tweetId = null;
+    protected $tweetId;
 
     public function __construct(TwitterOAuth $twitter)
     {
         $this->twitter = $twitter;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function match(string $url): bool
     {
         $host = parse_url($url, \PHP_URL_HOST);
@@ -41,9 +38,6 @@ class Twitter extends AbstractExtractor
         return true;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getContent(): string
     {
         $data = $this->retrieveTwitterData();

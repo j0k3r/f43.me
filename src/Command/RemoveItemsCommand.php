@@ -80,6 +80,7 @@ class RemoveItemsCommand extends Command
             }
             $feeds = [$feed];
         } else {
+            /** @var Feed[] */
             $feeds = $this->feedRepository->findAll();
         }
 

@@ -5,11 +5,8 @@ namespace App\Extractor;
 class Vimeo extends AbstractExtractor
 {
     /** @var string */
-    protected $vimeoUrl = null;
+    protected $vimeoUrl;
 
-    /**
-     * {@inheritdoc}
-     */
     public function match(string $url): bool
     {
         $host = parse_url($url, \PHP_URL_HOST);
@@ -19,7 +16,7 @@ class Vimeo extends AbstractExtractor
             return false;
         }
 
-        if (false === strpos((string) $host, 'vimeo.com')) {
+        if (!str_contains((string) $host, 'vimeo.com')) {
             return false;
         }
 
@@ -28,9 +25,6 @@ class Vimeo extends AbstractExtractor
         return true;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getContent(): string
     {
         if (!$this->vimeoUrl) {

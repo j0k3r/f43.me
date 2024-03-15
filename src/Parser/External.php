@@ -25,9 +25,6 @@ class External extends AbstractParser
         $this->urlApi = $urlApi;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function parse(string $url, bool $reloadConfigFiles = false): string
     {
         try {

@@ -5,11 +5,8 @@ namespace App\Extractor;
 class Instagram extends AbstractExtractor
 {
     /** @var string */
-    protected $instagramUrl = null;
+    protected $instagramUrl;
 
-    /**
-     * {@inheritdoc}
-     */
     public function match(string $url): bool
     {
         $host = parse_url($url, \PHP_URL_HOST);
@@ -24,7 +21,7 @@ class Instagram extends AbstractExtractor
         }
 
         // instagram path always starts with a /p
-        if (0 !== strpos((string) $path, '/p')) {
+        if (!str_starts_with((string) $path, '/p')) {
             return false;
         }
 
@@ -33,9 +30,6 @@ class Instagram extends AbstractExtractor
         return true;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getContent(): string
     {
         if (!$this->instagramUrl) {

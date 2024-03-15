@@ -5,11 +5,8 @@ namespace App\Extractor;
 class Soundcloud extends AbstractExtractor
 {
     /** @var string */
-    protected $soundCloundUrl = null;
+    protected $soundCloundUrl;
 
-    /**
-     * {@inheritdoc}
-     */
     public function match(string $url): bool
     {
         $host = parse_url($url, \PHP_URL_HOST);
@@ -19,7 +16,7 @@ class Soundcloud extends AbstractExtractor
             return false;
         }
 
-        if (false === strpos((string) $host, 'soundcloud.com')) {
+        if (!str_contains((string) $host, 'soundcloud.com')) {
             return false;
         }
 
@@ -28,9 +25,6 @@ class Soundcloud extends AbstractExtractor
         return true;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getContent(): string
     {
         if (!$this->soundCloundUrl) {
