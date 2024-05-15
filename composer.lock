@@ -2100,24 +2100,24 @@
         },
         {
             "name": "j0k3r/graby-site-config",
-            "version": "1.0.177",
+            "version": "1.0.186",
             "source": {
                 "type": "git",
                 "url": "https://github.com/j0k3r/graby-site-config.git",
-                "reference": "cce11a0d0ec6fc06cebda65c340fcfb7c63ce78a"
+                "reference": "4f4e9254dfa9f4082db548f600da8bf794661a60"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/j0k3r/graby-site-config/zipball/cce11a0d0ec6fc06cebda65c340fcfb7c63ce78a",
-                "reference": "cce11a0d0ec6fc06cebda65c340fcfb7c63ce78a",
+                "url": "https://api.github.com/repos/j0k3r/graby-site-config/zipball/4f4e9254dfa9f4082db548f600da8bf794661a60",
+                "reference": "4f4e9254dfa9f4082db548f600da8bf794661a60",
                 "shasum": ""
             },
             "require": {
-                "symfony/finder": "~2.6|~3.0|~4.0|~5.0|~6.0"
+                "symfony/finder": "~2.6|~3.0|~4.0|~5.0|~6.0|~7.0"
             },
             "require-dev": {
                 "liip/rmt": "1.2.*",
-                "symfony/phpunit-bridge": "^6.0"
+                "symfony/phpunit-bridge": "^6.0|^7.0"
             },
             "type": "library",
             "autoload": {
@@ -2138,9 +2138,9 @@
             "description": "Graby site config files",
             "support": {
                 "issues": "https://github.com/j0k3r/graby-site-config/issues",
-                "source": "https://github.com/j0k3r/graby-site-config/tree/1.0.177"
+                "source": "https://github.com/j0k3r/graby-site-config/tree/1.0.186"
             },
-            "time": "2023-10-01T02:12:17+00:00"
+            "time": "2024-05-01T02:12:39+00:00"
         },
         {
             "name": "j0k3r/httplug-ssrf-plugin",
