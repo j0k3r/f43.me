@@ -16,7 +16,7 @@
         "@babel/core": "^7.24.5",
         "@babel/preset-env": "^7.24.5",
         "@symfony/webpack-encore": "^4.6.1",
-        "core-js": "^3.37.0",
+        "core-js": "^3.37.1",
         "regenerator-runtime": "^0.14.1",
         "sass": "^1.77.1",
         "sass-loader": "^14.2.1",
