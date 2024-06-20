@@ -124,9 +124,6 @@
     "guzzlehttp/psr7": {
         "version": "1.6.1"
     },
-    "http-interop/http-factory-guzzle": {
-        "version": "1.0.0"
-    },
     "j0k3r/graby": {
         "version": "v2.2.2"
     },
@@ -268,19 +265,16 @@
             "config/packages/sensio_framework_extra.yaml"
         ]
     },
-    "sentry/sdk": {
-        "version": "2.2.0"
-    },
     "sentry/sentry": {
         "version": "2.5.0"
     },
     "sentry/sentry-symfony": {
-        "version": "4.14",
+        "version": "5.0",
         "recipe": {
             "repo": "github.com/symfony/recipes-contrib",
             "branch": "main",
-            "version": "4.6",
-            "ref": "153de5f041f7e8a9c19f3674b800b76be0e6fd90"
+            "version": "5.0",
+            "ref": "76afa07d23e76f678942f00af5a6a417ba0816d0"
         },
         "files": [
             "config/packages/sentry.yaml"
@@ -415,12 +409,6 @@
             "src/Controller/.gitignore",
             "src/Kernel.php"
         ]
-    },
-    "symfony/http-client": {
-        "version": "v4.4.13"
-    },
-    "symfony/http-client-contracts": {
-        "version": "v2.2.0"
     },
     "symfony/http-foundation": {
         "version": "v5.1.5"
