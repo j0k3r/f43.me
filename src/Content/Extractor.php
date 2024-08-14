@@ -58,7 +58,7 @@ class Extractor
     {
         $this->parser = $this->parserChain->getParser(strtolower($chosenParser));
         if (false === $this->parser) {
-            throw new \InvalidArgumentException(sprintf('The given parser "%s" does not exists.', $chosenParser));
+            throw new \InvalidArgumentException(\sprintf('The given parser "%s" does not exists.', $chosenParser));
         }
 
         $this->feed = $feed;
