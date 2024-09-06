@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "dd00c09be167a1c1617d7cfa1a08f63b",
+    "content-hash": "ff190020058b57cc8112bcbe1150d9f1",
     "packages": [
         {
             "name": "beberlei/doctrineextensions",
@@ -2046,16 +2046,16 @@
         },
         {
             "name": "j0k3r/graby-site-config",
-            "version": "1.0.188",
+            "version": "1.0.191",
             "source": {
                 "type": "git",
                 "url": "https://github.com/j0k3r/graby-site-config.git",
-                "reference": "2bbc1cc73007be0436679bdb0823203e614566ad"
+                "reference": "cb1bba4d1b86a855ba0e3c6de688e14fa54036c5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/j0k3r/graby-site-config/zipball/2bbc1cc73007be0436679bdb0823203e614566ad",
-                "reference": "2bbc1cc73007be0436679bdb0823203e614566ad",
+                "url": "https://api.github.com/repos/j0k3r/graby-site-config/zipball/cb1bba4d1b86a855ba0e3c6de688e14fa54036c5",
+                "reference": "cb1bba4d1b86a855ba0e3c6de688e14fa54036c5",
                 "shasum": ""
             },
             "require": {
@@ -2084,9 +2084,9 @@
             "description": "Graby site config files",
             "support": {
                 "issues": "https://github.com/j0k3r/graby-site-config/issues",
-                "source": "https://github.com/j0k3r/graby-site-config/tree/1.0.188"
+                "source": "https://github.com/j0k3r/graby-site-config/tree/1.0.191"
             },
-            "time": "2024-06-01T02:14:01+00:00"
+            "time": "2024-09-01T02:26:18+00:00"
         },
         {
             "name": "j0k3r/httplug-ssrf-plugin",
