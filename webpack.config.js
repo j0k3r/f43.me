@@ -60,7 +60,9 @@ Encore
     })
 
     // enables Sass/SCSS support
-    .enableSassLoader()
+    .enableSassLoader((options) => {
+        options.api = 'legacy';
+    })
 
     // uncomment if you use TypeScript
     //.enableTypeScriptLoader()
