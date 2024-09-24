@@ -125,11 +125,11 @@ class FeedControllerTest extends FeedWebTestCase
     public function dataNewFeedOk(): array
     {
         return [[[
-            'feed[name]' => 'Google News',
-            'feed[description]' => 'À la une - Google Actualités',
-            'feed[host]' => 'http://news.google.com',
+            'feed[name]' => 'j0k3r.n3t',
+            'feed[description]' => 'j0k3r.n3t',
+            'feed[host]' => 'https://www.j0k3r.net',
             // be sure that link is almost always different
-            'feed[link]' => 'http://news.google.fr/?output=rss&rand=' . time(),
+            'feed[link]' => 'https://www.j0k3r.net/feed.xml?rand=' . time(),
             'feed[parser]' => 'external',
             'feed[formatter]' => 'rss',
             'feed[sort_by]' => 'published_at',
@@ -176,7 +176,7 @@ class FeedControllerTest extends FeedWebTestCase
         $location = $client->getResponse()->headers->get('location');
 
         $this->assertSame(302, $client->getResponse()->getStatusCode());
-        $this->assertStringContainsString('google-news', (string) $location);
+        $this->assertStringContainsString('j0k3r-n3t', (string) $location);
 
         $crawler = $client->followRedirect();
         $this->assertCount(1, $alert = $crawler->filter('p.success')->extract(['_text']));

@@ -17,7 +17,7 @@ jobs:
     runs-on: "ubuntu-20.04"
     services:
       mysql:
-        image: mysql:5.7
+        image: mysql:9.0
         env:
           MYSQL_ALLOW_EMPTY_PASSWORD: yes
           MYSQL_DATABASE: f43_test
@@ -29,7 +29,7 @@ jobs:
           - 5672:5672
 
     env:
-      DATABASE_URL: mysql://root:@127.0.0.1:3306/f43_test?serverVersion=5.7&charset=utf8mb4
+      DATABASE_URL: mysql://root:@127.0.0.1:3306/f43_test?serverVersion=9.0.0&charset=utf8mb4
 
     strategy:
       matrix:
