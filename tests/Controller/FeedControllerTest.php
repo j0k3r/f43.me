@@ -314,13 +314,13 @@ class FeedControllerTest extends FeedWebTestCase
     /**
      * @depends testFeedNewSubmitOk
      *
-     * Feed with `google-news` slug will be created
+     * Feed with `j0k3r-n3t` slug will be created
      */
     public function testDeleteOk(): void
     {
         $client = static::getAuthorizedClient();
 
-        $crawler = $client->request('GET', '/feed/google-news/edit');
+        $crawler = $client->request('GET', '/feed/j0k3r-n3t/edit');
 
         $form = $crawler->filter('form.delete_form button[type=submit]')->form();
 
