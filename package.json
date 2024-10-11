@@ -3,7 +3,6 @@
     "license": "MIT",
     "private": true,
     "scripts": {
-        "dev-server": "encore dev-server",
         "dev": "encore dev",
         "watch": "encore dev --watch",
         "build": "encore production --progress"
@@ -15,7 +14,7 @@
     "devDependencies": {
         "@babel/core": "^7.25.8",
         "@babel/preset-env": "^7.25.8",
-        "@symfony/webpack-encore": "^4.7.0",
+        "@symfony/webpack-encore": "^5.0.1",
         "core-js": "^3.38.1",
         "regenerator-runtime": "^0.14.1",
         "sass-embedded": "^1.79.4",
