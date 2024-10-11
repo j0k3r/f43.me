@@ -902,10 +902,10 @@
     error-stack-parser "^2.1.4"
     string-width "^4.2.3"
 
-"@picocss/pico@^1.5.11":
-  version "1.5.13"
-  resolved "https://registry.yarnpkg.com/@picocss/pico/-/pico-1.5.13.tgz#2a2f2f5fcdd4e3f4ceedce7f95889faf39025362"
-  integrity sha512-BPTeE4JC95+7/vsG9r+6hDR1qUkV4YZ1blI/TI6peOmM94XubjmUDE3jUi4f6DBV6WmCL76ueTct/NerJ33E8A==
+"@picocss/pico@^2.0.6":
+  version "2.0.6"
+  resolved "https://registry.yarnpkg.com/@picocss/pico/-/pico-2.0.6.tgz#16e6d253366ab245e67bac6faa95a45edcac4124"
+  integrity sha512-/d8qsykowelD6g8k8JYgmCagOIulCPHMEc2NC4u7OjmpQLmtSetLhEbt0j1n3fPNJVcrT84dRp0RfJBn3wJROA==
 
 "@sinclair/typebox@^0.27.8":
   version "0.27.8"
