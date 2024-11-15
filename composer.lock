@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "6784e2d5cb92d498573c3b9a7a8da057",
+    "content-hash": "efdda22ca5007254b4dc871ee0da8f23",
     "packages": [
         {
             "name": "beberlei/doctrineextensions",
@@ -9411,7 +9411,7 @@
             ],
             "description": "Graby helps you extract article content from web pages, fork of j0k3r/graby",
             "support": {
-                "source": "https://github.com/tacman/graby/tree/tac"
+                "source": "https://github.com/tacman/graby/tree/3.0.1"
             },
             "funding": [
                 {
