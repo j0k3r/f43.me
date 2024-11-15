@@ -9,18 +9,15 @@ class Imgur extends AbstractExtractor
     /** @var Client */
     protected $imgurClient;
     /** @var string */
-    protected $hash = null;
+    protected $hash;
     /** @var string */
-    protected $type = null;
+    protected $type;
 
     public function __construct(Client $imgurClient)
     {
         $this->imgurClient = $imgurClient;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function match(string $url): bool
     {
         $host = parse_url($url, \PHP_URL_HOST);
@@ -40,7 +37,7 @@ class Imgur extends AbstractExtractor
         // from https://github.com/extesy/hoverzoom/blob/master/plugins/imgur_a.js
         preg_match('/(?:\/(a|gallery|signin))?\/([^\W_]{5,8})(?:\/|\.[a-zA-Z]+|#([^\W_]{5,8}|\d+))?(\/new|\/all|\?.*)?$/', $url, $matches);
 
-        if ((0 !== strpos((string) $host, 'imgur') && 0 !== strpos((string) $host, 'i.imgur')) || !isset($matches[2])) {
+        if ((!str_starts_with((string) $host, 'imgur') && !str_starts_with((string) $host, 'i.imgur')) || !isset($matches[2])) {
             return false;
         }
 
@@ -59,9 +56,6 @@ class Imgur extends AbstractExtractor
         return true;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getContent(): string
     {
         if (!$this->hash && !$this->type) {

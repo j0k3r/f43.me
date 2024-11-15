@@ -5,11 +5,8 @@ namespace App\Extractor;
 class Deviantart extends AbstractExtractor
 {
     /** @var string */
-    protected $deviantartUrl = null;
+    protected $deviantartUrl;
 
-    /**
-     * {@inheritdoc}
-     */
     public function match(string $url): bool
     {
         $host = parse_url($url, \PHP_URL_HOST);
@@ -33,8 +30,6 @@ class Deviantart extends AbstractExtractor
     }
 
     /**
-     * {@inheritdoc}
-     *
      * @see https://www.deviantart.com/developers/oembed
      */
     public function getContent(): string

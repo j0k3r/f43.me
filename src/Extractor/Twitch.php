@@ -7,16 +7,13 @@ class Twitch extends AbstractExtractor
     /** @var string */
     protected $twitchCliendId;
     /** @var string */
-    protected $twitchId = null;
+    protected $twitchId;
 
     public function __construct(string $twitchCliendId)
     {
         $this->twitchCliendId = $twitchCliendId;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function match(string $url): bool
     {
         $host = parse_url($url, \PHP_URL_HOST);
@@ -42,9 +39,6 @@ class Twitch extends AbstractExtractor
         return true;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getContent(): string
     {
         if (!$this->twitchId) {

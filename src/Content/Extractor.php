@@ -19,7 +19,7 @@ class Extractor
     /** @var bool */
     public $useDefault = false;
     /** @var Feed|null */
-    protected $feed = null;
+    protected $feed;
     /** @var ExtractorChain */
     protected $extractorChain;
     /** @var ImproverChain */
@@ -54,11 +54,11 @@ class Extractor
      * @param bool      $allowAllParser Define if we have to use all *known* parser to get the content if the defined one failed.
      *                                  For example, Internal parser can't make content readable, it will use the External one, etc ..
      */
-    public function init($chosenParser, Feed $feed = null, $allowAllParser = false): self
+    public function init($chosenParser, ?Feed $feed = null, $allowAllParser = false): self
     {
         $this->parser = $this->parserChain->getParser(strtolower($chosenParser));
         if (false === $this->parser) {
-            throw new \InvalidArgumentException(sprintf('The given parser "%s" does not exists.', $chosenParser));
+            throw new \InvalidArgumentException(\sprintf('The given parser "%s" does not exists.', $chosenParser));
         }
 
         $this->feed = $feed;

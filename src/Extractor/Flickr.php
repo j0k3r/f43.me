@@ -5,11 +5,8 @@ namespace App\Extractor;
 class Flickr extends AbstractExtractor
 {
     /** @var string */
-    protected $flickrUrl = null;
+    protected $flickrUrl;
 
-    /**
-     * {@inheritdoc}
-     */
     public function match(string $url): bool
     {
         $host = parse_url($url, \PHP_URL_HOST);
@@ -19,7 +16,7 @@ class Flickr extends AbstractExtractor
             return false;
         }
 
-        if (false === strpos((string) $host, 'flickr.com')) {
+        if (!str_contains((string) $host, 'flickr.com')) {
             return false;
         }
 
@@ -28,9 +25,6 @@ class Flickr extends AbstractExtractor
         return true;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getContent(): string
     {
         if (!$this->flickrUrl) {

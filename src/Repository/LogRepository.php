@@ -21,7 +21,7 @@ class LogRepository extends ServiceEntityRepository
      *
      * @param int|null $limit Items to retrieve
      */
-    public function findAllOrderedById(int $limit = null): array
+    public function findAllOrderedById(?int $limit = null): array
     {
         $q = $this->createQueryBuilder('l')
             ->select('l, f')
@@ -40,7 +40,7 @@ class LogRepository extends ServiceEntityRepository
      *
      * @param int $feedId Feed id
      *
-     * @return mixed
+     * @return array<Log>
      */
     public function findByFeedId(int $feedId)
     {
@@ -119,7 +119,7 @@ class LogRepository extends ServiceEntityRepository
      */
     public function countByFeedId(int $feedId)
     {
-        return $this->createQueryBuilder('l')
+        return (int) $this->createQueryBuilder('l')
             ->select('count(l.id)')
             ->leftJoin('l.feed', 'f')
             ->where('f.id = :feedId')->setParameter('feedId', $feedId)
@@ -136,7 +136,7 @@ class LogRepository extends ServiceEntityRepository
      *
      * @return \Doctrine\ORM\Query
      */
-    private function getItemsByFeedIdQuery(int $feedId, int $limit = null, int $skip = null)
+    private function getItemsByFeedIdQuery(int $feedId, ?int $limit = null, ?int $skip = null)
     {
         $q = $this->createQueryBuilder('l')
             ->select('l, f')

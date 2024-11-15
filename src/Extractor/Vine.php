@@ -5,11 +5,8 @@ namespace App\Extractor;
 class Vine extends AbstractExtractor
 {
     /** @var string */
-    protected $vineId = null;
+    protected $vineId;
 
-    /**
-     * {@inheritdoc}
-     */
     public function match(string $url): bool
     {
         $host = parse_url($url, \PHP_URL_HOST);
@@ -19,7 +16,7 @@ class Vine extends AbstractExtractor
             return false;
         }
 
-        if (false === strpos((string) $host, 'vine.co')) {
+        if (!str_contains((string) $host, 'vine.co')) {
             return false;
         }
 
@@ -35,9 +32,6 @@ class Vine extends AbstractExtractor
         return true;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getContent(): string
     {
         if (!$this->vineId) {

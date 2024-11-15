@@ -16,7 +16,7 @@ class XDOMElement extends \DOMElement
      * @param string|null $value        The value of the element
      * @param string|null $namespaceURI The namespace of the element
      */
-    public function __construct(string $name, string $value = null, string $namespaceURI = null)
+    public function __construct(string $name, ?string $value = null, ?string $namespaceURI = null)
     {
         parent::__construct((string) $name, '', (string) $namespaceURI);
     }

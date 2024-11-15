@@ -5,11 +5,8 @@ namespace App\Extractor;
 class Dailymotion extends AbstractExtractor
 {
     /** @var string */
-    protected $dailymotionUrl = null;
+    protected $dailymotionUrl;
 
-    /**
-     * {@inheritdoc}
-     */
     public function match(string $url): bool
     {
         $host = parse_url($url, \PHP_URL_HOST);
@@ -28,9 +25,6 @@ class Dailymotion extends AbstractExtractor
         return true;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getContent(): string
     {
         if (!$this->dailymotionUrl) {
