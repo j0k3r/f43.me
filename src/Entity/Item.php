@@ -6,99 +6,88 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
-/**
- * @ORM\Table(
- *     name="item"
- * )
- *
- * @ORM\Entity(repositoryClass="App\Repository\ItemRepository")
- *
- * @ORM\HasLifecycleCallbacks()
- */
+
+#[ORM\Table(name: 'item')]
+#[ORM\Entity(repositoryClass: \App\Repository\ItemRepository::class)]
+#[ORM\HasLifecycleCallbacks]
 class Item
 {
     /**
      * @var int
      *
-     * @ORM\Column(name="id", type="integer")
      *
-     * @ORM\Id
      *
-     * @ORM\GeneratedValue(strategy="AUTO")
      */
+    #[ORM\Column(name: 'id', type: 'integer')]
+    #[ORM\Id]
+    #[ORM\GeneratedValue(strategy: 'AUTO')]
     protected $id;
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="title", type="text")
      */
+    #[ORM\Column(name: 'title', type: 'text')]
     protected $title;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="link", type="text")
      *
-     * @Assert\NotBlank()
      *
-     * @Assert\Url()
      */
+    #[ORM\Column(name: 'link', type: 'text')]
+    #[Assert\NotBlank]
+    #[Assert\Url]
     protected $link;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="permalink", type="text")
      *
-     * @Assert\NotBlank()
      *
-     * @Assert\Url()
      */
+    #[ORM\Column(name: 'permalink', type: 'text')]
+    #[Assert\NotBlank]
+    #[Assert\Url]
     protected $permalink;
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="content", type="text", nullable=true)
      */
+    #[ORM\Column(name: 'content', type: 'text', nullable: true)]
     protected $content;
 
     /**
      * @var \DateTime
-     *
-     * @ORM\Column(name="published_at", type="datetime", nullable=true)
      */
+    #[ORM\Column(name: 'published_at', type: 'datetime', nullable: true)]
     protected $publishedAt;
 
     /**
      * @var \DateTime
-     *
-     * @ORM\Column(name="created_at", type="datetime")
      */
+    #[ORM\Column(name: 'created_at', type: 'datetime')]
     protected $createdAt;
 
     /**
      * @var \DateTime
-     *
-     * @ORM\Column(name="updated_at", type="datetime")
      */
+    #[ORM\Column(name: 'updated_at', type: 'datetime')]
     protected $updatedAt;
 
     /**
      * @var Feed
      *
-     * @ORM\ManyToOne(targetEntity="App\Entity\Feed", inversedBy="items")
      *
-     * @ORM\JoinColumn(name="feed_id", referencedColumnName="id")
      */
+    #[ORM\JoinColumn(name: 'feed_id', referencedColumnName: 'id')]
+    #[ORM\ManyToOne(targetEntity: \App\Entity\Feed::class, inversedBy: 'items')]
     protected $feed;
 
     /**
      * @var ArrayCollection<int, Log>
-     *
-     * @ORM\OneToMany(targetEntity="Log", mappedBy="item")
      */
+    #[ORM\OneToMany(targetEntity: \Log::class, mappedBy: 'item')]
     protected $logs;
 
     public function __construct(Feed $feed)
@@ -296,11 +285,9 @@ class Item
         return ('published_at' === $this->feed->getSortBy()) ? $this->getPublishedAt() : $this->getCreatedAt();
     }
 
-    /**
-     * @ORM\PrePersist
-     *
-     * @ORM\PreUpdate
-     */
+    
+    #[ORM\PrePersist]
+    #[ORM\PreUpdate]
     public function timestamps(): void
     {
         if (null === $this->createdAt) {

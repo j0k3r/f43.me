@@ -9,7 +9,7 @@ use Monolog\Logger;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Routing\Attribute\Route;
 
 class TestController extends AbstractController
 {
@@ -19,9 +19,8 @@ class TestController extends AbstractController
      * - improve parser
      * - chose the best parser
      * - test a site configuration.
-     *
-     * @Route("/feed/test", name="feed_test", methods={"GET", "POST"})
      */
+    #[Route(path: '/feed/test', name: 'feed_test', methods: ['GET', 'POST'])]
     public function indexAction(Request $request, Extractor $contentExtractor, GrabyHandler $grabyHandler): Response
     {
         $form = $this->createForm(ItemTestType::class);

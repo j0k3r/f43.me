@@ -33,7 +33,24 @@
                 <td><div><a href="{{ item.link }}" target="_blank">{{ item.title }}</a></div></td>
                 <td>{{ item.publishedAt|date('d/m/y - H:i:s') }}</td>
                 <td>{{ item.createdAt|date('d/m/y - H:i:s') }}</td>
-                <td><button class="open-modal" data-target="modal-preview-item" data-url="{{ url('item_preview_cached', { 'id': item.id }) }}">preview</button></td>
+                <td><button class="open-modal"
+                            data-target="modal-preview-item"
+                            data-url="{{ url('item_preview_cached', { 'id': item.id }) }}">
+
+                        preview</button>
+                        <a href="{{ path('item_preview_cached', {id: item.id}) }}">
+                            Open
+                        </a>
+
+                    <button
+                        hx-get="{{ path('item_preview_cached', {id: item.id}) }}"
+                        hx-target="#modals-here"
+                        hx-trigger="click"
+                        data-bs-toggle="modal"
+                        data-bs-target="#modals-here"
+                        class="btn primary">Open Modal</button>
+
+                </td>
             </tr>
         {% endfor %}
         </tbody>
@@ -44,6 +61,24 @@
         <button class="alert" type="submit">Delete all items</button>
     </form>
 {% endif %}
+
+    <button
+        hx-get="/modal"
+        hx-target="#modals-here"
+        hx-trigger="click"
+        data-bs-toggle="modal"
+        data-bs-target="#modals-here"
+        class="btn primary">Open Modal</button>
+
+    <div id="modals-here"
+         class="modal modal-blur fade"
+         style="display: none"
+         aria-hidden="false"
+         tabindex="-1">
+        <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+            <div class="modal-content"></div>
+        </div>
+    </div>
 
 <dialog id="modal-preview-item">
     <article></article>

@@ -52,8 +52,10 @@ class RedditGallery extends AbstractExtractor
             '<ul><li>Score: ' . $this->redditGalleryData['score'] . '</li><li>Comments: ' . $this->redditGalleryData['num_comments'] . '</li><li>Flair: ' . $this->redditGalleryData['link_flair_text'] . '</li><li>Author: ' . $this->redditGalleryData['author'] . '</li></ul>';
 
         foreach ($this->redditGalleryData['gallery_data']['items'] as $item) {
-            $content .= '<p>' . $item['caption'] . '</p>';
-            $content .= '<p><img src="' . $this->redditGalleryData['media_metadata'][$item['media_id']]['s']['u'] . '" /></p>';
+            if ($item['caption']??false) {
+                $content .= '<p>' . $item['caption'] . '</p>';
+                $content .= '<p><img src="' . $this->redditGalleryData['media_metadata'][$item['media_id']]['s']['u'] . '" /></p>';
+            }
         }
 
         $content .= '</div>';

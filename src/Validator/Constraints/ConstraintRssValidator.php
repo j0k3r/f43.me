@@ -22,12 +22,16 @@ class ConstraintRssValidator extends ConstraintValidator
 
     public function validate($value, Constraint $constraint): void
     {
+        // reddit feeds are not valid RSS
+        if (str_contains($value, 'reddit.com')) {
+            return;
+        }
+
         try {
             $content = $this->client
                 ->get('https://validator.w3.org/feed/check.cgi?url=' . $value)
                 ->getBody();
         } catch (RequestException $e) {
-            // if thing goes wrong, let's try with an alternative
             try {
                 $content = $this->client
                     ->get('https://www.rssboard.org/rss-validator/check.cgi?url=' . $value)

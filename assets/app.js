@@ -1,10 +1,16 @@
-const timeago = require('timeago.js')
+import '@picocss/pico/css/pico.min.css';
+import 'htmx.org'
 
-import './styles/app.scss'
+import '@tabler/core'; // the js
+import '@tabler/core/dist/css/tabler.min.css'
+
+
+import timeago from 'timeago.js';
+// import './styles/app.scss'
 
 // handle timeago date on the public page
 if (document.querySelectorAll('.time-ago').length > 0) {
-    timeago.render(document.querySelectorAll('.time-ago'), { minInterval: 60 })
+    // timeago.render(document.querySelectorAll('.time-ago'), { minInterval: 60 })
 }
 
 // handle show / hide of the textarea when testing config file

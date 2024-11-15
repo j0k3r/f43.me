@@ -21,6 +21,15 @@ Anyway, it's simple:
 
 ![f43.me screenshot](https://user-images.githubusercontent.com/62333/158586771-2137ea59-e882-4f89-9dd4-5eb657b843c5.png)
 
+## Issues
+
+graby is key, but out of date.
+
+```bash
+composer config repositories.graby '{"type": "path", "url": "/home/tac/g/tacman/graby"}'
+composer req j0k3r/graby:*@dev
+```
+
 ## Contents
 
 <!-- MarkdownTOC autolink="true" -->
@@ -68,7 +77,7 @@ You can find some examples in the [improver folder](https://github.com/j0k3r/f43
 
 Parser that gets html content from an url and find what can be the most interesting part for the user is important. But, most of the time they fail when it comes to images (like from Imgur, Flickr) or from social network (like Tumblr, Twitter or Facebook).
 
-These online service provides API to retrieve content from the their platform. Extractors will use them to grab the *real* content.
+These online service provides API to retrieve content from their platform. Extractors will use them to grab the *real* content.
 
 An extractor uses 2 methods:
 

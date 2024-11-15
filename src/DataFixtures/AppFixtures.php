@@ -7,9 +7,13 @@ use App\Entity\Item;
 use App\Entity\Log;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
+use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 class AppFixtures extends Fixture
 {
+    public function __construct(private ValidatorInterface  $validator)
+    {
+    }
     public function load(ObjectManager $manager): void
     {
         $this->loadFeeds($manager);
@@ -32,7 +36,10 @@ class AppFixtures extends Fixture
         $feedReddit->setSortBy('created_at');
         $feedReddit->setNbItems(3);
         $feedReddit->setLastItemCachedAt(new \DateTime());
+        $this->validate($feedReddit);
+
         $manager->persist($feedReddit);
+
         $this->addReference('feed-reddit', $feedReddit);
 
         $feedHN = new Feed();
@@ -48,6 +55,7 @@ class AppFixtures extends Fixture
         $feedHN->setSortBy('published_at');
         $feedHN->setNbItems(3);
         $feedHN->setLastItemCachedAt(new \DateTime());
+        $this->validate($feedHN);
         $manager->persist($feedHN);
         $this->addReference('feed-hackernews', $feedHN);
 
@@ -80,6 +88,18 @@ class AppFixtures extends Fixture
         $this->addReference('feed-wild', $feedWild);
 
         $manager->flush();
+    }
+
+    private function validate($entity): void
+    {
+        $errors = $this->validator->validate($entity);
+        if (count($errors) > 0) {
+            $errorsString = (string) $errors;
+            foreach ($errors as $error) {
+//                dump($error);
+            }
+            throw new \Exception($errorsString);
+        }
     }
 
     private function loadItems(ObjectManager $manager): void

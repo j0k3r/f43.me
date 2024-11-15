@@ -7,13 +7,15 @@ use App\Message\FeedSync;
 use App\Repository\FeedRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use Psr\Log\LoggerInterface;
+use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
 use Symfony\Component\Routing\RouterInterface;
 
 /**
  * Consumer message to fetch new items for a given feed.
  */
-class FetchItemsHandler implements MessageHandlerInterface
+#[AsMessageHandler]
+class FetchItemsHandler
 {
     private $doctrine;
     private $feedRepository;

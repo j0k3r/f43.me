@@ -1,0 +1,3 @@
+survos_command:
+    namespaces: [app, feed]
+

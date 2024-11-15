@@ -21,7 +21,6 @@ use Symfony\Component\Routing\RouterInterface;
 
 class FetchItemsCommand extends Command
 {
-    private $feedRepository;
     private $itemRepository;
     private $contentImport;
     private $router;
@@ -29,9 +28,8 @@ class FetchItemsCommand extends Command
     private $transport;
     private $bus;
 
-    public function __construct(FeedRepository $feedRepository, ItemRepository $itemRepository, ?Import $contentImport, RouterInterface $router, string $domain, TransportInterface $transport, MessageBusInterface $bus)
+    public function __construct(private FeedRepository $feedRepository, ItemRepository $itemRepository, ?Import $contentImport, RouterInterface $router, string $domain, TransportInterface $transport, MessageBusInterface $bus)
     {
-        $this->feedRepository = $feedRepository;
         $this->itemRepository = $itemRepository;
         $this->contentImport = $contentImport;
         $this->router = $router;
