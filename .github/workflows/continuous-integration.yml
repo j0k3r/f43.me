@@ -17,7 +17,7 @@ jobs:
     runs-on: "ubuntu-20.04"
     services:
       mysql:
-        image: mysql:5.7
+        image: mysql:9.0
         env:
           MYSQL_ALLOW_EMPTY_PASSWORD: yes
           MYSQL_DATABASE: f43_test
@@ -29,16 +29,15 @@ jobs:
           - 5672:5672
 
     env:
-      DATABASE_URL: mysql://root:@127.0.0.1:3306/f43_test?serverVersion=5.7&charset=utf8mb4
+      DATABASE_URL: mysql://root:@127.0.0.1:3306/f43_test?serverVersion=9.0.0&charset=utf8mb4
 
     strategy:
       matrix:
         php:
-          - "7.4"
-          - "8.0"
-          - "8.1"
+          - "8.2"
+          - "8.3"
         include:
-          - php: "7.4"
+          - php: "8.3"
             coverage: true
 
     steps:
@@ -66,9 +65,6 @@ jobs:
           node-version-file: ".nvmrc"
           cache: "yarn"
 
-      - name: Install dependencies with Yarn
-        run: yarn install && yarn dev
-
       - name: Setup messenger queue
         run: php bin/console messenger:setup-transports --env=dev
 
@@ -83,10 +79,10 @@ jobs:
 
   postgresql:
     name: PHPUnit (PHP ${{ matrix.php }} with PostgreSQL)
-    runs-on: "ubuntu-20.04"
+    runs-on: "ubuntu-22.04"
     services:
       postgres:
-        image: postgres:14-alpine
+        image: postgres:16-alpine
         env:
           POSTGRES_PASSWORD: root
         ports:
@@ -102,9 +98,8 @@ jobs:
     strategy:
       matrix:
         php:
-          - "7.4"
-          - "8.0"
-          - "8.1"
+          - "8.2"
+          - "8.3"
 
     steps:
       - name: Checkout

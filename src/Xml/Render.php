@@ -54,7 +54,7 @@ class Render
                 $formatter = new Formatter\AtomFormatter($feed, $items, $feedUrl, $this->generator);
                 break;
             default:
-                throw new \InvalidArgumentException(sprintf("Format '%s' is not available. Please see documentation.", $feed->getFormatter()));
+                throw new \InvalidArgumentException(\sprintf("Format '%s' is not available. Please see documentation.", $feed->getFormatter()));
         }
 
         return $formatter->render();
