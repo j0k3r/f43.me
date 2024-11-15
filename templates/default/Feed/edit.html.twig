@@ -17,12 +17,12 @@
 
             <div>
                 <label class="right inline">Created</label>
-                <input disabled="disabled" type="text" value="{{ feed.createdAt|date('Y-m-d H:i:s') }}" />
+                <input disabled="disabled" type="text" value="{{ feed.createdAt|date() }}" />
             </div>
 
             <div>
                 <label class="right inline">Updated</label>
-                <input disabled="disabled" type="text" value="{{ feed.updatedAt|date('Y-m-d H:i:s') }}" />
+                <input disabled="disabled" type="text" value="{{ feed.updatedAt|date }}" />
             </div>
 
             <button type="submit" class="small button radius success">Save</button>

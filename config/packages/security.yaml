@@ -63,4 +63,4 @@ security:
         - { path: ^/(.*)\.xml, roles: PUBLIC_ACCESS}
         - { path: ^/login, roles: PUBLIC_ACCESS}
         - { path: ^/feed/test, roles: PUBLIC_ACCESS}
-        - { path: ^/(feed)|(logs)|(item)|(dashboard)|(login_check), roles: ROLE_ADMIN }
+#        - { path: ^/(feed)|(logs)|(item)|(dashboard)|(login_check), roles: ROLE_ADMIN }
