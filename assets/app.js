@@ -1,4 +1,10 @@
 import '@picocss/pico/css/pico.min.css';
+import 'htmx.org'
+
+import '@tabler/core'; // the js
+import '@tabler/core/dist/css/tabler.min.css'
+
+
 import timeago from 'timeago.js';
 
 import './login.js';

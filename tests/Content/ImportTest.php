@@ -219,19 +219,19 @@ class ImportTest extends AppTestCase
             ->method('dispatch');
 
         $client = self::getMockClient([new Response(200, ['content-type' => 'application/json'], (string) json_encode([
-           'title' => 'Trololo',
-           'author_name' => 'KamoKatt',
-           'author_url' => 'https://www.youtube.com/user/KamoKatt',
-           'type' => 'video',
-           'height' => 150,
-           'width' => 200,
-           'version' => '1.0',
-           'provider_name' => 'YouTube',
-           'provider_url' => 'https://www.youtube.com/',
-           'thumbnail_height' => 360,
-           'thumbnail_width' => 480,
-           'thumbnail_url' => 'https://i.ytimg.com/vi/iwGFalTRHDA/hqdefault.jpg',
-           'html' => '<iframe width="200" height="150" src="https://www.youtube.com/embed/iwGFalTRHDA?feature=oembed" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>',
+            'title' => 'Trololo',
+            'author_name' => 'KamoKatt',
+            'author_url' => 'https://www.youtube.com/user/KamoKatt',
+            'type' => 'video',
+            'height' => 150,
+            'width' => 200,
+            'version' => '1.0',
+            'provider_name' => 'YouTube',
+            'provider_url' => 'https://www.youtube.com/',
+            'thumbnail_height' => 360,
+            'thumbnail_width' => 480,
+            'thumbnail_url' => 'https://i.ytimg.com/vi/iwGFalTRHDA/hqdefault.jpg',
+            'html' => '<iframe width="200" height="150" src="https://www.youtube.com/embed/iwGFalTRHDA?feature=oembed" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>',
         ]))]);
 
         $youtube = new Youtube();

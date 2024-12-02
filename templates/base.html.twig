@@ -16,8 +16,6 @@
 
         {% block javascripts %}
             {% block importmap %}{{ importmap('app') }}{% endblock %}
-{#            {{ encore_entry_script_tags('app') }}#}
-{#            {{ encore_entry_script_tags('theme-switcher') }}#}
         {% endblock %}
     </head>
     <body>
@@ -74,6 +72,7 @@
             {% block h_title %}{% endblock %}
 
             {% block content %}{% endblock %}
+            {% block body %}{% endblock %}
         </main>
     </body>
 </html>

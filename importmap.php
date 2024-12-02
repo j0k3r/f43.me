@@ -26,4 +26,14 @@ return [
     'timeago.js' => [
         'version' => '4.0.2',
     ],
+    'htmx.org' => [
+        'version' => '1.9.12',
+    ],
+    '@tabler/core' => [
+        'version' => '1.0.0-beta21',
+    ],
+    '@tabler/core/dist/css/tabler.min.css' => [
+        'version' => '1.0.0-beta21',
+        'type' => 'css',
+    ],
 ];

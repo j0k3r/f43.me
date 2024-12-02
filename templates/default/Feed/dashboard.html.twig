@@ -30,7 +30,7 @@
                     </div>
                 </td>
                 <td class="items-count">{{ feedlog.itemsNumber }}</td>
-                <td class="time-ago" datetime="{{ feedlog.createdAt|date('r') }}">{{ feedlog.createdAt|date('d/m/y - H:i:s') }}</td>
+                <td class="time-ago" datetime="{{ feedlog.createdAt|date('r') }}">{{ feedlog.createdAt|date }}</td>
             </tr>
         {% endfor %}
         </tbody>

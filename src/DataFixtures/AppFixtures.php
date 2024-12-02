@@ -11,10 +11,8 @@ use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 class AppFixtures extends Fixture
 {
-    private ValidatorInterface $validator;
-    public function __construct(ValidatorInterface  $validator)
+    public function __construct(private ValidatorInterface  $validator)
     {
-        $this->validator = $validator;
     }
     public function load(ObjectManager $manager): void
     {

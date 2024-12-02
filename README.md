@@ -21,6 +21,15 @@ Anyway, it's simple:
 
 ![f43.me screenshot](https://user-images.githubusercontent.com/62333/158586771-2137ea59-e882-4f89-9dd4-5eb657b843c5.png)
 
+## Issues
+
+graby is key, but out of date.
+
+```bash
+composer config repositories.graby '{"type": "path", "url": "/home/tac/g/tacman/graby"}'
+composer req j0k3r/graby:*@dev
+```
+
 ## Contents
 
 <!-- MarkdownTOC autolink="true" -->
@@ -99,7 +108,7 @@ You can find some of them in the [converter folder](https://github.com/j0k3r/f43
 ### Requirements
 
  - PHP >= 7.4 (with `pdo_mysql` or `pdo_pgsql`)
- - Node.js 16 (for assets), use `nvm install`
+ - Node.js 20 (for assets), use `nvm install`
  - MySQL >= 5.7 or PostgreSQL
  - [RabbitMQ](https://www.rabbitmq.com/), which is optional (see below)
  - [Supervisor](http://supervisord.org/) (only if you use RabbitMQ)
