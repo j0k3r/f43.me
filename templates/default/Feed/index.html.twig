@@ -34,6 +34,7 @@
                     <td class="items-count">{{ feed.nbItems }}</td>
                     <td>{{ feed.createdAt|date('d/m/y - H:i') }}</td>
                     <td>{{ feed.updatedAt|date('d/m/y - H:i') }}</td>
+                    <td>{{ feed.parser }}</td>
                     <td>
                         <a href="{{ path('feed_edit', { 'slug': feed.slug }) }}">edit</a> -
                         <a href="{{ path('item_homepage', { 'slug': feed.slug }) }}">items</a> -
