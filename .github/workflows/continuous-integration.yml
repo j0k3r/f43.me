@@ -14,7 +14,7 @@ env:
 jobs:
   mysql:
     name: PHPUnit (PHP ${{ matrix.php }} with MySQL)
-    runs-on: "ubuntu-20.04"
+    runs-on: ubuntu-latest
     services:
       mysql:
         image: mysql:9.0
@@ -81,7 +81,7 @@ jobs:
 
   postgresql:
     name: PHPUnit (PHP ${{ matrix.php }} with PostgreSQL)
-    runs-on: "ubuntu-20.04"
+    runs-on: ubuntu-latest
     services:
       postgres:
         image: postgres:14-alpine
