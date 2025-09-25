@@ -84,7 +84,7 @@ class AppFixtures extends Fixture
 
     private function loadItems(ObjectManager $manager): void
     {
-        $item1Reddit = new Item($this->getReference('feed-reddit'));
+        $item1Reddit = new Item($this->getReference('feed-reddit', Feed::class));
         $item1Reddit->setTitle('[AMA Request] Head of Potatoes Sarah Durdin Robertson');
         $item1Reddit->setLink('http://www.reddit.com/r/IAmA/comments/1lx8n5/ama_request_head_of_potatoes_sarah_durdin/');
         $item1Reddit->setPermaLink('http://www.reddit.com/r/IAmA/comments/1lx8n5/ama_request_head_of_potatoes_sarah_durdin/');
@@ -93,7 +93,7 @@ class AppFixtures extends Fixture
         $manager->persist($item1Reddit);
         $this->addReference('item1-reddit', $item1Reddit);
 
-        $item2Reddit = new Item($this->getReference('feed-reddit'));
+        $item2Reddit = new Item($this->getReference('feed-reddit', Feed::class));
         $item2Reddit->setTitle('How do I stop being a racist?');
         $item2Reddit->setLink('http://www.reddit.com/r/AskReddit/comments/1lx3h4/how_do_i_stop_being_a_racist/');
         $item2Reddit->setPermaLink('http://www.reddit.com/r/AskReddit/comments/1lx3h4/how_do_i_stop_being_a_racist/');
@@ -102,7 +102,7 @@ class AppFixtures extends Fixture
         $manager->persist($item2Reddit);
         $this->addReference('item2-reddit', $item2Reddit);
 
-        $item3Reddit = new Item($this->getReference('feed-reddit'));
+        $item3Reddit = new Item($this->getReference('feed-reddit', Feed::class));
         $item3Reddit->setTitle('How Do You Know When You\'re Middle-Aged?');
         $item3Reddit->setLink('http://imgur.com/yCQ7Xf8');
         $item3Reddit->setPermaLink('http://www.reddit.com/r/funny/comments/1lx234/how_do_you_know_when_youre_middleaged/');
@@ -111,7 +111,7 @@ class AppFixtures extends Fixture
         $manager->persist($item3Reddit);
         $this->addReference('item3-reddit', $item3Reddit);
 
-        $item1HackerNews = new Item($this->getReference('feed-hackernews'));
+        $item1HackerNews = new Item($this->getReference('feed-hackernews', Feed::class));
         $item1HackerNews->setTitle('Headteacher reported London student to police for his blog');
         $item1HackerNews->setLink('http://the-libertarian.co.uk/london-student-reported-to-police-enchanted-by-anarchism-and-individualism/');
         $item1HackerNews->setPermaLink('http://the-libertarian.co.uk/london-student-reported-to-police-enchanted-by-anarchism-and-individualism/');
@@ -120,7 +120,7 @@ class AppFixtures extends Fixture
         $manager->persist($item1HackerNews);
         $this->addReference('item1-hackernews', $item1HackerNews);
 
-        $item2HackerNews = new Item($this->getReference('feed-hackernews'));
+        $item2HackerNews = new Item($this->getReference('feed-hackernews', Feed::class));
         $item2HackerNews->setTitle('Is The Web Dying?');
         $item2HackerNews->setLink('https://medium.com/p/b2977dbee814');
         $item2HackerNews->setPermaLink('https://medium.com/p/b2977dbee814');
@@ -129,7 +129,7 @@ class AppFixtures extends Fixture
         $manager->persist($item2HackerNews);
         $this->addReference('item2-hackernews', $item2HackerNews);
 
-        $item3HackerNews = new Item($this->getReference('feed-hackernews'));
+        $item3HackerNews = new Item($this->getReference('feed-hackernews', Feed::class));
         $item3HackerNews->setTitle('Which is better? Performing calculations in sql or in your application?');
         $item3HackerNews->setLink('http://stackoverflow.com/questions/7510092/which-is-better-performing-calculations-in-sql-or-in-your-application');
         $item3HackerNews->setPermaLink('http://stackoverflow.com/q/7510092/625840');
@@ -138,7 +138,7 @@ class AppFixtures extends Fixture
         $manager->persist($item3HackerNews);
         $this->addReference('item3-hackernews', $item3HackerNews);
 
-        $item1BonjourMadame = new Item($this->getReference('feed-bonjourmadame'));
+        $item1BonjourMadame = new Item($this->getReference('feed-bonjourmadame', Feed::class));
         $item1BonjourMadame->setTitle('proposé par Nonolf');
         $item1BonjourMadame->setLink('http://www.bonjourmadame.fr/post/60435319843/propose-par-nonolf');
         $item1BonjourMadame->setPermaLink('http://www.bonjourmadame.fr/post/60435319843');
@@ -147,7 +147,7 @@ class AppFixtures extends Fixture
         $manager->persist($item1BonjourMadame);
         $this->addReference('item1-bonjourmadame', $item1BonjourMadame);
 
-        $item2BonjourMadame = new Item($this->getReference('feed-bonjourmadame'));
+        $item2BonjourMadame = new Item($this->getReference('feed-bonjourmadame', Feed::class));
         $item2BonjourMadame->setTitle('Naya');
         $item2BonjourMadame->setLink('http://www.bonjourmadame.fr/post/60059225434/naya');
         $item2BonjourMadame->setPermaLink('http://www.bonjourmadame.fr/post/60059225434');
@@ -161,22 +161,22 @@ class AppFixtures extends Fixture
 
     private function loadLogs(ObjectManager $manager): void
     {
-        $logReddit = new Log($this->getReference('feed-reddit'));
+        $logReddit = new Log($this->getReference('feed-reddit', Feed::class));
         $logReddit->setItemsNumber(25);
         $manager->persist($logReddit);
         $this->addReference('log-reddit', $logReddit);
 
-        $log1HackerNews = new Log($this->getReference('feed-hackernews'));
+        $log1HackerNews = new Log($this->getReference('feed-hackernews', Feed::class));
         $log1HackerNews->setItemsNumber(30);
         $manager->persist($log1HackerNews);
         $this->addReference('log1-hackernews', $log1HackerNews);
 
-        $logBonjourMadame = new Log($this->getReference('feed-bonjourmadame'));
+        $logBonjourMadame = new Log($this->getReference('feed-bonjourmadame', Feed::class));
         $logBonjourMadame->setItemsNumber(20);
         $manager->persist($logBonjourMadame);
         $this->addReference('log-bonjourmadame', $logBonjourMadame);
 
-        $log2HackerNews = new Log($this->getReference('feed-hackernews'));
+        $log2HackerNews = new Log($this->getReference('feed-hackernews', Feed::class));
         $log2HackerNews->setItemsNumber(3);
         $manager->persist($log2HackerNews);
         $this->addReference('log2-hackernews', $log2HackerNews);

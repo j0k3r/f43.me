@@ -4,10 +4,11 @@ namespace App\Tests\Improver;
 
 use App\Improver\HackerNews;
 use App\Tests\AppTestCase;
+use PHPUnit\Framework\Attributes\DataProvider;
 
 class HackerNewsTest extends AppTestCase
 {
-    public function dataMatch(): array
+    public static function dataMatch(): array
     {
         return [
             ['news.ycombinator.com', true],
@@ -15,9 +16,7 @@ class HackerNewsTest extends AppTestCase
         ];
     }
 
-    /**
-     * @dataProvider dataMatch
-     */
+    #[DataProvider('dataMatch')]
     public function testMatch(string $url, bool $expected): void
     {
         $hn = new HackerNews(self::getMockClient());

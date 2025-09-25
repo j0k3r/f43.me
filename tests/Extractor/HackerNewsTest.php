@@ -5,10 +5,11 @@ namespace App\Tests\Extractor;
 use App\Extractor\HackerNews;
 use App\Tests\AppTestCase;
 use GuzzleHttp\Psr7\Response;
+use PHPUnit\Framework\Attributes\DataProvider;
 
 class HackerNewsTest extends AppTestCase
 {
-    public function dataMatch(): array
+    public static function dataMatch(): array
     {
         return [
             ['https://news.ycombinator.com/item?id=10074364', true, ['text' => 'toto', 'type' => 'story']],
@@ -23,9 +24,7 @@ class HackerNewsTest extends AppTestCase
         ];
     }
 
-    /**
-     * @dataProvider dataMatch
-     */
+    #[DataProvider('dataMatch')]
     public function testMatch(string $url, bool $expected, ?array $valueReturned = null): void
     {
         $response = new Response(200, []);

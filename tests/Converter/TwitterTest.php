@@ -3,12 +3,13 @@
 namespace App\Tests\Converter;
 
 use App\Converter\Twitter;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 use Psr\Log\NullLogger;
 
 class TwitterTest extends TestCase
 {
-    public function dataMatch(): array
+    public static function dataMatch(): array
     {
         return [
             [
@@ -44,9 +45,7 @@ class TwitterTest extends TestCase
         ];
     }
 
-    /**
-     * @dataProvider dataMatch
-     */
+    #[DataProvider('dataMatch')]
     public function testMatch(string $html, string $expected, string $twitterId, int $twitterExtractorOccurence): void
     {
         $twitterExtractor = $this->getMockBuilder('App\Extractor\Twitter')

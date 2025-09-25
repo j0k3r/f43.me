@@ -5,6 +5,7 @@ namespace App\Tests\Content;
 use App\Content\Extractor;
 use App\Entity\Feed;
 use App\Parser\Internal;
+use Graby\Content;
 use PHPUnit\Framework\TestCase;
 
 class ExtractorTest extends TestCase
@@ -18,7 +19,7 @@ class ExtractorTest extends TestCase
 
         $this->graby->expects($this->any())
             ->method('fetchContent')
-            ->willReturn(['html' => false]);
+            ->willReturn(new Content(200, '', '', '', '', [], '', '', [], false));
 
         $contentExtractor->parseContent('http://foo.bar.nowhere', 'default content');
 
@@ -45,7 +46,7 @@ class ExtractorTest extends TestCase
 
         $this->graby->expects($this->any())
             ->method('fetchContent')
-            ->willReturn(['html' => false]);
+            ->willReturn(new Content(200, '', '', '', '', [], '', '', [], false));
 
         $contentExtractor->parseContent('http://foo.bar.nowhere', 'default content');
 
@@ -58,7 +59,7 @@ class ExtractorTest extends TestCase
 
         $this->graby->expects($this->any())
             ->method('fetchContent')
-            ->willReturn(['html' => false]);
+            ->willReturn(new Content(200, '', '', '', '', [], '', '', [], false));
 
         $contentExtractor->parseContent('http://foo.bar.nowhere', 'default content');
 

@@ -3,6 +3,7 @@
 namespace App\Tests\Parser;
 
 use App\Parser\Internal;
+use Graby\Content;
 use PHPUnit\Framework\TestCase;
 
 class InternalTest extends TestCase
@@ -16,7 +17,7 @@ class InternalTest extends TestCase
 
         $graby->expects($this->any())
             ->method('fetchContent')
-            ->willReturn([]);
+            ->willReturn(new Content(200, '', '', '', '', [], '', '', [], false));
 
         $internal = new Internal($graby);
         $this->assertEmpty($internal->parse('http://localhost'));
@@ -31,7 +32,7 @@ class InternalTest extends TestCase
 
         $graby->expects($this->any())
             ->method('fetchContent')
-            ->willReturn(['html' => false]);
+            ->willReturn(new Content(200, '', '', '', '', [], '', '', [], false));
 
         $internal = new Internal($graby);
         $this->assertEmpty($internal->parse('http://localhost'));
@@ -46,7 +47,7 @@ class InternalTest extends TestCase
 
         $graby->expects($this->any())
             ->method('fetchContent')
-            ->willReturn(['html' => '<p>test</p>']);
+            ->willReturn(new Content(200, '<p>test</p>', '', '', '', [], '', '', [], false));
 
         $internal = new Internal($graby);
         $this->assertNotEmpty($internal->parse('http://localhost'));

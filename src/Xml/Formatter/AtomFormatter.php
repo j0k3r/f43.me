@@ -49,7 +49,7 @@ class AtomFormatter extends Formatter
 
         $identifier = $this->dom->createElement('id', 'http://' . $this->feed->getHost() . '/');
         $title = $this->dom->createElement('title', htmlspecialchars($this->feed->getName()));
-        $subtitle = $this->dom->createElement('subtitle', htmlspecialchars($this->feed->getDescription()));
+        $subtitle = $this->dom->createElement('subtitle', htmlspecialchars((string) $this->feed->getDescription()));
         $name = $this->dom->createElement('name', htmlspecialchars($this->feed->getName()));
         $generator = $this->dom->createElement('generator', htmlspecialchars($this->generator));
 

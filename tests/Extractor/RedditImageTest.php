@@ -5,11 +5,12 @@ namespace App\Tests\Extractor;
 use App\Extractor\RedditImage;
 use Monolog\Handler\TestHandler;
 use Monolog\Logger;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
 class RedditImageTest extends TestCase
 {
-    public function dataMatch(): array
+    public static function dataMatch(): array
     {
         return [
             ['https://i.reddituploads.com/21fc8e0b2984423e84fd59fbc58024c8?fit=max&h=1536&w=1536&s=9e3c0fa6d46a642c42eace91833cad93', true],
@@ -25,9 +26,7 @@ class RedditImageTest extends TestCase
         ];
     }
 
-    /**
-     * @dataProvider dataMatch
-     */
+    #[DataProvider('dataMatch')]
     public function testMatch(string $url, bool $expected): void
     {
         $redditImage = new RedditImage();

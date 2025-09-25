@@ -1,0 +1,23 @@
+parameters:
+    level: 8
+    paths:
+        - bin/
+        - config/
+        - public/
+        - src/
+        - tests/
+
+    symfony:
+        containerXmlPath: %rootDir%/../../../var/cache/test/App_KernelTestDebugContainer.xml
+        consoleApplicationLoader: tests/console-application.php
+
+    ignoreErrors:
+        - '#Constructor of class App\\DomDocument\\XDOMElement has an unused parameter \$value.#'
+        # Don't want to update to PSR16 for SimplePie cache
+        - '#SimplePie\\SimplePie#'
+        - identifier: function.alreadyNarrowedType
+        - identifier: method.impossibleType
+        - identifier: missingType.iterableValue
+        - identifier: missingType.generics
+
+    inferPrivatePropertyTypeFromConstructor: true

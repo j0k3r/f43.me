@@ -2,6 +2,7 @@
 
 namespace App\Tests\Controller;
 
+use PHPUnit\Framework\Attributes\DataProvider;
 use Symfony\Component\DomCrawler\Crawler;
 
 class FeedControllerTest extends FeedWebTestCase
@@ -122,7 +123,7 @@ class FeedControllerTest extends FeedWebTestCase
         $this->assertGreaterThanOrEqual(1, \count($crawler->filter('small.error')));
     }
 
-    public function dataNewFeedOk(): array
+    public static function dataNewFeedOk(): array
     {
         return [[[
             'feed[name]' => 'j0k3r.n3t',
@@ -138,10 +139,9 @@ class FeedControllerTest extends FeedWebTestCase
     }
 
     /**
-     * @dataProvider dataNewFeedOk
-     *
      * This test will need an internet connection to pass.
      */
+    #[DataProvider('dataNewFeedOk')]
     public function testFeedNewSubmitBadRss(array $data): void
     {
         $client = static::getAuthorizedClient();
@@ -161,9 +161,7 @@ class FeedControllerTest extends FeedWebTestCase
         $this->assertGreaterThanOrEqual(1, \count($crawler->filter('small.error')));
     }
 
-    /**
-     * @dataProvider dataNewFeedOk
-     */
+    #[DataProvider('dataNewFeedOk')]
     public function testFeedNewSubmitOk(array $data): void
     {
         $client = static::getAuthorizedClient();
@@ -219,7 +217,7 @@ class FeedControllerTest extends FeedWebTestCase
         $this->assertCount(1, $crawler->filter('iframe.pubsubhubbub'));
     }
 
-    public function dataEditFeedOk(): array
+    public static function dataEditFeedOk(): array
     {
         return [[[
             'feed[name]' => 'Bonjour Madame edited !',
@@ -233,9 +231,7 @@ class FeedControllerTest extends FeedWebTestCase
         ]]];
     }
 
-    /**
-     * @dataProvider dataEditFeedOk
-     */
+    #[DataProvider('dataEditFeedOk')]
     public function testFeedEditSubmitBadValue(array $data): void
     {
         $client = static::getAuthorizedClient();
@@ -257,9 +253,7 @@ class FeedControllerTest extends FeedWebTestCase
         $this->assertStringContainsString('This value is not a valid URL.', (string) $client->getResponse()->getContent());
     }
 
-    /**
-     * @dataProvider dataEditFeedOk
-     */
+    #[DataProvider('dataEditFeedOk')]
     public function testFeedEditSubmitOk(array $data): void
     {
         $client = static::getAuthorizedClient();

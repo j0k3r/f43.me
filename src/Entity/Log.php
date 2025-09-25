@@ -41,7 +41,7 @@ class Log
     protected $createdAt;
 
     /**
-     * @var Feed
+     * @var Feed|null
      *
      * @ORM\ManyToOne(targetEntity="App\Entity\Feed", inversedBy="logs")
      *
@@ -50,7 +50,7 @@ class Log
     protected $feed;
 
     /**
-     * @var Item
+     * @var Item|null
      *
      * @ORM\ManyToOne(targetEntity="App\Entity\Item", inversedBy="logs")
      *
@@ -132,7 +132,7 @@ class Log
     /**
      * Return feed.
      *
-     * @return Feed
+     * @return Feed|null
      */
     public function getFeed()
     {
