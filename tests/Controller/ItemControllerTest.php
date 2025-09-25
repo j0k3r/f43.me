@@ -2,6 +2,8 @@
 
 namespace App\Tests\Controller;
 
+use PHPUnit\Framework\Attributes\Depends;
+
 class ItemControllerTest extends FeedWebTestCase
 {
     public function testUnAuthorized(): void
@@ -48,9 +50,7 @@ class ItemControllerTest extends FeedWebTestCase
         return $preview[0][1];
     }
 
-    /**
-     * @depends testIndex
-     */
+    #[Depends('testIndex')]
     public function testPreview(string $previewLink): void
     {
         $client = static::getAuthorizedClient();

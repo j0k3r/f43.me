@@ -3,6 +3,7 @@
 namespace App\Tests\Controller;
 
 use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Depends;
 use Symfony\Component\DomCrawler\Crawler;
 
 class FeedControllerTest extends FeedWebTestCase
@@ -305,11 +306,8 @@ class FeedControllerTest extends FeedWebTestCase
         $this->assertStringContainsString('Feed object not found', (string) $client->getResponse()->getContent());
     }
 
-    /**
-     * @depends testFeedNewSubmitOk
-     *
-     * Feed with `j0k3r-n3t` slug will be created
-     */
+    // Feed with `j0k3r-n3t` slug will be created'
+    #[Depends('testFeedNewSubmitOk')]
     public function testDeleteOk(): void
     {
         $client = static::getAuthorizedClient();
@@ -358,9 +356,7 @@ class FeedControllerTest extends FeedWebTestCase
         return $crawler;
     }
 
-    /**
-     * @depends testRedditFeed
-     */
+    #[Depends('testRedditFeed')]
     public function testRedditFeedContent(Crawler $crawler): void
     {
         $this->assertGreaterThan(0, $crawler->filterXPath('//channel/link')->count());
@@ -396,9 +392,7 @@ class FeedControllerTest extends FeedWebTestCase
         return $crawler;
     }
 
-    /**
-     * @depends testHnFeed
-     */
+    #[Depends('testHnFeed')]
     public function testHnFeedContent(Crawler $crawler): void
     {
         $this->assertGreaterThan(0, $crawler->filterXPath('//feed/title')->count());
