@@ -99,7 +99,7 @@ You can find some of them in the [converter folder](https://github.com/j0k3r/f43
 ### Requirements
 
  - PHP >= 7.4 (with `pdo_mysql` or `pdo_pgsql`)
- - Node.js 20 (for assets), use `nvm install`
+ - Node.js 22 (for assets), use `nvm install`
  - MySQL >= 5.7 or PostgreSQL
  - [RabbitMQ](https://www.rabbitmq.com/), which is optional (see below)
  - [Supervisor](http://supervisord.org/) (only if you use RabbitMQ)
