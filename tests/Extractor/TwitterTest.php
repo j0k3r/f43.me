@@ -8,6 +8,7 @@ use Monolog\Logger;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 use TwitterOAuth\Exception\TwitterException;
+use TwitterOAuth\TwitterOAuth;
 
 class TwitterTest extends TestCase
 {
@@ -27,7 +28,7 @@ class TwitterTest extends TestCase
     #[DataProvider('dataMatch')]
     public function testMatch(string $url, bool $expected): void
     {
-        $twitterOAuth = $this->getMockBuilder('TwitterOAuth\TwitterOAuth')
+        $twitterOAuth = $this->getMockBuilder(TwitterOAuth::class)
             ->disableOriginalConstructor()
             ->getMock();
 
@@ -37,7 +38,7 @@ class TwitterTest extends TestCase
 
     public function testContent(): void
     {
-        $twitterOAuth = $this->getMockBuilder('TwitterOAuth\TwitterOAuth')
+        $twitterOAuth = $this->getMockBuilder(TwitterOAuth::class)
             ->disableOriginalConstructor()
             ->getMock();
 
@@ -109,7 +110,7 @@ class TwitterTest extends TestCase
 
     public function testContentNoEntities(): void
     {
-        $twitterOAuth = $this->getMockBuilder('TwitterOAuth\TwitterOAuth')
+        $twitterOAuth = $this->getMockBuilder(TwitterOAuth::class)
             ->disableOriginalConstructor()
             ->getMock();
 
@@ -142,7 +143,7 @@ class TwitterTest extends TestCase
 
     public function testContentBadResponse(): void
     {
-        $twitterOAuth = $this->getMockBuilder('TwitterOAuth\TwitterOAuth')
+        $twitterOAuth = $this->getMockBuilder(TwitterOAuth::class)
             ->disableOriginalConstructor()
             ->getMock();
 
@@ -165,7 +166,7 @@ class TwitterTest extends TestCase
 
     public function testNoTweet(): void
     {
-        $twitterOAuth = $this->getMockBuilder('TwitterOAuth\TwitterOAuth')
+        $twitterOAuth = $this->getMockBuilder(TwitterOAuth::class)
             ->disableOriginalConstructor()
             ->getMock();
 

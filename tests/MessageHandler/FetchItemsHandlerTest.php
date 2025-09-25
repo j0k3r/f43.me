@@ -2,13 +2,18 @@
 
 namespace App\Tests\MessageHandler;
 
+use App\Content\Import;
 use App\Entity\Feed;
 use App\Message\FeedSync;
 use App\MessageHandler\FetchItemsHandler;
+use App\Repository\FeedRepository;
+use Doctrine\Bundle\DoctrineBundle\Registry;
+use Doctrine\ORM\EntityManager;
 use Monolog\Handler\TestHandler;
 use Monolog\Logger;
 use Psr\Log\NullLogger;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 class FetchItemsHandlerTest extends WebTestCase
 {
@@ -16,18 +21,18 @@ class FetchItemsHandlerTest extends WebTestCase
     {
         static::createClient();
 
-        /** @var \Symfony\Component\DependencyInjection\ContainerInterface */
+        /** @var ContainerInterface */
         $container = self::getContainer();
 
-        $doctrine = $this->getMockBuilder('Doctrine\Bundle\DoctrineBundle\Registry')
+        $doctrine = $this->getMockBuilder(Registry::class)
             ->disableOriginalConstructor()
             ->getMock();
 
-        $contentImport = $this->getMockBuilder('App\Content\Import')
+        $contentImport = $this->getMockBuilder(Import::class)
             ->disableOriginalConstructor()
             ->getMock();
 
-        $feedRepository = $this->getMockBuilder('App\Repository\FeedRepository')
+        $feedRepository = $this->getMockBuilder(FeedRepository::class)
             ->disableOriginalConstructor()
             ->getMock();
 
@@ -52,17 +57,17 @@ class FetchItemsHandlerTest extends WebTestCase
     {
         static::createClient();
 
-        /** @var \Symfony\Component\DependencyInjection\ContainerInterface */
+        /** @var ContainerInterface */
         $container = self::getContainer();
 
-        $em = $this->getMockBuilder('Doctrine\ORM\EntityManager')
+        $em = $this->getMockBuilder(EntityManager::class)
             ->disableOriginalConstructor()
             ->getMock();
         $em->expects($this->once())
             ->method('isOpen')
             ->willReturn(false); // simulate a closing manager
 
-        $doctrine = $this->getMockBuilder('Doctrine\Bundle\DoctrineBundle\Registry')
+        $doctrine = $this->getMockBuilder(Registry::class)
             ->disableOriginalConstructor()
             ->getMock();
         $doctrine->expects($this->once())
@@ -72,7 +77,7 @@ class FetchItemsHandlerTest extends WebTestCase
             ->method('resetManager')
             ->willReturn($em);
 
-        $contentImport = $this->getMockBuilder('App\Content\Import')
+        $contentImport = $this->getMockBuilder(Import::class)
             ->disableOriginalConstructor()
             ->getMock();
         $contentImport->expects($this->once())
@@ -85,7 +90,7 @@ class FetchItemsHandlerTest extends WebTestCase
         $feed->setId(123);
         $feed->setSlug('reddit');
 
-        $feedRepository = $this->getMockBuilder('App\Repository\FeedRepository')
+        $feedRepository = $this->getMockBuilder(FeedRepository::class)
             ->disableOriginalConstructor()
             ->getMock();
 

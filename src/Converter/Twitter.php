@@ -12,12 +12,8 @@ class Twitter extends AbstractConverter
 {
     public const IMAGE_CONTENT = '<img src="image_url" /></p><p>';
 
-    /** @var TwitterExtractor */
-    private $twitterExtractor;
-
-    public function __construct(TwitterExtractor $twitterExtractor)
+    public function __construct(private readonly TwitterExtractor $twitterExtractor)
     {
-        $this->twitterExtractor = $twitterExtractor;
     }
 
     /**
@@ -34,7 +30,7 @@ class Twitter extends AbstractConverter
             return $html;
         }
 
-        foreach ($matches[2] as $key => $twitterId) {
+        foreach ($matches[2] as $twitterId) {
             $this->twitterExtractor->match('https://twitter.com/username/' . $twitterId);
             $data = $this->twitterExtractor->retrieveTwitterData();
 
@@ -45,7 +41,7 @@ class Twitter extends AbstractConverter
             if (!empty($data['entities']['media'])) {
                 foreach ($data['entities']['media'] as $mediaData) {
                     $pic = $mediaData['display_url'];
-                    if (false === stripos($html, $pic)) {
+                    if (false === stripos($html, (string) $pic)) {
                         continue;
                     }
 

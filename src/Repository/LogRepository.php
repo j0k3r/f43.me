@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\Log;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\Query;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -88,7 +89,7 @@ class LogRepository extends ServiceEntityRepository
 
         $results = [];
         foreach ($res as $result) {
-            list($year, $month, $day) = explode('-', $result['date']->format('Y-m-d'));
+            [$year, $month, $day] = explode('-', (string) $result['date']->format('Y-m-d'));
             $results[$day . '/' . $month . '/' . $year] = $result['total'];
         }
 
@@ -134,7 +135,7 @@ class LogRepository extends ServiceEntityRepository
      * @param int|null $limit  Number of items to return
      * @param int|null $skip   Item to skip before applying the limit
      *
-     * @return \Doctrine\ORM\Query
+     * @return Query
      */
     private function getItemsByFeedIdQuery(int $feedId, ?int $limit = null, ?int $skip = null)
     {

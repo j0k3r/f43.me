@@ -2,6 +2,7 @@
 
 namespace App\Tests\Parser;
 
+use App\Parser\ParserChain;
 use App\Parser\ParserCompilerPass;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -13,14 +14,14 @@ class ParserCompilerPassTest extends TestCase
         $container = new ContainerBuilder();
         $this->process($container);
 
-        $this->assertFalse($container->hasDefinition('App\Parser\ParserChain'));
+        $this->assertFalse($container->hasDefinition(ParserChain::class));
     }
 
     public function testProcess(): void
     {
         $container = new ContainerBuilder();
         $container
-            ->register('App\Parser\ParserChain')
+            ->register(ParserChain::class)
             ->setPublic(false)
         ;
 
@@ -31,9 +32,9 @@ class ParserCompilerPassTest extends TestCase
 
         $this->process($container);
 
-        $this->assertTrue($container->hasDefinition('App\Parser\ParserChain'));
+        $this->assertTrue($container->hasDefinition(ParserChain::class));
 
-        $definition = $container->getDefinition('App\Parser\ParserChain');
+        $definition = $container->getDefinition(ParserChain::class);
         $this->assertTrue($definition->hasMethodCall('addParser'));
 
         $calls = $definition->getMethodCalls();

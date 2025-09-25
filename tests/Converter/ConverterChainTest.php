@@ -2,6 +2,7 @@
 
 namespace App\Tests\Converter;
 
+use App\Converter\AbstractConverter;
 use App\Converter\ConverterChain;
 use PHPUnit\Framework\TestCase;
 
@@ -9,7 +10,7 @@ class ConverterChainTest extends TestCase
 {
     public function testConvert(): void
     {
-        $converter = $this->getMockBuilder('App\Converter\AbstractConverter')
+        $converter = $this->getMockBuilder(AbstractConverter::class)
             ->disableOriginalConstructor()
             ->getMock();
 

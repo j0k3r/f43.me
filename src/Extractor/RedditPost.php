@@ -26,7 +26,7 @@ class RedditPost extends AbstractExtractor
         try {
             $response = $this->client->get($url);
             $data = $this->jsonDecode($response);
-        } catch (\Exception $e) {
+        } catch (\Exception) {
             return false;
         }
 
@@ -49,6 +49,6 @@ class RedditPost extends AbstractExtractor
 
         return '<div><h2>' . $this->redditPostData['title'] . '</h2>' .
             '<ul><li>Score: ' . $this->redditPostData['score'] . '</li><li>Comments: ' . $this->redditPostData['num_comments'] . '</li><li>Flair: ' . $this->redditPostData['link_flair_text'] . '</li><li>Author: ' . $this->redditPostData['author'] . '</li></ul>' .
-            '</div>' . htmlspecialchars_decode($this->redditPostData['selftext_html']);
+            '</div>' . htmlspecialchars_decode((string) $this->redditPostData['selftext_html']);
     }
 }

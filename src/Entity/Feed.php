@@ -2,167 +2,134 @@
 
 namespace App\Entity;
 
+use App\Repository\FeedRepository;
 use App\Validator\Constraints as FeedAssert;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Validator\Constraints as Assert;
 
-/**
- * @ORM\Table(
- *     name="feed",
- *     uniqueConstraints={
- *
- *         @ORM\UniqueConstraint(name="feed_slug_unique", columns={"slug"})
- *     }
- * )
- *
- * @ORM\Entity(repositoryClass="App\Repository\FeedRepository")
- *
- * @ORM\HasLifecycleCallbacks()
- */
+#[ORM\Table(name: 'feed')]
+#[ORM\UniqueConstraint(name: 'feed_slug_unique', columns: ['slug'])]
+#[ORM\Entity(repositoryClass: FeedRepository::class)]
+#[ORM\HasLifecycleCallbacks]
 class Feed
 {
     /**
      * @var int
-     *
-     * @ORM\Column(name="id", type="integer")
-     *
-     * @ORM\Id
-     *
-     * @ORM\GeneratedValue(strategy="AUTO")
      */
+    #[ORM\Column(name: 'id', type: 'integer')]
+    #[ORM\Id]
+    #[ORM\GeneratedValue(strategy: 'AUTO')]
     protected $id;
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="name", type="string", length=191)
-     *
-     * @Assert\NotBlank()
      */
+    #[ORM\Column(name: 'name', type: 'string', length: 191)]
+    #[Assert\NotBlank]
     protected $name;
 
     /**
      * @var string|null
-     *
-     * @ORM\Column(name="description", type="text", nullable=true)
      */
+    #[ORM\Column(name: 'description', type: 'text', nullable: true)]
     protected $description;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="link", type="string")
-     *
-     * @Assert\NotBlank()
-     *
-     * @Assert\Url()
-     *
      * @FeedAssert\ConstraintRss
      */
+    #[ORM\Column(name: 'link', type: 'string')]
+    #[Assert\NotBlank]
+    #[Assert\Url]
     protected $link;
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="host", type="string")
-     *
-     * @Assert\NotBlank()
      */
+    #[ORM\Column(name: 'host', type: 'string')]
+    #[Assert\NotBlank]
     protected $host;
 
     /**
      * @var string|null
-     *
-     * @ORM\Column(name="logo", type="string", nullable=true)
      */
+    #[ORM\Column(name: 'logo', type: 'string', nullable: true)]
     protected $logo;
 
     /**
      * @var string|null
-     *
-     * @ORM\Column(name="color", type="string", nullable=true)
      */
+    #[ORM\Column(name: 'color', type: 'string', nullable: true)]
     protected $color;
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="parser", type="string")
      */
+    #[ORM\Column(name: 'parser', type: 'string')]
     protected $parser;
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="formatter", type="string")
      */
+    #[ORM\Column(name: 'formatter', type: 'string')]
     protected $formatter;
 
     /**
      * @var int
-     *
-     * @ORM\Column(name="nb_items", type="integer")
      */
+    #[ORM\Column(name: 'nb_items', type: 'integer')]
     protected $nbItems = 0;
 
     /**
      * @var string
-     *
-     * @Gedmo\Slug(fields={"name"}, updatable=false, unique=true)
-     *
-     * @ORM\Column(name="slug", type="string", length=191)
      */
+    #[Gedmo\Slug(fields: ['name'], updatable: false, unique: true)]
+    #[ORM\Column(name: 'slug', type: 'string', length: 191)]
     protected $slug;
 
     /**
      * @var bool
-     *
-     * @ORM\Column(name="is_private", type="boolean")
      */
+    #[ORM\Column(name: 'is_private', type: 'boolean')]
     protected $isPrivate = false;
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="sort_by", type="string")
      */
+    #[ORM\Column(name: 'sort_by', type: 'string')]
     protected $sortBy;
 
     /**
      * @var \DateTime|null
-     *
-     * @ORM\Column(name="last_item_cached_at", type="datetime", nullable=true)
      */
+    #[ORM\Column(name: 'last_item_cached_at', type: 'datetime', nullable: true)]
     protected $lastItemCachedAt;
 
     /**
      * @var \DateTime
-     *
-     * @ORM\Column(name="created_at", type="datetime")
      */
+    #[ORM\Column(name: 'created_at', type: 'datetime')]
     protected $createdAt;
 
     /**
      * @var \DateTime
-     *
-     * @ORM\Column(name="updated_at", type="datetime")
      */
+    #[ORM\Column(name: 'updated_at', type: 'datetime')]
     protected $updatedAt;
 
     /**
      * @var ArrayCollection<int, Item>
-     *
-     * @ORM\OneToMany(targetEntity="Item", mappedBy="feed", cascade={"persist", "remove"})
      */
+    #[ORM\OneToMany(targetEntity: Item::class, mappedBy: 'feed', cascade: ['persist', 'remove'])]
     protected $items;
 
     /**
      * @var ArrayCollection<int, Log>
-     *
-     * @ORM\OneToMany(targetEntity="Log", mappedBy="feed", cascade={"persist", "remove"})
      */
+    #[ORM\OneToMany(targetEntity: Log::class, mappedBy: 'feed', cascade: ['persist', 'remove'])]
     protected $logs;
 
     public function __construct()
@@ -562,11 +529,8 @@ class Feed
         return $this->color;
     }
 
-    /**
-     * @ORM\PrePersist
-     *
-     * @ORM\PreUpdate
-     */
+    #[ORM\PrePersist]
+    #[ORM\PreUpdate]
     public function timestamps(): void
     {
         if (null === $this->createdAt) {

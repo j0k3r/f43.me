@@ -10,18 +10,10 @@ class NewFeedEvent extends Event
     public const NAME = 'feed.created';
 
     /**
-     * Feed entity.
-     *
-     * @var Feed
-     */
-    protected $feed;
-
-    /**
      * Store slug feed that need to be dispatched.
      */
-    public function __construct(Feed $feed)
+    public function __construct(protected Feed $feed)
     {
-        $this->feed = $feed;
     }
 
     public function getFeed(): Feed

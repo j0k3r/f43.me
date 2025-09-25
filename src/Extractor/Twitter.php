@@ -7,14 +7,11 @@ use TwitterOAuth\TwitterOAuth;
 
 class Twitter extends AbstractExtractor
 {
-    /** @var TwitterOAuth */
-    protected $twitter;
     /** @var string */
     protected $tweetId;
 
-    public function __construct(TwitterOAuth $twitter)
+    public function __construct(protected TwitterOAuth $twitter)
     {
-        $this->twitter = $twitter;
     }
 
     public function match(string $url): bool
@@ -82,7 +79,7 @@ class Twitter extends AbstractExtractor
     {
         $tweet = '<p><strong>' . $data['user']['name'] . '</strong>';
         $tweet .= ' &ndash; <a href="https://twitter.com/' . $data['user']['screen_name'] . '">@' . $data['user']['screen_name'] . '</a>';
-        $tweet .= '<br/>' . nl2br($data['full_text']);
+        $tweet .= '<br/>' . nl2br((string) $data['full_text']);
         $tweet .= '<br/><em>' . $data['created_at'] . '</em></p>';
 
         // replace links with real links

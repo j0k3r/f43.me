@@ -35,7 +35,7 @@ class ImproverChain
             return false;
         }
 
-        foreach ($this->improvers as $alias => $improver) {
+        foreach ($this->improvers as $improver) {
             if (true === $improver->match($host)) {
                 return $improver;
             }

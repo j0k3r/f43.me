@@ -19,9 +19,8 @@ class TestController extends AbstractController
      * - improve parser
      * - chose the best parser
      * - test a site configuration.
-     *
-     * @Route("/feed/test", name="feed_test", methods={"GET", "POST"})
      */
+    #[Route(path: '/feed/test', name: 'feed_test', methods: ['GET', 'POST'])]
     public function indexAction(Request $request, Extractor $contentExtractor, GrabyHandler $grabyHandler): Response
     {
         $form = $this->createForm(ItemTestType::class);
@@ -35,8 +34,8 @@ class TestController extends AbstractController
             // load custom siteconfig from user
             // add ability to test a siteconfig before submitting it
             $siteConfig = $form->get('siteconfig')->getData();
-            if (trim($siteConfig)) {
-                $host = parse_url($form->get('link')->getData(), \PHP_URL_HOST);
+            if (trim((string) $siteConfig)) {
+                $host = parse_url((string) $form->get('link')->getData(), \PHP_URL_HOST);
 
                 if ($host) {
                     // remove www. from host because graby check for domain (without www.) first

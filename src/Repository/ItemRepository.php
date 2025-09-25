@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\Item;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\Query;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -151,7 +152,7 @@ class ItemRepository extends ServiceEntityRepository
      * @param int   $feedId  Feed id
      * @param array $options limit, sort_by, skip
      *
-     * @return \Doctrine\ORM\Query
+     * @return Query
      */
     private function getItemsByFeedIdQuery(int $feedId, array $options = [])
     {

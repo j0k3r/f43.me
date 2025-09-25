@@ -2,6 +2,7 @@
 
 namespace App\Tests\Converter;
 
+use App\Converter\ConverterChain;
 use App\Converter\ConverterCompilerPass;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -13,14 +14,14 @@ class ConverterCompilerPassTest extends TestCase
         $container = new ContainerBuilder();
         $this->process($container);
 
-        $this->assertFalse($container->hasDefinition('App\Converter\ConverterChain'));
+        $this->assertFalse($container->hasDefinition(ConverterChain::class));
     }
 
     public function testProcess(): void
     {
         $container = new ContainerBuilder();
         $container
-            ->register('App\Converter\ConverterChain')
+            ->register(ConverterChain::class)
             ->setPublic(false)
         ;
 
@@ -31,9 +32,9 @@ class ConverterCompilerPassTest extends TestCase
 
         $this->process($container);
 
-        $this->assertTrue($container->hasDefinition('App\Converter\ConverterChain'));
+        $this->assertTrue($container->hasDefinition(ConverterChain::class));
 
-        $definition = $container->getDefinition('App\Converter\ConverterChain');
+        $definition = $container->getDefinition(ConverterChain::class);
         $this->assertTrue($definition->hasMethodCall('addConverter'));
 
         $calls = $definition->getMethodCalls();

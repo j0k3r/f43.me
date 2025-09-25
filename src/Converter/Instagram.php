@@ -11,12 +11,8 @@ class Instagram extends AbstractConverter
 {
     public const IMAGE_CONTENT = '<img src="image_url" /></p><p>';
 
-    /** @var InstagramExtractor */
-    private $instagramExtractor;
-
-    public function __construct(InstagramExtractor $instagramExtractor)
+    public function __construct(private readonly InstagramExtractor $instagramExtractor)
     {
-        $this->instagramExtractor = $instagramExtractor;
     }
 
     /**

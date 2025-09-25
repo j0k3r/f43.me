@@ -3,14 +3,22 @@
 namespace App\Tests\Content;
 
 use App\Content\Extractor;
+use App\Converter\ConverterChain;
 use App\Entity\Feed;
+use App\Extractor\ExtractorChain;
+use App\Extractor\Twitter;
+use App\Improver\DefaultImprover;
+use App\Improver\ImproverChain;
 use App\Parser\Internal;
+use App\Parser\ParserChain;
 use Graby\Content;
+use Graby\Graby;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
 class ExtractorTest extends TestCase
 {
-    /** @var \PHPUnit\Framework\MockObject\MockObject */
+    /** @var MockObject */
     private $graby;
 
     public function testWithEmptyContent(): void
@@ -71,19 +79,19 @@ class ExtractorTest extends TestCase
         $this->expectException(\InvalidArgumentException::class);
         $this->expectExceptionMessage('The given parser "oops" does not exists.');
 
-        $extractorChain = $this->getMockBuilder('App\Extractor\ExtractorChain')
+        $extractorChain = $this->getMockBuilder(ExtractorChain::class)
             ->disableOriginalConstructor()
             ->getMock();
 
-        $improverChain = $this->getMockBuilder('App\Improver\ImproverChain')
+        $improverChain = $this->getMockBuilder(ImproverChain::class)
             ->disableOriginalConstructor()
             ->getMock();
 
-        $converterChain = $this->getMockBuilder('App\Converter\ConverterChain')
+        $converterChain = $this->getMockBuilder(ConverterChain::class)
             ->disableOriginalConstructor()
             ->getMock();
 
-        $contentExtractor = new Extractor($extractorChain, $improverChain, $converterChain, new \App\Parser\ParserChain());
+        $contentExtractor = new Extractor($extractorChain, $improverChain, $converterChain, new ParserChain());
         $contentExtractor->init('oops');
     }
 
@@ -95,7 +103,7 @@ class ExtractorTest extends TestCase
         $feed->setFormatter('atom');
         $feed->setHost('Default');
 
-        $extractorChain = $this->getMockBuilder('App\Extractor\ExtractorChain')
+        $extractorChain = $this->getMockBuilder(ExtractorChain::class)
             ->disableOriginalConstructor()
             ->getMock();
 
@@ -104,11 +112,11 @@ class ExtractorTest extends TestCase
             ->willReturn(false);
 
         if (true === $customExtractor) {
-            $extractorChain = $this->getMockBuilder('App\Extractor\ExtractorChain')
+            $extractorChain = $this->getMockBuilder(ExtractorChain::class)
                 ->disableOriginalConstructor()
                 ->getMock();
 
-            $extractor = $this->getMockBuilder('App\Extractor\Twitter')
+            $extractor = $this->getMockBuilder(Twitter::class)
                 ->disableOriginalConstructor()
                 ->getMock();
 
@@ -121,11 +129,11 @@ class ExtractorTest extends TestCase
                 ->willReturn($extractor);
         }
 
-        $improverChain = $this->getMockBuilder('App\Improver\ImproverChain')
+        $improverChain = $this->getMockBuilder(ImproverChain::class)
             ->disableOriginalConstructor()
             ->getMock();
 
-        $defaultImprover = $this->getMockBuilder('App\Improver\DefaultImprover')
+        $defaultImprover = $this->getMockBuilder(DefaultImprover::class)
             ->disableOriginalConstructor()
             ->getMock();
 
@@ -141,7 +149,7 @@ class ExtractorTest extends TestCase
             ->method('match')
             ->willReturn($defaultImprover);
 
-        $converterChain = $this->getMockBuilder('App\Converter\ConverterChain')
+        $converterChain = $this->getMockBuilder(ConverterChain::class)
             ->disableOriginalConstructor()
             ->getMock();
 
@@ -149,14 +157,14 @@ class ExtractorTest extends TestCase
             ->method('convert')
             ->willReturnArgument(0);
 
-        $this->graby = $this->getMockBuilder('Graby\Graby')
+        $this->graby = $this->getMockBuilder(Graby::class)
             ->onlyMethods(['fetchContent'])
             ->disableOriginalConstructor()
             ->getMock();
 
         $internalParser = new Internal($this->graby);
 
-        $parserChain = $this->getMockBuilder('App\Parser\ParserChain')
+        $parserChain = $this->getMockBuilder(ParserChain::class)
             ->disableOriginalConstructor()
             ->getMock();
 

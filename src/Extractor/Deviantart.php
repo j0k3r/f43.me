@@ -53,7 +53,7 @@ class Deviantart extends AbstractExtractor
             <h2>' . $data['title'] . '</h2>
             <p>By <a href="' . $data['author_url'] . '">@' . $data['author_name'] . '</a></p>
             <p><i>' . $data['category'] . '</i></p>
-            <img src="' . (isset($data['url']) ? $data['url'] : $data['thumbnail_url']) . '" />';
+            <img src="' . ($data['url'] ?? $data['thumbnail_url']) . '" />';
 
         if (isset($data['html'])) {
             $content .= '<p>' . $data['html'] . '</p>';

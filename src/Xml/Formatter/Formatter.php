@@ -15,26 +15,6 @@ use App\Entity\Item;
 abstract class Formatter
 {
     /**
-     * @var Feed A feed instance
-     */
-    protected $feed;
-
-    /**
-     * @var array A collection of item
-     */
-    protected $items;
-
-    /**
-     * @var string Generator name
-     */
-    protected $generator;
-
-    /**
-     * @var string Feed url
-     */
-    protected $url;
-
-    /**
      * @var XDOMDocument XML (X)DOMDocument
      */
     protected $dom;
@@ -50,13 +30,8 @@ abstract class Formatter
      * @param Feed  $feed  A feed instance
      * @param array $items An array of Item object
      */
-    public function __construct(Feed $feed, array $items, string $url, string $generator = '')
+    public function __construct(protected Feed $feed, protected array $items, protected string $url, protected string $generator = '')
     {
-        $this->feed = $feed;
-        $this->items = $items;
-        $this->url = $url;
-        $this->generator = $generator;
-
         $this->dom = new XDOMDocument('1.0', 'utf-8');
 
         $this->setItemFields();

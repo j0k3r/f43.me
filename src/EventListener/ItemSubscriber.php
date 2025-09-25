@@ -9,13 +9,6 @@ use Symfony\Component\Routing\RouterInterface;
 
 class ItemSubscriber
 {
-    /** @var string */
-    protected $hub = '';
-    /** @var RouterInterface */
-    protected $router;
-    /** @var HttpMethodsClientInterface */
-    protected $client;
-
     /**
      * Create a new subscriber.
      *
@@ -23,11 +16,8 @@ class ItemSubscriber
      * @param RouterInterface            $router Symfony Router to generate the feed xml
      * @param HttpMethodsClientInterface $client Guzzle client to send the request
      */
-    public function __construct(string $hub, RouterInterface $router, HttpMethodsClientInterface $client)
+    public function __construct(protected string $hub, protected RouterInterface $router, protected HttpMethodsClientInterface $client)
     {
-        $this->hub = $hub;
-        $this->router = $router;
-        $this->client = $client;
     }
 
     /**
@@ -72,7 +62,7 @@ class ItemSubscriber
 
             // hub should response 204 if everything went fine
             return !(204 !== $response->getStatusCode());
-        } catch (\Exception $e) {
+        } catch (\Exception) {
             return false;
         }
     }

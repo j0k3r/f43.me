@@ -16,16 +16,8 @@ use Symfony\Component\Lock\Store\FlockStore;
 
 class RemoveItemsCommand extends Command
 {
-    private $feedRepository;
-    private $itemRepository;
-    private $em;
-
-    public function __construct(FeedRepository $feedRepository, ItemRepository $itemRepository, EntityManagerInterface $em)
+    public function __construct(private readonly FeedRepository $feedRepository, private readonly ItemRepository $itemRepository, private readonly EntityManagerInterface $em)
     {
-        $this->feedRepository = $feedRepository;
-        $this->itemRepository = $itemRepository;
-        $this->em = $em;
-
         parent::__construct();
     }
 

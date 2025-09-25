@@ -2,20 +2,19 @@
 
 namespace App\Extractor;
 
+use Imgur\Api\Album;
+use Imgur\Api\Image;
 use Imgur\Client;
 
 class Imgur extends AbstractExtractor
 {
-    /** @var Client */
-    protected $imgurClient;
     /** @var string */
     protected $hash;
     /** @var string */
     protected $type;
 
-    public function __construct(Client $imgurClient)
+    public function __construct(protected Client $imgurClient)
     {
-        $this->imgurClient = $imgurClient;
     }
 
     public function match(string $url): bool
@@ -68,7 +67,7 @@ class Imgur extends AbstractExtractor
 
         if (\in_array($this->type, ['a', 'gallery'], true)) {
             try {
-                /** @var \Imgur\Api\Album */
+                /** @var Album */
                 $album = $this->imgurClient->api('album');
                 $albumOrImage = $album->album($this->hash);
             } catch (\Exception $e) {
@@ -80,7 +79,7 @@ class Imgur extends AbstractExtractor
 
         if (null === $albumOrImage) {
             try {
-                /** @var \Imgur\Api\Image */
+                /** @var Image */
                 $image = $this->imgurClient->api('image');
                 $albumOrImage = $image->image($this->hash);
             } catch (\Exception $e) {
@@ -101,8 +100,8 @@ class Imgur extends AbstractExtractor
         }
 
         foreach ($images as $image) {
-            $info = '<p>' . trim($image['title']);
-            $info .= $image['description'] ? ' – ' . trim($image['description']) : '';
+            $info = '<p>' . trim((string) $image['title']);
+            $info .= $image['description'] ? ' – ' . trim((string) $image['description']) : '';
             $info .= '</p>';
 
             if (!$image['title'] && !$image['description']) {
@@ -110,7 +109,7 @@ class Imgur extends AbstractExtractor
             }
 
             // some gifv hasn't a gif alternative
-            if (strpos($image['link'], '.mp4')) {
+            if (strpos((string) $image['link'], '.mp4')) {
                 $content .= '<video width="' . $image['width'] . '" height="' . $image['height'] . '" controls="controls"><source src="' . $image['link'] . '" type="video/mp4" /></video>';
             } else {
                 $content .= '<div>' . $info . '<img src="' . $image['link'] . '" /></div>';

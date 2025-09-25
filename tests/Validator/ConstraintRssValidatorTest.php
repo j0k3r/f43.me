@@ -6,6 +6,7 @@ use App\Tests\AppTestCase;
 use App\Validator\Constraints\ConstraintRss;
 use App\Validator\Constraints\ConstraintRssValidator;
 use GuzzleHttp\Psr7\Response;
+use Symfony\Component\Validator\Context\ExecutionContextInterface;
 
 class ConstraintRssValidatorTest extends AppTestCase
 {
@@ -13,7 +14,7 @@ class ConstraintRssValidatorTest extends AppTestCase
     {
         $constraint = new ConstraintRss();
 
-        $context = $this->getMockBuilder('Symfony\Component\Validator\Context\ExecutionContextInterface')
+        $context = $this->getMockBuilder(ExecutionContextInterface::class)
             ->disableOriginalConstructor()
             ->getMock();
 
@@ -31,7 +32,7 @@ class ConstraintRssValidatorTest extends AppTestCase
     {
         $constraint = new ConstraintRss();
 
-        $context = $this->getMockBuilder('Symfony\Component\Validator\Context\ExecutionContextInterface')
+        $context = $this->getMockBuilder(ExecutionContextInterface::class)
             ->disableOriginalConstructor()
             ->getMock();
 
@@ -53,7 +54,7 @@ class ConstraintRssValidatorTest extends AppTestCase
     {
         $constraint = new ConstraintRss();
 
-        $context = $this->getMockBuilder('Symfony\Component\Validator\Context\ExecutionContextInterface')
+        $context = $this->getMockBuilder(ExecutionContextInterface::class)
             ->disableOriginalConstructor()
             ->getMock();
 
@@ -78,7 +79,7 @@ class ConstraintRssValidatorTest extends AppTestCase
     {
         $constraint = new ConstraintRss();
 
-        $context = $this->getMockBuilder('Symfony\Component\Validator\Context\ExecutionContextInterface')
+        $context = $this->getMockBuilder(ExecutionContextInterface::class)
             ->disableOriginalConstructor()
             ->getMock();
 
