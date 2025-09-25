@@ -34,10 +34,8 @@ jobs:
     strategy:
       matrix:
         php:
-          - "7.4"
-          - "8.0"
-          - "8.1"
           - "8.2"
+          - "8.3"
 
     steps:
       - name: Checkout
@@ -77,7 +75,7 @@ jobs:
         run: mkdir -p build/logs
 
       - name: Run PHPUnit
-        run: php bin/simple-phpunit -v
+        run: php bin/phpunit
 
   postgresql:
     name: PHPUnit (PHP ${{ matrix.php }} with PostgreSQL)
@@ -100,10 +98,8 @@ jobs:
     strategy:
       matrix:
         php:
-          - "7.4"
-          - "8.0"
-          - "8.1"
           - "8.2"
+          - "8.3"
 
     steps:
       - name: Checkout
@@ -143,4 +139,4 @@ jobs:
         run: mkdir -p build/logs
 
       - name: Run PHPUnit
-        run: php bin/simple-phpunit -v
+        run: php bin/phpunit

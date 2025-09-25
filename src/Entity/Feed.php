@@ -44,7 +44,7 @@ class Feed
     protected $name;
 
     /**
-     * @var string
+     * @var string|null
      *
      * @ORM\Column(name="description", type="text", nullable=true)
      */
@@ -73,14 +73,14 @@ class Feed
     protected $host;
 
     /**
-     * @var string
+     * @var string|null
      *
      * @ORM\Column(name="logo", type="string", nullable=true)
      */
     protected $logo;
 
     /**
-     * @var string
+     * @var string|null
      *
      * @ORM\Column(name="color", type="string", nullable=true)
      */
@@ -131,7 +131,7 @@ class Feed
     protected $sortBy;
 
     /**
-     * @var \DateTime
+     * @var \DateTime|null
      *
      * @ORM\Column(name="last_item_cached_at", type="datetime", nullable=true)
      */
@@ -236,7 +236,7 @@ class Feed
     /**
      * Get description.
      *
-     * @return string $description
+     * @return string|null $description
      */
     public function getDescription()
     {
@@ -483,7 +483,7 @@ class Feed
     /**
      * Get lastItemCachedAt.
      *
-     * @return \DateTime $lastItemCachedAt
+     * @return \DateTime|null $lastItemCachedAt
      */
     public function getLastItemCachedAt()
     {
@@ -531,7 +531,7 @@ class Feed
     /**
      * Get logo.
      *
-     * @return string $logo
+     * @return string|null $logo
      */
     public function getLogo()
     {
@@ -541,7 +541,7 @@ class Feed
     /**
      * Set color.
      *
-     * @param string $color
+     * @param string|null $color
      *
      * @return self
      */
@@ -555,7 +555,7 @@ class Feed
     /**
      * Get color.
      *
-     * @return string $color
+     * @return string|null $color
      */
     public function getColor()
     {

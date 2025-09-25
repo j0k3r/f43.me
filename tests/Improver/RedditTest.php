@@ -4,10 +4,11 @@ namespace App\Tests\Improver;
 
 use App\Improver\Reddit;
 use App\Tests\AppTestCase;
+use PHPUnit\Framework\Attributes\DataProvider;
 
 class RedditTest extends AppTestCase
 {
-    public function dataMatch(): array
+    public static function dataMatch(): array
     {
         return [
             ['reddit.com', true],
@@ -16,9 +17,7 @@ class RedditTest extends AppTestCase
         ];
     }
 
-    /**
-     * @dataProvider dataMatch
-     */
+    #[DataProvider('dataMatch')]
     public function testMatch(string $url, bool $expected): void
     {
         $reddit = new Reddit(self::getMockClient());

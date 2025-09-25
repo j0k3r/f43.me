@@ -7,10 +7,11 @@ use App\Tests\AppTestCase;
 use GuzzleHttp\Psr7\Response;
 use Monolog\Handler\TestHandler;
 use Monolog\Logger;
+use PHPUnit\Framework\Attributes\DataProvider;
 
 class RedditGalleryTest extends AppTestCase
 {
-    public function dataMatch(): array
+    public static function dataMatch(): array
     {
         return [
             ['https://v.redd.it/funfg141o3hz', false],
@@ -20,9 +21,7 @@ class RedditGalleryTest extends AppTestCase
         ];
     }
 
-    /**
-     * @dataProvider dataMatch
-     */
+    #[DataProvider('dataMatch')]
     public function testMatch(string $url, bool $expected): void
     {
         $redditGallery = new RedditGallery();

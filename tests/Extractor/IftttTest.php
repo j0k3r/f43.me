@@ -7,10 +7,11 @@ use App\Tests\AppTestCase;
 use GuzzleHttp\Psr7\Response;
 use Monolog\Handler\TestHandler;
 use Monolog\Logger;
+use PHPUnit\Framework\Attributes\DataProvider;
 
 class IftttTest extends AppTestCase
 {
-    public function dataMatch(): array
+    public static function dataMatch(): array
     {
         return [
             ['https://ifttt.com/recipes/385105-receive-notifications-for-a-jailbreak', true],
@@ -22,9 +23,7 @@ class IftttTest extends AppTestCase
         ];
     }
 
-    /**
-     * @dataProvider dataMatch
-     */
+    #[DataProvider('dataMatch')]
     public function testMatch(string $url, bool $expected): void
     {
         $ifttt = new Ifttt();

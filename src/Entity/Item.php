@@ -58,14 +58,14 @@ class Item
     protected $permalink;
 
     /**
-     * @var string
+     * @var string|null
      *
      * @ORM\Column(name="content", type="text", nullable=true)
      */
     protected $content;
 
     /**
-     * @var \DateTime
+     * @var \DateTime|null
      *
      * @ORM\Column(name="published_at", type="datetime", nullable=true)
      */
@@ -86,7 +86,7 @@ class Item
     protected $updatedAt;
 
     /**
-     * @var Feed
+     * @var Feed|null
      *
      * @ORM\ManyToOne(targetEntity="App\Entity\Feed", inversedBy="items")
      *
@@ -181,10 +181,8 @@ class Item
 
     /**
      * Get content.
-     *
-     * @return string $content
      */
-    public function getContent(): string
+    public function getContent(): ?string
     {
         return $this->content;
     }
@@ -278,7 +276,7 @@ class Item
     /**
      * Get publishedAt.
      *
-     * @return \DateTime $publishedAt
+     * @return \DateTime|null $publishedAt
      */
     public function getPublishedAt()
     {
@@ -289,11 +287,11 @@ class Item
      * Retrieve the "publication" date *only* used in the RSS/Atom feed.
      * Depending on the feed, we want the published_at date or the created_at date.
      *
-     * @return \DateTime
+     * @return \DateTime|null
      */
     public function getPubDate()
     {
-        return ('published_at' === $this->feed->getSortBy()) ? $this->getPublishedAt() : $this->getCreatedAt();
+        return ($this->feed && 'published_at' === $this->feed->getSortBy()) ? $this->getPublishedAt() : $this->getCreatedAt();
     }
 
     /**
@@ -313,7 +311,7 @@ class Item
     /**
      * Return feed.
      *
-     * @return Feed
+     * @return Feed|null
      */
     public function getFeed()
     {

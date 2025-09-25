@@ -5,12 +5,13 @@ namespace App\Tests\Extractor;
 use App\Extractor\Twitter;
 use Monolog\Handler\TestHandler;
 use Monolog\Logger;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 use TwitterOAuth\Exception\TwitterException;
 
 class TwitterTest extends TestCase
 {
-    public function dataMatch(): array
+    public static function dataMatch(): array
     {
         return [
             ['https://twitter.com/DoerteDev/statuses/50652222386027724', false],
@@ -23,9 +24,7 @@ class TwitterTest extends TestCase
         ];
     }
 
-    /**
-     * @dataProvider dataMatch
-     */
+    #[DataProvider('dataMatch')]
     public function testMatch(string $url, bool $expected): void
     {
         $twitterOAuth = $this->getMockBuilder('TwitterOAuth\TwitterOAuth')

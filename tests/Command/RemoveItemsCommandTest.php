@@ -36,7 +36,7 @@ class RemoveItemsCommandTest extends WebTestCase
     {
         $this->commandTester->execute(['command' => $this->command->getName()]);
 
-        $this->assertRegExp('`0 items removed.`', $this->commandTester->getDisplay());
+        $this->assertMatchesRegularExpression('`0 items removed.`', $this->commandTester->getDisplay());
     }
 
     public function testRemoveForOneFeed(): void
@@ -47,7 +47,7 @@ class RemoveItemsCommandTest extends WebTestCase
             '--slug' => 'hackernews',
         ]);
 
-        $this->assertRegExp('`0 items removed.`', $this->commandTester->getDisplay());
+        $this->assertMatchesRegularExpression('`0 items removed.`', $this->commandTester->getDisplay());
     }
 
     public function testRemoveBadSlug(): void
@@ -58,7 +58,7 @@ class RemoveItemsCommandTest extends WebTestCase
             '--slug' => 'toto',
         ]);
 
-        $this->assertRegExp('`Unable to find Feed document`', $this->commandTester->getDisplay());
+        $this->assertMatchesRegularExpression('`Unable to find Feed document`', $this->commandTester->getDisplay());
     }
 
     public function testRemoveAllMaxYes(): void
@@ -71,7 +71,7 @@ class RemoveItemsCommandTest extends WebTestCase
             '--max' => 0,
         ]);
 
-        $this->assertRegExp('`You will remove ALL items, are your sure?`', $this->commandTester->getDisplay());
+        $this->assertMatchesRegularExpression('`You will remove ALL items, are your sure?`', $this->commandTester->getDisplay());
     }
 
     public function testRemoveAllMaxNo(): void
@@ -84,7 +84,7 @@ class RemoveItemsCommandTest extends WebTestCase
             '--max' => 0,
         ]);
 
-        $this->assertRegExp('`remove everything from your database, pfiou`', $this->commandTester->getDisplay());
+        $this->assertMatchesRegularExpression('`remove everything from your database, pfiou`', $this->commandTester->getDisplay());
     }
 
     public function testRemove(): void
@@ -96,6 +96,6 @@ class RemoveItemsCommandTest extends WebTestCase
             '--max' => 2,
         ]);
 
-        $this->assertRegExp('`items removed.`', $this->commandTester->getDisplay());
+        $this->assertMatchesRegularExpression('`items removed.`', $this->commandTester->getDisplay());
     }
 }

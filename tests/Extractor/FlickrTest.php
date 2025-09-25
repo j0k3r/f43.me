@@ -7,10 +7,11 @@ use App\Tests\AppTestCase;
 use GuzzleHttp\Psr7\Response;
 use Monolog\Handler\TestHandler;
 use Monolog\Logger;
+use PHPUnit\Framework\Attributes\DataProvider;
 
 class FlickrTest extends AppTestCase
 {
-    public function dataMatch(): array
+    public static function dataMatch(): array
     {
         return [
             // single photo
@@ -30,9 +31,7 @@ class FlickrTest extends AppTestCase
         ];
     }
 
-    /**
-     * @dataProvider dataMatch
-     */
+    #[DataProvider('dataMatch')]
     public function testMatch(string $url, bool $expected): void
     {
         $flickr = new Flickr();

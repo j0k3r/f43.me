@@ -7,10 +7,11 @@ use App\Tests\AppTestCase;
 use GuzzleHttp\Psr7\Response;
 use Monolog\Handler\TestHandler;
 use Monolog\Logger;
+use PHPUnit\Framework\Attributes\DataProvider;
 
 class TumblrTest extends AppTestCase
 {
-    public function dataMatch(): array
+    public static function dataMatch(): array
     {
         return [
             ['http://thecodinglove.com/post/96365413702/client-giving-us-his-feedback-on-his-new-project', true],
@@ -20,9 +21,7 @@ class TumblrTest extends AppTestCase
         ];
     }
 
-    /**
-     * @dataProvider dataMatch
-     */
+    #[DataProvider('dataMatch')]
     public function testMatch(string $url, bool $expected): void
     {
         $client = self::getMockClient([new Response(200, ['X-Tumblr-User' => 'test'])]);

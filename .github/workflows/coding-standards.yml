@@ -16,7 +16,7 @@ jobs:
     strategy:
       matrix:
         php:
-          - "7.4"
+          - "8.2"
 
     steps:
       - name: Checkout
@@ -40,9 +40,6 @@ jobs:
 
       - name: Generate test cache for PHPStan
         run: php bin/console cache:clear --env=test
-
-      - name: Install PHPUnit for PHPStan
-        run: php bin/simple-phpunit install
 
       - name: Run PHPStan
         run: php bin/phpstan analyse --no-progress

@@ -7,10 +7,11 @@ use App\Tests\AppTestCase;
 use GuzzleHttp\Psr7\Response;
 use Monolog\Handler\TestHandler;
 use Monolog\Logger;
+use PHPUnit\Framework\Attributes\DataProvider;
 
 class GithubTest extends AppTestCase
 {
-    public function dataMatch(): array
+    public static function dataMatch(): array
     {
         return [
             ['https://github.com/j0k3r/f43.me', true],
@@ -26,9 +27,7 @@ class GithubTest extends AppTestCase
         ];
     }
 
-    /**
-     * @dataProvider dataMatch
-     */
+    #[DataProvider('dataMatch')]
     public function testMatch(string $url, bool $expected): void
     {
         $github = new Github('client_id', 'client_secret');

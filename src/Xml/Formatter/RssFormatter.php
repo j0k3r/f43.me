@@ -62,7 +62,7 @@ class RssFormatter extends Formatter
 
         $generator = $this->dom->createElement('generator', htmlspecialchars($this->generator));
         $title = $this->dom->createElement('title', htmlspecialchars($this->feed->getName()));
-        $description = $this->dom->createElement('description', htmlspecialchars($this->feed->getDescription()));
+        $description = $this->dom->createElement('description', htmlspecialchars((string) $this->feed->getDescription()));
 
         $link = $this->dom->createElement('link', 'http://' . $this->feed->getHost());
 

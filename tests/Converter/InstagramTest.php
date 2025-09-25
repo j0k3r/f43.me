@@ -3,12 +3,13 @@
 namespace App\Tests\Converter;
 
 use App\Converter\Instagram;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 use Psr\Log\NullLogger;
 
 class InstagramTest extends TestCase
 {
-    public function dataMatch(): array
+    public static function dataMatch(): array
     {
         return [
             [
@@ -45,9 +46,7 @@ class InstagramTest extends TestCase
         ];
     }
 
-    /**
-     * @dataProvider dataMatch
-     */
+    #[DataProvider('dataMatch')]
     public function testMatch(string $html, string $expected, string $instagramId, int $instaExtractorOccurence): void
     {
         $instaExtractor = $this->getMockBuilder('App\Extractor\Instagram')

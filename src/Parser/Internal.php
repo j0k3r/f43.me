@@ -30,6 +30,6 @@ class Internal extends AbstractParser
             return '';
         }
 
-        return $result->getHtml() ?? '';
+        return $result->getHtml();
     }
 }

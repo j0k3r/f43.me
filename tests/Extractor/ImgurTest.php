@@ -5,11 +5,12 @@ namespace App\Tests\Extractor;
 use App\Extractor\Imgur;
 use Monolog\Handler\TestHandler;
 use Monolog\Logger;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
 class ImgurTest extends TestCase
 {
-    public function dataMatch(): array
+    public static function dataMatch(): array
     {
         return [
             ['http://i.imgur.com/zNUC9TA.jpg', true],
@@ -32,9 +33,7 @@ class ImgurTest extends TestCase
         ];
     }
 
-    /**
-     * @dataProvider dataMatch
-     */
+    #[DataProvider('dataMatch')]
     public function testMatch(string $url, bool $expected): void
     {
         $imgurClient = $this->getMockBuilder('Imgur\Client')

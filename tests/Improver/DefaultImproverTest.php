@@ -5,10 +5,11 @@ namespace App\Tests\Improver;
 use App\Improver\DefaultImprover;
 use App\Tests\AppTestCase;
 use GuzzleHttp\Psr7\Response;
+use PHPUnit\Framework\Attributes\DataProvider;
 
 class DefaultImproverTest extends AppTestCase
 {
-    public function dataUpdateUrl(): array
+    public static function dataUpdateUrl(): array
     {
         return [
             ['http://modmyi.com/?utm_source=feedburner&utm_medium=feed&utm_campaign=Feed%3A+home_all+%28MMi+%7C+Homepage+All%29', 'http://modmyi.com/'],
@@ -21,9 +22,7 @@ class DefaultImproverTest extends AppTestCase
         ];
     }
 
-    /**
-     * @dataProvider dataUpdateUrl
-     */
+    #[DataProvider('dataUpdateUrl')]
     public function testUpdateUrl(string $url, string $expected): void
     {
         $client = self::getMockClient([new Response(200, ['content-type' => 'application/json'])]);
