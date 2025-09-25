@@ -5,6 +5,7 @@ declare(strict_types=1);
 use Rector\Config\RectorConfig;
 use Rector\Doctrine\Set\DoctrineSetList;
 use Rector\Php80\Rector\Class_\ClassPropertyAssignToConstructorPromotionRector;
+use Rector\PHPUnit\Set\PHPUnitSetList;
 use Rector\Symfony\Set\SymfonySetList;
 use Rector\TypeDeclaration\Rector\ClassMethod\AddVoidReturnTypeWhereNoReturnRector;
 
@@ -28,6 +29,7 @@ return RectorConfig::configure()
         DoctrineSetList::ANNOTATIONS_TO_ATTRIBUTES,
         SymfonySetList::ANNOTATIONS_TO_ATTRIBUTES,
         DoctrineSetList::GEDMO_ANNOTATIONS_TO_ATTRIBUTES,
+        PHPUnitSetList::PHPUNIT_110,
     ])
     ->withAttributesSets(symfony: true, doctrine: true, gedmo: true, jms: true, sensiolabs: true)
     ->withConfiguredRule(ClassPropertyAssignToConstructorPromotionRector::class, [

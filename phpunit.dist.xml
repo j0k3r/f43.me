@@ -3,8 +3,8 @@
 <!-- https://phpunit.readthedocs.io/en/latest/configuration.html -->
 <phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:noNamespaceSchemaLocation="vendor/phpunit/phpunit/phpunit.xsd"
-         backupGlobals="false"
          colors="true"
+         failOnDeprecation="true"
          failOnNotice="true"
          failOnWarning="true"
          bootstrap="tests/bootstrap.php"
@@ -23,16 +23,19 @@
         </testsuite>
     </testsuites>
 
-    <source ignoreSuppressionOfDeprecations="true" restrictNotices="true" restrictWarnings="true">
+    <source ignoreSuppressionOfDeprecations="true"
+            ignoreIndirectDeprecations="true"
+            restrictNotices="true"
+            restrictWarnings="true"
+    >
         <include>
             <directory>src</directory>
         </include>
-    </source>
 
-    <extensions>
-        <bootstrap class="Symfony\Bridge\PhpUnit\SymfonyExtension">
-            <parameter name="clock-mock-namespaces" value="App" />
-            <parameter name="dns-mock-namespaces" value="App" />
-        </bootstrap>
-    </extensions>
+        <deprecationTrigger>
+            <method>Doctrine\Deprecations\Deprecation::trigger</method>
+            <method>Doctrine\Deprecations\Deprecation::delegateTriggerToBackend</method>
+            <function>trigger_deprecation</function>
+        </deprecationTrigger>
+    </source>
 </phpunit>

@@ -242,15 +242,16 @@
         "version": "0.11.6"
     },
     "phpunit/phpunit": {
-        "version": "10.5",
+        "version": "11.5",
         "recipe": {
             "repo": "github.com/symfony/recipes",
             "branch": "main",
-            "version": "10.0",
-            "ref": "bb22cf8d8c554a623b427d5f3416b538f5525233"
+            "version": "11.1",
+            "ref": "c6658a60fc9d594805370eacdf542c3d6b5c0869"
         },
         "files": [
             ".env.test",
+            "bin/phpunit",
             "phpunit.dist.xml",
             "tests/bootstrap.php"
         ]
@@ -406,15 +407,16 @@
         "version": "v4.4.13"
     },
     "symfony/flex": {
-        "version": "1.19",
+        "version": "2.8",
         "recipe": {
             "repo": "github.com/symfony/recipes",
             "branch": "main",
-            "version": "1.0",
-            "ref": "146251ae39e06a95be0fe3d13c807bcf3938b172"
+            "version": "2.4",
+            "ref": "52e9754527a15e2b79d9a610f98185a1fe46622a"
         },
         "files": [
-            ".env"
+            ".env",
+            ".env.dev"
         ]
     },
     "symfony/form": {
@@ -457,15 +459,6 @@
             "config/packages/lock.yaml"
         ]
     },
-    "symfony/maker-bundle": {
-        "version": "1.0",
-        "recipe": {
-            "repo": "github.com/symfony/recipes",
-            "branch": "master",
-            "version": "1.0",
-            "ref": "fadbfe33303a76e25cb63401050439aa9b1a9c7f"
-        }
-    },
     "symfony/messenger": {
         "version": "5.4",
         "recipe": {
@@ -500,14 +493,19 @@
         "version": "v5.3.0"
     },
     "symfony/phpunit-bridge": {
-        "version": "7.3",
+        "version": "5.4",
         "recipe": {
             "repo": "github.com/symfony/recipes",
             "branch": "main",
-            "version": "7.3",
-            "ref": "dc13fec96bd527bd399c3c01f0aab915c67fd544"
+            "version": "5.3",
+            "ref": "07ce01a897311647520b43d4ddddad9537b99ba6"
         },
-        "files": []
+        "files": [
+            ".env.test",
+            "bin/phpunit",
+            "phpunit.dist.xml",
+            "tests/bootstrap.php"
+        ]
     },
     "symfony/polyfill-ctype": {
         "version": "v1.18.1"
@@ -664,18 +662,15 @@
         ]
     },
     "symfony/webpack-encore-bundle": {
-        "version": "1.17",
+        "version": "2.3",
         "recipe": {
             "repo": "github.com/symfony/recipes",
             "branch": "main",
-            "version": "1.10",
-            "ref": "6642c5eeebbd06268826e7f9fbee721cba1d7d77"
+            "version": "2.0",
+            "ref": "9ef5412a4a2a8415aca3a3f2b4edd3866aab9a19"
         },
         "files": [
             "assets/app.js",
-            "assets/bootstrap.js",
-            "assets/controllers.json",
-            "assets/controllers/hello_controller.js",
             "assets/styles/app.css",
             "config/packages/webpack_encore.yaml",
             "package.json",

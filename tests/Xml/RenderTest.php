@@ -10,10 +10,8 @@ use Symfony\Bundle\FrameworkBundle\Routing\Router;
 
 class RenderTest extends TestCase
 {
-    /** @var ItemRepository */
-    private $repo;
-    /** @var Router */
-    private $router;
+    private ItemRepository $repo;
+    private Router $router;
 
     protected function setUp(): void
     {
@@ -45,6 +43,7 @@ class RenderTest extends TestCase
         $this->expectException(\InvalidArgumentException::class);
 
         $feed = new Feed();
+        $feed->setName('');
         $feed->setId(66);
         $feed->setSortBy('created_at');
 
@@ -58,6 +57,7 @@ class RenderTest extends TestCase
         $feed->setId(66);
         $feed->setSortBy('created_at');
         $feed->setFormatter('atom');
+        $feed->setName('');
 
         $render = new Render('tata', $this->repo, $this->router);
         $content = $render->doRender($feed);
@@ -79,6 +79,7 @@ class RenderTest extends TestCase
         $feed->setId(66);
         $feed->setSortBy('created_at');
         $feed->setFormatter('rss');
+        $feed->setName('');
 
         $render = new Render('tata', $this->repo, $this->router);
         $content = $render->doRender($feed);
