@@ -35,7 +35,7 @@ class RedditVideo extends AbstractExtractor
         try {
             $response = $this->client->get($jsonUrl);
             $data = $this->jsonDecode($response);
-        } catch (\Exception $e) {
+        } catch (\Exception) {
             return false;
         }
 

@@ -31,7 +31,7 @@ class ExtractorChain
      */
     public function match($url)
     {
-        foreach ($this->extractors as $alias => $extractor) {
+        foreach ($this->extractors as $extractor) {
             if (true === $extractor->match($url)) {
                 return $extractor;
             }

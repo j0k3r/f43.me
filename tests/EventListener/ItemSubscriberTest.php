@@ -6,13 +6,14 @@ use App\Event\ItemsCachedEvent;
 use App\EventListener\ItemSubscriber;
 use App\Tests\AppTestCase;
 use GuzzleHttp\Psr7\Response;
+use Symfony\Bundle\FrameworkBundle\Routing\Router;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 class ItemSubscriberTest extends AppTestCase
 {
     public function testOnItemCachedNoHubDefined(): void
     {
-        $router = $this->getMockBuilder('Symfony\Bundle\FrameworkBundle\Routing\Router')
+        $router = $this->getMockBuilder(Router::class)
             ->disableOriginalConstructor()
             ->getMock();
 
@@ -29,7 +30,7 @@ class ItemSubscriberTest extends AppTestCase
 
     public function testOnItemCachedBadResponse(): void
     {
-        $router = $this->getMockBuilder('Symfony\Bundle\FrameworkBundle\Routing\Router')
+        $router = $this->getMockBuilder(Router::class)
             ->disableOriginalConstructor()
             ->getMock();
 
@@ -51,7 +52,7 @@ class ItemSubscriberTest extends AppTestCase
 
     public function testOnItemCachedGoodResponse(): void
     {
-        $router = $this->getMockBuilder('Symfony\Bundle\FrameworkBundle\Routing\Router')
+        $router = $this->getMockBuilder(Router::class)
             ->disableOriginalConstructor()
             ->getMock();
 

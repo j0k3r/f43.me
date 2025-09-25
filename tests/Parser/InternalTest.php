@@ -4,13 +4,14 @@ namespace App\Tests\Parser;
 
 use App\Parser\Internal;
 use Graby\Content;
+use Graby\Graby;
 use PHPUnit\Framework\TestCase;
 
 class InternalTest extends TestCase
 {
     public function testParseEmpty(): void
     {
-        $graby = $this->getMockBuilder('Graby\Graby')
+        $graby = $this->getMockBuilder(Graby::class)
             ->onlyMethods(['fetchContent'])
             ->disableOriginalConstructor()
             ->getMock();
@@ -25,7 +26,7 @@ class InternalTest extends TestCase
 
     public function testParseFalse(): void
     {
-        $graby = $this->getMockBuilder('Graby\Graby')
+        $graby = $this->getMockBuilder(Graby::class)
             ->onlyMethods(['fetchContent'])
             ->disableOriginalConstructor()
             ->getMock();
@@ -40,7 +41,7 @@ class InternalTest extends TestCase
 
     public function testParseOk(): void
     {
-        $graby = $this->getMockBuilder('Graby\Graby')
+        $graby = $this->getMockBuilder(Graby::class)
             ->onlyMethods(['fetchContent'])
             ->disableOriginalConstructor()
             ->getMock();
@@ -55,7 +56,7 @@ class InternalTest extends TestCase
 
     public function testParseException(): void
     {
-        $graby = $this->getMockBuilder('Graby\Graby')
+        $graby = $this->getMockBuilder(Graby::class)
             ->onlyMethods(['fetchContent'])
             ->disableOriginalConstructor()
             ->getMock();

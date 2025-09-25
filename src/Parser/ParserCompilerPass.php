@@ -10,12 +10,12 @@ class ParserCompilerPass implements CompilerPassInterface
 {
     public function process(ContainerBuilder $container): void
     {
-        if (!$container->hasDefinition('App\Parser\ParserChain')) {
+        if (!$container->hasDefinition(ParserChain::class)) {
             return;
         }
 
         $definition = $container->getDefinition(
-            'App\Parser\ParserChain'
+            ParserChain::class
         );
 
         $taggedServices = $container->findTaggedServiceIds(

@@ -3,26 +3,33 @@
 namespace App\Tests\Command;
 
 use App\Command\FetchItemsCommand;
+use App\Content\Extractor;
 use App\Content\Import;
 use App\Improver\ImproverChain;
 use App\Message\FeedSync;
 use App\Parser\ParserChain;
 use App\Repository\FeedRepository;
 use App\Repository\ItemRepository;
+use App\Xml\SimplePieProxy;
+use Doctrine\ORM\EntityManagerInterface;
 use Monolog\Handler\TestHandler;
 use Monolog\Logger;
 use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
+use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Tester\CommandTester;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\Messenger\Bridge\Amqp\Transport\AmqpTransport;
+use Symfony\Component\Messenger\Bridge\Amqp\Transport\Connection;
 use Symfony\Component\Messenger\Envelope;
+use Symfony\Component\Messenger\MessageBusInterface;
 
 class FetchItemsCommandTest extends WebTestCase
 {
     /** @var TestHandler */
     private $handler;
-    /** @var \Symfony\Component\Console\Command\Command */
+    /** @var Command */
     private $command;
     /** @var CommandTester */
     private $commandTester;
@@ -55,7 +62,7 @@ class FetchItemsCommandTest extends WebTestCase
             ->method('get_description')
             ->willReturn('description');
 
-        $simplePieProxy = $this->getMockBuilder('App\Xml\SimplePieProxy')
+        $simplePieProxy = $this->getMockBuilder(SimplePieProxy::class)
             ->disableOriginalConstructor()
             ->getMock();
 
@@ -67,7 +74,7 @@ class FetchItemsCommandTest extends WebTestCase
             ->method('init')
             ->willReturn($simplePie);
 
-        $bus = $this->getMockBuilder('Symfony\Component\Messenger\MessageBusInterface')
+        $bus = $this->getMockBuilder(MessageBusInterface::class)
             ->disableOriginalConstructor()
             ->getMock();
 
@@ -78,7 +85,7 @@ class FetchItemsCommandTest extends WebTestCase
         $this->handler = new TestHandler();
         $logger->pushHandler($this->handler);
 
-        /** @var \Symfony\Component\DependencyInjection\ContainerInterface */
+        /** @var ContainerInterface */
         $container = self::getContainer();
 
         $container->get(ParserChain::class)->addParser(
@@ -103,9 +110,9 @@ class FetchItemsCommandTest extends WebTestCase
 
         $import = new Import(
             $simplePieProxy,
-            $container->get(\App\Content\Extractor::class),
+            $container->get(Extractor::class),
             $container->get('event_dispatcher'),
-            $container->get(\Doctrine\ORM\EntityManagerInterface::class),
+            $container->get(EntityManagerInterface::class),
             $logger,
             $container->get(FeedRepository::class),
             $container->get(ItemRepository::class)
@@ -184,10 +191,10 @@ class FetchItemsCommandTest extends WebTestCase
 
     public function testUsingQueue(): void
     {
-        /** @var \Symfony\Component\DependencyInjection\ContainerInterface */
+        /** @var ContainerInterface */
         $container = self::getContainer();
 
-        $bus = $this->getMockBuilder('Symfony\Component\Messenger\MessageBusInterface')
+        $bus = $this->getMockBuilder(MessageBusInterface::class)
             ->disableOriginalConstructor()
             ->getMock();
 
@@ -195,7 +202,7 @@ class FetchItemsCommandTest extends WebTestCase
             ->method('dispatch')
             ->willReturn(new Envelope(new FeedSync(555)));
 
-        $connection = $this->getMockBuilder('Symfony\Component\Messenger\Bridge\Amqp\Transport\Connection')
+        $connection = $this->getMockBuilder(Connection::class)
             ->disableOriginalConstructor()
             ->getMock();
 
@@ -228,17 +235,17 @@ class FetchItemsCommandTest extends WebTestCase
 
     public function testCommandSyncAllUsersWithQueueFull(): void
     {
-        /** @var \Symfony\Component\DependencyInjection\ContainerInterface */
+        /** @var ContainerInterface */
         $container = self::getContainer();
 
-        $bus = $this->getMockBuilder('Symfony\Component\Messenger\MessageBusInterface')
+        $bus = $this->getMockBuilder(MessageBusInterface::class)
             ->disableOriginalConstructor()
             ->getMock();
 
         $bus->expects($this->any())
             ->method('dispatch');
 
-        $connection = $this->getMockBuilder('Symfony\Component\Messenger\Bridge\Amqp\Transport\Connection')
+        $connection = $this->getMockBuilder(Connection::class)
             ->disableOriginalConstructor()
             ->getMock();
 

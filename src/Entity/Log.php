@@ -2,60 +2,46 @@
 
 namespace App\Entity;
 
+use App\Repository\LogRepository;
 use Doctrine\ORM\Mapping as ORM;
 
-/**
- * @ORM\Table(
- *     name="log"
- * )
- *
- * @ORM\Entity(repositoryClass="App\Repository\LogRepository")
- *
- * @ORM\HasLifecycleCallbacks()
- */
+#[ORM\Table(name: 'log')]
+#[ORM\Entity(repositoryClass: LogRepository::class)]
+#[ORM\HasLifecycleCallbacks]
 class Log
 {
     /**
      * @var int
-     *
-     * @ORM\Column(name="id", type="integer")
-     *
-     * @ORM\Id
-     *
-     * @ORM\GeneratedValue(strategy="AUTO")
      */
+    #[ORM\Column(name: 'id', type: 'integer')]
+    #[ORM\Id]
+    #[ORM\GeneratedValue(strategy: 'AUTO')]
     protected $id;
 
     /**
      * @var int
-     *
-     * @ORM\Column(name="items_number", type="integer")
      */
+    #[ORM\Column(name: 'items_number', type: 'integer')]
     protected $itemsNumber;
 
     /**
      * @var \DateTime
-     *
-     * @ORM\Column(name="created_at", type="datetime")
      */
+    #[ORM\Column(name: 'created_at', type: 'datetime')]
     protected $createdAt;
 
     /**
      * @var Feed|null
-     *
-     * @ORM\ManyToOne(targetEntity="App\Entity\Feed", inversedBy="logs")
-     *
-     * @ORM\JoinColumn(name="feed_id", referencedColumnName="id")
      */
+    #[ORM\JoinColumn(name: 'feed_id', referencedColumnName: 'id')]
+    #[ORM\ManyToOne(targetEntity: Feed::class, inversedBy: 'logs')]
     protected $feed;
 
     /**
      * @var Item|null
-     *
-     * @ORM\ManyToOne(targetEntity="App\Entity\Item", inversedBy="logs")
-     *
-     * @ORM\JoinColumn(name="item_id", referencedColumnName="id")
      */
+    #[ORM\JoinColumn(name: 'item_id', referencedColumnName: 'id')]
+    #[ORM\ManyToOne(targetEntity: Item::class, inversedBy: 'logs')]
     protected $item;
 
     public function __construct(Feed $feed)
@@ -121,9 +107,7 @@ class Log
         return $this->createdAt;
     }
 
-    /**
-     * @ORM\PrePersist
-     */
+    #[ORM\PrePersist]
     public function timestamps(): void
     {
         $this->createdAt = new \DateTime();

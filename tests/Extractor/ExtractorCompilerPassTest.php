@@ -2,6 +2,7 @@
 
 namespace App\Tests\Extractor;
 
+use App\Extractor\ExtractorChain;
 use App\Extractor\ExtractorCompilerPass;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -13,14 +14,14 @@ class ExtractorCompilerPassTest extends TestCase
         $container = new ContainerBuilder();
         $this->process($container);
 
-        $this->assertFalse($container->hasDefinition('App\Extractor\ExtractorChain'));
+        $this->assertFalse($container->hasDefinition(ExtractorChain::class));
     }
 
     public function testProcess(): void
     {
         $container = new ContainerBuilder();
         $container
-            ->register('App\Extractor\ExtractorChain')
+            ->register(ExtractorChain::class)
             ->setPublic(false)
         ;
 
@@ -31,9 +32,9 @@ class ExtractorCompilerPassTest extends TestCase
 
         $this->process($container);
 
-        $this->assertTrue($container->hasDefinition('App\Extractor\ExtractorChain'));
+        $this->assertTrue($container->hasDefinition(ExtractorChain::class));
 
-        $definition = $container->getDefinition('App\Extractor\ExtractorChain');
+        $definition = $container->getDefinition(ExtractorChain::class);
         $this->assertTrue($definition->hasMethodCall('addExtractor'));
 
         $calls = $definition->getMethodCalls();

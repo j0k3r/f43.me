@@ -2,6 +2,7 @@
 
 namespace App\Tests\Improver;
 
+use App\Improver\DefaultImprover;
 use App\Improver\ImproverChain;
 use PHPUnit\Framework\TestCase;
 
@@ -9,7 +10,7 @@ class ImproverChainTest extends TestCase
 {
     public function testMatchTrue(): void
     {
-        $improver = $this->getMockBuilder('App\Improver\DefaultImprover')
+        $improver = $this->getMockBuilder(DefaultImprover::class)
             ->disableOriginalConstructor()
             ->getMock();
 
@@ -25,7 +26,7 @@ class ImproverChainTest extends TestCase
 
     public function testMatchFalse(): void
     {
-        $improver = $this->getMockBuilder('App\Improver\DefaultImprover')
+        $improver = $this->getMockBuilder(DefaultImprover::class)
             ->disableOriginalConstructor()
             ->getMock();
 
@@ -41,7 +42,7 @@ class ImproverChainTest extends TestCase
 
     public function testMatchWithEmptyHost(): void
     {
-        $improver = $this->getMockBuilder('App\Improver\DefaultImprover')
+        $improver = $this->getMockBuilder(DefaultImprover::class)
             ->disableOriginalConstructor()
             ->getMock();
 

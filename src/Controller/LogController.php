@@ -15,9 +15,8 @@ class LogController extends AbstractController
 {
     /**
      * Lists all Log documents.
-     *
-     * @Route("/logs", name="log_homepage", methods={"GET"})
      */
+    #[Route(path: '/logs', name: 'log_homepage', methods: ['GET'])]
     public function indexAction(LogRepository $logRepository): Response
     {
         return $this->render('default/Log/index.html.twig', [
@@ -29,10 +28,9 @@ class LogController extends AbstractController
     /**
      * Lists all Log documents related to a given feed.
      *
-     * @Route("/feed/{slug}/logs", name="log_feed", methods={"GET"})
-     *
      * @param Feed $feed The document Feed (retrieving for a ParamConverter with the slug)
      */
+    #[Route(path: '/feed/{slug}/logs', name: 'log_feed', methods: ['GET'])]
     public function feedAction(Feed $feed, LogRepository $logRepository): Response
     {
         return $this->render('default/Log/feed.html.twig', [
@@ -46,10 +44,9 @@ class LogController extends AbstractController
     /**
      * Delete all logs for a given Feed.
      *
-     * @Route("/feed/{slug}/logs/deleteAll", name="log_delete_all", methods={"POST"})
-     *
      * @param Feed $feed The document Feed (retrieving for a ParamConverter with the slug)
      */
+    #[Route(path: '/feed/{slug}/logs/deleteAll', name: 'log_delete_all', methods: ['POST'])]
     public function deleteAllAction(Request $request, Feed $feed, LogRepository $logRepository, Session $session): RedirectResponse
     {
         $form = $this->createFormBuilder()->getForm();

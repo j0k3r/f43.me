@@ -13,13 +13,18 @@ use App\Improver\ImproverChain;
 use App\Improver\Reddit;
 use App\Parser\Internal;
 use App\Parser\ParserChain;
+use App\Repository\FeedRepository;
+use App\Repository\ItemRepository;
 use App\Tests\AppTestCase;
+use App\Xml\SimplePieProxy;
+use Doctrine\ORM\EntityManager;
 use Graby\Graby;
 use GuzzleHttp\Psr7\Response;
 use Psr\Log\NullLogger;
 use SimplePie\Item as SimplePieItem;
 use SimplePie\Registry as SimplePieRegistry;
 use SimplePie\SimplePie;
+use Symfony\Component\EventDispatcher\EventDispatcher;
 
 /**
  * Crazy complicated tests with too much mocks to replicate a bug where url with & in reddit feed are converted to &amp; and breaks the link.
@@ -79,7 +84,7 @@ class ImportTest extends AppTestCase
 
         $rssFeed->init();
 
-        $simplePie = $this->getMockBuilder('App\Xml\SimplePieProxy')
+        $simplePie = $this->getMockBuilder(SimplePieProxy::class)
             ->disableOriginalConstructor()
             ->getMock();
 
@@ -91,7 +96,7 @@ class ImportTest extends AppTestCase
             ->method('init')
             ->willReturn($rssFeed);
 
-        $eventDispatcher = $this->getMockBuilder('Symfony\Component\EventDispatcher\EventDispatcher')
+        $eventDispatcher = $this->getMockBuilder(EventDispatcher::class)
             ->onlyMethods(['dispatch'])
             ->disableOriginalConstructor()
             ->getMock();
@@ -116,7 +121,7 @@ class ImportTest extends AppTestCase
 
         $extractor = new Extractor($extractorChain, $improverChain, new ConverterChain(), $parserChain);
 
-        $feedRepo = $this->getMockBuilder('App\Repository\FeedRepository')
+        $feedRepo = $this->getMockBuilder(FeedRepository::class)
             ->disableOriginalConstructor()
             ->getMock();
 
@@ -124,11 +129,11 @@ class ImportTest extends AppTestCase
             ->method('findOneBy')
             ->willReturn($feed);
 
-        $feedItemRepo = $this->getMockBuilder('App\Repository\ItemRepository')
+        $feedItemRepo = $this->getMockBuilder(ItemRepository::class)
             ->disableOriginalConstructor()
             ->getMock();
 
-        $em = $this->getMockBuilder('Doctrine\ORM\EntityManager')
+        $em = $this->getMockBuilder(EntityManager::class)
             ->onlyMethods(['persist', 'flush', 'clear'])
             ->disableOriginalConstructor()
             ->getMock();
@@ -198,7 +203,7 @@ class ImportTest extends AppTestCase
 
         $rssFeed->init();
 
-        $simplePie = $this->getMockBuilder('App\Xml\SimplePieProxy')
+        $simplePie = $this->getMockBuilder(SimplePieProxy::class)
             ->disableOriginalConstructor()
             ->getMock();
 
@@ -210,7 +215,7 @@ class ImportTest extends AppTestCase
             ->method('init')
             ->willReturn($rssFeed);
 
-        $eventDispatcher = $this->getMockBuilder('Symfony\Component\EventDispatcher\EventDispatcher')
+        $eventDispatcher = $this->getMockBuilder(EventDispatcher::class)
             ->onlyMethods(['dispatch'])
             ->disableOriginalConstructor()
             ->getMock();
@@ -249,7 +254,7 @@ class ImportTest extends AppTestCase
 
         $extractor = new Extractor($extractorChain, $improverChain, new ConverterChain(), $parserChain);
 
-        $feedRepo = $this->getMockBuilder('App\Repository\FeedRepository')
+        $feedRepo = $this->getMockBuilder(FeedRepository::class)
             ->disableOriginalConstructor()
             ->getMock();
 
@@ -257,11 +262,11 @@ class ImportTest extends AppTestCase
             ->method('findOneBy')
             ->willReturn($feed);
 
-        $feedItemRepo = $this->getMockBuilder('App\Repository\ItemRepository')
+        $feedItemRepo = $this->getMockBuilder(ItemRepository::class)
             ->disableOriginalConstructor()
             ->getMock();
 
-        $em = $this->getMockBuilder('Doctrine\ORM\EntityManager')
+        $em = $this->getMockBuilder(EntityManager::class)
             ->onlyMethods(['persist', 'flush', 'clear'])
             ->disableOriginalConstructor()
             ->getMock();

@@ -27,7 +27,7 @@ class RedditGallery extends AbstractExtractor
         try {
             $response = $this->client->get($url);
             $data = $this->jsonDecode($response);
-        } catch (\Exception $e) {
+        } catch (\Exception) {
             return false;
         }
 

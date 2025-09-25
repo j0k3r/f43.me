@@ -11,18 +11,11 @@ use Http\Client\Exception\RequestException;
  */
 class External extends AbstractParser
 {
-    /** @var HttpMethodsClientInterface */
-    protected $client;
-    /** @var string */
-    protected $urlApi;
-
     /**
      * @param string $urlApi Mercury API url
      */
-    public function __construct(HttpMethodsClientInterface $client, string $urlApi)
+    public function __construct(protected HttpMethodsClientInterface $client, protected string $urlApi)
     {
-        $this->client = $client;
-        $this->urlApi = $urlApi;
     }
 
     public function parse(string $url, bool $reloadConfigFiles = false): string
@@ -31,14 +24,10 @@ class External extends AbstractParser
             $response = $this->client->get($this->urlApi . '?url=' . urlencode($url));
 
             $data = json_decode((string) $response->getBody(), true);
-        } catch (RequestException $e) {
+        } catch (RequestException) {
             return '';
         }
 
-        if (isset($data['content'])) {
-            return $data['content'];
-        }
-
-        return '';
+        return $data['content'] ?? '';
     }
 }

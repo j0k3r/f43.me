@@ -4,11 +4,8 @@ namespace App\Message;
 
 class FeedSync
 {
-    private $feedId;
-
-    public function __construct(int $feedId)
+    public function __construct(private readonly int $feedId)
     {
-        $this->feedId = $feedId;
     }
 
     public function getfeedId(): int

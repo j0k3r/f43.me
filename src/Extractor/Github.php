@@ -8,10 +8,6 @@ use Http\Message\Authentication\BasicAuth;
 class Github extends AbstractExtractor
 {
     /** @var string */
-    protected $githubClientId;
-    /** @var string */
-    protected $githubClientSecret;
-    /** @var string */
     protected $githubRepo;
     /** @var string */
     protected $releaseTag;
@@ -20,10 +16,8 @@ class Github extends AbstractExtractor
     /** @var string */
     protected $issueNumber;
 
-    public function __construct(string $githubClientId, string $githubClientSecret)
+    public function __construct(protected string $githubClientId, protected string $githubClientSecret)
     {
-        $this->githubClientId = $githubClientId;
-        $this->githubClientSecret = $githubClientSecret;
     }
 
     public function match(string $url): bool
@@ -103,7 +97,7 @@ class Github extends AbstractExtractor
                     '<p>' . $data['base']['repo']['description'] . '</p>' .
                     '<h3>PR: <a href="' . $data['html_url'] . '">' . $data['title'] . '</a></h3>' .
                     '<ul><li>by <a href="' . $data['user']['html_url'] . '">' . $data['user']['login'] . '</a></li>' .
-                    '<li>on ' . date('d/m/Y', strtotime($data['created_at'])) . '</li>' .
+                    '<li>on ' . date('d/m/Y', (int) strtotime((string) $data['created_at'])) . '</li>' .
                     '<li>' . $data['commits'] . ' commits</li>' .
                     '<li>' . $data['comments'] . ' comments</li></ul>' .
                     $data['body_html'] . '</div>';
@@ -130,7 +124,7 @@ class Github extends AbstractExtractor
                 return '<div><em>Issue on Github</em>' .
                     '<h2><a href="' . $data['html_url'] . '">' . $data['title'] . '</a></h2>' .
                     '<ul><li>by <a href="' . $data['user']['html_url'] . '">' . $data['user']['login'] . '</a></li>' .
-                    '<li>on ' . date('d/m/Y', strtotime($data['created_at'])) . '</li>' .
+                    '<li>on ' . date('d/m/Y', (int) strtotime((string) $data['created_at'])) . '</li>' .
                     '<li>' . $data['comments'] . ' comments</li></ul>' .
                     $data['body_html'] . '</div>';
             } catch (\Exception $e) {
@@ -156,7 +150,7 @@ class Github extends AbstractExtractor
                 return '<div><em>Release on Github</em>' .
                     '<h2><a href="' . $data['html_url'] . '">' . $data['name'] . ' (' . $data['tag_name'] . ')</a></h2>' .
                     '<ul><li>repo <strong>' . $this->githubRepo . '</strong></li>' .
-                    '<li>on ' . date('d/m/Y', strtotime($data['published_at'])) . '</li>' .
+                    '<li>on ' . date('d/m/Y', (int) strtotime((string) $data['published_at'])) . '</li>' .
                     '<li>' . $data['reactions']['total_count'] . ' reactions</li></ul>' .
                     $data['body_html'] . '</div>';
             } catch (\Exception $e) {
@@ -179,7 +173,7 @@ class Github extends AbstractExtractor
             ;
 
             return (string) $this->client->sendRequest($authentication->authenticate($request))->getBody();
-        } catch (\Exception $e) {
+        } catch (\Exception) {
             // Github will return a 404 if no readme are found
             return '';
         }

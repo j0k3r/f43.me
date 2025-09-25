@@ -20,10 +20,9 @@ class ItemController extends AbstractController
     /**
      * Lists all Items documents related to a Feed.
      *
-     * @Route("/feed/{slug}/items", name="item_homepage", methods={"GET"})
-     *
      * @param Feed $feed The document Feed (retrieving for a ParamConverter with the slug)
      */
+    #[Route(path: '/feed/{slug}/items', name: 'item_homepage', methods: ['GET'])]
     public function indexAction(Feed $feed, ItemRepository $itemRepository): Response
     {
         $items = $itemRepository->findByFeed(
@@ -42,10 +41,9 @@ class ItemController extends AbstractController
     /**
      * Delete all items for a given Feed.
      *
-     * @Route("/feed/{slug}/items/deleteAll", name="item_delete_all", methods={"POST"})
-     *
      * @param Feed $feed The document Feed (retrieving for a ParamConverter with the slug)
      */
+    #[Route(path: '/feed/{slug}/items/deleteAll', name: 'item_delete_all', methods: ['POST'])]
     public function deleteAllAction(Request $request, Feed $feed, ItemRepository $itemRepository, EntityManagerInterface $em, Session $session): RedirectResponse
     {
         $form = $this->createFormBuilder()->getForm();
@@ -67,10 +65,9 @@ class ItemController extends AbstractController
     /**
      * Preview an item that is already cached.
      *
-     * @Route("/item/{id}/preview", name="item_preview_cached", methods={"GET"})
-     *
      * @param Item $feedItem The document Item (retrieving for a ParamConverter with the id)
      */
+    #[Route(path: '/item/{id}/preview', name: 'item_preview_cached', methods: ['GET'])]
     public function previewCachedAction(Item $feedItem): Response
     {
         return $this->render('default/Item/content.html.twig', [
@@ -84,10 +81,9 @@ class ItemController extends AbstractController
     /**
      * Following the previous action, this one will actually parse the content (for both parser).
      *
-     * @Route("/feed/{slug}/previewItem", name="item_preview_new", methods={"GET"})
-     *
      * @param Feed $feed The document Feed (retrieving for a ParamConverter with the slug)
      */
+    #[Route(path: '/feed/{slug}/previewItem', name: 'item_preview_new', methods: ['GET'])]
     public function previewNewAction(Request $request, Feed $feed, SimplePieProxy $simplePieProxy, Extractor $contentExtractor): Response
     {
         $rssFeed = $simplePieProxy

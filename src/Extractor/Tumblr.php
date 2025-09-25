@@ -5,15 +5,12 @@ namespace App\Extractor;
 class Tumblr extends AbstractExtractor
 {
     /** @var string */
-    protected $tumblrApiKey;
-    /** @var string */
     protected $tumblrId;
     /** @var string */
     protected $tumblrHost;
 
-    public function __construct(string $tumblrApiKey)
+    public function __construct(protected string $tumblrApiKey)
     {
-        $this->tumblrApiKey = $tumblrApiKey;
     }
 
     public function match(string $url): bool

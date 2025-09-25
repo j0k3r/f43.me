@@ -5,13 +5,10 @@ namespace App\Extractor;
 class Twitch extends AbstractExtractor
 {
     /** @var string */
-    protected $twitchCliendId;
-    /** @var string */
     protected $twitchId;
 
-    public function __construct(string $twitchCliendId)
+    public function __construct(protected string $twitchCliendId)
     {
-        $this->twitchCliendId = $twitchCliendId;
     }
 
     public function match(string $url): bool

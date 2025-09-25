@@ -3,6 +3,10 @@
 namespace App\Tests\Extractor;
 
 use App\Extractor\Imgur;
+use Imgur\Api\Album;
+use Imgur\Api\Image;
+use Imgur\Client;
+use Imgur\Exception\ErrorException;
 use Monolog\Handler\TestHandler;
 use Monolog\Logger;
 use PHPUnit\Framework\Attributes\DataProvider;
@@ -36,7 +40,7 @@ class ImgurTest extends TestCase
     #[DataProvider('dataMatch')]
     public function testMatch(string $url, bool $expected): void
     {
-        $imgurClient = $this->getMockBuilder('Imgur\Client')
+        $imgurClient = $this->getMockBuilder(Client::class)
             ->disableOriginalConstructor()
             ->getMock();
 
@@ -46,11 +50,11 @@ class ImgurTest extends TestCase
 
     public function testContentImage(): void
     {
-        $imgurClient = $this->getMockBuilder('Imgur\Client')
+        $imgurClient = $this->getMockBuilder(Client::class)
             ->disableOriginalConstructor()
             ->getMock();
 
-        $apiAlbum = $this->getMockBuilder('Imgur\Api\Album')
+        $apiAlbum = $this->getMockBuilder(Album::class)
             ->disableOriginalConstructor()
             ->getMock();
 
@@ -95,11 +99,11 @@ class ImgurTest extends TestCase
 
     public function testContentMp4(): void
     {
-        $imgurClient = $this->getMockBuilder('Imgur\Client')
+        $imgurClient = $this->getMockBuilder(Client::class)
             ->disableOriginalConstructor()
             ->getMock();
 
-        $apiImage = $this->getMockBuilder('Imgur\Api\Image')
+        $apiImage = $this->getMockBuilder(Image::class)
             ->disableOriginalConstructor()
             ->getMock();
 
@@ -143,11 +147,11 @@ class ImgurTest extends TestCase
 
     public function testContentAlbum(): void
     {
-        $imgurClient = $this->getMockBuilder('Imgur\Client')
+        $imgurClient = $this->getMockBuilder(Client::class)
             ->disableOriginalConstructor()
             ->getMock();
 
-        $apiAlbum = $this->getMockBuilder('Imgur\Api\Album')
+        $apiAlbum = $this->getMockBuilder(Album::class)
             ->disableOriginalConstructor()
             ->getMock();
 
@@ -233,7 +237,7 @@ class ImgurTest extends TestCase
 
     public function testNoHashNoType(): void
     {
-        $imgurClient = $this->getMockBuilder('Imgur\Client')
+        $imgurClient = $this->getMockBuilder(Client::class)
             ->disableOriginalConstructor()
             ->getMock();
 
@@ -245,13 +249,13 @@ class ImgurTest extends TestCase
 
     public function testImgurFail(): void
     {
-        $imgurClient = $this->getMockBuilder('Imgur\Client')
+        $imgurClient = $this->getMockBuilder(Client::class)
             ->disableOriginalConstructor()
             ->getMock();
 
         $imgurClient->expects($this->any())
             ->method('api')
-            ->will($this->throwException(new \Imgur\Exception\ErrorException()));
+            ->will($this->throwException(new ErrorException()));
 
         $imgur = new Imgur($imgurClient);
 

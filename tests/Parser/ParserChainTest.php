@@ -2,6 +2,7 @@
 
 namespace App\Tests\Parser;
 
+use App\Parser\AbstractParser;
 use App\Parser\ParserChain;
 use PHPUnit\Framework\TestCase;
 
@@ -9,7 +10,7 @@ class ParserChainTest extends TestCase
 {
     public function testParseTrue(): void
     {
-        $parser = $this->getMockBuilder('App\Parser\AbstractParser')
+        $parser = $this->getMockBuilder(AbstractParser::class)
             ->disableOriginalConstructor()
             ->getMock();
 
@@ -26,7 +27,7 @@ class ParserChainTest extends TestCase
 
     public function testParseFalse(): void
     {
-        $parser = $this->getMockBuilder('App\Parser\AbstractParser')
+        $parser = $this->getMockBuilder(AbstractParser::class)
             ->disableOriginalConstructor()
             ->getMock();
 

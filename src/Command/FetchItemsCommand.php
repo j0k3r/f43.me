@@ -21,24 +21,8 @@ use Symfony\Component\Routing\RouterInterface;
 
 class FetchItemsCommand extends Command
 {
-    private $feedRepository;
-    private $itemRepository;
-    private $contentImport;
-    private $router;
-    private $domain;
-    private $transport;
-    private $bus;
-
-    public function __construct(FeedRepository $feedRepository, ItemRepository $itemRepository, ?Import $contentImport, RouterInterface $router, string $domain, TransportInterface $transport, MessageBusInterface $bus)
+    public function __construct(private readonly FeedRepository $feedRepository, private readonly ItemRepository $itemRepository, private readonly ?Import $contentImport, private readonly RouterInterface $router, private readonly string $domain, private readonly TransportInterface $transport, private readonly MessageBusInterface $bus)
     {
-        $this->feedRepository = $feedRepository;
-        $this->itemRepository = $itemRepository;
-        $this->contentImport = $contentImport;
-        $this->router = $router;
-        $this->domain = $domain;
-        $this->transport = $transport;
-        $this->bus = $bus;
-
         parent::__construct();
     }
 

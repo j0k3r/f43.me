@@ -15,23 +15,8 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 class Import
 {
-    private $logger;
-    private $simplePieProxy;
-    private $extractor;
-    private $eventDispatcher;
-    private $em;
-    private $feedRepository;
-    private $itemRepository;
-
-    public function __construct(SimplePieProxy $simplePieProxy, Extractor $extractor, EventDispatcherInterface $eventDispatcher, EntityManagerInterface $em, LoggerInterface $logger, FeedRepository $feedRepository, ItemRepository $itemRepository)
+    public function __construct(private readonly SimplePieProxy $simplePieProxy, private readonly Extractor $extractor, private readonly EventDispatcherInterface $eventDispatcher, private EntityManagerInterface $em, private readonly LoggerInterface $logger, private readonly FeedRepository $feedRepository, private readonly ItemRepository $itemRepository)
     {
-        $this->simplePieProxy = $simplePieProxy;
-        $this->extractor = $extractor;
-        $this->eventDispatcher = $eventDispatcher;
-        $this->em = $em;
-        $this->feedRepository = $feedRepository;
-        $this->itemRepository = $itemRepository;
-        $this->logger = $logger;
     }
 
     public function setEntityManager(EntityManagerInterface $em): void

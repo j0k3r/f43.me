@@ -30,7 +30,7 @@ class HackerNews extends AbstractExtractor
         try {
             $response = $this->client->get('https://hacker-news.firebaseio.com/v0/item/' . $matches[1] . '.json');
             $data = $this->jsonDecode($response);
-        } catch (\Exception $e) {
+        } catch (\Exception) {
             return false;
         }
 

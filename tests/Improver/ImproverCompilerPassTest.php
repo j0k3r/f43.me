@@ -2,6 +2,7 @@
 
 namespace App\Tests\Improver;
 
+use App\Improver\ImproverChain;
 use App\Improver\ImproverCompilerPass;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -13,14 +14,14 @@ class ImproverCompilerPassTest extends TestCase
         $container = new ContainerBuilder();
         $this->process($container);
 
-        $this->assertFalse($container->hasDefinition('App\Improver\ImproverChain'));
+        $this->assertFalse($container->hasDefinition(ImproverChain::class));
     }
 
     public function testProcess(): void
     {
         $container = new ContainerBuilder();
         $container
-            ->register('App\Improver\ImproverChain')
+            ->register(ImproverChain::class)
             ->setPublic(false)
         ;
 
@@ -31,9 +32,9 @@ class ImproverCompilerPassTest extends TestCase
 
         $this->process($container);
 
-        $this->assertTrue($container->hasDefinition('App\Improver\ImproverChain'));
+        $this->assertTrue($container->hasDefinition(ImproverChain::class));
 
-        $definition = $container->getDefinition('App\Improver\ImproverChain');
+        $definition = $container->getDefinition(ImproverChain::class);
         $this->assertTrue($definition->hasMethodCall('addImprover'));
 
         $calls = $definition->getMethodCalls();

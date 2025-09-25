@@ -16,15 +16,15 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\Session;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Annotation\Route;
 
 class FeedController extends AbstractController
 {
     /**
      * Display some information about feeds, items, logs, etc ...
-     *
-     * @Route("/dashboard", name="feed_dashboard", methods={"GET"})
      */
+    #[Route(path: '/dashboard', name: 'feed_dashboard', methods: ['GET'])]
     public function dashboardAction(FeedRepository $feedRepository, LogRepository $logRepository): Response
     {
         $feeds = $feedRepository->findAllOrderedByDate(20);
@@ -41,9 +41,8 @@ class FeedController extends AbstractController
 
     /**
      * Display a public view.
-     *
-     * @Route("/", name="feed_publicview", methods={"GET"})
      */
+    #[Route(path: '/', name: 'feed_publicview', methods: ['GET'])]
     public function publicAction(FeedRepository $feedRepository): Response
     {
         return $this->render('default/Feed/public.html.twig', [
@@ -53,9 +52,8 @@ class FeedController extends AbstractController
 
     /**
      * Lists all Feed documents.
-     *
-     * @Route("/feeds", name="feed_homepage", methods={"GET"})
      */
+    #[Route(path: '/feeds', name: 'feed_homepage', methods: ['GET'])]
     public function indexAction(FeedRepository $feedRepository): Response
     {
         return $this->render('default/Feed/index.html.twig', [
@@ -66,9 +64,8 @@ class FeedController extends AbstractController
 
     /**
      * Displays a form to create a new Feed document.
-     *
-     * @Route("/feed/new", name="feed_new", methods={"GET"})
      */
+    #[Route(path: '/feed/new', name: 'feed_new', methods: ['GET'])]
     public function newAction(): Response
     {
         $feed = new Feed();
@@ -84,10 +81,9 @@ class FeedController extends AbstractController
     /**
      * Creates a new Feed document.
      *
-     * @Route("/feed/create", name="feed_create", methods={"POST"})
-     *
      * @return RedirectResponse|Response
      */
+    #[Route(path: '/feed/create', name: 'feed_create', methods: ['POST'])]
     public function createAction(Request $request, EntityManagerInterface $em, Session $session, EventDispatcherInterface $eventDispatcher)
     {
         $feed = new Feed();
@@ -117,14 +113,13 @@ class FeedController extends AbstractController
     /**
      * Displays a form to edit an existing Feed document.
      *
-     * @Route("/feed/{slug}/edit", name="feed_edit", methods={"GET", "POST"})
-     *
      * @param Feed $feed The document Feed (retrieving for a ParamConverter with the slug)
      *
-     * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException If document doesn't exists
+     * @throws NotFoundHttpException If document doesn't exists
      *
      * @return RedirectResponse|Response
      */
+    #[Route(path: '/feed/{slug}/edit', name: 'feed_edit', methods: ['GET', 'POST'])]
     public function editAction(Request $request, Feed $feed, EntityManagerInterface $em, LogRepository $logRepository, ItemRepository $itemRepository, Session $session)
     {
         $editForm = $this->createForm(FeedType::class, $feed);
@@ -162,13 +157,12 @@ class FeedController extends AbstractController
     /**
      * Deletes a Feed document.
      *
-     * @Route("/feed/{slug}/delete", name="feed_delete", methods={"POST"})
-     *
      * @param Request $request The request object
      * @param Feed    $feed    The document Feed (retrieving for a ParamConverter with the slug)
      *
-     * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException If document doesn't exists
+     * @throws NotFoundHttpException If document doesn't exists
      */
+    #[Route(path: '/feed/{slug}/delete', name: 'feed_delete', methods: ['POST'])]
     public function deleteAction(Request $request, Feed $feed, EntityManagerInterface $em, Session $session): RedirectResponse
     {
         $form = $this->createFormBuilder()->getForm();
@@ -187,10 +181,9 @@ class FeedController extends AbstractController
     /**
      * Display some information about feeds, items, logs, etc ...
      *
-     * @Route("/{slug}.xml", name="feed_xml", methods={"GET"})
-     *
      * @param Feed $feed The document Feed (retrieving for a ParamConverter with the slug)
      */
+    #[Route(path: '/{slug}.xml', name: 'feed_xml', methods: ['GET'])]
     public function xmlAction(Feed $feed, Render $xmlRender): Response
     {
         return new Response(

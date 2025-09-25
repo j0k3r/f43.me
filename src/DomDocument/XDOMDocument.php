@@ -19,7 +19,7 @@ class XDOMDocument extends \DOMDocument
     {
         parent::__construct((string) $version, (string) $encoding);
 
-        $this->registerNodeClass('DOMElement', 'App\DomDocument\XDOMElement');
+        $this->registerNodeClass('DOMElement', XDOMElement::class);
     }
 
     /**

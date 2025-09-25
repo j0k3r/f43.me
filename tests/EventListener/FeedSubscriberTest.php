@@ -8,12 +8,13 @@ use App\EventListener\FeedSubscriber;
 use App\Message\FeedSync;
 use App\Tests\AppTestCase;
 use Symfony\Component\Messenger\Envelope;
+use Symfony\Component\Messenger\MessageBusInterface;
 
 class FeedSubscriberTest extends AppTestCase
 {
     public function testOnFeedCreated(): void
     {
-        $bus = $this->getMockBuilder('Symfony\Component\Messenger\MessageBusInterface')
+        $bus = $this->getMockBuilder(MessageBusInterface::class)
             ->disableOriginalConstructor()
             ->getMock();
 

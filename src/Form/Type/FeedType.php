@@ -2,6 +2,7 @@
 
 namespace App\Form\Type;
 
+use App\Entity\Feed;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
@@ -63,7 +64,7 @@ class FeedType extends AbstractType
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'data_class' => 'App\Entity\Feed',
+            'data_class' => Feed::class,
         ]);
     }
 }

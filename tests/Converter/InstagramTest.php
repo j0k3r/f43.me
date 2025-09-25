@@ -49,7 +49,7 @@ class InstagramTest extends TestCase
     #[DataProvider('dataMatch')]
     public function testMatch(string $html, string $expected, string $instagramId, int $instaExtractorOccurence): void
     {
-        $instaExtractor = $this->getMockBuilder('App\Extractor\Instagram')
+        $instaExtractor = $this->getMockBuilder(\App\Extractor\Instagram::class)
             ->disableOriginalConstructor()
             ->getMock();
 
@@ -71,7 +71,7 @@ class InstagramTest extends TestCase
     {
         $html = '<a href="https://www.instagram.com/p/BQDVfhnlC2P/" style=" color:#000; font-family:Arial,sans-serif; font-size:14px; font-style:normal; font-weight:normal; line-height:17px; text-decoration:none; word-wrap:break-word;" target="_blank">Photo</a>';
 
-        $instaExtractor = $this->getMockBuilder('App\Extractor\Instagram')
+        $instaExtractor = $this->getMockBuilder(\App\Extractor\Instagram::class)
             ->disableOriginalConstructor()
             ->getMock();
 

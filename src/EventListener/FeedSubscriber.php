@@ -8,12 +8,8 @@ use Symfony\Component\Messenger\MessageBusInterface;
 
 class FeedSubscriber
 {
-    /** @var MessageBusInterface */
-    protected $bus;
-
-    public function __construct(MessageBusInterface $bus)
+    public function __construct(protected MessageBusInterface $bus)
     {
-        $this->bus = $bus;
     }
 
     /**

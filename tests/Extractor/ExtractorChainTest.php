@@ -2,6 +2,7 @@
 
 namespace App\Tests\Extractor;
 
+use App\Extractor\AbstractExtractor;
 use App\Extractor\ExtractorChain;
 use PHPUnit\Framework\TestCase;
 
@@ -9,7 +10,7 @@ class ExtractorChainTest extends TestCase
 {
     public function testMatchTrue(): void
     {
-        $extractor = $this->getMockBuilder('App\Extractor\AbstractExtractor')
+        $extractor = $this->getMockBuilder(AbstractExtractor::class)
             ->disableOriginalConstructor()
             ->getMock();
 
@@ -25,7 +26,7 @@ class ExtractorChainTest extends TestCase
 
     public function testMatchFalse(): void
     {
-        $extractor = $this->getMockBuilder('App\Extractor\AbstractExtractor')
+        $extractor = $this->getMockBuilder(AbstractExtractor::class)
             ->disableOriginalConstructor()
             ->getMock();
 

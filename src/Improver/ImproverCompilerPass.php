@@ -10,12 +10,12 @@ class ImproverCompilerPass implements CompilerPassInterface
 {
     public function process(ContainerBuilder $container): void
     {
-        if (!$container->hasDefinition('App\Improver\ImproverChain')) {
+        if (!$container->hasDefinition(ImproverChain::class)) {
             return;
         }
 
         $definition = $container->getDefinition(
-            'App\Improver\ImproverChain'
+            ImproverChain::class
         );
 
         $taggedServices = $container->findTaggedServiceIds(

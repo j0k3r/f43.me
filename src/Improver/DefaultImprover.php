@@ -15,12 +15,9 @@ class DefaultImprover
     protected $url;
     /** @var string */
     protected $itemContent;
-    /** @var HttpMethodsClientInterface */
-    protected $client;
 
-    public function __construct(HttpMethodsClientInterface $client)
+    public function __construct(protected HttpMethodsClientInterface $client)
     {
-        $this->client = $client;
     }
 
     /**
@@ -70,9 +67,7 @@ class DefaultImprover
         // remove utm parameters (utm_source, utm_medium, utm_campaign, etc ...)
         parse_str($query, $queryExploded);
 
-        $notUtmParameters = array_filter(array_keys($queryExploded), function ($k) {
-            return !str_starts_with((string) $k, 'utm');
-        });
+        $notUtmParameters = array_filter(array_keys($queryExploded), fn ($k) => !str_starts_with((string) $k, 'utm'));
         $newQuery = array_intersect_key($queryExploded, array_flip($notUtmParameters));
 
         // remove all parameters from url to re-add them later

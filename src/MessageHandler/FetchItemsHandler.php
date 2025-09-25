@@ -3,8 +3,10 @@
 namespace App\MessageHandler;
 
 use App\Content\Import;
+use App\Entity\Feed;
 use App\Message\FeedSync;
 use App\Repository\FeedRepository;
+use Doctrine\ORM\EntityManager;
 use Doctrine\Persistence\ManagerRegistry;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
@@ -15,28 +17,15 @@ use Symfony\Component\Routing\RouterInterface;
  */
 class FetchItemsHandler implements MessageHandlerInterface
 {
-    private $doctrine;
-    private $feedRepository;
-    private $contentImport;
-    private $router;
-    private $domain;
-    private $logger;
-
-    public function __construct(ManagerRegistry $doctrine, FeedRepository $feedRepository, Import $contentImport, RouterInterface $router, LoggerInterface $logger, string $domain)
+    public function __construct(private readonly ManagerRegistry $doctrine, private readonly FeedRepository $feedRepository, private readonly Import $contentImport, private readonly RouterInterface $router, private readonly LoggerInterface $logger, private readonly string $domain)
     {
-        $this->doctrine = $doctrine;
-        $this->feedRepository = $feedRepository;
-        $this->contentImport = $contentImport;
-        $this->router = $router;
-        $this->domain = $domain;
-        $this->logger = $logger;
     }
 
     public function __invoke(FeedSync $message): bool
     {
         $feedId = $message->getFeedId();
 
-        /** @var \App\Entity\Feed|null */
+        /** @var Feed|null */
         $feed = $this->feedRepository->find($feedId);
 
         if (null === $feed) {
@@ -51,12 +40,12 @@ class FetchItemsHandler implements MessageHandlerInterface
         $context = $this->router->getContext();
         $context->setHost($this->domain);
 
-        /** @var \Doctrine\ORM\EntityManager */
+        /** @var EntityManager */
         $em = $this->doctrine->getManager();
 
         // in case of the manager is closed following a previous exception
         if (!$em->isOpen()) {
-            /** @var \Doctrine\ORM\EntityManager */
+            /** @var EntityManager */
             $em = $this->doctrine->resetManager();
 
             $this->contentImport->setEntityManager($em);
