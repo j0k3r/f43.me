@@ -26,7 +26,7 @@
         "beberlei/doctrineextensions": "^1.2",
         "composer/package-versions-deprecated": "^1.11",
         "doctrine/doctrine-bundle": "^2.0",
-        "doctrine/orm": "^2.5",
+        "doctrine/orm": "^3.5",
         "gedmo/doctrine-extensions": "^3.6.0",
         "j0k3r/graby": "dev-master#08a9c9c09ff1d74abcbd90e1f7c68c6bd9de7a02",
         "j0k3r/graby-site-config": "^1",
