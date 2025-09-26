@@ -6,6 +6,7 @@ use App\Entity\Feed;
 use App\Repository\FeedRepository;
 use App\Repository\ItemRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
@@ -14,6 +15,7 @@ use Symfony\Component\Console\Question\ConfirmationQuestion;
 use Symfony\Component\Lock\LockFactory;
 use Symfony\Component\Lock\Store\FlockStore;
 
+#[AsCommand(name: 'feed:remove-items', description: 'Fetch items from feed to cache them')]
 class RemoveItemsCommand extends Command
 {
     public function __construct(private readonly FeedRepository $feedRepository, private readonly ItemRepository $itemRepository, private readonly EntityManagerInterface $em)
@@ -24,8 +26,6 @@ class RemoveItemsCommand extends Command
     protected function configure(): void
     {
         $this
-            ->setName('feed:remove-items')
-            ->setDescription('Fetch items from feed to cache them')
             ->addOption('max', 'm', InputOption::VALUE_OPTIONAL, 'Number of items to keep in the feed', '100')
             ->addOption('slug', null, InputOption::VALUE_OPTIONAL, 'To work on one particular feed (using its slug)')
             ->addOption('with-trace', 't', InputOption::VALUE_NONE, 'Display debug')

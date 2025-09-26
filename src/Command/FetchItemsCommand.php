@@ -7,6 +7,7 @@ use App\Entity\Feed;
 use App\Message\FeedSync;
 use App\Repository\FeedRepository;
 use App\Repository\ItemRepository;
+use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -19,6 +20,7 @@ use Symfony\Component\Messenger\Transport\Receiver\MessageCountAwareInterface;
 use Symfony\Component\Messenger\Transport\TransportInterface;
 use Symfony\Component\Routing\RouterInterface;
 
+#[AsCommand(name: 'feed:fetch-items', description: 'Fetch items from feed to cache them')]
 class FetchItemsCommand extends Command
 {
     public function __construct(private readonly FeedRepository $feedRepository, private readonly ItemRepository $itemRepository, private readonly ?Import $contentImport, private readonly RouterInterface $router, private readonly string $domain, private readonly TransportInterface $transport, private readonly MessageBusInterface $bus)
@@ -29,8 +31,6 @@ class FetchItemsCommand extends Command
     protected function configure(): void
     {
         $this
-            ->setName('feed:fetch-items')
-            ->setDescription('Fetch items from feed to cache them')
             ->addArgument(
                 'age',
                 InputArgument::OPTIONAL,

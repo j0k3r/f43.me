@@ -13,7 +13,7 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\Session;
-use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Routing\Attribute\Route;
 
 class ItemController extends AbstractController
 {
@@ -34,7 +34,7 @@ class ItemController extends AbstractController
             'menu' => 'feed',
             'feed' => $feed,
             'items' => $items,
-            'delete_all_form' => $this->createFormBuilder()->getForm()->createView(),
+            'delete_all_form' => $this->createFormBuilder()->getForm(),
         ]);
     }
 
