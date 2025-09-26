@@ -184,9 +184,6 @@
     "php-http/message": {
         "version": "1.9.0"
     },
-    "php-http/message-factory": {
-        "version": "v1.0.2"
-    },
     "php-http/mock-client": {
         "version": "1.4.1"
     },
