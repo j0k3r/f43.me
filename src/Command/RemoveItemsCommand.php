@@ -42,7 +42,7 @@ class RemoveItemsCommand extends Command
         if (!$lock->acquire()) {
             $output->writeLn('<error>The command is already running in another process.</error>');
 
-            return 1;
+            return Command::FAILURE;
         }
 
         // ask user as it will remove all items from its database
@@ -55,7 +55,7 @@ class RemoveItemsCommand extends Command
 
                 $output->writeLn('<comment>You *almost* remove everything from your database, pfiou !</comment> Be sure to define a <comment>max</comment> option greater than 0.');
 
-                return 1;
+                return Command::FAILURE;
             }
         }
 
@@ -68,7 +68,7 @@ class RemoveItemsCommand extends Command
 
                 $output->writeLn('<error>Unable to find Feed document:</error> <comment>' . $slug . '</comment>');
 
-                return 1;
+                return Command::FAILURE;
             }
             $feeds = [$feed];
         } else {
@@ -108,6 +108,6 @@ class RemoveItemsCommand extends Command
 
         $output->writeLn('<comment>' . $totalRemoved . '</comment> items removed.');
 
-        return 0;
+        return Command::SUCCESS;
     }
 }
