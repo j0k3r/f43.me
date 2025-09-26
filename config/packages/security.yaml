@@ -1,6 +1,4 @@
 security:
-    enable_authenticator_manager: true
-
     role_hierarchy:
         ROLE_ADMIN: [ROLE_ADMIN]
 
@@ -43,3 +41,8 @@ security:
         - { path: ^/login, roles: PUBLIC_ACCESS}
         - { path: ^/feed/test, roles: PUBLIC_ACCESS}
         - { path: ^/(feed)|(logs)|(item)|(dashboard)|(login_check), roles: ROLE_ADMIN }
+
+when@test:
+    security:
+        password_hashers:
+            Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface: 'plaintext'

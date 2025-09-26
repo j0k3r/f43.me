@@ -1,4 +1,0 @@
-framework:
-    messenger:
-        transports:
-            fetch_items: 'in-memory://'

@@ -6,3 +6,9 @@ login_check:
 logout:
     path:     /logout
     methods:  [GET]
+
+controllers:
+    resource:
+        path: ../src/Controller/
+        namespace: App\Controller
+    type: attribute

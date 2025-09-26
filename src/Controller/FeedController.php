@@ -17,7 +17,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
-use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Routing\Attribute\Route;
 
 class FeedController extends AbstractController
 {
@@ -74,7 +74,7 @@ class FeedController extends AbstractController
         return $this->render('default/Feed/new.html.twig', [
             'menu' => 'new',
             'feed' => $feed,
-            'form' => $form->createView(),
+            'form' => $form,
         ]);
     }
 
@@ -106,7 +106,7 @@ class FeedController extends AbstractController
         return $this->render('default/Feed/new.html.twig', [
             'menu' => 'new',
             'feed' => $feed,
-            'form' => $form->createView(),
+            'form' => $form,
         ]);
     }
 
@@ -149,8 +149,8 @@ class FeedController extends AbstractController
                 'last_log' => $lastLog,
                 'nb_logs' => $nbLogs,
             ],
-            'edit_form' => $editForm->createView(),
-            'delete_form' => $this->createFormBuilder()->getForm()->createView(),
+            'edit_form' => $editForm,
+            'delete_form' => $this->createFormBuilder()->getForm(),
         ]);
     }
 

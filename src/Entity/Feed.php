@@ -38,9 +38,8 @@ class Feed
 
     /**
      * @var string
-     *
-     * @FeedAssert\ConstraintRss
      */
+    #[FeedAssert\ConstraintRss]
     #[ORM\Column(name: 'link', type: 'string')]
     #[Assert\NotBlank]
     #[Assert\Url]

@@ -9,13 +9,14 @@ use App\Repository\FeedRepository;
 use Doctrine\ORM\EntityManager;
 use Doctrine\Persistence\ManagerRegistry;
 use Psr\Log\LoggerInterface;
-use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
+use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 use Symfony\Component\Routing\RouterInterface;
 
 /**
  * Consumer message to fetch new items for a given feed.
  */
-class FetchItemsHandler implements MessageHandlerInterface
+#[AsMessageHandler]
+class FetchItemsHandler
 {
     public function __construct(private readonly ManagerRegistry $doctrine, private readonly FeedRepository $feedRepository, private readonly Import $contentImport, private readonly RouterInterface $router, private readonly LoggerInterface $logger, private readonly string $domain)
     {

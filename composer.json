@@ -35,25 +35,23 @@
         "php-http/guzzle7-adapter": "^1.0",
         "php-http/httplug-bundle": "^1.14",
         "ricardoper/twitteroauth": "~1.0",
-        "sensio/framework-extra-bundle": "^6.0",
         "sentry/sentry-symfony": "^5.0",
         "simplepie/simplepie": "^1.8",
         "stof/doctrine-extensions-bundle": "~1.1",
-        "symfony/amqp-messenger": "5.4.*",
-        "symfony/asset": "5.4.*",
-        "symfony/dotenv": "5.4.*",
+        "symfony/amqp-messenger": "*",
+        "symfony/asset": "*",
+        "symfony/dotenv": "*",
         "symfony/flex": "^2.8",
-        "symfony/form": "5.4.*",
-        "symfony/lock": "5.4.*",
+        "symfony/form": "*",
+        "symfony/lock": "*",
         "symfony/monolog-bundle": "^3.5",
-        "symfony/polyfill-php80": "^1.27",
-        "symfony/runtime": "5.4.*",
-        "symfony/security-bundle": "5.4.*",
-        "symfony/translation": "5.4.*",
-        "symfony/twig-bundle": "5.4.*",
-        "symfony/validator": "5.4.*",
+        "symfony/runtime": "*",
+        "symfony/security-bundle": "*",
+        "symfony/translation": "*",
+        "symfony/twig-bundle": "*",
+        "symfony/validator": "*",
         "symfony/webpack-encore-bundle": "^2.3",
-        "symfony/yaml": "5.4.*",
+        "symfony/yaml": "*",
         "twig/extra-bundle": "^2.12|^3.0",
         "twig/twig": "^2.12|^3.0"
     },
@@ -69,12 +67,12 @@
         "phpstan/phpstan-symfony": "^2.0",
         "phpunit/phpunit": "^11.0",
         "rector/rector": "^2.1",
-        "symfony/browser-kit": "5.4.*",
-        "symfony/css-selector": "5.4.*",
-        "symfony/debug-bundle": "5.4.*",
-        "symfony/phpunit-bridge": "5.4.*",
-        "symfony/stopwatch": "5.4.*",
-        "symfony/web-profiler-bundle": "5.4.*"
+        "symfony/browser-kit": "*",
+        "symfony/css-selector": "*",
+        "symfony/debug-bundle": "*",
+        "symfony/phpunit-bridge": "*",
+        "symfony/stopwatch": "*",
+        "symfony/web-profiler-bundle": "*"
     },
     "conflict": {
         "symfony/symfony": "*"
@@ -107,7 +105,7 @@
     "extra": {
         "symfony": {
             "allow-contrib": true,
-            "require": "5.4.*",
+            "require": "6.4.*",
             "docker": true
         }
     }

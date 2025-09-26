@@ -3,6 +3,7 @@ twig:
     debug: '%kernel.debug%'
     strict_variables: '%kernel.debug%'
     exception_controller: null
+    file_name_pattern: '*.twig'
 
 when@test:
     twig:

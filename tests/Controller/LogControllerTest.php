@@ -44,7 +44,7 @@ class LogControllerTest extends FeedWebTestCase
 
         $client->request('GET', '/feed/toto/logs');
         $this->assertSame(404, $client->getResponse()->getStatusCode());
-        $this->assertStringContainsString('Feed object not found', (string) $client->getResponse()->getContent());
+        $this->assertStringContainsString('object not found', (string) $client->getResponse()->getContent());
     }
 
     public function testLogsFeed(): void
@@ -94,6 +94,6 @@ class LogControllerTest extends FeedWebTestCase
         $client->request('POST', '/feed/nawak/logs/deleteAll');
 
         $this->assertSame(404, $client->getResponse()->getStatusCode());
-        $this->assertStringContainsString('Feed object not found', (string) $client->getResponse()->getContent());
+        $this->assertStringContainsString('object not found', (string) $client->getResponse()->getContent());
     }
 }

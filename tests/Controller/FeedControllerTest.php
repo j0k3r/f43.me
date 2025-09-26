@@ -118,7 +118,7 @@ class FeedControllerTest extends FeedWebTestCase
 
         $crawler = $client->submit($form);
 
-        $this->assertSame(200, $client->getResponse()->getStatusCode());
+        $this->assertSame(422, $client->getResponse()->getStatusCode());
         $this->assertCount(1, $alert = $crawler->filter('p.error')->extract(['_text']));
         $this->assertSame('Form is invalid.', $alert[0]);
         $this->assertGreaterThanOrEqual(1, \count($crawler->filter('small.error')));
@@ -156,7 +156,7 @@ class FeedControllerTest extends FeedWebTestCase
 
         $crawler = $client->submit($form, $data);
 
-        $this->assertSame(200, $client->getResponse()->getStatusCode());
+        $this->assertSame(422, $client->getResponse()->getStatusCode());
         $this->assertCount(1, $alert = $crawler->filter('p.error')->extract(['_text']));
         $this->assertSame('Form is invalid.', $alert[0]);
         $this->assertGreaterThanOrEqual(1, \count($crawler->filter('small.error')));
@@ -189,7 +189,7 @@ class FeedControllerTest extends FeedWebTestCase
         $client->request('GET', '/feed/nawak/edit');
 
         $this->assertSame(404, $client->getResponse()->getStatusCode());
-        $this->assertStringContainsString('Feed object not found', (string) $client->getResponse()->getContent());
+        $this->assertStringContainsString('object not found', (string) $client->getResponse()->getContent());
     }
 
     public function testFeedEditOk(): void
@@ -246,7 +246,7 @@ class FeedControllerTest extends FeedWebTestCase
 
         $crawler = $client->submit($form, $data);
 
-        $this->assertSame(200, $client->getResponse()->getStatusCode());
+        $this->assertSame(422, $client->getResponse()->getStatusCode());
         $this->assertCount(1, $alert = $crawler->filter('p.error')->extract(['_text']));
         $this->assertSame('Form is invalid.', $alert[0]);
         // url invalid + feed invalid
@@ -280,7 +280,7 @@ class FeedControllerTest extends FeedWebTestCase
         $client->request('POST', '/feed/nawak/edit');
 
         $this->assertSame(404, $client->getResponse()->getStatusCode());
-        $this->assertStringContainsString('Feed object not found', (string) $client->getResponse()->getContent());
+        $this->assertStringContainsString('object not found', (string) $client->getResponse()->getContent());
     }
 
     public function testDeleteFormNotValid(): void
@@ -303,7 +303,7 @@ class FeedControllerTest extends FeedWebTestCase
         $client->request('POST', '/feed/nawak/delete', $form->getPhpValues());
 
         $this->assertSame(404, $client->getResponse()->getStatusCode());
-        $this->assertStringContainsString('Feed object not found', (string) $client->getResponse()->getContent());
+        $this->assertStringContainsString('object not found', (string) $client->getResponse()->getContent());
     }
 
     // Feed with `j0k3r-n3t` slug will be created'
