@@ -1,7 +1,7 @@
 # f43.me
 
 ![CI](https://github.com/j0k3r/f43.me/workflows/CI/badge.svg)
-[![Coverage Status](https://coveralls.io/repos/j0k3r/f43.me/badge.svg?branch=master&service=github)](https://coveralls.io/github/j0k3r/f43.me?branch=master)
+[![codecov](https://codecov.io/github/j0k3r/f43.me/graph/badge.svg?token=Y11ye87FfN)](https://codecov.io/github/j0k3r/f43.me)
 
 ## What's that?
 
