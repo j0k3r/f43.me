@@ -8,21 +8,26 @@ $del-hover: #d32f2f;
 @import "~@picocss/pico/scss/pico.scss";
 
 // Light theme (Default)
-// Can be forced with data-theme="light"
-[data-theme="light"],
-:root:not([data-theme="dark"]) {
-  --nav-background-color: #{rgba($white, 0.7)};
-  --nav-border-color: #{rgba($grey-500, 0.2)};
-  --nav-logo-color: #{$white};
+@media (prefers-color-scheme: light) {
+  body {
+    --nav-background-color: #{rgba($white, 0.7)};
+    --nav-border-color: #{rgba($grey-500, 0.2)};
+    --nav-logo-color: #{$white};
 
-  --custom-del-color: #{$del-color};
-  --custom-del-hover: #{$del-hover};
+    --custom-del-color: #{$del-color};
+    --custom-del-hover: #{$del-hover};
+  }
 }
 
 // Dark theme
-[data-theme="dark"] {
-  --nav-background-color: #{rgba($grey-900, 0.8)};
-  --nav-border-color: #{rgba($grey-500, 0.2)};
+@media (prefers-color-scheme: dark) {
+  body {
+    --nav-background-color: #{rgba($grey-900, 0.8)};
+    --nav-border-color: #{rgba($grey-500, 0.2)};
+
+    --custom-del-color: #{$del-hover};
+    --custom-del-hover: #{$del-color};
+  }
 }
 
 body>nav {
