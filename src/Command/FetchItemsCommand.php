@@ -60,7 +60,7 @@ class FetchItemsCommand extends Command
             if (0 < $count) {
                 $output->writeln('Current queue as too much messages (<error>' . $count . '</error>), <comment>skipping</comment>.');
 
-                return 1;
+                return Command::FAILURE;
             }
         }
 
@@ -72,7 +72,7 @@ class FetchItemsCommand extends Command
         if (!$lock->acquire()) {
             $output->writeLn('<error>The command is already running in another process.</error>');
 
-            return 1;
+            return Command::FAILURE;
         }
 
         $feeds = [];
@@ -90,7 +90,7 @@ class FetchItemsCommand extends Command
 
                 $output->writeLn('<error>Unable to find Feed document:</error> <comment>' . $slug . '</comment>');
 
-                return 1;
+                return Command::FAILURE;
             }
             $feeds = [$feed];
         } elseif (\in_array($input->getArgument('age'), ['new', 'old'], true)) {
@@ -110,7 +110,7 @@ class FetchItemsCommand extends Command
 
             $output->writeLn('<error>You must add some options to the task :</error> an <comment>age</comment> or a <comment>slug</comment>');
 
-            return 1;
+            return Command::FAILURE;
         }
 
         if ($output->isVerbose()) {
@@ -126,7 +126,7 @@ class FetchItemsCommand extends Command
 
             $output->writeLn('<comment>' . \count($feeds) . '</comment> feeds queued.');
 
-            return 0;
+            return Command::SUCCESS;
         }
 
         if (null === $this->contentImport) {
@@ -134,7 +134,7 @@ class FetchItemsCommand extends Command
 
             $output->writeLn('<error>contentImport is not defined?</error>');
 
-            return 1;
+            return Command::FAILURE;
         }
 
         // let's import some stuff !
@@ -144,6 +144,6 @@ class FetchItemsCommand extends Command
 
         $output->writeLn('<comment>' . $totalCached . '</comment> items cached.');
 
-        return 0;
+        return Command::SUCCESS;
     }
 }
