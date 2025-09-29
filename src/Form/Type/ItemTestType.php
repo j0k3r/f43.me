@@ -3,6 +3,7 @@
 namespace App\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\UrlType;
@@ -26,6 +27,10 @@ class ItemTestType extends AbstractType
                     'internal' => 'Internal',
                     'external' => 'External',
                 ]),
+            ])
+            ->add('siteconfig_replace', CheckboxType::class, [
+                'required' => false,
+                'label' => 'Replace existing site config for the given host',
             ])
         ;
     }

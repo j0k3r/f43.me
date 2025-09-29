@@ -147,3 +147,7 @@ iframe.pubsubhubbub {
     overflow-y: scroll;
     align-items: flex-start;
 }
+
+label.label-no-block {
+    display: inline-block;
+}
