@@ -34,6 +34,7 @@ class TestController extends AbstractController
             // load custom siteconfig from user
             // add ability to test a siteconfig before submitting it
             $siteConfig = $form->get('siteconfig')->getData();
+            $replaceCurrentSiteconfig = $form->get('siteconfig_replace')->getData();
             if (trim((string) $siteConfig)) {
                 $host = parse_url((string) $form->get('link')->getData(), \PHP_URL_HOST);
 
@@ -48,7 +49,10 @@ class TestController extends AbstractController
 
                     if (file_exists($filePath)) {
                         $previousVersion = file_get_contents($filePath);
-                        $siteConfig = $previousVersion . "\n" . $siteConfig;
+
+                        if (!$replaceCurrentSiteconfig) {
+                            $siteConfig = $previousVersion . "\n" . $siteConfig;
+                        }
                     }
 
                     file_put_contents($filePath, $siteConfig);

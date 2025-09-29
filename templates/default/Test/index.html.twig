@@ -27,6 +27,11 @@
             <p><a href="#" id="try-siteconfig">Want to try a custom siteconfig?</a> A tool is <a target="_blank" href="http://siteconfig.fivefilters.org/">available</a> to help build site-specific extraction rules.</p>
 
             {{ form_widget(form.siteconfig, {'attr': { 'placeholder': 'Put your config file here'}}) }}
+
+            <div>
+                {{ form_label(form.siteconfig_replace, null, {'label_attr': {'class': 'label-no-block'}}) }}
+                {{ form_widget(form.siteconfig_replace) }}
+            </div>
         </div>
 
         {{ form_rest(form) }}
