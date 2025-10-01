@@ -2,17 +2,12 @@
 
 namespace App\Tests\Command;
 
-use App\Command\RemoveItemsCommand;
-use App\Repository\FeedRepository;
-use App\Repository\ItemRepository;
-use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Console\Application;
-use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
+use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Tester\CommandTester;
-use Symfony\Component\DependencyInjection\ContainerInterface;
 
-class RemoveItemsCommandTest extends WebTestCase
+class RemoveItemsCommandTest extends KernelTestCase
 {
     /** @var Command */
     private $command;
@@ -21,17 +16,8 @@ class RemoveItemsCommandTest extends WebTestCase
 
     protected function setUp(): void
     {
-        static::createClient();
-
-        /** @var ContainerInterface */
-        $container = self::getContainer();
-
-        $application = new Application(static::$kernel);
-        $application->add(new RemoveItemsCommand(
-            $container->get(FeedRepository::class),
-            $container->get(ItemRepository::class),
-            $container->get(EntityManagerInterface::class)
-        ));
+        $kernel = self::bootKernel();
+        $application = new Application($kernel);
 
         $this->command = $application->find('feed:remove-items');
         $this->commandTester = new CommandTester($this->command);

@@ -7,11 +7,10 @@ use App\Entity\Feed;
 use App\Message\FeedSync;
 use App\Repository\FeedRepository;
 use App\Repository\ItemRepository;
+use Symfony\Component\Console\Attribute\Argument;
 use Symfony\Component\Console\Attribute\AsCommand;
+use Symfony\Component\Console\Attribute\Option;
 use Symfony\Component\Console\Command\Command;
-use Symfony\Component\Console\Input\InputArgument;
-use Symfony\Component\Console\Input\InputInterface;
-use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Lock\LockFactory;
 use Symfony\Component\Lock\Store\FlockStore;
@@ -21,40 +20,19 @@ use Symfony\Component\Messenger\Transport\TransportInterface;
 use Symfony\Component\Routing\RouterInterface;
 
 #[AsCommand(name: 'feed:fetch-items', description: 'Fetch items from feed to cache them')]
-class FetchItemsCommand extends Command
+class FetchItemsCommand
 {
     public function __construct(private readonly FeedRepository $feedRepository, private readonly ItemRepository $itemRepository, private readonly ?Import $contentImport, private readonly RouterInterface $router, private readonly string $domain, private readonly TransportInterface $transport, private readonly MessageBusInterface $bus)
     {
-        parent::__construct();
     }
 
-    protected function configure(): void
-    {
-        $this
-            ->addArgument(
-                'age',
-                InputArgument::OPTIONAL,
-                '`old` to fetch old feed or `new` to fetch recent feed with no item',
-                'old'
-            )
-            ->addOption(
-                'slug',
-                null,
-                InputOption::VALUE_OPTIONAL,
-                'To fetch item for one particular feed (using its slug)'
-            )
-            ->addOption(
-                'use_queue',
-                null,
-                InputOption::VALUE_NONE,
-                'Push each feed into a queue instead of fetching it right away'
-            )
-        ;
-    }
-
-    protected function execute(InputInterface $input, OutputInterface $output): int
-    {
-        if ($input->getOption('use_queue') && $this->transport instanceof MessageCountAwareInterface) {
+    public function __invoke(
+        OutputInterface $output,
+        #[Argument(name: 'age', description: '`old` to fetch old feed or `new` to fetch recent feed with no item')] string $age = 'old',
+        #[Option(name: 'slug', description: 'To fetch item for one particular feed (using its slug)')] string|bool $slug = false,
+        #[Option(name: 'use_queue', description: 'Push each feed into a queue instead of fetching it right away')] bool $useQueue = false,
+    ): int {
+        if ($useQueue && $this->transport instanceof MessageCountAwareInterface) {
             $count = $this->transport->getMessageCount();
 
             if (0 < $count) {
@@ -67,7 +45,7 @@ class FetchItemsCommand extends Command
         $store = new FlockStore(sys_get_temp_dir());
         $factory = new LockFactory($store);
 
-        $lock = $factory->createLock((string) $this->getName());
+        $lock = $factory->createLock('feed:fetch-items');
 
         if (!$lock->acquire()) {
             $output->writeLn('<error>The command is already running in another process.</error>');
@@ -82,8 +60,7 @@ class FetchItemsCommand extends Command
         $context->setHost($this->domain);
 
         // retrieve feed to work on
-        $slug = (string) $input->getOption('slug');
-        if ($slug) {
+        if ($slug && \is_string($slug)) {
             $feed = $this->feedRepository->findOneBy(['slug' => $slug]);
             if (!$feed instanceof Feed) {
                 $lock->release();
@@ -93,16 +70,16 @@ class FetchItemsCommand extends Command
                 return Command::FAILURE;
             }
             $feeds = [$feed];
-        } elseif (\in_array($input->getArgument('age'), ['new', 'old'], true)) {
+        } elseif (\in_array($age, ['new', 'old'], true)) {
             $feedsWithItems = $this->itemRepository->findAllFeedWithItems();
 
             // retrieve feed that HAVE items
-            if ('old' === $input->getArgument('age')) {
+            if ('old' === $age) {
                 $feeds = $this->feedRepository->findByIds($feedsWithItems, 'in');
             }
 
             // retrieve feeds that DOESN'T have items
-            if ('new' === $input->getArgument('age')) {
+            if ('new' === $age) {
                 $feeds = $this->feedRepository->findByIds($feedsWithItems, 'notIn');
             }
         } else {
@@ -117,7 +94,7 @@ class FetchItemsCommand extends Command
             $output->writeln('<info>Feeds to check</info>: ' . \count($feeds));
         }
 
-        if ($input->getOption('use_queue')) {
+        if ($useQueue) {
             foreach ($feeds as $feed) {
                 $this->bus->dispatch(new FeedSync($feed->getId()));
             }

@@ -5,7 +5,7 @@ namespace App\Controller;
 use App\Content\Extractor;
 use App\Form\Type\ItemTestType;
 use Graby\Monolog\Handler\GrabyHandler;
-use Monolog\Logger;
+use Monolog\Level;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -78,7 +78,7 @@ class TestController extends AbstractController
             'content' => $content,
             'form' => $form,
             'logs' => $grabyHandler->getRecords(),
-            'logsHasWarning' => $grabyHandler->hasRecords(Logger::WARNING),
+            'logsHasWarning' => $grabyHandler->hasRecords(Level::Warning),
         ]);
     }
 }

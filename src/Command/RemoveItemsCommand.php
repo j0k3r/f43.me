@@ -7,37 +7,33 @@ use App\Repository\FeedRepository;
 use App\Repository\ItemRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Console\Attribute\AsCommand;
+use Symfony\Component\Console\Attribute\Option;
 use Symfony\Component\Console\Command\Command;
+use Symfony\Component\Console\Helper\QuestionHelper;
 use Symfony\Component\Console\Input\InputInterface;
-use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Question\ConfirmationQuestion;
 use Symfony\Component\Lock\LockFactory;
 use Symfony\Component\Lock\Store\FlockStore;
 
 #[AsCommand(name: 'feed:remove-items', description: 'Fetch items from feed to cache them')]
-class RemoveItemsCommand extends Command
+class RemoveItemsCommand
 {
     public function __construct(private readonly FeedRepository $feedRepository, private readonly ItemRepository $itemRepository, private readonly EntityManagerInterface $em)
     {
-        parent::__construct();
     }
 
-    protected function configure(): void
-    {
-        $this
-            ->addOption('max', 'm', InputOption::VALUE_OPTIONAL, 'Number of items to keep in the feed', '100')
-            ->addOption('slug', null, InputOption::VALUE_OPTIONAL, 'To work on one particular feed (using its slug)')
-            ->addOption('with-trace', 't', InputOption::VALUE_NONE, 'Display debug')
-        ;
-    }
-
-    protected function execute(InputInterface $input, OutputInterface $output): int
-    {
+    public function __invoke(
+        OutputInterface $output,
+        InputInterface $input,
+        #[Option(name: 'max', shortcut: 'm', description: 'Number of items to keep in the feed')] int $max = 100,
+        #[Option(name: 'slug', description: 'To work on one particular feed (using its slug)')] string|bool $slug = false,
+        #[Option(name: 'with-trace', shortcut: 't', description: 'Display debug')] bool $withTrace = false,
+    ): int {
         $store = new FlockStore(sys_get_temp_dir());
         $factory = new LockFactory($store);
 
-        $lock = $factory->createLock((string) $this->getName());
+        $lock = $factory->createLock('feed:remove-items');
 
         if (!$lock->acquire()) {
             $output->writeLn('<error>The command is already running in another process.</error>');
@@ -46,8 +42,8 @@ class RemoveItemsCommand extends Command
         }
 
         // ask user as it will remove all items from its database
-        if (0 >= $input->getOption('max')) {
-            $helper = $this->getHelper('question');
+        if (0 >= $max) {
+            $helper = new QuestionHelper();
             $question = new ConfirmationQuestion('<question>You will remove ALL items, are your sure?</question>', false);
 
             if (!$helper->ask($input, $output, $question)) {
@@ -60,8 +56,7 @@ class RemoveItemsCommand extends Command
         }
 
         // retrieve feed to work on
-        $slug = (string) $input->getOption('slug');
-        if ($slug) {
+        if ($slug && \is_string($slug)) {
             $feed = $this->feedRepository->findOneBy(['slug' => $slug]);
             if (!$feed instanceof Feed) {
                 $lock->release();
@@ -76,7 +71,7 @@ class RemoveItemsCommand extends Command
             $feeds = $this->feedRepository->findAll();
         }
 
-        if ($input->getOption('with-trace')) {
+        if ($withTrace) {
             $output->writeLn('<info>Feeds</info>: <comment>' . \count($feeds) . '</comment>');
         }
 
@@ -84,7 +79,7 @@ class RemoveItemsCommand extends Command
         foreach ($feeds as $feed) {
             $items = $this->itemRepository->findOldItemsByFeedId(
                 $feed->getId(),
-                (int) $input->getOption('max')
+                (int) $max
             );
 
             // manual remove. I can't find a way to perform a remove + skip in one query, it doesn't work :-/
@@ -96,7 +91,7 @@ class RemoveItemsCommand extends Command
 
             $totalRemoved += $removed;
 
-            if ($input->getOption('with-trace')) {
+            if ($withTrace) {
                 $output->writeLn('<info>' . $feed->getName() . '</info>: <comment>' . $removed . '</comment> removed.');
             }
         }

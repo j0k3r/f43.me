@@ -19,5 +19,9 @@ parameters:
         - identifier: method.impossibleType
         - identifier: missingType.iterableValue
         - identifier: missingType.generics
+        -
+            path: tests/Command/FetchItemsCommandTest.php
+            identifier: argument.type
+            count: 4
 
     inferPrivatePropertyTypeFromConstructor: true

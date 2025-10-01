@@ -17,7 +17,7 @@ class ItemTestType extends AbstractType
         $builder
             ->add('link', UrlType::class, [
                 'default_protocol' => null,
-                'constraints' => new Url(),
+                'constraints' => new Url(requireTld: false),
             ])
             ->add('siteconfig', TextareaType::class, [
                 'required' => false,
