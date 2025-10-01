@@ -31,7 +31,7 @@ class Item
      */
     #[ORM\Column(name: 'link', type: 'text')]
     #[Assert\NotBlank]
-    #[Assert\Url]
+    #[Assert\Url(requireTld: false)]
     protected $link;
 
     /**
@@ -39,7 +39,7 @@ class Item
      */
     #[ORM\Column(name: 'permalink', type: 'text')]
     #[Assert\NotBlank]
-    #[Assert\Url]
+    #[Assert\Url(requireTld: false)]
     protected $permalink;
 
     /**

@@ -42,7 +42,7 @@ class Feed
     #[FeedAssert\ConstraintRss]
     #[ORM\Column(name: 'link', type: 'string')]
     #[Assert\NotBlank]
-    #[Assert\Url]
+    #[Assert\Url(requireTld: false)]
     protected $link;
 
     /**

@@ -13,7 +13,7 @@ use Monolog\Handler\TestHandler;
 use Monolog\Logger;
 use Psr\Log\NullLogger;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
-use Symfony\Component\DependencyInjection\ContainerInterface;
+use Symfony\Component\DependencyInjection\Container;
 
 class FetchItemsHandlerTest extends WebTestCase
 {
@@ -21,7 +21,7 @@ class FetchItemsHandlerTest extends WebTestCase
     {
         static::createClient();
 
-        /** @var ContainerInterface */
+        /** @var Container */
         $container = self::getContainer();
 
         $doctrine = $this->getMockBuilder(Registry::class)
@@ -57,7 +57,7 @@ class FetchItemsHandlerTest extends WebTestCase
     {
         static::createClient();
 
-        /** @var ContainerInterface */
+        /** @var Container */
         $container = self::getContainer();
 
         $em = $this->getMockBuilder(EntityManager::class)
