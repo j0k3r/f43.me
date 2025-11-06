@@ -3,6 +3,7 @@ root = true
 
 ; Unix-style newlines
 [*]
+charset = utf-8
 end_of_line = LF
 indent_style = space
 indent_size = 4
@@ -15,3 +16,9 @@ indent_style = tab
 
 [.github/**.yml]
 indent_size = 2
+
+[{compose.yaml,compose.*.yaml}]
+indent_size = 2
+
+[*.md]
+trim_trailing_whitespace = false

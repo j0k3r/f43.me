@@ -10,6 +10,7 @@ use App\Repository\ItemRepository;
 use App\Repository\LogRepository;
 use App\Xml\Render;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Bridge\Doctrine\Attribute\MapEntity;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -120,7 +121,7 @@ class FeedController extends AbstractController
      * @return RedirectResponse|Response
      */
     #[Route(path: '/feed/{slug}/edit', name: 'feed_edit', methods: ['GET', 'POST'])]
-    public function editAction(Request $request, Feed $feed, EntityManagerInterface $em, LogRepository $logRepository, ItemRepository $itemRepository, Session $session)
+    public function editAction(Request $request, #[MapEntity(mapping: ['slug' => 'slug'])] Feed $feed, EntityManagerInterface $em, LogRepository $logRepository, ItemRepository $itemRepository, Session $session)
     {
         $editForm = $this->createForm(FeedType::class, $feed);
         $editForm->handleRequest($request);
@@ -163,7 +164,7 @@ class FeedController extends AbstractController
      * @throws NotFoundHttpException If document doesn't exists
      */
     #[Route(path: '/feed/{slug}/delete', name: 'feed_delete', methods: ['POST'])]
-    public function deleteAction(Request $request, Feed $feed, EntityManagerInterface $em, Session $session): RedirectResponse
+    public function deleteAction(Request $request, #[MapEntity(mapping: ['slug' => 'slug'])] Feed $feed, EntityManagerInterface $em, Session $session): RedirectResponse
     {
         $form = $this->createFormBuilder()->getForm();
         $form->handleRequest($request);
@@ -184,8 +185,10 @@ class FeedController extends AbstractController
      * @param Feed $feed The document Feed (retrieving for a ParamConverter with the slug)
      */
     #[Route(path: '/{slug}.xml', name: 'feed_xml', methods: ['GET'])]
-    public function xmlAction(Feed $feed, Render $xmlRender): Response
-    {
+    public function xmlAction(
+        #[MapEntity(mapping: ['slug' => 'slug'])] Feed $feed,
+        Render $xmlRender,
+    ): Response {
         return new Response(
             $xmlRender->doRender($feed),
             200,

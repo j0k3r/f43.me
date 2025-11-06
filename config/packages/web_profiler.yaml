@@ -15,4 +15,4 @@ when@test:
     framework:
         profiler:
             enabled: false
-            collect: false
+            collect_serializer_data: true
