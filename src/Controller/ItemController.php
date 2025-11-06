@@ -8,6 +8,7 @@ use App\Entity\Item;
 use App\Repository\ItemRepository;
 use App\Xml\SimplePieProxy;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Bridge\Doctrine\Attribute\MapEntity;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -23,7 +24,7 @@ class ItemController extends AbstractController
      * @param Feed $feed The document Feed (retrieving for a ParamConverter with the slug)
      */
     #[Route(path: '/feed/{slug}/items', name: 'item_homepage', methods: ['GET'])]
-    public function indexAction(Feed $feed, ItemRepository $itemRepository): Response
+    public function indexAction(#[MapEntity(mapping: ['slug' => 'slug'])] Feed $feed, ItemRepository $itemRepository): Response
     {
         $items = $itemRepository->findByFeed(
             $feed->getId(),
@@ -44,7 +45,7 @@ class ItemController extends AbstractController
      * @param Feed $feed The document Feed (retrieving for a ParamConverter with the slug)
      */
     #[Route(path: '/feed/{slug}/items/deleteAll', name: 'item_delete_all', methods: ['POST'])]
-    public function deleteAllAction(Request $request, Feed $feed, ItemRepository $itemRepository, EntityManagerInterface $em, Session $session): RedirectResponse
+    public function deleteAllAction(Request $request, #[MapEntity(mapping: ['slug' => 'slug'])] Feed $feed, ItemRepository $itemRepository, EntityManagerInterface $em, Session $session): RedirectResponse
     {
         $form = $this->createFormBuilder()->getForm();
         $form->handleRequest($request);
@@ -68,7 +69,7 @@ class ItemController extends AbstractController
      * @param Item $feedItem The document Item (retrieving for a ParamConverter with the id)
      */
     #[Route(path: '/item/{id}/preview', name: 'item_preview_cached', methods: ['GET'])]
-    public function previewCachedAction(Item $feedItem): Response
+    public function previewCachedAction(#[MapEntity(id: 'id')] Item $feedItem): Response
     {
         return $this->render('default/Item/content.html.twig', [
             'title' => $feedItem->getTitle(),
@@ -84,7 +85,7 @@ class ItemController extends AbstractController
      * @param Feed $feed The document Feed (retrieving for a ParamConverter with the slug)
      */
     #[Route(path: '/feed/{slug}/previewItem', name: 'item_preview_new', methods: ['GET'])]
-    public function previewNewAction(Request $request, Feed $feed, SimplePieProxy $simplePieProxy, Extractor $contentExtractor): Response
+    public function previewNewAction(Request $request, #[MapEntity(mapping: ['slug' => 'slug'])] Feed $feed, SimplePieProxy $simplePieProxy, Extractor $contentExtractor): Response
     {
         $rssFeed = $simplePieProxy
             ->setUrl($feed->getLink())
