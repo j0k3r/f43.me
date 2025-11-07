@@ -5172,16 +5172,16 @@
         },
         {
             "name": "symfony/form",
-            "version": "v7.3.5",
+            "version": "v7.3.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/form.git",
-                "reference": "c8032766d5b198865d00b7d4471fc787a0a7f5e4"
+                "reference": "a8f32aa19b322bf46cbaaafa89c132eb662ecfe5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/form/zipball/c8032766d5b198865d00b7d4471fc787a0a7f5e4",
-                "reference": "c8032766d5b198865d00b7d4471fc787a0a7f5e4",
+                "url": "https://api.github.com/repos/symfony/form/zipball/a8f32aa19b322bf46cbaaafa89c132eb662ecfe5",
+                "reference": "a8f32aa19b322bf46cbaaafa89c132eb662ecfe5",
                 "shasum": ""
             },
             "require": {
@@ -5249,7 +5249,7 @@
             "description": "Allows to easily create, process and reuse HTML forms",
             "homepage": "https://symfony.com",
             "support": {
-                "source": "https://github.com/symfony/form/tree/v7.3.5"
+                "source": "https://github.com/symfony/form/tree/v7.3.6"
             },
             "funding": [
                 {
@@ -5269,7 +5269,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2025-10-10T11:54:12+00:00"
+            "time": "2025-10-31T09:25:04+00:00"
         },
         {
             "name": "symfony/framework-bundle",
@@ -7651,16 +7651,16 @@
         },
         {
             "name": "symfony/service-contracts",
-            "version": "v3.6.0",
+            "version": "v3.6.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/service-contracts.git",
-                "reference": "f021b05a130d35510bd6b25fe9053c2a8a15d5d4"
+                "reference": "45112560a3ba2d715666a509a0bc9521d10b6c43"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/service-contracts/zipball/f021b05a130d35510bd6b25fe9053c2a8a15d5d4",
-                "reference": "f021b05a130d35510bd6b25fe9053c2a8a15d5d4",
+                "url": "https://api.github.com/repos/symfony/service-contracts/zipball/45112560a3ba2d715666a509a0bc9521d10b6c43",
+                "reference": "45112560a3ba2d715666a509a0bc9521d10b6c43",
                 "shasum": ""
             },
             "require": {
@@ -7714,7 +7714,7 @@
                 "standards"
             ],
             "support": {
-                "source": "https://github.com/symfony/service-contracts/tree/v3.6.0"
+                "source": "https://github.com/symfony/service-contracts/tree/v3.6.1"
             },
             "funding": [
                 {
@@ -7726,11 +7726,15 @@
                     "type": "github"
                 },
                 {
+                    "url": "https://github.com/nicolas-grekas",
+                    "type": "github"
+                },
+                {
                     "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
                     "type": "tidelift"
                 }
             ],
-            "time": "2025-04-25T09:37:31+00:00"
+            "time": "2025-07-15T11:30:57+00:00"
         },
         {
             "name": "symfony/stopwatch",
@@ -7986,16 +7990,16 @@
         },
         {
             "name": "symfony/translation-contracts",
-            "version": "v3.6.0",
+            "version": "v3.6.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/translation-contracts.git",
-                "reference": "df210c7a2573f1913b2d17cc95f90f53a73d8f7d"
+                "reference": "65a8bc82080447fae78373aa10f8d13b38338977"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/translation-contracts/zipball/df210c7a2573f1913b2d17cc95f90f53a73d8f7d",
-                "reference": "df210c7a2573f1913b2d17cc95f90f53a73d8f7d",
+                "url": "https://api.github.com/repos/symfony/translation-contracts/zipball/65a8bc82080447fae78373aa10f8d13b38338977",
+                "reference": "65a8bc82080447fae78373aa10f8d13b38338977",
                 "shasum": ""
             },
             "require": {
@@ -8044,7 +8048,7 @@
                 "standards"
             ],
             "support": {
-                "source": "https://github.com/symfony/translation-contracts/tree/v3.6.0"
+                "source": "https://github.com/symfony/translation-contracts/tree/v3.6.1"
             },
             "funding": [
                 {
@@ -8056,11 +8060,15 @@
                     "type": "github"
                 },
                 {
+                    "url": "https://github.com/nicolas-grekas",
+                    "type": "github"
+                },
+                {
                     "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
                     "type": "tidelift"
                 }
             ],
-            "time": "2024-09-27T08:32:26+00:00"
+            "time": "2025-07-15T13:41:35+00:00"
         },
         {
             "name": "symfony/twig-bridge",
@@ -8350,16 +8358,16 @@
         },
         {
             "name": "symfony/validator",
-            "version": "v7.3.5",
+            "version": "v7.3.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/validator.git",
-                "reference": "724086992fb7c7882d05c9d2219d70401ab9fdda"
+                "reference": "5a2904dc351c7bd1fb402dfc4faccccd6f55ce01"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/validator/zipball/724086992fb7c7882d05c9d2219d70401ab9fdda",
-                "reference": "724086992fb7c7882d05c9d2219d70401ab9fdda",
+                "url": "https://api.github.com/repos/symfony/validator/zipball/5a2904dc351c7bd1fb402dfc4faccccd6f55ce01",
+                "reference": "5a2904dc351c7bd1fb402dfc4faccccd6f55ce01",
                 "shasum": ""
             },
             "require": {
@@ -8428,7 +8436,7 @@
             "description": "Provides tools to validate values",
             "homepage": "https://symfony.com",
             "support": {
-                "source": "https://github.com/symfony/validator/tree/v7.3.5"
+                "source": "https://github.com/symfony/validator/tree/v7.3.6"
             },
             "funding": [
                 {
@@ -8448,7 +8456,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2025-10-24T14:27:20+00:00"
+            "time": "2025-10-29T13:09:25+00:00"
         },
         {
             "name": "symfony/var-dumper",
@@ -12304,16 +12312,16 @@
         },
         {
             "name": "symfony/browser-kit",
-            "version": "v7.3.2",
+            "version": "v7.3.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/browser-kit.git",
-                "reference": "f0b889b73a845cddef1d25fe207b37fd04cb5419"
+                "reference": "e9a9fd604296b17bf90939c3647069f1f16ef04e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/browser-kit/zipball/f0b889b73a845cddef1d25fe207b37fd04cb5419",
-                "reference": "f0b889b73a845cddef1d25fe207b37fd04cb5419",
+                "url": "https://api.github.com/repos/symfony/browser-kit/zipball/e9a9fd604296b17bf90939c3647069f1f16ef04e",
+                "reference": "e9a9fd604296b17bf90939c3647069f1f16ef04e",
                 "shasum": ""
             },
             "require": {
@@ -12352,7 +12360,7 @@
             "description": "Simulates the behavior of a web browser, allowing you to make requests, click on links and submit forms programmatically",
             "homepage": "https://symfony.com",
             "support": {
-                "source": "https://github.com/symfony/browser-kit/tree/v7.3.2"
+                "source": "https://github.com/symfony/browser-kit/tree/v7.3.6"
             },
             "funding": [
                 {
@@ -12372,20 +12380,20 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2025-07-10T08:47:49+00:00"
+            "time": "2025-11-05T07:57:47+00:00"
         },
         {
             "name": "symfony/css-selector",
-            "version": "v7.3.0",
+            "version": "v7.3.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/css-selector.git",
-                "reference": "601a5ce9aaad7bf10797e3663faefce9e26c24e2"
+                "reference": "84321188c4754e64273b46b406081ad9b18e8614"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/css-selector/zipball/601a5ce9aaad7bf10797e3663faefce9e26c24e2",
-                "reference": "601a5ce9aaad7bf10797e3663faefce9e26c24e2",
+                "url": "https://api.github.com/repos/symfony/css-selector/zipball/84321188c4754e64273b46b406081ad9b18e8614",
+                "reference": "84321188c4754e64273b46b406081ad9b18e8614",
                 "shasum": ""
             },
             "require": {
@@ -12421,7 +12429,7 @@
             "description": "Converts CSS selectors to XPath expressions",
             "homepage": "https://symfony.com",
             "support": {
-                "source": "https://github.com/symfony/css-selector/tree/v7.3.0"
+                "source": "https://github.com/symfony/css-selector/tree/v7.3.6"
             },
             "funding": [
                 {
@@ -12433,11 +12441,15 @@
                     "type": "github"
                 },
                 {
+                    "url": "https://github.com/nicolas-grekas",
+                    "type": "github"
+                },
+                {
                     "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
                     "type": "tidelift"
                 }
             ],
-            "time": "2024-09-25T14:21:43+00:00"
+            "time": "2025-10-29T17:24:25+00:00"
         },
         {
             "name": "symfony/debug-bundle",
