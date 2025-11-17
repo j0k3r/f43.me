@@ -73,6 +73,6 @@ class HackerNewsTest extends AppTestCase
         $this->assertEmpty($hn->getContent());
 
         $hn->match('http://news.ycombinator.com/item?id=10074364');
-        $this->assertEmpty($hn->getContent());
+        $this->assertSame($hn->getContent(), '');
     }
 }

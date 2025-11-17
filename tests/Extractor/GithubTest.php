@@ -53,9 +53,9 @@ class GithubTest extends AppTestCase
         // consecutive calls
         $this->assertSame('<div>README</div>', (string) $github->getContent());
         // this one will got an empty array
-        $this->assertEmpty($github->getContent());
+        $this->assertSame($github->getContent(), '');
         // this one will catch an exception
-        $this->assertEmpty($github->getContent());
+        $this->assertSame($github->getContent(), '');
     }
 
     public function testIssue(): void
