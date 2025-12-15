@@ -92,7 +92,7 @@ class ItemController extends AbstractController
             ->init();
 
         try {
-            $parser = $contentExtractor->init($request->get('parser'), $feed);
+            $parser = $contentExtractor->init($request->query->get('parser', 'internal'), $feed);
         } catch (\InvalidArgumentException $e) {
             throw $this->createNotFoundException($e->getMessage());
         }
