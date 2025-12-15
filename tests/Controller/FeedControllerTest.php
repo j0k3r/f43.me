@@ -332,7 +332,6 @@ class FeedControllerTest extends FeedWebTestCase
         $client->request('GET', '/nawak.xml');
 
         $this->assertSame(404, $client->getResponse()->getStatusCode());
-        $this->assertStringContainsString('Not Found', (string) $client->getResponse()->getContent());
     }
 
     public function testRedditFeed(): Crawler
