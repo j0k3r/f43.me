@@ -44,7 +44,7 @@
         "symfony/flex": "^2.8",
         "symfony/form": "*",
         "symfony/lock": "*",
-        "symfony/monolog-bundle": "^3.5",
+        "symfony/monolog-bundle": "^4.0",
         "symfony/runtime": "*",
         "symfony/security-bundle": "*",
         "symfony/translation": "*",
