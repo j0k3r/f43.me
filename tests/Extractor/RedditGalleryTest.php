@@ -63,7 +63,7 @@ class RedditGalleryTest extends AppTestCase
         $client = self::getMockClient([new Response(200, [], (string) json_encode([['data' => ['children' => [['data' => [
             'is_gallery' => true,
             'title' => 'the title',
-            'selftext_html' => null,
+            'selftext_html' => '&lt;!-- SC_OFF --&gt;&lt;div class="md"&gt;&lt;p&gt;1- The Jaunt (Stephen King) - To explain this trope&lt;/p&gt;\n&lt;/div&gt;&lt;!-- SC_ON --&gt;',
             'score' => 100,
             'author' => 'bob',
             'num_comments' => 100,
@@ -96,6 +96,6 @@ class RedditGalleryTest extends AppTestCase
 
         $redditGallery->match('https://www.reddit.com/gallery/xodu0r');
 
-        $this->assertSame('<div><h2>the title</h2><ul><li>Score: 100</li><li>Comments: 100</li><li>Flair: GIFS</li><li>Author: bob</li></ul><p>coucou</p><p><img src="https://preview.redd.it/dnwyvs4r26q91.png?width=1004&format=png&auto=webp&s=82f7c8878a36a21bbdaf626c65e522d1c3ac90fd" /></p></div>', $redditGallery->getContent());
+        $this->assertSame('<div><h2>the title</h2><ul><li>Score: 100</li><li>Comments: 100</li><li>Flair: GIFS</li><li>Author: bob</li></ul><p>coucou</p><p><img src="https://preview.redd.it/dnwyvs4r26q91.png?width=1004&format=png&auto=webp&s=82f7c8878a36a21bbdaf626c65e522d1c3ac90fd" /></p><!-- SC_OFF --><div class="md"><p>1- The Jaunt (Stephen King) - To explain this trope</p>\n</div><!-- SC_ON --></div>', $redditGallery->getContent());
     }
 }
