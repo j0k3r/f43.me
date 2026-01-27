@@ -23,5 +23,9 @@ parameters:
             path: tests/Command/FetchItemsCommandTest.php
             identifier: argument.type
             count: 4
+        -
+            path: config/reference.php
+            identifier: return.type
+            count: 1
 
     inferPrivatePropertyTypeFromConstructor: true
