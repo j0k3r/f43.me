@@ -16,6 +16,9 @@ updates:
     twig-dependencies:
       patterns:
         - "twig/*"
+    phpstan-dependencies:
+      patterns:
+        - "phpstan/*"
 - package-ecosystem: npm
   directory: "/"
   schedule:
