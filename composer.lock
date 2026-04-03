@@ -1731,16 +1731,16 @@
         },
         {
             "name": "j0k3r/graby-site-config",
-            "version": "1.0.209",
+            "version": "1.0.210",
             "source": {
                 "type": "git",
                 "url": "https://github.com/j0k3r/graby-site-config.git",
-                "reference": "b0cd5a11355d7311b55424cc5ed408af53dd4450"
+                "reference": "58738c83e2a9ba5b86cdb26fbb55c4a86a95c008"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/j0k3r/graby-site-config/zipball/b0cd5a11355d7311b55424cc5ed408af53dd4450",
-                "reference": "b0cd5a11355d7311b55424cc5ed408af53dd4450",
+                "url": "https://api.github.com/repos/j0k3r/graby-site-config/zipball/58738c83e2a9ba5b86cdb26fbb55c4a86a95c008",
+                "reference": "58738c83e2a9ba5b86cdb26fbb55c4a86a95c008",
                 "shasum": ""
             },
             "require": {
@@ -1769,9 +1769,9 @@
             "description": "Graby site config files",
             "support": {
                 "issues": "https://github.com/j0k3r/graby-site-config/issues",
-                "source": "https://github.com/j0k3r/graby-site-config/tree/1.0.209"
+                "source": "https://github.com/j0k3r/graby-site-config/tree/1.0.210"
             },
-            "time": "2026-03-01T02:58:34+00:00"
+            "time": "2026-04-01T02:59:23+00:00"
         },
         {
             "name": "j0k3r/httplug-ssrf-plugin",
@@ -5040,16 +5040,16 @@
         },
         {
             "name": "symfony/finder",
-            "version": "v7.4.6",
+            "version": "v7.4.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/finder.git",
-                "reference": "8655bf1076b7a3a346cb11413ffdabff50c7ffcf"
+                "reference": "e0be088d22278583a82da281886e8c3592fbf149"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/finder/zipball/8655bf1076b7a3a346cb11413ffdabff50c7ffcf",
-                "reference": "8655bf1076b7a3a346cb11413ffdabff50c7ffcf",
+                "url": "https://api.github.com/repos/symfony/finder/zipball/e0be088d22278583a82da281886e8c3592fbf149",
+                "reference": "e0be088d22278583a82da281886e8c3592fbf149",
                 "shasum": ""
             },
             "require": {
@@ -5084,7 +5084,7 @@
             "description": "Finds files and directories via an intuitive fluent interface",
             "homepage": "https://symfony.com",
             "support": {
-                "source": "https://github.com/symfony/finder/tree/v7.4.6"
+                "source": "https://github.com/symfony/finder/tree/v7.4.8"
             },
             "funding": [
                 {
@@ -5104,7 +5104,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2026-01-29T09:40:50+00:00"
+            "time": "2026-03-24T13:12:05+00:00"
         },
         {
             "name": "symfony/flex",
