@@ -99,7 +99,6 @@ You can find some of them in the [converter folder](https://github.com/j0k3r/f43
 ### Requirements
 
  - PHP >= 8.2 (with `pdo_mysql` or `pdo_pgsql`)
- - Node.js 22 (for assets), use `nvm install`
  - MySQL >= 5.7 or PostgreSQL
  - [RabbitMQ](https://www.rabbitmq.com/), which is optional (see below)
  - [Supervisor](http://supervisord.org/) (only if you use RabbitMQ)
@@ -109,7 +108,6 @@ For each external API that improvers / extractors / parsers use, you will need a
  * Tumblr: https://www.tumblr.com/oauth/apps
  * Imgur: https://api.imgur.com/oauth2/addclient
  * Mercury: https://mercury.postlight.com/web-parser/
- * Twitch: https://www.twitch.tv/kraken/oauth2/clients/new
  * GitHub: https://github.com/settings/applications/new
 
 ### Install
@@ -132,9 +130,9 @@ Follow these steps:
 git clone git@github.com:j0k3r/f43.me.git
 cd f43.me
 APP_ENV=prod composer install -o --no-dev
-yarn install
+APP_ENV=prod php bin/console importmap:install
+APP_ENV=prod php bin/console asset-map:compile
 php bin/console doctrine:schema:create --env=prod
-yarn build
 ```
 
 #### Without RabbitMQ

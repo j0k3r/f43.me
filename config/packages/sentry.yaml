@@ -26,7 +26,6 @@ when@prod:
                 type: service
                 id: Sentry\Monolog\Handler
                 level: !php/const Monolog\Logger::ERROR
-                hub_id: Sentry\State\HubInterface
 
     services:
         Sentry\Monolog\Handler:
