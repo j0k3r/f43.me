@@ -1,18 +1,35 @@
-// Override default variables
-// $primary-500: #e91e63;
-// $primary-600: #d81b60;
-// $primary-700: #c2185b;
+@use "sass:map";
+@use "@picocss/pico/scss/pico" as pico with (
+    $css-var-prefix: "--",
+    $breakpoints: (
+        lg: (
+            breakpoint: 992px,
+            viewport: 920px,
+            root-font-size: 118.75%,
+        ),
+        xl: (
+            breakpoint: 1200px,
+            viewport: 1130px,
+            root-font-size: 125%,
+        ),
+        xxl: false,
+    )
+);
+
 $del-color: #e53935;
 $del-hover: #d32f2f;
 
-@import "~@picocss/pico/scss/pico.scss";
+$legacy-nav-light-background: hsla(0, 0%, 100%, 0.7);
+$legacy-nav-border: rgba(115, 130, 140, 0.2);
+$legacy-nav-dark-background: rgba(27, 40, 50, 0.8);
+$legacy-nav-logo-color: #fff;
 
 // Light theme (Default)
 @media (prefers-color-scheme: light) {
   body {
-    --nav-background-color: #{rgba($white, 0.7)};
-    --nav-border-color: #{rgba($grey-500, 0.2)};
-    --nav-logo-color: #{$white};
+    --nav-background-color: #{$legacy-nav-light-background};
+    --nav-border-color: #{$legacy-nav-border};
+    --nav-logo-color: #{$legacy-nav-logo-color};
 
     --custom-del-color: #{$del-color};
     --custom-del-hover: #{$del-hover};
@@ -22,8 +39,8 @@ $del-hover: #d32f2f;
 // Dark theme
 @media (prefers-color-scheme: dark) {
   body {
-    --nav-background-color: #{rgba($grey-900, 0.8)};
-    --nav-border-color: #{rgba($grey-500, 0.2)};
+    --nav-background-color: #{$legacy-nav-dark-background};
+    --nav-border-color: #{$legacy-nav-border};
 
     --custom-del-color: #{$del-hover};
     --custom-del-hover: #{$del-color};
@@ -82,7 +99,7 @@ body>nav {
             display: none;
             color: var(--h1-color);
 
-            @media (min-width: map-get($breakpoints, "lg")) {
+            @media (min-width: map.get(map.get(pico.$breakpoints, "lg"), "breakpoint")) {
                 display: inline;
             }
         }
@@ -95,7 +112,7 @@ body>main {
 
 @media (min-width: 1200px) {
     body>main {
-        padding-top: calc(var(--block-spacing-vertical) + 2rem);
+        padding-top: calc(var(--block-spacing-vertical) + 5rem);
     }
 }
 
@@ -150,4 +167,8 @@ iframe.pubsubhubbub {
 
 label.label-no-block {
     display: inline-block;
+}
+
+a {
+  --text-decoration: none;
 }
