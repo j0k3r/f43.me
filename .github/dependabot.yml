@@ -15,15 +15,6 @@ updates:
     phpstan-dependencies:
       patterns:
         - "phpstan/*"
-- package-ecosystem: npm
-  directory: "/"
-  schedule:
-    interval: weekly
-  open-pull-requests-limit: 10
-  groups:
-    babel-dependencies:
-      patterns:
-        - "*babel*"
 - package-ecosystem: github-actions
   directory: "/"
   schedule:

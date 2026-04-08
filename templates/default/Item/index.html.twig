@@ -7,9 +7,8 @@
     </hgroup>
 {% endblock %}
 
-{% block javascripts %}
-    {{ parent() }}
-    {{ encore_entry_script_tags('modal') }}
+{% block importmap %}
+    {{ importmap(['app', 'theme-switcher', 'modal']) }}
 {% endblock %}
 
 {% block content %}

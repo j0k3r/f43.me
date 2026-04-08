@@ -2,9 +2,8 @@
 
 {% block h_title %}{% endblock %}
 
-{% block stylesheets %}
-    {{ parent() }}
-    {{ encore_entry_link_tags('login') }}
+{% block importmap %}
+    {{ importmap(['app', 'theme-switcher', 'login']) }}
 {% endblock %}
 
 {% block content %}
