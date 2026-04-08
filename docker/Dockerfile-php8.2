@@ -1,4 +1,4 @@
-FROM php:7.4-fpm
+FROM php:8.2-fpm
 
 # Install nginx
 RUN apt-get update \
@@ -15,19 +15,8 @@ RUN pecl install xdebug amqp tidy \
     && docker-php-ext-enable tidy
 
 ADD ./fastcgi-php.conf /etc/nginx/snippets/fastcgi-php.conf
-ADD ./upstream-php.conf /etc/nginx/conf.d/php7.4-fpm.conf
+ADD ./upstream-php.conf /etc/nginx/conf.d/php8.2-fpm.conf
 ADD ./vhost.sh /tmp/vhost.sh
-
-RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
-
-ENV NVM_DIR=/root/.nvm
-ENV NODE_VERSION=v16
-
-RUN . $HOME/.nvm/nvm.sh \
-    && nvm install $NODE_VERSION \
-    && nvm alias default $NODE_VERSION \
-    && nvm use default \
-    && npm install -g yarn
 
 RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" \
     && php composer-setup.php \
