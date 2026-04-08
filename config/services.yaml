@@ -89,16 +89,6 @@ services:
     Graby\Monolog\Handler\GrabyHandler:
         alias: graby.log_handler
 
-    twitter.client:
-        class: TwitterOAuth\TwitterOAuth
-        arguments:
-            -
-                consumer_key: "%env(TWITTER_CONSUMER_KEY)%"
-                consumer_secret: "%env(TWITTER_CONSUMER_SECRET)%"
-                oauth_token: "%env(TWITTER_ACCESS_TOKEN)%"
-                oauth_token_secret: "%env(TWITTER_ACCESS_TOKEN_SECRET)%"
-                output_format: 'array'
-
     # custom formatter for import commande (below)
     monolog.import.formatter:
         class: Symfony\Bridge\Monolog\Formatter\ConsoleFormatter

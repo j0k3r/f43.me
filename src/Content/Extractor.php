@@ -93,7 +93,7 @@ class Extractor
         // retrieve custom url ?
         $this->url = $improver->updateUrl($url);
 
-        // try to find a custom extractor for api content (imgur, twitter, etc...)
+        // try to find a custom extractor for api content (imgur, etc...)
         $extractor = $this->extractorChain->match($this->url);
         if (false !== $extractor) {
             $this->content = $extractor->getContent();
