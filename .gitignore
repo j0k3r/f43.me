@@ -1,6 +1,5 @@
 /coverage/
 /.sass-cache
-/node_modules/
 /bin/*
 !/bin/console
 /data/mysql

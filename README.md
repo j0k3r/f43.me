@@ -189,6 +189,9 @@ You can use the built-in Docker image using `docker-compose`:
 docker-compose up
 ```
 
+The Docker setup injects variables from `.env` and `.env.local` into the PHP container.
+`DATABASE_URL` is then overridden in `docker-compose.yml` so the app always targets the Docker MySQL service instead of `127.0.0.1`.
+
 You should be able to access the interface using `http://localhost:8100/index.php`
 
 ## License

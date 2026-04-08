@@ -1,52 +1,42 @@
-version: '3.1'
 services:
-  # database:
-  #   image: mariadb:10
-  #   ports:
-  #     - "3306:3306"
-  #   volumes:
-  #     - ./data/mysql:/var/lib/mysql:rw
-  #   environment:
-  #     MARIADB_ROOT_PASSWORD: root
-  #   restart: always
-
 ###> doctrine/doctrine-bundle ###
   database:
-    image: postgres:${POSTGRES_VERSION:-16}-alpine
+    image: mariadb:11.8.6
     ports:
-      - 5432:5432
+      - "3306:3306"
     environment:
-      POSTGRES_DB: ${POSTGRES_DB:-app}
-      # You should definitely change the password in production
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-root}
-      POSTGRES_USER: ${POSTGRES_USER:-app}
+      MYSQL_DATABASE: f43me
+      MARIADB_ROOT_PASSWORD: root
     healthcheck:
-      test: ["CMD", "pg_isready", "-d", "${POSTGRES_DB:-app}", "-U", "${POSTGRES_USER:-app}"]
+      test: ["CMD", "mariadb-admin", "ping", "-h", "127.0.0.1", "-uroot", "-proot"]
       timeout: 5s
       retries: 5
       start_period: 60s
     volumes:
-      - database_data:/var/lib/postgresql/data:rw
-      # You may use a bind-mounted host directory instead, so that it is harder to accidentally remove the volume and lose all your data!
-      # - ./docker/db/data:/var/lib/postgresql/data:rw
+      - database_mysql_data:/var/lib/mysql:rw
     restart: always
 ###< doctrine/doctrine-bundle ###
 
   nginx-php:
     build:
       context: ./docker
-      dockerfile: ./Dockerfile-php7.4
+      dockerfile: ./Dockerfile-php8.2
     ports:
       - "8100:8100"
-    links:
-      - database
+    depends_on:
+      database:
+        condition: service_healthy
     volumes:
       - ./:/usr/share/nginx/html
+    env_file:
+      - .env
+      - .env.local
     environment:
-      DATABASE_URL: "mysql://root:root@database:3306/f43me"
+      DATABASE_URL: "mysql://root:root@database:3306/f43me?serverVersion=mariadb-11.8.6&charset=utf8mb4"
+      LOCK_DSN: "flock"
     command: ["bash", "/usr/share/nginx/html/docker/launch-f43me.sh"]
 
 volumes:
 ###> doctrine/doctrine-bundle ###
-  database_data:
+  database_mysql_data:
 ###< doctrine/doctrine-bundle ###

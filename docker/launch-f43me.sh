@@ -10,12 +10,9 @@ chown -R www-data var
 chown -R www-data public
 chmod -R 777 var/
 
-# re-source the bashrc, so nvm will be loaded
-. /root/.bashrc
-
 echo "Installing assets..."
-yarn install
-yarn dev
+php bin/console importmap:install
+php bin/console asset-map:compile
 
 echo "Setup database..."
 php bin/console doctrine:database:create --if-not-exists
