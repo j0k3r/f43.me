@@ -10,8 +10,8 @@
         <link rel="preconnect" href="https://t3.gstatic.com">
         <link rel="preconnect" href="https://s2.googleusercontent.com">
 
-        {% block stylesheets %}
-            {{ encore_entry_link_tags('app') }}
+        {% block javascripts %}
+            {{ importmap(['app', 'theme-switcher']) }}
         {% endblock %}
 
         <script type="text/javascript"> function delayer() {window.location = "/"} </script>

@@ -1,10 +1,10 @@
-const timeago = require('timeago.js')
-
-import './styles/app.scss'
+import '@picocss/pico/css/pico.css';
+import { render } from 'timeago.js';
+import './styles/app.css';
 
 // handle timeago date on the public page
 if (document.querySelectorAll('.time-ago').length > 0) {
-    timeago.render(document.querySelectorAll('.time-ago'), { minInterval: 60 })
+    render(document.querySelectorAll('.time-ago'), undefined, { minInterval: 60 })
 }
 
 // handle show / hide of the textarea when testing config file

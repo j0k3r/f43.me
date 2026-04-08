@@ -39,6 +39,7 @@
         "stof/doctrine-extensions-bundle": "~1.1",
         "symfony/amqp-messenger": "*",
         "symfony/asset": "*",
+        "symfony/asset-mapper": "7.4.*",
         "symfony/dotenv": "*",
         "symfony/flex": "^2.8",
         "symfony/form": "*",
@@ -49,7 +50,6 @@
         "symfony/translation": "*",
         "symfony/twig-bundle": "*",
         "symfony/validator": "*",
-        "symfony/webpack-encore-bundle": "^2.3",
         "symfony/yaml": "*",
         "twig/extra-bundle": "^2.12|^3.0",
         "twig/twig": "^2.12|^3.0"
@@ -85,7 +85,8 @@
         ],
         "auto-scripts": {
             "cache:clear": "symfony-cmd",
-            "assets:install %PUBLIC_DIR%": "symfony-cmd"
+            "assets:install %PUBLIC_DIR%": "symfony-cmd",
+            "importmap:install": "symfony-cmd"
         }
     },
     "config": {

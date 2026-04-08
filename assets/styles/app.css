@@ -1,0 +1,164 @@
+@media (prefers-color-scheme: light) {
+    body {
+        --nav-background-color: hsla(0, 0%, 100%, 0.7);
+        --nav-border-color: rgba(115, 130, 140, 0.2);
+        --nav-logo-color: #fff;
+        --custom-del-color: #e53935;
+        --custom-del-hover: #d32f2f;
+    }
+}
+
+@media (prefers-color-scheme: dark) {
+    body {
+        --nav-background-color: rgba(27, 40, 50, 0.8);
+        --nav-border-color: rgba(115, 130, 140, 0.2);
+        --custom-del-color: #d32f2f;
+        --custom-del-hover: #e53935;
+    }
+}
+
+@media (min-width: 992px) {
+    :root {
+        --pico-font-size: 118.75%;
+    }
+
+    .container {
+        max-width: 920px;
+    }
+}
+
+@media (min-width: 1200px) {
+    :root {
+        --pico-font-size: 125%;
+    }
+
+    .container {
+        max-width: 1130px;
+    }
+}
+
+body > nav {
+    -webkit-backdrop-filter: saturate(180%) blur(20px);
+    z-index: 99;
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    backdrop-filter: saturate(180%) blur(20px);
+    background-color: var(--nav-background-color);
+    box-shadow: 0 1px 0 var(--nav-border-color);
+}
+
+body > nav.container-fluid {
+    padding-right: calc(var(--pico-spacing) + var(--scrollbar-width, 0px));
+}
+
+body > nav svg {
+    vertical-align: text-bottom;
+}
+
+body > nav li {
+    padding: calc(var(--pico-nav-element-spacing-vertical) / 6) var(--pico-nav-element-spacing-horizontal);
+}
+
+body > nav li > * {
+    --pico-spacing: 1rem;
+}
+
+body > nav ul:first-of-type li:first-of-type a {
+    width: 4rem;
+    height: 3.5rem;
+    margin-left: calc(var(--pico-spacing) * -1);
+    padding: 0;
+    color: var(--nav-logo-color);
+}
+
+body > nav ul:first-of-type li:first-of-type a svg {
+    margin-left: var(--pico-spacing);
+    margin-top: calc(var(--pico-spacing) * 0.6);
+    height: 2.5rem;
+}
+
+body > nav ul:first-of-type li:nth-of-type(2) {
+    display: none;
+    color: var(--pico-h1-color);
+}
+
+@media (min-width: 992px) {
+    body > nav ul:first-of-type li:nth-of-type(2) {
+        display: inline;
+    }
+}
+
+body > main {
+    padding-top: calc(var(--pico-block-spacing-vertical) + 4rem);
+}
+
+@media (min-width: 1200px) {
+    body > main {
+        padding-top: calc(var(--pico-block-spacing-vertical) + 5rem);
+    }
+}
+
+p.error,
+span.error,
+small.error {
+    color: var(--custom-del-color);
+}
+
+p.success,
+span.success,
+small.success {
+    color: var(--pico-ins-color);
+}
+
+p.info,
+span.info,
+small.info {
+    color: var(--pico-mark-color);
+}
+
+button.alert {
+    --pico-background-color: var(--custom-del-color);
+    --pico-border-color: var(--custom-del-color);
+    --pico-color: var(--pico-primary-inverse);
+    border: var(--pico-border-width) solid var(--pico-border-color);
+}
+
+button.alert:active,
+button.alert:focus,
+button.alert:hover {
+    --pico-background-color: var(--custom-del-hover);
+    --pico-border-color: var(--custom-del-hover);
+    --pico-box-shadow: var(--pico-button-hover-box-shadow, 0 0 0 rgba(0, 0, 0, 0));
+}
+
+form.delete_form {
+    margin-bottom: 0;
+}
+
+form.delete_form button {
+    margin-bottom: 0;
+}
+
+iframe.pubsubhubbub {
+    width: 100%;
+    height: 600px;
+}
+
+#siteconfig textarea {
+    height: 15em;
+}
+
+#modal-preview-item {
+    overflow-y: scroll;
+    align-items: flex-start;
+}
+
+label.label-no-block {
+    display: inline-block;
+}
+
+a {
+    --pico-text-decoration: none;
+}
