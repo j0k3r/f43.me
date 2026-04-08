@@ -16,7 +16,7 @@ class Spotify extends AbstractExtractor
             return false;
         }
 
-        if (!\in_array($host, ['open.spotify.com', 'play.spotify.com'], true)) {
+        if (!\in_array($host, ['open.spotify.com', 'play.spotify.com', 'spotify.link'], true)) {
             return false;
         }
 
@@ -32,7 +32,7 @@ class Spotify extends AbstractExtractor
         }
 
         try {
-            $response = $this->client->get('https://embed.spotify.com/oembed/?format=json&url=' . $this->spotifyUrl);
+            $response = $this->client->get('https://open.spotify.com/oembed?url=' . rawurlencode($this->normalizeSpotifyUrl($this->spotifyUrl)));
             $data = $this->jsonDecode($response);
         } catch (\Exception $e) {
             $this->logger->warning('Spotify extract failed for: ' . $this->spotifyUrl, [
@@ -47,5 +47,10 @@ class Spotify extends AbstractExtractor
         }
 
         return '<div><h2>' . $data['title'] . '</h2><p><img src="' . $data['thumbnail_url'] . '"></p>' . $data['html'] . '</div>';
+    }
+
+    private function normalizeSpotifyUrl(string $url): string
+    {
+        return str_replace('://play.spotify.com/', '://open.spotify.com/', $url);
     }
 }

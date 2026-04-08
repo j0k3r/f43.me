@@ -19,6 +19,7 @@ class SpotifyTest extends AppTestCase
             ['https://play.spotify.com/artist/4njdEjTnLfcGImKZu1iSrz', true],
             ['https://play.spotify.com/album/6yGp5e6Puhx155c8dQ8e6P', true],
             ['https://play.spotify.com/track/2wIC3jqtTK78zQMdj1DRLu', true],
+            ['https://spotify.link/abc123', true],
             ['https://goog.co', false],
             ['http://user@:80', false],
         ];
