@@ -23,14 +23,6 @@ services:
         tags:
             -  { name: feed.extractor, alias: tumblr }
 
-    feed.extractor.vine:
-        class: App\Extractor\Vine
-        calls:
-            - [ setLogger, [ "@logger" ]]
-            - [ setClient, [ "@httplug.client.default.http_methods" ]]
-        tags:
-            -  { name: feed.extractor, alias: vine }
-
     feed.extractor.instagram:
         class: App\Extractor\Instagram
         calls:
@@ -38,22 +30,6 @@ services:
             - [ setClient, [ "@httplug.client.default.http_methods" ]]
         tags:
             -  { name: feed.extractor, alias: instagram }
-
-    feed.extractor.vidme:
-        class: App\Extractor\Vidme
-        calls:
-            - [ setLogger, [ "@logger" ]]
-            - [ setClient, [ "@httplug.client.default.http_methods" ]]
-        tags:
-            -  { name: feed.extractor, alias: vidme }
-
-    feed.extractor.gfycat:
-        class: App\Extractor\Gfycat
-        calls:
-            - [ setLogger, [ "@logger" ]]
-            - [ setClient, [ "@httplug.client.default.http_methods" ]]
-        tags:
-            -  { name: feed.extractor, alias: gfycat }
 
     feed.extractor.flickr:
         class: App\Extractor\Flickr
@@ -81,14 +57,6 @@ services:
             - [ setClient, [ "@httplug.client.default.http_methods" ]]
         tags:
             -  { name: feed.extractor, alias: deviantart }
-
-    feed.extractor.camplus:
-        class: App\Extractor\Camplus
-        calls:
-            - [ setLogger, [ "@logger" ]]
-            - [ setClient, [ "@httplug.client.default.http_methods" ]]
-        tags:
-            -  { name: feed.extractor, alias: camplus }
 
     feed.extractor.soundcloud:
         class: App\Extractor\Soundcloud
@@ -200,21 +168,3 @@ services:
             - [ setClient, [ "@httplug.client.default.http_methods" ]]
         tags:
             -  { name: feed.extractor, alias: giphy }
-
-    feed.extractor.twitch:
-        class: App\Extractor\Twitch
-        arguments:
-            - "%env(TWITCH_CLIENT_ID)%"
-        calls:
-            - [ setLogger, [ "@logger" ]]
-            - [ setClient, [ "@httplug.client.default.http_methods" ]]
-        tags:
-            -  { name: feed.extractor, alias: twitch }
-
-    feed.extractor.periscope:
-        class: App\Extractor\Periscope
-        calls:
-            - [ setLogger, [ "@logger" ]]
-            - [ setClient, [ "@httplug.client.default.http_methods" ]]
-        tags:
-            -  { name: feed.extractor, alias: periscope }
