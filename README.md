@@ -66,16 +66,16 @@ You can find some examples in the [improver folder](https://github.com/j0k3r/f43
 
 ### Extractors
 
-Parser that gets html content from an url and find what can be the most interesting part for the user is important. But, most of the time they fail when it comes to images (like from Imgur, Flickr) or from social network (like Tumblr, Twitter or Facebook).
+Parser that gets html content from an url and find what can be the most interesting part for the user is important. But, most of the time they fail when it comes to images (like from Imgur, Flickr) or from social network (like Tumblr or Facebook).
 
 These online service provides API to retrieve content from their platform. Extractors will use them to grab the *real* content.
 
 An extractor uses 2 methods:
 
  * `match`: tells if this extractor needs to work on that item (usually a bunch of regex & host matching)
- * `getContent`: it will call the related API or url to fetch the content from the match parameters found in the `match` method (like Twitter ID, Flickr ID, etc...) and return a clean html
+ * `getContent`: it will call the related API or url to fetch the content from the match parameters found in the `match` method (like Flickr ID, etc...) and return a clean html
 
-You can find some of them in the [extractor folder](https://github.com/j0k3r/f43.me/tree/master/src/Extractor) (Flickr, Twitter, GitHub, etc...)
+You can find some of them in the [extractor folder](https://github.com/j0k3r/f43.me/tree/master/src/Extractor) (Flickr, GitHub, etc...)
 
 ### Parsers
 

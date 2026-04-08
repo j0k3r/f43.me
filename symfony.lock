@@ -259,9 +259,6 @@
     "ralouphie/getallheaders": {
         "version": "3.0.3"
     },
-    "ricardoper/twitteroauth": {
-        "version": "v1.1.1"
-    },
     "sentry/sentry": {
         "version": "2.5.0"
     },

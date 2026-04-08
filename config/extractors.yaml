@@ -13,16 +13,6 @@ services:
         tags:
             -  { name: feed.extractor, alias: imgur }
 
-    feed.extractor.twitter:
-        class: App\Extractor\Twitter
-        arguments:
-            - "@twitter.client"
-        calls:
-            - [ setLogger, [ "@logger" ]]
-            - [ setClient, [ "@httplug.client.default.http_methods" ]]
-        tags:
-            -  { name: feed.extractor, alias: twitter }
-
     feed.extractor.tumblr:
         class: App\Extractor\Tumblr
         arguments:

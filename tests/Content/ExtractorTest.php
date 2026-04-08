@@ -5,8 +5,8 @@ namespace App\Tests\Content;
 use App\Content\Extractor;
 use App\Converter\ConverterChain;
 use App\Entity\Feed;
+use App\Extractor\AbstractExtractor;
 use App\Extractor\ExtractorChain;
-use App\Extractor\Twitter;
 use App\Improver\DefaultImprover;
 use App\Improver\ImproverChain;
 use App\Parser\Internal;
@@ -119,13 +119,17 @@ class ExtractorTest extends TestCase
                 ->disableOriginalConstructor()
                 ->getMock();
 
-            $extractor = $this->getMockBuilder(Twitter::class)
-                ->disableOriginalConstructor()
-                ->getMock();
+            $extractor = new class extends AbstractExtractor {
+                public function match(string $url): bool
+                {
+                    return false;
+                }
 
-            $extractor->expects($this->any())
-                ->method('getContent')
-                ->willReturn('<html/>');
+                public function getContent(): string
+                {
+                    return '<html/>';
+                }
+            };
 
             $extractorChain->expects($this->any())
                 ->method('match')
