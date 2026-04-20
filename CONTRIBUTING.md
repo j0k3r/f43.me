@@ -12,7 +12,6 @@ You locally need:
 Install deps:
 
 ```
-yarn
 composer i
 ```
 
