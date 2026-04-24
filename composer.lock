@@ -1931,22 +1931,22 @@
         },
         {
             "name": "j0k3r/php-imgur-api-client",
-            "version": "4.0.2",
+            "version": "4.0.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/j0k3r/php-imgur-api-client.git",
-                "reference": "fab0380f44bbb4316f7d0271aef35e6dba3c2353"
+                "reference": "67cbcbe2a1034caede1fff98f0c1cbf77c9e074c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/j0k3r/php-imgur-api-client/zipball/fab0380f44bbb4316f7d0271aef35e6dba3c2353",
-                "reference": "fab0380f44bbb4316f7d0271aef35e6dba3c2353",
+                "url": "https://api.github.com/repos/j0k3r/php-imgur-api-client/zipball/67cbcbe2a1034caede1fff98f0c1cbf77c9e074c",
+                "reference": "67cbcbe2a1034caede1fff98f0c1cbf77c9e074c",
                 "shasum": ""
             },
             "require": {
                 "ext-curl": "*",
                 "guzzlehttp/guzzle": "^7.0",
-                "php": ">=7.4"
+                "php": ">=8.2"
             },
             "replace": {
                 "adyg/php-imgur-api-client": "self.version"
@@ -1954,10 +1954,10 @@
             "require-dev": {
                 "friendsofphp/php-cs-fixer": "^3.0",
                 "phpstan/extension-installer": "^1.1",
-                "phpstan/phpstan": "^1.2",
-                "phpstan/phpstan-deprecation-rules": "^1.0",
-                "phpstan/phpstan-phpunit": "^1.0",
-                "symfony/phpunit-bridge": "^6.0"
+                "phpstan/phpstan": "^2.1",
+                "phpstan/phpstan-deprecation-rules": "^2.0",
+                "phpstan/phpstan-phpunit": "^2.0",
+                "phpunit/phpunit": "^11.0"
             },
             "type": "library",
             "autoload": {
@@ -1973,7 +1973,7 @@
                 {
                     "name": "Jeremy Benoist",
                     "email": "jeremy.benoist@gmail.com",
-                    "homepage": "http://www.j0k3r.net"
+                    "homepage": "https://www.j0k3r.net"
                 },
                 {
                     "name": "Adrian Ghiuta",
@@ -1989,7 +1989,7 @@
             ],
             "support": {
                 "issues": "https://github.com/j0k3r/php-imgur-api-client/issues",
-                "source": "https://github.com/j0k3r/php-imgur-api-client/tree/4.0.2"
+                "source": "https://github.com/j0k3r/php-imgur-api-client/tree/4.0.3"
             },
             "funding": [
                 {
@@ -1997,7 +1997,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-08-21T13:39:26+00:00"
+            "time": "2026-04-21T19:12:41+00:00"
         },
         {
             "name": "j0k3r/php-readability",
