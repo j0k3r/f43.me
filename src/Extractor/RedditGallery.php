@@ -31,13 +31,14 @@ class RedditGallery extends AbstractExtractor
             return false;
         }
 
-        // we only match reddit post
-        if (!isset($data[0]['data']['children'][0]['data'])
-            || true !== $data[0]['data']['children'][0]['data']['is_gallery']) {
+        $postData = $data[0]['data']['children'][0]['data'] ?? null;
+
+        // we only match reddit gallery posts
+        if (!\is_array($postData) || true !== ($postData['is_gallery'] ?? false)) {
             return false;
         }
 
-        $this->redditGalleryData = $data[0]['data']['children'][0]['data'];
+        $this->redditGalleryData = $postData;
 
         return true;
     }
