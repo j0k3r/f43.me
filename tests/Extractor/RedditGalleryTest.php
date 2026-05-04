@@ -58,6 +58,20 @@ class RedditGalleryTest extends AppTestCase
         $this->assertFalse($redditGallery->match('https://www.reddit.com/r/jailbreak/comments/7bnvuq/request_tweak_that_allows_more_than_140/'));
     }
 
+    public function testMatchRedditWithoutGalleryFlag(): void
+    {
+        $client = self::getMockClient([
+            new Response(200, [], (string) json_encode([
+                ['data' => ['children' => [['data' => []]]]],
+            ])),
+        ]);
+
+        $redditGallery = new RedditGallery();
+        $redditGallery->setClient($client);
+
+        $this->assertFalse($redditGallery->match('https://www.reddit.com/r/jailbreak/comments/7bnvuq/request_tweak_that_allows_more_than_140/'));
+    }
+
     public function testContent(): void
     {
         $client = self::getMockClient([new Response(200, [], (string) json_encode([['data' => ['children' => [['data' => [
