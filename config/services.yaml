@@ -1,3 +1,4 @@
+# yaml-language-server: $schema=../vendor/symfony/dependency-injection/Loader/schema/services.schema.json
 imports:
     - { resource: extractors.yaml }
     - { resource: improvers.yaml }

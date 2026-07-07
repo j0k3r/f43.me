@@ -24,7 +24,6 @@
     "require": {
         "php": ">=8.2",
         "beberlei/doctrineextensions": "^1.2",
-        "composer/package-versions-deprecated": "^1.11",
         "doctrine/doctrine-bundle": "^2.0",
         "doctrine/orm": "^3.5",
         "gedmo/doctrine-extensions": "^3.6.0",

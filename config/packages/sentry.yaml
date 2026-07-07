@@ -26,10 +26,15 @@ when@prod:
                 type: service
                 id: Sentry\Monolog\Handler
                 level: !php/const Monolog\Logger::ERROR
+            # Use this for structured log integration
+            sentry_logs:
+                type: service
+                id: Sentry\SentryBundle\Monolog\LogsHandler
 
     services:
         Sentry\Monolog\Handler:
             arguments:
                 $hub: '@Sentry\State\HubInterface'
                 $level: !php/const Monolog\Logger::ERROR
+                $fillExtraContext: true # Enables sending monolog context to Sentry
                 $bubble: false
