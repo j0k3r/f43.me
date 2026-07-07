@@ -15,7 +15,8 @@ security:
 
     firewalls:
         dev:
-            pattern: ^/(_(profiler|wdt)|css|images|js)/
+            # Ensure dev tools and static assets are always allowed
+            pattern: ^/(_profiler|_wdt|css|images|js|assets|build)/
             security: false
 
         test:
@@ -34,8 +35,7 @@ security:
 
             logout: ~
 
-    # Easy way to control access for large sections of your site
-    # Note: Only the *first* access control that matches will be used
+    # Note: Only the *first* matching rule is applied
     access_control:
         - { path: ^/(.*)\.xml, roles: PUBLIC_ACCESS}
         - { path: ^/login, roles: PUBLIC_ACCESS}
