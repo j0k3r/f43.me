@@ -10,9 +10,7 @@ class ParserChainTest extends TestCase
 {
     public function testParseTrue(): void
     {
-        $parser = $this->getMockBuilder(AbstractParser::class)
-            ->disableOriginalConstructor()
-            ->getMock();
+        $parser = $this->createMock(AbstractParser::class);
 
         $parser->expects($this->once())
             ->method('parse')
@@ -27,9 +25,7 @@ class ParserChainTest extends TestCase
 
     public function testParseFalse(): void
     {
-        $parser = $this->getMockBuilder(AbstractParser::class)
-            ->disableOriginalConstructor()
-            ->getMock();
+        $parser = $this->createMock(AbstractParser::class);
 
         $parser->expects($this->once())
             ->method('parse')

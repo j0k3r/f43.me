@@ -10,9 +10,7 @@ class ConverterChainTest extends TestCase
 {
     public function testConvert(): void
     {
-        $converter = $this->getMockBuilder(AbstractConverter::class)
-            ->disableOriginalConstructor()
-            ->getMock();
+        $converter = $this->createMock(AbstractConverter::class);
 
         $converter->expects($this->once())
             ->method('convert')

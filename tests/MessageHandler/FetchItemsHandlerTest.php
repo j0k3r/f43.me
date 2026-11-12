@@ -24,17 +24,11 @@ class FetchItemsHandlerTest extends WebTestCase
         /** @var Container */
         $container = self::getContainer();
 
-        $doctrine = $this->getMockBuilder(Registry::class)
-            ->disableOriginalConstructor()
-            ->getMock();
+        $doctrine = $this->createStub(Registry::class);
 
-        $contentImport = $this->getMockBuilder(Import::class)
-            ->disableOriginalConstructor()
-            ->getMock();
+        $contentImport = $this->createStub(Import::class);
 
-        $feedRepository = $this->getMockBuilder(FeedRepository::class)
-            ->disableOriginalConstructor()
-            ->getMock();
+        $feedRepository = $this->createMock(FeedRepository::class);
 
         $feedRepository->expects($this->once())
             ->method('find')
@@ -60,16 +54,12 @@ class FetchItemsHandlerTest extends WebTestCase
         /** @var Container */
         $container = self::getContainer();
 
-        $em = $this->getMockBuilder(EntityManager::class)
-            ->disableOriginalConstructor()
-            ->getMock();
+        $em = $this->createMock(EntityManager::class);
         $em->expects($this->once())
             ->method('isOpen')
             ->willReturn(false); // simulate a closing manager
 
-        $doctrine = $this->getMockBuilder(Registry::class)
-            ->disableOriginalConstructor()
-            ->getMock();
+        $doctrine = $this->createMock(Registry::class);
         $doctrine->expects($this->once())
             ->method('getManager')
             ->willReturn($em);
@@ -77,9 +67,7 @@ class FetchItemsHandlerTest extends WebTestCase
             ->method('resetManager')
             ->willReturn($em);
 
-        $contentImport = $this->getMockBuilder(Import::class)
-            ->disableOriginalConstructor()
-            ->getMock();
+        $contentImport = $this->createMock(Import::class);
         $contentImport->expects($this->once())
             ->method('setEntityManager');
         $contentImport->expects($this->once())
@@ -90,9 +78,7 @@ class FetchItemsHandlerTest extends WebTestCase
         $feed->setId(123);
         $feed->setSlug('reddit');
 
-        $feedRepository = $this->getMockBuilder(FeedRepository::class)
-            ->disableOriginalConstructor()
-            ->getMock();
+        $feedRepository = $this->createMock(FeedRepository::class);
 
         $feedRepository->expects($this->once())
             ->method('find')

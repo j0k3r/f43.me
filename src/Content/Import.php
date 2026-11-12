@@ -92,9 +92,7 @@ class Import
 
                 // if there is no date in the feed, we use the current one
                 $date = $item->get_date();
-                if (null === $date) {
-                    $date = time();
-                }
+                $date ??= time();
                 $date = (new \DateTime())->setTimestamp((int) strtotime((string) $date));
 
                 $feedItem = new Item($feed);

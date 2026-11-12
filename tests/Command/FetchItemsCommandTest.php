@@ -32,47 +32,39 @@ class FetchItemsCommandTest extends KernelTestCase
 
     protected function setUp(): void
     {
-        $simplePieItem = $this->getMockBuilder('SimplePie_Item')
-            ->disableOriginalConstructor()
-            ->getMock();
+        $simplePieItem = $this->createMock('SimplePie_Item');
 
-        $simplePieItem->expects($this->any())
+        $simplePieItem
             ->method('get_description')
             ->willReturn('description');
 
-        $simplePieItem->expects($this->any())
+        $simplePieItem
             ->method('get_permalink')
             ->willReturn('https://wildtrip.blog/sri-lanka-3-semaines-quoi-voir.html');
 
-        $simplePie = $this->getMockBuilder('SimplePie')
-            ->disableOriginalConstructor()
-            ->getMock();
+        $simplePie = $this->createMock('SimplePie');
 
-        $simplePie->expects($this->any())
+        $simplePie
             ->method('get_items')
             ->willReturn([$simplePieItem]);
 
-        $simplePie->expects($this->any())
+        $simplePie
             ->method('get_description')
             ->willReturn('description');
 
-        $simplePieProxy = $this->getMockBuilder(SimplePieProxy::class)
-            ->disableOriginalConstructor()
-            ->getMock();
+        $simplePieProxy = $this->createMock(SimplePieProxy::class);
 
-        $simplePieProxy->expects($this->any())
+        $simplePieProxy
             ->method('setUrl')
             ->willReturnSelf();
 
-        $simplePieProxy->expects($this->any())
+        $simplePieProxy
             ->method('init')
             ->willReturn($simplePie);
 
-        $bus = $this->getMockBuilder(MessageBusInterface::class)
-            ->disableOriginalConstructor()
-            ->getMock();
+        $bus = $this->createMock(MessageBusInterface::class);
 
-        $bus->expects($this->any())
+        $bus
             ->method('dispatch');
 
         $logger = new Logger('import');
@@ -184,17 +176,13 @@ class FetchItemsCommandTest extends KernelTestCase
         /** @var Container */
         $container = self::getContainer();
 
-        $bus = $this->getMockBuilder(MessageBusInterface::class)
-            ->disableOriginalConstructor()
-            ->getMock();
+        $bus = $this->createMock(MessageBusInterface::class);
 
-        $bus->expects($this->any())
+        $bus
             ->method('dispatch')
             ->willReturn(new Envelope(new FeedSync(555)));
 
-        $connection = $this->getMockBuilder(Connection::class)
-            ->disableOriginalConstructor()
-            ->getMock();
+        $connection = $this->createMock(Connection::class);
 
         $connection->expects($this->once())
             ->method('countMessagesInQueues')
@@ -223,16 +211,12 @@ class FetchItemsCommandTest extends KernelTestCase
         /** @var Container */
         $container = self::getContainer();
 
-        $bus = $this->getMockBuilder(MessageBusInterface::class)
-            ->disableOriginalConstructor()
-            ->getMock();
+        $bus = $this->createMock(MessageBusInterface::class);
 
-        $bus->expects($this->any())
+        $bus
             ->method('dispatch');
 
-        $connection = $this->getMockBuilder(Connection::class)
-            ->disableOriginalConstructor()
-            ->getMock();
+        $connection = $this->createMock(Connection::class);
 
         $connection->expects($this->once())
             ->method('countMessagesInQueues')

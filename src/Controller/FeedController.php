@@ -99,7 +99,7 @@ class FeedController extends AbstractController
 
             $session->getFlashBag()->add('notice', 'Feed created!');
 
-            return $this->redirect($this->generateUrl('feed_edit', ['slug' => $feed->getSlug()]));
+            return $this->redirectToRoute('feed_edit', ['slug' => $feed->getSlug()]);
         }
 
         $session->getFlashBag()->add('error', 'Form is invalid.');
@@ -133,7 +133,7 @@ class FeedController extends AbstractController
 
                 $session->getFlashBag()->add('notice', 'Feed updated!');
 
-                return $this->redirect($this->generateUrl('feed_edit', ['slug' => $feed->getSlug()]));
+                return $this->redirectToRoute('feed_edit', ['slug' => $feed->getSlug()]);
             }
             $session->getFlashBag()->add('error', 'Form is invalid.');
         }
@@ -176,7 +176,7 @@ class FeedController extends AbstractController
             $session->getFlashBag()->add('notice', 'Feed deleted!');
         }
 
-        return $this->redirect($this->generateUrl('feed_homepage'));
+        return $this->redirectToRoute('feed_homepage');
     }
 
     /**

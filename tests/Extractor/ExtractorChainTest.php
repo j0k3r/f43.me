@@ -10,9 +10,7 @@ class ExtractorChainTest extends TestCase
 {
     public function testMatchTrue(): void
     {
-        $extractor = $this->getMockBuilder(AbstractExtractor::class)
-            ->disableOriginalConstructor()
-            ->getMock();
+        $extractor = $this->createMock(AbstractExtractor::class);
 
         $extractor->expects($this->once())
             ->method('match')
@@ -26,9 +24,7 @@ class ExtractorChainTest extends TestCase
 
     public function testMatchFalse(): void
     {
-        $extractor = $this->getMockBuilder(AbstractExtractor::class)
-            ->disableOriginalConstructor()
-            ->getMock();
+        $extractor = $this->createMock(AbstractExtractor::class);
 
         $extractor->expects($this->once())
             ->method('match')

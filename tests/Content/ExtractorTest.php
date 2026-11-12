@@ -28,7 +28,7 @@ class ExtractorTest extends TestCase
     {
         $contentExtractor = $this->getContentExtrator();
 
-        $this->graby->expects($this->any())
+        $this->graby
             ->method('fetchContent')
             ->willReturn($this->getGrabyContent(''));
 
@@ -41,7 +41,7 @@ class ExtractorTest extends TestCase
     {
         $contentExtractor = $this->getContentExtrator();
 
-        $this->graby->expects($this->any())
+        $this->graby
             ->method('fetchContent')
             ->will($this->throwException(new \Exception()));
 
@@ -55,7 +55,7 @@ class ExtractorTest extends TestCase
     {
         $contentExtractor = $this->getContentExtrator(true);
 
-        $this->graby->expects($this->any())
+        $this->graby
             ->method('fetchContent')
             ->willReturn($this->getGrabyContent(''));
 
@@ -68,7 +68,7 @@ class ExtractorTest extends TestCase
     {
         $contentExtractor = $this->getContentExtrator(false, true);
 
-        $this->graby->expects($this->any())
+        $this->graby
             ->method('fetchContent')
             ->willReturn($this->getGrabyContent(''));
 
@@ -82,17 +82,11 @@ class ExtractorTest extends TestCase
         $this->expectException(\InvalidArgumentException::class);
         $this->expectExceptionMessage('The given parser "oops" does not exists.');
 
-        $extractorChain = $this->getMockBuilder(ExtractorChain::class)
-            ->disableOriginalConstructor()
-            ->getMock();
+        $extractorChain = $this->createStub(ExtractorChain::class);
 
-        $improverChain = $this->getMockBuilder(ImproverChain::class)
-            ->disableOriginalConstructor()
-            ->getMock();
+        $improverChain = $this->createStub(ImproverChain::class);
 
-        $converterChain = $this->getMockBuilder(ConverterChain::class)
-            ->disableOriginalConstructor()
-            ->getMock();
+        $converterChain = $this->createStub(ConverterChain::class);
 
         $contentExtractor = new Extractor($extractorChain, $improverChain, $converterChain, new ParserChain());
         $contentExtractor->init('oops');
@@ -106,18 +100,14 @@ class ExtractorTest extends TestCase
         $feed->setFormatter('atom');
         $feed->setHost('Default');
 
-        $extractorChain = $this->getMockBuilder(ExtractorChain::class)
-            ->disableOriginalConstructor()
-            ->getMock();
+        $extractorChain = $this->createMock(ExtractorChain::class);
 
-        $extractorChain->expects($this->any())
+        $extractorChain
             ->method('match')
             ->willReturn(false);
 
         if (true === $customExtractor) {
-            $extractorChain = $this->getMockBuilder(ExtractorChain::class)
-                ->disableOriginalConstructor()
-                ->getMock();
+            $extractorChain = $this->createMock(ExtractorChain::class);
 
             $extractor = new class extends AbstractExtractor {
                 public function match(string $url): bool
@@ -131,36 +121,30 @@ class ExtractorTest extends TestCase
                 }
             };
 
-            $extractorChain->expects($this->any())
+            $extractorChain
                 ->method('match')
                 ->willReturn($extractor);
         }
 
-        $improverChain = $this->getMockBuilder(ImproverChain::class)
-            ->disableOriginalConstructor()
-            ->getMock();
+        $improverChain = $this->createMock(ImproverChain::class);
 
-        $defaultImprover = $this->getMockBuilder(DefaultImprover::class)
-            ->disableOriginalConstructor()
-            ->getMock();
+        $defaultImprover = $this->createMock(DefaultImprover::class);
 
-        $defaultImprover->expects($this->any())
+        $defaultImprover
             ->method('updateContent')
             ->willReturnArgument(0);
 
-        $defaultImprover->expects($this->any())
+        $defaultImprover
             ->method('updateUrl')
             ->willReturnArgument(0);
 
-        $improverChain->expects($this->any())
+        $improverChain
             ->method('match')
             ->willReturn($defaultImprover);
 
-        $converterChain = $this->getMockBuilder(ConverterChain::class)
-            ->disableOriginalConstructor()
-            ->getMock();
+        $converterChain = $this->createMock(ConverterChain::class);
 
-        $converterChain->expects($this->any())
+        $converterChain
             ->method('convert')
             ->willReturnArgument(0);
 
@@ -171,11 +155,9 @@ class ExtractorTest extends TestCase
 
         $internalParser = new Internal($this->graby);
 
-        $parserChain = $this->getMockBuilder(ParserChain::class)
-            ->disableOriginalConstructor()
-            ->getMock();
+        $parserChain = $this->createMock(ParserChain::class);
 
-        $parserChain->expects($this->any())
+        $parserChain
             ->method('getParser')
             ->willReturn($internalParser);
 

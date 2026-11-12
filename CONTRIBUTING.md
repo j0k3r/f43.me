@@ -18,7 +18,7 @@ composer i
 Then you can use Docker to launch the database (used for test or dev):
 
 ```
-docker run -d --name f43me-mysql -e MYSQL_ALLOW_EMPTY_PASSWORD=yes -p 3306:3306 mysql:latest
+docker run -d --name f43me-mysql -e MYSQL_ALLOW_EMPTY_PASSWORD=yes -p 3306:3306 mariadb:latest
 ```
 
 ## Running Tests
@@ -32,7 +32,7 @@ make prepare
 Once it's ok, launch tests:
 
 ```
-php bin/phpunit -v
+php bin/phpunit
 ```
 
 ## Linting

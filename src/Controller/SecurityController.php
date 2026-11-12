@@ -21,7 +21,7 @@ class SecurityController extends AbstractController
     public function loginAction(Request $request, AuthorizationCheckerInterface $authorizationChecker, AuthenticationUtils $authenticationUtils)
     {
         if (true === $authorizationChecker->isGranted('ROLE_ADMIN')) {
-            return $this->redirect($this->generateUrl('feed_dashboard'));
+            return $this->redirectToRoute('feed_dashboard');
         }
 
         return $this->render('default/Security/login.html.twig', [
