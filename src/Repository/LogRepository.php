@@ -73,24 +73,25 @@ class LogRepository extends ServiceEntityRepository
      *
      * @param int $limit Limit of results to show in the dashboard chart
      *
-     * @return array
+     * @return array<string, int>
      */
-    public function findStatsForLastDays(int $limit = 20)
+    public function findStatsForLastDays(int $limit = 20): array
     {
-        $res = $this->createQueryBuilder('l')
-            ->select('l.createdAt as date, count(l.id) as total')
+        $res = $this->getEntityManager()->getConnection()->createQueryBuilder()
+            ->select('DATE(l.created_at) AS date, SUM(l.items_number) AS total')
+            ->from('log', 'l')
             ->groupBy('date')
             ->orderBy('date', 'desc')
             ->setMaxResults($limit)
-            ->getQuery()
-            ->getArrayResult();
+            ->executeQuery()
+            ->fetchAllAssociative();
 
         krsort($res);
 
         $results = [];
         foreach ($res as $result) {
-            [$year, $month, $day] = explode('-', (string) $result['date']->format('Y-m-d'));
-            $results[$day . '/' . $month . '/' . $year] = $result['total'];
+            [$year, $month, $day] = explode('-', $result['date']);
+            $results[$day . '/' . $month . '/' . $year] = (int) $result['total'];
         }
 
         return $results;
