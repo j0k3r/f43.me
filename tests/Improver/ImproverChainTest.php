@@ -10,9 +10,7 @@ class ImproverChainTest extends TestCase
 {
     public function testMatchTrue(): void
     {
-        $improver = $this->getMockBuilder(DefaultImprover::class)
-            ->disableOriginalConstructor()
-            ->getMock();
+        $improver = $this->createMock(DefaultImprover::class);
 
         $improver->expects($this->once())
             ->method('match')
@@ -26,9 +24,7 @@ class ImproverChainTest extends TestCase
 
     public function testMatchFalse(): void
     {
-        $improver = $this->getMockBuilder(DefaultImprover::class)
-            ->disableOriginalConstructor()
-            ->getMock();
+        $improver = $this->createMock(DefaultImprover::class);
 
         $improver->expects($this->once())
             ->method('match')
@@ -42,9 +38,7 @@ class ImproverChainTest extends TestCase
 
     public function testMatchWithEmptyHost(): void
     {
-        $improver = $this->getMockBuilder(DefaultImprover::class)
-            ->disableOriginalConstructor()
-            ->getMock();
+        $improver = $this->createMock(DefaultImprover::class);
 
         $improver->expects($this->never())
             ->method('match');

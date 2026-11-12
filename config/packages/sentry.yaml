@@ -32,6 +32,8 @@ when@prod:
                 id: Sentry\SentryBundle\Monolog\LogsHandler
 
     services:
+        Sentry\SentryBundle\Monolog\LogsHandler: ~
+
         Sentry\Monolog\Handler:
             arguments:
                 $hub: '@Sentry\State\HubInterface'

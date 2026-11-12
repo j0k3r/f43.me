@@ -13,9 +13,7 @@ class ItemSubscriberTest extends AppTestCase
 {
     public function testOnItemCachedNoHubDefined(): void
     {
-        $router = $this->getMockBuilder(Router::class)
-            ->disableOriginalConstructor()
-            ->getMock();
+        $router = $this->createStub(Router::class);
 
         $client = self::getMockClient();
 
@@ -30,9 +28,7 @@ class ItemSubscriberTest extends AppTestCase
 
     public function testOnItemCachedBadResponse(): void
     {
-        $router = $this->getMockBuilder(Router::class)
-            ->disableOriginalConstructor()
-            ->getMock();
+        $router = $this->createMock(Router::class);
 
         $router->expects($this->once())
             ->method('generate')
@@ -52,9 +48,7 @@ class ItemSubscriberTest extends AppTestCase
 
     public function testOnItemCachedGoodResponse(): void
     {
-        $router = $this->getMockBuilder(Router::class)
-            ->disableOriginalConstructor()
-            ->getMock();
+        $router = $this->createMock(Router::class);
 
         $router->expects($this->once())
             ->method('generate')

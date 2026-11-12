@@ -84,9 +84,7 @@ class ImportTest extends AppTestCase
 
         $rssFeed->init();
 
-        $simplePie = $this->getMockBuilder(SimplePieProxy::class)
-            ->disableOriginalConstructor()
-            ->getMock();
+        $simplePie = $this->createMock(SimplePieProxy::class);
 
         $simplePie->expects($this->once())
             ->method('setUrl')
@@ -121,17 +119,13 @@ class ImportTest extends AppTestCase
 
         $extractor = new Extractor($extractorChain, $improverChain, new ConverterChain(), $parserChain);
 
-        $feedRepo = $this->getMockBuilder(FeedRepository::class)
-            ->disableOriginalConstructor()
-            ->getMock();
+        $feedRepo = $this->createMock(FeedRepository::class);
 
         $feedRepo->expects($this->once())
             ->method('findOneBy')
             ->willReturn($feed);
 
-        $feedItemRepo = $this->getMockBuilder(ItemRepository::class)
-            ->disableOriginalConstructor()
-            ->getMock();
+        $feedItemRepo = $this->createStub(ItemRepository::class);
 
         $em = $this->getMockBuilder(EntityManager::class)
             ->onlyMethods(['persist', 'flush', 'clear'])
@@ -203,9 +197,7 @@ class ImportTest extends AppTestCase
 
         $rssFeed->init();
 
-        $simplePie = $this->getMockBuilder(SimplePieProxy::class)
-            ->disableOriginalConstructor()
-            ->getMock();
+        $simplePie = $this->createMock(SimplePieProxy::class);
 
         $simplePie->expects($this->once())
             ->method('setUrl')
@@ -254,17 +246,13 @@ class ImportTest extends AppTestCase
 
         $extractor = new Extractor($extractorChain, $improverChain, new ConverterChain(), $parserChain);
 
-        $feedRepo = $this->getMockBuilder(FeedRepository::class)
-            ->disableOriginalConstructor()
-            ->getMock();
+        $feedRepo = $this->createMock(FeedRepository::class);
 
         $feedRepo->expects($this->once())
             ->method('findOneBy')
             ->willReturn($feed);
 
-        $feedItemRepo = $this->getMockBuilder(ItemRepository::class)
-            ->disableOriginalConstructor()
-            ->getMock();
+        $feedItemRepo = $this->createStub(ItemRepository::class);
 
         $em = $this->getMockBuilder(EntityManager::class)
             ->onlyMethods(['persist', 'flush', 'clear'])

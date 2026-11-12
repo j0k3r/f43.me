@@ -74,11 +74,14 @@ services:
             - [ setOption, [ 'client_id', "%env(IMGUR_CLIENT_ID)%" ] ]
             - [ setOption, [ 'client_secret', "%env(IMGUR_CLIENT_SECRET)%" ] ]
 
+    Graby\GrabyConfig:
+        arguments:
+            $errorMessage: ''
+
     graby:
         class: Graby\Graby
         arguments:
-            -
-                error_message: ''
+            $config: '@Graby\GrabyConfig'
         calls:
             - [ setLogger, [ "@logger" ] ]
         tags:

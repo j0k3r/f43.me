@@ -59,6 +59,6 @@ class LogController extends AbstractController
             $session->getFlashBag()->add('notice', $res . ' logs deleted!');
         }
 
-        return $this->redirect($this->generateUrl('feed_edit', ['slug' => $feed->getSlug()]));
+        return $this->redirectToRoute('feed_edit', ['slug' => $feed->getSlug()]);
     }
 }

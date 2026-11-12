@@ -14,9 +14,7 @@ class ConstraintRssValidatorTest extends AppTestCase
     {
         $constraint = new ConstraintRss();
 
-        $context = $this->getMockBuilder(ExecutionContextInterface::class)
-            ->disableOriginalConstructor()
-            ->getMock();
+        $context = $this->createMock(ExecutionContextInterface::class);
 
         $context->expects($this->never())
             ->method('addViolation');
@@ -32,9 +30,7 @@ class ConstraintRssValidatorTest extends AppTestCase
     {
         $constraint = new ConstraintRss();
 
-        $context = $this->getMockBuilder(ExecutionContextInterface::class)
-            ->disableOriginalConstructor()
-            ->getMock();
+        $context = $this->createMock(ExecutionContextInterface::class);
 
         $context->expects($this->once())
             ->method('addViolation')
@@ -54,9 +50,7 @@ class ConstraintRssValidatorTest extends AppTestCase
     {
         $constraint = new ConstraintRss();
 
-        $context = $this->getMockBuilder(ExecutionContextInterface::class)
-            ->disableOriginalConstructor()
-            ->getMock();
+        $context = $this->createMock(ExecutionContextInterface::class);
 
         $context->expects($this->once())
             ->method('addViolation')
@@ -79,9 +73,7 @@ class ConstraintRssValidatorTest extends AppTestCase
     {
         $constraint = new ConstraintRss();
 
-        $context = $this->getMockBuilder(ExecutionContextInterface::class)
-            ->disableOriginalConstructor()
-            ->getMock();
+        $context = $this->createMock(ExecutionContextInterface::class);
 
         $context->expects($this->never())
             ->method('addViolation');

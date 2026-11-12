@@ -14,9 +14,7 @@ class FeedSubscriberTest extends AppTestCase
 {
     public function testOnFeedCreated(): void
     {
-        $bus = $this->getMockBuilder(MessageBusInterface::class)
-            ->disableOriginalConstructor()
-            ->getMock();
+        $bus = $this->createMock(MessageBusInterface::class);
 
         $bus->expects($this->once())
             ->method('dispatch')

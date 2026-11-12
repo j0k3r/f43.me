@@ -50,8 +50,8 @@
         "symfony/twig-bundle": "*",
         "symfony/validator": "*",
         "symfony/yaml": "*",
-        "twig/extra-bundle": "^2.12|^3.0",
-        "twig/twig": "^2.12|^3.0"
+        "twig/extra-bundle": "^3.0",
+        "twig/twig": "^3.0"
     },
     "require-dev": {
         "doctrine/doctrine-fixtures-bundle": "^4.1",
@@ -99,6 +99,11 @@
             "symfony/flex": true,
             "symfony/runtime": true,
             "php-http/discovery": true
+        },
+        "policy": {
+            "advisories": {
+                "ignore-id": ["PKSA-px1b-j2dd-31r6"]
+            }
         }
     },
     "extra": {

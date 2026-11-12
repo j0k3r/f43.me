@@ -15,11 +15,9 @@ class RenderTest extends TestCase
 
     protected function setUp(): void
     {
-        $this->router = $this->getMockBuilder(Router::class)
-            ->disableOriginalConstructor()
-            ->getMock();
+        $this->router = $this->createMock(Router::class);
 
-        $this->router->expects($this->any())
+        $this->router
             ->method('generate')
             ->willReturn('https://fake.url');
 
@@ -28,7 +26,7 @@ class RenderTest extends TestCase
             ->disableOriginalConstructor()
             ->getMock();
 
-        $this->repo->expects($this->any())
+        $this->repo
             ->method('findByFeed')
             ->willReturn([]);
     }
