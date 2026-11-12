@@ -153,7 +153,7 @@ You just need to define these 3 cronjobs (replace all `/path/to/f43.me` with rea
 You can also run a command to fetch all new items from a given feed, using its slug:
 
 ```bash
-php /path/to/f43.me/bin/console feed:fetch-items --env=prod --slug=reddit -t
+php /path/to/f43.me/bin/console feed:fetch-items --env=prod --slug=reddit
 ```
 
 #### With RabbitMQ
