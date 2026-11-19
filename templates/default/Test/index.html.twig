@@ -18,6 +18,7 @@
             <p><a href="#" id="try-siteconfig">Want to try a custom siteconfig?</a> A tool is <a target="_blank" href="http://siteconfig.fivefilters.org/">available</a> to help build site-specific extraction rules.</p>
 
             {{ form_widget(form.siteconfig, {'attr': { 'placeholder': 'Put your config file here'}}) }}
+            <small>Custom siteconfigs bypass specialized extractors. Without “Replace”, existing rules are tried first.</small>
 
             <div>
                 {{ form_label(form.siteconfig_replace, null, {'label_attr': {'class': 'label-no-block'}}) }}

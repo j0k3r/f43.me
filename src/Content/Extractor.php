@@ -50,10 +50,11 @@ class Extractor
     /**
      * Try to retrieve content from a given url.
      *
-     * @param string      $url         RSS item url
-     * @param string|null $itemContent RSS item content, which will be taken if we can't extract content from url
+     * @param string        $url         RSS item url
+     * @param string|null   $itemContent RSS item content, which will be taken if we can't extract content from url
+     * @param Internal|null $parser      Isolated parser for siteconfig tests; bypasses specialized extractors
      */
-    public function parseContent($url, $itemContent = null): self
+    public function parseContent($url, $itemContent = null, ?Internal $parser = null): self
     {
         // be sure to have a clean workspace :)
         $this->content = '';
@@ -75,15 +76,16 @@ class Extractor
         $this->url = $improver->updateUrl($url);
 
         // try to find a custom extractor for api content (imgur, etc...)
-        $extractor = $this->extractorChain->match($this->url);
+        $extractor = null === $parser ? $this->extractorChain->match($this->url) : false;
         if (false !== $extractor) {
             $this->content = $extractor->getContent();
         }
 
         // this means the selected extractor wasn't able to extract content OR
         // no extractor were able to match the url
+        $parser ??= $this->parser;
         if (!$this->content) {
-            $this->content = $this->parser->parse($this->url, $this->reloadConfigFiles);
+            $this->content = $parser->parse($this->url, $this->reloadConfigFiles);
         }
 
         // do something when readable content failed
