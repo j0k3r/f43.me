@@ -2,7 +2,12 @@
 
 namespace App\Tests\Controller;
 
+use App\Content\Extractor;
+use App\Xml\SimplePieProxy;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Depends;
+use SimplePie\Item;
+use SimplePie\SimplePie;
 
 class ItemControllerTest extends FeedWebTestCase
 {
@@ -72,33 +77,41 @@ class ItemControllerTest extends FeedWebTestCase
         $this->assertStringContainsString('object not found', (string) $client->getResponse()->getContent());
     }
 
-    public function testPreviewItemInternal(): void
+    public static function previewUrls(): iterable
     {
-        $client = static::getAuthorizedClient();
-
-        $crawler = $client->request('GET', '/feed/blog-wildtrip/previewItem?parser=internal');
-
-        $this->assertSame(200, $client->getResponse()->getStatusCode());
-        $this->assertGreaterThanOrEqual(2, $crawler->filter('li strong')->count());
+        yield 'default' => [''];
+        yield 'legacy internal link' => ['?parser=internal'];
+        yield 'legacy external link' => ['?parser=external'];
+        yield 'parser parameter is ignored' => ['?parser=nawak'];
     }
 
-    public function testPreviewItemExternal(): void
+    #[DataProvider('previewUrls')]
+    public function testPreviewItem(string $query): void
     {
         $client = static::getAuthorizedClient();
+        $client->disableReboot();
+        $item = $this->createStub(Item::class);
+        $item->method('get_permalink')->willReturn('https://preview.example/article');
+        $item->method('get_description')->willReturn('Feed description');
+        $item->method('get_title')->willReturn('Preview title');
+        $rss = $this->createStub(SimplePie::class);
+        $rss->method('get_item')->willReturn($item);
+        $simplePie = $this->createMock(SimplePieProxy::class);
+        $simplePie->method('setUrl')->willReturnSelf();
+        $simplePie->method('init')->willReturn($rss);
+        static::getContainer()->set(SimplePieProxy::class, $simplePie);
 
-        $crawler = $client->request('GET', '/feed/blog-wildtrip/previewItem?parser=external');
+        $extractor = $this->createMock(Extractor::class);
+        $extractor->expects($this->once())->method('init')->willReturnSelf();
+        $extractor->expects($this->once())->method('parseContent')->with('https://preview.example/article', 'Feed description')->willReturnSelf();
+        $extractor->content = '<p>Graby preview marker</p>';
+        $extractor->url = 'https://preview.example/article';
+        static::getContainer()->set(Extractor::class, $extractor);
 
-        $this->assertSame(200, $client->getResponse()->getStatusCode());
-        $this->assertGreaterThanOrEqual(2, $crawler->filter('li strong')->count());
-    }
+        $crawler = $client->request('GET', '/feed/blog-wildtrip/previewItem' . $query);
 
-    public function testPreviewItemBadParser(): void
-    {
-        $client = static::getAuthorizedClient();
-
-        $crawler = $client->request('GET', '/feed/hackernews/previewItem?parser=nawak');
-
-        $this->assertSame(404, $client->getResponse()->getStatusCode());
+        $this->assertResponseIsSuccessful();
+        $this->assertStringContainsString('Graby preview marker', $crawler->text());
     }
 
     public function testPreviewItemBadSlug(): void

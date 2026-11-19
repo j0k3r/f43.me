@@ -9,17 +9,8 @@
     {{ form_start(form, {'attr': {'class': 'custom' }}) }}
         {{ form_errors(form) }}
 
-        <div class="grid">
-            <div>
-                {{ form_label(form.link) }}
-                {{ form_widget(form.link, { 'attr': {'autofocus': 'autofocus'} }) }}
-            </div>
-
-            <div>
-                {{ form_label(form.parser) }}
-                {{ form_widget(form.parser) }}
-            </div>
-        </div>
+        {{ form_label(form.link) }}
+        {{ form_widget(form.link, { 'attr': {'autofocus': 'autofocus'} }) }}
 
         <button type="submit">Test</button>
 

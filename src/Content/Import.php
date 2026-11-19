@@ -42,7 +42,7 @@ class Import
         $feedUpdated = [];
 
         foreach ($feeds as $feed) {
-            $this->logger->debug('<info>Working on</info>: ' . $feed->getName() . ' (parser: <comment>' . $feed->getParser() . '</comment>)');
+            $this->logger->debug('<info>Working on</info>: ' . $feed->getName());
 
             $rssFeed = $this
                 ->simplePieProxy
@@ -58,7 +58,7 @@ class Import
 
             $parser = $this
                 ->extractor
-                ->init($feed->getParser(), $feed, true);
+                ->init($feed);
 
             $cachedLinks = $this->itemRepository->getAllLinks($feed->getId());
             $cached = 0;

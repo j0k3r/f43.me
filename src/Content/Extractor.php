@@ -7,8 +7,7 @@ use App\Entity\Feed;
 use App\Extractor\ExtractorChain;
 use App\Improver\DefaultImprover;
 use App\Improver\ImproverChain;
-use App\Parser\AbstractParser;
-use App\Parser\ParserChain;
+use App\Parser\Internal;
 
 class Extractor
 {
@@ -20,37 +19,19 @@ class Extractor
     public $useDefault = false;
     /** @var Feed|null */
     protected $feed;
-    /** @var AbstractParser|false */
-    protected $parser;
-    /** @var bool */
-    protected $allowAllParser = false;
     /** @var bool */
     protected $reloadConfigFiles = false;
 
     /**
      * Content Extractor will use Extractor, Improver & Parser to get the readable content.
      */
-    public function __construct(protected ExtractorChain $extractorChain, protected ImproverChain $improverChain, protected ConverterChain $converterChain, protected ParserChain $parserChain)
+    public function __construct(protected ExtractorChain $extractorChain, protected ImproverChain $improverChain, protected ConverterChain $converterChain, protected Internal $parser)
     {
     }
 
-    /**
-     * Initialize some common variable.
-     *
-     * @param string    $chosenParser   Could be "internal" or "external"
-     * @param Feed|null $feed           Define the Feed object to work on
-     * @param bool      $allowAllParser Define if we have to use all *known* parser to get the content if the defined one failed.
-     *                                  For example, Internal parser can't make content readable, it will use the External one, etc ..
-     */
-    public function init($chosenParser, ?Feed $feed = null, $allowAllParser = false): self
+    public function init(?Feed $feed = null): self
     {
-        $this->parser = $this->parserChain->getParser(strtolower($chosenParser));
-        if (false === $this->parser) {
-            throw new \InvalidArgumentException(\sprintf('The given parser "%s" does not exists.', $chosenParser));
-        }
-
         $this->feed = $feed;
-        $this->allowAllParser = (bool) $allowAllParser;
 
         return $this;
     }
@@ -101,13 +82,8 @@ class Extractor
 
         // this means the selected extractor wasn't able to extract content OR
         // no extractor were able to match the url
-        if (!$this->content && $this->parser) {
+        if (!$this->content) {
             $this->content = $this->parser->parse($this->url, $this->reloadConfigFiles);
-        }
-
-        // if we allow all parser to be tested to get content, loop through all of them
-        if (!$this->content && true === $this->allowAllParser && $this->parser) {
-            $this->content = $this->parserChain->parseAll($this->url);
         }
 
         // do something when readable content failed

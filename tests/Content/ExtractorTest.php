@@ -10,7 +10,6 @@ use App\Extractor\ExtractorChain;
 use App\Improver\DefaultImprover;
 use App\Improver\ImproverChain;
 use App\Parser\Internal;
-use App\Parser\ParserChain;
 use Graby\Content;
 use Graby\Graby;
 use Graby\HttpClient\EffectiveResponse;
@@ -51,11 +50,12 @@ class ExtractorTest extends TestCase
         $this->assertSame('default content', $contentExtractor->content);
     }
 
-    public function testWithCustomParser(): void
+    public function testFailedGrabyIsNotRetried(): void
     {
-        $contentExtractor = $this->getContentExtrator(true);
+        $contentExtractor = $this->getContentExtrator();
 
         $this->graby
+            ->expects($this->once())
             ->method('fetchContent')
             ->willReturn($this->getGrabyContent(''));
 
@@ -66,7 +66,7 @@ class ExtractorTest extends TestCase
 
     public function testWithCustomExtractor(): void
     {
-        $contentExtractor = $this->getContentExtrator(false, true);
+        $contentExtractor = $this->getContentExtrator(true);
 
         $this->graby
             ->method('fetchContent')
@@ -77,24 +77,21 @@ class ExtractorTest extends TestCase
         $this->assertSame('<html/>', $contentExtractor->content);
     }
 
-    public function testInvalidParser(): void
-    {
-        $this->expectException(\InvalidArgumentException::class);
-        $this->expectExceptionMessage('The given parser "oops" does not exists.');
-
-        $extractorChain = $this->createStub(ExtractorChain::class);
-
-        $improverChain = $this->createStub(ImproverChain::class);
-
-        $converterChain = $this->createStub(ConverterChain::class);
-
-        $contentExtractor = new Extractor($extractorChain, $improverChain, $converterChain, new ParserChain());
-        $contentExtractor->init('oops');
-    }
-
-    protected function getContentExtrator(bool $customParser = false, bool $customExtractor = false): Extractor
+    public function testLegacyExternalFeedUsesGraby(): void
     {
         $feed = new Feed();
+        $feed->setParser('external');
+        $contentExtractor = $this->getContentExtrator(false, $feed);
+        $this->graby->expects($this->once())->method('fetchContent')->willReturn($this->getGrabyContent('<p>Graby content</p>'));
+
+        $contentExtractor->parseContent('https://legacy.example/article');
+
+        $this->assertSame('<p>Graby content</p>', $contentExtractor->content);
+    }
+
+    protected function getContentExtrator(bool $customExtractor = false, ?Feed $feed = null): Extractor
+    {
+        $feed ??= new Feed();
         $feed->setId(66);
         $feed->setSortBy('created_at');
         $feed->setFormatter('atom');
@@ -155,14 +152,8 @@ class ExtractorTest extends TestCase
 
         $internalParser = new Internal($this->graby);
 
-        $parserChain = $this->createMock(ParserChain::class);
-
-        $parserChain
-            ->method('getParser')
-            ->willReturn($internalParser);
-
-        $contentExtractor = new Extractor($extractorChain, $improverChain, $converterChain, $parserChain);
-        $contentExtractor->init('internal', $feed, true);
+        $contentExtractor = new Extractor($extractorChain, $improverChain, $converterChain, $internalParser);
+        $contentExtractor->init($feed);
 
         return $contentExtractor;
     }

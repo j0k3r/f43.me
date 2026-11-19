@@ -7,7 +7,6 @@ use App\Content\Extractor;
 use App\Content\Import;
 use App\Improver\ImproverChain;
 use App\Message\FeedSync;
-use App\Parser\ParserChain;
 use App\Repository\FeedRepository;
 use App\Repository\ItemRepository;
 use App\Xml\SimplePieProxy;
@@ -73,16 +72,6 @@ class FetchItemsCommandTest extends KernelTestCase
 
         /** @var Container */
         $container = self::getContainer();
-
-        $container->get(ParserChain::class)->addParser(
-            $container->get('feed.parser.internal'),
-            'internal'
-        );
-
-        $container->get(ParserChain::class)->addParser(
-            $container->get('feed.parser.external'),
-            'external'
-        );
 
         $container->get(ImproverChain::class)->addImprover(
             $container->get('feed.improver.default_improver'),

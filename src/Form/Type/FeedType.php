@@ -39,12 +39,6 @@ class FeedType extends AbstractType
             ->add('color', TextType::class, [
                 'required' => false,
             ])
-            ->add('parser', ChoiceType::class, [
-                'choices' => [
-                    'Internal' => 'internal',
-                    'External' => 'external',
-                ],
-            ])
             ->add('formatter', ChoiceType::class, [
                 'choices' => [
                     'RSS' => 'rss',

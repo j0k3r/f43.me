@@ -103,7 +103,8 @@ class FeedControllerTest extends FeedWebTestCase
         $this->assertCount(2, $crawler->filter('input[type=url]'));
         $this->assertCount(1, $crawler->filter('input[type=checkbox]'));
         $this->assertCount(1, $crawler->filter('input[type=hidden]'));
-        $this->assertCount(3, $crawler->filter('select'));
+        $this->assertCount(2, $crawler->filter('select'));
+        $this->assertSelectorNotExists('[name="feed[parser]"]');
         $this->assertCount(1, $crawler->filter('textarea'));
         $this->assertCount(1, $crawler->filter('button[type=submit]'));
     }
@@ -132,7 +133,6 @@ class FeedControllerTest extends FeedWebTestCase
             'feed[host]' => 'https://www.j0k3r.net',
             // be sure that link is almost always different
             'feed[link]' => 'https://www.j0k3r.net/feed.xml?rand=' . time(),
-            'feed[parser]' => 'external',
             'feed[formatter]' => 'rss',
             'feed[sort_by]' => 'published_at',
             'feed[is_private]' => 1,
@@ -208,7 +208,10 @@ class FeedControllerTest extends FeedWebTestCase
         $this->assertCount(2, $crawler->filter('form.custom input[type=url]'));
         $this->assertCount(1, $crawler->filter('form.custom input[type=checkbox]'));
         $this->assertCount(1, $crawler->filter('form.custom input[type=hidden]'));
-        $this->assertCount(3, $crawler->filter('form.custom select'));
+        $this->assertCount(2, $crawler->filter('form.custom select'));
+        $this->assertSelectorNotExists('[name="feed[parser]"]');
+        $this->assertSelectorExists('#preview-parsing button[type="button"]');
+        $this->assertSelectorNotExists('[data-parser]');
         $this->assertCount(1, $crawler->filter('form.custom textarea'));
         $this->assertCount(1, $crawler->filter('form.custom button[type=submit]'));
         $this->assertCount(2, $crawler->filter('form.custom input[disabled=disabled]'));
@@ -225,7 +228,6 @@ class FeedControllerTest extends FeedWebTestCase
             'feed[description]' => 'Bonjour Madame edited !',
             'feed[host]' => 'bonjourmadame.fr',
             'feed[link]' => 'http://feeds2.feedburner.com/BonjourMadame',
-            'feed[parser]' => 'internal',
             'feed[formatter]' => 'atom',
             'feed[sort_by]' => 'published_at',
             // 'feed[is_private]' => 0,

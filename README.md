@@ -81,10 +81,7 @@ You can find some of them in the [extractor folder](https://github.com/j0k3r/f43
 
 When we have the (most of the time, little) content from the feed, we use parsers to grab the html from the url and make it readable.
 
-This involve 2 kind of parser:
-
- * the **Internal**, which uses a local PHP libray, called [graby](https://github.com/j0k3r/graby).
- * the **External**, which uses the excellent [Mercury Parser API](https://github.com/postlight/mercury-parser) from Postlight Labs.
+Content extraction uses the local PHP library [graby](https://github.com/j0k3r/graby), including for feeds previously configured with the retired Mercury parser. No parser selection or database migration is required.
 
 ### Converters
 
@@ -103,11 +100,10 @@ You can find some of them in the [converter folder](https://github.com/j0k3r/f43
  - [RabbitMQ](https://www.rabbitmq.com/), which is optional (see below)
  - [Supervisor](http://supervisord.org/) (only if you use RabbitMQ)
 
-For each external API that improvers / extractors / parsers use, you will need an api key:
+For each external API that improvers / extractors use, you will need an api key:
 
  * Tumblr: https://www.tumblr.com/oauth/apps
  * Imgur: https://api.imgur.com/oauth2/addclient
- * Mercury: https://mercury.postlight.com/web-parser/
  * GitHub: https://github.com/settings/applications/new
 
 ### Install

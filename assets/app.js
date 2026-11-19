@@ -51,29 +51,11 @@ if (previewParsing !== null) {
     const url = previewParsing.dataset.url
     const loader = '<a href="#" aria-busy="true">Loading content, please wait…</a>'
 
-    // internal parser
-    previewParsing.childNodes[1].onclick = async function (event) {
+    previewParsing.querySelector('button[type="button"]').onclick = async function (event) {
         parsingResult.innerHTML = loader
         event.preventDefault()
 
-        const response = await fetch(url + '?parser=internal', { method: 'GET' })
-
-        if (!response.ok) {
-            parsingResult.innerHTML = '<p class="error">Error while retrieving content…</a>'
-
-            return
-        }
-
-        const body = await response.text()
-
-        parsingResult.innerHTML = body
-    }
-    // external parser
-    previewParsing.childNodes[3].onclick = async function (event) {
-        parsingResult.innerHTML = loader
-        event.preventDefault()
-
-        const response = await fetch(url + '?parser=external', { method: 'GET' })
+        const response = await fetch(url, { method: 'GET' })
 
         if (!response.ok) {
             parsingResult.innerHTML = '<p class="error">Error while retrieving content…</a>'

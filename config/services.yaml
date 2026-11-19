@@ -107,7 +107,7 @@ services:
             - "@feed.extractor.chain"
             - "@feed.improver.chain"
             - "@feed.converter.chain"
-            - "@feed.parser.chain"
+            - '@App\Parser\Internal'
 
     simple_pie_proxy:
         class: App\Xml\SimplePieProxy
