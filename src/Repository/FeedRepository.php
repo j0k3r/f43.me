@@ -56,6 +56,10 @@ class FeedRepository extends ServiceEntityRepository
      */
     public function findByIds(array $ids, string $type = 'in')
     {
+        if ([] === $ids) {
+            return 'in' === $type ? [] : $this->findAll();
+        }
+
         $q = $this->createQueryBuilder('f');
 
         if ('in' === $type) {
