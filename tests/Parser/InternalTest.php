@@ -14,10 +14,7 @@ class InternalTest extends TestCase
 {
     public function testParseEmpty(): void
     {
-        $graby = $this->getMockBuilder(Graby::class)
-            ->onlyMethods(['fetchContent'])
-            ->disableOriginalConstructor()
-            ->getMock();
+        $graby = $this->createStub(Graby::class);
 
         $graby
             ->method('fetchContent')
@@ -29,10 +26,7 @@ class InternalTest extends TestCase
 
     public function testParseFalse(): void
     {
-        $graby = $this->getMockBuilder(Graby::class)
-            ->onlyMethods(['fetchContent'])
-            ->disableOriginalConstructor()
-            ->getMock();
+        $graby = $this->createStub(Graby::class);
 
         $graby
             ->method('fetchContent')
@@ -44,10 +38,7 @@ class InternalTest extends TestCase
 
     public function testParseOk(): void
     {
-        $graby = $this->getMockBuilder(Graby::class)
-            ->onlyMethods(['fetchContent'])
-            ->disableOriginalConstructor()
-            ->getMock();
+        $graby = $this->createStub(Graby::class);
 
         $graby
             ->method('fetchContent')
@@ -59,10 +50,7 @@ class InternalTest extends TestCase
 
     public function testParseException(): void
     {
-        $graby = $this->getMockBuilder(Graby::class)
-            ->onlyMethods(['fetchContent'])
-            ->disableOriginalConstructor()
-            ->getMock();
+        $graby = $this->createStub(Graby::class);
 
         $graby
             ->method('fetchContent')

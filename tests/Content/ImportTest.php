@@ -123,10 +123,7 @@ class ImportTest extends AppTestCase
 
         $feedItemRepo = $this->createStub(ItemRepository::class);
 
-        $em = $this->getMockBuilder(EntityManager::class)
-            ->onlyMethods(['persist', 'flush', 'clear'])
-            ->disableOriginalConstructor()
-            ->getMock();
+        $em = $this->createStub(EntityManager::class);
 
         $import = new Import($simplePie, $extractor, $eventDispatcher, $em, new NullLogger(), $feedRepo, $feedItemRepo);
         $res = $import->process([$feed]);
@@ -247,10 +244,7 @@ class ImportTest extends AppTestCase
 
         $feedItemRepo = $this->createStub(ItemRepository::class);
 
-        $em = $this->getMockBuilder(EntityManager::class)
-            ->onlyMethods(['persist', 'flush', 'clear'])
-            ->disableOriginalConstructor()
-            ->getMock();
+        $em = $this->createStub(EntityManager::class);
 
         $import = new Import($simplePie, $extractor, $eventDispatcher, $em, new NullLogger(), $feedRepo, $feedItemRepo);
         $res = $import->process([$feed]);

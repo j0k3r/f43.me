@@ -22,9 +22,9 @@
         }
     ],
     "require": {
-        "php": ">=8.2",
+        "php": ">=8.4",
         "beberlei/doctrineextensions": "^1.2",
-        "doctrine/doctrine-bundle": "^2.0",
+        "doctrine/doctrine-bundle": "^3.0",
         "doctrine/orm": "^3.5",
         "gedmo/doctrine-extensions": "^3.6.0",
         "j0k3r/graby": "dev-master",
@@ -63,7 +63,7 @@
         "phpstan/phpstan-doctrine": "^2.0",
         "phpstan/phpstan-phpunit": "^2.0",
         "phpstan/phpstan-symfony": "^2.0",
-        "phpunit/phpunit": "^11.0",
+        "phpunit/phpunit": "^13.4",
         "rector/rector": "^2.1",
         "symfony/browser-kit": "*",
         "symfony/css-selector": "*",
@@ -90,7 +90,7 @@
     },
     "config": {
         "platform": {
-            "php": "8.2.27"
+            "php": "8.4.27"
         },
         "bin-dir": "bin",
         "sort-packages": true,

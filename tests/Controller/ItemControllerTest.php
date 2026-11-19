@@ -96,7 +96,7 @@ class ItemControllerTest extends FeedWebTestCase
         $item->method('get_title')->willReturn('Preview title');
         $rss = $this->createStub(SimplePie::class);
         $rss->method('get_item')->willReturn($item);
-        $simplePie = $this->createMock(SimplePieProxy::class);
+        $simplePie = $this->createStub(SimplePieProxy::class);
         $simplePie->method('setUrl')->willReturnSelf();
         $simplePie->method('init')->willReturn($rss);
         static::getContainer()->set(SimplePieProxy::class, $simplePie);

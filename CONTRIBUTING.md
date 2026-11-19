@@ -6,7 +6,7 @@ Contributions are welcome, of course.
 
 You locally need:
 
- - PHP >= 8.2 (with `pdo_mysql` or `pdo_pgsql`) with [Composer](https://getcomposer.org/) installed
+ - PHP >= 8.4 (with `pdo_mysql` or `pdo_pgsql`) with [Composer](https://getcomposer.org/) installed
  - Docker (to run the database)
 
 Install deps:

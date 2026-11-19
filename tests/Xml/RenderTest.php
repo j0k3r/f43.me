@@ -15,16 +15,13 @@ class RenderTest extends TestCase
 
     protected function setUp(): void
     {
-        $this->router = $this->createMock(Router::class);
+        $this->router = $this->createStub(Router::class);
 
         $this->router
             ->method('generate')
             ->willReturn('https://fake.url');
 
-        $this->repo = $this->getMockBuilder(ItemRepository::class)
-            ->onlyMethods(['findByFeed'])
-            ->disableOriginalConstructor()
-            ->getMock();
+        $this->repo = $this->createStub(ItemRepository::class);
 
         $this->repo
             ->method('findByFeed')

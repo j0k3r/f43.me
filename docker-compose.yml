@@ -20,7 +20,7 @@ services:
   nginx-php:
     build:
       context: ./docker
-      dockerfile: ./Dockerfile-php8.2
+      dockerfile: ./Dockerfile-php8.4
     ports:
       - "8100:8100"
     depends_on:

@@ -1,4 +1,4 @@
-FROM php:8.2-fpm
+FROM php:8.4-fpm
 
 # Install nginx
 RUN apt-get update \
@@ -15,7 +15,7 @@ RUN pecl install xdebug amqp tidy \
     && docker-php-ext-enable tidy
 
 ADD ./fastcgi-php.conf /etc/nginx/snippets/fastcgi-php.conf
-ADD ./upstream-php.conf /etc/nginx/conf.d/php8.2-fpm.conf
+ADD ./upstream-php.conf /etc/nginx/conf.d/php8.4-fpm.conf
 ADD ./vhost.sh /tmp/vhost.sh
 
 RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" \

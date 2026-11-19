@@ -48,9 +48,9 @@ class ImgurTest extends TestCase
 
     public function testContentImage(): void
     {
-        $imgurClient = $this->createMock(Client::class);
+        $imgurClient = $this->createStub(Client::class);
 
-        $apiAlbum = $this->createMock(Album::class);
+        $apiAlbum = $this->createStub(Album::class);
 
         $apiAlbum
             ->method('album')
@@ -93,9 +93,9 @@ class ImgurTest extends TestCase
 
     public function testContentMp4(): void
     {
-        $imgurClient = $this->createMock(Client::class);
+        $imgurClient = $this->createStub(Client::class);
 
-        $apiImage = $this->createMock(Image::class);
+        $apiImage = $this->createStub(Image::class);
 
         $apiImage
             ->method('image')
@@ -137,9 +137,9 @@ class ImgurTest extends TestCase
 
     public function testContentAlbum(): void
     {
-        $imgurClient = $this->createMock(Client::class);
+        $imgurClient = $this->createStub(Client::class);
 
-        $apiAlbum = $this->createMock(Album::class);
+        $apiAlbum = $this->createStub(Album::class);
 
         $apiAlbum
             ->method('album')
@@ -233,7 +233,7 @@ class ImgurTest extends TestCase
 
     public function testImgurFail(): void
     {
-        $imgurClient = $this->createMock(Client::class);
+        $imgurClient = $this->createStub(Client::class);
 
         $imgurClient
             ->method('api')
