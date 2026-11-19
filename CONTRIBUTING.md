@@ -36,6 +36,13 @@ Generate a hashed password and define it in `.env.local` for `ADMINPASS`:
 php bin/console security:hash-password --empty-salt
 ```
 
+Generate assets:
+
+```
+APP_ENV=prod php bin/console importmap:install
+APP_ENV=prod php bin/console asset-map:compile
+```
+
 Launch the server:
 
 ```
