@@ -31,7 +31,7 @@ class FetchItemsCommandTest extends KernelTestCase
 
     protected function setUp(): void
     {
-        $simplePieItem = $this->createMock('SimplePie_Item');
+        $simplePieItem = $this->createStub('SimplePie_Item');
 
         $simplePieItem
             ->method('get_description')
@@ -41,7 +41,7 @@ class FetchItemsCommandTest extends KernelTestCase
             ->method('get_permalink')
             ->willReturn('https://wildtrip.blog/sri-lanka-3-semaines-quoi-voir.html');
 
-        $simplePie = $this->createMock('SimplePie');
+        $simplePie = $this->createStub('SimplePie');
 
         $simplePie
             ->method('get_items')
@@ -51,7 +51,7 @@ class FetchItemsCommandTest extends KernelTestCase
             ->method('get_description')
             ->willReturn('description');
 
-        $simplePieProxy = $this->createMock(SimplePieProxy::class);
+        $simplePieProxy = $this->createStub(SimplePieProxy::class);
 
         $simplePieProxy
             ->method('setUrl')
@@ -61,7 +61,7 @@ class FetchItemsCommandTest extends KernelTestCase
             ->method('init')
             ->willReturn($simplePie);
 
-        $bus = $this->createMock(MessageBusInterface::class);
+        $bus = $this->createStub(MessageBusInterface::class);
 
         $bus
             ->method('dispatch');
@@ -165,7 +165,7 @@ class FetchItemsCommandTest extends KernelTestCase
         /** @var Container */
         $container = self::getContainer();
 
-        $bus = $this->createMock(MessageBusInterface::class);
+        $bus = $this->createStub(MessageBusInterface::class);
 
         $bus
             ->method('dispatch')
@@ -200,7 +200,7 @@ class FetchItemsCommandTest extends KernelTestCase
         /** @var Container */
         $container = self::getContainer();
 
-        $bus = $this->createMock(MessageBusInterface::class);
+        $bus = $this->createStub(MessageBusInterface::class);
 
         $bus
             ->method('dispatch');

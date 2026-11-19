@@ -145,7 +145,7 @@ class SiteConfigTestTest extends TestCase
     public function testTemporaryFilesAreRemovedOnExtractionFailure(): void
     {
         $this->expectException(\RuntimeException::class);
-        $this->expectExceptionMessage('Extraction failed');
+        $this->expectExceptionMessageIs('Extraction failed');
 
         try {
             $this->tester->run(self::URL, self::CUSTOM, true, static function (): never {
@@ -159,12 +159,12 @@ class SiteConfigTestTest extends TestCase
 
     public function testWriteFailureDoesNotRunExtractionAndCleansUp(): void
     {
-        $filesystem = $this->getMockBuilder(Filesystem::class)->onlyMethods(['dumpFile'])->getMock();
+        $filesystem = $this->getStubBuilder(Filesystem::class)->onlyMethods(['dumpFile'])->getStub();
         $filesystem->method('dumpFile')->willThrowException(new IOException('Permission denied'));
         $tester = new SiteConfigTest($this->config, $filesystem, $this->logger, $this->directory . '/tests');
 
         $this->expectException(IOException::class);
-        $this->expectExceptionMessage('Permission denied');
+        $this->expectExceptionMessageIs('Permission denied');
 
         try {
             $tester->run(self::URL, self::CUSTOM, true, function (): never {
@@ -178,7 +178,7 @@ class SiteConfigTestTest extends TestCase
     public function testInvalidHostIsRejectedBeforeWritingFiles(): void
     {
         $this->expectException(\InvalidArgumentException::class);
-        $this->expectExceptionMessage('valid siteconfig hostname');
+        $this->expectExceptionMessageIsOrContains('valid siteconfig hostname');
 
         try {
             $this->tester->run('https://example.com%2Fescaped/article', self::CUSTOM, true, function (): void {

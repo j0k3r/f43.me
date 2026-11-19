@@ -5,9 +5,9 @@ namespace App\Tests\Form\Type;
 use App\Entity\Feed;
 use App\Form\Type\FeedType;
 use PHPUnit\Framework\Attributes\DataProvider;
-use Symfony\Component\Form\Test\TypeTestCase;
+use Symfony\Component\Form\Test\FormIntegrationTestCase;
 
-class FeedTypeTest extends TypeTestCase
+class FeedTypeTest extends FormIntegrationTestCase
 {
     public static function parserSettings(): iterable
     {

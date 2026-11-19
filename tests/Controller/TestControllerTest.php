@@ -71,7 +71,7 @@ class TestControllerTest extends FeedWebTestCase
     {
         $client = static::getAuthorizedClient();
         $client->disableReboot();
-        $tester = $this->createMock(SiteConfigTest::class);
+        $tester = $this->createStub(SiteConfigTest::class);
         $tester->method('run')->willThrowException(new IOException('Permission denied'));
         static::getContainer()->set(SiteConfigTest::class, $tester);
 
@@ -114,7 +114,7 @@ class TestControllerTest extends FeedWebTestCase
             static::getContainer()->get('monolog.logger.graby'),
             $this->temporaryDirectory,
         );
-        $tester = $this->createMock(SiteConfigTest::class);
+        $tester = $this->createStub(SiteConfigTest::class);
         $tester->method('run')->willReturnCallback(static fn (string $url, string $config, bool $replace, callable $test) => $realTester->run(
             $url,
             $config,

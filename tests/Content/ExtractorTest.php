@@ -28,6 +28,7 @@ class ExtractorTest extends TestCase
         $contentExtractor = $this->getContentExtrator();
 
         $this->graby
+            ->expects($this->once())
             ->method('fetchContent')
             ->willReturn($this->getGrabyContent(''));
 
@@ -41,6 +42,7 @@ class ExtractorTest extends TestCase
         $contentExtractor = $this->getContentExtrator();
 
         $this->graby
+            ->expects($this->once())
             ->method('fetchContent')
             ->will($this->throwException(new \Exception()));
 
@@ -69,6 +71,7 @@ class ExtractorTest extends TestCase
         $contentExtractor = $this->getContentExtrator(true);
 
         $this->graby
+            ->expects($this->never())
             ->method('fetchContent')
             ->willReturn($this->getGrabyContent(''));
 
@@ -122,14 +125,14 @@ class ExtractorTest extends TestCase
         $feed->setFormatter('atom');
         $feed->setHost('Default');
 
-        $extractorChain = $this->createMock(ExtractorChain::class);
+        $extractorChain = $this->createStub(ExtractorChain::class);
 
         $extractorChain
             ->method('match')
             ->willReturn(false);
 
         if (true === $customExtractor) {
-            $extractorChain = $this->createMock(ExtractorChain::class);
+            $extractorChain = $this->createStub(ExtractorChain::class);
 
             $extractor = new class extends AbstractExtractor {
                 public function match(string $url): bool
@@ -148,9 +151,9 @@ class ExtractorTest extends TestCase
                 ->willReturn($extractor);
         }
 
-        $improverChain = $this->createMock(ImproverChain::class);
+        $improverChain = $this->createStub(ImproverChain::class);
 
-        $defaultImprover = $this->createMock(DefaultImprover::class);
+        $defaultImprover = $this->createStub(DefaultImprover::class);
 
         $defaultImprover
             ->method('updateContent')
@@ -164,7 +167,7 @@ class ExtractorTest extends TestCase
             ->method('match')
             ->willReturn($defaultImprover);
 
-        $converterChain = $this->createMock(ConverterChain::class);
+        $converterChain = $this->createStub(ConverterChain::class);
 
         $converterChain
             ->method('convert')
