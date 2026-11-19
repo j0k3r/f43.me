@@ -17,7 +17,6 @@ class TestController extends AbstractController
      * The only purpose is to be able to quickly see a convert article
      * - check bug
      * - improve parser
-     * - chose the best parser
      * - test a site configuration.
      */
     #[Route(path: '/feed/test', name: 'feed_test', methods: ['GET', 'POST'])]
@@ -61,7 +60,7 @@ class TestController extends AbstractController
 
             $content = $contentExtractor
                 ->enableReloadConfigFiles()
-                ->init($form->get('parser')->getData())
+                ->init()
                 ->parseContent($form->get('link')->getData());
 
             if ($filePath) {

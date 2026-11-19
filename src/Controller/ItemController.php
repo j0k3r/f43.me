@@ -80,22 +80,18 @@ class ItemController extends AbstractController
     }
 
     /**
-     * Following the previous action, this one will actually parse the content (for both parser).
+     * Following the previous action, this one will actually parse the content.
      *
      * @param Feed $feed The document Feed (retrieving for a ParamConverter with the slug)
      */
     #[Route(path: '/feed/{slug}/previewItem', name: 'item_preview_new', methods: ['GET'])]
-    public function previewNewAction(Request $request, #[MapEntity(mapping: ['slug' => 'slug'])] Feed $feed, SimplePieProxy $simplePieProxy, Extractor $contentExtractor): Response
+    public function previewNewAction(#[MapEntity(mapping: ['slug' => 'slug'])] Feed $feed, SimplePieProxy $simplePieProxy, Extractor $contentExtractor): Response
     {
         $rssFeed = $simplePieProxy
             ->setUrl($feed->getLink())
             ->init();
 
-        try {
-            $parser = $contentExtractor->init($request->query->get('parser', 'internal'), $feed);
-        } catch (\InvalidArgumentException $e) {
-            throw $this->createNotFoundException($e->getMessage());
-        }
+        $parser = $contentExtractor->init($feed);
 
         $firstItem = $rssFeed->get_item(0);
         if (!$firstItem) {

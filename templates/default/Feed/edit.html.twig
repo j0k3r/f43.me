@@ -77,8 +77,7 @@
 </div>
 
 <div class="grid" id="preview-parsing" data-url="{{ url('item_preview_new', { 'slug': feed.slug }) }}">
-    <button type="button" class="secondary outline" title="It can take few seconds to load" data-parser="internal">Test with internal parser</button>
-    <button type="button" class="secondary outline" title="It can take few seconds to load" data-parser="external">Test with external parser</button>
+    <button type="button" class="secondary outline" title="It can take few seconds to load">Test extraction</button>
     <form class="delete_form" action="{{ path('feed_delete', { 'slug': feed.slug }) }}" method="post">
         {{ form_rest(delete_form) }}
         <button class="alert" type="submit">Delete</button>

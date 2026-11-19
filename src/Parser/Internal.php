@@ -5,10 +5,9 @@ namespace App\Parser;
 use Graby\Graby;
 
 /**
- * Retrieve content from an internal library instead of a webservice.
- * It's a fallback by default, but can be the only solution if specified.
+ * Retrieve readable content with Graby.
  */
-class Internal extends AbstractParser
+class Internal
 {
     public function __construct(protected Graby $graby)
     {

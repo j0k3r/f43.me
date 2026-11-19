@@ -55,7 +55,7 @@ class AppFixtures extends Fixture
         $feedMadame->setName('Bonjour Madame');
         $feedMadame->setDescription('TOUS LES MATINS 10h, une nouvelle photo, une nouvelle fracture de l\'oeil ');
         $feedMadame->setLink('http://feeds2.feedburner.com/BonjourMadame');
-        $feedMadame->setParser('external');
+        $feedMadame->setParser('internal');
         $feedMadame->setFormatter('rss');
         $feedMadame->setHost('bonjourmadame.fr');
         $feedMadame->setIsPrivate(true);

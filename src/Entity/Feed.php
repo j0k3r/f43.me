@@ -67,8 +67,9 @@ class Feed
     /**
      * @var string
      */
+    // Retained for existing databases; content extraction always uses Graby.
     #[ORM\Column(name: 'parser', type: 'string')]
-    protected $parser;
+    protected $parser = 'internal';
 
     /**
      * @var string

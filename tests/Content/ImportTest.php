@@ -12,7 +12,6 @@ use App\Extractor\Youtube;
 use App\Improver\ImproverChain;
 use App\Improver\Reddit;
 use App\Parser\Internal;
-use App\Parser\ParserChain;
 use App\Repository\FeedRepository;
 use App\Repository\ItemRepository;
 use App\Tests\AppTestCase;
@@ -114,10 +113,7 @@ class ImportTest extends AppTestCase
         $improverChain = new ImproverChain();
         $improverChain->addImprover(new Reddit($client), 'reddit');
 
-        $parserChain = new ParserChain();
-        $parserChain->addParser(new Internal(new Graby()), 'internal');
-
-        $extractor = new Extractor($extractorChain, $improverChain, new ConverterChain(), $parserChain);
+        $extractor = new Extractor($extractorChain, $improverChain, new ConverterChain(), new Internal(new Graby()));
 
         $feedRepo = $this->createMock(FeedRepository::class);
 
@@ -241,10 +237,7 @@ class ImportTest extends AppTestCase
         $improverChain = new ImproverChain();
         $improverChain->addImprover(new Reddit($client), 'reddit');
 
-        $parserChain = new ParserChain();
-        $parserChain->addParser(new Internal(new Graby()), 'internal');
-
-        $extractor = new Extractor($extractorChain, $improverChain, new ConverterChain(), $parserChain);
+        $extractor = new Extractor($extractorChain, $improverChain, new ConverterChain(), new Internal(new Graby()));
 
         $feedRepo = $this->createMock(FeedRepository::class);
 
