@@ -77,6 +77,31 @@ class ExtractorTest extends TestCase
         $this->assertSame('<html/>', $contentExtractor->content);
     }
 
+    public function testIsolatedParserBypassesSpecializedExtractorsButKeepsContentProcessing(): void
+    {
+        $url = 'https://siteconfig-test.example/article';
+        $extractors = $this->createMock(ExtractorChain::class);
+        $extractors->expects($this->never())->method('match');
+
+        $improver = $this->createMock(DefaultImprover::class);
+        $improver->method('updateUrl')->willReturn($url . '?improved=1');
+        $improver->expects($this->once())->method('updateContent')->with('<p>Custom content</p>')->willReturn('<p>Improved content</p>');
+        $improvers = $this->createStub(ImproverChain::class);
+        $improvers->method('match')->willReturn($improver);
+
+        $converters = $this->createMock(ConverterChain::class);
+        $converters->expects($this->once())->method('convert')->with('<p>Improved content</p>')->willReturn('<p>Converted content</p>');
+        $parser = $this->createMock(Internal::class);
+        $parser->expects($this->once())->method('parse')->with($url . '?improved=1', false)->willReturn('<p>Custom content</p>');
+
+        $defaultParser = $this->createMock(Internal::class);
+        $defaultParser->expects($this->never())->method('parse');
+        $extractor = new Extractor($extractors, $improvers, $converters, $defaultParser);
+        $extractor->parseContent($url, null, $parser);
+
+        $this->assertSame('<p>Converted content</p>', $extractor->content);
+    }
+
     public function testLegacyExternalFeedUsesGraby(): void
     {
         $feed = new Feed();

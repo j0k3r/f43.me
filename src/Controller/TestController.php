@@ -3,10 +3,15 @@
 namespace App\Controller;
 
 use App\Content\Extractor;
+use App\Content\SiteConfigTest;
 use App\Form\Type\ItemTestType;
+use App\Parser\Internal;
+use Graby\Graby;
 use Graby\Monolog\Handler\GrabyHandler;
 use Monolog\Level;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Filesystem\Exception\IOExceptionInterface;
+use Symfony\Component\Form\FormError;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
@@ -20,55 +25,29 @@ class TestController extends AbstractController
      * - test a site configuration.
      */
     #[Route(path: '/feed/test', name: 'feed_test', methods: ['GET', 'POST'])]
-    public function indexAction(Request $request, Extractor $contentExtractor, GrabyHandler $grabyHandler): Response
+    public function indexAction(Request $request, Extractor $contentExtractor, GrabyHandler $grabyHandler, SiteConfigTest $siteConfigTest): Response
     {
         $form = $this->createForm(ItemTestType::class);
         $form->handleRequest($request);
 
-        $filePath = '';
         $content = null;
-        $previousVersion = null;
 
         if ($form->isSubmitted() && $form->isValid()) {
-            // load custom siteconfig from user
-            // add ability to test a siteconfig before submitting it
-            $siteConfig = $form->get('siteconfig')->getData();
-            $replaceCurrentSiteconfig = $form->get('siteconfig_replace')->getData();
-            if (trim((string) $siteConfig)) {
-                $host = parse_url((string) $form->get('link')->getData(), \PHP_URL_HOST);
+            $siteConfig = (string) $form->get('siteconfig')->getData();
+            $url = $form->get('link')->getData();
 
-                if ($host) {
-                    // remove www. from host because graby check for domain (without www.) first
-                    $host = strtolower($host);
-                    if (0 === stripos($host, 'www.')) {
-                        $host = substr($host, 4);
-                    }
-
-                    $filePath = $this->getParameter('kernel.project_dir') . '/vendor/j0k3r/graby-site-config/' . $host . '.txt';
-
-                    if (file_exists($filePath)) {
-                        $previousVersion = file_get_contents($filePath);
-
-                        if (!$replaceCurrentSiteconfig) {
-                            $siteConfig = $previousVersion . "\n" . $siteConfig;
-                        }
-                    }
-
-                    file_put_contents($filePath, $siteConfig);
-                }
-            }
-
-            $content = $contentExtractor
-                ->enableReloadConfigFiles()
-                ->init()
-                ->parseContent($form->get('link')->getData());
-
-            if ($filePath) {
-                if ($previousVersion) {
-                    file_put_contents($filePath, $previousVersion);
-                } else {
-                    unlink($filePath);
-                }
+            try {
+                $contentExtractor->init();
+                $content = '' === trim($siteConfig)
+                    ? $contentExtractor->parseContent($url)
+                    : $siteConfigTest->run(
+                        $url,
+                        $siteConfig,
+                        $form->get('siteconfig_replace')->getData(),
+                        static fn (Graby $graby): Extractor => $contentExtractor->parseContent($url, null, new Internal($graby)),
+                    );
+            } catch (IOExceptionInterface|\InvalidArgumentException $exception) {
+                $form->addError(new FormError('Unable to test the siteconfig: ' . $exception->getMessage()));
             }
         }
 

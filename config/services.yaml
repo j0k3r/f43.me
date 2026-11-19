@@ -87,6 +87,12 @@ services:
         tags:
             - { name: monolog.logger, channel: graby }
 
+    App\Content\SiteConfigTest:
+        arguments:
+            $temporaryDirectory: '%kernel.cache_dir%/siteconfig-tests'
+        tags:
+            - { name: monolog.logger, channel: graby }
+
     graby.log_handler:
         class: Graby\Monolog\Handler\GrabyHandler
 
