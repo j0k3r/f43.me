@@ -38,7 +38,7 @@
         "stof/doctrine-extensions-bundle": "~1.1",
         "symfony/amqp-messenger": "*",
         "symfony/asset": "*",
-        "symfony/asset-mapper": "7.4.*",
+        "symfony/asset-mapper": "8.1.*",
         "symfony/dotenv": "*",
         "symfony/flex": "^2.8",
         "symfony/form": "*",
